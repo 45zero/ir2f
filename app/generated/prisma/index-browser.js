@@ -245,6 +245,63 @@ exports.Prisma.ArticleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DocumentPasserelleScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  url: 'url',
+  type: 'type',
+  section: 'section',
+  ordre: 'ordre',
+  actif: 'actif',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PartenaireScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  logoUrl: 'logoUrl',
+  siteUrl: 'siteUrl',
+  ordre: 'ordre',
+  actif: 'actif',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ContactScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  prenom: 'prenom',
+  email: 'email',
+  telephone: 'telephone',
+  poste: 'poste',
+  section: 'section',
+  ordre: 'ordre',
+  actif: 'actif',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VideoScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  url: 'url',
+  description: 'description',
+  section: 'section',
+  ordre: 'ordre',
+  actif: 'actif',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.WebinaireScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  date: 'date',
+  lien: 'lien',
+  actif: 'actif',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -291,6 +348,17 @@ exports.StatutCovoiturage = exports.$Enums.StatutCovoiturage = {
   ANNULE: 'ANNULE'
 };
 
+exports.TypeDocument = exports.$Enums.TypeDocument = {
+  FICHIER: 'FICHIER',
+  LIEN_EXTERNE: 'LIEN_EXTERNE'
+};
+
+exports.SectionEmploi = exports.$Enums.SectionEmploi = {
+  FINANCEMENTS: 'FINANCEMENTS',
+  GESTION_EMPLOI: 'GESTION_EMPLOI',
+  FORMATION_EMPLOYABILITE: 'FORMATION_EMPLOYABILITE'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Formation: 'Formation',
@@ -303,7 +371,12 @@ exports.Prisma.ModelName = {
   MessageDestinataire: 'MessageDestinataire',
   Covoiturage: 'Covoiturage',
   CovoituragePassager: 'CovoituragePassager',
-  Article: 'Article'
+  Article: 'Article',
+  DocumentPasserelle: 'DocumentPasserelle',
+  Partenaire: 'Partenaire',
+  Contact: 'Contact',
+  Video: 'Video',
+  Webinaire: 'Webinaire'
 };
 
 /**
