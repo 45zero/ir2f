@@ -2208,6 +2208,7 @@ export namespace Prisma {
     nom: string | null
     prenom: string | null
     telephone: string | null
+    password: string | null
     role: $Enums.Role | null
     actif: boolean | null
     createdAt: Date | null
@@ -2220,6 +2221,7 @@ export namespace Prisma {
     nom: string | null
     prenom: string | null
     telephone: string | null
+    password: string | null
     role: $Enums.Role | null
     actif: boolean | null
     createdAt: Date | null
@@ -2232,6 +2234,7 @@ export namespace Prisma {
     nom: number
     prenom: number
     telephone: number
+    password: number
     role: number
     actif: number
     createdAt: number
@@ -2246,6 +2249,7 @@ export namespace Prisma {
     nom?: true
     prenom?: true
     telephone?: true
+    password?: true
     role?: true
     actif?: true
     createdAt?: true
@@ -2258,6 +2262,7 @@ export namespace Prisma {
     nom?: true
     prenom?: true
     telephone?: true
+    password?: true
     role?: true
     actif?: true
     createdAt?: true
@@ -2270,6 +2275,7 @@ export namespace Prisma {
     nom?: true
     prenom?: true
     telephone?: true
+    password?: true
     role?: true
     actif?: true
     createdAt?: true
@@ -2355,6 +2361,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone: string | null
+    password: string | null
     role: $Enums.Role
     actif: boolean
     createdAt: Date
@@ -2384,6 +2391,7 @@ export namespace Prisma {
     nom?: boolean
     prenom?: boolean
     telephone?: boolean
+    password?: boolean
     role?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -2406,6 +2414,7 @@ export namespace Prisma {
     nom?: boolean
     prenom?: boolean
     telephone?: boolean
+    password?: boolean
     role?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -2418,6 +2427,7 @@ export namespace Prisma {
     nom?: boolean
     prenom?: boolean
     telephone?: boolean
+    password?: boolean
     role?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -2430,13 +2440,14 @@ export namespace Prisma {
     nom?: boolean
     prenom?: boolean
     telephone?: boolean
+    password?: boolean
     role?: boolean
     actif?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "nom" | "prenom" | "telephone" | "role" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "nom" | "prenom" | "telephone" | "password" | "role" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inscriptions?: boolean | User$inscriptionsArgs<ExtArgs>
     documentsUpload?: boolean | User$documentsUploadArgs<ExtArgs>
@@ -2471,6 +2482,7 @@ export namespace Prisma {
       nom: string
       prenom: string
       telephone: string | null
+      password: string | null
       role: $Enums.Role
       actif: boolean
       createdAt: Date
@@ -2912,6 +2924,7 @@ export namespace Prisma {
     readonly nom: FieldRef<"User", 'String'>
     readonly prenom: FieldRef<"User", 'String'>
     readonly telephone: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
     readonly actif: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -15969,6 +15982,7 @@ export namespace Prisma {
     nom: 'nom',
     prenom: 'prenom',
     telephone: 'telephone',
+    password: 'password',
     role: 'role',
     actif: 'actif',
     createdAt: 'createdAt',
@@ -16297,6 +16311,7 @@ export namespace Prisma {
     nom?: StringFilter<"User"> | string
     prenom?: StringFilter<"User"> | string
     telephone?: StringNullableFilter<"User"> | string | null
+    password?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     actif?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -16318,6 +16333,7 @@ export namespace Prisma {
     nom?: SortOrder
     prenom?: SortOrder
     telephone?: SortOrderInput | SortOrder
+    password?: SortOrderInput | SortOrder
     role?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -16342,6 +16358,7 @@ export namespace Prisma {
     nom?: StringFilter<"User"> | string
     prenom?: StringFilter<"User"> | string
     telephone?: StringNullableFilter<"User"> | string | null
+    password?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     actif?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -16363,6 +16380,7 @@ export namespace Prisma {
     nom?: SortOrder
     prenom?: SortOrder
     telephone?: SortOrderInput | SortOrder
+    password?: SortOrderInput | SortOrder
     role?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -16381,6 +16399,7 @@ export namespace Prisma {
     nom?: StringWithAggregatesFilter<"User"> | string
     prenom?: StringWithAggregatesFilter<"User"> | string
     telephone?: StringNullableWithAggregatesFilter<"User"> | string | null
+    password?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     actif?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -17164,6 +17183,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -17185,6 +17205,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -17206,6 +17227,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17227,6 +17249,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17248,6 +17271,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -17260,6 +17284,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17272,6 +17297,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18228,6 +18254,7 @@ export namespace Prisma {
     nom?: SortOrder
     prenom?: SortOrder
     telephone?: SortOrder
+    password?: SortOrder
     role?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -18240,6 +18267,7 @@ export namespace Prisma {
     nom?: SortOrder
     prenom?: SortOrder
     telephone?: SortOrder
+    password?: SortOrder
     role?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -18252,6 +18280,7 @@ export namespace Prisma {
     nom?: SortOrder
     prenom?: SortOrder
     telephone?: SortOrder
+    password?: SortOrder
     role?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -21001,6 +21030,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21021,6 +21051,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21096,6 +21127,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21116,6 +21148,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21220,6 +21253,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21240,6 +21274,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21321,6 +21356,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21341,6 +21377,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21361,6 +21398,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21381,6 +21419,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21480,6 +21519,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21500,6 +21540,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21610,6 +21651,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21630,6 +21672,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21701,6 +21744,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21721,6 +21765,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21741,6 +21786,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21761,6 +21807,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21821,6 +21868,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21841,6 +21889,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21898,6 +21947,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21918,6 +21968,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -21981,6 +22032,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22001,6 +22053,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22021,6 +22074,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -22041,6 +22095,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -22099,6 +22154,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22119,6 +22175,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22184,6 +22241,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -22204,6 +22262,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -22275,6 +22334,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22295,6 +22355,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22315,6 +22376,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -22335,6 +22397,7 @@ export namespace Prisma {
     nom: string
     prenom: string
     telephone?: string | null
+    password?: string | null
     role?: $Enums.Role
     actif?: boolean
     createdAt?: Date | string
@@ -22371,6 +22434,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22391,6 +22455,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

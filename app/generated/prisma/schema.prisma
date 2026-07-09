@@ -63,6 +63,7 @@ model User {
   nom       String
   prenom    String
   telephone String?
+  password  String?
   role      Role     @default(STAGIAIRE)
   actif     Boolean  @default(true)
   createdAt DateTime @default(now())
