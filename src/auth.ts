@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-import { PrismaClient } from "../app/generated/prisma"
 import bcrypt from "bcryptjs"
+import { prisma } from "@/lib/prisma"
 
 declare module "next-auth" {
   interface Session {
@@ -13,8 +13,6 @@ declare module "next-auth" {
     }
   }
 }
-
-const prisma = new PrismaClient()
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [

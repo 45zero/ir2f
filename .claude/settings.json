@@ -1,0 +1,48 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx prisma *)",
+      "Bash(npx tsc *)",
+      "Bash(python3 -)",
+      "Bash(npm install *)",
+      "Bash(npx tsx *)",
+      "Bash(curl -s -o /tmp/home.html -w \"home: %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /tmp/formations.html -w \"formations: %{http_code}\\\\n\" http://localhost:3000/formations)",
+      "Bash(curl -s -o /tmp/bef.html -w \"bef detail: %{http_code}\\\\n\" http://localhost:3000/formations/bef)",
+      "Bash(tail -60 /tmp/ir2f-dev.log)",
+      "Read(//private/tmp/**)",
+      "Bash(python3 -m json.tool)",
+      "Bash(git mv *)",
+      "Bash(echo \"=== home ===\" *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(file public/images/*.png)",
+      "Bash(curl -s -b /tmp/ir2f-cookies.txt -o /dev/null -w '%{http_code}\\\\n' -D - http://localhost:3000/login)",
+      "Bash(rm -f /tmp/ir2f-cookies.txt /tmp/callback.html /tmp/dashboard-authed.html /tmp/dash.html /tmp/login.html)",
+      "Bash(mkdir -p \"/Users/giovanniverna/Documents/ir2f/src/app/admin/formations/new\" \"/Users/giovanniverna/Documents/ir2f/src/app/admin/formations/[id]\")",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(curl -s -b /tmp/ir2f-cookies.txt -D /tmp/create-headers.txt -o /tmp/create-body.html -X POST http://localhost:3000/admin/formations/new -F '$ACTION_ID_40496ed74ff075d36af6f4657c34dc4b3d35addb45=' -F 'titre=Formation Test Smoke' -F slug=formation-test-smoke -F 'description=Une formation créée pour vérifier le flux admin.' -F categorie=ARBITRAGE -F filiere= -F statut=BROUILLON -F type=PRESENTIEL -F 'dureeLabel=1 jour' -F modeLabel= -F lieu=Nancy -F prix= -F places=10 -F lienVisio= -F image= -F formateurNom= -F formateurRole= -F ordre=0 -F groupeEquivalence= -F varianteNode= -F badgeNode= -F shortNode= -F programme=[] -F sessions=[])",
+      "Read(//tmp/**)",
+      "Bash(python3)",
+      "Bash(curl -s -b /tmp/ir2f-cookies.txt http://localhost:3000/admin/formations -o /tmp/list.html)",
+      "Bash(rm -f /tmp/ir2f-cookies.txt /tmp/create-headers.txt /tmp/create-body.html /tmp/update-headers.txt /tmp/update-body.html /tmp/edit.html /tmp/list.html /tmp/admin-new.html /tmp/admin-formations.html /tmp/public-detail.html /tmp/update-form-fields.txt /tmp/dashboard-authed.html)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(mkdir -p \"/Users/giovanniverna/Documents/ir2f/src/app/admin/users/new\" \"/Users/giovanniverna/Documents/ir2f/src/app/admin/users/[id]\")",
+      "Bash(curl -s http://localhost:3000/api/auth/csrf)",
+      "Bash(pkill -f \"node .*next\")",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill -9)",
+      "Bash(lsof -ti:3001)",
+      "Bash(grep -o 'name=\"role\"[^>]*' /tmp/edit-user.html)",
+      "Bash(curl -s -b /tmp/ir2f-cookies.txt -X POST http://localhost:3000/api/debug-test-actions -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(mkdir -p \"/Users/giovanniverna/Documents/ir2f/src/app/admin/articles/new\" \"/Users/giovanniverna/Documents/ir2f/src/app/admin/articles/[id]\")",
+      "Bash(curl -s -o /tmp/emploi-filled.html http://localhost:3000/emploi)",
+      "Bash(grep -i \"email\" /tmp/ir2f-dev.log)",
+      "Bash(curl -s -b /tmp/ir2f-cookies-stagiaire.txt http://localhost:3000/dashboard/messages)"
+    ],
+    "additionalDirectories": [
+      "/Users/giovanniverna/Documents/ir2f/src/app/admin/formations",
+      "/Users/giovanniverna/Documents/ir2f/src/app/admin/users",
+      "/Users/giovanniverna/Documents/ir2f/src/app/admin/articles"
+    ]
+  }
+}
