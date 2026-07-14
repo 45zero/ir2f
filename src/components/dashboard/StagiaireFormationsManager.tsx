@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { CATEGORIE_LABELS } from "@/lib/formations-shared"
 import { STATUT_INSCRIPTION_LABELS } from "@/lib/inscriptions-shared"
+import { SignDocumentButton } from "@/components/dashboard/SignDocumentButton"
 import { colors, fontBody } from "@/lib/theme"
 import type { CategorieFormation, StatutInscription } from "@/generated/prisma"
 
@@ -19,9 +20,11 @@ export type StagiaireFormationCard = {
 export type StagiaireFormationDoc = {
   id: string
   nom: string
+  url: string | null
   formationId: string | null
   signed: boolean
   isNew: boolean
+  requiresSignature: boolean
 }
 
 export type StagiaireFormationCovoit = {
@@ -219,27 +222,36 @@ function FormationCard({
           )}
 
           {tab === "documents" && (
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {docs.length === 0 && <span style={{ fontSize: 13, color: colors.textLight }}>Aucun document pour cette formation.</span>}
               {docs.map((d) => (
-                <div key={d.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 0", borderBottom: "1px solid #eef0f3" }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={d.signed ? colors.gold : colors.red} strokeWidth="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                  </svg>
-                  <span style={{ flex: 1, fontSize: 13.5, fontWeight: 600, color: colors.text }}>{d.nom}</span>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      padding: "5px 10px",
-                      borderRadius: 14,
-                      color: d.signed ? colors.navy : colors.red,
-                      background: d.signed ? "#eef2f9" : "#fdeceb",
-                    }}
-                  >
-                    {d.signed ? "Signé" : "À signer"}
-                  </span>
+                <div key={d.id} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "10px 0", borderBottom: "1px solid #eef0f3" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={d.signed ? colors.gold : colors.red} strokeWidth="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    {d.url ? (
+                      <a href={d.url} target="_blank" rel="noreferrer" style={{ flex: 1, fontSize: 13.5, fontWeight: 600, color: colors.navy, textDecoration: "none" }}>
+                        {d.nom}
+                      </a>
+                    ) : (
+                      <span style={{ flex: 1, fontSize: 13.5, fontWeight: 600, color: colors.text }}>{d.nom}</span>
+                    )}
+                    <span
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 700,
+                        padding: "5px 10px",
+                        borderRadius: 14,
+                        color: d.signed ? colors.navy : colors.red,
+                        background: d.signed ? "#eef2f9" : "#fdeceb",
+                      }}
+                    >
+                      {d.signed ? "Signé" : "À signer"}
+                    </span>
+                  </div>
+                  {d.requiresSignature && <SignDocumentButton documentId={d.id} signed={d.signed} />}
                 </div>
               ))}
             </div>

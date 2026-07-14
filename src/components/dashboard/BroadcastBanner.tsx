@@ -19,7 +19,7 @@ export function BroadcastBanner({ items }: { items: BroadcastBannerItem[] }) {
       {items.map((b) => (
         <Link
           key={b.messageId}
-          href="/dashboard/formations"
+          href={b.isDocument ? "/dashboard/documents" : "/dashboard/formations"}
           onClick={() => markMessageAsRead(b.messageId)}
           style={{
             cursor: "pointer",

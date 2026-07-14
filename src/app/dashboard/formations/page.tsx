@@ -84,9 +84,11 @@ async function MesFormations({ userId }: { userId: string }) {
   const documents: StagiaireFormationDoc[] = documentsRaw.map((d) => ({
     id: d.id,
     nom: d.nom,
+    url: d.resolvedUrl,
     formationId: d.formationId,
     signed: d.signatures.some((s) => s.userId === userId),
     isNew: now - d.createdAt.getTime() < SEVEN_DAYS_MS,
+    requiresSignature: d.rolesRequis.includes("STAGIAIRE"),
   }))
 
   const covoiturages: StagiaireFormationCovoit[] = covoituragesRaw.map((c) => ({
