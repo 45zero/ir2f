@@ -1,6 +1,6 @@
 "use client"
 
-import { useActionState } from "react"
+import { useState, useActionState } from "react"
 import { broadcastDocumentToFormation } from "@/lib/actions/documents"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 
@@ -33,6 +33,16 @@ export function BroadcastComposerModal({
     },
     undefined
   )
+  const [selectedIds, setSelectedIds] = useState<string[]>(stagiaires.map((s) => s.id))
+  const allSelected = selectedIds.length === stagiaires.length && stagiaires.length > 0
+
+  function toggleAll() {
+    setSelectedIds(allSelected ? [] : stagiaires.map((s) => s.id))
+  }
+
+  function toggleOne(id: string) {
+    setSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
+  }
 
   return (
     <div
@@ -100,6 +110,23 @@ export function BroadcastComposerModal({
           <input name="url" placeholder="Lien du document" required style={fieldStyle} />
 
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <button
+              type="button"
+              onClick={toggleAll}
+              style={{
+                alignSelf: "flex-start",
+                background: "transparent",
+                border: "none",
+                color: colors.navy,
+                fontSize: 12,
+                fontWeight: 700,
+                fontFamily: fontBody,
+                cursor: "pointer",
+                padding: 0,
+              }}
+            >
+              {allSelected ? "Tout désélectionner" : "Tout sélectionner"}
+            </button>
             {stagiaires.map((s) => (
               <label
                 key={s.id}
@@ -113,7 +140,14 @@ export function BroadcastComposerModal({
                   cursor: "pointer",
                 }}
               >
-                <input type="checkbox" name="stagiaires" value={s.id} style={{ width: 16, height: 16, accentColor: colors.navy }} />
+                <input
+                  type="checkbox"
+                  name="stagiaires"
+                  value={s.id}
+                  checked={selectedIds.includes(s.id)}
+                  onChange={() => toggleOne(s.id)}
+                  style={{ width: 16, height: 16, accentColor: colors.navy }}
+                />
                 <span style={{ fontSize: 13.5, fontWeight: 600, color: colors.text }}>
                   {s.prenom} {s.nom}
                 </span>
@@ -125,20 +159,20 @@ export function BroadcastComposerModal({
 
           <button
             type="submit"
-            disabled={pending}
+            disabled={pending || selectedIds.length === 0}
             style={{
-              background: colors.navy,
-              color: "#fff",
+              background: selectedIds.length === 0 ? "#e4e9f2" : colors.navy,
+              color: selectedIds.length === 0 ? "#8a93a3" : "#fff",
               border: "none",
               padding: "12px 20px",
               borderRadius: 20,
               fontSize: 13,
               fontWeight: 700,
               fontFamily: fontBody,
-              cursor: pending ? "default" : "pointer",
+              cursor: pending || selectedIds.length === 0 ? "default" : "pointer",
             }}
           >
-            {pending ? "Envoi..." : "Envoyer le document"}
+            {pending ? "Envoi..." : `Envoyer à ${selectedIds.length} stagiaire(s)`}
           </button>
         </form>
       </div>

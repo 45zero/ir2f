@@ -2,9 +2,12 @@
 
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import { headers } from "next/headers"
+import crypto from "crypto"
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { str, optionalStr } from "@/lib/actions/form-utils"
+import { SIGNATURE_CONSENT_TEXT } from "@/lib/signature-consent"
 
 export type DocumentActionState = { error: string | null }
 
@@ -85,10 +88,28 @@ export async function signDocument(documentId: string) {
   const session = await auth()
   if (!session?.user) redirect("/login")
 
+  const doc = await prisma.document.findUnique({
+    where: { id: documentId },
+    select: { id: true, nom: true, url: true },
+  })
+  if (!doc) redirect("/dashboard/documents")
+
+  const hdrs = await headers()
+  const ipAddress = hdrs.get("x-forwarded-for")?.split(",")[0]?.trim() || hdrs.get("x-real-ip") || null
+  const userAgent = hdrs.get("user-agent")
+  const documentHash = crypto.createHash("sha256").update(`${doc.id}:${doc.nom}:${doc.url}`).digest("hex")
+
   await prisma.signature.upsert({
     where: { documentId_userId: { documentId, userId: session.user.id } },
     update: {},
-    create: { documentId, userId: session.user.id },
+    create: {
+      documentId,
+      userId: session.user.id,
+      consentText: SIGNATURE_CONSENT_TEXT,
+      ipAddress,
+      userAgent,
+      documentHash,
+    },
   })
 
   revalidatePath("/dashboard/documents")

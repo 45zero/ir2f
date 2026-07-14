@@ -221,7 +221,11 @@ exports.Prisma.SignatureScalarFieldEnum = {
   documentId: 'documentId',
   userId: 'userId',
   signedAt: 'signedAt',
-  signatureUrl: 'signatureUrl'
+  signatureUrl: 'signatureUrl',
+  consentText: 'consentText',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  documentHash: 'documentHash'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {

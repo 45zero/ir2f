@@ -264,6 +264,10 @@ model Signature {
   userId       String
   signedAt     DateTime @default(now())
   signatureUrl String?
+  consentText  String?
+  ipAddress    String?
+  userAgent    String?
+  documentHash String?
 
   document Document @relation(fields: [documentId], references: [id])
   user     User     @relation(fields: [userId], references: [id])

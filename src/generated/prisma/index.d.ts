@@ -11857,6 +11857,10 @@ export namespace Prisma {
     userId: string | null
     signedAt: Date | null
     signatureUrl: string | null
+    consentText: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    documentHash: string | null
   }
 
   export type SignatureMaxAggregateOutputType = {
@@ -11865,6 +11869,10 @@ export namespace Prisma {
     userId: string | null
     signedAt: Date | null
     signatureUrl: string | null
+    consentText: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    documentHash: string | null
   }
 
   export type SignatureCountAggregateOutputType = {
@@ -11873,6 +11881,10 @@ export namespace Prisma {
     userId: number
     signedAt: number
     signatureUrl: number
+    consentText: number
+    ipAddress: number
+    userAgent: number
+    documentHash: number
     _all: number
   }
 
@@ -11883,6 +11895,10 @@ export namespace Prisma {
     userId?: true
     signedAt?: true
     signatureUrl?: true
+    consentText?: true
+    ipAddress?: true
+    userAgent?: true
+    documentHash?: true
   }
 
   export type SignatureMaxAggregateInputType = {
@@ -11891,6 +11907,10 @@ export namespace Prisma {
     userId?: true
     signedAt?: true
     signatureUrl?: true
+    consentText?: true
+    ipAddress?: true
+    userAgent?: true
+    documentHash?: true
   }
 
   export type SignatureCountAggregateInputType = {
@@ -11899,6 +11919,10 @@ export namespace Prisma {
     userId?: true
     signedAt?: true
     signatureUrl?: true
+    consentText?: true
+    ipAddress?: true
+    userAgent?: true
+    documentHash?: true
     _all?: true
   }
 
@@ -11980,6 +12004,10 @@ export namespace Prisma {
     userId: string
     signedAt: Date
     signatureUrl: string | null
+    consentText: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    documentHash: string | null
     _count: SignatureCountAggregateOutputType | null
     _min: SignatureMinAggregateOutputType | null
     _max: SignatureMaxAggregateOutputType | null
@@ -12005,6 +12033,10 @@ export namespace Prisma {
     userId?: boolean
     signedAt?: boolean
     signatureUrl?: boolean
+    consentText?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    documentHash?: boolean
     document?: boolean | DocumentDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["signature"]>
@@ -12015,6 +12047,10 @@ export namespace Prisma {
     userId?: boolean
     signedAt?: boolean
     signatureUrl?: boolean
+    consentText?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    documentHash?: boolean
     document?: boolean | DocumentDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["signature"]>
@@ -12025,6 +12061,10 @@ export namespace Prisma {
     userId?: boolean
     signedAt?: boolean
     signatureUrl?: boolean
+    consentText?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    documentHash?: boolean
     document?: boolean | DocumentDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["signature"]>
@@ -12035,9 +12075,13 @@ export namespace Prisma {
     userId?: boolean
     signedAt?: boolean
     signatureUrl?: boolean
+    consentText?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    documentHash?: boolean
   }
 
-  export type SignatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "documentId" | "userId" | "signedAt" | "signatureUrl", ExtArgs["result"]["signature"]>
+  export type SignatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "documentId" | "userId" | "signedAt" | "signatureUrl" | "consentText" | "ipAddress" | "userAgent" | "documentHash", ExtArgs["result"]["signature"]>
   export type SignatureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     document?: boolean | DocumentDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -12063,6 +12107,10 @@ export namespace Prisma {
       userId: string
       signedAt: Date
       signatureUrl: string | null
+      consentText: string | null
+      ipAddress: string | null
+      userAgent: string | null
+      documentHash: string | null
     }, ExtArgs["result"]["signature"]>
     composites: {}
   }
@@ -12493,6 +12541,10 @@ export namespace Prisma {
     readonly userId: FieldRef<"Signature", 'String'>
     readonly signedAt: FieldRef<"Signature", 'DateTime'>
     readonly signatureUrl: FieldRef<"Signature", 'String'>
+    readonly consentText: FieldRef<"Signature", 'String'>
+    readonly ipAddress: FieldRef<"Signature", 'String'>
+    readonly userAgent: FieldRef<"Signature", 'String'>
+    readonly documentHash: FieldRef<"Signature", 'String'>
   }
     
 
@@ -27256,7 +27308,11 @@ export namespace Prisma {
     documentId: 'documentId',
     userId: 'userId',
     signedAt: 'signedAt',
-    signatureUrl: 'signatureUrl'
+    signatureUrl: 'signatureUrl',
+    consentText: 'consentText',
+    ipAddress: 'ipAddress',
+    userAgent: 'userAgent',
+    documentHash: 'documentHash'
   };
 
   export type SignatureScalarFieldEnum = (typeof SignatureScalarFieldEnum)[keyof typeof SignatureScalarFieldEnum]
@@ -28385,6 +28441,10 @@ export namespace Prisma {
     userId?: StringFilter<"Signature"> | string
     signedAt?: DateTimeFilter<"Signature"> | Date | string
     signatureUrl?: StringNullableFilter<"Signature"> | string | null
+    consentText?: StringNullableFilter<"Signature"> | string | null
+    ipAddress?: StringNullableFilter<"Signature"> | string | null
+    userAgent?: StringNullableFilter<"Signature"> | string | null
+    documentHash?: StringNullableFilter<"Signature"> | string | null
     document?: XOR<DocumentScalarRelationFilter, DocumentWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -28395,6 +28455,10 @@ export namespace Prisma {
     userId?: SortOrder
     signedAt?: SortOrder
     signatureUrl?: SortOrderInput | SortOrder
+    consentText?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    documentHash?: SortOrderInput | SortOrder
     document?: DocumentOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
@@ -28409,6 +28473,10 @@ export namespace Prisma {
     userId?: StringFilter<"Signature"> | string
     signedAt?: DateTimeFilter<"Signature"> | Date | string
     signatureUrl?: StringNullableFilter<"Signature"> | string | null
+    consentText?: StringNullableFilter<"Signature"> | string | null
+    ipAddress?: StringNullableFilter<"Signature"> | string | null
+    userAgent?: StringNullableFilter<"Signature"> | string | null
+    documentHash?: StringNullableFilter<"Signature"> | string | null
     document?: XOR<DocumentScalarRelationFilter, DocumentWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "documentId_userId">
@@ -28419,6 +28487,10 @@ export namespace Prisma {
     userId?: SortOrder
     signedAt?: SortOrder
     signatureUrl?: SortOrderInput | SortOrder
+    consentText?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    documentHash?: SortOrderInput | SortOrder
     _count?: SignatureCountOrderByAggregateInput
     _max?: SignatureMaxOrderByAggregateInput
     _min?: SignatureMinOrderByAggregateInput
@@ -28433,6 +28505,10 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Signature"> | string
     signedAt?: DateTimeWithAggregatesFilter<"Signature"> | Date | string
     signatureUrl?: StringNullableWithAggregatesFilter<"Signature"> | string | null
+    consentText?: StringNullableWithAggregatesFilter<"Signature"> | string | null
+    ipAddress?: StringNullableWithAggregatesFilter<"Signature"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"Signature"> | string | null
+    documentHash?: StringNullableWithAggregatesFilter<"Signature"> | string | null
   }
 
   export type MessageWhereInput = {
@@ -30073,6 +30149,10 @@ export namespace Prisma {
     id?: string
     signedAt?: Date | string
     signatureUrl?: string | null
+    consentText?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
     document: DocumentCreateNestedOneWithoutSignaturesInput
     user: UserCreateNestedOneWithoutSignaturesInput
   }
@@ -30083,12 +30163,20 @@ export namespace Prisma {
     userId: string
     signedAt?: Date | string
     signatureUrl?: string | null
+    consentText?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
   }
 
   export type SignatureUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
     document?: DocumentUpdateOneRequiredWithoutSignaturesNestedInput
     user?: UserUpdateOneRequiredWithoutSignaturesNestedInput
   }
@@ -30099,6 +30187,10 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SignatureCreateManyInput = {
@@ -30107,12 +30199,20 @@ export namespace Prisma {
     userId: string
     signedAt?: Date | string
     signatureUrl?: string | null
+    consentText?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
   }
 
   export type SignatureUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SignatureUncheckedUpdateManyInput = {
@@ -30121,6 +30221,10 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MessageCreateInput = {
@@ -31929,6 +32033,10 @@ export namespace Prisma {
     userId?: SortOrder
     signedAt?: SortOrder
     signatureUrl?: SortOrder
+    consentText?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    documentHash?: SortOrder
   }
 
   export type SignatureMaxOrderByAggregateInput = {
@@ -31937,6 +32045,10 @@ export namespace Prisma {
     userId?: SortOrder
     signedAt?: SortOrder
     signatureUrl?: SortOrder
+    consentText?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    documentHash?: SortOrder
   }
 
   export type SignatureMinOrderByAggregateInput = {
@@ -31945,6 +32057,10 @@ export namespace Prisma {
     userId?: SortOrder
     signedAt?: SortOrder
     signatureUrl?: SortOrder
+    consentText?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    documentHash?: SortOrder
   }
 
   export type DocumentNullableScalarRelationFilter = {
@@ -34377,6 +34493,10 @@ export namespace Prisma {
     id?: string
     signedAt?: Date | string
     signatureUrl?: string | null
+    consentText?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
     document: DocumentCreateNestedOneWithoutSignaturesInput
   }
 
@@ -34385,6 +34505,10 @@ export namespace Prisma {
     documentId: string
     signedAt?: Date | string
     signatureUrl?: string | null
+    consentText?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
   }
 
   export type SignatureCreateOrConnectWithoutUserInput = {
@@ -34679,6 +34803,10 @@ export namespace Prisma {
     userId?: StringFilter<"Signature"> | string
     signedAt?: DateTimeFilter<"Signature"> | Date | string
     signatureUrl?: StringNullableFilter<"Signature"> | string | null
+    consentText?: StringNullableFilter<"Signature"> | string | null
+    ipAddress?: StringNullableFilter<"Signature"> | string | null
+    userAgent?: StringNullableFilter<"Signature"> | string | null
+    documentHash?: StringNullableFilter<"Signature"> | string | null
   }
 
   export type MessageUpsertWithWhereUniqueWithoutExpediteurInput = {
@@ -36391,6 +36519,10 @@ export namespace Prisma {
     id?: string
     signedAt?: Date | string
     signatureUrl?: string | null
+    consentText?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
     user: UserCreateNestedOneWithoutSignaturesInput
   }
 
@@ -36399,6 +36531,10 @@ export namespace Prisma {
     userId: string
     signedAt?: Date | string
     signatureUrl?: string | null
+    consentText?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
   }
 
   export type SignatureCreateOrConnectWithoutDocumentInput = {
@@ -38091,6 +38227,10 @@ export namespace Prisma {
     documentId: string
     signedAt?: Date | string
     signatureUrl?: string | null
+    consentText?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
   }
 
   export type MessageCreateManyExpediteurInput = {
@@ -38220,6 +38360,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
     document?: DocumentUpdateOneRequiredWithoutSignaturesNestedInput
   }
 
@@ -38228,6 +38372,10 @@ export namespace Prisma {
     documentId?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SignatureUncheckedUpdateManyWithoutUserInput = {
@@ -38235,6 +38383,10 @@ export namespace Prisma {
     documentId?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MessageUpdateWithoutExpediteurInput = {
@@ -38764,6 +38916,10 @@ export namespace Prisma {
     userId: string
     signedAt?: Date | string
     signatureUrl?: string | null
+    consentText?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
   }
 
   export type MessageCreateManyDocumentInput = {
@@ -38779,6 +38935,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSignaturesNestedInput
   }
 
@@ -38787,6 +38947,10 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SignatureUncheckedUpdateManyWithoutDocumentInput = {
@@ -38794,6 +38958,10 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MessageUpdateWithoutDocumentInput = {
