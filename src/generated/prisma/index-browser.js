@@ -208,11 +208,13 @@ exports.Prisma.DocumentScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
   url: 'url',
+  storagePath: 'storagePath',
   taille: 'taille',
   mimeType: 'mimeType',
   uploaderId: 'uploaderId',
   formationId: 'formationId',
   public: 'public',
+  rolesRequis: 'rolesRequis',
   createdAt: 'createdAt'
 };
 

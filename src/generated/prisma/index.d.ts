@@ -10631,6 +10631,7 @@ export namespace Prisma {
     id: string | null
     nom: string | null
     url: string | null
+    storagePath: string | null
     taille: number | null
     mimeType: string | null
     uploaderId: string | null
@@ -10643,6 +10644,7 @@ export namespace Prisma {
     id: string | null
     nom: string | null
     url: string | null
+    storagePath: string | null
     taille: number | null
     mimeType: string | null
     uploaderId: string | null
@@ -10655,11 +10657,13 @@ export namespace Prisma {
     id: number
     nom: number
     url: number
+    storagePath: number
     taille: number
     mimeType: number
     uploaderId: number
     formationId: number
     public: number
+    rolesRequis: number
     createdAt: number
     _all: number
   }
@@ -10677,6 +10681,7 @@ export namespace Prisma {
     id?: true
     nom?: true
     url?: true
+    storagePath?: true
     taille?: true
     mimeType?: true
     uploaderId?: true
@@ -10689,6 +10694,7 @@ export namespace Prisma {
     id?: true
     nom?: true
     url?: true
+    storagePath?: true
     taille?: true
     mimeType?: true
     uploaderId?: true
@@ -10701,11 +10707,13 @@ export namespace Prisma {
     id?: true
     nom?: true
     url?: true
+    storagePath?: true
     taille?: true
     mimeType?: true
     uploaderId?: true
     formationId?: true
     public?: true
+    rolesRequis?: true
     createdAt?: true
     _all?: true
   }
@@ -10799,12 +10807,14 @@ export namespace Prisma {
   export type DocumentGroupByOutputType = {
     id: string
     nom: string
-    url: string
+    url: string | null
+    storagePath: string | null
     taille: number | null
     mimeType: string | null
     uploaderId: string
     formationId: string | null
     public: boolean
+    rolesRequis: $Enums.Role[]
     createdAt: Date
     _count: DocumentCountAggregateOutputType | null
     _avg: DocumentAvgAggregateOutputType | null
@@ -10831,11 +10841,13 @@ export namespace Prisma {
     id?: boolean
     nom?: boolean
     url?: boolean
+    storagePath?: boolean
     taille?: boolean
     mimeType?: boolean
     uploaderId?: boolean
     formationId?: boolean
     public?: boolean
+    rolesRequis?: boolean
     createdAt?: boolean
     uploader?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | Document$formationArgs<ExtArgs>
@@ -10848,11 +10860,13 @@ export namespace Prisma {
     id?: boolean
     nom?: boolean
     url?: boolean
+    storagePath?: boolean
     taille?: boolean
     mimeType?: boolean
     uploaderId?: boolean
     formationId?: boolean
     public?: boolean
+    rolesRequis?: boolean
     createdAt?: boolean
     uploader?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | Document$formationArgs<ExtArgs>
@@ -10862,11 +10876,13 @@ export namespace Prisma {
     id?: boolean
     nom?: boolean
     url?: boolean
+    storagePath?: boolean
     taille?: boolean
     mimeType?: boolean
     uploaderId?: boolean
     formationId?: boolean
     public?: boolean
+    rolesRequis?: boolean
     createdAt?: boolean
     uploader?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | Document$formationArgs<ExtArgs>
@@ -10876,15 +10892,17 @@ export namespace Prisma {
     id?: boolean
     nom?: boolean
     url?: boolean
+    storagePath?: boolean
     taille?: boolean
     mimeType?: boolean
     uploaderId?: boolean
     formationId?: boolean
     public?: boolean
+    rolesRequis?: boolean
     createdAt?: boolean
   }
 
-  export type DocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "url" | "taille" | "mimeType" | "uploaderId" | "formationId" | "public" | "createdAt", ExtArgs["result"]["document"]>
+  export type DocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "url" | "storagePath" | "taille" | "mimeType" | "uploaderId" | "formationId" | "public" | "rolesRequis" | "createdAt", ExtArgs["result"]["document"]>
   export type DocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     uploader?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | Document$formationArgs<ExtArgs>
@@ -10912,12 +10930,14 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       nom: string
-      url: string
+      url: string | null
+      storagePath: string | null
       taille: number | null
       mimeType: string | null
       uploaderId: string
       formationId: string | null
       public: boolean
+      rolesRequis: $Enums.Role[]
       createdAt: Date
     }, ExtArgs["result"]["document"]>
     composites: {}
@@ -11349,11 +11369,13 @@ export namespace Prisma {
     readonly id: FieldRef<"Document", 'String'>
     readonly nom: FieldRef<"Document", 'String'>
     readonly url: FieldRef<"Document", 'String'>
+    readonly storagePath: FieldRef<"Document", 'String'>
     readonly taille: FieldRef<"Document", 'Int'>
     readonly mimeType: FieldRef<"Document", 'String'>
     readonly uploaderId: FieldRef<"Document", 'String'>
     readonly formationId: FieldRef<"Document", 'String'>
     readonly public: FieldRef<"Document", 'Boolean'>
+    readonly rolesRequis: FieldRef<"Document", 'Role[]'>
     readonly createdAt: FieldRef<"Document", 'DateTime'>
   }
     
@@ -27292,11 +27314,13 @@ export namespace Prisma {
     id: 'id',
     nom: 'nom',
     url: 'url',
+    storagePath: 'storagePath',
     taille: 'taille',
     mimeType: 'mimeType',
     uploaderId: 'uploaderId',
     formationId: 'formationId',
     public: 'public',
+    rolesRequis: 'rolesRequis',
     createdAt: 'createdAt'
   };
 
@@ -28352,12 +28376,14 @@ export namespace Prisma {
     NOT?: DocumentWhereInput | DocumentWhereInput[]
     id?: StringFilter<"Document"> | string
     nom?: StringFilter<"Document"> | string
-    url?: StringFilter<"Document"> | string
+    url?: StringNullableFilter<"Document"> | string | null
+    storagePath?: StringNullableFilter<"Document"> | string | null
     taille?: IntNullableFilter<"Document"> | number | null
     mimeType?: StringNullableFilter<"Document"> | string | null
     uploaderId?: StringFilter<"Document"> | string
     formationId?: StringNullableFilter<"Document"> | string | null
     public?: BoolFilter<"Document"> | boolean
+    rolesRequis?: EnumRoleNullableListFilter<"Document">
     createdAt?: DateTimeFilter<"Document"> | Date | string
     uploader?: XOR<UserScalarRelationFilter, UserWhereInput>
     formation?: XOR<FormationNullableScalarRelationFilter, FormationWhereInput> | null
@@ -28368,12 +28394,14 @@ export namespace Prisma {
   export type DocumentOrderByWithRelationInput = {
     id?: SortOrder
     nom?: SortOrder
-    url?: SortOrder
+    url?: SortOrderInput | SortOrder
+    storagePath?: SortOrderInput | SortOrder
     taille?: SortOrderInput | SortOrder
     mimeType?: SortOrderInput | SortOrder
     uploaderId?: SortOrder
     formationId?: SortOrderInput | SortOrder
     public?: SortOrder
+    rolesRequis?: SortOrder
     createdAt?: SortOrder
     uploader?: UserOrderByWithRelationInput
     formation?: FormationOrderByWithRelationInput
@@ -28387,12 +28415,14 @@ export namespace Prisma {
     OR?: DocumentWhereInput[]
     NOT?: DocumentWhereInput | DocumentWhereInput[]
     nom?: StringFilter<"Document"> | string
-    url?: StringFilter<"Document"> | string
+    url?: StringNullableFilter<"Document"> | string | null
+    storagePath?: StringNullableFilter<"Document"> | string | null
     taille?: IntNullableFilter<"Document"> | number | null
     mimeType?: StringNullableFilter<"Document"> | string | null
     uploaderId?: StringFilter<"Document"> | string
     formationId?: StringNullableFilter<"Document"> | string | null
     public?: BoolFilter<"Document"> | boolean
+    rolesRequis?: EnumRoleNullableListFilter<"Document">
     createdAt?: DateTimeFilter<"Document"> | Date | string
     uploader?: XOR<UserScalarRelationFilter, UserWhereInput>
     formation?: XOR<FormationNullableScalarRelationFilter, FormationWhereInput> | null
@@ -28403,12 +28433,14 @@ export namespace Prisma {
   export type DocumentOrderByWithAggregationInput = {
     id?: SortOrder
     nom?: SortOrder
-    url?: SortOrder
+    url?: SortOrderInput | SortOrder
+    storagePath?: SortOrderInput | SortOrder
     taille?: SortOrderInput | SortOrder
     mimeType?: SortOrderInput | SortOrder
     uploaderId?: SortOrder
     formationId?: SortOrderInput | SortOrder
     public?: SortOrder
+    rolesRequis?: SortOrder
     createdAt?: SortOrder
     _count?: DocumentCountOrderByAggregateInput
     _avg?: DocumentAvgOrderByAggregateInput
@@ -28423,12 +28455,14 @@ export namespace Prisma {
     NOT?: DocumentScalarWhereWithAggregatesInput | DocumentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Document"> | string
     nom?: StringWithAggregatesFilter<"Document"> | string
-    url?: StringWithAggregatesFilter<"Document"> | string
+    url?: StringNullableWithAggregatesFilter<"Document"> | string | null
+    storagePath?: StringNullableWithAggregatesFilter<"Document"> | string | null
     taille?: IntNullableWithAggregatesFilter<"Document"> | number | null
     mimeType?: StringNullableWithAggregatesFilter<"Document"> | string | null
     uploaderId?: StringWithAggregatesFilter<"Document"> | string
     formationId?: StringNullableWithAggregatesFilter<"Document"> | string | null
     public?: BoolWithAggregatesFilter<"Document"> | boolean
+    rolesRequis?: EnumRoleNullableListFilter<"Document">
     createdAt?: DateTimeWithAggregatesFilter<"Document"> | Date | string
   }
 
@@ -30058,10 +30092,12 @@ export namespace Prisma {
   export type DocumentCreateInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     uploader: UserCreateNestedOneWithoutDocumentsUploadInput
     formation?: FormationCreateNestedOneWithoutDocumentsInput
@@ -30072,12 +30108,14 @@ export namespace Prisma {
   export type DocumentUncheckedCreateInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     uploaderId: string
     formationId?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     signatures?: SignatureUncheckedCreateNestedManyWithoutDocumentInput
     messages?: MessageUncheckedCreateNestedManyWithoutDocumentInput
@@ -30086,10 +30124,12 @@ export namespace Prisma {
   export type DocumentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutDocumentsUploadNestedInput
     formation?: FormationUpdateOneWithoutDocumentsNestedInput
@@ -30100,12 +30140,14 @@ export namespace Prisma {
   export type DocumentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     uploaderId?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatures?: SignatureUncheckedUpdateManyWithoutDocumentNestedInput
     messages?: MessageUncheckedUpdateManyWithoutDocumentNestedInput
@@ -30114,34 +30156,40 @@ export namespace Prisma {
   export type DocumentCreateManyInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     uploaderId: string
     formationId?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
   }
 
   export type DocumentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DocumentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     uploaderId?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -31973,15 +32021,25 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumRoleNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
+    has?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type DocumentCountOrderByAggregateInput = {
     id?: SortOrder
     nom?: SortOrder
     url?: SortOrder
+    storagePath?: SortOrder
     taille?: SortOrder
     mimeType?: SortOrder
     uploaderId?: SortOrder
     formationId?: SortOrder
     public?: SortOrder
+    rolesRequis?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -31993,6 +32051,7 @@ export namespace Prisma {
     id?: SortOrder
     nom?: SortOrder
     url?: SortOrder
+    storagePath?: SortOrder
     taille?: SortOrder
     mimeType?: SortOrder
     uploaderId?: SortOrder
@@ -32005,6 +32064,7 @@ export namespace Prisma {
     id?: SortOrder
     nom?: SortOrder
     url?: SortOrder
+    storagePath?: SortOrder
     taille?: SortOrder
     mimeType?: SortOrder
     uploaderId?: SortOrder
@@ -33575,6 +33635,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDemandesInscriptionInput, UserUpdateWithoutDemandesInscriptionInput>, UserUncheckedUpdateWithoutDemandesInscriptionInput>
   }
 
+  export type DocumentCreaterolesRequisInput = {
+    set: $Enums.Role[]
+  }
+
   export type UserCreateNestedOneWithoutDocumentsUploadInput = {
     create?: XOR<UserCreateWithoutDocumentsUploadInput, UserUncheckedCreateWithoutDocumentsUploadInput>
     connectOrCreate?: UserCreateOrConnectWithoutDocumentsUploadInput
@@ -33613,6 +33677,11 @@ export namespace Prisma {
     connectOrCreate?: MessageCreateOrConnectWithoutDocumentInput | MessageCreateOrConnectWithoutDocumentInput[]
     createMany?: MessageCreateManyDocumentInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type DocumentUpdaterolesRequisInput = {
+    set?: $Enums.Role[]
+    push?: $Enums.Role | $Enums.Role[]
   }
 
   export type UserUpdateOneRequiredWithoutDocumentsUploadNestedInput = {
@@ -34456,10 +34525,12 @@ export namespace Prisma {
   export type DocumentCreateWithoutUploaderInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     formation?: FormationCreateNestedOneWithoutDocumentsInput
     signatures?: SignatureCreateNestedManyWithoutDocumentInput
@@ -34469,11 +34540,13 @@ export namespace Prisma {
   export type DocumentUncheckedCreateWithoutUploaderInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     formationId?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     signatures?: SignatureUncheckedCreateNestedManyWithoutDocumentInput
     messages?: MessageUncheckedCreateNestedManyWithoutDocumentInput
@@ -34769,12 +34842,14 @@ export namespace Prisma {
     NOT?: DocumentScalarWhereInput | DocumentScalarWhereInput[]
     id?: StringFilter<"Document"> | string
     nom?: StringFilter<"Document"> | string
-    url?: StringFilter<"Document"> | string
+    url?: StringNullableFilter<"Document"> | string | null
+    storagePath?: StringNullableFilter<"Document"> | string | null
     taille?: IntNullableFilter<"Document"> | number | null
     mimeType?: StringNullableFilter<"Document"> | string | null
     uploaderId?: StringFilter<"Document"> | string
     formationId?: StringNullableFilter<"Document"> | string | null
     public?: BoolFilter<"Document"> | boolean
+    rolesRequis?: EnumRoleNullableListFilter<"Document">
     createdAt?: DateTimeFilter<"Document"> | Date | string
   }
 
@@ -35106,10 +35181,12 @@ export namespace Prisma {
   export type DocumentCreateWithoutFormationInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     uploader: UserCreateNestedOneWithoutDocumentsUploadInput
     signatures?: SignatureCreateNestedManyWithoutDocumentInput
@@ -35119,11 +35196,13 @@ export namespace Prisma {
   export type DocumentUncheckedCreateWithoutFormationInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     uploaderId: string
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     signatures?: SignatureUncheckedCreateNestedManyWithoutDocumentInput
     messages?: MessageUncheckedCreateNestedManyWithoutDocumentInput
@@ -36752,10 +36831,12 @@ export namespace Prisma {
   export type DocumentCreateWithoutSignaturesInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     uploader: UserCreateNestedOneWithoutDocumentsUploadInput
     formation?: FormationCreateNestedOneWithoutDocumentsInput
@@ -36765,12 +36846,14 @@ export namespace Prisma {
   export type DocumentUncheckedCreateWithoutSignaturesInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     uploaderId: string
     formationId?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutDocumentInput
   }
@@ -36843,10 +36926,12 @@ export namespace Prisma {
   export type DocumentUpdateWithoutSignaturesInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutDocumentsUploadNestedInput
     formation?: FormationUpdateOneWithoutDocumentsNestedInput
@@ -36856,12 +36941,14 @@ export namespace Prisma {
   export type DocumentUncheckedUpdateWithoutSignaturesInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     uploaderId?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutDocumentNestedInput
   }
@@ -37076,10 +37163,12 @@ export namespace Prisma {
   export type DocumentCreateWithoutMessagesInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     uploader: UserCreateNestedOneWithoutDocumentsUploadInput
     formation?: FormationCreateNestedOneWithoutDocumentsInput
@@ -37089,12 +37178,14 @@ export namespace Prisma {
   export type DocumentUncheckedCreateWithoutMessagesInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     uploaderId: string
     formationId?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
     signatures?: SignatureUncheckedCreateNestedManyWithoutDocumentInput
   }
@@ -37274,10 +37365,12 @@ export namespace Prisma {
   export type DocumentUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutDocumentsUploadNestedInput
     formation?: FormationUpdateOneWithoutDocumentsNestedInput
@@ -37287,12 +37380,14 @@ export namespace Prisma {
   export type DocumentUncheckedUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     uploaderId?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatures?: SignatureUncheckedUpdateManyWithoutDocumentNestedInput
   }
@@ -38214,11 +38309,13 @@ export namespace Prisma {
   export type DocumentCreateManyUploaderInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     formationId?: string | null
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
   }
 
@@ -38322,10 +38419,12 @@ export namespace Prisma {
   export type DocumentUpdateWithoutUploaderInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     formation?: FormationUpdateOneWithoutDocumentsNestedInput
     signatures?: SignatureUpdateManyWithoutDocumentNestedInput
@@ -38335,11 +38434,13 @@ export namespace Prisma {
   export type DocumentUncheckedUpdateWithoutUploaderInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatures?: SignatureUncheckedUpdateManyWithoutDocumentNestedInput
     messages?: MessageUncheckedUpdateManyWithoutDocumentNestedInput
@@ -38348,11 +38449,13 @@ export namespace Prisma {
   export type DocumentUncheckedUpdateManyWithoutUploaderInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -38613,11 +38716,13 @@ export namespace Prisma {
   export type DocumentCreateManyFormationInput = {
     id?: string
     nom: string
-    url: string
+    url?: string | null
+    storagePath?: string | null
     taille?: number | null
     mimeType?: string | null
     uploaderId: string
     public?: boolean
+    rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     createdAt?: Date | string
   }
 
@@ -38756,10 +38861,12 @@ export namespace Prisma {
   export type DocumentUpdateWithoutFormationInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutDocumentsUploadNestedInput
     signatures?: SignatureUpdateManyWithoutDocumentNestedInput
@@ -38769,11 +38876,13 @@ export namespace Prisma {
   export type DocumentUncheckedUpdateWithoutFormationInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     uploaderId?: StringFieldUpdateOperationsInput | string
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatures?: SignatureUncheckedUpdateManyWithoutDocumentNestedInput
     messages?: MessageUncheckedUpdateManyWithoutDocumentNestedInput
@@ -38782,11 +38891,13 @@ export namespace Prisma {
   export type DocumentUncheckedUpdateManyWithoutFormationInput = {
     id?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    storagePath?: NullableStringFieldUpdateOperationsInput | string | null
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     uploaderId?: StringFieldUpdateOperationsInput | string
     public?: BoolFieldUpdateOperationsInput | boolean
+    rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

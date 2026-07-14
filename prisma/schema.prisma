@@ -242,12 +242,14 @@ model DemandeInscription {
 model Document {
   id          String   @id @default(uuid())
   nom         String
-  url         String
+  url         String?
+  storagePath String?
   taille      Int?
   mimeType    String?
   uploaderId  String
   formationId String?
   public      Boolean  @default(false)
+  rolesRequis Role[]   @default([STAGIAIRE])
   createdAt   DateTime @default(now())
 
   uploader   User        @relation(fields: [uploaderId], references: [id])

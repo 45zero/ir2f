@@ -66,7 +66,7 @@ async function FormateurFormationsView({ userId }: { userId: string }) {
 async function MesFormations({ userId }: { userId: string }) {
   const [inscriptions, documentsRaw, covoituragesRaw, inboxRaw] = await Promise.all([
     getMesInscriptions(userId),
-    getMesDocuments(userId),
+    getMesDocuments(userId, "STAGIAIRE"),
     getCovoituragesDisponibles(),
     getInbox(userId),
   ])
@@ -85,7 +85,7 @@ async function MesFormations({ userId }: { userId: string }) {
     id: d.id,
     nom: d.nom,
     formationId: d.formationId,
-    signed: d.signatures.length > 0,
+    signed: d.signatures.some((s) => s.userId === userId),
     isNew: now - d.createdAt.getTime() < SEVEN_DAYS_MS,
   }))
 

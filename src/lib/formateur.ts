@@ -1,5 +1,6 @@
 import "server-only"
 import { prisma } from "@/lib/prisma"
+import { getSignedDocumentUrl } from "@/lib/storage"
 
 export async function getFormateurFormations(userId: string) {
   const links = await prisma.formationFormateur.findMany({
@@ -79,6 +80,32 @@ export async function getFormationRosterForFormateur(formationId: string, format
       signed: d.signatures.some((s) => s.userId === i.user.id),
     })),
   }))
+}
+
+export async function getFormateurDocumentsToSign(userId: string) {
+  const links = await prisma.formationFormateur.findMany({ where: { userId }, select: { formationId: true } })
+  const formationIds = links.map((l) => l.formationId)
+  if (formationIds.length === 0) return []
+
+  const documents = await prisma.document.findMany({
+    where: { formationId: { in: formationIds }, rolesRequis: { has: "FORMATEUR" } },
+    include: {
+      formation: { select: { titre: true } },
+      signatures: { select: { userId: true, user: { select: { role: true } } } },
+    },
+    orderBy: { createdAt: "desc" },
+  })
+
+  const pending = documents.filter((d) => !d.signatures.some((s) => s.user.role === "FORMATEUR"))
+
+  return Promise.all(
+    pending.map(async (d) => ({
+      id: d.id,
+      nom: d.nom,
+      formationTitre: d.formation?.titre ?? null,
+      url: d.storagePath ? await getSignedDocumentUrl(d.storagePath) : d.url,
+    }))
+  )
 }
 
 export async function getFormateurAlerts(userId: string) {

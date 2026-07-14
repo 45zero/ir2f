@@ -1,10 +1,15 @@
-import { getFormateurFormations, getFormateurAlerts } from "@/lib/formateur"
+import { getFormateurFormations, getFormateurAlerts, getFormateurDocumentsToSign } from "@/lib/formateur"
 import { FormateurAlertsList } from "@/components/dashboard/FormateurAlertsList"
+import { SignDocumentButton } from "@/components/dashboard/SignDocumentButton"
 import { StatCard } from "@/components/dashboard/StatCard"
 import { colors, fontHeading } from "@/lib/theme"
 
 export async function FormateurDashboardHome({ userId, name }: { userId: string; name: string }) {
-  const [formations, alerts] = await Promise.all([getFormateurFormations(userId), getFormateurAlerts(userId)])
+  const [formations, alerts, documentsToSign] = await Promise.all([
+    getFormateurFormations(userId),
+    getFormateurAlerts(userId),
+    getFormateurDocumentsToSign(userId),
+  ])
   const stagiairesSuivis = formations.reduce((acc, f) => acc + f.stagiaireCount, 0)
   const nouvellesAlertes = alerts.filter((a) => !a.lu).length
 
@@ -56,6 +61,29 @@ export async function FormateurDashboardHome({ userId, name }: { userId: string;
           }
         />
       </div>
+
+      {documentsToSign.length > 0 && (
+        <div style={{ background: "#fff", borderRadius: 14, padding: 24, boxShadow: "0 4px 20px rgba(20,33,61,0.06)", display: "flex", flexDirection: "column", gap: 14 }}>
+          <h2 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 18, fontWeight: 800, margin: 0 }}>Documents à signer</h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            {documentsToSign.map((d) => (
+              <div key={d.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", padding: "12px 0", borderBottom: "1px solid #eef0f3" }}>
+                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+                  {d.url ? (
+                    <a href={d.url} target="_blank" rel="noreferrer" style={{ fontSize: 13.5, fontWeight: 700, color: colors.navy, textDecoration: "none" }}>
+                      {d.nom}
+                    </a>
+                  ) : (
+                    <span style={{ fontSize: 13.5, fontWeight: 700, color: colors.text }}>{d.nom}</span>
+                  )}
+                  {d.formationTitre && <span style={{ fontSize: 12, color: colors.textLight }}>{d.formationTitre}</span>}
+                </div>
+                <SignDocumentButton documentId={d.id} signed={false} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div style={{ background: "#fff", borderRadius: 14, padding: 24, boxShadow: "0 4px 20px rgba(20,33,61,0.06)", display: "flex", flexDirection: "column", gap: 14 }}>
         <h2 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 18, fontWeight: 800, margin: 0 }}>Alertes récentes</h2>

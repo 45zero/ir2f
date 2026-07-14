@@ -13,7 +13,7 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: 
 export async function StagiaireDashboardHome({ userId, name }: { userId: string; name: string }) {
   const [inscriptions, documents, covoiturages, inbox, nextSession] = await Promise.all([
     getMesInscriptions(userId),
-    getMesDocuments(userId),
+    getMesDocuments(userId, "STAGIAIRE"),
     getCovoituragesDisponibles(),
     getInbox(userId),
     getNextSessionForUser(userId),
@@ -22,7 +22,7 @@ export async function StagiaireDashboardHome({ userId, name }: { userId: string;
   const validees = inscriptions.filter((i) => i.statut === "VALIDEE")
   const validatedFormationIds = new Set(validees.map((i) => i.formation.id))
 
-  const docsASigner = documents.filter((d) => d.signatures.length === 0).length
+  const docsASigner = documents.filter((d) => !d.signatures.some((s) => s.userId === userId)).length
   const trajetsPourMesFormations = covoiturages.filter(
     (c) => c.formationId && validatedFormationIds.has(c.formationId) && c.statut === "OUVERT"
   )

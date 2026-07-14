@@ -5,8 +5,13 @@ import { redirect } from "next/navigation"
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { str, optionalStr, optionalNumber } from "@/lib/actions/form-utils"
+import { sendEmail } from "@/lib/emails/send"
+import { CovoiturageRejointEmail } from "@/lib/emails/CovoiturageRejointEmail"
+import { CovoiturageAnnuleEmail } from "@/lib/emails/CovoiturageAnnuleEmail"
 
 export type CovoiturageActionState = { error: string | null }
+
+const dateLabelFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" })
 
 function revalidateCovoiturage() {
   revalidatePath("/dashboard/covoiturage")
@@ -57,7 +62,10 @@ export async function rejoindreCovoiturage(covoiturageId: string): Promise<Covoi
 
   const covoit = await prisma.covoiturage.findUnique({
     where: { id: covoiturageId },
-    include: { _count: { select: { passagers: true } } },
+    include: {
+      _count: { select: { passagers: true } },
+      conducteur: { select: { email: true, prenom: true } },
+    },
   })
   if (!covoit) return { error: "Trajet introuvable." }
   if (covoit.conducteurId === userId) return { error: "Vous êtes le conducteur de ce trajet." }
@@ -72,6 +80,8 @@ export async function rejoindreCovoiturage(covoiturageId: string): Promise<Covoi
     return { error: "Ce trajet est complet." }
   }
 
+  const passager = await prisma.user.findUnique({ where: { id: userId }, select: { nom: true, prenom: true } })
+
   await prisma.covoiturage.update({
     where: { id: covoiturageId },
     data: { passagers: { create: { userId } } },
@@ -80,6 +90,20 @@ export async function rejoindreCovoiturage(covoiturageId: string): Promise<Covoi
   const newCount = covoit._count.passagers + 1
   if (newCount >= covoit.places) {
     await prisma.covoiturage.update({ where: { id: covoiturageId }, data: { statut: "COMPLET" } })
+  }
+
+  if (passager) {
+    await sendEmail({
+      to: covoit.conducteur.email,
+      subject: `${passager.prenom} a rejoint votre trajet ${covoit.depart} → ${covoit.destination}`,
+      react: CovoiturageRejointEmail({
+        prenom: covoit.conducteur.prenom,
+        passagerNom: `${passager.prenom} ${passager.nom}`,
+        depart: covoit.depart,
+        destination: covoit.destination,
+        dateLabel: dateLabelFormatter.format(covoit.dateDepart),
+      }),
+    })
   }
 
   revalidateCovoiturage()
@@ -102,13 +126,38 @@ export async function annulerCovoiturage(covoiturageId: string): Promise<Covoitu
   const session = await auth()
   if (!session?.user) redirect("/login")
 
-  const covoit = await prisma.covoiturage.findUnique({ where: { id: covoiturageId }, select: { conducteurId: true } })
+  const covoit = await prisma.covoiturage.findUnique({
+    where: { id: covoiturageId },
+    select: {
+      conducteurId: true,
+      depart: true,
+      destination: true,
+      dateDepart: true,
+      passagers: { select: { user: { select: { email: true, prenom: true } } } },
+    },
+  })
   if (!covoit) return { error: "Trajet introuvable." }
   if (covoit.conducteurId !== session.user.id) {
     return { error: "Seul le conducteur peut annuler ce trajet." }
   }
 
   await prisma.covoiturage.update({ where: { id: covoiturageId }, data: { statut: "ANNULE" } })
+
+  await Promise.all(
+    covoit.passagers.map((p) =>
+      sendEmail({
+        to: p.user.email,
+        subject: `Trajet annulé — ${covoit.depart} → ${covoit.destination}`,
+        react: CovoiturageAnnuleEmail({
+          prenom: p.user.prenom,
+          depart: covoit.depart,
+          destination: covoit.destination,
+          dateLabel: dateLabelFormatter.format(covoit.dateDepart),
+        }),
+      })
+    )
+  )
+
   revalidateCovoiturage()
   return { error: null }
 }

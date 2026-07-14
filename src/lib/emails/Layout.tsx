@@ -13,8 +13,9 @@ export function EmailLayout({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ fontFamily: "Arial, sans-serif", backgroundColor: "#f5f5f5", padding: "32px 16px" }}>
       <div style={{ maxWidth: 480, margin: "0 auto", background: "#ffffff", borderRadius: 8, overflow: "hidden" }}>
-        <div style={{ background: colors.navy, padding: "20px 28px" }}>
-          <span style={{ color: "#ffffff", fontSize: 20, fontWeight: 800, letterSpacing: 0.5 }}>IR2F</span>
+        <div style={{ background: colors.navy, padding: "16px 28px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={`${SITE_URL}/images/logo-ir2f.png`} alt="IR2F" width={92} height={58} style={{ display: "block" }} />
         </div>
         <div style={{ padding: "28px", color: colors.text, fontSize: 14, lineHeight: 1.6 }}>{children}</div>
         <div style={{ padding: "16px 28px", borderTop: "1px solid #eef0f3" }}>
