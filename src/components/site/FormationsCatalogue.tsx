@@ -447,15 +447,7 @@ export function FormationsCatalogue({
 
             {expandedTab === "parcours" && expandedCategory === "EDUCATEUR" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
-                  Les connaissances acquises précédemment sur des formations ayant évolué peuvent être valorisées via des
-                  équivalences avec le nouveau parcours de formation. De plus, des allègements ont été imaginés entre le
-                  parcours bénévole et le parcours professionnel.
-                </p>
-                <h4 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 17, fontWeight: 800, margin: 0 }}>
-                  Équivalences entre ancienne et nouvelle filière
-                </h4>
-                <p style={{ color: colors.textLight, fontSize: 12, margin: 0 }}>Cliquez sur une case pour en voir le détail.</p>
+                
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(560px,1fr))", gap: 20 }}>
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
