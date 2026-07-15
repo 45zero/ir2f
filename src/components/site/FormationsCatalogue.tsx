@@ -411,7 +411,7 @@ export function FormationsCatalogue({
               </div>
             )}
 
-            {expandedTab === "parcours" && (
+            {expandedTab === "parcours" && expandedCategory !== "EDUCATEUR" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 <p style={{ color: colors.textMuted, fontSize: 13, margin: 0 }}>
                   Cliquez sur une formation pour en voir le détail.
@@ -445,7 +445,7 @@ export function FormationsCatalogue({
               </div>
             )}
 
-            {expandedTab === "equivalences" && expandedCategory === "EDUCATEUR" && (
+            {expandedTab === "parcours" && expandedCategory === "EDUCATEUR" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
                   Les connaissances acquises précédemment sur des formations ayant évolué peuvent être valorisées via des
@@ -641,6 +641,12 @@ export function FormationsCatalogue({
                   les journées complémentaires pour obtenir les équivalences des Diplômes Fédéraux. Les personnes titulaires de
                   CFI (même certifiés) ne sont pas éligibles aux journées complémentaires.
                 </p>
+              </div>
+            )}
+
+            {expandedTab === "equivalences" && expandedCategory === "EDUCATEUR" && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                <p style={{ color: colors.textLight, fontSize: 13, margin: 0 }}>Contenu à venir.</p>
               </div>
             )}
           </div>
