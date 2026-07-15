@@ -9,14 +9,20 @@ import { prisma } from "@/lib/prisma"
 import { str, optionalStr } from "@/lib/actions/form-utils"
 import { SIGNATURE_CONSENT_TEXT } from "@/lib/signature-consent"
 import { uploadDocumentFile } from "@/lib/storage"
-import { notifyDocumentSignataires } from "@/lib/emails/document-notifications"
-import type { Role } from "@/generated/prisma"
+import { notifyDocumentSignataires, notifyDocumentFullySigned } from "@/lib/emails/document-notifications"
+import { checkDocumentFullySignedById } from "@/lib/documents-completion"
+import type { Role, DocumentCategorie } from "@/generated/prisma"
 
 export type DocumentActionState = { error: string | null }
 
 const VALID_ROLES: Role[] = ["STAGIAIRE", "FORMATEUR", "ADMIN", "DIRECTION"]
 
-function parseRolesRequis(formData: FormData): Role[] {
+function parseCategorie(formData: FormData): DocumentCategorie {
+  return str(formData, "categorie") === "PEDAGOGIQUE" ? "PEDAGOGIQUE" : "ADMINISTRATIF"
+}
+
+function parseRolesRequis(formData: FormData, categorie: DocumentCategorie): Role[] {
+  if (categorie === "PEDAGOGIQUE") return []
   const submitted = formData.getAll("rolesRequis").map(String)
   const roles = submitted.filter((r): r is Role => (VALID_ROLES as string[]).includes(r))
   return roles.length > 0 ? roles : ["STAGIAIRE"]
@@ -24,12 +30,13 @@ function parseRolesRequis(formData: FormData): Role[] {
 
 async function resolveUploadedFile(
   formData: FormData,
-  keyHint: string
+  keyHint: string,
+  categorie: DocumentCategorie
 ): Promise<{ url: string | null; storagePath: string | null; mimeType: string | null; taille: number | null } | { error: string }> {
   const file = formData.get("file")
   if (file instanceof File && file.size > 0) {
-    if (file.type && file.type !== "application/pdf") {
-      return { error: "Seuls les fichiers PDF sont acceptés." }
+    if (categorie === "ADMINISTRATIF" && file.type && file.type !== "application/pdf") {
+      return { error: "Seuls les fichiers PDF sont acceptés pour un document administratif." }
     }
     try {
       const uploaded = await uploadDocumentFile(file, keyHint)
@@ -39,7 +46,7 @@ async function resolveUploadedFile(
     }
   }
   const url = str(formData, "url")
-  if (!url) return { error: "Ajoutez un fichier PDF ou un lien vers le document." }
+  if (!url) return { error: "Ajoutez un fichier ou un lien vers le document." }
   return { url, storagePath: null, mimeType: null, taille: null }
 }
 
@@ -53,15 +60,16 @@ export async function uploadDocument(
   const nom = str(formData, "nom")
   const formationId = optionalStr(formData, "formationId")
   const isPublic = formData.get("public") === "on"
-  const rolesRequis = parseRolesRequis(formData)
+  const categorie = parseCategorie(formData)
+  const rolesRequis = parseRolesRequis(formData, categorie)
 
   if (!nom) return { error: "Le nom du document est obligatoire." }
 
-  const source = await resolveUploadedFile(formData, `uploads/${session.user.id}`)
+  const source = await resolveUploadedFile(formData, `uploads/${session.user.id}`, categorie)
   if ("error" in source) return { error: source.error }
 
   const document = await prisma.document.create({
-    data: { nom, formationId, uploaderId: session.user.id, public: isPublic, rolesRequis, ...source },
+    data: { nom, formationId, uploaderId: session.user.id, public: isPublic, rolesRequis, categorie, ...source },
     include: { formation: { select: { titre: true } } },
   })
 
@@ -90,7 +98,8 @@ export async function broadcastDocumentToFormation(
   const formationId = str(formData, "formationId")
   const nom = str(formData, "nom")
   const submittedIds = formData.getAll("stagiaires").map(String).filter(Boolean)
-  const rolesRequis = parseRolesRequis(formData)
+  const categorie = parseCategorie(formData)
+  const rolesRequis = parseRolesRequis(formData, categorie)
 
   if (!formationId) return { error: "Formation introuvable." }
   if (!nom) return { error: "Le nom du document est obligatoire." }
@@ -101,7 +110,7 @@ export async function broadcastDocumentToFormation(
   })
   if (!link) return { error: "Vous n'encadrez pas cette formation." }
 
-  const source = await resolveUploadedFile(formData, `formations/${formationId}`)
+  const source = await resolveUploadedFile(formData, `formations/${formationId}`, categorie)
   if ("error" in source) return { error: source.error }
 
   const [roster, formation] = await Promise.all([
@@ -114,15 +123,21 @@ export async function broadcastDocumentToFormation(
   const recipientIds = roster.map((r) => r.userId)
   if (recipientIds.length === 0) return { error: "Aucun destinataire valide sélectionné." }
 
+  const sujet = categorie === "PEDAGOGIQUE" ? `Nouveau contenu pédagogique — ${nom}` : `Nouveau document — ${nom}`
+  const contenu =
+    categorie === "PEDAGOGIQUE"
+      ? `Un nouveau contenu pédagogique a été partagé pour votre formation : ${nom}.`
+      : `Un nouveau document a été partagé pour votre formation : ${nom}.`
+
   await prisma.$transaction(async (tx) => {
     const document = await tx.document.create({
-      data: { nom, formationId, uploaderId: session.user.id, public: false, rolesRequis, ...source },
+      data: { nom, formationId, uploaderId: session.user.id, public: false, rolesRequis, categorie, ...source },
     })
     await tx.message.create({
       data: {
         expediteurId: session.user.id,
-        sujet: `Nouveau document — ${nom}`,
-        contenu: `Un nouveau document a été partagé pour votre formation : ${nom}.`,
+        sujet,
+        contenu,
         formationId,
         documentId: document.id,
         destinataires: { create: recipientIds.map((userId) => ({ userId })) },
@@ -150,7 +165,14 @@ export async function signDocument(documentId: string) {
 
   const doc = await prisma.document.findUnique({
     where: { id: documentId },
-    select: { id: true, nom: true, url: true, storagePath: true, rolesRequis: true },
+    select: {
+      id: true,
+      nom: true,
+      url: true,
+      storagePath: true,
+      rolesRequis: true,
+      formation: { select: { titre: true } },
+    },
   })
   if (!doc) redirect("/dashboard/documents")
   if (!doc.rolesRequis.includes(session.user.role as Role)) {
@@ -165,6 +187,8 @@ export async function signDocument(documentId: string) {
     .update(`${doc.id}:${doc.nom}:${doc.url ?? doc.storagePath ?? ""}`)
     .digest("hex")
 
+  const wasComplete = await checkDocumentFullySignedById(documentId)
+
   await prisma.signature.upsert({
     where: { documentId_userId: { documentId, userId: session.user.id } },
     update: {},
@@ -177,6 +201,13 @@ export async function signDocument(documentId: string) {
       documentHash,
     },
   })
+
+  if (!wasComplete) {
+    const isCompleteNow = await checkDocumentFullySignedById(documentId)
+    if (isCompleteNow) {
+      await notifyDocumentFullySigned({ documentNom: doc.nom, formationTitre: doc.formation?.titre ?? null })
+    }
+  }
 
   revalidatePath("/dashboard/documents")
   revalidatePath("/dashboard")

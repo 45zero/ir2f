@@ -3,10 +3,11 @@
 import { useState, useActionState } from "react"
 import { uploadDocument, deleteDocument } from "@/lib/actions/documents"
 import { SignDocumentButton } from "@/components/dashboard/SignDocumentButton"
+import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
 import { colors, fontBody } from "@/lib/theme"
 import type { FormationOption } from "@/lib/formations-shared"
 import { SIGNATORY_ROLE_OPTIONS } from "@/lib/documents-shared"
-import type { Role } from "@/generated/prisma"
+import type { Role, DocumentCategorie } from "@/generated/prisma"
 
 const fieldStyle = {
   border: "1px solid #e2e5ea",
@@ -35,6 +36,8 @@ export type DashboardDocument = {
   id: string
   nom: string
   url: string | null
+  downloadUrl: string | null
+  categorie: DocumentCategorie
   public: boolean
   createdAt: string
   formationTitre: string | null
@@ -42,6 +45,9 @@ export type DashboardDocument = {
   isMine: boolean
   requiresViewerSignature: boolean
   isSignedByViewer: boolean
+  signedAt: string | null
+  signedByName: string | null
+  fullySigned: boolean
   roleStatus: { label: string; done: boolean }[]
 }
 
@@ -86,40 +92,49 @@ function DocumentCard({ doc }: { doc: DashboardDocument }) {
 
   return (
     <div style={{ background: "#fff", border: "1px solid #eef0f3", borderRadius: 8, padding: 16, display: "flex", flexDirection: "column", gap: 8 }}>
-      {doc.url ? (
-        <a href={doc.url} target="_blank" rel="noreferrer" style={{ fontSize: 14, fontWeight: 700, color: colors.navy, textDecoration: "none" }}>
-          {doc.nom}
-        </a>
-      ) : (
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10 }}>
         <span style={{ fontSize: 14, fontWeight: 700, color: colors.text }}>{doc.nom}</span>
-      )}
+        <DocumentLinkActions viewUrl={doc.url} downloadUrl={doc.downloadUrl} />
+      </div>
       <span style={{ fontSize: 12, color: colors.textLight }}>
         {doc.formationTitre ? `${doc.formationTitre} · ` : ""}
         Ajouté par {doc.uploaderNom}
         {doc.public ? " · Partagé" : ""}
+        {doc.categorie === "PEDAGOGIQUE" ? " · Contenu pédagogique" : ""}
       </span>
 
-      {doc.roleStatus.length > 0 && (
+      {(doc.fullySigned || doc.roleStatus.length > 0) && (
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-          {doc.roleStatus.map((r) => (
-            <span
-              key={r.label}
-              style={{
-                fontSize: 10.5,
-                fontWeight: 700,
-                padding: "4px 9px",
-                borderRadius: 12,
-                color: r.done ? colors.navy : colors.red,
-                background: r.done ? "#eef2f9" : "#fdeceb",
-              }}
-            >
-              {r.label} {r.done ? "✓ signé" : "en attente"}
+          {doc.fullySigned ? (
+            <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 10.5, fontWeight: 700, padding: "4px 9px", borderRadius: 12, color: "#1a6b3a", background: "#e6f4ea" }}>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#1a6b3a" strokeWidth="3">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Toutes les signatures recueillies
             </span>
-          ))}
+          ) : (
+            doc.roleStatus.map((r) => (
+              <span
+                key={r.label}
+                style={{
+                  fontSize: 10.5,
+                  fontWeight: 700,
+                  padding: "4px 9px",
+                  borderRadius: 12,
+                  color: r.done ? colors.navy : colors.red,
+                  background: r.done ? "#eef2f9" : "#fdeceb",
+                }}
+              >
+                {r.label} {r.done ? "✓ signé" : "en attente"}
+              </span>
+            ))
+          )}
         </div>
       )}
 
-      {doc.requiresViewerSignature && <SignDocumentButton documentId={doc.id} signed={doc.isSignedByViewer} />}
+      {doc.requiresViewerSignature && (
+        <SignDocumentButton documentId={doc.id} signed={doc.isSignedByViewer} signedAt={doc.signedAt} signedByName={doc.signedByName} />
+      )}
 
       {doc.isMine && (
         <form
@@ -154,6 +169,7 @@ function DocumentCard({ doc }: { doc: DashboardDocument }) {
 
 function UploadForm({ formations, onDone }: { formations: FormationOption[]; onDone: () => void }) {
   const [mode, setMode] = useState<"file" | "url">("file")
+  const [categorie, setCategorie] = useState<DocumentCategorie>("ADMINISTRATIF")
   const [rolesRequis, setRolesRequis] = useState<Role[]>(["STAGIAIRE"])
   const [state, formAction, pending] = useActionState(
     async (prev: { error: string | null } | undefined, formData: FormData) => {
@@ -173,6 +189,17 @@ function UploadForm({ formations, onDone }: { formations: FormationOption[]; onD
       action={formAction}
       style={{ background: "#fff", border: `1px solid ${colors.gold}`, borderRadius: 8, padding: 16, display: "flex", flexDirection: "column", gap: 10 }}
     >
+      <input type="hidden" name="categorie" value={categorie} />
+
+      <div style={{ display: "flex", gap: 8 }}>
+        <button type="button" onClick={() => setCategorie("ADMINISTRATIF")} style={categorie === "ADMINISTRATIF" ? modeActiveStyle : modeBaseStyle}>
+          Document administratif
+        </button>
+        <button type="button" onClick={() => setCategorie("PEDAGOGIQUE")} style={categorie === "PEDAGOGIQUE" ? modeActiveStyle : modeBaseStyle}>
+          Contenu pédagogique
+        </button>
+      </div>
+
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10 }}>
         <input name="nom" placeholder="Nom du document" required style={fieldStyle} />
         <select name="formationId" defaultValue="" style={fieldStyle}>
@@ -187,37 +214,39 @@ function UploadForm({ formations, onDone }: { formations: FormationOption[]; onD
 
       <div style={{ display: "flex", gap: 8 }}>
         <button type="button" onClick={() => setMode("file")} style={mode === "file" ? modeActiveStyle : modeBaseStyle}>
-          Fichier PDF
+          {categorie === "ADMINISTRATIF" ? "Fichier PDF" : "Fichier"}
         </button>
         <button type="button" onClick={() => setMode("url")} style={mode === "url" ? modeActiveStyle : modeBaseStyle}>
-          Lien externe
+          Lien externe {categorie === "PEDAGOGIQUE" ? "(vidéo, exercice...)" : ""}
         </button>
       </div>
 
       {mode === "file" ? (
-        <input name="file" type="file" accept="application/pdf" style={fieldStyle} />
+        <input name="file" type="file" accept={categorie === "ADMINISTRATIF" ? "application/pdf" : undefined} style={fieldStyle} />
       ) : (
-        <input name="url" placeholder="Lien du document" style={fieldStyle} />
+        <input name="url" placeholder={categorie === "PEDAGOGIQUE" ? "Lien vidéo, exercice, ressource..." : "Lien du document"} style={fieldStyle} />
       )}
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Qui doit signer ce document ?</span>
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          {SIGNATORY_ROLE_OPTIONS.map((r) => (
-            <label key={r.value} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
-              <input
-                type="checkbox"
-                name="rolesRequis"
-                value={r.value}
-                checked={rolesRequis.includes(r.value)}
-                onChange={() => toggleRole(r.value)}
-                style={{ width: 14, height: 14 }}
-              />
-              {r.label}
-            </label>
-          ))}
+      {categorie === "ADMINISTRATIF" && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Qui doit signer ce document ?</span>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            {SIGNATORY_ROLE_OPTIONS.map((r) => (
+              <label key={r.value} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
+                <input
+                  type="checkbox"
+                  name="rolesRequis"
+                  value={r.value}
+                  checked={rolesRequis.includes(r.value)}
+                  onChange={() => toggleRole(r.value)}
+                  style={{ width: 14, height: 14 }}
+                />
+                {r.label}
+              </label>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text }}>
         <input type="checkbox" name="public" style={{ width: 15, height: 15 }} />

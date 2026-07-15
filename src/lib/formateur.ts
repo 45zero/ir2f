@@ -1,6 +1,8 @@
 import "server-only"
 import { prisma } from "@/lib/prisma"
-import { getSignedDocumentUrl } from "@/lib/storage"
+import { getSignedDocumentUrl, getSignedDocumentDownloadUrl } from "@/lib/storage"
+import { computeDocumentFullySigned } from "@/lib/documents-completion"
+import type { Role } from "@/generated/prisma"
 
 export async function getFormateurFormations(userId: string) {
   const links = await prisma.formationFormateur.findMany({
@@ -12,11 +14,15 @@ export async function getFormateurFormations(userId: string) {
             where: { statut: "VALIDEE" },
             include: { user: { select: { id: true, nom: true, prenom: true } } },
           },
-          documents: { select: { id: true } },
+          documents: { select: { id: true, rolesRequis: true } },
           sessions: {
             where: { dateDebut: { gte: new Date() } },
             orderBy: { dateDebut: "asc" },
             take: 1,
+          },
+          covoiturages: {
+            where: { statut: { in: ["OUVERT", "COMPLET"] }, dateDepart: { gte: new Date() } },
+            select: { id: true },
           },
         },
       },
@@ -28,18 +34,38 @@ export async function getFormateurFormations(userId: string) {
   const signatures = allDocIds.length
     ? await prisma.signature.findMany({
         where: { documentId: { in: allDocIds } },
-        select: { documentId: true, userId: true },
+        select: { documentId: true, userId: true, user: { select: { role: true } } },
       })
     : []
-  const signedPairs = new Set(signatures.map((s) => `${s.documentId}:${s.userId}`))
+  const sigsByDoc = new Map<string, { userId: string; role: Role }[]>()
+  for (const s of signatures) {
+    const arr = sigsByDoc.get(s.documentId) ?? []
+    arr.push({ userId: s.userId, role: s.user.role })
+    sigsByDoc.set(s.documentId, arr)
+  }
 
   return links.map((l) => {
     const f = l.formation
     const stagiaires = f.inscriptions.map((i) => i.user)
-    const unsignedCount = f.documents.reduce(
-      (acc, d) => acc + stagiaires.filter((s) => !signedPairs.has(`${d.id}:${s.id}`)).length,
-      0
-    )
+    const stagiaireIds = stagiaires.map((s) => s.id)
+
+    const stagiaireDocs = f.documents.filter((d) => d.rolesRequis.includes("STAGIAIRE"))
+    const unsignedCount = stagiaireDocs.reduce((acc, d) => {
+      const signedIds = new Set((sigsByDoc.get(d.id) ?? []).filter((s) => s.role === "STAGIAIRE").map((s) => s.userId))
+      return acc + stagiaires.filter((s) => !signedIds.has(s.id)).length
+    }, 0)
+
+    // Seuls les documents nécessitant au moins une signature comptent ici — le contenu
+    // pédagogique (rolesRequis vide) ne doit pas gonfler artificiellement ce ratio.
+    const signableDocs = f.documents.filter((d) => d.rolesRequis.length > 0)
+    const fullySignedDocumentsCount = signableDocs.filter((d) =>
+      computeDocumentFullySigned({
+        rolesRequis: d.rolesRequis,
+        signatures: sigsByDoc.get(d.id) ?? [],
+        stagiaireRosterIds: stagiaireIds,
+      })
+    ).length
+
     return {
       id: f.id,
       titre: f.titre,
@@ -47,6 +73,9 @@ export async function getFormateurFormations(userId: string) {
       nextSession: f.sessions[0] ?? null,
       stagiaireCount: stagiaires.length,
       unsignedCount,
+      documentsCount: signableDocs.length,
+      fullySignedDocumentsCount,
+      covoiturageCount: f.covoiturages.length,
     }
   })
 }
@@ -65,20 +94,34 @@ export async function getFormationRosterForFormateur(formationId: string, format
     }),
     prisma.document.findMany({
       where: { formationId },
-      include: { signatures: { select: { userId: true } } },
+      include: { signatures: { select: { userId: true, signedAt: true } } },
       orderBy: { createdAt: "asc" },
     }),
   ])
+
+  const resolvedDocs = await Promise.all(
+    documents.map(async (d) => ({
+      ...d,
+      viewUrl: d.storagePath ? await getSignedDocumentUrl(d.storagePath) : d.url,
+      downloadUrl: d.storagePath ? await getSignedDocumentDownloadUrl(d.storagePath, d.nom) : d.url,
+    }))
+  )
 
   return inscriptions.map((i) => ({
     id: i.user.id,
     nom: i.user.nom,
     prenom: i.user.prenom,
-    documents: documents.map((d) => ({
-      id: d.id,
-      nom: d.nom,
-      signed: d.signatures.some((s) => s.userId === i.user.id),
-    })),
+    documents: resolvedDocs.map((d) => {
+      const sig = d.signatures.find((s) => s.userId === i.user.id)
+      return {
+        id: d.id,
+        nom: d.nom,
+        signed: Boolean(sig),
+        signedAt: sig ? sig.signedAt.toISOString() : null,
+        viewUrl: d.viewUrl,
+        downloadUrl: d.downloadUrl,
+      }
+    }),
   }))
 }
 
@@ -104,6 +147,7 @@ export async function getFormateurDocumentsToSign(userId: string) {
       nom: d.nom,
       formationTitre: d.formation?.titre ?? null,
       url: d.storagePath ? await getSignedDocumentUrl(d.storagePath) : d.url,
+      downloadUrl: d.storagePath ? await getSignedDocumentDownloadUrl(d.storagePath, d.nom) : d.url,
     }))
   )
 }

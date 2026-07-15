@@ -215,6 +215,7 @@ exports.Prisma.DocumentScalarFieldEnum = {
   formationId: 'formationId',
   public: 'public',
   rolesRequis: 'rolesRequis',
+  categorie: 'categorie',
   createdAt: 'createdAt'
 };
 
@@ -448,6 +449,11 @@ exports.StatutInscription = exports.$Enums.StatutInscription = {
   EN_ATTENTE: 'EN_ATTENTE',
   VALIDEE: 'VALIDEE',
   REFUSEE: 'REFUSEE'
+};
+
+exports.DocumentCategorie = exports.$Enums.DocumentCategorie = {
+  ADMINISTRATIF: 'ADMINISTRATIF',
+  PEDAGOGIQUE: 'PEDAGOGIQUE'
 };
 
 exports.StatutCovoiturage = exports.$Enums.StatutCovoiturage = {

@@ -49,3 +49,16 @@ export async function getSignedDocumentUrl(storagePath: string, expiresInSeconds
   if (error || !data) return null
   return data.signedUrl
 }
+
+export async function getSignedDocumentDownloadUrl(
+  storagePath: string,
+  fileName: string,
+  expiresInSeconds = 3600
+): Promise<string | null> {
+  const client = getStorageClient()
+  const { data, error } = await client.storage
+    .from(BUCKET)
+    .createSignedUrl(storagePath, expiresInSeconds, { download: fileName })
+  if (error || !data) return null
+  return data.signedUrl
+}

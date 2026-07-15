@@ -5,7 +5,19 @@ import { signDocument } from "@/lib/actions/documents"
 import { SIGNATURE_CONSENT_TEXT } from "@/lib/signature-consent"
 import { colors, fontBody } from "@/lib/theme"
 
-export function SignDocumentButton({ documentId, signed }: { documentId: string; signed: boolean }) {
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" })
+
+export function SignDocumentButton({
+  documentId,
+  signed,
+  signedAt,
+  signedByName,
+}: {
+  documentId: string
+  signed: boolean
+  signedAt?: string | null
+  signedByName?: string | null
+}) {
   const [confirming, setConfirming] = useState(false)
   const [signState, signAction, signPending] = useActionState(
     async () => {
@@ -18,7 +30,10 @@ export function SignDocumentButton({ documentId, signed }: { documentId: string;
   const isSigned = signed || Boolean(signState?.done)
 
   if (isSigned) {
-    return <span style={{ color: "#3f9142", fontSize: 12, fontWeight: 600 }}>Signé électroniquement</span>
+    const label = signedAt
+      ? `Signé électroniquement${signedByName ? ` par ${signedByName}` : ""} le ${dateFormatter.format(new Date(signedAt))}`
+      : "Signé électroniquement à l'instant"
+    return <span style={{ color: "#3f9142", fontSize: 12, fontWeight: 600 }}>{label}</span>
   }
 
   if (confirming) {

@@ -2,7 +2,10 @@
 
 import { useState } from "react"
 import { BroadcastComposerModal } from "@/components/dashboard/BroadcastComposerModal"
+import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
 import { colors, fontBody } from "@/lib/theme"
+
+const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" })
 
 export type FormateurFormationRow = {
   id: string
@@ -11,11 +14,14 @@ export type FormateurFormationRow = {
   dateLabel: string | null
   stagiaireCount: number
   unsignedCount: number
+  documentsCount: number
+  fullySignedDocumentsCount: number
+  covoiturageCount: number
   stagiaires: {
     id: string
     nom: string
     prenom: string
-    documents: { id: string; nom: string; signed: boolean }[]
+    documents: { id: string; nom: string; signed: boolean; signedAt: string | null; viewUrl: string | null; downloadUrl: string | null }[]
   }[]
 }
 
@@ -96,6 +102,36 @@ export function FormationRosterAndBroadcast({ formations }: { formations: Format
                 </svg>
                 {f.stagiaireCount} stagiaires
               </span>
+              {f.documentsCount > 0 && (
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                    background: f.fullySignedDocumentsCount === f.documentsCount ? "#e6f4ea" : "#faf4e6",
+                    color: f.fullySignedDocumentsCount === f.documentsCount ? "#1a6b3a" : "#7a6423",
+                    fontSize: 12,
+                    fontWeight: 700,
+                    padding: "6px 12px",
+                    borderRadius: 16,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                  </svg>
+                  {f.fullySignedDocumentsCount}/{f.documentsCount} documents signés
+                </span>
+              )}
+              {f.covoiturageCount > 0 && (
+                <span style={{ display: "flex", alignItems: "center", gap: 6, background: "#eef2f9", color: colors.navy, fontSize: 12, fontWeight: 700, padding: "6px 12px", borderRadius: 16, whiteSpace: "nowrap" }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2.2">
+                    <path d="M5 17h14M5 17a2 2 0 1 0 4 0M15 17a2 2 0 1 0 4 0M5 17l1.5-6.5A2 2 0 0 1 8.4 9h7.2a2 2 0 0 1 1.9 1.5L19 17M7 9V6a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3" />
+                  </svg>
+                  {f.covoiturageCount} trajet{f.covoiturageCount > 1 ? "s" : ""}
+                </span>
+              )}
               {f.unsignedCount > 0 && (
                 <span style={{ background: "#fdeceb", color: colors.red, fontSize: 11, fontWeight: 700, padding: "5px 10px", borderRadius: 14, whiteSpace: "nowrap" }}>
                   {f.unsignedCount} à signer
@@ -197,24 +233,32 @@ export function FormationRosterAndBroadcast({ formations }: { formations: Format
                             <span style={{ fontSize: 12.5, color: colors.textLight }}>Aucun document pour cette formation.</span>
                           )}
                           {s.documents.map((d) => (
-                            <div key={d.id} style={{ display: "flex", alignItems: "center", gap: 10, background: "#fff", padding: "9px 12px", borderRadius: 8 }}>
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={d.signed ? colors.gold : colors.red} strokeWidth="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                <polyline points="14 2 14 8 20 8" />
-                              </svg>
-                              <span style={{ flex: 1, fontSize: 12.5, fontWeight: 600, color: colors.text }}>{d.nom}</span>
-                              <span
-                                style={{
-                                  fontSize: 10.5,
-                                  fontWeight: 700,
-                                  padding: "4px 9px",
-                                  borderRadius: 12,
-                                  color: d.signed ? colors.navy : colors.red,
-                                  background: d.signed ? "#eef2f9" : "#fdeceb",
-                                }}
-                              >
-                                {d.signed ? "Signé" : "À signer"}
-                              </span>
+                            <div key={d.id} style={{ display: "flex", flexDirection: "column", gap: 4, background: "#fff", padding: "9px 12px", borderRadius: 8 }}>
+                              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={d.signed ? colors.gold : colors.red} strokeWidth="2">
+                                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                  <polyline points="14 2 14 8 20 8" />
+                                </svg>
+                                <span style={{ flex: 1, fontSize: 12.5, fontWeight: 600, color: colors.text }}>{d.nom}</span>
+                                <span
+                                  style={{
+                                    fontSize: 10.5,
+                                    fontWeight: 700,
+                                    padding: "4px 9px",
+                                    borderRadius: 12,
+                                    color: d.signed ? colors.navy : colors.red,
+                                    background: d.signed ? "#eef2f9" : "#fdeceb",
+                                  }}
+                                >
+                                  {d.signed ? "Signé" : "À signer"}
+                                </span>
+                                <DocumentLinkActions viewUrl={d.viewUrl} downloadUrl={d.downloadUrl} />
+                              </div>
+                              {d.signed && d.signedAt && (
+                                <span style={{ fontSize: 11, color: colors.textLight, paddingLeft: 26 }}>
+                                  Signé le {dateTimeFormatter.format(new Date(d.signedAt))}
+                                </span>
+                              )}
                             </div>
                           ))}
                         </div>

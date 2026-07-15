@@ -22,10 +22,11 @@ export default async function DashboardDocumentsPage() {
 
   const rows: DashboardDocument[] = documents
     .map((d) => {
-      const isSignedByViewer =
+      const relevantSignature =
         role === "STAGIAIRE"
-          ? d.signatures.some((s) => s.userId === session.user.id)
-          : d.signatures.some((s) => s.user.role === role)
+          ? d.signatures.find((s) => s.userId === session.user.id)
+          : d.signatures.find((s) => s.user.role === role)
+      const isSignedByViewer = Boolean(relevantSignature)
 
       const roleStatus = ROLE_BADGE_ORDER.filter((r) => d.rolesRequis.includes(r)).map((r) => ({
         label: ROLE_LABELS[r],
@@ -36,6 +37,8 @@ export default async function DashboardDocumentsPage() {
         id: d.id,
         nom: d.nom,
         url: d.resolvedUrl,
+        downloadUrl: d.resolvedDownloadUrl,
+        categorie: d.categorie,
         public: d.public,
         createdAt: d.createdAt.toISOString(),
         formationTitre: d.formation?.titre ?? null,
@@ -43,6 +46,12 @@ export default async function DashboardDocumentsPage() {
         isMine: d.uploaderId === session.user.id,
         requiresViewerSignature: d.rolesRequis.includes(role),
         isSignedByViewer,
+        signedAt: relevantSignature ? relevantSignature.signedAt.toISOString() : null,
+        signedByName:
+          relevantSignature && relevantSignature.userId !== session.user.id
+            ? `${relevantSignature.user.prenom} ${relevantSignature.user.nom}`
+            : null,
+        fullySigned: d.rolesRequis.length > 0 && d.fullySigned,
         roleStatus,
       }
     })

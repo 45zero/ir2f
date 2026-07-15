@@ -55,6 +55,9 @@ async function FormateurFormationsView({ userId }: { userId: string }) {
         dateLabel: f.nextSession ? dateFormatter.format(f.nextSession.dateDebut) : null,
         stagiaireCount: f.stagiaireCount,
         unsignedCount: f.unsignedCount,
+        documentsCount: f.documentsCount,
+        fullySignedDocumentsCount: f.fullySignedDocumentsCount,
+        covoiturageCount: f.covoiturageCount,
         stagiaires: roster,
       }
     })
@@ -81,15 +84,20 @@ async function MesFormations({ userId }: { userId: string }) {
   }))
 
   const now = Date.now()
-  const documents: StagiaireFormationDoc[] = documentsRaw.map((d) => ({
-    id: d.id,
-    nom: d.nom,
-    url: d.resolvedUrl,
-    formationId: d.formationId,
-    signed: d.signatures.some((s) => s.userId === userId),
-    isNew: now - d.createdAt.getTime() < SEVEN_DAYS_MS,
-    requiresSignature: d.rolesRequis.includes("STAGIAIRE"),
-  }))
+  const documents: StagiaireFormationDoc[] = documentsRaw.map((d) => {
+    const mySignature = d.signatures.find((s) => s.userId === userId)
+    return {
+      id: d.id,
+      nom: d.nom,
+      url: d.resolvedUrl,
+      downloadUrl: d.resolvedDownloadUrl,
+      formationId: d.formationId,
+      signed: Boolean(mySignature),
+      signedAt: mySignature ? mySignature.signedAt.toISOString() : null,
+      isNew: now - d.createdAt.getTime() < SEVEN_DAYS_MS,
+      requiresSignature: d.rolesRequis.includes("STAGIAIRE"),
+    }
+  })
 
   const covoiturages: StagiaireFormationCovoit[] = covoituragesRaw.map((c) => ({
     id: c.id,

@@ -206,6 +206,14 @@ export const VarianteNode: {
 export type VarianteNode = (typeof VarianteNode)[keyof typeof VarianteNode]
 
 
+export const DocumentCategorie: {
+  ADMINISTRATIF: 'ADMINISTRATIF',
+  PEDAGOGIQUE: 'PEDAGOGIQUE'
+};
+
+export type DocumentCategorie = (typeof DocumentCategorie)[keyof typeof DocumentCategorie]
+
+
 export const StatutCovoiturage: {
   OUVERT: 'OUVERT',
   COMPLET: 'COMPLET',
@@ -264,6 +272,10 @@ export const GroupeEquivalence: typeof $Enums.GroupeEquivalence
 export type VarianteNode = $Enums.VarianteNode
 
 export const VarianteNode: typeof $Enums.VarianteNode
+
+export type DocumentCategorie = $Enums.DocumentCategorie
+
+export const DocumentCategorie: typeof $Enums.DocumentCategorie
 
 export type StatutCovoiturage = $Enums.StatutCovoiturage
 
@@ -10637,6 +10649,7 @@ export namespace Prisma {
     uploaderId: string | null
     formationId: string | null
     public: boolean | null
+    categorie: $Enums.DocumentCategorie | null
     createdAt: Date | null
   }
 
@@ -10650,6 +10663,7 @@ export namespace Prisma {
     uploaderId: string | null
     formationId: string | null
     public: boolean | null
+    categorie: $Enums.DocumentCategorie | null
     createdAt: Date | null
   }
 
@@ -10664,6 +10678,7 @@ export namespace Prisma {
     formationId: number
     public: number
     rolesRequis: number
+    categorie: number
     createdAt: number
     _all: number
   }
@@ -10687,6 +10702,7 @@ export namespace Prisma {
     uploaderId?: true
     formationId?: true
     public?: true
+    categorie?: true
     createdAt?: true
   }
 
@@ -10700,6 +10716,7 @@ export namespace Prisma {
     uploaderId?: true
     formationId?: true
     public?: true
+    categorie?: true
     createdAt?: true
   }
 
@@ -10714,6 +10731,7 @@ export namespace Prisma {
     formationId?: true
     public?: true
     rolesRequis?: true
+    categorie?: true
     createdAt?: true
     _all?: true
   }
@@ -10815,6 +10833,7 @@ export namespace Prisma {
     formationId: string | null
     public: boolean
     rolesRequis: $Enums.Role[]
+    categorie: $Enums.DocumentCategorie
     createdAt: Date
     _count: DocumentCountAggregateOutputType | null
     _avg: DocumentAvgAggregateOutputType | null
@@ -10848,6 +10867,7 @@ export namespace Prisma {
     formationId?: boolean
     public?: boolean
     rolesRequis?: boolean
+    categorie?: boolean
     createdAt?: boolean
     uploader?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | Document$formationArgs<ExtArgs>
@@ -10867,6 +10887,7 @@ export namespace Prisma {
     formationId?: boolean
     public?: boolean
     rolesRequis?: boolean
+    categorie?: boolean
     createdAt?: boolean
     uploader?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | Document$formationArgs<ExtArgs>
@@ -10883,6 +10904,7 @@ export namespace Prisma {
     formationId?: boolean
     public?: boolean
     rolesRequis?: boolean
+    categorie?: boolean
     createdAt?: boolean
     uploader?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | Document$formationArgs<ExtArgs>
@@ -10899,10 +10921,11 @@ export namespace Prisma {
     formationId?: boolean
     public?: boolean
     rolesRequis?: boolean
+    categorie?: boolean
     createdAt?: boolean
   }
 
-  export type DocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "url" | "storagePath" | "taille" | "mimeType" | "uploaderId" | "formationId" | "public" | "rolesRequis" | "createdAt", ExtArgs["result"]["document"]>
+  export type DocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "url" | "storagePath" | "taille" | "mimeType" | "uploaderId" | "formationId" | "public" | "rolesRequis" | "categorie" | "createdAt", ExtArgs["result"]["document"]>
   export type DocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     uploader?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | Document$formationArgs<ExtArgs>
@@ -10938,6 +10961,7 @@ export namespace Prisma {
       formationId: string | null
       public: boolean
       rolesRequis: $Enums.Role[]
+      categorie: $Enums.DocumentCategorie
       createdAt: Date
     }, ExtArgs["result"]["document"]>
     composites: {}
@@ -11376,6 +11400,7 @@ export namespace Prisma {
     readonly formationId: FieldRef<"Document", 'String'>
     readonly public: FieldRef<"Document", 'Boolean'>
     readonly rolesRequis: FieldRef<"Document", 'Role[]'>
+    readonly categorie: FieldRef<"Document", 'DocumentCategorie'>
     readonly createdAt: FieldRef<"Document", 'DateTime'>
   }
     
@@ -27321,6 +27346,7 @@ export namespace Prisma {
     formationId: 'formationId',
     public: 'public',
     rolesRequis: 'rolesRequis',
+    categorie: 'categorie',
     createdAt: 'createdAt'
   };
 
@@ -27749,6 +27775,20 @@ export namespace Prisma {
    * Reference to a field of type 'StatutInscription[]'
    */
   export type ListEnumStatutInscriptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutInscription[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DocumentCategorie'
+   */
+  export type EnumDocumentCategorieFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentCategorie'>
+    
+
+
+  /**
+   * Reference to a field of type 'DocumentCategorie[]'
+   */
+  export type ListEnumDocumentCategorieFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentCategorie[]'>
     
 
 
@@ -28384,6 +28424,7 @@ export namespace Prisma {
     formationId?: StringNullableFilter<"Document"> | string | null
     public?: BoolFilter<"Document"> | boolean
     rolesRequis?: EnumRoleNullableListFilter<"Document">
+    categorie?: EnumDocumentCategorieFilter<"Document"> | $Enums.DocumentCategorie
     createdAt?: DateTimeFilter<"Document"> | Date | string
     uploader?: XOR<UserScalarRelationFilter, UserWhereInput>
     formation?: XOR<FormationNullableScalarRelationFilter, FormationWhereInput> | null
@@ -28402,6 +28443,7 @@ export namespace Prisma {
     formationId?: SortOrderInput | SortOrder
     public?: SortOrder
     rolesRequis?: SortOrder
+    categorie?: SortOrder
     createdAt?: SortOrder
     uploader?: UserOrderByWithRelationInput
     formation?: FormationOrderByWithRelationInput
@@ -28423,6 +28465,7 @@ export namespace Prisma {
     formationId?: StringNullableFilter<"Document"> | string | null
     public?: BoolFilter<"Document"> | boolean
     rolesRequis?: EnumRoleNullableListFilter<"Document">
+    categorie?: EnumDocumentCategorieFilter<"Document"> | $Enums.DocumentCategorie
     createdAt?: DateTimeFilter<"Document"> | Date | string
     uploader?: XOR<UserScalarRelationFilter, UserWhereInput>
     formation?: XOR<FormationNullableScalarRelationFilter, FormationWhereInput> | null
@@ -28441,6 +28484,7 @@ export namespace Prisma {
     formationId?: SortOrderInput | SortOrder
     public?: SortOrder
     rolesRequis?: SortOrder
+    categorie?: SortOrder
     createdAt?: SortOrder
     _count?: DocumentCountOrderByAggregateInput
     _avg?: DocumentAvgOrderByAggregateInput
@@ -28463,6 +28507,7 @@ export namespace Prisma {
     formationId?: StringNullableWithAggregatesFilter<"Document"> | string | null
     public?: BoolWithAggregatesFilter<"Document"> | boolean
     rolesRequis?: EnumRoleNullableListFilter<"Document">
+    categorie?: EnumDocumentCategorieWithAggregatesFilter<"Document"> | $Enums.DocumentCategorie
     createdAt?: DateTimeWithAggregatesFilter<"Document"> | Date | string
   }
 
@@ -30098,6 +30143,7 @@ export namespace Prisma {
     mimeType?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     uploader: UserCreateNestedOneWithoutDocumentsUploadInput
     formation?: FormationCreateNestedOneWithoutDocumentsInput
@@ -30116,6 +30162,7 @@ export namespace Prisma {
     formationId?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     signatures?: SignatureUncheckedCreateNestedManyWithoutDocumentInput
     messages?: MessageUncheckedCreateNestedManyWithoutDocumentInput
@@ -30130,6 +30177,7 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutDocumentsUploadNestedInput
     formation?: FormationUpdateOneWithoutDocumentsNestedInput
@@ -30148,6 +30196,7 @@ export namespace Prisma {
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatures?: SignatureUncheckedUpdateManyWithoutDocumentNestedInput
     messages?: MessageUncheckedUpdateManyWithoutDocumentNestedInput
@@ -30164,6 +30213,7 @@ export namespace Prisma {
     formationId?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
   }
 
@@ -30176,6 +30226,7 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -30190,6 +30241,7 @@ export namespace Prisma {
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -32029,6 +32081,13 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type EnumDocumentCategorieFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentCategorie | EnumDocumentCategorieFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentCategorie[] | ListEnumDocumentCategorieFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentCategorie[] | ListEnumDocumentCategorieFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentCategorieFilter<$PrismaModel> | $Enums.DocumentCategorie
+  }
+
   export type DocumentCountOrderByAggregateInput = {
     id?: SortOrder
     nom?: SortOrder
@@ -32040,6 +32099,7 @@ export namespace Prisma {
     formationId?: SortOrder
     public?: SortOrder
     rolesRequis?: SortOrder
+    categorie?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -32057,6 +32117,7 @@ export namespace Prisma {
     uploaderId?: SortOrder
     formationId?: SortOrder
     public?: SortOrder
+    categorie?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -32070,11 +32131,22 @@ export namespace Prisma {
     uploaderId?: SortOrder
     formationId?: SortOrder
     public?: SortOrder
+    categorie?: SortOrder
     createdAt?: SortOrder
   }
 
   export type DocumentSumOrderByAggregateInput = {
     taille?: SortOrder
+  }
+
+  export type EnumDocumentCategorieWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentCategorie | EnumDocumentCategorieFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentCategorie[] | ListEnumDocumentCategorieFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentCategorie[] | ListEnumDocumentCategorieFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentCategorieWithAggregatesFilter<$PrismaModel> | $Enums.DocumentCategorie
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDocumentCategorieFilter<$PrismaModel>
+    _max?: NestedEnumDocumentCategorieFilter<$PrismaModel>
   }
 
   export type DocumentScalarRelationFilter = {
@@ -33684,6 +33756,10 @@ export namespace Prisma {
     push?: $Enums.Role | $Enums.Role[]
   }
 
+  export type EnumDocumentCategorieFieldUpdateOperationsInput = {
+    set?: $Enums.DocumentCategorie
+  }
+
   export type UserUpdateOneRequiredWithoutDocumentsUploadNestedInput = {
     create?: XOR<UserCreateWithoutDocumentsUploadInput, UserUncheckedCreateWithoutDocumentsUploadInput>
     connectOrCreate?: UserCreateOrConnectWithoutDocumentsUploadInput
@@ -34403,6 +34479,23 @@ export namespace Prisma {
     _max?: NestedEnumStatutInscriptionFilter<$PrismaModel>
   }
 
+  export type NestedEnumDocumentCategorieFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentCategorie | EnumDocumentCategorieFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentCategorie[] | ListEnumDocumentCategorieFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentCategorie[] | ListEnumDocumentCategorieFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentCategorieFilter<$PrismaModel> | $Enums.DocumentCategorie
+  }
+
+  export type NestedEnumDocumentCategorieWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentCategorie | EnumDocumentCategorieFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentCategorie[] | ListEnumDocumentCategorieFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentCategorie[] | ListEnumDocumentCategorieFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentCategorieWithAggregatesFilter<$PrismaModel> | $Enums.DocumentCategorie
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDocumentCategorieFilter<$PrismaModel>
+    _max?: NestedEnumDocumentCategorieFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -34531,6 +34624,7 @@ export namespace Prisma {
     mimeType?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     formation?: FormationCreateNestedOneWithoutDocumentsInput
     signatures?: SignatureCreateNestedManyWithoutDocumentInput
@@ -34547,6 +34641,7 @@ export namespace Prisma {
     formationId?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     signatures?: SignatureUncheckedCreateNestedManyWithoutDocumentInput
     messages?: MessageUncheckedCreateNestedManyWithoutDocumentInput
@@ -34850,6 +34945,7 @@ export namespace Prisma {
     formationId?: StringNullableFilter<"Document"> | string | null
     public?: BoolFilter<"Document"> | boolean
     rolesRequis?: EnumRoleNullableListFilter<"Document">
+    categorie?: EnumDocumentCategorieFilter<"Document"> | $Enums.DocumentCategorie
     createdAt?: DateTimeFilter<"Document"> | Date | string
   }
 
@@ -35187,6 +35283,7 @@ export namespace Prisma {
     mimeType?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     uploader: UserCreateNestedOneWithoutDocumentsUploadInput
     signatures?: SignatureCreateNestedManyWithoutDocumentInput
@@ -35203,6 +35300,7 @@ export namespace Prisma {
     uploaderId: string
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     signatures?: SignatureUncheckedCreateNestedManyWithoutDocumentInput
     messages?: MessageUncheckedCreateNestedManyWithoutDocumentInput
@@ -36837,6 +36935,7 @@ export namespace Prisma {
     mimeType?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     uploader: UserCreateNestedOneWithoutDocumentsUploadInput
     formation?: FormationCreateNestedOneWithoutDocumentsInput
@@ -36854,6 +36953,7 @@ export namespace Prisma {
     formationId?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutDocumentInput
   }
@@ -36932,6 +37032,7 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutDocumentsUploadNestedInput
     formation?: FormationUpdateOneWithoutDocumentsNestedInput
@@ -36949,6 +37050,7 @@ export namespace Prisma {
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutDocumentNestedInput
   }
@@ -37169,6 +37271,7 @@ export namespace Prisma {
     mimeType?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     uploader: UserCreateNestedOneWithoutDocumentsUploadInput
     formation?: FormationCreateNestedOneWithoutDocumentsInput
@@ -37186,6 +37289,7 @@ export namespace Prisma {
     formationId?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
     signatures?: SignatureUncheckedCreateNestedManyWithoutDocumentInput
   }
@@ -37371,6 +37475,7 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutDocumentsUploadNestedInput
     formation?: FormationUpdateOneWithoutDocumentsNestedInput
@@ -37388,6 +37493,7 @@ export namespace Prisma {
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatures?: SignatureUncheckedUpdateManyWithoutDocumentNestedInput
   }
@@ -38316,6 +38422,7 @@ export namespace Prisma {
     formationId?: string | null
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
   }
 
@@ -38425,6 +38532,7 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     formation?: FormationUpdateOneWithoutDocumentsNestedInput
     signatures?: SignatureUpdateManyWithoutDocumentNestedInput
@@ -38441,6 +38549,7 @@ export namespace Prisma {
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatures?: SignatureUncheckedUpdateManyWithoutDocumentNestedInput
     messages?: MessageUncheckedUpdateManyWithoutDocumentNestedInput
@@ -38456,6 +38565,7 @@ export namespace Prisma {
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -38723,6 +38833,7 @@ export namespace Prisma {
     uploaderId: string
     public?: boolean
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
+    categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
   }
 
@@ -38867,6 +38978,7 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     uploader?: UserUpdateOneRequiredWithoutDocumentsUploadNestedInput
     signatures?: SignatureUpdateManyWithoutDocumentNestedInput
@@ -38883,6 +38995,7 @@ export namespace Prisma {
     uploaderId?: StringFieldUpdateOperationsInput | string
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatures?: SignatureUncheckedUpdateManyWithoutDocumentNestedInput
     messages?: MessageUncheckedUpdateManyWithoutDocumentNestedInput
@@ -38898,6 +39011,7 @@ export namespace Prisma {
     uploaderId?: StringFieldUpdateOperationsInput | string
     public?: BoolFieldUpdateOperationsInput | boolean
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
+    categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

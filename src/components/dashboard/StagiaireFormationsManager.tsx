@@ -5,6 +5,7 @@ import Link from "next/link"
 import { CATEGORIE_LABELS } from "@/lib/formations-shared"
 import { STATUT_INSCRIPTION_LABELS } from "@/lib/inscriptions-shared"
 import { SignDocumentButton } from "@/components/dashboard/SignDocumentButton"
+import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
 import { colors, fontBody } from "@/lib/theme"
 import type { CategorieFormation, StatutInscription } from "@/generated/prisma"
 
@@ -21,8 +22,10 @@ export type StagiaireFormationDoc = {
   id: string
   nom: string
   url: string | null
+  downloadUrl: string | null
   formationId: string | null
   signed: boolean
+  signedAt: string | null
   isNew: boolean
   requiresSignature: boolean
 }
@@ -231,13 +234,7 @@ function FormationCard({
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                       <polyline points="14 2 14 8 20 8" />
                     </svg>
-                    {d.url ? (
-                      <a href={d.url} target="_blank" rel="noreferrer" style={{ flex: 1, fontSize: 13.5, fontWeight: 600, color: colors.navy, textDecoration: "none" }}>
-                        {d.nom}
-                      </a>
-                    ) : (
-                      <span style={{ flex: 1, fontSize: 13.5, fontWeight: 600, color: colors.text }}>{d.nom}</span>
-                    )}
+                    <span style={{ flex: 1, fontSize: 13.5, fontWeight: 600, color: colors.text }}>{d.nom}</span>
                     <span
                       style={{
                         fontSize: 11,
@@ -250,8 +247,9 @@ function FormationCard({
                     >
                       {d.signed ? "Signé" : "À signer"}
                     </span>
+                    <DocumentLinkActions viewUrl={d.url} downloadUrl={d.downloadUrl} />
                   </div>
-                  {d.requiresSignature && <SignDocumentButton documentId={d.id} signed={d.signed} />}
+                  {d.requiresSignature && <SignDocumentButton documentId={d.id} signed={d.signed} signedAt={d.signedAt} />}
                 </div>
               ))}
             </div>

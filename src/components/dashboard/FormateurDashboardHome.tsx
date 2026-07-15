@@ -1,6 +1,7 @@
 import { getFormateurFormations, getFormateurAlerts, getFormateurDocumentsToSign } from "@/lib/formateur"
 import { FormateurAlertsList } from "@/components/dashboard/FormateurAlertsList"
 import { SignDocumentButton } from "@/components/dashboard/SignDocumentButton"
+import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
 import { StatCard } from "@/components/dashboard/StatCard"
 import { colors, fontHeading } from "@/lib/theme"
 
@@ -69,16 +70,13 @@ export async function FormateurDashboardHome({ userId, name }: { userId: string;
             {documentsToSign.map((d) => (
               <div key={d.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", padding: "12px 0", borderBottom: "1px solid #eef0f3" }}>
                 <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  {d.url ? (
-                    <a href={d.url} target="_blank" rel="noreferrer" style={{ fontSize: 13.5, fontWeight: 700, color: colors.navy, textDecoration: "none" }}>
-                      {d.nom}
-                    </a>
-                  ) : (
-                    <span style={{ fontSize: 13.5, fontWeight: 700, color: colors.text }}>{d.nom}</span>
-                  )}
+                  <span style={{ fontSize: 13.5, fontWeight: 700, color: colors.text }}>{d.nom}</span>
                   {d.formationTitre && <span style={{ fontSize: 12, color: colors.textLight }}>{d.formationTitre}</span>}
                 </div>
-                <SignDocumentButton documentId={d.id} signed={false} />
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <DocumentLinkActions viewUrl={d.url} downloadUrl={d.downloadUrl} />
+                  <SignDocumentButton documentId={d.id} signed={false} />
+                </div>
               </div>
             ))}
           </div>

@@ -2,6 +2,8 @@ import "server-only"
 import { prisma } from "@/lib/prisma"
 import { sendEmail } from "@/lib/emails/send"
 import { DocumentASignerEmail } from "@/lib/emails/DocumentASignerEmail"
+import { DocumentEntierementSigneEmail } from "@/lib/emails/DocumentEntierementSigneEmail"
+import { getAdminNotificationEmails } from "@/lib/emails/admin-recipients"
 import type { Role } from "@/generated/prisma"
 
 function dashboardPathFor(role: Role) {
@@ -66,6 +68,25 @@ export async function notifyDocumentSignataires({
           formationTitre,
           dashboardPath: dashboardPathFor(r.role),
         }),
+      })
+    )
+  )
+}
+
+export async function notifyDocumentFullySigned({
+  documentNom,
+  formationTitre,
+}: {
+  documentNom: string
+  formationTitre: string | null
+}) {
+  const adminEmails = await getAdminNotificationEmails()
+  await Promise.all(
+    adminEmails.map((email) =>
+      sendEmail({
+        to: email,
+        subject: `Document entièrement signé — ${documentNom}`,
+        react: DocumentEntierementSigneEmail({ documentNom, formationTitre }),
       })
     )
   )

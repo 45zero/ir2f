@@ -4,7 +4,7 @@ import { useState, useActionState } from "react"
 import { broadcastDocumentToFormation } from "@/lib/actions/documents"
 import { SIGNATORY_ROLE_OPTIONS } from "@/lib/documents-shared"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import type { Role } from "@/generated/prisma"
+import type { Role, DocumentCategorie } from "@/generated/prisma"
 
 const fieldStyle = {
   border: "1px solid #e2e5ea",
@@ -38,6 +38,7 @@ export function BroadcastComposerModal({
   const [selectedIds, setSelectedIds] = useState<string[]>(stagiaires.map((s) => s.id))
   const allSelected = selectedIds.length === stagiaires.length && stagiaires.length > 0
   const [mode, setMode] = useState<"file" | "url">("file")
+  const [categorie, setCategorie] = useState<DocumentCategorie>("ADMINISTRATIF")
   const [rolesRequis, setRolesRequis] = useState<Role[]>(["STAGIAIRE"])
 
   function toggleAll() {
@@ -114,41 +115,54 @@ export function BroadcastComposerModal({
 
         <form action={formAction} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <input type="hidden" name="formationId" value={formationId} />
+          <input type="hidden" name="categorie" value={categorie} />
+
+          <div style={{ display: "flex", gap: 8 }}>
+            <button type="button" onClick={() => setCategorie("ADMINISTRATIF")} style={categorie === "ADMINISTRATIF" ? modeActiveStyle : modeBaseStyle}>
+              Document administratif
+            </button>
+            <button type="button" onClick={() => setCategorie("PEDAGOGIQUE")} style={categorie === "PEDAGOGIQUE" ? modeActiveStyle : modeBaseStyle}>
+              Contenu pédagogique
+            </button>
+          </div>
+
           <input name="nom" placeholder="Nom du document" required style={fieldStyle} />
 
           <div style={{ display: "flex", gap: 8 }}>
             <button type="button" onClick={() => setMode("file")} style={mode === "file" ? modeActiveStyle : modeBaseStyle}>
-              Fichier PDF
+              {categorie === "ADMINISTRATIF" ? "Fichier PDF" : "Fichier"}
             </button>
             <button type="button" onClick={() => setMode("url")} style={mode === "url" ? modeActiveStyle : modeBaseStyle}>
-              Lien externe
+              Lien externe {categorie === "PEDAGOGIQUE" ? "(vidéo, exercice...)" : ""}
             </button>
           </div>
 
           {mode === "file" ? (
-            <input name="file" type="file" accept="application/pdf" style={fieldStyle} />
+            <input name="file" type="file" accept={categorie === "ADMINISTRATIF" ? "application/pdf" : undefined} style={fieldStyle} />
           ) : (
-            <input name="url" placeholder="Lien du document" style={fieldStyle} />
+            <input name="url" placeholder={categorie === "PEDAGOGIQUE" ? "Lien vidéo, exercice, ressource..." : "Lien du document"} style={fieldStyle} />
           )}
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Qui doit signer ce document ?</span>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              {SIGNATORY_ROLE_OPTIONS.map((r) => (
-                <label key={r.value} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
-                  <input
-                    type="checkbox"
-                    name="rolesRequis"
-                    value={r.value}
-                    checked={rolesRequis.includes(r.value)}
-                    onChange={() => toggleRole(r.value)}
-                    style={{ width: 14, height: 14 }}
-                  />
-                  {r.label}
-                </label>
-              ))}
+          {categorie === "ADMINISTRATIF" && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Qui doit signer ce document ?</span>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                {SIGNATORY_ROLE_OPTIONS.map((r) => (
+                  <label key={r.value} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
+                    <input
+                      type="checkbox"
+                      name="rolesRequis"
+                      value={r.value}
+                      checked={rolesRequis.includes(r.value)}
+                      onChange={() => toggleRole(r.value)}
+                      style={{ width: 14, height: 14 }}
+                    />
+                    {r.label}
+                  </label>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <button
