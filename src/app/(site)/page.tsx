@@ -1,10 +1,11 @@
 import { getPublishedFormations } from "@/lib/formations"
-import { getHeroSlides, getStatsCles, getRecentArticles } from "@/lib/home"
+import { getHeroSlides, getStatsCles, getRecentArticles, getAccompagnementCards, getAccueilContenu } from "@/lib/home"
 import { HeroCarousel } from "@/components/site/HeroCarousel"
 import { HomeSearch } from "@/components/site/HomeSearch"
 import { ContactTeaser } from "@/components/site/ContactTeaser"
 import { HoverLink } from "@/components/ui/HoverLink"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
+import type { IconeAccompagnement } from "@/generated/prisma"
 
 const NEWS_CARD_STYLES = [
   `linear-gradient(135deg, ${colors.navy}, #234a86)`,
@@ -38,45 +39,55 @@ function VoirToutesLesActualites() {
   )
 }
 
-const EMPLOI_CARDS = [
-  {
-    title: "Financements & Subventions",
-    body: "OPCO, France Travail, CPF : identifiez les dispositifs mobilisables pour financer votre parcours.",
-    icon: (
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={colors.gold} strokeWidth="1.8">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M9 12h6M12 9v6" />
-      </svg>
-    ),
-  },
-  {
-    title: "Gestion de l'emploi",
-    body: "Un appui aux clubs pour structurer les postes, les contrats et le suivi RH de leurs éducateurs.",
-    icon: (
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={colors.gold} strokeWidth="1.8">
-        <rect x="3" y="7" width="18" height="13" rx="1" />
-        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-      </svg>
-    ),
-  },
-  {
-    title: "Formation–Employabilité",
-    body: "Des parcours pensés pour déboucher sur un emploi durable dans le football régional.",
-    icon: (
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={colors.gold} strokeWidth="1.8">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-      </svg>
-    ),
-  },
-]
+const ACCOMPAGNEMENT_ICONS: Record<IconeAccompagnement, React.ReactNode> = {
+  FINANCEMENT: (
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={colors.gold} strokeWidth="1.8">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9 12h6M12 9v6" />
+    </svg>
+  ),
+  GESTION: (
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={colors.gold} strokeWidth="1.8">
+      <rect x="3" y="7" width="18" height="13" rx="1" />
+      <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    </svg>
+  ),
+  FORMATION: (
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={colors.gold} strokeWidth="1.8">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </svg>
+  ),
+  CONTACT: (
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={colors.gold} strokeWidth="1.8">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  ),
+  DOCUMENT: (
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={colors.gold} strokeWidth="1.8">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+    </svg>
+  ),
+  VALIDATION: (
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke={colors.gold} strokeWidth="1.8">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+  ),
+}
 
 export default async function HomePage() {
-  const [formations, heroSlides, stats, articles] = await Promise.all([
+  const [formations, heroSlides, stats, articles, accompagnementCards, contenu] = await Promise.all([
     getPublishedFormations(),
     getHeroSlides(),
     getStatsCles(),
     getRecentArticles(),
+    getAccompagnementCards(),
+    getAccueilContenu(),
   ])
 
   const newsGrid = articles.slice(0, 4)
@@ -119,7 +130,7 @@ export default async function HomePage() {
               textTransform: "uppercase",
             }}
           >
-            Je souhaite être accompagné sur l&apos;emploi
+            {contenu.bandeauEmploiTitre}
           </span>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <HoverLink
@@ -309,16 +320,16 @@ export default async function HomePage() {
         <div style={{ maxWidth: 1160, margin: "0 auto" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 40 }}>
             <span style={{ color: colors.gold, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase" }}>
-              IR2F vous accompagne
+              {contenu.accompagnementEyebrow}
             </span>
             <h2 style={{ fontFamily: fontHeading, color: "#fff", fontSize: "clamp(26px,3vw,38px)", fontWeight: 800, margin: 0 }}>
-              Accompagnement Emploi
+              {contenu.accompagnementTitre}
             </h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 24 }}>
-            {EMPLOI_CARDS.map((card) => (
+            {accompagnementCards.map((card) => (
               <div
-                key={card.title}
+                key={card.id}
                 style={{
                   background: "rgba(255,255,255,0.06)",
                   border: "1px solid rgba(201,168,76,0.35)",
@@ -329,12 +340,12 @@ export default async function HomePage() {
                   gap: 14,
                 }}
               >
-                {card.icon}
+                {ACCOMPAGNEMENT_ICONS[card.icone as IconeAccompagnement]}
                 <h3 style={{ color: "#fff", fontFamily: fontHeading, fontSize: 20, fontWeight: 700, margin: 0 }}>
-                  {card.title}
+                  {card.titre}
                 </h3>
                 <p style={{ color: "rgba(255,255,255,0.75)", fontSize: 14, lineHeight: 1.6, margin: 0 }}>
-                  {card.body}
+                  {card.description}
                 </p>
               </div>
             ))}
@@ -369,7 +380,7 @@ export default async function HomePage() {
       </section>
 
       <div id="contact">
-        <ContactTeaser formations={formations} />
+        <ContactTeaser formations={formations} titre={contenu.contactTitre} sousTitre={contenu.contactSousTitre} />
       </div>
 
       {stats.length > 0 && (

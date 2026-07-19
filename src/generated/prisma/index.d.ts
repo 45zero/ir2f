@@ -79,6 +79,16 @@ export type CovoituragePassager = $Result.DefaultSelection<Prisma.$CovoituragePa
  */
 export type Article = $Result.DefaultSelection<Prisma.$ArticlePayload>
 /**
+ * Model AccompagnementCard
+ * 
+ */
+export type AccompagnementCard = $Result.DefaultSelection<Prisma.$AccompagnementCardPayload>
+/**
+ * Model AccueilContenu
+ * 
+ */
+export type AccueilContenu = $Result.DefaultSelection<Prisma.$AccueilContenuPayload>
+/**
  * Model StatCle
  * 
  */
@@ -223,6 +233,18 @@ export const StatutCovoiturage: {
 export type StatutCovoiturage = (typeof StatutCovoiturage)[keyof typeof StatutCovoiturage]
 
 
+export const IconeAccompagnement: {
+  FINANCEMENT: 'FINANCEMENT',
+  GESTION: 'GESTION',
+  FORMATION: 'FORMATION',
+  CONTACT: 'CONTACT',
+  DOCUMENT: 'DOCUMENT',
+  VALIDATION: 'VALIDATION'
+};
+
+export type IconeAccompagnement = (typeof IconeAccompagnement)[keyof typeof IconeAccompagnement]
+
+
 export const SectionEmploi: {
   FINANCEMENTS: 'FINANCEMENTS',
   GESTION_EMPLOI: 'GESTION_EMPLOI',
@@ -280,6 +302,10 @@ export const DocumentCategorie: typeof $Enums.DocumentCategorie
 export type StatutCovoiturage = $Enums.StatutCovoiturage
 
 export const StatutCovoiturage: typeof $Enums.StatutCovoiturage
+
+export type IconeAccompagnement = $Enums.IconeAccompagnement
+
+export const IconeAccompagnement: typeof $Enums.IconeAccompagnement
 
 export type SectionEmploi = $Enums.SectionEmploi
 
@@ -539,6 +565,26 @@ export class PrismaClient<
     * ```
     */
   get article(): Prisma.ArticleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.accompagnementCard`: Exposes CRUD operations for the **AccompagnementCard** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AccompagnementCards
+    * const accompagnementCards = await prisma.accompagnementCard.findMany()
+    * ```
+    */
+  get accompagnementCard(): Prisma.AccompagnementCardDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.accueilContenu`: Exposes CRUD operations for the **AccueilContenu** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AccueilContenus
+    * const accueilContenus = await prisma.accueilContenu.findMany()
+    * ```
+    */
+  get accueilContenu(): Prisma.AccueilContenuDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.statCle`: Exposes CRUD operations for the **StatCle** model.
@@ -1066,6 +1112,8 @@ export namespace Prisma {
     Covoiturage: 'Covoiturage',
     CovoituragePassager: 'CovoituragePassager',
     Article: 'Article',
+    AccompagnementCard: 'AccompagnementCard',
+    AccueilContenu: 'AccueilContenu',
     StatCle: 'StatCle',
     HeroSlide: 'HeroSlide',
     CategorieInfo: 'CategorieInfo',
@@ -1089,7 +1137,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "document" | "signature" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "statCle" | "heroSlide" | "categorieInfo" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "document" | "signature" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "categorieInfo" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2055,6 +2103,154 @@ export namespace Prisma {
           }
         }
       }
+      AccompagnementCard: {
+        payload: Prisma.$AccompagnementCardPayload<ExtArgs>
+        fields: Prisma.AccompagnementCardFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AccompagnementCardFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AccompagnementCardFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload>
+          }
+          findFirst: {
+            args: Prisma.AccompagnementCardFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AccompagnementCardFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload>
+          }
+          findMany: {
+            args: Prisma.AccompagnementCardFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload>[]
+          }
+          create: {
+            args: Prisma.AccompagnementCardCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload>
+          }
+          createMany: {
+            args: Prisma.AccompagnementCardCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AccompagnementCardCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload>[]
+          }
+          delete: {
+            args: Prisma.AccompagnementCardDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload>
+          }
+          update: {
+            args: Prisma.AccompagnementCardUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload>
+          }
+          deleteMany: {
+            args: Prisma.AccompagnementCardDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AccompagnementCardUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AccompagnementCardUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload>[]
+          }
+          upsert: {
+            args: Prisma.AccompagnementCardUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccompagnementCardPayload>
+          }
+          aggregate: {
+            args: Prisma.AccompagnementCardAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAccompagnementCard>
+          }
+          groupBy: {
+            args: Prisma.AccompagnementCardGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AccompagnementCardGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AccompagnementCardCountArgs<ExtArgs>
+            result: $Utils.Optional<AccompagnementCardCountAggregateOutputType> | number
+          }
+        }
+      }
+      AccueilContenu: {
+        payload: Prisma.$AccueilContenuPayload<ExtArgs>
+        fields: Prisma.AccueilContenuFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AccueilContenuFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AccueilContenuFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload>
+          }
+          findFirst: {
+            args: Prisma.AccueilContenuFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AccueilContenuFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload>
+          }
+          findMany: {
+            args: Prisma.AccueilContenuFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload>[]
+          }
+          create: {
+            args: Prisma.AccueilContenuCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload>
+          }
+          createMany: {
+            args: Prisma.AccueilContenuCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AccueilContenuCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload>[]
+          }
+          delete: {
+            args: Prisma.AccueilContenuDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload>
+          }
+          update: {
+            args: Prisma.AccueilContenuUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload>
+          }
+          deleteMany: {
+            args: Prisma.AccueilContenuDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AccueilContenuUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AccueilContenuUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload>[]
+          }
+          upsert: {
+            args: Prisma.AccueilContenuUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccueilContenuPayload>
+          }
+          aggregate: {
+            args: Prisma.AccueilContenuAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAccueilContenu>
+          }
+          groupBy: {
+            args: Prisma.AccueilContenuGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AccueilContenuGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AccueilContenuCountArgs<ExtArgs>
+            result: $Utils.Optional<AccueilContenuCountAggregateOutputType> | number
+          }
+        }
+      }
       StatCle: {
         payload: Prisma.$StatClePayload<ExtArgs>
         fields: Prisma.StatCleFieldRefs
@@ -2768,6 +2964,8 @@ export namespace Prisma {
     covoiturage?: CovoiturageOmit
     covoituragePassager?: CovoituragePassagerOmit
     article?: ArticleOmit
+    accompagnementCard?: AccompagnementCardOmit
+    accueilContenu?: AccueilContenuOmit
     statCle?: StatCleOmit
     heroSlide?: HeroSlideOmit
     categorieInfo?: CategorieInfoOmit
@@ -18661,6 +18859,2105 @@ export namespace Prisma {
 
 
   /**
+   * Model AccompagnementCard
+   */
+
+  export type AggregateAccompagnementCard = {
+    _count: AccompagnementCardCountAggregateOutputType | null
+    _avg: AccompagnementCardAvgAggregateOutputType | null
+    _sum: AccompagnementCardSumAggregateOutputType | null
+    _min: AccompagnementCardMinAggregateOutputType | null
+    _max: AccompagnementCardMaxAggregateOutputType | null
+  }
+
+  export type AccompagnementCardAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type AccompagnementCardSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type AccompagnementCardMinAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    description: string | null
+    icone: $Enums.IconeAccompagnement | null
+    ordre: number | null
+    actif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AccompagnementCardMaxAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    description: string | null
+    icone: $Enums.IconeAccompagnement | null
+    ordre: number | null
+    actif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AccompagnementCardCountAggregateOutputType = {
+    id: number
+    titre: number
+    description: number
+    icone: number
+    ordre: number
+    actif: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AccompagnementCardAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type AccompagnementCardSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type AccompagnementCardMinAggregateInputType = {
+    id?: true
+    titre?: true
+    description?: true
+    icone?: true
+    ordre?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AccompagnementCardMaxAggregateInputType = {
+    id?: true
+    titre?: true
+    description?: true
+    icone?: true
+    ordre?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AccompagnementCardCountAggregateInputType = {
+    id?: true
+    titre?: true
+    description?: true
+    icone?: true
+    ordre?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AccompagnementCardAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AccompagnementCard to aggregate.
+     */
+    where?: AccompagnementCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccompagnementCards to fetch.
+     */
+    orderBy?: AccompagnementCardOrderByWithRelationInput | AccompagnementCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AccompagnementCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccompagnementCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccompagnementCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AccompagnementCards
+    **/
+    _count?: true | AccompagnementCardCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AccompagnementCardAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AccompagnementCardSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AccompagnementCardMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AccompagnementCardMaxAggregateInputType
+  }
+
+  export type GetAccompagnementCardAggregateType<T extends AccompagnementCardAggregateArgs> = {
+        [P in keyof T & keyof AggregateAccompagnementCard]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAccompagnementCard[P]>
+      : GetScalarType<T[P], AggregateAccompagnementCard[P]>
+  }
+
+
+
+
+  export type AccompagnementCardGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccompagnementCardWhereInput
+    orderBy?: AccompagnementCardOrderByWithAggregationInput | AccompagnementCardOrderByWithAggregationInput[]
+    by: AccompagnementCardScalarFieldEnum[] | AccompagnementCardScalarFieldEnum
+    having?: AccompagnementCardScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AccompagnementCardCountAggregateInputType | true
+    _avg?: AccompagnementCardAvgAggregateInputType
+    _sum?: AccompagnementCardSumAggregateInputType
+    _min?: AccompagnementCardMinAggregateInputType
+    _max?: AccompagnementCardMaxAggregateInputType
+  }
+
+  export type AccompagnementCardGroupByOutputType = {
+    id: string
+    titre: string
+    description: string
+    icone: $Enums.IconeAccompagnement
+    ordre: number
+    actif: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: AccompagnementCardCountAggregateOutputType | null
+    _avg: AccompagnementCardAvgAggregateOutputType | null
+    _sum: AccompagnementCardSumAggregateOutputType | null
+    _min: AccompagnementCardMinAggregateOutputType | null
+    _max: AccompagnementCardMaxAggregateOutputType | null
+  }
+
+  type GetAccompagnementCardGroupByPayload<T extends AccompagnementCardGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AccompagnementCardGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AccompagnementCardGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AccompagnementCardGroupByOutputType[P]>
+            : GetScalarType<T[P], AccompagnementCardGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AccompagnementCardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    description?: boolean
+    icone?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["accompagnementCard"]>
+
+  export type AccompagnementCardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    description?: boolean
+    icone?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["accompagnementCard"]>
+
+  export type AccompagnementCardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    description?: boolean
+    icone?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["accompagnementCard"]>
+
+  export type AccompagnementCardSelectScalar = {
+    id?: boolean
+    titre?: boolean
+    description?: boolean
+    icone?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AccompagnementCardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "description" | "icone" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["accompagnementCard"]>
+
+  export type $AccompagnementCardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AccompagnementCard"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      titre: string
+      description: string
+      icone: $Enums.IconeAccompagnement
+      ordre: number
+      actif: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["accompagnementCard"]>
+    composites: {}
+  }
+
+  type AccompagnementCardGetPayload<S extends boolean | null | undefined | AccompagnementCardDefaultArgs> = $Result.GetResult<Prisma.$AccompagnementCardPayload, S>
+
+  type AccompagnementCardCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AccompagnementCardFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AccompagnementCardCountAggregateInputType | true
+    }
+
+  export interface AccompagnementCardDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AccompagnementCard'], meta: { name: 'AccompagnementCard' } }
+    /**
+     * Find zero or one AccompagnementCard that matches the filter.
+     * @param {AccompagnementCardFindUniqueArgs} args - Arguments to find a AccompagnementCard
+     * @example
+     * // Get one AccompagnementCard
+     * const accompagnementCard = await prisma.accompagnementCard.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AccompagnementCardFindUniqueArgs>(args: SelectSubset<T, AccompagnementCardFindUniqueArgs<ExtArgs>>): Prisma__AccompagnementCardClient<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AccompagnementCard that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AccompagnementCardFindUniqueOrThrowArgs} args - Arguments to find a AccompagnementCard
+     * @example
+     * // Get one AccompagnementCard
+     * const accompagnementCard = await prisma.accompagnementCard.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AccompagnementCardFindUniqueOrThrowArgs>(args: SelectSubset<T, AccompagnementCardFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AccompagnementCardClient<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccompagnementCard that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccompagnementCardFindFirstArgs} args - Arguments to find a AccompagnementCard
+     * @example
+     * // Get one AccompagnementCard
+     * const accompagnementCard = await prisma.accompagnementCard.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AccompagnementCardFindFirstArgs>(args?: SelectSubset<T, AccompagnementCardFindFirstArgs<ExtArgs>>): Prisma__AccompagnementCardClient<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccompagnementCard that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccompagnementCardFindFirstOrThrowArgs} args - Arguments to find a AccompagnementCard
+     * @example
+     * // Get one AccompagnementCard
+     * const accompagnementCard = await prisma.accompagnementCard.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AccompagnementCardFindFirstOrThrowArgs>(args?: SelectSubset<T, AccompagnementCardFindFirstOrThrowArgs<ExtArgs>>): Prisma__AccompagnementCardClient<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AccompagnementCards that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccompagnementCardFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AccompagnementCards
+     * const accompagnementCards = await prisma.accompagnementCard.findMany()
+     * 
+     * // Get first 10 AccompagnementCards
+     * const accompagnementCards = await prisma.accompagnementCard.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const accompagnementCardWithIdOnly = await prisma.accompagnementCard.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AccompagnementCardFindManyArgs>(args?: SelectSubset<T, AccompagnementCardFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AccompagnementCard.
+     * @param {AccompagnementCardCreateArgs} args - Arguments to create a AccompagnementCard.
+     * @example
+     * // Create one AccompagnementCard
+     * const AccompagnementCard = await prisma.accompagnementCard.create({
+     *   data: {
+     *     // ... data to create a AccompagnementCard
+     *   }
+     * })
+     * 
+     */
+    create<T extends AccompagnementCardCreateArgs>(args: SelectSubset<T, AccompagnementCardCreateArgs<ExtArgs>>): Prisma__AccompagnementCardClient<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AccompagnementCards.
+     * @param {AccompagnementCardCreateManyArgs} args - Arguments to create many AccompagnementCards.
+     * @example
+     * // Create many AccompagnementCards
+     * const accompagnementCard = await prisma.accompagnementCard.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AccompagnementCardCreateManyArgs>(args?: SelectSubset<T, AccompagnementCardCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AccompagnementCards and returns the data saved in the database.
+     * @param {AccompagnementCardCreateManyAndReturnArgs} args - Arguments to create many AccompagnementCards.
+     * @example
+     * // Create many AccompagnementCards
+     * const accompagnementCard = await prisma.accompagnementCard.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AccompagnementCards and only return the `id`
+     * const accompagnementCardWithIdOnly = await prisma.accompagnementCard.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AccompagnementCardCreateManyAndReturnArgs>(args?: SelectSubset<T, AccompagnementCardCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AccompagnementCard.
+     * @param {AccompagnementCardDeleteArgs} args - Arguments to delete one AccompagnementCard.
+     * @example
+     * // Delete one AccompagnementCard
+     * const AccompagnementCard = await prisma.accompagnementCard.delete({
+     *   where: {
+     *     // ... filter to delete one AccompagnementCard
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AccompagnementCardDeleteArgs>(args: SelectSubset<T, AccompagnementCardDeleteArgs<ExtArgs>>): Prisma__AccompagnementCardClient<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AccompagnementCard.
+     * @param {AccompagnementCardUpdateArgs} args - Arguments to update one AccompagnementCard.
+     * @example
+     * // Update one AccompagnementCard
+     * const accompagnementCard = await prisma.accompagnementCard.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AccompagnementCardUpdateArgs>(args: SelectSubset<T, AccompagnementCardUpdateArgs<ExtArgs>>): Prisma__AccompagnementCardClient<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AccompagnementCards.
+     * @param {AccompagnementCardDeleteManyArgs} args - Arguments to filter AccompagnementCards to delete.
+     * @example
+     * // Delete a few AccompagnementCards
+     * const { count } = await prisma.accompagnementCard.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AccompagnementCardDeleteManyArgs>(args?: SelectSubset<T, AccompagnementCardDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AccompagnementCards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccompagnementCardUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AccompagnementCards
+     * const accompagnementCard = await prisma.accompagnementCard.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AccompagnementCardUpdateManyArgs>(args: SelectSubset<T, AccompagnementCardUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AccompagnementCards and returns the data updated in the database.
+     * @param {AccompagnementCardUpdateManyAndReturnArgs} args - Arguments to update many AccompagnementCards.
+     * @example
+     * // Update many AccompagnementCards
+     * const accompagnementCard = await prisma.accompagnementCard.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AccompagnementCards and only return the `id`
+     * const accompagnementCardWithIdOnly = await prisma.accompagnementCard.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AccompagnementCardUpdateManyAndReturnArgs>(args: SelectSubset<T, AccompagnementCardUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AccompagnementCard.
+     * @param {AccompagnementCardUpsertArgs} args - Arguments to update or create a AccompagnementCard.
+     * @example
+     * // Update or create a AccompagnementCard
+     * const accompagnementCard = await prisma.accompagnementCard.upsert({
+     *   create: {
+     *     // ... data to create a AccompagnementCard
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AccompagnementCard we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AccompagnementCardUpsertArgs>(args: SelectSubset<T, AccompagnementCardUpsertArgs<ExtArgs>>): Prisma__AccompagnementCardClient<$Result.GetResult<Prisma.$AccompagnementCardPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AccompagnementCards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccompagnementCardCountArgs} args - Arguments to filter AccompagnementCards to count.
+     * @example
+     * // Count the number of AccompagnementCards
+     * const count = await prisma.accompagnementCard.count({
+     *   where: {
+     *     // ... the filter for the AccompagnementCards we want to count
+     *   }
+     * })
+    **/
+    count<T extends AccompagnementCardCountArgs>(
+      args?: Subset<T, AccompagnementCardCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AccompagnementCardCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AccompagnementCard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccompagnementCardAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AccompagnementCardAggregateArgs>(args: Subset<T, AccompagnementCardAggregateArgs>): Prisma.PrismaPromise<GetAccompagnementCardAggregateType<T>>
+
+    /**
+     * Group by AccompagnementCard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccompagnementCardGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AccompagnementCardGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AccompagnementCardGroupByArgs['orderBy'] }
+        : { orderBy?: AccompagnementCardGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AccompagnementCardGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAccompagnementCardGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AccompagnementCard model
+   */
+  readonly fields: AccompagnementCardFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AccompagnementCard.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AccompagnementCardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AccompagnementCard model
+   */
+  interface AccompagnementCardFieldRefs {
+    readonly id: FieldRef<"AccompagnementCard", 'String'>
+    readonly titre: FieldRef<"AccompagnementCard", 'String'>
+    readonly description: FieldRef<"AccompagnementCard", 'String'>
+    readonly icone: FieldRef<"AccompagnementCard", 'IconeAccompagnement'>
+    readonly ordre: FieldRef<"AccompagnementCard", 'Int'>
+    readonly actif: FieldRef<"AccompagnementCard", 'Boolean'>
+    readonly createdAt: FieldRef<"AccompagnementCard", 'DateTime'>
+    readonly updatedAt: FieldRef<"AccompagnementCard", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AccompagnementCard findUnique
+   */
+  export type AccompagnementCardFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * Filter, which AccompagnementCard to fetch.
+     */
+    where: AccompagnementCardWhereUniqueInput
+  }
+
+  /**
+   * AccompagnementCard findUniqueOrThrow
+   */
+  export type AccompagnementCardFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * Filter, which AccompagnementCard to fetch.
+     */
+    where: AccompagnementCardWhereUniqueInput
+  }
+
+  /**
+   * AccompagnementCard findFirst
+   */
+  export type AccompagnementCardFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * Filter, which AccompagnementCard to fetch.
+     */
+    where?: AccompagnementCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccompagnementCards to fetch.
+     */
+    orderBy?: AccompagnementCardOrderByWithRelationInput | AccompagnementCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AccompagnementCards.
+     */
+    cursor?: AccompagnementCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccompagnementCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccompagnementCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccompagnementCards.
+     */
+    distinct?: AccompagnementCardScalarFieldEnum | AccompagnementCardScalarFieldEnum[]
+  }
+
+  /**
+   * AccompagnementCard findFirstOrThrow
+   */
+  export type AccompagnementCardFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * Filter, which AccompagnementCard to fetch.
+     */
+    where?: AccompagnementCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccompagnementCards to fetch.
+     */
+    orderBy?: AccompagnementCardOrderByWithRelationInput | AccompagnementCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AccompagnementCards.
+     */
+    cursor?: AccompagnementCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccompagnementCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccompagnementCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccompagnementCards.
+     */
+    distinct?: AccompagnementCardScalarFieldEnum | AccompagnementCardScalarFieldEnum[]
+  }
+
+  /**
+   * AccompagnementCard findMany
+   */
+  export type AccompagnementCardFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * Filter, which AccompagnementCards to fetch.
+     */
+    where?: AccompagnementCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccompagnementCards to fetch.
+     */
+    orderBy?: AccompagnementCardOrderByWithRelationInput | AccompagnementCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AccompagnementCards.
+     */
+    cursor?: AccompagnementCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccompagnementCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccompagnementCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccompagnementCards.
+     */
+    distinct?: AccompagnementCardScalarFieldEnum | AccompagnementCardScalarFieldEnum[]
+  }
+
+  /**
+   * AccompagnementCard create
+   */
+  export type AccompagnementCardCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * The data needed to create a AccompagnementCard.
+     */
+    data: XOR<AccompagnementCardCreateInput, AccompagnementCardUncheckedCreateInput>
+  }
+
+  /**
+   * AccompagnementCard createMany
+   */
+  export type AccompagnementCardCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AccompagnementCards.
+     */
+    data: AccompagnementCardCreateManyInput | AccompagnementCardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AccompagnementCard createManyAndReturn
+   */
+  export type AccompagnementCardCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * The data used to create many AccompagnementCards.
+     */
+    data: AccompagnementCardCreateManyInput | AccompagnementCardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AccompagnementCard update
+   */
+  export type AccompagnementCardUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * The data needed to update a AccompagnementCard.
+     */
+    data: XOR<AccompagnementCardUpdateInput, AccompagnementCardUncheckedUpdateInput>
+    /**
+     * Choose, which AccompagnementCard to update.
+     */
+    where: AccompagnementCardWhereUniqueInput
+  }
+
+  /**
+   * AccompagnementCard updateMany
+   */
+  export type AccompagnementCardUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AccompagnementCards.
+     */
+    data: XOR<AccompagnementCardUpdateManyMutationInput, AccompagnementCardUncheckedUpdateManyInput>
+    /**
+     * Filter which AccompagnementCards to update
+     */
+    where?: AccompagnementCardWhereInput
+    /**
+     * Limit how many AccompagnementCards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccompagnementCard updateManyAndReturn
+   */
+  export type AccompagnementCardUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * The data used to update AccompagnementCards.
+     */
+    data: XOR<AccompagnementCardUpdateManyMutationInput, AccompagnementCardUncheckedUpdateManyInput>
+    /**
+     * Filter which AccompagnementCards to update
+     */
+    where?: AccompagnementCardWhereInput
+    /**
+     * Limit how many AccompagnementCards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccompagnementCard upsert
+   */
+  export type AccompagnementCardUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * The filter to search for the AccompagnementCard to update in case it exists.
+     */
+    where: AccompagnementCardWhereUniqueInput
+    /**
+     * In case the AccompagnementCard found by the `where` argument doesn't exist, create a new AccompagnementCard with this data.
+     */
+    create: XOR<AccompagnementCardCreateInput, AccompagnementCardUncheckedCreateInput>
+    /**
+     * In case the AccompagnementCard was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AccompagnementCardUpdateInput, AccompagnementCardUncheckedUpdateInput>
+  }
+
+  /**
+   * AccompagnementCard delete
+   */
+  export type AccompagnementCardDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+    /**
+     * Filter which AccompagnementCard to delete.
+     */
+    where: AccompagnementCardWhereUniqueInput
+  }
+
+  /**
+   * AccompagnementCard deleteMany
+   */
+  export type AccompagnementCardDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AccompagnementCards to delete
+     */
+    where?: AccompagnementCardWhereInput
+    /**
+     * Limit how many AccompagnementCards to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccompagnementCard without action
+   */
+  export type AccompagnementCardDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccompagnementCard
+     */
+    select?: AccompagnementCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccompagnementCard
+     */
+    omit?: AccompagnementCardOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AccueilContenu
+   */
+
+  export type AggregateAccueilContenu = {
+    _count: AccueilContenuCountAggregateOutputType | null
+    _min: AccueilContenuMinAggregateOutputType | null
+    _max: AccueilContenuMaxAggregateOutputType | null
+  }
+
+  export type AccueilContenuMinAggregateOutputType = {
+    id: string | null
+    bandeauEmploiTitre: string | null
+    accompagnementEyebrow: string | null
+    accompagnementTitre: string | null
+    contactTitre: string | null
+    contactSousTitre: string | null
+    updatedAt: Date | null
+  }
+
+  export type AccueilContenuMaxAggregateOutputType = {
+    id: string | null
+    bandeauEmploiTitre: string | null
+    accompagnementEyebrow: string | null
+    accompagnementTitre: string | null
+    contactTitre: string | null
+    contactSousTitre: string | null
+    updatedAt: Date | null
+  }
+
+  export type AccueilContenuCountAggregateOutputType = {
+    id: number
+    bandeauEmploiTitre: number
+    accompagnementEyebrow: number
+    accompagnementTitre: number
+    contactTitre: number
+    contactSousTitre: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AccueilContenuMinAggregateInputType = {
+    id?: true
+    bandeauEmploiTitre?: true
+    accompagnementEyebrow?: true
+    accompagnementTitre?: true
+    contactTitre?: true
+    contactSousTitre?: true
+    updatedAt?: true
+  }
+
+  export type AccueilContenuMaxAggregateInputType = {
+    id?: true
+    bandeauEmploiTitre?: true
+    accompagnementEyebrow?: true
+    accompagnementTitre?: true
+    contactTitre?: true
+    contactSousTitre?: true
+    updatedAt?: true
+  }
+
+  export type AccueilContenuCountAggregateInputType = {
+    id?: true
+    bandeauEmploiTitre?: true
+    accompagnementEyebrow?: true
+    accompagnementTitre?: true
+    contactTitre?: true
+    contactSousTitre?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AccueilContenuAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AccueilContenu to aggregate.
+     */
+    where?: AccueilContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccueilContenus to fetch.
+     */
+    orderBy?: AccueilContenuOrderByWithRelationInput | AccueilContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AccueilContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccueilContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccueilContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AccueilContenus
+    **/
+    _count?: true | AccueilContenuCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AccueilContenuMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AccueilContenuMaxAggregateInputType
+  }
+
+  export type GetAccueilContenuAggregateType<T extends AccueilContenuAggregateArgs> = {
+        [P in keyof T & keyof AggregateAccueilContenu]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAccueilContenu[P]>
+      : GetScalarType<T[P], AggregateAccueilContenu[P]>
+  }
+
+
+
+
+  export type AccueilContenuGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccueilContenuWhereInput
+    orderBy?: AccueilContenuOrderByWithAggregationInput | AccueilContenuOrderByWithAggregationInput[]
+    by: AccueilContenuScalarFieldEnum[] | AccueilContenuScalarFieldEnum
+    having?: AccueilContenuScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AccueilContenuCountAggregateInputType | true
+    _min?: AccueilContenuMinAggregateInputType
+    _max?: AccueilContenuMaxAggregateInputType
+  }
+
+  export type AccueilContenuGroupByOutputType = {
+    id: string
+    bandeauEmploiTitre: string
+    accompagnementEyebrow: string
+    accompagnementTitre: string
+    contactTitre: string
+    contactSousTitre: string
+    updatedAt: Date
+    _count: AccueilContenuCountAggregateOutputType | null
+    _min: AccueilContenuMinAggregateOutputType | null
+    _max: AccueilContenuMaxAggregateOutputType | null
+  }
+
+  type GetAccueilContenuGroupByPayload<T extends AccueilContenuGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AccueilContenuGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AccueilContenuGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AccueilContenuGroupByOutputType[P]>
+            : GetScalarType<T[P], AccueilContenuGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AccueilContenuSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bandeauEmploiTitre?: boolean
+    accompagnementEyebrow?: boolean
+    accompagnementTitre?: boolean
+    contactTitre?: boolean
+    contactSousTitre?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["accueilContenu"]>
+
+  export type AccueilContenuSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bandeauEmploiTitre?: boolean
+    accompagnementEyebrow?: boolean
+    accompagnementTitre?: boolean
+    contactTitre?: boolean
+    contactSousTitre?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["accueilContenu"]>
+
+  export type AccueilContenuSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bandeauEmploiTitre?: boolean
+    accompagnementEyebrow?: boolean
+    accompagnementTitre?: boolean
+    contactTitre?: boolean
+    contactSousTitre?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["accueilContenu"]>
+
+  export type AccueilContenuSelectScalar = {
+    id?: boolean
+    bandeauEmploiTitre?: boolean
+    accompagnementEyebrow?: boolean
+    accompagnementTitre?: boolean
+    contactTitre?: boolean
+    contactSousTitre?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AccueilContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bandeauEmploiTitre" | "accompagnementEyebrow" | "accompagnementTitre" | "contactTitre" | "contactSousTitre" | "updatedAt", ExtArgs["result"]["accueilContenu"]>
+
+  export type $AccueilContenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AccueilContenu"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      bandeauEmploiTitre: string
+      accompagnementEyebrow: string
+      accompagnementTitre: string
+      contactTitre: string
+      contactSousTitre: string
+      updatedAt: Date
+    }, ExtArgs["result"]["accueilContenu"]>
+    composites: {}
+  }
+
+  type AccueilContenuGetPayload<S extends boolean | null | undefined | AccueilContenuDefaultArgs> = $Result.GetResult<Prisma.$AccueilContenuPayload, S>
+
+  type AccueilContenuCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AccueilContenuFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AccueilContenuCountAggregateInputType | true
+    }
+
+  export interface AccueilContenuDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AccueilContenu'], meta: { name: 'AccueilContenu' } }
+    /**
+     * Find zero or one AccueilContenu that matches the filter.
+     * @param {AccueilContenuFindUniqueArgs} args - Arguments to find a AccueilContenu
+     * @example
+     * // Get one AccueilContenu
+     * const accueilContenu = await prisma.accueilContenu.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AccueilContenuFindUniqueArgs>(args: SelectSubset<T, AccueilContenuFindUniqueArgs<ExtArgs>>): Prisma__AccueilContenuClient<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AccueilContenu that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AccueilContenuFindUniqueOrThrowArgs} args - Arguments to find a AccueilContenu
+     * @example
+     * // Get one AccueilContenu
+     * const accueilContenu = await prisma.accueilContenu.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AccueilContenuFindUniqueOrThrowArgs>(args: SelectSubset<T, AccueilContenuFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AccueilContenuClient<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccueilContenu that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccueilContenuFindFirstArgs} args - Arguments to find a AccueilContenu
+     * @example
+     * // Get one AccueilContenu
+     * const accueilContenu = await prisma.accueilContenu.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AccueilContenuFindFirstArgs>(args?: SelectSubset<T, AccueilContenuFindFirstArgs<ExtArgs>>): Prisma__AccueilContenuClient<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccueilContenu that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccueilContenuFindFirstOrThrowArgs} args - Arguments to find a AccueilContenu
+     * @example
+     * // Get one AccueilContenu
+     * const accueilContenu = await prisma.accueilContenu.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AccueilContenuFindFirstOrThrowArgs>(args?: SelectSubset<T, AccueilContenuFindFirstOrThrowArgs<ExtArgs>>): Prisma__AccueilContenuClient<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AccueilContenus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccueilContenuFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AccueilContenus
+     * const accueilContenus = await prisma.accueilContenu.findMany()
+     * 
+     * // Get first 10 AccueilContenus
+     * const accueilContenus = await prisma.accueilContenu.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const accueilContenuWithIdOnly = await prisma.accueilContenu.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AccueilContenuFindManyArgs>(args?: SelectSubset<T, AccueilContenuFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AccueilContenu.
+     * @param {AccueilContenuCreateArgs} args - Arguments to create a AccueilContenu.
+     * @example
+     * // Create one AccueilContenu
+     * const AccueilContenu = await prisma.accueilContenu.create({
+     *   data: {
+     *     // ... data to create a AccueilContenu
+     *   }
+     * })
+     * 
+     */
+    create<T extends AccueilContenuCreateArgs>(args: SelectSubset<T, AccueilContenuCreateArgs<ExtArgs>>): Prisma__AccueilContenuClient<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AccueilContenus.
+     * @param {AccueilContenuCreateManyArgs} args - Arguments to create many AccueilContenus.
+     * @example
+     * // Create many AccueilContenus
+     * const accueilContenu = await prisma.accueilContenu.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AccueilContenuCreateManyArgs>(args?: SelectSubset<T, AccueilContenuCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AccueilContenus and returns the data saved in the database.
+     * @param {AccueilContenuCreateManyAndReturnArgs} args - Arguments to create many AccueilContenus.
+     * @example
+     * // Create many AccueilContenus
+     * const accueilContenu = await prisma.accueilContenu.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AccueilContenus and only return the `id`
+     * const accueilContenuWithIdOnly = await prisma.accueilContenu.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AccueilContenuCreateManyAndReturnArgs>(args?: SelectSubset<T, AccueilContenuCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AccueilContenu.
+     * @param {AccueilContenuDeleteArgs} args - Arguments to delete one AccueilContenu.
+     * @example
+     * // Delete one AccueilContenu
+     * const AccueilContenu = await prisma.accueilContenu.delete({
+     *   where: {
+     *     // ... filter to delete one AccueilContenu
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AccueilContenuDeleteArgs>(args: SelectSubset<T, AccueilContenuDeleteArgs<ExtArgs>>): Prisma__AccueilContenuClient<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AccueilContenu.
+     * @param {AccueilContenuUpdateArgs} args - Arguments to update one AccueilContenu.
+     * @example
+     * // Update one AccueilContenu
+     * const accueilContenu = await prisma.accueilContenu.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AccueilContenuUpdateArgs>(args: SelectSubset<T, AccueilContenuUpdateArgs<ExtArgs>>): Prisma__AccueilContenuClient<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AccueilContenus.
+     * @param {AccueilContenuDeleteManyArgs} args - Arguments to filter AccueilContenus to delete.
+     * @example
+     * // Delete a few AccueilContenus
+     * const { count } = await prisma.accueilContenu.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AccueilContenuDeleteManyArgs>(args?: SelectSubset<T, AccueilContenuDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AccueilContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccueilContenuUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AccueilContenus
+     * const accueilContenu = await prisma.accueilContenu.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AccueilContenuUpdateManyArgs>(args: SelectSubset<T, AccueilContenuUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AccueilContenus and returns the data updated in the database.
+     * @param {AccueilContenuUpdateManyAndReturnArgs} args - Arguments to update many AccueilContenus.
+     * @example
+     * // Update many AccueilContenus
+     * const accueilContenu = await prisma.accueilContenu.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AccueilContenus and only return the `id`
+     * const accueilContenuWithIdOnly = await prisma.accueilContenu.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AccueilContenuUpdateManyAndReturnArgs>(args: SelectSubset<T, AccueilContenuUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AccueilContenu.
+     * @param {AccueilContenuUpsertArgs} args - Arguments to update or create a AccueilContenu.
+     * @example
+     * // Update or create a AccueilContenu
+     * const accueilContenu = await prisma.accueilContenu.upsert({
+     *   create: {
+     *     // ... data to create a AccueilContenu
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AccueilContenu we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AccueilContenuUpsertArgs>(args: SelectSubset<T, AccueilContenuUpsertArgs<ExtArgs>>): Prisma__AccueilContenuClient<$Result.GetResult<Prisma.$AccueilContenuPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AccueilContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccueilContenuCountArgs} args - Arguments to filter AccueilContenus to count.
+     * @example
+     * // Count the number of AccueilContenus
+     * const count = await prisma.accueilContenu.count({
+     *   where: {
+     *     // ... the filter for the AccueilContenus we want to count
+     *   }
+     * })
+    **/
+    count<T extends AccueilContenuCountArgs>(
+      args?: Subset<T, AccueilContenuCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AccueilContenuCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AccueilContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccueilContenuAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AccueilContenuAggregateArgs>(args: Subset<T, AccueilContenuAggregateArgs>): Prisma.PrismaPromise<GetAccueilContenuAggregateType<T>>
+
+    /**
+     * Group by AccueilContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccueilContenuGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AccueilContenuGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AccueilContenuGroupByArgs['orderBy'] }
+        : { orderBy?: AccueilContenuGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AccueilContenuGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAccueilContenuGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AccueilContenu model
+   */
+  readonly fields: AccueilContenuFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AccueilContenu.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AccueilContenuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AccueilContenu model
+   */
+  interface AccueilContenuFieldRefs {
+    readonly id: FieldRef<"AccueilContenu", 'String'>
+    readonly bandeauEmploiTitre: FieldRef<"AccueilContenu", 'String'>
+    readonly accompagnementEyebrow: FieldRef<"AccueilContenu", 'String'>
+    readonly accompagnementTitre: FieldRef<"AccueilContenu", 'String'>
+    readonly contactTitre: FieldRef<"AccueilContenu", 'String'>
+    readonly contactSousTitre: FieldRef<"AccueilContenu", 'String'>
+    readonly updatedAt: FieldRef<"AccueilContenu", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AccueilContenu findUnique
+   */
+  export type AccueilContenuFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which AccueilContenu to fetch.
+     */
+    where: AccueilContenuWhereUniqueInput
+  }
+
+  /**
+   * AccueilContenu findUniqueOrThrow
+   */
+  export type AccueilContenuFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which AccueilContenu to fetch.
+     */
+    where: AccueilContenuWhereUniqueInput
+  }
+
+  /**
+   * AccueilContenu findFirst
+   */
+  export type AccueilContenuFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which AccueilContenu to fetch.
+     */
+    where?: AccueilContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccueilContenus to fetch.
+     */
+    orderBy?: AccueilContenuOrderByWithRelationInput | AccueilContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AccueilContenus.
+     */
+    cursor?: AccueilContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccueilContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccueilContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccueilContenus.
+     */
+    distinct?: AccueilContenuScalarFieldEnum | AccueilContenuScalarFieldEnum[]
+  }
+
+  /**
+   * AccueilContenu findFirstOrThrow
+   */
+  export type AccueilContenuFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which AccueilContenu to fetch.
+     */
+    where?: AccueilContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccueilContenus to fetch.
+     */
+    orderBy?: AccueilContenuOrderByWithRelationInput | AccueilContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AccueilContenus.
+     */
+    cursor?: AccueilContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccueilContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccueilContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccueilContenus.
+     */
+    distinct?: AccueilContenuScalarFieldEnum | AccueilContenuScalarFieldEnum[]
+  }
+
+  /**
+   * AccueilContenu findMany
+   */
+  export type AccueilContenuFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which AccueilContenus to fetch.
+     */
+    where?: AccueilContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccueilContenus to fetch.
+     */
+    orderBy?: AccueilContenuOrderByWithRelationInput | AccueilContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AccueilContenus.
+     */
+    cursor?: AccueilContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccueilContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccueilContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccueilContenus.
+     */
+    distinct?: AccueilContenuScalarFieldEnum | AccueilContenuScalarFieldEnum[]
+  }
+
+  /**
+   * AccueilContenu create
+   */
+  export type AccueilContenuCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to create a AccueilContenu.
+     */
+    data: XOR<AccueilContenuCreateInput, AccueilContenuUncheckedCreateInput>
+  }
+
+  /**
+   * AccueilContenu createMany
+   */
+  export type AccueilContenuCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AccueilContenus.
+     */
+    data: AccueilContenuCreateManyInput | AccueilContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AccueilContenu createManyAndReturn
+   */
+  export type AccueilContenuCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * The data used to create many AccueilContenus.
+     */
+    data: AccueilContenuCreateManyInput | AccueilContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AccueilContenu update
+   */
+  export type AccueilContenuUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to update a AccueilContenu.
+     */
+    data: XOR<AccueilContenuUpdateInput, AccueilContenuUncheckedUpdateInput>
+    /**
+     * Choose, which AccueilContenu to update.
+     */
+    where: AccueilContenuWhereUniqueInput
+  }
+
+  /**
+   * AccueilContenu updateMany
+   */
+  export type AccueilContenuUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AccueilContenus.
+     */
+    data: XOR<AccueilContenuUpdateManyMutationInput, AccueilContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which AccueilContenus to update
+     */
+    where?: AccueilContenuWhereInput
+    /**
+     * Limit how many AccueilContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccueilContenu updateManyAndReturn
+   */
+  export type AccueilContenuUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * The data used to update AccueilContenus.
+     */
+    data: XOR<AccueilContenuUpdateManyMutationInput, AccueilContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which AccueilContenus to update
+     */
+    where?: AccueilContenuWhereInput
+    /**
+     * Limit how many AccueilContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccueilContenu upsert
+   */
+  export type AccueilContenuUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * The filter to search for the AccueilContenu to update in case it exists.
+     */
+    where: AccueilContenuWhereUniqueInput
+    /**
+     * In case the AccueilContenu found by the `where` argument doesn't exist, create a new AccueilContenu with this data.
+     */
+    create: XOR<AccueilContenuCreateInput, AccueilContenuUncheckedCreateInput>
+    /**
+     * In case the AccueilContenu was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AccueilContenuUpdateInput, AccueilContenuUncheckedUpdateInput>
+  }
+
+  /**
+   * AccueilContenu delete
+   */
+  export type AccueilContenuDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+    /**
+     * Filter which AccueilContenu to delete.
+     */
+    where: AccueilContenuWhereUniqueInput
+  }
+
+  /**
+   * AccueilContenu deleteMany
+   */
+  export type AccueilContenuDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AccueilContenus to delete
+     */
+    where?: AccueilContenuWhereInput
+    /**
+     * Limit how many AccueilContenus to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccueilContenu without action
+   */
+  export type AccueilContenuDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccueilContenu
+     */
+    select?: AccueilContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccueilContenu
+     */
+    omit?: AccueilContenuOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model StatCle
    */
 
@@ -27473,6 +29770,33 @@ export namespace Prisma {
   export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
 
 
+  export const AccompagnementCardScalarFieldEnum: {
+    id: 'id',
+    titre: 'titre',
+    description: 'description',
+    icone: 'icone',
+    ordre: 'ordre',
+    actif: 'actif',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AccompagnementCardScalarFieldEnum = (typeof AccompagnementCardScalarFieldEnum)[keyof typeof AccompagnementCardScalarFieldEnum]
+
+
+  export const AccueilContenuScalarFieldEnum: {
+    id: 'id',
+    bandeauEmploiTitre: 'bandeauEmploiTitre',
+    accompagnementEyebrow: 'accompagnementEyebrow',
+    accompagnementTitre: 'accompagnementTitre',
+    contactTitre: 'contactTitre',
+    contactSousTitre: 'contactSousTitre',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AccueilContenuScalarFieldEnum = (typeof AccueilContenuScalarFieldEnum)[keyof typeof AccueilContenuScalarFieldEnum]
+
+
   export const StatCleScalarFieldEnum: {
     id: 'id',
     valeur: 'valeur',
@@ -27845,6 +30169,20 @@ export namespace Prisma {
    * Reference to a field of type 'StatutCovoiturage[]'
    */
   export type ListEnumStatutCovoiturageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutCovoiturage[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'IconeAccompagnement'
+   */
+  export type EnumIconeAccompagnementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IconeAccompagnement'>
+    
+
+
+  /**
+   * Reference to a field of type 'IconeAccompagnement[]'
+   */
+  export type ListEnumIconeAccompagnementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IconeAccompagnement[]'>
     
 
 
@@ -28985,6 +31323,137 @@ export namespace Prisma {
     auteurId?: StringWithAggregatesFilter<"Article"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
+  }
+
+  export type AccompagnementCardWhereInput = {
+    AND?: AccompagnementCardWhereInput | AccompagnementCardWhereInput[]
+    OR?: AccompagnementCardWhereInput[]
+    NOT?: AccompagnementCardWhereInput | AccompagnementCardWhereInput[]
+    id?: StringFilter<"AccompagnementCard"> | string
+    titre?: StringFilter<"AccompagnementCard"> | string
+    description?: StringFilter<"AccompagnementCard"> | string
+    icone?: EnumIconeAccompagnementFilter<"AccompagnementCard"> | $Enums.IconeAccompagnement
+    ordre?: IntFilter<"AccompagnementCard"> | number
+    actif?: BoolFilter<"AccompagnementCard"> | boolean
+    createdAt?: DateTimeFilter<"AccompagnementCard"> | Date | string
+    updatedAt?: DateTimeFilter<"AccompagnementCard"> | Date | string
+  }
+
+  export type AccompagnementCardOrderByWithRelationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccompagnementCardWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AccompagnementCardWhereInput | AccompagnementCardWhereInput[]
+    OR?: AccompagnementCardWhereInput[]
+    NOT?: AccompagnementCardWhereInput | AccompagnementCardWhereInput[]
+    titre?: StringFilter<"AccompagnementCard"> | string
+    description?: StringFilter<"AccompagnementCard"> | string
+    icone?: EnumIconeAccompagnementFilter<"AccompagnementCard"> | $Enums.IconeAccompagnement
+    ordre?: IntFilter<"AccompagnementCard"> | number
+    actif?: BoolFilter<"AccompagnementCard"> | boolean
+    createdAt?: DateTimeFilter<"AccompagnementCard"> | Date | string
+    updatedAt?: DateTimeFilter<"AccompagnementCard"> | Date | string
+  }, "id">
+
+  export type AccompagnementCardOrderByWithAggregationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AccompagnementCardCountOrderByAggregateInput
+    _avg?: AccompagnementCardAvgOrderByAggregateInput
+    _max?: AccompagnementCardMaxOrderByAggregateInput
+    _min?: AccompagnementCardMinOrderByAggregateInput
+    _sum?: AccompagnementCardSumOrderByAggregateInput
+  }
+
+  export type AccompagnementCardScalarWhereWithAggregatesInput = {
+    AND?: AccompagnementCardScalarWhereWithAggregatesInput | AccompagnementCardScalarWhereWithAggregatesInput[]
+    OR?: AccompagnementCardScalarWhereWithAggregatesInput[]
+    NOT?: AccompagnementCardScalarWhereWithAggregatesInput | AccompagnementCardScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AccompagnementCard"> | string
+    titre?: StringWithAggregatesFilter<"AccompagnementCard"> | string
+    description?: StringWithAggregatesFilter<"AccompagnementCard"> | string
+    icone?: EnumIconeAccompagnementWithAggregatesFilter<"AccompagnementCard"> | $Enums.IconeAccompagnement
+    ordre?: IntWithAggregatesFilter<"AccompagnementCard"> | number
+    actif?: BoolWithAggregatesFilter<"AccompagnementCard"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"AccompagnementCard"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AccompagnementCard"> | Date | string
+  }
+
+  export type AccueilContenuWhereInput = {
+    AND?: AccueilContenuWhereInput | AccueilContenuWhereInput[]
+    OR?: AccueilContenuWhereInput[]
+    NOT?: AccueilContenuWhereInput | AccueilContenuWhereInput[]
+    id?: StringFilter<"AccueilContenu"> | string
+    bandeauEmploiTitre?: StringFilter<"AccueilContenu"> | string
+    accompagnementEyebrow?: StringFilter<"AccueilContenu"> | string
+    accompagnementTitre?: StringFilter<"AccueilContenu"> | string
+    contactTitre?: StringFilter<"AccueilContenu"> | string
+    contactSousTitre?: StringFilter<"AccueilContenu"> | string
+    updatedAt?: DateTimeFilter<"AccueilContenu"> | Date | string
+  }
+
+  export type AccueilContenuOrderByWithRelationInput = {
+    id?: SortOrder
+    bandeauEmploiTitre?: SortOrder
+    accompagnementEyebrow?: SortOrder
+    accompagnementTitre?: SortOrder
+    contactTitre?: SortOrder
+    contactSousTitre?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccueilContenuWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AccueilContenuWhereInput | AccueilContenuWhereInput[]
+    OR?: AccueilContenuWhereInput[]
+    NOT?: AccueilContenuWhereInput | AccueilContenuWhereInput[]
+    bandeauEmploiTitre?: StringFilter<"AccueilContenu"> | string
+    accompagnementEyebrow?: StringFilter<"AccueilContenu"> | string
+    accompagnementTitre?: StringFilter<"AccueilContenu"> | string
+    contactTitre?: StringFilter<"AccueilContenu"> | string
+    contactSousTitre?: StringFilter<"AccueilContenu"> | string
+    updatedAt?: DateTimeFilter<"AccueilContenu"> | Date | string
+  }, "id">
+
+  export type AccueilContenuOrderByWithAggregationInput = {
+    id?: SortOrder
+    bandeauEmploiTitre?: SortOrder
+    accompagnementEyebrow?: SortOrder
+    accompagnementTitre?: SortOrder
+    contactTitre?: SortOrder
+    contactSousTitre?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AccueilContenuCountOrderByAggregateInput
+    _max?: AccueilContenuMaxOrderByAggregateInput
+    _min?: AccueilContenuMinOrderByAggregateInput
+  }
+
+  export type AccueilContenuScalarWhereWithAggregatesInput = {
+    AND?: AccueilContenuScalarWhereWithAggregatesInput | AccueilContenuScalarWhereWithAggregatesInput[]
+    OR?: AccueilContenuScalarWhereWithAggregatesInput[]
+    NOT?: AccueilContenuScalarWhereWithAggregatesInput | AccueilContenuScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    bandeauEmploiTitre?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    accompagnementEyebrow?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    accompagnementTitre?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    contactTitre?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    contactSousTitre?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AccueilContenu"> | Date | string
   }
 
   export type StatCleWhereInput = {
@@ -30736,6 +33205,153 @@ export namespace Prisma {
     publie?: BoolFieldUpdateOperationsInput | boolean
     auteurId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccompagnementCardCreateInput = {
+    id?: string
+    titre: string
+    description: string
+    icone?: $Enums.IconeAccompagnement
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AccompagnementCardUncheckedCreateInput = {
+    id?: string
+    titre: string
+    description: string
+    icone?: $Enums.IconeAccompagnement
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AccompagnementCardUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icone?: EnumIconeAccompagnementFieldUpdateOperationsInput | $Enums.IconeAccompagnement
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccompagnementCardUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icone?: EnumIconeAccompagnementFieldUpdateOperationsInput | $Enums.IconeAccompagnement
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccompagnementCardCreateManyInput = {
+    id?: string
+    titre: string
+    description: string
+    icone?: $Enums.IconeAccompagnement
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AccompagnementCardUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icone?: EnumIconeAccompagnementFieldUpdateOperationsInput | $Enums.IconeAccompagnement
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccompagnementCardUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    icone?: EnumIconeAccompagnementFieldUpdateOperationsInput | $Enums.IconeAccompagnement
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccueilContenuCreateInput = {
+    id?: string
+    bandeauEmploiTitre?: string
+    accompagnementEyebrow?: string
+    accompagnementTitre?: string
+    contactTitre?: string
+    contactSousTitre?: string
+    updatedAt?: Date | string
+  }
+
+  export type AccueilContenuUncheckedCreateInput = {
+    id?: string
+    bandeauEmploiTitre?: string
+    accompagnementEyebrow?: string
+    accompagnementTitre?: string
+    contactTitre?: string
+    contactSousTitre?: string
+    updatedAt?: Date | string
+  }
+
+  export type AccueilContenuUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bandeauEmploiTitre?: StringFieldUpdateOperationsInput | string
+    accompagnementEyebrow?: StringFieldUpdateOperationsInput | string
+    accompagnementTitre?: StringFieldUpdateOperationsInput | string
+    contactTitre?: StringFieldUpdateOperationsInput | string
+    contactSousTitre?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccueilContenuUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bandeauEmploiTitre?: StringFieldUpdateOperationsInput | string
+    accompagnementEyebrow?: StringFieldUpdateOperationsInput | string
+    accompagnementTitre?: StringFieldUpdateOperationsInput | string
+    contactTitre?: StringFieldUpdateOperationsInput | string
+    contactSousTitre?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccueilContenuCreateManyInput = {
+    id?: string
+    bandeauEmploiTitre?: string
+    accompagnementEyebrow?: string
+    accompagnementTitre?: string
+    contactTitre?: string
+    contactSousTitre?: string
+    updatedAt?: Date | string
+  }
+
+  export type AccueilContenuUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bandeauEmploiTitre?: StringFieldUpdateOperationsInput | string
+    accompagnementEyebrow?: StringFieldUpdateOperationsInput | string
+    accompagnementTitre?: StringFieldUpdateOperationsInput | string
+    contactTitre?: StringFieldUpdateOperationsInput | string
+    contactSousTitre?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccueilContenuUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bandeauEmploiTitre?: StringFieldUpdateOperationsInput | string
+    accompagnementEyebrow?: StringFieldUpdateOperationsInput | string
+    accompagnementTitre?: StringFieldUpdateOperationsInput | string
+    contactTitre?: StringFieldUpdateOperationsInput | string
+    contactSousTitre?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -32518,6 +35134,94 @@ export namespace Prisma {
     _max?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
   }
 
+  export type EnumIconeAccompagnementFilter<$PrismaModel = never> = {
+    equals?: $Enums.IconeAccompagnement | EnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    in?: $Enums.IconeAccompagnement[] | ListEnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IconeAccompagnement[] | ListEnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    not?: NestedEnumIconeAccompagnementFilter<$PrismaModel> | $Enums.IconeAccompagnement
+  }
+
+  export type AccompagnementCardCountOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccompagnementCardAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type AccompagnementCardMaxOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccompagnementCardMinOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccompagnementCardSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type EnumIconeAccompagnementWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IconeAccompagnement | EnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    in?: $Enums.IconeAccompagnement[] | ListEnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IconeAccompagnement[] | ListEnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    not?: NestedEnumIconeAccompagnementWithAggregatesFilter<$PrismaModel> | $Enums.IconeAccompagnement
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIconeAccompagnementFilter<$PrismaModel>
+    _max?: NestedEnumIconeAccompagnementFilter<$PrismaModel>
+  }
+
+  export type AccueilContenuCountOrderByAggregateInput = {
+    id?: SortOrder
+    bandeauEmploiTitre?: SortOrder
+    accompagnementEyebrow?: SortOrder
+    accompagnementTitre?: SortOrder
+    contactTitre?: SortOrder
+    contactSousTitre?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccueilContenuMaxOrderByAggregateInput = {
+    id?: SortOrder
+    bandeauEmploiTitre?: SortOrder
+    accompagnementEyebrow?: SortOrder
+    accompagnementTitre?: SortOrder
+    contactTitre?: SortOrder
+    contactSousTitre?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AccueilContenuMinOrderByAggregateInput = {
+    id?: SortOrder
+    bandeauEmploiTitre?: SortOrder
+    accompagnementEyebrow?: SortOrder
+    accompagnementTitre?: SortOrder
+    contactTitre?: SortOrder
+    contactSousTitre?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type StatCleCountOrderByAggregateInput = {
     id?: SortOrder
     valeur?: SortOrder
@@ -34208,6 +36912,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutArticlesInput, UserUpdateWithoutArticlesInput>, UserUncheckedUpdateWithoutArticlesInput>
   }
 
+  export type EnumIconeAccompagnementFieldUpdateOperationsInput = {
+    set?: $Enums.IconeAccompagnement
+  }
+
   export type FormationCreateNestedOneWithoutHeroSlidesInput = {
     create?: XOR<FormationCreateWithoutHeroSlidesInput, FormationUncheckedCreateWithoutHeroSlidesInput>
     connectOrCreate?: FormationCreateOrConnectWithoutHeroSlidesInput
@@ -34661,6 +37369,23 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
     _max?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumIconeAccompagnementFilter<$PrismaModel = never> = {
+    equals?: $Enums.IconeAccompagnement | EnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    in?: $Enums.IconeAccompagnement[] | ListEnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IconeAccompagnement[] | ListEnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    not?: NestedEnumIconeAccompagnementFilter<$PrismaModel> | $Enums.IconeAccompagnement
+  }
+
+  export type NestedEnumIconeAccompagnementWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IconeAccompagnement | EnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    in?: $Enums.IconeAccompagnement[] | ListEnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IconeAccompagnement[] | ListEnumIconeAccompagnementFieldRefInput<$PrismaModel>
+    not?: NestedEnumIconeAccompagnementWithAggregatesFilter<$PrismaModel> | $Enums.IconeAccompagnement
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIconeAccompagnementFilter<$PrismaModel>
+    _max?: NestedEnumIconeAccompagnementFilter<$PrismaModel>
   }
 
   export type NestedEnumTypeDocumentFilter<$PrismaModel = never> = {

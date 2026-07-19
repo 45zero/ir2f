@@ -37,9 +37,13 @@ const typeActiveStyle = {
 export function ContactTeaser({
   formations,
   startOpen = false,
+  titre = "Je souhaite être contacté",
+  sousTitre = "Un conseiller IR2F revient vers vous sous 48h.",
 }: {
   formations: FormationOption[]
   startOpen?: boolean
+  titre?: string
+  sousTitre?: string
 }) {
   const [open, setOpen] = useState(startOpen)
   const [type, setType] = useState<"club" | "stagiaire" | null>(null)
@@ -69,10 +73,10 @@ export function ContactTeaser({
                 margin: 0,
               }}
             >
-              Je souhaite être contacté
+              {titre}
             </h2>
             <p style={{ color: colors.textMuted, fontSize: 15, margin: 0 }}>
-              Un conseiller IR2F revient vers vous sous 48h.
+              {sousTitre}
             </p>
           </div>
           {!open && state?.status !== "success" && (

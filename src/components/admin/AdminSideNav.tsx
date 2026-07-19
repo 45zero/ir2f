@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { colors } from "@/lib/theme"
 
 const ITEMS = [
+  { href: "/admin/accueil", label: "Page d'accueil", enabled: true },
   { href: "/admin/formations", label: "Formations", enabled: true },
   { href: "/admin/inscriptions", label: "Inscriptions", enabled: true },
   { href: "/admin/users", label: "Utilisateurs", enabled: true },

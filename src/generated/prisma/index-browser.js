@@ -282,6 +282,27 @@ exports.Prisma.ArticleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AccompagnementCardScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  icone: 'icone',
+  ordre: 'ordre',
+  actif: 'actif',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AccueilContenuScalarFieldEnum = {
+  id: 'id',
+  bandeauEmploiTitre: 'bandeauEmploiTitre',
+  accompagnementEyebrow: 'accompagnementEyebrow',
+  accompagnementTitre: 'accompagnementTitre',
+  contactTitre: 'contactTitre',
+  contactSousTitre: 'contactSousTitre',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.StatCleScalarFieldEnum = {
   id: 'id',
   valeur: 'valeur',
@@ -465,6 +486,15 @@ exports.StatutCovoiturage = exports.$Enums.StatutCovoiturage = {
   ANNULE: 'ANNULE'
 };
 
+exports.IconeAccompagnement = exports.$Enums.IconeAccompagnement = {
+  FINANCEMENT: 'FINANCEMENT',
+  GESTION: 'GESTION',
+  FORMATION: 'FORMATION',
+  CONTACT: 'CONTACT',
+  DOCUMENT: 'DOCUMENT',
+  VALIDATION: 'VALIDATION'
+};
+
 exports.TypeDocument = exports.$Enums.TypeDocument = {
   FICHIER: 'FICHIER',
   LIEN_EXTERNE: 'LIEN_EXTERNE'
@@ -490,6 +520,8 @@ exports.Prisma.ModelName = {
   Covoiturage: 'Covoiturage',
   CovoituragePassager: 'CovoituragePassager',
   Article: 'Article',
+  AccompagnementCard: 'AccompagnementCard',
+  AccueilContenu: 'AccueilContenu',
   StatCle: 'StatCle',
   HeroSlide: 'HeroSlide',
   CategorieInfo: 'CategorieInfo',

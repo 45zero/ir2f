@@ -45,3 +45,39 @@ export async function getRecentArticles(limit = 9): Promise<ArticleListItem[]> {
   const articles = await getPublishedArticles()
   return articles.slice(0, limit)
 }
+
+export type AccompagnementCardData = {
+  id: string
+  titre: string
+  description: string
+  icone: string
+}
+
+export async function getAccompagnementCards(): Promise<AccompagnementCardData[]> {
+  const cards = await prisma.accompagnementCard.findMany({
+    where: { actif: true },
+    orderBy: { ordre: "asc" },
+  })
+  return cards.map((c) => ({ id: c.id, titre: c.titre, description: c.description, icone: c.icone }))
+}
+
+export type AccueilContenuData = {
+  bandeauEmploiTitre: string
+  accompagnementEyebrow: string
+  accompagnementTitre: string
+  contactTitre: string
+  contactSousTitre: string
+}
+
+const CONTENU_DEFAUT: AccueilContenuData = {
+  bandeauEmploiTitre: "Je souhaite être accompagné sur l'emploi",
+  accompagnementEyebrow: "IR2F vous accompagne",
+  accompagnementTitre: "Accompagnement Emploi",
+  contactTitre: "Je souhaite être contacté",
+  contactSousTitre: "Un conseiller IR2F revient vers vous sous 48h.",
+}
+
+export async function getAccueilContenu(): Promise<AccueilContenuData> {
+  const contenu = await prisma.accueilContenu.findUnique({ where: { id: "accueil" } })
+  return contenu ?? CONTENU_DEFAUT
+}

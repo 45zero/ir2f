@@ -374,6 +374,44 @@ model Article {
 
 // ─── CONTENU SITE PUBLIC (accueil / catalogue) ───────
 
+// Icônes disponibles pour les cartes "Accompagnement Emploi" de l'accueil
+enum IconeAccompagnement {
+  FINANCEMENT
+  GESTION
+  FORMATION
+  CONTACT
+  DOCUMENT
+  VALIDATION
+
+  @@schema("ir2f")
+}
+
+model AccompagnementCard {
+  id          String              @id @default(uuid())
+  titre       String
+  description String
+  icone       IconeAccompagnement @default(FINANCEMENT)
+  ordre       Int                 @default(0)
+  actif       Boolean             @default(true)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@schema("ir2f")
+}
+
+// Textes éditables de la page d'accueil (une seule ligne, id fixe "accueil")
+model AccueilContenu {
+  id                    String   @id @default("accueil")
+  bandeauEmploiTitre    String   @default("Je souhaite être accompagné sur l'emploi")
+  accompagnementEyebrow String   @default("IR2F vous accompagne")
+  accompagnementTitre   String   @default("Accompagnement Emploi")
+  contactTitre          String   @default("Je souhaite être contacté")
+  contactSousTitre      String   @default("Un conseiller IR2F revient vers vous sous 48h.")
+  updatedAt             DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
 model StatCle {
   id        String   @id @default(uuid())
   valeur    String
