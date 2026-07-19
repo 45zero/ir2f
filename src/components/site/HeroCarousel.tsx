@@ -25,7 +25,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
   const slide = slides[index]
 
   return (
-    <section style={{ position: "relative", overflow: "hidden", minHeight: 420, background: colors.navy }}>
+    <section style={{ position: "relative", overflow: "hidden", minHeight: 420, marginTop: -68, background: colors.navy }}>
       <div
         key={slide.id}
         style={{

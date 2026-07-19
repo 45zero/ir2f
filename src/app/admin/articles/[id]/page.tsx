@@ -10,7 +10,10 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
 
   const initial: ArticleFormInitial = {
     titre: article.titre,
+    slug: article.slug,
     contenu: article.contenu,
+    image: article.image ?? "",
+    categorie: article.categorie ?? "",
     publie: article.publie,
   }
 

@@ -17545,7 +17545,10 @@ export namespace Prisma {
   export type ArticleMinAggregateOutputType = {
     id: string | null
     titre: string | null
+    slug: string | null
     contenu: string | null
+    image: string | null
+    categorie: $Enums.CategorieFormation | null
     publie: boolean | null
     auteurId: string | null
     createdAt: Date | null
@@ -17555,7 +17558,10 @@ export namespace Prisma {
   export type ArticleMaxAggregateOutputType = {
     id: string | null
     titre: string | null
+    slug: string | null
     contenu: string | null
+    image: string | null
+    categorie: $Enums.CategorieFormation | null
     publie: boolean | null
     auteurId: string | null
     createdAt: Date | null
@@ -17565,7 +17571,10 @@ export namespace Prisma {
   export type ArticleCountAggregateOutputType = {
     id: number
     titre: number
+    slug: number
     contenu: number
+    image: number
+    categorie: number
     publie: number
     auteurId: number
     createdAt: number
@@ -17577,7 +17586,10 @@ export namespace Prisma {
   export type ArticleMinAggregateInputType = {
     id?: true
     titre?: true
+    slug?: true
     contenu?: true
+    image?: true
+    categorie?: true
     publie?: true
     auteurId?: true
     createdAt?: true
@@ -17587,7 +17599,10 @@ export namespace Prisma {
   export type ArticleMaxAggregateInputType = {
     id?: true
     titre?: true
+    slug?: true
     contenu?: true
+    image?: true
+    categorie?: true
     publie?: true
     auteurId?: true
     createdAt?: true
@@ -17597,7 +17612,10 @@ export namespace Prisma {
   export type ArticleCountAggregateInputType = {
     id?: true
     titre?: true
+    slug?: true
     contenu?: true
+    image?: true
+    categorie?: true
     publie?: true
     auteurId?: true
     createdAt?: true
@@ -17680,7 +17698,10 @@ export namespace Prisma {
   export type ArticleGroupByOutputType = {
     id: string
     titre: string
+    slug: string
     contenu: string
+    image: string | null
+    categorie: $Enums.CategorieFormation | null
     publie: boolean
     auteurId: string
     createdAt: Date
@@ -17707,7 +17728,10 @@ export namespace Prisma {
   export type ArticleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     titre?: boolean
+    slug?: boolean
     contenu?: boolean
+    image?: boolean
+    categorie?: boolean
     publie?: boolean
     auteurId?: boolean
     createdAt?: boolean
@@ -17718,7 +17742,10 @@ export namespace Prisma {
   export type ArticleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     titre?: boolean
+    slug?: boolean
     contenu?: boolean
+    image?: boolean
+    categorie?: boolean
     publie?: boolean
     auteurId?: boolean
     createdAt?: boolean
@@ -17729,7 +17756,10 @@ export namespace Prisma {
   export type ArticleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     titre?: boolean
+    slug?: boolean
     contenu?: boolean
+    image?: boolean
+    categorie?: boolean
     publie?: boolean
     auteurId?: boolean
     createdAt?: boolean
@@ -17740,14 +17770,17 @@ export namespace Prisma {
   export type ArticleSelectScalar = {
     id?: boolean
     titre?: boolean
+    slug?: boolean
     contenu?: boolean
+    image?: boolean
+    categorie?: boolean
     publie?: boolean
     auteurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "contenu" | "publie" | "auteurId" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "slug" | "contenu" | "image" | "categorie" | "publie" | "auteurId" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -17766,7 +17799,10 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       titre: string
+      slug: string
       contenu: string
+      image: string | null
+      categorie: $Enums.CategorieFormation | null
       publie: boolean
       auteurId: string
       createdAt: Date
@@ -18197,7 +18233,10 @@ export namespace Prisma {
   interface ArticleFieldRefs {
     readonly id: FieldRef<"Article", 'String'>
     readonly titre: FieldRef<"Article", 'String'>
+    readonly slug: FieldRef<"Article", 'String'>
     readonly contenu: FieldRef<"Article", 'String'>
+    readonly image: FieldRef<"Article", 'String'>
+    readonly categorie: FieldRef<"Article", 'CategorieFormation'>
     readonly publie: FieldRef<"Article", 'Boolean'>
     readonly auteurId: FieldRef<"Article", 'String'>
     readonly createdAt: FieldRef<"Article", 'DateTime'>
@@ -27421,7 +27460,10 @@ export namespace Prisma {
   export const ArticleScalarFieldEnum: {
     id: 'id',
     titre: 'titre',
+    slug: 'slug',
     contenu: 'contenu',
+    image: 'image',
+    categorie: 'categorie',
     publie: 'publie',
     auteurId: 'auteurId',
     createdAt: 'createdAt',
@@ -28871,7 +28913,10 @@ export namespace Prisma {
     NOT?: ArticleWhereInput | ArticleWhereInput[]
     id?: StringFilter<"Article"> | string
     titre?: StringFilter<"Article"> | string
+    slug?: StringFilter<"Article"> | string
     contenu?: StringFilter<"Article"> | string
+    image?: StringNullableFilter<"Article"> | string | null
+    categorie?: EnumCategorieFormationNullableFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolFilter<"Article"> | boolean
     auteurId?: StringFilter<"Article"> | string
     createdAt?: DateTimeFilter<"Article"> | Date | string
@@ -28882,7 +28927,10 @@ export namespace Prisma {
   export type ArticleOrderByWithRelationInput = {
     id?: SortOrder
     titre?: SortOrder
+    slug?: SortOrder
     contenu?: SortOrder
+    image?: SortOrderInput | SortOrder
+    categorie?: SortOrderInput | SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
     createdAt?: SortOrder
@@ -28892,22 +28940,28 @@ export namespace Prisma {
 
   export type ArticleWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    slug?: string
     AND?: ArticleWhereInput | ArticleWhereInput[]
     OR?: ArticleWhereInput[]
     NOT?: ArticleWhereInput | ArticleWhereInput[]
     titre?: StringFilter<"Article"> | string
     contenu?: StringFilter<"Article"> | string
+    image?: StringNullableFilter<"Article"> | string | null
+    categorie?: EnumCategorieFormationNullableFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolFilter<"Article"> | boolean
     auteurId?: StringFilter<"Article"> | string
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "slug">
 
   export type ArticleOrderByWithAggregationInput = {
     id?: SortOrder
     titre?: SortOrder
+    slug?: SortOrder
     contenu?: SortOrder
+    image?: SortOrderInput | SortOrder
+    categorie?: SortOrderInput | SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
     createdAt?: SortOrder
@@ -28923,7 +28977,10 @@ export namespace Prisma {
     NOT?: ArticleScalarWhereWithAggregatesInput | ArticleScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Article"> | string
     titre?: StringWithAggregatesFilter<"Article"> | string
+    slug?: StringWithAggregatesFilter<"Article"> | string
     contenu?: StringWithAggregatesFilter<"Article"> | string
+    image?: StringNullableWithAggregatesFilter<"Article"> | string | null
+    categorie?: EnumCategorieFormationNullableWithAggregatesFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolWithAggregatesFilter<"Article"> | boolean
     auteurId?: StringWithAggregatesFilter<"Article"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
@@ -30595,7 +30652,10 @@ export namespace Prisma {
   export type ArticleCreateInput = {
     id?: string
     titre: string
+    slug: string
     contenu: string
+    image?: string | null
+    categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30605,7 +30665,10 @@ export namespace Prisma {
   export type ArticleUncheckedCreateInput = {
     id?: string
     titre: string
+    slug: string
     contenu: string
+    image?: string | null
+    categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     auteurId: string
     createdAt?: Date | string
@@ -30615,7 +30678,10 @@ export namespace Prisma {
   export type ArticleUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30625,7 +30691,10 @@ export namespace Prisma {
   export type ArticleUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     auteurId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30635,7 +30704,10 @@ export namespace Prisma {
   export type ArticleCreateManyInput = {
     id?: string
     titre: string
+    slug: string
     contenu: string
+    image?: string | null
+    categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     auteurId: string
     createdAt?: Date | string
@@ -30645,7 +30717,10 @@ export namespace Prisma {
   export type ArticleUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30654,7 +30729,10 @@ export namespace Prisma {
   export type ArticleUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     auteurId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32384,10 +32462,20 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type EnumCategorieFormationNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CategorieFormation | EnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CategorieFormation[] | ListEnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CategorieFormation[] | ListEnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCategorieFormationNullableFilter<$PrismaModel> | $Enums.CategorieFormation | null
+  }
+
   export type ArticleCountOrderByAggregateInput = {
     id?: SortOrder
     titre?: SortOrder
+    slug?: SortOrder
     contenu?: SortOrder
+    image?: SortOrder
+    categorie?: SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
     createdAt?: SortOrder
@@ -32397,7 +32485,10 @@ export namespace Prisma {
   export type ArticleMaxOrderByAggregateInput = {
     id?: SortOrder
     titre?: SortOrder
+    slug?: SortOrder
     contenu?: SortOrder
+    image?: SortOrder
+    categorie?: SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
     createdAt?: SortOrder
@@ -32407,11 +32498,24 @@ export namespace Prisma {
   export type ArticleMinOrderByAggregateInput = {
     id?: SortOrder
     titre?: SortOrder
+    slug?: SortOrder
     contenu?: SortOrder
+    image?: SortOrder
+    categorie?: SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumCategorieFormationNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CategorieFormation | EnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CategorieFormation[] | ListEnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CategorieFormation[] | ListEnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCategorieFormationNullableWithAggregatesFilter<$PrismaModel> | $Enums.CategorieFormation | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
+    _max?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
   }
 
   export type StatCleCountOrderByAggregateInput = {
@@ -34092,6 +34196,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type NullableEnumCategorieFormationFieldUpdateOperationsInput = {
+    set?: $Enums.CategorieFormation | null
+  }
+
   export type UserUpdateOneRequiredWithoutArticlesNestedInput = {
     create?: XOR<UserCreateWithoutArticlesInput, UserUncheckedCreateWithoutArticlesInput>
     connectOrCreate?: UserCreateOrConnectWithoutArticlesInput
@@ -34538,6 +34646,23 @@ export namespace Prisma {
     _max?: NestedEnumStatutCovoiturageFilter<$PrismaModel>
   }
 
+  export type NestedEnumCategorieFormationNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CategorieFormation | EnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CategorieFormation[] | ListEnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CategorieFormation[] | ListEnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCategorieFormationNullableFilter<$PrismaModel> | $Enums.CategorieFormation | null
+  }
+
+  export type NestedEnumCategorieFormationNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CategorieFormation | EnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CategorieFormation[] | ListEnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CategorieFormation[] | ListEnumCategorieFormationFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCategorieFormationNullableWithAggregatesFilter<$PrismaModel> | $Enums.CategorieFormation | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
+    _max?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumTypeDocumentFilter<$PrismaModel = never> = {
     equals?: $Enums.TypeDocument | EnumTypeDocumentFieldRefInput<$PrismaModel>
     in?: $Enums.TypeDocument[] | ListEnumTypeDocumentFieldRefInput<$PrismaModel>
@@ -34804,7 +34929,10 @@ export namespace Prisma {
   export type ArticleCreateWithoutAuteurInput = {
     id?: string
     titre: string
+    slug: string
     contenu: string
+    image?: string | null
+    categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34813,7 +34941,10 @@ export namespace Prisma {
   export type ArticleUncheckedCreateWithoutAuteurInput = {
     id?: string
     titre: string
+    slug: string
     contenu: string
+    image?: string | null
+    categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35116,7 +35247,10 @@ export namespace Prisma {
     NOT?: ArticleScalarWhereInput | ArticleScalarWhereInput[]
     id?: StringFilter<"Article"> | string
     titre?: StringFilter<"Article"> | string
+    slug?: StringFilter<"Article"> | string
     contenu?: StringFilter<"Article"> | string
+    image?: StringNullableFilter<"Article"> | string | null
+    categorie?: EnumCategorieFormationNullableFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolFilter<"Article"> | boolean
     auteurId?: StringFilter<"Article"> | string
     createdAt?: DateTimeFilter<"Article"> | Date | string
@@ -38474,7 +38608,10 @@ export namespace Prisma {
   export type ArticleCreateManyAuteurInput = {
     id?: string
     titre: string
+    slug: string
     contenu: string
+    image?: string | null
+    categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38711,7 +38848,10 @@ export namespace Prisma {
   export type ArticleUpdateWithoutAuteurInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38720,7 +38860,10 @@ export namespace Prisma {
   export type ArticleUncheckedUpdateWithoutAuteurInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38729,7 +38872,10 @@ export namespace Prisma {
   export type ArticleUncheckedUpdateManyWithoutAuteurInput = {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

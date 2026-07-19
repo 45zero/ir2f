@@ -2,7 +2,9 @@
 
 import { useActionState } from "react"
 import { colors, fontBody } from "@/lib/theme"
+import { CATEGORIE_LABELS } from "@/lib/formations-shared"
 import { createArticle, updateArticle, type ArticleActionState } from "@/lib/actions/articles"
+import type { CategorieFormation } from "@/generated/prisma"
 
 const fieldStyle = {
   border: "1px solid #e2e5ea",
@@ -14,7 +16,14 @@ const fieldStyle = {
   width: "100%",
 }
 
-export type ArticleFormInitial = { titre: string; contenu: string; publie: boolean }
+export type ArticleFormInitial = {
+  titre: string
+  slug: string
+  contenu: string
+  image: string
+  categorie: CategorieFormation | ""
+  publie: boolean
+}
 
 export function ArticleForm({
   id,
@@ -48,6 +57,29 @@ export function ArticleForm({
       <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
         <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Titre</span>
         <input name="titre" required defaultValue={initial?.titre} style={fieldStyle} />
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>
+          Slug (utilisé dans l&apos;URL /actualites/…)
+        </span>
+        <input name="slug" required defaultValue={initial?.slug} style={fieldStyle} />
+      </div>
+      <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 5, flex: "1 1 260px" }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Image (URL)</span>
+          <input name="image" defaultValue={initial?.image} style={fieldStyle} />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 5, flex: "1 1 200px" }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Catégorie</span>
+          <select name="categorie" defaultValue={initial?.categorie ?? ""} style={fieldStyle}>
+            <option value="">Aucune (générique IR2F)</option>
+            {Object.entries(CATEGORIE_LABELS).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
         <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Contenu</span>

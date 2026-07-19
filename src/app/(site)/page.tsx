@@ -13,6 +13,31 @@ const NEWS_CARD_STYLES = [
   `linear-gradient(135deg, ${colors.gold}, #a67c27)`,
 ]
 
+function VoirToutesLesActualites() {
+  return (
+    <HoverLink
+      href="/actualites"
+      style={{
+        fontSize: 13,
+        fontWeight: 700,
+        color: colors.navy,
+        cursor: "pointer",
+        textDecoration: "none",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+      }}
+      hoverStyle={{ color: colors.red }}
+    >
+      Voir toutes les actualités
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <line x1="5" y1="12" x2="19" y2="12" />
+        <polyline points="12 5 19 12 12 19" />
+      </svg>
+    </HoverLink>
+  )
+}
+
 const EMPLOI_CARDS = [
   {
     title: "Financements & Subventions",
@@ -67,22 +92,7 @@ export default async function HomePage() {
           backgroundColor: "#FFFFFF",
         }}
       >
-        <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", alignItems: "center", flexDirection: "column", gap: 12 }}>
-          <h1
-            style={{
-              fontFamily: fontHeading,
-              fontSize: "clamp(24px,3.2vw,38px)",
-              fontWeight: 800,
-              color: colors.navy,
-              margin: 0,
-              lineHeight: 1.05,
-            }}
-          >
-            <span style={{ color: colors.red }}>Se former</span> au football
-          </h1>
-          <p style={{ fontSize: 14, lineHeight: 1.5, color: colors.textMuted, margin: 0, maxWidth: 560 }}>
-            Les formations IR2F pour éducateurs, arbitres, clubs et dirigeants de la Ligue Grand Est.
-          </p>
+        <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", flexDirection: "column", gap: 12 }}>
           <HomeSearch formations={formations} />
         </div>
       </section>
@@ -163,7 +173,7 @@ export default async function HomePage() {
 
       {newsGrid.length > 0 && (
         <section style={{ maxWidth: 1160, margin: "0 auto", padding: "44px 20px 56px" }}>
-          <div style={{ marginBottom: 26 }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", flexWrap: "wrap", gap: 10, marginBottom: 26 }}>
             <h2
               style={{
                 fontFamily: fontHeading,
@@ -175,6 +185,7 @@ export default async function HomePage() {
             >
               Toutes les <span style={{ color: colors.gold }}>actualités</span>
             </h2>
+            <VoirToutesLesActualites />
           </div>
 
           <div
@@ -187,23 +198,29 @@ export default async function HomePage() {
           >
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 16 }}>
               {newsGrid.map((n, i) => (
-                <div
+                <HoverLink
                   key={n.id}
+                  href={`/actualites/${n.slug}`}
                   style={{
                     borderRadius: 8,
                     overflow: "hidden",
                     position: "relative",
                     minHeight: 230,
-                    background: NEWS_CARD_STYLES[i % NEWS_CARD_STYLES.length],
+                    background: n.image ? undefined : NEWS_CARD_STYLES[i % NEWS_CARD_STYLES.length],
+                    backgroundImage: n.image ? `url('${n.image}')` : undefined,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
                     display: "flex",
                     alignItems: "flex-end",
+                    textDecoration: "none",
                   }}
+                  hoverStyle={{ opacity: 0.94 }}
                 >
                   <div
                     style={{
                       position: "absolute",
                       inset: 0,
-                      background: "linear-gradient(0deg,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.05) 55%)",
+                      background: "linear-gradient(0deg,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.05) 55%)",
                     }}
                   />
                   <div style={{ position: "relative", padding: 18, display: "flex", flexDirection: "column", gap: 10, width: "100%" }}>
@@ -219,7 +236,7 @@ export default async function HomePage() {
                         width: "fit-content",
                       }}
                     >
-                      Actualité IR2F
+                      {n.categorieLabel}
                     </span>
                     <span
                       style={{
@@ -233,7 +250,7 @@ export default async function HomePage() {
                       {n.titre}
                     </span>
                   </div>
-                </div>
+                </HoverLink>
               ))}
             </div>
 
@@ -242,21 +259,24 @@ export default async function HomePage() {
                 <h3 style={{ fontFamily: fontHeading, fontSize: 19, fontWeight: 800, color: colors.navy, margin: "0 0 16px" }}>
                   Fil d&apos;infos
                 </h3>
-                {newsFeed.map((f, i) => (
-                  <div
+                {newsFeed.map((f) => (
+                  <HoverLink
                     key={f.id}
+                    href={`/actualites/${f.slug}`}
                     style={{
                       display: "flex",
                       alignItems: "flex-start",
                       gap: 12,
                       padding: "14px 0",
                       borderTop: "1px solid #e4e4e4",
+                      textDecoration: "none",
                     }}
+                    hoverStyle={{ opacity: 0.75 }}
                   >
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <span style={{ fontSize: 11.5, fontWeight: 700, color: colors.navy }}>{f.date}</span>
                       <span style={{ fontSize: 11.5, fontWeight: 700, color: colors.gold, marginLeft: 6, textTransform: "uppercase" }}>
-                        Actualité
+                        {f.categorieLabel}
                       </span>
                       <span style={{ display: "block", fontSize: 13.5, fontWeight: 700, color: colors.text, lineHeight: 1.35, marginTop: 4 }}>
                         {f.titre}
@@ -268,11 +288,17 @@ export default async function HomePage() {
                         height: 56,
                         borderRadius: 6,
                         flexShrink: 0,
-                        background: NEWS_CARD_STYLES[i % NEWS_CARD_STYLES.length],
+                        backgroundImage: f.image ? `url('${f.image}')` : undefined,
+                        backgroundColor: f.image ? undefined : colors.navy,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
                       }}
                     />
-                  </div>
+                  </HoverLink>
                 ))}
+                <div style={{ marginTop: 14 }}>
+                  <VoirToutesLesActualites />
+                </div>
               </div>
             )}
           </div>

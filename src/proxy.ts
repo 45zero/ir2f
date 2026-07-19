@@ -8,7 +8,8 @@ export default auth((req) => {
     req.nextUrl.pathname === "/" ||
     req.nextUrl.pathname.startsWith("/formations") ||
     req.nextUrl.pathname.startsWith("/emploi") ||
-    req.nextUrl.pathname.startsWith("/contact")
+    req.nextUrl.pathname.startsWith("/contact") ||
+    req.nextUrl.pathname.startsWith("/actualites")
 
   if (!isLoggedIn && !isLoginPage && !isPublicPage) {
     return NextResponse.redirect(new URL("/login", req.url))

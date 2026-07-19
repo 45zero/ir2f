@@ -356,13 +356,16 @@ model CovoituragePassager {
 // ─── ARTICLES / SITE PUBLIC ──────────────────────────
 
 model Article {
-  id        String   @id @default(uuid())
+  id        String              @id @default(uuid())
   titre     String
+  slug      String              @unique
   contenu   String
-  publie    Boolean  @default(false)
+  image     String?
+  categorie CategorieFormation?
+  publie    Boolean             @default(false)
   auteurId  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
 
   auteur User @relation(fields: [auteurId], references: [id])
 

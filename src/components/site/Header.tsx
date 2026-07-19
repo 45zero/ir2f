@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Hoverable } from "@/components/ui/Hoverable"
@@ -39,6 +39,19 @@ function initialsOf(name: string) {
 export function Header({ user }: { user: HeaderUser }) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  const isHome = pathname === "/"
+
+  useEffect(() => {
+    if (!isHome) return
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [isHome])
+
+  const overlay = isHome && !scrolled
 
   return (
     <header
@@ -53,8 +66,9 @@ export function Header({ user }: { user: HeaderUser }) {
         justifyContent: "space-between",
         padding: "0 clamp(16px,4vw,40px)",
         zIndex: 1000,
-        boxShadow: "0 1px 0 rgba(26,58,107,0.1)",
-        background: colors.navy,
+        boxShadow: overlay ? "none" : "0 1px 0 rgba(26,58,107,0.1)",
+        background: overlay ? "transparent" : colors.navy,
+        transition: "background-color 0.25s ease, box-shadow 0.25s ease",
       }}
     >
       <Link
@@ -225,17 +239,28 @@ export function Header({ user }: { user: HeaderUser }) {
           <Hoverable
             as={Link}
             href="/login"
+            aria-label="Connexion"
             style={{
-              fontSize: 14,
-              fontWeight: 600,
+              background: "transparent",
               color: "#ffffff",
+              border: "1.5px solid rgba(255,255,255,0.5)",
+              padding: "9px 14px",
+              borderRadius: 20,
               cursor: "pointer",
               textDecoration: "none",
-              letterSpacing: 0.2,
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
             }}
-            hoverStyle={{ color: colors.red }}
+            hoverStyle={{ borderColor: "#ffffff" }}
           >
-            Connexion
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" />
+            </svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
           </Hoverable>
         )}
 

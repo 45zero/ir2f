@@ -272,7 +272,10 @@ exports.Prisma.CovoituragePassagerScalarFieldEnum = {
 exports.Prisma.ArticleScalarFieldEnum = {
   id: 'id',
   titre: 'titre',
+  slug: 'slug',
   contenu: 'contenu',
+  image: 'image',
+  categorie: 'categorie',
   publie: 'publie',
   auteurId: 'auteurId',
   createdAt: 'createdAt',

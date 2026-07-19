@@ -4,13 +4,28 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
-import { str } from "@/lib/actions/form-utils"
+import { str, optionalStr } from "@/lib/actions/form-utils"
+import type { CategorieFormation } from "@/generated/prisma"
 
 export type ArticleActionState = { error: string | null }
 
-function revalidateArticles() {
+function revalidateArticles(slug?: string, previousSlug?: string) {
   revalidatePath("/admin/articles")
-  revalidatePath("/articles")
+  revalidatePath("/")
+  revalidatePath("/actualites")
+  if (slug) revalidatePath(`/actualites/${slug}`)
+  if (previousSlug && previousSlug !== slug) revalidatePath(`/actualites/${previousSlug}`)
+}
+
+function buildArticleData(formData: FormData) {
+  return {
+    titre: str(formData, "titre"),
+    slug: str(formData, "slug"),
+    contenu: str(formData, "contenu"),
+    image: optionalStr(formData, "image"),
+    categorie: optionalStr(formData, "categorie") as CategorieFormation | null,
+    publie: formData.get("publie") === "on",
+  }
 }
 
 export async function createArticle(
@@ -19,36 +34,32 @@ export async function createArticle(
 ): Promise<ArticleActionState> {
   const session = await requireAdmin()
 
-  const titre = str(formData, "titre")
-  const contenu = str(formData, "contenu")
-  const publie = formData.get("publie") === "on"
-
-  if (!titre || !contenu) {
-    return { error: "Le titre et le contenu sont obligatoires." }
+  const data = buildArticleData(formData)
+  if (!data.titre || !data.slug || !data.contenu) {
+    return { error: "Le titre, le slug et le contenu sont obligatoires." }
   }
 
-  await prisma.article.create({
-    data: { titre, contenu, publie, auteurId: session!.user.id },
+  const article = await prisma.article.create({
+    data: { ...data, auteurId: session!.user.id },
   })
 
-  revalidateArticles()
+  revalidateArticles(article.slug)
   redirect("/admin/articles")
 }
 
 export async function updateArticle(id: string, formData: FormData): Promise<ArticleActionState> {
   await requireAdmin()
 
-  const titre = str(formData, "titre")
-  const contenu = str(formData, "contenu")
-  const publie = formData.get("publie") === "on"
+  const existing = await prisma.article.findUnique({ where: { id }, select: { slug: true } })
 
-  if (!titre || !contenu) {
-    return { error: "Le titre et le contenu sont obligatoires." }
+  const data = buildArticleData(formData)
+  if (!data.titre || !data.slug || !data.contenu) {
+    return { error: "Le titre, le slug et le contenu sont obligatoires." }
   }
 
-  await prisma.article.update({ where: { id }, data: { titre, contenu, publie } })
+  const article = await prisma.article.update({ where: { id }, data })
 
-  revalidateArticles()
+  revalidateArticles(article.slug, existing?.slug)
   redirect("/admin/articles")
 }
 
