@@ -39,3 +39,20 @@ export async function getStatsCles(): Promise<StatCleData[]> {
   })
   return stats.map((s) => ({ id: s.id, valeur: s.valeur, label: s.label }))
 }
+
+export type ArticleCardData = {
+  id: string
+  titre: string
+  date: string
+}
+
+export async function getRecentArticles(limit = 9): Promise<ArticleCardData[]> {
+  const articles = await prisma.article.findMany({
+    where: { publie: true },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+    select: { id: true, titre: true, createdAt: true },
+  })
+  const formatter = new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "short" })
+  return articles.map((a) => ({ id: a.id, titre: a.titre, date: formatter.format(a.createdAt) }))
+}

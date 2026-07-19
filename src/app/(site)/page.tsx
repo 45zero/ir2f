@@ -1,10 +1,17 @@
 import { getPublishedFormations } from "@/lib/formations"
-import { getHeroSlides, getStatsCles } from "@/lib/home"
+import { getHeroSlides, getStatsCles, getRecentArticles } from "@/lib/home"
 import { HeroCarousel } from "@/components/site/HeroCarousel"
 import { HomeSearch } from "@/components/site/HomeSearch"
 import { ContactTeaser } from "@/components/site/ContactTeaser"
 import { HoverLink } from "@/components/ui/HoverLink"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
+
+const NEWS_CARD_STYLES = [
+  `linear-gradient(135deg, ${colors.navy}, #234a86)`,
+  `linear-gradient(135deg, #7a6423, ${colors.gold})`,
+  `linear-gradient(135deg, ${colors.navyDark}, ${colors.navy})`,
+  `linear-gradient(135deg, ${colors.gold}, #a67c27)`,
+]
 
 const EMPLOI_CARDS = [
   {
@@ -40,14 +47,20 @@ const EMPLOI_CARDS = [
 ]
 
 export default async function HomePage() {
-  const [formations, heroSlides, stats] = await Promise.all([
+  const [formations, heroSlides, stats, articles] = await Promise.all([
     getPublishedFormations(),
     getHeroSlides(),
     getStatsCles(),
+    getRecentArticles(),
   ])
+
+  const newsGrid = articles.slice(0, 4)
+  const newsFeed = articles.slice(4, 9)
 
   return (
     <main>
+      <HeroCarousel slides={heroSlides} />
+
       <section
         style={{
           padding: "clamp(24px,3vw,36px) clamp(20px,5vw,60px) 28px",
@@ -74,7 +87,197 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <HeroCarousel slides={heroSlides} />
+      <section style={{ background: colors.navy, padding: "18px clamp(20px,5vw,60px)" }}>
+        <div
+          style={{
+            maxWidth: 1160,
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 16,
+          }}
+        >
+          <span
+            style={{
+              color: "#ffffff",
+              fontFamily: fontHeading,
+              fontSize: "clamp(18px,2.4vw,26px)",
+              fontWeight: 800,
+              letterSpacing: 0.3,
+              textTransform: "uppercase",
+            }}
+          >
+            Je souhaite être accompagné sur l&apos;emploi
+          </span>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <HoverLink
+              href="#contact"
+              style={{
+                background: colors.red,
+                color: "#fff",
+                border: "none",
+                padding: "12px 22px",
+                borderRadius: 24,
+                fontSize: 13,
+                fontWeight: 700,
+                fontFamily: fontBody,
+                cursor: "pointer",
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+              }}
+              hoverStyle={{ background: colors.redDark }}
+            >
+              Je donne mes infos
+            </HoverLink>
+            <HoverLink
+              href="/emploi"
+              style={{
+                background: "transparent",
+                color: "#fff",
+                border: "1.5px solid rgba(255,255,255,0.5)",
+                padding: "12px 22px",
+                borderRadius: 24,
+                fontSize: 13,
+                fontWeight: 700,
+                fontFamily: fontBody,
+                cursor: "pointer",
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+              }}
+              hoverStyle={{ borderColor: "#fff" }}
+            >
+              En savoir plus
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </HoverLink>
+          </div>
+        </div>
+      </section>
+
+      {newsGrid.length > 0 && (
+        <section style={{ maxWidth: 1160, margin: "0 auto", padding: "44px 20px 56px" }}>
+          <div style={{ marginBottom: 26 }}>
+            <h2
+              style={{
+                fontFamily: fontHeading,
+                fontSize: "clamp(24px,3vw,34px)",
+                fontWeight: 800,
+                margin: 0,
+                color: colors.navy,
+              }}
+            >
+              Toutes les <span style={{ color: colors.gold }}>actualités</span>
+            </h2>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: newsFeed.length > 0 ? "2fr 1fr" : "1fr",
+              gap: 24,
+              alignItems: "start",
+            }}
+          >
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 16 }}>
+              {newsGrid.map((n, i) => (
+                <div
+                  key={n.id}
+                  style={{
+                    borderRadius: 8,
+                    overflow: "hidden",
+                    position: "relative",
+                    minHeight: 230,
+                    background: NEWS_CARD_STYLES[i % NEWS_CARD_STYLES.length],
+                    display: "flex",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "linear-gradient(0deg,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.05) 55%)",
+                    }}
+                  />
+                  <div style={{ position: "relative", padding: 18, display: "flex", flexDirection: "column", gap: 10, width: "100%" }}>
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        background: colors.navy,
+                        color: "#fff",
+                        fontSize: 11,
+                        fontWeight: 700,
+                        padding: "5px 11px",
+                        borderRadius: 3,
+                        width: "fit-content",
+                      }}
+                    >
+                      Actualité IR2F
+                    </span>
+                    <span
+                      style={{
+                        color: "#fff",
+                        fontSize: 17,
+                        fontWeight: 800,
+                        lineHeight: 1.25,
+                        fontFamily: fontHeading,
+                      }}
+                    >
+                      {n.titre}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {newsFeed.length > 0 && (
+              <div style={{ background: colors.bg, borderRadius: 8, padding: 22 }}>
+                <h3 style={{ fontFamily: fontHeading, fontSize: 19, fontWeight: 800, color: colors.navy, margin: "0 0 16px" }}>
+                  Fil d&apos;infos
+                </h3>
+                {newsFeed.map((f, i) => (
+                  <div
+                    key={f.id}
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: 12,
+                      padding: "14px 0",
+                      borderTop: "1px solid #e4e4e4",
+                    }}
+                  >
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <span style={{ fontSize: 11.5, fontWeight: 700, color: colors.navy }}>{f.date}</span>
+                      <span style={{ fontSize: 11.5, fontWeight: 700, color: colors.gold, marginLeft: 6, textTransform: "uppercase" }}>
+                        Actualité
+                      </span>
+                      <span style={{ display: "block", fontSize: 13.5, fontWeight: 700, color: colors.text, lineHeight: 1.35, marginTop: 4 }}>
+                        {f.titre}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        width: 56,
+                        height: 56,
+                        borderRadius: 6,
+                        flexShrink: 0,
+                        background: NEWS_CARD_STYLES[i % NEWS_CARD_STYLES.length],
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       <section style={{ background: colors.navy, padding: "64px clamp(20px,5vw,60px)" }}>
         <div style={{ maxWidth: 1160, margin: "0 auto" }}>
@@ -139,7 +342,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <ContactTeaser formations={formations} />
+      <div id="contact">
+        <ContactTeaser formations={formations} />
+      </div>
 
       {stats.length > 0 && (
         <section style={{ maxWidth: 1160, margin: "0 auto", padding: "0 20px 72px" }}>
