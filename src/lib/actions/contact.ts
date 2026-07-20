@@ -7,6 +7,7 @@ import { str, optionalStr } from "@/lib/actions/form-utils"
 import { sendEmail } from "@/lib/emails/send"
 import { NouvelleDemandeAdminEmail } from "@/lib/emails/NouvelleDemandeAdminEmail"
 import { getAdminNotificationEmails } from "@/lib/emails/admin-recipients"
+import { getContactTheme } from "@/lib/contact-themes"
 
 export type ContactState = { status: "idle" | "success" | "error"; message?: string }
 
@@ -15,6 +16,7 @@ export async function submitContactRequest(
   formData: FormData
 ): Promise<ContactState> {
   const type = str(formData, "type")
+  const thematiqueValue = str(formData, "thematique")
   const nom = str(formData, "nom")
   const prenom = str(formData, "prenom")
   const email = str(formData, "email")
@@ -23,11 +25,17 @@ export async function submitContactRequest(
   const formationId = optionalStr(formData, "formationId")
   const messageRaw = optionalStr(formData, "message")
 
+  const theme = getContactTheme(thematiqueValue)
+
+  if (!theme) {
+    return { status: "error", message: "Merci de sélectionner une thématique." }
+  }
+
   if (!nom || !prenom || !email) {
     return { status: "error", message: "Merci de renseigner votre nom, prénom et email." }
   }
 
-  const parts: string[] = []
+  const parts: string[] = [`Thématique : ${theme.label}`]
   if (type === "club" && clubNom) parts.push(`Club : ${clubNom}`)
   if (messageRaw) parts.push(messageRaw)
 
@@ -53,10 +61,11 @@ export async function submitContactRequest(
   revalidatePath("/admin/inscriptions")
 
   const adminEmails = await getAdminNotificationEmails()
-  if (adminEmails.length > 0) {
+  const recipients = Array.from(new Set([...adminEmails, theme.email]))
+  if (recipients.length > 0) {
     await sendEmail({
-      to: adminEmails,
-      subject: "Nouvelle demande d'inscription IR2F",
+      to: recipients,
+      subject: `Nouvelle demande d'inscription IR2F — ${theme.label}`,
       react: NouvelleDemandeAdminEmail({ nom, prenom, email, formationTitre: formation?.titre, message }),
     })
   }
