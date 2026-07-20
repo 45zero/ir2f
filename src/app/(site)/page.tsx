@@ -285,7 +285,7 @@ export default async function HomePage() {
                     hoverStyle={{ opacity: 0.75 }}
                   >
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <span style={{ fontSize: 11.5, fontWeight: 700, color: colors.navy }}>{f.date}</span>
+                      <span style={{ fontSize: 11.5, fontWeight: 700, color: colors.navy }}>{f.feedDate}</span>
                       <span style={{ fontSize: 11.5, fontWeight: 700, color: colors.gold, marginLeft: 6, textTransform: "uppercase" }}>
                         {f.categorieLabel}
                       </span>

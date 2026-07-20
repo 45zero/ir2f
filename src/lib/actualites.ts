@@ -9,9 +9,21 @@ export type ArticleListItem = {
   image: string | null
   categorieLabel: string
   date: string
+  feedDate: string
 }
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "short", year: "numeric" })
+const timeFormatter = new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit" })
+const shortDateFormatter = new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "2-digit" })
+
+function isSameDay(a: Date, b: Date) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
+}
+
+// Repère de fraîcheur façon fil d'actu : heure pour aujourd'hui, jour/mois sinon.
+function formatFeedDate(createdAt: Date): string {
+  return isSameDay(createdAt, new Date()) ? timeFormatter.format(createdAt) : shortDateFormatter.format(createdAt)
+}
 
 function toListItem(a: {
   id: string
@@ -28,6 +40,7 @@ function toListItem(a: {
     image: a.image,
     categorieLabel: a.categorie ? CATEGORIE_LABELS[a.categorie] : "IR2F",
     date: dateFormatter.format(a.createdAt),
+    feedDate: formatFeedDate(a.createdAt),
   }
 }
 

@@ -20,7 +20,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <h1 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 26, fontWeight: 800, margin: 0 }}>
-        Modifier l&apos;article
+        Modifier l&apos;actualité
       </h1>
       <ArticleForm id={id} initial={initial} submitLabel="Enregistrer les modifications" />
     </div>

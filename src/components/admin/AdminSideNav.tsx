@@ -10,7 +10,7 @@ const ITEMS = [
   { href: "/admin/inscriptions", label: "Inscriptions", enabled: true },
   { href: "/admin/users", label: "Utilisateurs", enabled: true },
   { href: "/admin/emploi", label: "Emploi", enabled: true },
-  { href: "/admin/articles", label: "Articles", enabled: true },
+  { href: "/admin/articles", label: "Actualités", enabled: true },
 ]
 
 export function AdminSideNav() {

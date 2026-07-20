@@ -19,10 +19,10 @@ export default async function AdminArticlesPage() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
         <div>
           <h1 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 26, fontWeight: 800, margin: 0 }}>
-            Articles
+            Actualités
           </h1>
           <p style={{ color: colors.textMuted, fontSize: 13, margin: "4px 0 0" }}>
-            {rows.length} article{rows.length > 1 ? "s" : ""} au total.
+            {rows.length} actualité{rows.length > 1 ? "s" : ""} au total.
           </p>
         </div>
         <Link
@@ -39,7 +39,7 @@ export default async function AdminArticlesPage() {
             textDecoration: "none",
           }}
         >
-          + Nouvel article
+          + Nouvelle actualité
         </Link>
       </div>
 

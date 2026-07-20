@@ -67,7 +67,7 @@ export function ArticlesTable({ articles }: { articles: AdminArticleRow[] }) {
         </div>
 
         {filtered.length === 0 && (
-          <div style={{ padding: 24, color: colors.textLight, fontSize: 13 }}>Aucun article.</div>
+          <div style={{ padding: 24, color: colors.textLight, fontSize: 13 }}>Aucune actualité.</div>
         )}
 
         {filtered.map((a) => (
