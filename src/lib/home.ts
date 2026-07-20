@@ -84,7 +84,7 @@ export type AccueilContenuData = {
 }
 
 const CONTENU_DEFAUT: AccueilContenuData = {
-  bandeauEmploiTitre: "Je souhaite être accompagné sur l'emploi",
+  bandeauEmploiTitre: "Je souhaite créer un emploi dans mon club",
   accompagnementEyebrow: "IR2F vous accompagne",
   accompagnementTitre: "Accompagnement Emploi",
   contactTitre: "Je souhaite être contacté",
