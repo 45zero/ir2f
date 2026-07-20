@@ -4,16 +4,18 @@ import { useMemo, useState, type CSSProperties } from "react"
 import Link from "next/link"
 import { Hoverable } from "@/components/ui/Hoverable"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import { CATEGORIE_LABELS, type CatalogueFormation } from "@/lib/formations-shared"
+import { CATEGORIE_LABELS, FILIERE_LABELS, type CatalogueFormation } from "@/lib/formations-shared"
 import type { CategorieFormation, GroupeEquivalence, VarianteNode } from "@/generated/prisma"
 
 type CategoryInfo = { titre: string; corps: string } | null
 
-const TILES: { id: CategorieFormation; label: string; image: string | null }[] = [
-  { id: "EDUCATEUR", label: "Éducateur", image: "https://images.unsplash.com/photo-1544717684-1243da23b545?w=800&q=80&auto=format&fit=crop" },
-  { id: "ARBITRAGE", label: "Arbitres", image: "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=800&q=80&auto=format&fit=crop" },
-  { id: "TERRAIN", label: "Tout Terrain", image: null },
-  { id: "DEV", label: "Chargé de développement", image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&q=80&auto=format&fit=crop" },
+type ExpandedTab = "info" | "parcours" | "club" | "eduPresentation" | "eduPro" | "eduBenevole" | "eduEquivalences"
+
+const TILES: { id: CategorieFormation; label: string }[] = [
+  { id: "EDUCATEUR", label: "Éducateurs" },
+  { id: "ARBITRAGE", label: "Arbitres" },
+  { id: "TERRAIN", label: "Tout Terrain" },
+  { id: "DEV", label: "Chargé de Développement de Structures Sportives et Associatives (CDSSA)" },
 ]
 
 const SIDEBAR_CATEGORIES: CategorieFormation[] = ["EDUCATEUR", "ARBITRAGE", "TERRAIN", "CLUB", "DEV"]
@@ -123,10 +125,9 @@ export function FormationsCatalogue({
   initialCategory: CategorieFormation
 }) {
   const [sidebarCategory, setSidebarCategory] = useState<CategorieFormation>(initialCategory)
-  const [expandedCategory, setExpandedCategory] = useState<CategorieFormation | null>(null)
-  const [expandedTab, setExpandedTab] = useState<"info" | "parcours" | "equivalences">("info")
+  const [expandedCategory, setExpandedCategory] = useState<CategorieFormation | null>(initialCategory)
+  const [expandedTab, setExpandedTab] = useState<ExpandedTab>(initialCategory === "EDUCATEUR" ? "eduPresentation" : "info")
   const [eduTrackFilter, setEduTrackFilter] = useState<"pro" | "benevole" | null>(null)
-  const [clubPanelOpen, setClubPanelOpen] = useState(false)
   const [popupFormationId, setPopupFormationId] = useState<string | null>(null)
 
   const byCategory = useMemo(() => {
@@ -173,108 +174,12 @@ export function FormationsCatalogue({
         <span style={{ color: colors.red, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase" }}>
           Catalogue
         </span>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16, margin: "6px 0 28px" }}>
+        <div style={{ margin: "6px 0 28px" }}>
           <h1 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, margin: 0 }}>
           NOTRE OFFRE DE FORMATION
           </h1>
-          <Hoverable
-            as="button"
-            onClick={() => setClubPanelOpen((v) => !v)}
-            style={{
-              background: "#f5f7fb",
-              color: colors.navy,
-              border: `1.5px solid ${colors.gold}`,
-              padding: "11px 20px",
-              borderRadius: 24,
-              fontSize: 12,
-              fontWeight: 700,
-              fontFamily: fontBody,
-              cursor: "pointer",
-              letterSpacing: 0.3,
-              whiteSpace: "nowrap",
-            }}
-            hoverStyle={{ background: "#eef2f9" }}
-          >
-            Accueillir une formation dans mon club
-          </Hoverable>
         </div>
       </section>
-
-      {clubPanelOpen && (
-        <section style={{ maxWidth: 1160, margin: "0 auto", padding: "0 20px 32px" }}>
-          <div
-            style={{
-              background: "#f5f7fb",
-              borderLeft: `4px solid ${colors.gold}`,
-              borderRadius: 8,
-              padding: "clamp(20px,3vw,32px)",
-              position: "relative",
-              animation: "ir2fFadeIn 0.3s ease",
-              display: "flex",
-              flexDirection: "column",
-              gap: 16,
-            }}
-          >
-            <button
-              onClick={() => setClubPanelOpen(false)}
-              aria-label="Fermer"
-              style={{
-                position: "absolute",
-                top: 16,
-                right: 16,
-                width: 30,
-                height: 30,
-                borderRadius: "50%",
-                border: "none",
-                background: "#fff",
-                color: colors.navy,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 2px 6px rgba(20,33,61,0.12)",
-              }}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-            <h3 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: "clamp(18px,2.2vw,24px)", fontWeight: 800, margin: 0, lineHeight: 1.2, maxWidth: 820, paddingRight: 40 }}>
-              ACCUEILLIR UNE FORMATION AU SEIN DE MON CLUB
-            </h3>
-            <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
-              L&apos;Institut Régional de Formation du Football de la Ligue du Grand Est souhaite recueillir les besoins en
-              formations « Tout Terrain » (dirigeants, bénévoles, éducateurs, arbitres, parents) des clubs sur le territoire afin
-              de proposer une offre adaptée à vos besoins.
-            </p>
-            <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
-              Veuillez remplir le formulaire ci-dessous pour recevoir une formation au sein des locaux de votre club et former
-              vos bénévoles !
-            </p>
-            <Hoverable
-              as={Link}
-              href="/contact"
-              style={{
-                alignSelf: "flex-start",
-                background: colors.red,
-                color: "#fff",
-                border: "none",
-                padding: "13px 26px",
-                borderRadius: 4,
-                fontSize: 14,
-                fontWeight: 700,
-                fontFamily: fontBody,
-                cursor: "pointer",
-                textDecoration: "none",
-              }}
-              hoverStyle={{ background: colors.redDark }}
-            >
-              Remplir le formulaire de contact
-            </Hoverable>
-          </div>
-        </section>
-      )}
 
       <section style={{ maxWidth: 1160, margin: "0 auto", padding: "0 20px 40px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 14 }}>
@@ -285,31 +190,43 @@ export function FormationsCatalogue({
               style={{
                 cursor: "pointer",
                 position: "relative",
-                minHeight: 120,
+                minHeight: 150,
                 borderRadius: 8,
                 overflow: "hidden",
-                background: tile.image
-                  ? `url("${tile.image}") center / cover no-repeat`
-                  : "repeating-linear-gradient(135deg,#c9a84c,#c9a84c 12px,#b3934a 12px,#b3934a 24px)",
+                background: "repeating-linear-gradient(135deg,#c9a84c,#c9a84c 12px,#b3934a 12px,#b3934a 24px)",
                 display: "flex",
                 alignItems: "flex-end",
-                padding: 16,
-                boxShadow: sidebarCategory === tile.id ? "0 0 0 3px #c9a84c inset" : undefined,
+                padding: 18,
+                boxShadow: sidebarCategory === tile.id ? "0 0 0 3px #1a3a6b inset" : undefined,
               }}
             >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", gap: 8 }}>
+              <img
+                src="/images/logo-lgef.png"
+                alt=""
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%,-50%)",
+                  height: "60%",
+                  width: "auto",
+                  opacity: 0.16,
+                  pointerEvents: "none",
+                }}
+              />
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", gap: 8, position: "relative" }}>
                 <span
                   style={{
-                    color: tile.image ? "#fff" : colors.navy,
+                    color: colors.navy,
                     fontFamily: fontHeading,
-                    fontSize: tile.id === "DEV" ? 16 : 19,
+                    fontSize: tile.id === "DEV" ? 13 : 19,
                     fontWeight: 800,
-                    lineHeight: 1.1,
+                    lineHeight: 1.15,
                   }}
                 >
                   {tile.label}
                 </span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={tile.image ? "#fff" : colors.navy} strokeWidth="2.5" style={{ flexShrink: 0 }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2.5" style={{ flexShrink: 0 }}>
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
                 </svg>
@@ -361,19 +278,36 @@ export function FormationsCatalogue({
               </svg>
             </button>
 
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingRight: 40 }}>
-              <button style={expandedTab === "info" ? tabActive : tabBase} onClick={() => setExpandedTab("info")}>
-                Présentation
-              </button>
-              <button style={expandedTab === "parcours" ? tabActive : tabBase} onClick={() => setExpandedTab("parcours")}>
-                Les différents parcours
-              </button>
-              {expandedCategory === "EDUCATEUR" && (
-                <button style={expandedTab === "equivalences" ? tabActive : tabBase} onClick={() => setExpandedTab("equivalences")}>
+            {expandedCategory === "EDUCATEUR" ? (
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingRight: 40 }}>
+                <button style={expandedTab === "eduPresentation" ? tabActive : tabBase} onClick={() => setExpandedTab("eduPresentation")}>
+                  Présentation et parcours
+                </button>
+                <button style={expandedTab === "eduPro" ? tabActive : tabBase} onClick={() => setExpandedTab("eduPro")}>
+                  Formations professionnelles
+                </button>
+                <button style={expandedTab === "eduBenevole" ? tabActive : tabBase} onClick={() => setExpandedTab("eduBenevole")}>
+                  Formations bénévoles
+                </button>
+                <button style={expandedTab === "eduEquivalences" ? tabActive : tabBase} onClick={() => setExpandedTab("eduEquivalences")}>
                   Équivalences et passerelles
                 </button>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingRight: 40 }}>
+                <button style={expandedTab === "info" ? tabActive : tabBase} onClick={() => setExpandedTab("info")}>
+                  Présentation
+                </button>
+                <button style={expandedTab === "parcours" ? tabActive : tabBase} onClick={() => setExpandedTab("parcours")}>
+                  Les différents parcours
+                </button>
+                {expandedCategory === "TERRAIN" && (
+                  <button style={expandedTab === "club" ? tabActive : tabBase} onClick={() => setExpandedTab("club")}>
+                    Accueillir une formation dans mon club
+                  </button>
+                )}
+              </div>
+            )}
 
             {expandedTab === "info" && info && (
               <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
@@ -445,200 +379,293 @@ export function FormationsCatalogue({
               </div>
             )}
 
-            {expandedTab === "parcours" && expandedCategory === "EDUCATEUR" && (
+            {expandedTab === "club" && expandedCategory === "TERRAIN" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                
+                <h3 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: "clamp(18px,2.2vw,24px)", fontWeight: 800, margin: 0, lineHeight: 1.2, maxWidth: 820 }}>
+                  ACCUEILLIR UNE FORMATION AU SEIN DE MON CLUB
+                </h3>
+                <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
+                  L&apos;Institut Régional de Formation du Football de la Ligue du Grand Est souhaite recueillir les besoins en
+                  formations « Tout Terrain » (dirigeants, bénévoles, éducateurs, arbitres, parents) des clubs sur le territoire afin
+                  de proposer une offre adaptée à vos besoins.
+                </p>
+                <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
+                  Veuillez remplir le formulaire ci-dessous pour recevoir une formation au sein des locaux de votre club et former
+                  vos bénévoles !
+                </p>
+                <Hoverable
+                  as={Link}
+                  href="/contact"
+                  style={{
+                    alignSelf: "flex-start",
+                    background: colors.red,
+                    color: "#fff",
+                    border: "none",
+                    padding: "13px 26px",
+                    borderRadius: 4,
+                    fontSize: 14,
+                    fontWeight: 700,
+                    fontFamily: fontBody,
+                    cursor: "pointer",
+                    textDecoration: "none",
+                  }}
+                  hoverStyle={{ background: colors.redDark }}
+                >
+                  Remplir le formulaire de contact
+                </Hoverable>
+              </div>
+            )}
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(560px,1fr))", gap: 20 }}>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                    <div
-                      style={{
-                        background: colors.red,
-                        color: "#fff",
-                        fontFamily: fontHeading,
-                        fontSize: 16,
-                        fontWeight: 800,
-                        letterSpacing: 0.5,
-                        textTransform: "uppercase",
-                        padding: "12px 16px",
-                        borderRadius: 6,
-                        textAlign: "center",
-                      }}
-                    >
-                      Parcours bénévole
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, alignItems: "start" }}>
-                      {BENEVOLE_COLUMNS.map((col) => (
-                        <div key={col.groupe} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                          <div
+            {expandedTab === "eduPresentation" && expandedCategory === "EDUCATEUR" && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 820 }}>
+                  <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0 }}>
+                    La filière de formation des éducateurs de la FFF s&apos;adapte à vos besoins en proposant deux parcours :
+                    bénévole ou professionnel. Selon votre projet, si vous souhaitez perfectionner vos compétences
+                    d&apos;éducateur(rice) sans en faire votre métier, choisissez le parcours bénévole. Plusieurs types de
+                    formations existent, dont la durée peut varier de 8h à 161h permettant d&apos;encadrer différents publics
+                    (enfants, jeunes et seniors) et toutes les pratiques comme le Futsal, Futnet, Beach soccer,
+                    l&apos;Handi-foot …
+                  </p>
+                  <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0 }}>
+                    En revanche, si vous souhaitez devenir éducateur(rice) ou entraîneur(e) et en faire votre métier,
+                    choisissez le parcours professionnel en commençant par le Brevet de moniteur de football (BMF) ou le
+                    Brevet d&apos;entraîneur de football (BEF) si vous justifiez des prérequis spécifiques. Le BMF est
+                    accessible sous différentes formes, en apprentissage, par la formation continue.
+                  </p>
+                </div>
+
+                <div style={{ overflowX: "auto" }}>
+                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                    <thead>
+                      <tr>
+                        {["Formation", "Filière", "Durée", "Format", "CPF"].map((h) => (
+                          <th
+                            key={h}
                             style={{
+                              textAlign: "left",
+                              padding: "10px 12px",
                               background: colors.navy,
                               color: "#fff",
                               fontSize: 11,
                               fontWeight: 700,
-                              textAlign: "center",
-                              padding: "8px 6px",
-                              borderRadius: 5,
-                              letterSpacing: 0.3,
+                              textTransform: "uppercase",
+                              letterSpacing: 0.4,
                             }}
                           >
-                            {col.label}
-                          </div>
-                          {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
-                            <Hoverable
-                              as={Link}
-                              key={f.id}
-                              href={`/formations/${f.slug}`}
-                              style={nodeChipStyle(f)}
-                              hoverStyle={{ opacity: 0.85 }}
-                            >
-                              <NodeBadge f={f} />
-                              <span>{f.titre}</span>
-                            </Hoverable>
-                          ))}
-                        </div>
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {(byCategory.get("EDUCATEUR") ?? []).map((f, i) => (
+                        <tr key={f.id} style={{ background: i % 2 === 0 ? "#fff" : "#f5f7fb" }}>
+                          <td style={{ padding: "9px 12px", fontWeight: 600, color: colors.navy }}>{f.titre}</td>
+                          <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.filiere ? FILIERE_LABELS[f.filiere] : "—"}</td>
+                          <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.dureeLabel}</td>
+                          <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.modeLabel}</td>
+                          <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.cpfEligible ? "Éligible" : "—"}</td>
+                        </tr>
                       ))}
-                    </div>
-                    <div
-                      style={{
-                        background: colors.navy,
-                        color: "#fff",
-                        fontSize: 11,
-                        fontWeight: 700,
-                        textAlign: "center",
-                        padding: "8px 6px",
-                        borderRadius: 5,
-                        letterSpacing: 0.3,
-                        marginTop: 4,
-                      }}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {expandedTab === "eduPro" && expandedCategory === "EDUCATEUR" && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 560 }}>
+                <div
+                  style={{
+                    background: colors.gold,
+                    color: colors.navy,
+                    fontFamily: fontHeading,
+                    fontSize: 16,
+                    fontWeight: 800,
+                    letterSpacing: 0.5,
+                    textTransform: "uppercase",
+                    padding: "12px 16px",
+                    borderRadius: 6,
+                    textAlign: "center",
+                  }}
+                >
+                  Formations professionnelles (BEF, BMF, FPC)
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                  {(equivalenceByGroup.get("PRO_TOP") ?? []).map((f) => (
+                    <Hoverable
+                      as={Link}
+                      key={f.id}
+                      href={`/formations/${f.slug}`}
+                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                      hoverStyle={{ opacity: 0.85 }}
                     >
-                      CERTIFICATIONS
-                    </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
-                      {(equivalenceByGroup.get("CERTIF") ?? []).map((f) => (
+                      <NodeBadge f={f} />
+                      <span>{f.shortNode}</span>
+                    </Hoverable>
+                  ))}
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
+                  {(equivalenceByGroup.get("PRO_MID") ?? []).map((f) => (
+                    <Hoverable
+                      as={Link}
+                      key={f.id}
+                      href={`/formations/${f.slug}`}
+                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                      hoverStyle={{ opacity: 0.85 }}
+                    >
+                      {f.titre}
+                    </Hoverable>
+                  ))}
+                </div>
+
+                {(equivalenceByGroup.get("PRO_BEF") ?? []).map((f) => (
+                  <Hoverable
+                    as={Link}
+                    key={f.id}
+                    href={`/formations/${f.slug}`}
+                    style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
+                    hoverStyle={{ opacity: 0.85 }}
+                  >
+                    <NodeBadge f={f} />
+                    <span>{f.shortNode} — {f.titre}</span>
+                  </Hoverable>
+                ))}
+
+                {(equivalenceByGroup.get("PRO_BMF") ?? []).map((f) => (
+                  <Hoverable
+                    as={Link}
+                    key={f.id}
+                    href={`/formations/${f.slug}`}
+                    style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
+                    hoverStyle={{ opacity: 0.85 }}
+                  >
+                    <NodeBadge f={f} />
+                    <span>{f.shortNode} — {f.titre}</span>
+                  </Hoverable>
+                ))}
+
+                {(equivalenceByGroup.get("PRO_MID2") ?? []).map((f) => (
+                  <Hoverable
+                    as={Link}
+                    key={f.id}
+                    href={`/formations/${f.slug}`}
+                    style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                    hoverStyle={{ opacity: 0.85 }}
+                  >
+                    {f.titre}
+                  </Hoverable>
+                ))}
+
+                {(equivalenceByGroup.get("PRO_BOTTOM") ?? []).map((f) => (
+                  <Hoverable
+                    as={Link}
+                    key={f.id}
+                    href={`/formations/${f.slug}`}
+                    style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13, marginTop: 4 }}
+                    hoverStyle={{ opacity: 0.85 }}
+                  >
+                    {f.shortNode} — {f.titre}
+                  </Hoverable>
+                ))}
+              </div>
+            )}
+
+            {expandedTab === "eduBenevole" && expandedCategory === "EDUCATEUR" && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 700 }}>
+                <div
+                  style={{
+                    background: colors.red,
+                    color: "#fff",
+                    fontFamily: fontHeading,
+                    fontSize: 16,
+                    fontWeight: 800,
+                    letterSpacing: 0.5,
+                    textTransform: "uppercase",
+                    padding: "12px 16px",
+                    borderRadius: 6,
+                    textAlign: "center",
+                  }}
+                >
+                  Formations bénévoles (AF, CFI, DF, Certifications)
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, alignItems: "start" }}>
+                  {BENEVOLE_COLUMNS.map((col) => (
+                    <div key={col.groupe} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                      <div
+                        style={{
+                          background: colors.navy,
+                          color: "#fff",
+                          fontSize: 11,
+                          fontWeight: 700,
+                          textAlign: "center",
+                          padding: "8px 6px",
+                          borderRadius: 5,
+                          letterSpacing: 0.3,
+                        }}
+                      >
+                        {col.label}
+                      </div>
+                      {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
                         <Hoverable
                           as={Link}
                           key={f.id}
                           href={`/formations/${f.slug}`}
-                          style={{ ...nodeChipStyle(f), textAlign: "center", justifyContent: "center" }}
-                          hoverStyle={{ opacity: 0.85 }}
-                        >
-                          {f.titre}
-                        </Hoverable>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                    <div
-                      style={{
-                        background: colors.gold,
-                        color: colors.navy,
-                        fontFamily: fontHeading,
-                        fontSize: 16,
-                        fontWeight: 800,
-                        letterSpacing: 0.5,
-                        textTransform: "uppercase",
-                        padding: "12px 16px",
-                        borderRadius: 6,
-                        textAlign: "center",
-                      }}
-                    >
-                      Parcours professionnel
-                    </div>
-
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                      {(equivalenceByGroup.get("PRO_TOP") ?? []).map((f) => (
-                        <Hoverable
-                          as={Link}
-                          key={f.id}
-                          href={`/formations/${f.slug}`}
-                          style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                          style={nodeChipStyle(f)}
                           hoverStyle={{ opacity: 0.85 }}
                         >
                           <NodeBadge f={f} />
-                          <span>{f.shortNode}</span>
+                          <span>{f.titre}</span>
                         </Hoverable>
                       ))}
                     </div>
-
-                    <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
-                      {(equivalenceByGroup.get("PRO_MID") ?? []).map((f) => (
-                        <Hoverable
-                          as={Link}
-                          key={f.id}
-                          href={`/formations/${f.slug}`}
-                          style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
-                          hoverStyle={{ opacity: 0.85 }}
-                        >
-                          {f.titre}
-                        </Hoverable>
-                      ))}
-                    </div>
-
-                    {(equivalenceByGroup.get("PRO_BEF") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        <NodeBadge f={f} />
-                        <span>{f.shortNode} — {f.titre}</span>
-                      </Hoverable>
-                    ))}
-
-                    {(equivalenceByGroup.get("PRO_BMF") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        <NodeBadge f={f} />
-                        <span>{f.shortNode} — {f.titre}</span>
-                      </Hoverable>
-                    ))}
-
-                    {(equivalenceByGroup.get("PRO_MID2") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        {f.titre}
-                      </Hoverable>
-                    ))}
-
-                    {(equivalenceByGroup.get("PRO_BOTTOM") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13, marginTop: 4 }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        {f.shortNode} — {f.titre}
-                      </Hoverable>
-                    ))}
-                  </div>
+                  ))}
                 </div>
+                <div
+                  style={{
+                    background: colors.navy,
+                    color: "#fff",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    textAlign: "center",
+                    padding: "8px 6px",
+                    borderRadius: 5,
+                    letterSpacing: 0.3,
+                    marginTop: 4,
+                  }}
+                >
+                  CERTIFICATIONS
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+                  {(equivalenceByGroup.get("CERTIF") ?? []).map((f) => (
+                    <Hoverable
+                      as={Link}
+                      key={f.id}
+                      href={`/formations/${f.slug}`}
+                      style={{ ...nodeChipStyle(f), textAlign: "center", justifyContent: "center" }}
+                      hoverStyle={{ opacity: 0.85 }}
+                    >
+                      {f.titre}
+                    </Hoverable>
+                  ))}
+                </div>
+              </div>
+            )}
 
+            {expandedTab === "eduEquivalences" && expandedCategory === "EDUCATEUR" && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
+                  Certaines formations bénévoles permettent d&apos;obtenir des équivalences vers les diplômes fédéraux, sous
+                  conditions.
+                </p>
                 <p style={{ color: colors.red, fontSize: 12, lineHeight: 1.6, margin: 0, fontWeight: 600, maxWidth: 820 }}>
                   Attention : seules les personnes titulaires du CFF2 certifié ou du CFF3 certifié peuvent s&apos;inscrire sur
                   les journées complémentaires pour obtenir les équivalences des Diplômes Fédéraux. Les personnes titulaires de
                   CFI (même certifiés) ne sont pas éligibles aux journées complémentaires.
                 </p>
-              </div>
-            )}
-
-            {expandedTab === "equivalences" && expandedCategory === "EDUCATEUR" && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                <p style={{ color: colors.textLight, fontSize: 13, margin: 0 }}>Contenu à venir.</p>
               </div>
             )}
           </div>

@@ -63,6 +63,7 @@ const IMAGE_TARGET_BYTES = 2 * 1024 * 1024
  * Filet de sécurité côté serveur : redimensionne/compresse toute image publique avant
  * stockage, même si la compression déjà faite dans le navigateur a été contournée. Garantit
  * qu'aucune image servie publiquement ne dépasse ~2 Mo, quelle que soit la taille envoyée.
+ * Les images avec transparence (logos) restent en PNG pour ne pas perdre le fond transparent.
  */
 async function compressForStorage(bytes: ArrayBuffer, mimeType: string): Promise<{ buffer: Buffer; contentType: string; ext: string }> {
   if (mimeType === "image/svg+xml") {
@@ -70,20 +71,20 @@ async function compressForStorage(bytes: ArrayBuffer, mimeType: string): Promise
   }
 
   const input = Buffer.from(bytes)
+  const resizeOptions = { width: IMAGE_MAX_DIMENSION, height: IMAGE_MAX_DIMENSION, fit: "inside" as const, withoutEnlargement: true }
+  const metadata = await sharp(input).metadata()
+
+  if (metadata.hasAlpha) {
+    const output = await sharp(input).rotate().resize(resizeOptions).png({ compressionLevel: 9, effort: 10 }).toBuffer()
+    return { buffer: output, contentType: "image/png", ext: "png" }
+  }
+
   let quality = 85
-  let output = await sharp(input)
-    .rotate()
-    .resize({ width: IMAGE_MAX_DIMENSION, height: IMAGE_MAX_DIMENSION, fit: "inside", withoutEnlargement: true })
-    .jpeg({ quality, mozjpeg: true })
-    .toBuffer()
+  let output = await sharp(input).rotate().resize(resizeOptions).jpeg({ quality, mozjpeg: true }).toBuffer()
 
   while (output.length > IMAGE_TARGET_BYTES && quality > 35) {
     quality -= 12
-    output = await sharp(input)
-      .rotate()
-      .resize({ width: IMAGE_MAX_DIMENSION, height: IMAGE_MAX_DIMENSION, fit: "inside", withoutEnlargement: true })
-      .jpeg({ quality, mozjpeg: true })
-      .toBuffer()
+    output = await sharp(input).rotate().resize(resizeOptions).jpeg({ quality, mozjpeg: true }).toBuffer()
   }
 
   return { buffer: output, contentType: "image/jpeg", ext: "jpg" }
