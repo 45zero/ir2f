@@ -5,6 +5,7 @@ import { getMesDocuments } from "@/lib/documents"
 import { getCovoituragesDisponibles } from "@/lib/covoiturage"
 import { getInbox } from "@/lib/messages"
 import { getFormateurFormations, getFormationRosterForFormateur } from "@/lib/formateur"
+import { getAllFormationsRosterAdmin } from "@/lib/admin/roster"
 import { FormationRosterAndBroadcast, type FormateurFormationRow } from "@/components/dashboard/FormationRosterAndBroadcast"
 import {
   StagiaireFormationsManager,
@@ -25,14 +26,14 @@ export default async function DashboardFormationsPage() {
   if (!session?.user) redirect("/login")
   const { role, id } = session.user
 
-  if (role === "ADMIN") redirect("/admin/formations")
-
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <h1 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: "clamp(24px,3vw,32px)", fontWeight: 800, margin: 0 }}>
         {role === "FORMATEUR" ? "Mes formations" : "Formations"}
       </h1>
-      {role === "FORMATEUR" ? (
+      {role === "ADMIN" ? (
+        <AdminFormationsView />
+      ) : role === "FORMATEUR" ? (
         <FormateurFormationsView userId={id} />
       ) : role === "DIRECTION" ? (
         <FormationsApercu />
@@ -41,6 +42,11 @@ export default async function DashboardFormationsPage() {
       )}
     </div>
   )
+}
+
+async function AdminFormationsView() {
+  const formations = await getAllFormationsRosterAdmin()
+  return <FormationRosterAndBroadcast formations={formations} allowBroadcast={false} />
 }
 
 async function FormateurFormationsView({ userId }: { userId: string }) {

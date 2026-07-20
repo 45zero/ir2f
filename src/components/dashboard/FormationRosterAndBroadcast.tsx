@@ -4,6 +4,13 @@ import { useState } from "react"
 import { BroadcastComposerModal } from "@/components/dashboard/BroadcastComposerModal"
 import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
 import { colors, fontBody } from "@/lib/theme"
+import type { OrigineInscription } from "@/generated/prisma"
+
+const ORIGINE_LABEL: Record<OrigineInscription, string | null> = {
+  INTERNE: null,
+  FFF_STAGIAIRE: "Via FFF — stagiaire",
+  FFF_CLUB: "Via FFF — club",
+}
 
 const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" })
 
@@ -21,6 +28,9 @@ export type FormateurFormationRow = {
     id: string
     nom: string
     prenom: string
+    email: string
+    telephone: string | null
+    origine: OrigineInscription
     documents: { id: string; nom: string; signed: boolean; signedAt: string | null; viewUrl: string | null; downloadUrl: string | null }[]
   }[]
 }
@@ -29,7 +39,13 @@ function initialsOf(prenom: string, nom: string) {
   return `${prenom[0] ?? ""}${nom[0] ?? ""}`.toUpperCase()
 }
 
-export function FormationRosterAndBroadcast({ formations }: { formations: FormateurFormationRow[] }) {
+export function FormationRosterAndBroadcast({
+  formations,
+  allowBroadcast = true,
+}: {
+  formations: FormateurFormationRow[]
+  allowBroadcast?: boolean
+}) {
   const [openFormationId, setOpenFormationId] = useState<string | null>(null)
   const [openStagiaireId, setOpenStagiaireId] = useState<string | null>(null)
   const [broadcastFormationId, setBroadcastFormationId] = useState<string | null>(null)
@@ -156,29 +172,31 @@ export function FormationRosterAndBroadcast({ formations }: { formations: Format
                   <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.5 }}>
                     Dossiers stagiaires
                   </span>
-                  <button
-                    onClick={() => setBroadcastFormationId(f.id)}
-                    style={{
-                      background: colors.navy,
-                      color: "#fff",
-                      border: "none",
-                      padding: "9px 16px",
-                      borderRadius: 16,
-                      fontSize: 12,
-                      fontWeight: 700,
-                      fontFamily: fontBody,
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
-                    }}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.3">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                      <polyline points="14 2 14 8 20 8" />
-                    </svg>
-                    Envoyer un document
-                  </button>
+                  {allowBroadcast && (
+                    <button
+                      onClick={() => setBroadcastFormationId(f.id)}
+                      style={{
+                        background: colors.navy,
+                        color: "#fff",
+                        border: "none",
+                        padding: "9px 16px",
+                        borderRadius: 16,
+                        fontSize: 12,
+                        fontWeight: 700,
+                        fontFamily: fontBody,
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 6,
+                      }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.3">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                      </svg>
+                      Envoyer un document
+                    </button>
+                  )}
                 </div>
 
                 {f.stagiaires.length === 0 && (
@@ -211,9 +229,31 @@ export function FormationRosterAndBroadcast({ formations }: { formations: Format
                         >
                           {initialsOf(s.prenom, s.nom)}
                         </div>
-                        <span style={{ flex: 1, fontSize: 13.5, fontWeight: 700, color: colors.text }}>
-                          {s.prenom} {s.nom}
+                        <span style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 1 }}>
+                          <span style={{ fontSize: 13.5, fontWeight: 700, color: colors.text }}>
+                            {s.prenom} {s.nom}
+                          </span>
+                          <span style={{ fontSize: 11.5, color: colors.textLight }}>
+                            {s.email}
+                            {s.telephone ? ` · ${s.telephone}` : ""}
+                          </span>
                         </span>
+                        {ORIGINE_LABEL[s.origine] && (
+                          <span
+                            style={{
+                              background: "#eef2f9",
+                              color: colors.navy,
+                              fontSize: 10.5,
+                              fontWeight: 700,
+                              padding: "4px 9px",
+                              borderRadius: 12,
+                              whiteSpace: "nowrap",
+                              flexShrink: 0,
+                            }}
+                          >
+                            {ORIGINE_LABEL[s.origine]}
+                          </span>
+                        )}
                         {unsigned > 0 && <span style={{ width: 8, height: 8, borderRadius: "50%", background: colors.red, flexShrink: 0 }} />}
                         <svg
                           width="15"

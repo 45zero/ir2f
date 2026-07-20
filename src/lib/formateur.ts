@@ -89,7 +89,7 @@ export async function getFormationRosterForFormateur(formationId: string, format
   const [inscriptions, documents] = await Promise.all([
     prisma.inscription.findMany({
       where: { formationId, statut: "VALIDEE" },
-      include: { user: { select: { id: true, nom: true, prenom: true } } },
+      include: { user: { select: { id: true, nom: true, prenom: true, email: true, telephone: true } } },
       orderBy: { user: { nom: "asc" } },
     }),
     prisma.document.findMany({
@@ -111,6 +111,9 @@ export async function getFormationRosterForFormateur(formationId: string, format
     id: i.user.id,
     nom: i.user.nom,
     prenom: i.user.prenom,
+    email: i.user.email,
+    telephone: i.user.telephone,
+    origine: i.origine,
     documents: resolvedDocs.map((d) => {
       const sig = d.signatures.find((s) => s.userId === i.user.id)
       return {
