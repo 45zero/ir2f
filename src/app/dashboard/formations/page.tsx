@@ -46,7 +46,11 @@ export default async function DashboardFormationsPage() {
 
 async function AdminFormationsView() {
   const formations = await getAllFormationsRosterAdmin()
-  return <FormationRosterAndBroadcast formations={formations} allowBroadcast={false} />
+  const rows: FormateurFormationRow[] = formations.map((f) => ({
+    ...f,
+    dateLabel: f.nextSession ? dateFormatter.format(f.nextSession.dateDebut) : null,
+  }))
+  return <FormationRosterAndBroadcast formations={rows} allowBroadcast={false} />
 }
 
 async function FormateurFormationsView({ userId }: { userId: string }) {
