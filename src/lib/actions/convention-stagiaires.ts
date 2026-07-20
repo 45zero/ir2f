@@ -8,7 +8,8 @@ import { requireAdmin } from "@/lib/auth/guards"
 export type ImportStagiairesState = { error: string | null; imported: number | null }
 
 /**
- * Gabarit LGEF (colonnes fixes, 2 lignes d'en-tête puis les données) :
+ * Gabarit LGEF (colonnes fixes, 1 ou 2 lignes d'en-tête puis les données — la ligne d'en-tête
+ * est détectée par son contenu, voir isHeaderRow, pas par un nombre de lignes fixe) :
  * Le club accueil du stagiaire (Nom du Club, Numéro d'affiliation, Mail club/employeur),
  * Information stagiaire (Civilité, Nom, Prénom, Date de naissance, Adresse, CP, Ville,
  * Téléphone, Mail), Information tuteur (Nom, Prénom, Mail), Information maître de stage
@@ -39,11 +40,28 @@ const COLUMN_INDEX = {
 } as const
 
 const COLUMN_COUNT = 21
-const HEADER_ROWS = 2
 
 function cell(row: unknown[], index: number): string {
   const value = row[index]
   return value === undefined || value === null ? "" : String(value).trim()
+}
+
+function normalize(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase()
+}
+
+/**
+ * Le gabarit peut avoir 1 ou 2 lignes d'en-tête selon la version du fichier (ligne de groupes
+ * fusionnés optionnelle au-dessus des noms de colonnes) — plutôt que de deviner un nombre fixe
+ * de lignes à sauter, on repère la ligne d'en-tête par son contenu : la colonne "Nom" du
+ * stagiaire y contient littéralement "Nom".
+ */
+function isHeaderRow(row: unknown[]): boolean {
+  return normalize(cell(row, COLUMN_INDEX.nom)) === "nom"
 }
 
 export async function importStagiairesExcel(
@@ -63,13 +81,13 @@ export async function importStagiairesExcel(
     const workbook = XLSX.read(buffer, { type: "buffer" })
     const sheet = workbook.Sheets[workbook.SheetNames[0]]
     const allRows = XLSX.utils.sheet_to_json<unknown[]>(sheet, { header: 1, raw: false, defval: "" })
-    detailHeaderRow = allRows[1] ?? []
-    rows = allRows.slice(HEADER_ROWS)
+    detailHeaderRow = allRows.find(isHeaderRow) ?? []
+    rows = allRows.filter((row) => !isHeaderRow(row))
   } catch {
     return { error: "Ce fichier Excel est illisible ou corrompu.", imported: null }
   }
 
-  if (rows.length === 0) return { error: "Le fichier ne contient aucune ligne de données (après les 2 lignes d'en-tête).", imported: null }
+  if (rows.length === 0) return { error: "Le fichier ne contient aucune ligne de données.", imported: null }
 
   let imported = 0
   for (const row of rows) {
