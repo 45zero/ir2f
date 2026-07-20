@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation"
 import { auth } from "@/auth"
+import { prisma } from "@/lib/prisma"
 import { getFormationBySlug, getInscriptionStatusMessage, CATEGORIE_LABELS, TYPE_LABELS } from "@/lib/formations"
 import { Hoverable } from "@/components/ui/Hoverable"
 import { HoverLink } from "@/components/ui/HoverLink"
 import { InscribeButton } from "@/components/site/InscribeButton"
+import { FffInscriptionPanel } from "@/components/site/FffInscriptionPanel"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 
 type ProgrammeStep = { n: string; title: string; desc: string }
@@ -16,9 +18,16 @@ export default async function FormationDetailPage({ params }: { params: Promise<
   if (!formation) notFound()
 
   const session = await auth()
-  const inscriptionMessage = session?.user
-    ? await getInscriptionStatusMessage(session.user.id, formation.id)
-    : undefined
+  const isFff = formation.modeInscription === "PORTAIL_FFF"
+  const inscriptionMessage =
+    session?.user && !isFff ? await getInscriptionStatusMessage(session.user.id, formation.id) : undefined
+  const currentUser =
+    session?.user && isFff
+      ? await prisma.user.findUnique({
+          where: { id: session.user.id },
+          select: { nom: true, prenom: true, email: true, telephone: true },
+        })
+      : null
 
   const categorieLabel = CATEGORIE_LABELS[formation.categorie]
   const modeLabel = formation.modeLabel ?? TYPE_LABELS[formation.type]
@@ -127,13 +136,22 @@ export default async function FormationDetailPage({ params }: { params: Promise<
             </div>
 
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 10, alignItems: "flex-start" }}>
-              <InscribeButton
-                formationId={formation.id}
-                label="S'inscrire"
-                variant="primary"
-                loggedIn={Boolean(session?.user)}
-                initialMessage={inscriptionMessage}
-              />
+              {isFff ? (
+                <FffInscriptionPanel
+                  formationId={formation.id}
+                  lienFffStagiaire={formation.lienFffStagiaire}
+                  lienFffClub={formation.lienFffClub}
+                  prefill={currentUser ?? undefined}
+                />
+              ) : (
+                <InscribeButton
+                  formationId={formation.id}
+                  label="S'inscrire"
+                  variant="primary"
+                  loggedIn={Boolean(session?.user)}
+                  initialMessage={inscriptionMessage}
+                />
+              )}
               <Hoverable
                 as="button"
                 style={{
@@ -266,14 +284,16 @@ export default async function FormationDetailPage({ params }: { params: Promise<
                   {sess.lieu ?? formation.lieu ?? "Lieu à confirmer"}
                   {sess.places != null ? ` · ${sess.places} places restantes` : ""}
                 </span>
-                <InscribeButton
-                  formationId={formation.id}
-                  sessionLabel={`${dateFormatter.format(sess.dateDebut)} — ${sess.lieu ?? formation.lieu ?? "lieu à confirmer"}`}
-                  label="S'inscrire"
-                  variant="session"
-                  loggedIn={Boolean(session?.user)}
-                  initialMessage={inscriptionMessage}
-                />
+                {!isFff && (
+                  <InscribeButton
+                    formationId={formation.id}
+                    sessionLabel={`${dateFormatter.format(sess.dateDebut)} — ${sess.lieu ?? formation.lieu ?? "lieu à confirmer"}`}
+                    label="S'inscrire"
+                    variant="session"
+                    loggedIn={Boolean(session?.user)}
+                    initialMessage={inscriptionMessage}
+                  />
+                )}
               </div>
             ))}
           </div>

@@ -19,6 +19,7 @@ import type {
   StatutFormation,
   GroupeEquivalence,
   VarianteNode,
+  ModeInscription,
 } from "@/generated/prisma"
 
 type ProgrammeStep = { n: string; title: string; desc: string }
@@ -40,6 +41,9 @@ export type FormationFormInitial = {
   lienVisio: string
   image: string
   cpfEligible: boolean
+  modeInscription: ModeInscription
+  lienFffStagiaire: string
+  lienFffClub: string
   formateurNom: string
   formateurRole: string
   ordre: string
@@ -68,6 +72,9 @@ const EMPTY: FormationFormInitial = {
   lienVisio: "",
   image: "",
   cpfEligible: false,
+  modeInscription: "INTERNE",
+  lienFffStagiaire: "",
+  lienFffClub: "",
   formateurNom: "",
   formateurRole: "",
   ordre: "0",
@@ -140,6 +147,7 @@ export function FormationForm({
   const [programme, setProgramme] = useState<ProgrammeStep[]>(data.programme)
   const [sessions, setSessions] = useState<SessionRow[]>(data.sessions)
   const [formateurIds, setFormateurIds] = useState<string[]>(data.formateurIds)
+  const [modeInscription, setModeInscription] = useState<ModeInscription>(data.modeInscription)
 
   const programmeJson = useMemo(
     () => JSON.stringify(programme.map((p, i) => ({ ...p, n: String(i + 1).padStart(2, "0") }))),
@@ -250,6 +258,46 @@ export function FormationForm({
             Éligible CPF
           </label>
         </div>
+      </SectionCard>
+
+      <SectionCard title="Inscription">
+        <Field label="Mode d'inscription">
+          <select
+            name="modeInscription"
+            value={modeInscription}
+            onChange={(e) => setModeInscription(e.target.value as ModeInscription)}
+            style={fieldStyle}
+          >
+            <option value="INTERNE">Interne (formulaire IR2F)</option>
+            <option value="PORTAIL_FFF">Portail FFF (redirection externe)</option>
+          </select>
+        </Field>
+        {modeInscription === "PORTAIL_FFF" && (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 14 }}>
+            <Field label="Lien FFF — inscription par le stagiaire">
+              <input
+                name="lienFffStagiaire"
+                type="url"
+                placeholder="https://..."
+                defaultValue={data.lienFffStagiaire}
+                style={fieldStyle}
+              />
+            </Field>
+            <Field label="Lien FFF — inscription par le club">
+              <input
+                name="lienFffClub"
+                type="url"
+                placeholder="https://..."
+                defaultValue={data.lienFffClub}
+                style={fieldStyle}
+              />
+            </Field>
+            <p style={{ gridColumn: "1 / -1", color: colors.textLight, fontSize: 12, margin: 0 }}>
+              Renseignez au moins un des deux liens. Avant la redirection, le nom, prénom, email et téléphone du
+              stagiaire sont capturés et ajoutés à la liste des stagiaires de cette formation.
+            </p>
+          </div>
+        )}
       </SectionCard>
 
       <SectionCard title="Formateur">

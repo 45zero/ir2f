@@ -233,6 +233,23 @@ export const StatutCovoiturage: {
 export type StatutCovoiturage = (typeof StatutCovoiturage)[keyof typeof StatutCovoiturage]
 
 
+export const ModeInscription: {
+  INTERNE: 'INTERNE',
+  PORTAIL_FFF: 'PORTAIL_FFF'
+};
+
+export type ModeInscription = (typeof ModeInscription)[keyof typeof ModeInscription]
+
+
+export const OrigineInscription: {
+  INTERNE: 'INTERNE',
+  FFF_STAGIAIRE: 'FFF_STAGIAIRE',
+  FFF_CLUB: 'FFF_CLUB'
+};
+
+export type OrigineInscription = (typeof OrigineInscription)[keyof typeof OrigineInscription]
+
+
 export const IconeAccompagnement: {
   FINANCEMENT: 'FINANCEMENT',
   GESTION: 'GESTION',
@@ -320,6 +337,14 @@ export const DocumentCategorie: typeof $Enums.DocumentCategorie
 export type StatutCovoiturage = $Enums.StatutCovoiturage
 
 export const StatutCovoiturage: typeof $Enums.StatutCovoiturage
+
+export type ModeInscription = $Enums.ModeInscription
+
+export const ModeInscription: typeof $Enums.ModeInscription
+
+export type OrigineInscription = $Enums.OrigineInscription
+
+export const OrigineInscription: typeof $Enums.OrigineInscription
 
 export type IconeAccompagnement = $Enums.IconeAccompagnement
 
@@ -4826,6 +4851,9 @@ export namespace Prisma {
     categorie: $Enums.CategorieFormation | null
     filiere: $Enums.Filiere | null
     cpfEligible: boolean | null
+    modeInscription: $Enums.ModeInscription | null
+    lienFffStagiaire: string | null
+    lienFffClub: string | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
@@ -4855,6 +4883,9 @@ export namespace Prisma {
     categorie: $Enums.CategorieFormation | null
     filiere: $Enums.Filiere | null
     cpfEligible: boolean | null
+    modeInscription: $Enums.ModeInscription | null
+    lienFffStagiaire: string | null
+    lienFffClub: string | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
@@ -4885,6 +4916,9 @@ export namespace Prisma {
     categorie: number
     filiere: number
     cpfEligible: number
+    modeInscription: number
+    lienFffStagiaire: number
+    lienFffClub: number
     groupeEquivalence: number
     varianteNode: number
     badgeNode: number
@@ -4930,6 +4964,9 @@ export namespace Prisma {
     categorie?: true
     filiere?: true
     cpfEligible?: true
+    modeInscription?: true
+    lienFffStagiaire?: true
+    lienFffClub?: true
     groupeEquivalence?: true
     varianteNode?: true
     badgeNode?: true
@@ -4959,6 +4996,9 @@ export namespace Prisma {
     categorie?: true
     filiere?: true
     cpfEligible?: true
+    modeInscription?: true
+    lienFffStagiaire?: true
+    lienFffClub?: true
     groupeEquivalence?: true
     varianteNode?: true
     badgeNode?: true
@@ -4989,6 +5029,9 @@ export namespace Prisma {
     categorie?: true
     filiere?: true
     cpfEligible?: true
+    modeInscription?: true
+    lienFffStagiaire?: true
+    lienFffClub?: true
     groupeEquivalence?: true
     varianteNode?: true
     badgeNode?: true
@@ -5106,6 +5149,9 @@ export namespace Prisma {
     categorie: $Enums.CategorieFormation
     filiere: $Enums.Filiere | null
     cpfEligible: boolean
+    modeInscription: $Enums.ModeInscription
+    lienFffStagiaire: string | null
+    lienFffClub: string | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
@@ -5155,6 +5201,9 @@ export namespace Prisma {
     categorie?: boolean
     filiere?: boolean
     cpfEligible?: boolean
+    modeInscription?: boolean
+    lienFffStagiaire?: boolean
+    lienFffClub?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -5194,6 +5243,9 @@ export namespace Prisma {
     categorie?: boolean
     filiere?: boolean
     cpfEligible?: boolean
+    modeInscription?: boolean
+    lienFffStagiaire?: boolean
+    lienFffClub?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -5224,6 +5276,9 @@ export namespace Prisma {
     categorie?: boolean
     filiere?: boolean
     cpfEligible?: boolean
+    modeInscription?: boolean
+    lienFffStagiaire?: boolean
+    lienFffClub?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -5254,6 +5309,9 @@ export namespace Prisma {
     categorie?: boolean
     filiere?: boolean
     cpfEligible?: boolean
+    modeInscription?: boolean
+    lienFffStagiaire?: boolean
+    lienFffClub?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -5262,7 +5320,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
@@ -5311,6 +5369,9 @@ export namespace Prisma {
       categorie: $Enums.CategorieFormation
       filiere: $Enums.Filiere | null
       cpfEligible: boolean
+      modeInscription: $Enums.ModeInscription
+      lienFffStagiaire: string | null
+      lienFffClub: string | null
       groupeEquivalence: $Enums.GroupeEquivalence | null
       varianteNode: $Enums.VarianteNode | null
       badgeNode: string | null
@@ -5769,6 +5830,9 @@ export namespace Prisma {
     readonly categorie: FieldRef<"Formation", 'CategorieFormation'>
     readonly filiere: FieldRef<"Formation", 'Filiere'>
     readonly cpfEligible: FieldRef<"Formation", 'Boolean'>
+    readonly modeInscription: FieldRef<"Formation", 'ModeInscription'>
+    readonly lienFffStagiaire: FieldRef<"Formation", 'String'>
+    readonly lienFffClub: FieldRef<"Formation", 'String'>
     readonly groupeEquivalence: FieldRef<"Formation", 'GroupeEquivalence'>
     readonly varianteNode: FieldRef<"Formation", 'VarianteNode'>
     readonly badgeNode: FieldRef<"Formation", 'String'>
@@ -8587,6 +8651,7 @@ export namespace Prisma {
     userId: string | null
     formationId: string | null
     statut: $Enums.StatutInscription | null
+    origine: $Enums.OrigineInscription | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8596,6 +8661,7 @@ export namespace Prisma {
     userId: string | null
     formationId: string | null
     statut: $Enums.StatutInscription | null
+    origine: $Enums.OrigineInscription | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8605,6 +8671,7 @@ export namespace Prisma {
     userId: number
     formationId: number
     statut: number
+    origine: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -8616,6 +8683,7 @@ export namespace Prisma {
     userId?: true
     formationId?: true
     statut?: true
+    origine?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8625,6 +8693,7 @@ export namespace Prisma {
     userId?: true
     formationId?: true
     statut?: true
+    origine?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -8634,6 +8703,7 @@ export namespace Prisma {
     userId?: true
     formationId?: true
     statut?: true
+    origine?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -8716,6 +8786,7 @@ export namespace Prisma {
     userId: string
     formationId: string
     statut: $Enums.StatutInscription
+    origine: $Enums.OrigineInscription
     createdAt: Date
     updatedAt: Date
     _count: InscriptionCountAggregateOutputType | null
@@ -8742,6 +8813,7 @@ export namespace Prisma {
     userId?: boolean
     formationId?: boolean
     statut?: boolean
+    origine?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -8753,6 +8825,7 @@ export namespace Prisma {
     userId?: boolean
     formationId?: boolean
     statut?: boolean
+    origine?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -8764,6 +8837,7 @@ export namespace Prisma {
     userId?: boolean
     formationId?: boolean
     statut?: boolean
+    origine?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -8775,11 +8849,12 @@ export namespace Prisma {
     userId?: boolean
     formationId?: boolean
     statut?: boolean
+    origine?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type InscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "formationId" | "statut" | "createdAt" | "updatedAt", ExtArgs["result"]["inscription"]>
+  export type InscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "formationId" | "statut" | "origine" | "createdAt" | "updatedAt", ExtArgs["result"]["inscription"]>
   export type InscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | FormationDefaultArgs<ExtArgs>
@@ -8804,6 +8879,7 @@ export namespace Prisma {
       userId: string
       formationId: string
       statut: $Enums.StatutInscription
+      origine: $Enums.OrigineInscription
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["inscription"]>
@@ -9235,6 +9311,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"Inscription", 'String'>
     readonly formationId: FieldRef<"Inscription", 'String'>
     readonly statut: FieldRef<"Inscription", 'StatutInscription'>
+    readonly origine: FieldRef<"Inscription", 'OrigineInscription'>
     readonly createdAt: FieldRef<"Inscription", 'DateTime'>
     readonly updatedAt: FieldRef<"Inscription", 'DateTime'>
   }
@@ -29728,6 +29805,9 @@ export namespace Prisma {
     categorie: 'categorie',
     filiere: 'filiere',
     cpfEligible: 'cpfEligible',
+    modeInscription: 'modeInscription',
+    lienFffStagiaire: 'lienFffStagiaire',
+    lienFffClub: 'lienFffClub',
     groupeEquivalence: 'groupeEquivalence',
     varianteNode: 'varianteNode',
     badgeNode: 'badgeNode',
@@ -29768,6 +29848,7 @@ export namespace Prisma {
     userId: 'userId',
     formationId: 'formationId',
     statut: 'statut',
+    origine: 'origine',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -30231,6 +30312,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ModeInscription'
+   */
+  export type EnumModeInscriptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModeInscription'>
+    
+
+
+  /**
+   * Reference to a field of type 'ModeInscription[]'
+   */
+  export type ListEnumModeInscriptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModeInscription[]'>
+    
+
+
+  /**
    * Reference to a field of type 'GroupeEquivalence'
    */
   export type EnumGroupeEquivalenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GroupeEquivalence'>
@@ -30269,6 +30364,20 @@ export namespace Prisma {
    * Reference to a field of type 'StatutInscription[]'
    */
   export type ListEnumStatutInscriptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutInscription[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'OrigineInscription'
+   */
+  export type EnumOrigineInscriptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrigineInscription'>
+    
+
+
+  /**
+   * Reference to a field of type 'OrigineInscription[]'
+   */
+  export type ListEnumOrigineInscriptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrigineInscription[]'>
     
 
 
@@ -30505,6 +30614,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFilter<"Formation"> | $Enums.CategorieFormation
     filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolFilter<"Formation"> | boolean
+    modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
+    lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
+    lienFffClub?: StringNullableFilter<"Formation"> | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
@@ -30543,6 +30655,9 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrderInput | SortOrder
     cpfEligible?: SortOrder
+    modeInscription?: SortOrder
+    lienFffStagiaire?: SortOrderInput | SortOrder
+    lienFffClub?: SortOrderInput | SortOrder
     groupeEquivalence?: SortOrderInput | SortOrder
     varianteNode?: SortOrderInput | SortOrder
     badgeNode?: SortOrderInput | SortOrder
@@ -30584,6 +30699,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFilter<"Formation"> | $Enums.CategorieFormation
     filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolFilter<"Formation"> | boolean
+    modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
+    lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
+    lienFffClub?: StringNullableFilter<"Formation"> | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
@@ -30622,6 +30740,9 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrderInput | SortOrder
     cpfEligible?: SortOrder
+    modeInscription?: SortOrder
+    lienFffStagiaire?: SortOrderInput | SortOrder
+    lienFffClub?: SortOrderInput | SortOrder
     groupeEquivalence?: SortOrderInput | SortOrder
     varianteNode?: SortOrderInput | SortOrder
     badgeNode?: SortOrderInput | SortOrder
@@ -30660,6 +30781,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationWithAggregatesFilter<"Formation"> | $Enums.CategorieFormation
     filiere?: EnumFiliereNullableWithAggregatesFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolWithAggregatesFilter<"Formation"> | boolean
+    modeInscription?: EnumModeInscriptionWithAggregatesFilter<"Formation"> | $Enums.ModeInscription
+    lienFffStagiaire?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    lienFffClub?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableWithAggregatesFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableWithAggregatesFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableWithAggregatesFilter<"Formation"> | string | null
@@ -30802,6 +30926,7 @@ export namespace Prisma {
     userId?: StringFilter<"Inscription"> | string
     formationId?: StringFilter<"Inscription"> | string
     statut?: EnumStatutInscriptionFilter<"Inscription"> | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFilter<"Inscription"> | $Enums.OrigineInscription
     createdAt?: DateTimeFilter<"Inscription"> | Date | string
     updatedAt?: DateTimeFilter<"Inscription"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -30813,6 +30938,7 @@ export namespace Prisma {
     userId?: SortOrder
     formationId?: SortOrder
     statut?: SortOrder
+    origine?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -30828,6 +30954,7 @@ export namespace Prisma {
     userId?: StringFilter<"Inscription"> | string
     formationId?: StringFilter<"Inscription"> | string
     statut?: EnumStatutInscriptionFilter<"Inscription"> | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFilter<"Inscription"> | $Enums.OrigineInscription
     createdAt?: DateTimeFilter<"Inscription"> | Date | string
     updatedAt?: DateTimeFilter<"Inscription"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -30839,6 +30966,7 @@ export namespace Prisma {
     userId?: SortOrder
     formationId?: SortOrder
     statut?: SortOrder
+    origine?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: InscriptionCountOrderByAggregateInput
@@ -30854,6 +30982,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Inscription"> | string
     formationId?: StringWithAggregatesFilter<"Inscription"> | string
     statut?: EnumStatutInscriptionWithAggregatesFilter<"Inscription"> | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionWithAggregatesFilter<"Inscription"> | $Enums.OrigineInscription
     createdAt?: DateTimeWithAggregatesFilter<"Inscription"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Inscription"> | Date | string
   }
@@ -32351,6 +32480,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -32389,6 +32521,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -32427,6 +32562,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32465,6 +32603,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32503,6 +32644,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -32533,6 +32677,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32563,6 +32710,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32697,6 +32847,7 @@ export namespace Prisma {
   export type InscriptionCreateInput = {
     id?: string
     statut?: $Enums.StatutInscription
+    origine?: $Enums.OrigineInscription
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutInscriptionsInput
@@ -32708,6 +32859,7 @@ export namespace Prisma {
     userId: string
     formationId: string
     statut?: $Enums.StatutInscription
+    origine?: $Enums.OrigineInscription
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -32715,6 +32867,7 @@ export namespace Prisma {
   export type InscriptionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutInscriptionsNestedInput
@@ -32726,6 +32879,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     formationId?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32735,6 +32889,7 @@ export namespace Prisma {
     userId: string
     formationId: string
     statut?: $Enums.StatutInscription
+    origine?: $Enums.OrigineInscription
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -32742,6 +32897,7 @@ export namespace Prisma {
   export type InscriptionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32751,6 +32907,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     formationId?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34559,6 +34716,13 @@ export namespace Prisma {
     not?: NestedEnumFiliereNullableFilter<$PrismaModel> | $Enums.Filiere | null
   }
 
+  export type EnumModeInscriptionFilter<$PrismaModel = never> = {
+    equals?: $Enums.ModeInscription | EnumModeInscriptionFieldRefInput<$PrismaModel>
+    in?: $Enums.ModeInscription[] | ListEnumModeInscriptionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ModeInscription[] | ListEnumModeInscriptionFieldRefInput<$PrismaModel>
+    not?: NestedEnumModeInscriptionFilter<$PrismaModel> | $Enums.ModeInscription
+  }
+
   export type EnumGroupeEquivalenceNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.GroupeEquivalence | EnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
     in?: $Enums.GroupeEquivalence[] | ListEnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
@@ -34615,6 +34779,9 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrder
     cpfEligible?: SortOrder
+    modeInscription?: SortOrder
+    lienFffStagiaire?: SortOrder
+    lienFffClub?: SortOrder
     groupeEquivalence?: SortOrder
     varianteNode?: SortOrder
     badgeNode?: SortOrder
@@ -34651,6 +34818,9 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrder
     cpfEligible?: SortOrder
+    modeInscription?: SortOrder
+    lienFffStagiaire?: SortOrder
+    lienFffClub?: SortOrder
     groupeEquivalence?: SortOrder
     varianteNode?: SortOrder
     badgeNode?: SortOrder
@@ -34680,6 +34850,9 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrder
     cpfEligible?: SortOrder
+    modeInscription?: SortOrder
+    lienFffStagiaire?: SortOrder
+    lienFffClub?: SortOrder
     groupeEquivalence?: SortOrder
     varianteNode?: SortOrder
     badgeNode?: SortOrder
@@ -34809,6 +34982,16 @@ export namespace Prisma {
     _max?: NestedEnumFiliereNullableFilter<$PrismaModel>
   }
 
+  export type EnumModeInscriptionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ModeInscription | EnumModeInscriptionFieldRefInput<$PrismaModel>
+    in?: $Enums.ModeInscription[] | ListEnumModeInscriptionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ModeInscription[] | ListEnumModeInscriptionFieldRefInput<$PrismaModel>
+    not?: NestedEnumModeInscriptionWithAggregatesFilter<$PrismaModel> | $Enums.ModeInscription
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumModeInscriptionFilter<$PrismaModel>
+    _max?: NestedEnumModeInscriptionFilter<$PrismaModel>
+  }
+
   export type EnumGroupeEquivalenceNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.GroupeEquivalence | EnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
     in?: $Enums.GroupeEquivalence[] | ListEnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
@@ -34913,6 +35096,13 @@ export namespace Prisma {
     not?: NestedEnumStatutInscriptionFilter<$PrismaModel> | $Enums.StatutInscription
   }
 
+  export type EnumOrigineInscriptionFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrigineInscription | EnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    in?: $Enums.OrigineInscription[] | ListEnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrigineInscription[] | ListEnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrigineInscriptionFilter<$PrismaModel> | $Enums.OrigineInscription
+  }
+
   export type InscriptionUserIdFormationIdCompoundUniqueInput = {
     userId: string
     formationId: string
@@ -34923,6 +35113,7 @@ export namespace Prisma {
     userId?: SortOrder
     formationId?: SortOrder
     statut?: SortOrder
+    origine?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -34932,6 +35123,7 @@ export namespace Prisma {
     userId?: SortOrder
     formationId?: SortOrder
     statut?: SortOrder
+    origine?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -34941,6 +35133,7 @@ export namespace Prisma {
     userId?: SortOrder
     formationId?: SortOrder
     statut?: SortOrder
+    origine?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -34953,6 +35146,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutInscriptionFilter<$PrismaModel>
     _max?: NestedEnumStatutInscriptionFilter<$PrismaModel>
+  }
+
+  export type EnumOrigineInscriptionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrigineInscription | EnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    in?: $Enums.OrigineInscription[] | ListEnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrigineInscription[] | ListEnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrigineInscriptionWithAggregatesFilter<$PrismaModel> | $Enums.OrigineInscription
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOrigineInscriptionFilter<$PrismaModel>
+    _max?: NestedEnumOrigineInscriptionFilter<$PrismaModel>
   }
 
   export type FormationNullableScalarRelationFilter = {
@@ -36474,6 +36677,10 @@ export namespace Prisma {
     set?: $Enums.Filiere | null
   }
 
+  export type EnumModeInscriptionFieldUpdateOperationsInput = {
+    set?: $Enums.ModeInscription
+  }
+
   export type NullableEnumGroupeEquivalenceFieldUpdateOperationsInput = {
     set?: $Enums.GroupeEquivalence | null
   }
@@ -36762,6 +36969,10 @@ export namespace Prisma {
 
   export type EnumStatutInscriptionFieldUpdateOperationsInput = {
     set?: $Enums.StatutInscription
+  }
+
+  export type EnumOrigineInscriptionFieldUpdateOperationsInput = {
+    set?: $Enums.OrigineInscription
   }
 
   export type UserUpdateOneRequiredWithoutInscriptionsNestedInput = {
@@ -37427,6 +37638,13 @@ export namespace Prisma {
     not?: NestedEnumFiliereNullableFilter<$PrismaModel> | $Enums.Filiere | null
   }
 
+  export type NestedEnumModeInscriptionFilter<$PrismaModel = never> = {
+    equals?: $Enums.ModeInscription | EnumModeInscriptionFieldRefInput<$PrismaModel>
+    in?: $Enums.ModeInscription[] | ListEnumModeInscriptionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ModeInscription[] | ListEnumModeInscriptionFieldRefInput<$PrismaModel>
+    not?: NestedEnumModeInscriptionFilter<$PrismaModel> | $Enums.ModeInscription
+  }
+
   export type NestedEnumGroupeEquivalenceNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.GroupeEquivalence | EnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
     in?: $Enums.GroupeEquivalence[] | ListEnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
@@ -37563,6 +37781,16 @@ export namespace Prisma {
     _max?: NestedEnumFiliereNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumModeInscriptionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ModeInscription | EnumModeInscriptionFieldRefInput<$PrismaModel>
+    in?: $Enums.ModeInscription[] | ListEnumModeInscriptionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ModeInscription[] | ListEnumModeInscriptionFieldRefInput<$PrismaModel>
+    not?: NestedEnumModeInscriptionWithAggregatesFilter<$PrismaModel> | $Enums.ModeInscription
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumModeInscriptionFilter<$PrismaModel>
+    _max?: NestedEnumModeInscriptionFilter<$PrismaModel>
+  }
+
   export type NestedEnumGroupeEquivalenceNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.GroupeEquivalence | EnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
     in?: $Enums.GroupeEquivalence[] | ListEnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
@@ -37590,6 +37818,13 @@ export namespace Prisma {
     not?: NestedEnumStatutInscriptionFilter<$PrismaModel> | $Enums.StatutInscription
   }
 
+  export type NestedEnumOrigineInscriptionFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrigineInscription | EnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    in?: $Enums.OrigineInscription[] | ListEnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrigineInscription[] | ListEnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrigineInscriptionFilter<$PrismaModel> | $Enums.OrigineInscription
+  }
+
   export type NestedEnumStatutInscriptionWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.StatutInscription | EnumStatutInscriptionFieldRefInput<$PrismaModel>
     in?: $Enums.StatutInscription[] | ListEnumStatutInscriptionFieldRefInput<$PrismaModel>
@@ -37598,6 +37833,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutInscriptionFilter<$PrismaModel>
     _max?: NestedEnumStatutInscriptionFilter<$PrismaModel>
+  }
+
+  export type NestedEnumOrigineInscriptionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrigineInscription | EnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    in?: $Enums.OrigineInscription[] | ListEnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrigineInscription[] | ListEnumOrigineInscriptionFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrigineInscriptionWithAggregatesFilter<$PrismaModel> | $Enums.OrigineInscription
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOrigineInscriptionFilter<$PrismaModel>
+    _max?: NestedEnumOrigineInscriptionFilter<$PrismaModel>
   }
 
   export type NestedEnumDocumentCategorieFilter<$PrismaModel = never> = {
@@ -37781,6 +38026,7 @@ export namespace Prisma {
   export type InscriptionCreateWithoutUserInput = {
     id?: string
     statut?: $Enums.StatutInscription
+    origine?: $Enums.OrigineInscription
     createdAt?: Date | string
     updatedAt?: Date | string
     formation: FormationCreateNestedOneWithoutInscriptionsInput
@@ -37790,6 +38036,7 @@ export namespace Prisma {
     id?: string
     formationId: string
     statut?: $Enums.StatutInscription
+    origine?: $Enums.OrigineInscription
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -38106,6 +38353,7 @@ export namespace Prisma {
     userId?: StringFilter<"Inscription"> | string
     formationId?: StringFilter<"Inscription"> | string
     statut?: EnumStatutInscriptionFilter<"Inscription"> | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFilter<"Inscription"> | $Enums.OrigineInscription
     createdAt?: DateTimeFilter<"Inscription"> | Date | string
     updatedAt?: DateTimeFilter<"Inscription"> | Date | string
   }
@@ -38413,6 +38661,7 @@ export namespace Prisma {
   export type InscriptionCreateWithoutFormationInput = {
     id?: string
     statut?: $Enums.StatutInscription
+    origine?: $Enums.OrigineInscription
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutInscriptionsInput
@@ -38422,6 +38671,7 @@ export namespace Prisma {
     id?: string
     userId: string
     statut?: $Enums.StatutInscription
+    origine?: $Enums.OrigineInscription
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -38886,6 +39136,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -38923,6 +39176,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -39031,6 +39287,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39068,6 +39327,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39105,6 +39367,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -39142,6 +39407,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -39195,6 +39463,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39232,6 +39503,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39318,6 +39592,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -39355,6 +39632,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -39463,6 +39743,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39500,6 +39783,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39537,6 +39823,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -39574,6 +39863,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -39676,6 +39968,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39713,6 +40008,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39854,6 +40152,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -39891,6 +40192,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -40061,6 +40365,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40098,6 +40405,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40424,6 +40734,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -40461,6 +40774,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -40622,6 +40938,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40659,6 +40978,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40970,6 +41292,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -41007,6 +41332,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -41131,6 +41459,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41168,6 +41499,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41481,6 +41815,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -41518,6 +41855,9 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -41571,6 +41911,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41608,6 +41951,9 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41627,6 +41973,7 @@ export namespace Prisma {
     id?: string
     formationId: string
     statut?: $Enums.StatutInscription
+    origine?: $Enums.OrigineInscription
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -41724,6 +42071,7 @@ export namespace Prisma {
   export type InscriptionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     formation?: FormationUpdateOneRequiredWithoutInscriptionsNestedInput
@@ -41733,6 +42081,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     formationId?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41741,6 +42090,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     formationId?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42037,6 +42387,7 @@ export namespace Prisma {
     id?: string
     userId: string
     statut?: $Enums.StatutInscription
+    origine?: $Enums.OrigineInscription
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -42147,6 +42498,7 @@ export namespace Prisma {
   export type InscriptionUpdateWithoutFormationInput = {
     id?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutInscriptionsNestedInput
@@ -42156,6 +42508,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42164,6 +42517,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
+    origine?: EnumOrigineInscriptionFieldUpdateOperationsInput | $Enums.OrigineInscription
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

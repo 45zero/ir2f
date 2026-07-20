@@ -105,6 +105,26 @@ enum StatutCovoiturage {
   @@schema("ir2f")
 }
 
+// Mode d'inscription à une formation : formulaire interne IR2F, ou
+// redirection vers le portail d'inscription de la FFF (IR2F gère alors
+// uniquement les documents internes — convention de stage, etc.)
+enum ModeInscription {
+  INTERNE
+  PORTAIL_FFF
+
+  @@schema("ir2f")
+}
+
+// Origine d'une inscription — permet de distinguer les inscriptions
+// enregistrées en interne de celles capturées avant redirection vers la FFF
+enum OrigineInscription {
+  INTERNE
+  FFF_STAGIAIRE
+  FFF_CLUB
+
+  @@schema("ir2f")
+}
+
 // ─── UTILISATEURS ────────────────────────────────────
 
 model User {
@@ -159,6 +179,12 @@ model Formation {
   filiere     Filiere?
   cpfEligible Boolean            @default(false)
 
+  // Inscription via le portail FFF (externe à IR2F) — lien distinct selon
+  // que ce soit le stagiaire ou le club qui réalise l'inscription
+  modeInscription  ModeInscription @default(INTERNE)
+  lienFffStagiaire String?
+  lienFffClub      String?
+
   // Diagramme "équivalences et passerelles" — null si hors diagramme
   groupeEquivalence GroupeEquivalence?
   varianteNode      VarianteNode?
@@ -211,12 +237,13 @@ model Session {
 // ─── INSCRIPTIONS ────────────────────────────────────
 
 model Inscription {
-  id          String            @id @default(uuid())
+  id          String             @id @default(uuid())
   userId      String
   formationId String
-  statut      StatutInscription @default(EN_ATTENTE)
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
+  statut      StatutInscription  @default(EN_ATTENTE)
+  origine     OrigineInscription @default(INTERNE)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
 
   user      User      @relation(fields: [userId], references: [id])
   formation Formation @relation(fields: [formationId], references: [id])

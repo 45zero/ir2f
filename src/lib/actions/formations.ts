@@ -13,6 +13,7 @@ import type {
   StatutFormation,
   GroupeEquivalence,
   VarianteNode,
+  ModeInscription,
 } from "@/generated/prisma"
 
 type ProgrammeStep = { n: string; title: string; desc: string }
@@ -44,6 +45,9 @@ async function buildFormationData(formData: FormData) {
     lienVisio: optionalStr(formData, "lienVisio"),
     image,
     cpfEligible: formData.get("cpfEligible") === "on",
+    modeInscription: str(formData, "modeInscription") as ModeInscription,
+    lienFffStagiaire: optionalStr(formData, "lienFffStagiaire"),
+    lienFffClub: optionalStr(formData, "lienFffClub"),
     formateurNom: optionalStr(formData, "formateurNom"),
     formateurRole: optionalStr(formData, "formateurRole"),
     ordre: optionalNumber(formData, "ordre") ?? 0,

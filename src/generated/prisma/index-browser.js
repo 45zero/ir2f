@@ -155,6 +155,9 @@ exports.Prisma.FormationScalarFieldEnum = {
   categorie: 'categorie',
   filiere: 'filiere',
   cpfEligible: 'cpfEligible',
+  modeInscription: 'modeInscription',
+  lienFffStagiaire: 'lienFffStagiaire',
+  lienFffClub: 'lienFffClub',
   groupeEquivalence: 'groupeEquivalence',
   varianteNode: 'varianteNode',
   badgeNode: 'badgeNode',
@@ -186,6 +189,7 @@ exports.Prisma.InscriptionScalarFieldEnum = {
   userId: 'userId',
   formationId: 'formationId',
   statut: 'statut',
+  origine: 'origine',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -456,6 +460,11 @@ exports.Filiere = exports.$Enums.Filiere = {
   BENEVOLE: 'BENEVOLE'
 };
 
+exports.ModeInscription = exports.$Enums.ModeInscription = {
+  INTERNE: 'INTERNE',
+  PORTAIL_FFF: 'PORTAIL_FFF'
+};
+
 exports.GroupeEquivalence = exports.$Enums.GroupeEquivalence = {
   AF: 'AF',
   CFI: 'CFI',
@@ -480,6 +489,12 @@ exports.StatutInscription = exports.$Enums.StatutInscription = {
   EN_ATTENTE: 'EN_ATTENTE',
   VALIDEE: 'VALIDEE',
   REFUSEE: 'REFUSEE'
+};
+
+exports.OrigineInscription = exports.$Enums.OrigineInscription = {
+  INTERNE: 'INTERNE',
+  FFF_STAGIAIRE: 'FFF_STAGIAIRE',
+  FFF_CLUB: 'FFF_CLUB'
 };
 
 exports.DocumentCategorie = exports.$Enums.DocumentCategorie = {
