@@ -59,6 +59,21 @@ export type Document = $Result.DefaultSelection<Prisma.$DocumentPayload>
  */
 export type Signature = $Result.DefaultSelection<Prisma.$SignaturePayload>
 /**
+ * Model ConventionTemplate
+ * 
+ */
+export type ConventionTemplate = $Result.DefaultSelection<Prisma.$ConventionTemplatePayload>
+/**
+ * Model ConventionStagiaire
+ * 
+ */
+export type ConventionStagiaire = $Result.DefaultSelection<Prisma.$ConventionStagiairePayload>
+/**
+ * Model ConventionSignataire
+ * 
+ */
+export type ConventionSignataire = $Result.DefaultSelection<Prisma.$ConventionSignatairePayload>
+/**
  * Model Message
  * 
  */
@@ -273,6 +288,27 @@ export const TypeLien: {
 export type TypeLien = (typeof TypeLien)[keyof typeof TypeLien]
 
 
+export const RoleSignataire: {
+  STAGIAIRE: 'STAGIAIRE',
+  CLUB: 'CLUB',
+  TUTEUR: 'TUTEUR',
+  MAITRE_DE_STAGE: 'MAITRE_DE_STAGE',
+  RESPONSABLE_PEDAGOGIQUE: 'RESPONSABLE_PEDAGOGIQUE'
+};
+
+export type RoleSignataire = (typeof RoleSignataire)[keyof typeof RoleSignataire]
+
+
+export const StatutSignature: {
+  NON_ENVOYE: 'NON_ENVOYE',
+  EN_ATTENTE: 'EN_ATTENTE',
+  SIGNE: 'SIGNE',
+  REFUSE: 'REFUSE'
+};
+
+export type StatutSignature = (typeof StatutSignature)[keyof typeof StatutSignature]
+
+
 export const IconeAccompagnement: {
   FINANCEMENT: 'FINANCEMENT',
   GESTION: 'GESTION',
@@ -407,6 +443,14 @@ export const OrigineInscription: typeof $Enums.OrigineInscription
 export type TypeLien = $Enums.TypeLien
 
 export const TypeLien: typeof $Enums.TypeLien
+
+export type RoleSignataire = $Enums.RoleSignataire
+
+export const RoleSignataire: typeof $Enums.RoleSignataire
+
+export type StatutSignature = $Enums.StatutSignature
+
+export const StatutSignature: typeof $Enums.StatutSignature
 
 export type IconeAccompagnement = $Enums.IconeAccompagnement
 
@@ -650,6 +694,36 @@ export class PrismaClient<
     * ```
     */
   get signature(): Prisma.SignatureDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.conventionTemplate`: Exposes CRUD operations for the **ConventionTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConventionTemplates
+    * const conventionTemplates = await prisma.conventionTemplate.findMany()
+    * ```
+    */
+  get conventionTemplate(): Prisma.ConventionTemplateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.conventionStagiaire`: Exposes CRUD operations for the **ConventionStagiaire** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConventionStagiaires
+    * const conventionStagiaires = await prisma.conventionStagiaire.findMany()
+    * ```
+    */
+  get conventionStagiaire(): Prisma.ConventionStagiaireDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.conventionSignataire`: Exposes CRUD operations for the **ConventionSignataire** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConventionSignataires
+    * const conventionSignataires = await prisma.conventionSignataire.findMany()
+    * ```
+    */
+  get conventionSignataire(): Prisma.ConventionSignataireDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.message`: Exposes CRUD operations for the **Message** model.
@@ -1263,6 +1337,9 @@ export namespace Prisma {
     DemandeContact: 'DemandeContact',
     Document: 'Document',
     Signature: 'Signature',
+    ConventionTemplate: 'ConventionTemplate',
+    ConventionStagiaire: 'ConventionStagiaire',
+    ConventionSignataire: 'ConventionSignataire',
     Message: 'Message',
     MessageDestinataire: 'MessageDestinataire',
     Covoiturage: 'Covoiturage',
@@ -1295,7 +1372,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "signature" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "signature" | "conventionTemplate" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1962,6 +2039,228 @@ export namespace Prisma {
           count: {
             args: Prisma.SignatureCountArgs<ExtArgs>
             result: $Utils.Optional<SignatureCountAggregateOutputType> | number
+          }
+        }
+      }
+      ConventionTemplate: {
+        payload: Prisma.$ConventionTemplatePayload<ExtArgs>
+        fields: Prisma.ConventionTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConventionTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConventionTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.ConventionTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConventionTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.ConventionTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.ConventionTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.ConventionTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConventionTemplateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload>[]
+          }
+          delete: {
+            args: Prisma.ConventionTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload>
+          }
+          update: {
+            args: Prisma.ConventionTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.ConventionTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConventionTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConventionTemplateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload>[]
+          }
+          upsert: {
+            args: Prisma.ConventionTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.ConventionTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConventionTemplate>
+          }
+          groupBy: {
+            args: Prisma.ConventionTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConventionTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConventionTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<ConventionTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
+      ConventionStagiaire: {
+        payload: Prisma.$ConventionStagiairePayload<ExtArgs>
+        fields: Prisma.ConventionStagiaireFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConventionStagiaireFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConventionStagiaireFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload>
+          }
+          findFirst: {
+            args: Prisma.ConventionStagiaireFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConventionStagiaireFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload>
+          }
+          findMany: {
+            args: Prisma.ConventionStagiaireFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload>[]
+          }
+          create: {
+            args: Prisma.ConventionStagiaireCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload>
+          }
+          createMany: {
+            args: Prisma.ConventionStagiaireCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConventionStagiaireCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload>[]
+          }
+          delete: {
+            args: Prisma.ConventionStagiaireDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload>
+          }
+          update: {
+            args: Prisma.ConventionStagiaireUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload>
+          }
+          deleteMany: {
+            args: Prisma.ConventionStagiaireDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConventionStagiaireUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConventionStagiaireUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload>[]
+          }
+          upsert: {
+            args: Prisma.ConventionStagiaireUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionStagiairePayload>
+          }
+          aggregate: {
+            args: Prisma.ConventionStagiaireAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConventionStagiaire>
+          }
+          groupBy: {
+            args: Prisma.ConventionStagiaireGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConventionStagiaireGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConventionStagiaireCountArgs<ExtArgs>
+            result: $Utils.Optional<ConventionStagiaireCountAggregateOutputType> | number
+          }
+        }
+      }
+      ConventionSignataire: {
+        payload: Prisma.$ConventionSignatairePayload<ExtArgs>
+        fields: Prisma.ConventionSignataireFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConventionSignataireFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConventionSignataireFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload>
+          }
+          findFirst: {
+            args: Prisma.ConventionSignataireFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConventionSignataireFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload>
+          }
+          findMany: {
+            args: Prisma.ConventionSignataireFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload>[]
+          }
+          create: {
+            args: Prisma.ConventionSignataireCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload>
+          }
+          createMany: {
+            args: Prisma.ConventionSignataireCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConventionSignataireCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload>[]
+          }
+          delete: {
+            args: Prisma.ConventionSignataireDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload>
+          }
+          update: {
+            args: Prisma.ConventionSignataireUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload>
+          }
+          deleteMany: {
+            args: Prisma.ConventionSignataireDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConventionSignataireUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConventionSignataireUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload>[]
+          }
+          upsert: {
+            args: Prisma.ConventionSignataireUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConventionSignatairePayload>
+          }
+          aggregate: {
+            args: Prisma.ConventionSignataireAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConventionSignataire>
+          }
+          groupBy: {
+            args: Prisma.ConventionSignataireGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConventionSignataireGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConventionSignataireCountArgs<ExtArgs>
+            result: $Utils.Optional<ConventionSignataireCountAggregateOutputType> | number
           }
         }
       }
@@ -3340,6 +3639,9 @@ export namespace Prisma {
     demandeContact?: DemandeContactOmit
     document?: DocumentOmit
     signature?: SignatureOmit
+    conventionTemplate?: ConventionTemplateOmit
+    conventionStagiaire?: ConventionStagiaireOmit
+    conventionSignataire?: ConventionSignataireOmit
     message?: MessageOmit
     messageDestinataire?: MessageDestinataireOmit
     covoiturage?: CovoiturageOmit
@@ -3557,6 +3859,7 @@ export namespace Prisma {
     formateurs: number
     messages: number
     covoiturages: number
+    conventionStagiaires: number
   }
 
   export type FormationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3568,6 +3871,7 @@ export namespace Prisma {
     formateurs?: boolean | FormationCountOutputTypeCountFormateursArgs
     messages?: boolean | FormationCountOutputTypeCountMessagesArgs
     covoiturages?: boolean | FormationCountOutputTypeCountCovoituragesArgs
+    conventionStagiaires?: boolean | FormationCountOutputTypeCountConventionStagiairesArgs
   }
 
   // Custom InputTypes
@@ -3637,6 +3941,13 @@ export namespace Prisma {
     where?: CovoiturageWhereInput
   }
 
+  /**
+   * FormationCountOutputType without action
+   */
+  export type FormationCountOutputTypeCountConventionStagiairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConventionStagiaireWhereInput
+  }
+
 
   /**
    * Count Type DocumentCountOutputType
@@ -3675,6 +3986,68 @@ export namespace Prisma {
    */
   export type DocumentCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+
+  /**
+   * Count Type ConventionTemplateCountOutputType
+   */
+
+  export type ConventionTemplateCountOutputType = {
+    formations: number
+  }
+
+  export type ConventionTemplateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formations?: boolean | ConventionTemplateCountOutputTypeCountFormationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ConventionTemplateCountOutputType without action
+   */
+  export type ConventionTemplateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplateCountOutputType
+     */
+    select?: ConventionTemplateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ConventionTemplateCountOutputType without action
+   */
+  export type ConventionTemplateCountOutputTypeCountFormationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormationWhereInput
+  }
+
+
+  /**
+   * Count Type ConventionStagiaireCountOutputType
+   */
+
+  export type ConventionStagiaireCountOutputType = {
+    signataires: number
+  }
+
+  export type ConventionStagiaireCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    signataires?: boolean | ConventionStagiaireCountOutputTypeCountSignatairesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ConventionStagiaireCountOutputType without action
+   */
+  export type ConventionStagiaireCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaireCountOutputType
+     */
+    select?: ConventionStagiaireCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ConventionStagiaireCountOutputType without action
+   */
+  export type ConventionStagiaireCountOutputTypeCountSignatairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConventionSignataireWhereInput
   }
 
 
@@ -5186,6 +5559,11 @@ export namespace Prisma {
     modeInscription: $Enums.ModeInscription | null
     lienFffStagiaire: string | null
     lienFffClub: string | null
+    conventionTemplateId: string | null
+    responsablePedagogiqueNom: string | null
+    responsablePedagogiquePrenom: string | null
+    responsablePedagogiqueEmail: string | null
+    responsablePedagogiqueTelephone: string | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
@@ -5218,6 +5596,11 @@ export namespace Prisma {
     modeInscription: $Enums.ModeInscription | null
     lienFffStagiaire: string | null
     lienFffClub: string | null
+    conventionTemplateId: string | null
+    responsablePedagogiqueNom: string | null
+    responsablePedagogiquePrenom: string | null
+    responsablePedagogiqueEmail: string | null
+    responsablePedagogiqueTelephone: string | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
@@ -5251,6 +5634,11 @@ export namespace Prisma {
     modeInscription: number
     lienFffStagiaire: number
     lienFffClub: number
+    conventionTemplateId: number
+    responsablePedagogiqueNom: number
+    responsablePedagogiquePrenom: number
+    responsablePedagogiqueEmail: number
+    responsablePedagogiqueTelephone: number
     groupeEquivalence: number
     varianteNode: number
     badgeNode: number
@@ -5299,6 +5687,11 @@ export namespace Prisma {
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
+    conventionTemplateId?: true
+    responsablePedagogiqueNom?: true
+    responsablePedagogiquePrenom?: true
+    responsablePedagogiqueEmail?: true
+    responsablePedagogiqueTelephone?: true
     groupeEquivalence?: true
     varianteNode?: true
     badgeNode?: true
@@ -5331,6 +5724,11 @@ export namespace Prisma {
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
+    conventionTemplateId?: true
+    responsablePedagogiqueNom?: true
+    responsablePedagogiquePrenom?: true
+    responsablePedagogiqueEmail?: true
+    responsablePedagogiqueTelephone?: true
     groupeEquivalence?: true
     varianteNode?: true
     badgeNode?: true
@@ -5364,6 +5762,11 @@ export namespace Prisma {
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
+    conventionTemplateId?: true
+    responsablePedagogiqueNom?: true
+    responsablePedagogiquePrenom?: true
+    responsablePedagogiqueEmail?: true
+    responsablePedagogiqueTelephone?: true
     groupeEquivalence?: true
     varianteNode?: true
     badgeNode?: true
@@ -5484,6 +5887,11 @@ export namespace Prisma {
     modeInscription: $Enums.ModeInscription
     lienFffStagiaire: string | null
     lienFffClub: string | null
+    conventionTemplateId: string | null
+    responsablePedagogiqueNom: string | null
+    responsablePedagogiquePrenom: string | null
+    responsablePedagogiqueEmail: string | null
+    responsablePedagogiqueTelephone: string | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
@@ -5536,6 +5944,11 @@ export namespace Prisma {
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
+    conventionTemplateId?: boolean
+    responsablePedagogiqueNom?: boolean
+    responsablePedagogiquePrenom?: boolean
+    responsablePedagogiqueEmail?: boolean
+    responsablePedagogiqueTelephone?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -5550,6 +5963,8 @@ export namespace Prisma {
     formateurs?: boolean | Formation$formateursArgs<ExtArgs>
     messages?: boolean | Formation$messagesArgs<ExtArgs>
     covoiturages?: boolean | Formation$covoituragesArgs<ExtArgs>
+    conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
+    conventionStagiaires?: boolean | Formation$conventionStagiairesArgs<ExtArgs>
     _count?: boolean | FormationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["formation"]>
 
@@ -5578,12 +5993,18 @@ export namespace Prisma {
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
+    conventionTemplateId?: boolean
+    responsablePedagogiqueNom?: boolean
+    responsablePedagogiquePrenom?: boolean
+    responsablePedagogiqueEmail?: boolean
+    responsablePedagogiqueTelephone?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
     shortNode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
   }, ExtArgs["result"]["formation"]>
 
   export type FormationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5611,12 +6032,18 @@ export namespace Prisma {
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
+    conventionTemplateId?: boolean
+    responsablePedagogiqueNom?: boolean
+    responsablePedagogiquePrenom?: boolean
+    responsablePedagogiqueEmail?: boolean
+    responsablePedagogiqueTelephone?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
     shortNode?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
   }, ExtArgs["result"]["formation"]>
 
   export type FormationSelectScalar = {
@@ -5644,6 +6071,11 @@ export namespace Prisma {
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
+    conventionTemplateId?: boolean
+    responsablePedagogiqueNom?: boolean
+    responsablePedagogiquePrenom?: boolean
+    responsablePedagogiqueEmail?: boolean
+    responsablePedagogiqueTelephone?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -5652,7 +6084,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
@@ -5662,10 +6094,16 @@ export namespace Prisma {
     formateurs?: boolean | Formation$formateursArgs<ExtArgs>
     messages?: boolean | Formation$messagesArgs<ExtArgs>
     covoiturages?: boolean | Formation$covoituragesArgs<ExtArgs>
+    conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
+    conventionStagiaires?: boolean | Formation$conventionStagiairesArgs<ExtArgs>
     _count?: boolean | FormationCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type FormationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type FormationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type FormationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
+  }
+  export type FormationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
+  }
 
   export type $FormationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Formation"
@@ -5678,6 +6116,8 @@ export namespace Prisma {
       formateurs: Prisma.$FormationFormateurPayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
       covoiturages: Prisma.$CovoituragePayload<ExtArgs>[]
+      conventionTemplate: Prisma.$ConventionTemplatePayload<ExtArgs> | null
+      conventionStagiaires: Prisma.$ConventionStagiairePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5704,6 +6144,11 @@ export namespace Prisma {
       modeInscription: $Enums.ModeInscription
       lienFffStagiaire: string | null
       lienFffClub: string | null
+      conventionTemplateId: string | null
+      responsablePedagogiqueNom: string | null
+      responsablePedagogiquePrenom: string | null
+      responsablePedagogiqueEmail: string | null
+      responsablePedagogiqueTelephone: string | null
       groupeEquivalence: $Enums.GroupeEquivalence | null
       varianteNode: $Enums.VarianteNode | null
       badgeNode: string | null
@@ -6112,6 +6557,8 @@ export namespace Prisma {
     formateurs<T extends Formation$formateursArgs<ExtArgs> = {}>(args?: Subset<T, Formation$formateursArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationFormateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends Formation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     covoiturages<T extends Formation$covoituragesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$covoituragesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CovoituragePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    conventionTemplate<T extends Formation$conventionTemplateArgs<ExtArgs> = {}>(args?: Subset<T, Formation$conventionTemplateArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    conventionStagiaires<T extends Formation$conventionStagiairesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$conventionStagiairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6165,6 +6612,11 @@ export namespace Prisma {
     readonly modeInscription: FieldRef<"Formation", 'ModeInscription'>
     readonly lienFffStagiaire: FieldRef<"Formation", 'String'>
     readonly lienFffClub: FieldRef<"Formation", 'String'>
+    readonly conventionTemplateId: FieldRef<"Formation", 'String'>
+    readonly responsablePedagogiqueNom: FieldRef<"Formation", 'String'>
+    readonly responsablePedagogiquePrenom: FieldRef<"Formation", 'String'>
+    readonly responsablePedagogiqueEmail: FieldRef<"Formation", 'String'>
+    readonly responsablePedagogiqueTelephone: FieldRef<"Formation", 'String'>
     readonly groupeEquivalence: FieldRef<"Formation", 'GroupeEquivalence'>
     readonly varianteNode: FieldRef<"Formation", 'VarianteNode'>
     readonly badgeNode: FieldRef<"Formation", 'String'>
@@ -6425,6 +6877,10 @@ export namespace Prisma {
      */
     data: FormationCreateManyInput | FormationCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6495,6 +6951,10 @@ export namespace Prisma {
      * Limit how many Formations to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6753,6 +7213,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CovoiturageScalarFieldEnum | CovoiturageScalarFieldEnum[]
+  }
+
+  /**
+   * Formation.conventionTemplate
+   */
+  export type Formation$conventionTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    where?: ConventionTemplateWhereInput
+  }
+
+  /**
+   * Formation.conventionStagiaires
+   */
+  export type Formation$conventionStagiairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    where?: ConventionStagiaireWhereInput
+    orderBy?: ConventionStagiaireOrderByWithRelationInput | ConventionStagiaireOrderByWithRelationInput[]
+    cursor?: ConventionStagiaireWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConventionStagiaireScalarFieldEnum | ConventionStagiaireScalarFieldEnum[]
   }
 
   /**
@@ -14680,6 +15183,3709 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: SignatureInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ConventionTemplate
+   */
+
+  export type AggregateConventionTemplate = {
+    _count: ConventionTemplateCountAggregateOutputType | null
+    _min: ConventionTemplateMinAggregateOutputType | null
+    _max: ConventionTemplateMaxAggregateOutputType | null
+  }
+
+  export type ConventionTemplateMinAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    storagePath: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ConventionTemplateMaxAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    storagePath: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ConventionTemplateCountAggregateOutputType = {
+    id: number
+    nom: number
+    storagePath: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ConventionTemplateMinAggregateInputType = {
+    id?: true
+    nom?: true
+    storagePath?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ConventionTemplateMaxAggregateInputType = {
+    id?: true
+    nom?: true
+    storagePath?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ConventionTemplateCountAggregateInputType = {
+    id?: true
+    nom?: true
+    storagePath?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ConventionTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConventionTemplate to aggregate.
+     */
+    where?: ConventionTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionTemplates to fetch.
+     */
+    orderBy?: ConventionTemplateOrderByWithRelationInput | ConventionTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConventionTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConventionTemplates
+    **/
+    _count?: true | ConventionTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConventionTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConventionTemplateMaxAggregateInputType
+  }
+
+  export type GetConventionTemplateAggregateType<T extends ConventionTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateConventionTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConventionTemplate[P]>
+      : GetScalarType<T[P], AggregateConventionTemplate[P]>
+  }
+
+
+
+
+  export type ConventionTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConventionTemplateWhereInput
+    orderBy?: ConventionTemplateOrderByWithAggregationInput | ConventionTemplateOrderByWithAggregationInput[]
+    by: ConventionTemplateScalarFieldEnum[] | ConventionTemplateScalarFieldEnum
+    having?: ConventionTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConventionTemplateCountAggregateInputType | true
+    _min?: ConventionTemplateMinAggregateInputType
+    _max?: ConventionTemplateMaxAggregateInputType
+  }
+
+  export type ConventionTemplateGroupByOutputType = {
+    id: string
+    nom: string
+    storagePath: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ConventionTemplateCountAggregateOutputType | null
+    _min: ConventionTemplateMinAggregateOutputType | null
+    _max: ConventionTemplateMaxAggregateOutputType | null
+  }
+
+  type GetConventionTemplateGroupByPayload<T extends ConventionTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConventionTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConventionTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConventionTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], ConventionTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConventionTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    storagePath?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    formations?: boolean | ConventionTemplate$formationsArgs<ExtArgs>
+    _count?: boolean | ConventionTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conventionTemplate"]>
+
+  export type ConventionTemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    storagePath?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["conventionTemplate"]>
+
+  export type ConventionTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    storagePath?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["conventionTemplate"]>
+
+  export type ConventionTemplateSelectScalar = {
+    id?: boolean
+    nom?: boolean
+    storagePath?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ConventionTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "storagePath" | "createdAt" | "updatedAt", ExtArgs["result"]["conventionTemplate"]>
+  export type ConventionTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formations?: boolean | ConventionTemplate$formationsArgs<ExtArgs>
+    _count?: boolean | ConventionTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ConventionTemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ConventionTemplateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ConventionTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConventionTemplate"
+    objects: {
+      formations: Prisma.$FormationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nom: string
+      storagePath: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["conventionTemplate"]>
+    composites: {}
+  }
+
+  type ConventionTemplateGetPayload<S extends boolean | null | undefined | ConventionTemplateDefaultArgs> = $Result.GetResult<Prisma.$ConventionTemplatePayload, S>
+
+  type ConventionTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConventionTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConventionTemplateCountAggregateInputType | true
+    }
+
+  export interface ConventionTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConventionTemplate'], meta: { name: 'ConventionTemplate' } }
+    /**
+     * Find zero or one ConventionTemplate that matches the filter.
+     * @param {ConventionTemplateFindUniqueArgs} args - Arguments to find a ConventionTemplate
+     * @example
+     * // Get one ConventionTemplate
+     * const conventionTemplate = await prisma.conventionTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConventionTemplateFindUniqueArgs>(args: SelectSubset<T, ConventionTemplateFindUniqueArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConventionTemplate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConventionTemplateFindUniqueOrThrowArgs} args - Arguments to find a ConventionTemplate
+     * @example
+     * // Get one ConventionTemplate
+     * const conventionTemplate = await prisma.conventionTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConventionTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, ConventionTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConventionTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionTemplateFindFirstArgs} args - Arguments to find a ConventionTemplate
+     * @example
+     * // Get one ConventionTemplate
+     * const conventionTemplate = await prisma.conventionTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConventionTemplateFindFirstArgs>(args?: SelectSubset<T, ConventionTemplateFindFirstArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConventionTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionTemplateFindFirstOrThrowArgs} args - Arguments to find a ConventionTemplate
+     * @example
+     * // Get one ConventionTemplate
+     * const conventionTemplate = await prisma.conventionTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConventionTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, ConventionTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConventionTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConventionTemplates
+     * const conventionTemplates = await prisma.conventionTemplate.findMany()
+     * 
+     * // Get first 10 ConventionTemplates
+     * const conventionTemplates = await prisma.conventionTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conventionTemplateWithIdOnly = await prisma.conventionTemplate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConventionTemplateFindManyArgs>(args?: SelectSubset<T, ConventionTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConventionTemplate.
+     * @param {ConventionTemplateCreateArgs} args - Arguments to create a ConventionTemplate.
+     * @example
+     * // Create one ConventionTemplate
+     * const ConventionTemplate = await prisma.conventionTemplate.create({
+     *   data: {
+     *     // ... data to create a ConventionTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConventionTemplateCreateArgs>(args: SelectSubset<T, ConventionTemplateCreateArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConventionTemplates.
+     * @param {ConventionTemplateCreateManyArgs} args - Arguments to create many ConventionTemplates.
+     * @example
+     * // Create many ConventionTemplates
+     * const conventionTemplate = await prisma.conventionTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConventionTemplateCreateManyArgs>(args?: SelectSubset<T, ConventionTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ConventionTemplates and returns the data saved in the database.
+     * @param {ConventionTemplateCreateManyAndReturnArgs} args - Arguments to create many ConventionTemplates.
+     * @example
+     * // Create many ConventionTemplates
+     * const conventionTemplate = await prisma.conventionTemplate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ConventionTemplates and only return the `id`
+     * const conventionTemplateWithIdOnly = await prisma.conventionTemplate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConventionTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, ConventionTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ConventionTemplate.
+     * @param {ConventionTemplateDeleteArgs} args - Arguments to delete one ConventionTemplate.
+     * @example
+     * // Delete one ConventionTemplate
+     * const ConventionTemplate = await prisma.conventionTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one ConventionTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConventionTemplateDeleteArgs>(args: SelectSubset<T, ConventionTemplateDeleteArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConventionTemplate.
+     * @param {ConventionTemplateUpdateArgs} args - Arguments to update one ConventionTemplate.
+     * @example
+     * // Update one ConventionTemplate
+     * const conventionTemplate = await prisma.conventionTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConventionTemplateUpdateArgs>(args: SelectSubset<T, ConventionTemplateUpdateArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConventionTemplates.
+     * @param {ConventionTemplateDeleteManyArgs} args - Arguments to filter ConventionTemplates to delete.
+     * @example
+     * // Delete a few ConventionTemplates
+     * const { count } = await prisma.conventionTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConventionTemplateDeleteManyArgs>(args?: SelectSubset<T, ConventionTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConventionTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConventionTemplates
+     * const conventionTemplate = await prisma.conventionTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConventionTemplateUpdateManyArgs>(args: SelectSubset<T, ConventionTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConventionTemplates and returns the data updated in the database.
+     * @param {ConventionTemplateUpdateManyAndReturnArgs} args - Arguments to update many ConventionTemplates.
+     * @example
+     * // Update many ConventionTemplates
+     * const conventionTemplate = await prisma.conventionTemplate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ConventionTemplates and only return the `id`
+     * const conventionTemplateWithIdOnly = await prisma.conventionTemplate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConventionTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, ConventionTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ConventionTemplate.
+     * @param {ConventionTemplateUpsertArgs} args - Arguments to update or create a ConventionTemplate.
+     * @example
+     * // Update or create a ConventionTemplate
+     * const conventionTemplate = await prisma.conventionTemplate.upsert({
+     *   create: {
+     *     // ... data to create a ConventionTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConventionTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConventionTemplateUpsertArgs>(args: SelectSubset<T, ConventionTemplateUpsertArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConventionTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionTemplateCountArgs} args - Arguments to filter ConventionTemplates to count.
+     * @example
+     * // Count the number of ConventionTemplates
+     * const count = await prisma.conventionTemplate.count({
+     *   where: {
+     *     // ... the filter for the ConventionTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConventionTemplateCountArgs>(
+      args?: Subset<T, ConventionTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConventionTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConventionTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConventionTemplateAggregateArgs>(args: Subset<T, ConventionTemplateAggregateArgs>): Prisma.PrismaPromise<GetConventionTemplateAggregateType<T>>
+
+    /**
+     * Group by ConventionTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConventionTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConventionTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: ConventionTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConventionTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConventionTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConventionTemplate model
+   */
+  readonly fields: ConventionTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConventionTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConventionTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    formations<T extends ConventionTemplate$formationsArgs<ExtArgs> = {}>(args?: Subset<T, ConventionTemplate$formationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConventionTemplate model
+   */
+  interface ConventionTemplateFieldRefs {
+    readonly id: FieldRef<"ConventionTemplate", 'String'>
+    readonly nom: FieldRef<"ConventionTemplate", 'String'>
+    readonly storagePath: FieldRef<"ConventionTemplate", 'String'>
+    readonly createdAt: FieldRef<"ConventionTemplate", 'DateTime'>
+    readonly updatedAt: FieldRef<"ConventionTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConventionTemplate findUnique
+   */
+  export type ConventionTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionTemplate to fetch.
+     */
+    where: ConventionTemplateWhereUniqueInput
+  }
+
+  /**
+   * ConventionTemplate findUniqueOrThrow
+   */
+  export type ConventionTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionTemplate to fetch.
+     */
+    where: ConventionTemplateWhereUniqueInput
+  }
+
+  /**
+   * ConventionTemplate findFirst
+   */
+  export type ConventionTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionTemplate to fetch.
+     */
+    where?: ConventionTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionTemplates to fetch.
+     */
+    orderBy?: ConventionTemplateOrderByWithRelationInput | ConventionTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConventionTemplates.
+     */
+    cursor?: ConventionTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConventionTemplates.
+     */
+    distinct?: ConventionTemplateScalarFieldEnum | ConventionTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionTemplate findFirstOrThrow
+   */
+  export type ConventionTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionTemplate to fetch.
+     */
+    where?: ConventionTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionTemplates to fetch.
+     */
+    orderBy?: ConventionTemplateOrderByWithRelationInput | ConventionTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConventionTemplates.
+     */
+    cursor?: ConventionTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConventionTemplates.
+     */
+    distinct?: ConventionTemplateScalarFieldEnum | ConventionTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionTemplate findMany
+   */
+  export type ConventionTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionTemplates to fetch.
+     */
+    where?: ConventionTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionTemplates to fetch.
+     */
+    orderBy?: ConventionTemplateOrderByWithRelationInput | ConventionTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConventionTemplates.
+     */
+    cursor?: ConventionTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConventionTemplates.
+     */
+    distinct?: ConventionTemplateScalarFieldEnum | ConventionTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionTemplate create
+   */
+  export type ConventionTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ConventionTemplate.
+     */
+    data: XOR<ConventionTemplateCreateInput, ConventionTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * ConventionTemplate createMany
+   */
+  export type ConventionTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConventionTemplates.
+     */
+    data: ConventionTemplateCreateManyInput | ConventionTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConventionTemplate createManyAndReturn
+   */
+  export type ConventionTemplateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to create many ConventionTemplates.
+     */
+    data: ConventionTemplateCreateManyInput | ConventionTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConventionTemplate update
+   */
+  export type ConventionTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ConventionTemplate.
+     */
+    data: XOR<ConventionTemplateUpdateInput, ConventionTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which ConventionTemplate to update.
+     */
+    where: ConventionTemplateWhereUniqueInput
+  }
+
+  /**
+   * ConventionTemplate updateMany
+   */
+  export type ConventionTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConventionTemplates.
+     */
+    data: XOR<ConventionTemplateUpdateManyMutationInput, ConventionTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which ConventionTemplates to update
+     */
+    where?: ConventionTemplateWhereInput
+    /**
+     * Limit how many ConventionTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConventionTemplate updateManyAndReturn
+   */
+  export type ConventionTemplateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to update ConventionTemplates.
+     */
+    data: XOR<ConventionTemplateUpdateManyMutationInput, ConventionTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which ConventionTemplates to update
+     */
+    where?: ConventionTemplateWhereInput
+    /**
+     * Limit how many ConventionTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConventionTemplate upsert
+   */
+  export type ConventionTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ConventionTemplate to update in case it exists.
+     */
+    where: ConventionTemplateWhereUniqueInput
+    /**
+     * In case the ConventionTemplate found by the `where` argument doesn't exist, create a new ConventionTemplate with this data.
+     */
+    create: XOR<ConventionTemplateCreateInput, ConventionTemplateUncheckedCreateInput>
+    /**
+     * In case the ConventionTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConventionTemplateUpdateInput, ConventionTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * ConventionTemplate delete
+   */
+  export type ConventionTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+    /**
+     * Filter which ConventionTemplate to delete.
+     */
+    where: ConventionTemplateWhereUniqueInput
+  }
+
+  /**
+   * ConventionTemplate deleteMany
+   */
+  export type ConventionTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConventionTemplates to delete
+     */
+    where?: ConventionTemplateWhereInput
+    /**
+     * Limit how many ConventionTemplates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConventionTemplate.formations
+   */
+  export type ConventionTemplate$formationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Formation
+     */
+    select?: FormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Formation
+     */
+    omit?: FormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationInclude<ExtArgs> | null
+    where?: FormationWhereInput
+    orderBy?: FormationOrderByWithRelationInput | FormationOrderByWithRelationInput[]
+    cursor?: FormationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FormationScalarFieldEnum | FormationScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionTemplate without action
+   */
+  export type ConventionTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionTemplate
+     */
+    select?: ConventionTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionTemplate
+     */
+    omit?: ConventionTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionTemplateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ConventionStagiaire
+   */
+
+  export type AggregateConventionStagiaire = {
+    _count: ConventionStagiaireCountAggregateOutputType | null
+    _min: ConventionStagiaireMinAggregateOutputType | null
+    _max: ConventionStagiaireMaxAggregateOutputType | null
+  }
+
+  export type ConventionStagiaireMinAggregateOutputType = {
+    id: string | null
+    formationId: string | null
+    club: string | null
+    numeroAffiliationClub: string | null
+    emailClub: string | null
+    civilite: string | null
+    nom: string | null
+    prenom: string | null
+    dateNaissance: string | null
+    adresse: string | null
+    cp: string | null
+    ville: string | null
+    telephone: string | null
+    email: string | null
+    tuteurNom: string | null
+    tuteurPrenom: string | null
+    tuteurEmail: string | null
+    maitreDeStageNom: string | null
+    maitreDeStagePrenom: string | null
+    maitreDeStageAdresse: string | null
+    maitreDeStageCp: string | null
+    maitreDeStageVille: string | null
+    maitreDeStageEmail: string | null
+    pdfStoragePath: string | null
+    envoyeAt: Date | null
+    completedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type ConventionStagiaireMaxAggregateOutputType = {
+    id: string | null
+    formationId: string | null
+    club: string | null
+    numeroAffiliationClub: string | null
+    emailClub: string | null
+    civilite: string | null
+    nom: string | null
+    prenom: string | null
+    dateNaissance: string | null
+    adresse: string | null
+    cp: string | null
+    ville: string | null
+    telephone: string | null
+    email: string | null
+    tuteurNom: string | null
+    tuteurPrenom: string | null
+    tuteurEmail: string | null
+    maitreDeStageNom: string | null
+    maitreDeStagePrenom: string | null
+    maitreDeStageAdresse: string | null
+    maitreDeStageCp: string | null
+    maitreDeStageVille: string | null
+    maitreDeStageEmail: string | null
+    pdfStoragePath: string | null
+    envoyeAt: Date | null
+    completedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type ConventionStagiaireCountAggregateOutputType = {
+    id: number
+    formationId: number
+    club: number
+    numeroAffiliationClub: number
+    emailClub: number
+    civilite: number
+    nom: number
+    prenom: number
+    dateNaissance: number
+    adresse: number
+    cp: number
+    ville: number
+    telephone: number
+    email: number
+    tuteurNom: number
+    tuteurPrenom: number
+    tuteurEmail: number
+    maitreDeStageNom: number
+    maitreDeStagePrenom: number
+    maitreDeStageAdresse: number
+    maitreDeStageCp: number
+    maitreDeStageVille: number
+    maitreDeStageEmail: number
+    donneesSupplementaires: number
+    pdfStoragePath: number
+    envoyeAt: number
+    completedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ConventionStagiaireMinAggregateInputType = {
+    id?: true
+    formationId?: true
+    club?: true
+    numeroAffiliationClub?: true
+    emailClub?: true
+    civilite?: true
+    nom?: true
+    prenom?: true
+    dateNaissance?: true
+    adresse?: true
+    cp?: true
+    ville?: true
+    telephone?: true
+    email?: true
+    tuteurNom?: true
+    tuteurPrenom?: true
+    tuteurEmail?: true
+    maitreDeStageNom?: true
+    maitreDeStagePrenom?: true
+    maitreDeStageAdresse?: true
+    maitreDeStageCp?: true
+    maitreDeStageVille?: true
+    maitreDeStageEmail?: true
+    pdfStoragePath?: true
+    envoyeAt?: true
+    completedAt?: true
+    createdAt?: true
+  }
+
+  export type ConventionStagiaireMaxAggregateInputType = {
+    id?: true
+    formationId?: true
+    club?: true
+    numeroAffiliationClub?: true
+    emailClub?: true
+    civilite?: true
+    nom?: true
+    prenom?: true
+    dateNaissance?: true
+    adresse?: true
+    cp?: true
+    ville?: true
+    telephone?: true
+    email?: true
+    tuteurNom?: true
+    tuteurPrenom?: true
+    tuteurEmail?: true
+    maitreDeStageNom?: true
+    maitreDeStagePrenom?: true
+    maitreDeStageAdresse?: true
+    maitreDeStageCp?: true
+    maitreDeStageVille?: true
+    maitreDeStageEmail?: true
+    pdfStoragePath?: true
+    envoyeAt?: true
+    completedAt?: true
+    createdAt?: true
+  }
+
+  export type ConventionStagiaireCountAggregateInputType = {
+    id?: true
+    formationId?: true
+    club?: true
+    numeroAffiliationClub?: true
+    emailClub?: true
+    civilite?: true
+    nom?: true
+    prenom?: true
+    dateNaissance?: true
+    adresse?: true
+    cp?: true
+    ville?: true
+    telephone?: true
+    email?: true
+    tuteurNom?: true
+    tuteurPrenom?: true
+    tuteurEmail?: true
+    maitreDeStageNom?: true
+    maitreDeStagePrenom?: true
+    maitreDeStageAdresse?: true
+    maitreDeStageCp?: true
+    maitreDeStageVille?: true
+    maitreDeStageEmail?: true
+    donneesSupplementaires?: true
+    pdfStoragePath?: true
+    envoyeAt?: true
+    completedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ConventionStagiaireAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConventionStagiaire to aggregate.
+     */
+    where?: ConventionStagiaireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionStagiaires to fetch.
+     */
+    orderBy?: ConventionStagiaireOrderByWithRelationInput | ConventionStagiaireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConventionStagiaireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionStagiaires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionStagiaires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConventionStagiaires
+    **/
+    _count?: true | ConventionStagiaireCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConventionStagiaireMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConventionStagiaireMaxAggregateInputType
+  }
+
+  export type GetConventionStagiaireAggregateType<T extends ConventionStagiaireAggregateArgs> = {
+        [P in keyof T & keyof AggregateConventionStagiaire]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConventionStagiaire[P]>
+      : GetScalarType<T[P], AggregateConventionStagiaire[P]>
+  }
+
+
+
+
+  export type ConventionStagiaireGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConventionStagiaireWhereInput
+    orderBy?: ConventionStagiaireOrderByWithAggregationInput | ConventionStagiaireOrderByWithAggregationInput[]
+    by: ConventionStagiaireScalarFieldEnum[] | ConventionStagiaireScalarFieldEnum
+    having?: ConventionStagiaireScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConventionStagiaireCountAggregateInputType | true
+    _min?: ConventionStagiaireMinAggregateInputType
+    _max?: ConventionStagiaireMaxAggregateInputType
+  }
+
+  export type ConventionStagiaireGroupByOutputType = {
+    id: string
+    formationId: string
+    club: string | null
+    numeroAffiliationClub: string | null
+    emailClub: string | null
+    civilite: string | null
+    nom: string
+    prenom: string
+    dateNaissance: string | null
+    adresse: string | null
+    cp: string | null
+    ville: string | null
+    telephone: string | null
+    email: string
+    tuteurNom: string | null
+    tuteurPrenom: string | null
+    tuteurEmail: string | null
+    maitreDeStageNom: string | null
+    maitreDeStagePrenom: string | null
+    maitreDeStageAdresse: string | null
+    maitreDeStageCp: string | null
+    maitreDeStageVille: string | null
+    maitreDeStageEmail: string | null
+    donneesSupplementaires: JsonValue | null
+    pdfStoragePath: string | null
+    envoyeAt: Date | null
+    completedAt: Date | null
+    createdAt: Date
+    _count: ConventionStagiaireCountAggregateOutputType | null
+    _min: ConventionStagiaireMinAggregateOutputType | null
+    _max: ConventionStagiaireMaxAggregateOutputType | null
+  }
+
+  type GetConventionStagiaireGroupByPayload<T extends ConventionStagiaireGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConventionStagiaireGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConventionStagiaireGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConventionStagiaireGroupByOutputType[P]>
+            : GetScalarType<T[P], ConventionStagiaireGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConventionStagiaireSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    formationId?: boolean
+    club?: boolean
+    numeroAffiliationClub?: boolean
+    emailClub?: boolean
+    civilite?: boolean
+    nom?: boolean
+    prenom?: boolean
+    dateNaissance?: boolean
+    adresse?: boolean
+    cp?: boolean
+    ville?: boolean
+    telephone?: boolean
+    email?: boolean
+    tuteurNom?: boolean
+    tuteurPrenom?: boolean
+    tuteurEmail?: boolean
+    maitreDeStageNom?: boolean
+    maitreDeStagePrenom?: boolean
+    maitreDeStageAdresse?: boolean
+    maitreDeStageCp?: boolean
+    maitreDeStageVille?: boolean
+    maitreDeStageEmail?: boolean
+    donneesSupplementaires?: boolean
+    pdfStoragePath?: boolean
+    envoyeAt?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
+    signataires?: boolean | ConventionStagiaire$signatairesArgs<ExtArgs>
+    _count?: boolean | ConventionStagiaireCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conventionStagiaire"]>
+
+  export type ConventionStagiaireSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    formationId?: boolean
+    club?: boolean
+    numeroAffiliationClub?: boolean
+    emailClub?: boolean
+    civilite?: boolean
+    nom?: boolean
+    prenom?: boolean
+    dateNaissance?: boolean
+    adresse?: boolean
+    cp?: boolean
+    ville?: boolean
+    telephone?: boolean
+    email?: boolean
+    tuteurNom?: boolean
+    tuteurPrenom?: boolean
+    tuteurEmail?: boolean
+    maitreDeStageNom?: boolean
+    maitreDeStagePrenom?: boolean
+    maitreDeStageAdresse?: boolean
+    maitreDeStageCp?: boolean
+    maitreDeStageVille?: boolean
+    maitreDeStageEmail?: boolean
+    donneesSupplementaires?: boolean
+    pdfStoragePath?: boolean
+    envoyeAt?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conventionStagiaire"]>
+
+  export type ConventionStagiaireSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    formationId?: boolean
+    club?: boolean
+    numeroAffiliationClub?: boolean
+    emailClub?: boolean
+    civilite?: boolean
+    nom?: boolean
+    prenom?: boolean
+    dateNaissance?: boolean
+    adresse?: boolean
+    cp?: boolean
+    ville?: boolean
+    telephone?: boolean
+    email?: boolean
+    tuteurNom?: boolean
+    tuteurPrenom?: boolean
+    tuteurEmail?: boolean
+    maitreDeStageNom?: boolean
+    maitreDeStagePrenom?: boolean
+    maitreDeStageAdresse?: boolean
+    maitreDeStageCp?: boolean
+    maitreDeStageVille?: boolean
+    maitreDeStageEmail?: boolean
+    donneesSupplementaires?: boolean
+    pdfStoragePath?: boolean
+    envoyeAt?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conventionStagiaire"]>
+
+  export type ConventionStagiaireSelectScalar = {
+    id?: boolean
+    formationId?: boolean
+    club?: boolean
+    numeroAffiliationClub?: boolean
+    emailClub?: boolean
+    civilite?: boolean
+    nom?: boolean
+    prenom?: boolean
+    dateNaissance?: boolean
+    adresse?: boolean
+    cp?: boolean
+    ville?: boolean
+    telephone?: boolean
+    email?: boolean
+    tuteurNom?: boolean
+    tuteurPrenom?: boolean
+    tuteurEmail?: boolean
+    maitreDeStageNom?: boolean
+    maitreDeStagePrenom?: boolean
+    maitreDeStageAdresse?: boolean
+    maitreDeStageCp?: boolean
+    maitreDeStageVille?: boolean
+    maitreDeStageEmail?: boolean
+    donneesSupplementaires?: boolean
+    pdfStoragePath?: boolean
+    envoyeAt?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type ConventionStagiaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formationId" | "club" | "numeroAffiliationClub" | "emailClub" | "civilite" | "nom" | "prenom" | "dateNaissance" | "adresse" | "cp" | "ville" | "telephone" | "email" | "tuteurNom" | "tuteurPrenom" | "tuteurEmail" | "maitreDeStageNom" | "maitreDeStagePrenom" | "maitreDeStageAdresse" | "maitreDeStageCp" | "maitreDeStageVille" | "maitreDeStageEmail" | "donneesSupplementaires" | "pdfStoragePath" | "envoyeAt" | "completedAt" | "createdAt", ExtArgs["result"]["conventionStagiaire"]>
+  export type ConventionStagiaireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
+    signataires?: boolean | ConventionStagiaire$signatairesArgs<ExtArgs>
+    _count?: boolean | ConventionStagiaireCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ConventionStagiaireIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
+  }
+  export type ConventionStagiaireIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
+  }
+
+  export type $ConventionStagiairePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConventionStagiaire"
+    objects: {
+      formation: Prisma.$FormationPayload<ExtArgs>
+      signataires: Prisma.$ConventionSignatairePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      formationId: string
+      club: string | null
+      numeroAffiliationClub: string | null
+      emailClub: string | null
+      civilite: string | null
+      nom: string
+      prenom: string
+      dateNaissance: string | null
+      adresse: string | null
+      cp: string | null
+      ville: string | null
+      telephone: string | null
+      email: string
+      tuteurNom: string | null
+      tuteurPrenom: string | null
+      tuteurEmail: string | null
+      maitreDeStageNom: string | null
+      maitreDeStagePrenom: string | null
+      maitreDeStageAdresse: string | null
+      maitreDeStageCp: string | null
+      maitreDeStageVille: string | null
+      maitreDeStageEmail: string | null
+      donneesSupplementaires: Prisma.JsonValue | null
+      pdfStoragePath: string | null
+      envoyeAt: Date | null
+      completedAt: Date | null
+      createdAt: Date
+    }, ExtArgs["result"]["conventionStagiaire"]>
+    composites: {}
+  }
+
+  type ConventionStagiaireGetPayload<S extends boolean | null | undefined | ConventionStagiaireDefaultArgs> = $Result.GetResult<Prisma.$ConventionStagiairePayload, S>
+
+  type ConventionStagiaireCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConventionStagiaireFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConventionStagiaireCountAggregateInputType | true
+    }
+
+  export interface ConventionStagiaireDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConventionStagiaire'], meta: { name: 'ConventionStagiaire' } }
+    /**
+     * Find zero or one ConventionStagiaire that matches the filter.
+     * @param {ConventionStagiaireFindUniqueArgs} args - Arguments to find a ConventionStagiaire
+     * @example
+     * // Get one ConventionStagiaire
+     * const conventionStagiaire = await prisma.conventionStagiaire.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConventionStagiaireFindUniqueArgs>(args: SelectSubset<T, ConventionStagiaireFindUniqueArgs<ExtArgs>>): Prisma__ConventionStagiaireClient<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConventionStagiaire that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConventionStagiaireFindUniqueOrThrowArgs} args - Arguments to find a ConventionStagiaire
+     * @example
+     * // Get one ConventionStagiaire
+     * const conventionStagiaire = await prisma.conventionStagiaire.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConventionStagiaireFindUniqueOrThrowArgs>(args: SelectSubset<T, ConventionStagiaireFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConventionStagiaireClient<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConventionStagiaire that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionStagiaireFindFirstArgs} args - Arguments to find a ConventionStagiaire
+     * @example
+     * // Get one ConventionStagiaire
+     * const conventionStagiaire = await prisma.conventionStagiaire.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConventionStagiaireFindFirstArgs>(args?: SelectSubset<T, ConventionStagiaireFindFirstArgs<ExtArgs>>): Prisma__ConventionStagiaireClient<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConventionStagiaire that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionStagiaireFindFirstOrThrowArgs} args - Arguments to find a ConventionStagiaire
+     * @example
+     * // Get one ConventionStagiaire
+     * const conventionStagiaire = await prisma.conventionStagiaire.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConventionStagiaireFindFirstOrThrowArgs>(args?: SelectSubset<T, ConventionStagiaireFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConventionStagiaireClient<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConventionStagiaires that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionStagiaireFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConventionStagiaires
+     * const conventionStagiaires = await prisma.conventionStagiaire.findMany()
+     * 
+     * // Get first 10 ConventionStagiaires
+     * const conventionStagiaires = await prisma.conventionStagiaire.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conventionStagiaireWithIdOnly = await prisma.conventionStagiaire.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConventionStagiaireFindManyArgs>(args?: SelectSubset<T, ConventionStagiaireFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConventionStagiaire.
+     * @param {ConventionStagiaireCreateArgs} args - Arguments to create a ConventionStagiaire.
+     * @example
+     * // Create one ConventionStagiaire
+     * const ConventionStagiaire = await prisma.conventionStagiaire.create({
+     *   data: {
+     *     // ... data to create a ConventionStagiaire
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConventionStagiaireCreateArgs>(args: SelectSubset<T, ConventionStagiaireCreateArgs<ExtArgs>>): Prisma__ConventionStagiaireClient<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConventionStagiaires.
+     * @param {ConventionStagiaireCreateManyArgs} args - Arguments to create many ConventionStagiaires.
+     * @example
+     * // Create many ConventionStagiaires
+     * const conventionStagiaire = await prisma.conventionStagiaire.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConventionStagiaireCreateManyArgs>(args?: SelectSubset<T, ConventionStagiaireCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ConventionStagiaires and returns the data saved in the database.
+     * @param {ConventionStagiaireCreateManyAndReturnArgs} args - Arguments to create many ConventionStagiaires.
+     * @example
+     * // Create many ConventionStagiaires
+     * const conventionStagiaire = await prisma.conventionStagiaire.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ConventionStagiaires and only return the `id`
+     * const conventionStagiaireWithIdOnly = await prisma.conventionStagiaire.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConventionStagiaireCreateManyAndReturnArgs>(args?: SelectSubset<T, ConventionStagiaireCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ConventionStagiaire.
+     * @param {ConventionStagiaireDeleteArgs} args - Arguments to delete one ConventionStagiaire.
+     * @example
+     * // Delete one ConventionStagiaire
+     * const ConventionStagiaire = await prisma.conventionStagiaire.delete({
+     *   where: {
+     *     // ... filter to delete one ConventionStagiaire
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConventionStagiaireDeleteArgs>(args: SelectSubset<T, ConventionStagiaireDeleteArgs<ExtArgs>>): Prisma__ConventionStagiaireClient<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConventionStagiaire.
+     * @param {ConventionStagiaireUpdateArgs} args - Arguments to update one ConventionStagiaire.
+     * @example
+     * // Update one ConventionStagiaire
+     * const conventionStagiaire = await prisma.conventionStagiaire.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConventionStagiaireUpdateArgs>(args: SelectSubset<T, ConventionStagiaireUpdateArgs<ExtArgs>>): Prisma__ConventionStagiaireClient<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConventionStagiaires.
+     * @param {ConventionStagiaireDeleteManyArgs} args - Arguments to filter ConventionStagiaires to delete.
+     * @example
+     * // Delete a few ConventionStagiaires
+     * const { count } = await prisma.conventionStagiaire.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConventionStagiaireDeleteManyArgs>(args?: SelectSubset<T, ConventionStagiaireDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConventionStagiaires.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionStagiaireUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConventionStagiaires
+     * const conventionStagiaire = await prisma.conventionStagiaire.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConventionStagiaireUpdateManyArgs>(args: SelectSubset<T, ConventionStagiaireUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConventionStagiaires and returns the data updated in the database.
+     * @param {ConventionStagiaireUpdateManyAndReturnArgs} args - Arguments to update many ConventionStagiaires.
+     * @example
+     * // Update many ConventionStagiaires
+     * const conventionStagiaire = await prisma.conventionStagiaire.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ConventionStagiaires and only return the `id`
+     * const conventionStagiaireWithIdOnly = await prisma.conventionStagiaire.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConventionStagiaireUpdateManyAndReturnArgs>(args: SelectSubset<T, ConventionStagiaireUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ConventionStagiaire.
+     * @param {ConventionStagiaireUpsertArgs} args - Arguments to update or create a ConventionStagiaire.
+     * @example
+     * // Update or create a ConventionStagiaire
+     * const conventionStagiaire = await prisma.conventionStagiaire.upsert({
+     *   create: {
+     *     // ... data to create a ConventionStagiaire
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConventionStagiaire we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConventionStagiaireUpsertArgs>(args: SelectSubset<T, ConventionStagiaireUpsertArgs<ExtArgs>>): Prisma__ConventionStagiaireClient<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConventionStagiaires.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionStagiaireCountArgs} args - Arguments to filter ConventionStagiaires to count.
+     * @example
+     * // Count the number of ConventionStagiaires
+     * const count = await prisma.conventionStagiaire.count({
+     *   where: {
+     *     // ... the filter for the ConventionStagiaires we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConventionStagiaireCountArgs>(
+      args?: Subset<T, ConventionStagiaireCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConventionStagiaireCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConventionStagiaire.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionStagiaireAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConventionStagiaireAggregateArgs>(args: Subset<T, ConventionStagiaireAggregateArgs>): Prisma.PrismaPromise<GetConventionStagiaireAggregateType<T>>
+
+    /**
+     * Group by ConventionStagiaire.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionStagiaireGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConventionStagiaireGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConventionStagiaireGroupByArgs['orderBy'] }
+        : { orderBy?: ConventionStagiaireGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConventionStagiaireGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConventionStagiaireGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConventionStagiaire model
+   */
+  readonly fields: ConventionStagiaireFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConventionStagiaire.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConventionStagiaireClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    formation<T extends FormationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FormationDefaultArgs<ExtArgs>>): Prisma__FormationClient<$Result.GetResult<Prisma.$FormationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    signataires<T extends ConventionStagiaire$signatairesArgs<ExtArgs> = {}>(args?: Subset<T, ConventionStagiaire$signatairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConventionStagiaire model
+   */
+  interface ConventionStagiaireFieldRefs {
+    readonly id: FieldRef<"ConventionStagiaire", 'String'>
+    readonly formationId: FieldRef<"ConventionStagiaire", 'String'>
+    readonly club: FieldRef<"ConventionStagiaire", 'String'>
+    readonly numeroAffiliationClub: FieldRef<"ConventionStagiaire", 'String'>
+    readonly emailClub: FieldRef<"ConventionStagiaire", 'String'>
+    readonly civilite: FieldRef<"ConventionStagiaire", 'String'>
+    readonly nom: FieldRef<"ConventionStagiaire", 'String'>
+    readonly prenom: FieldRef<"ConventionStagiaire", 'String'>
+    readonly dateNaissance: FieldRef<"ConventionStagiaire", 'String'>
+    readonly adresse: FieldRef<"ConventionStagiaire", 'String'>
+    readonly cp: FieldRef<"ConventionStagiaire", 'String'>
+    readonly ville: FieldRef<"ConventionStagiaire", 'String'>
+    readonly telephone: FieldRef<"ConventionStagiaire", 'String'>
+    readonly email: FieldRef<"ConventionStagiaire", 'String'>
+    readonly tuteurNom: FieldRef<"ConventionStagiaire", 'String'>
+    readonly tuteurPrenom: FieldRef<"ConventionStagiaire", 'String'>
+    readonly tuteurEmail: FieldRef<"ConventionStagiaire", 'String'>
+    readonly maitreDeStageNom: FieldRef<"ConventionStagiaire", 'String'>
+    readonly maitreDeStagePrenom: FieldRef<"ConventionStagiaire", 'String'>
+    readonly maitreDeStageAdresse: FieldRef<"ConventionStagiaire", 'String'>
+    readonly maitreDeStageCp: FieldRef<"ConventionStagiaire", 'String'>
+    readonly maitreDeStageVille: FieldRef<"ConventionStagiaire", 'String'>
+    readonly maitreDeStageEmail: FieldRef<"ConventionStagiaire", 'String'>
+    readonly donneesSupplementaires: FieldRef<"ConventionStagiaire", 'Json'>
+    readonly pdfStoragePath: FieldRef<"ConventionStagiaire", 'String'>
+    readonly envoyeAt: FieldRef<"ConventionStagiaire", 'DateTime'>
+    readonly completedAt: FieldRef<"ConventionStagiaire", 'DateTime'>
+    readonly createdAt: FieldRef<"ConventionStagiaire", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConventionStagiaire findUnique
+   */
+  export type ConventionStagiaireFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionStagiaire to fetch.
+     */
+    where: ConventionStagiaireWhereUniqueInput
+  }
+
+  /**
+   * ConventionStagiaire findUniqueOrThrow
+   */
+  export type ConventionStagiaireFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionStagiaire to fetch.
+     */
+    where: ConventionStagiaireWhereUniqueInput
+  }
+
+  /**
+   * ConventionStagiaire findFirst
+   */
+  export type ConventionStagiaireFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionStagiaire to fetch.
+     */
+    where?: ConventionStagiaireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionStagiaires to fetch.
+     */
+    orderBy?: ConventionStagiaireOrderByWithRelationInput | ConventionStagiaireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConventionStagiaires.
+     */
+    cursor?: ConventionStagiaireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionStagiaires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionStagiaires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConventionStagiaires.
+     */
+    distinct?: ConventionStagiaireScalarFieldEnum | ConventionStagiaireScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionStagiaire findFirstOrThrow
+   */
+  export type ConventionStagiaireFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionStagiaire to fetch.
+     */
+    where?: ConventionStagiaireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionStagiaires to fetch.
+     */
+    orderBy?: ConventionStagiaireOrderByWithRelationInput | ConventionStagiaireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConventionStagiaires.
+     */
+    cursor?: ConventionStagiaireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionStagiaires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionStagiaires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConventionStagiaires.
+     */
+    distinct?: ConventionStagiaireScalarFieldEnum | ConventionStagiaireScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionStagiaire findMany
+   */
+  export type ConventionStagiaireFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionStagiaires to fetch.
+     */
+    where?: ConventionStagiaireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionStagiaires to fetch.
+     */
+    orderBy?: ConventionStagiaireOrderByWithRelationInput | ConventionStagiaireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConventionStagiaires.
+     */
+    cursor?: ConventionStagiaireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionStagiaires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionStagiaires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConventionStagiaires.
+     */
+    distinct?: ConventionStagiaireScalarFieldEnum | ConventionStagiaireScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionStagiaire create
+   */
+  export type ConventionStagiaireCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ConventionStagiaire.
+     */
+    data: XOR<ConventionStagiaireCreateInput, ConventionStagiaireUncheckedCreateInput>
+  }
+
+  /**
+   * ConventionStagiaire createMany
+   */
+  export type ConventionStagiaireCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConventionStagiaires.
+     */
+    data: ConventionStagiaireCreateManyInput | ConventionStagiaireCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConventionStagiaire createManyAndReturn
+   */
+  export type ConventionStagiaireCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * The data used to create many ConventionStagiaires.
+     */
+    data: ConventionStagiaireCreateManyInput | ConventionStagiaireCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConventionStagiaire update
+   */
+  export type ConventionStagiaireUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ConventionStagiaire.
+     */
+    data: XOR<ConventionStagiaireUpdateInput, ConventionStagiaireUncheckedUpdateInput>
+    /**
+     * Choose, which ConventionStagiaire to update.
+     */
+    where: ConventionStagiaireWhereUniqueInput
+  }
+
+  /**
+   * ConventionStagiaire updateMany
+   */
+  export type ConventionStagiaireUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConventionStagiaires.
+     */
+    data: XOR<ConventionStagiaireUpdateManyMutationInput, ConventionStagiaireUncheckedUpdateManyInput>
+    /**
+     * Filter which ConventionStagiaires to update
+     */
+    where?: ConventionStagiaireWhereInput
+    /**
+     * Limit how many ConventionStagiaires to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConventionStagiaire updateManyAndReturn
+   */
+  export type ConventionStagiaireUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * The data used to update ConventionStagiaires.
+     */
+    data: XOR<ConventionStagiaireUpdateManyMutationInput, ConventionStagiaireUncheckedUpdateManyInput>
+    /**
+     * Filter which ConventionStagiaires to update
+     */
+    where?: ConventionStagiaireWhereInput
+    /**
+     * Limit how many ConventionStagiaires to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConventionStagiaire upsert
+   */
+  export type ConventionStagiaireUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ConventionStagiaire to update in case it exists.
+     */
+    where: ConventionStagiaireWhereUniqueInput
+    /**
+     * In case the ConventionStagiaire found by the `where` argument doesn't exist, create a new ConventionStagiaire with this data.
+     */
+    create: XOR<ConventionStagiaireCreateInput, ConventionStagiaireUncheckedCreateInput>
+    /**
+     * In case the ConventionStagiaire was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConventionStagiaireUpdateInput, ConventionStagiaireUncheckedUpdateInput>
+  }
+
+  /**
+   * ConventionStagiaire delete
+   */
+  export type ConventionStagiaireDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+    /**
+     * Filter which ConventionStagiaire to delete.
+     */
+    where: ConventionStagiaireWhereUniqueInput
+  }
+
+  /**
+   * ConventionStagiaire deleteMany
+   */
+  export type ConventionStagiaireDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConventionStagiaires to delete
+     */
+    where?: ConventionStagiaireWhereInput
+    /**
+     * Limit how many ConventionStagiaires to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConventionStagiaire.signataires
+   */
+  export type ConventionStagiaire$signatairesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    where?: ConventionSignataireWhereInput
+    orderBy?: ConventionSignataireOrderByWithRelationInput | ConventionSignataireOrderByWithRelationInput[]
+    cursor?: ConventionSignataireWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConventionSignataireScalarFieldEnum | ConventionSignataireScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionStagiaire without action
+   */
+  export type ConventionStagiaireDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionStagiaire
+     */
+    select?: ConventionStagiaireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionStagiaire
+     */
+    omit?: ConventionStagiaireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionStagiaireInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ConventionSignataire
+   */
+
+  export type AggregateConventionSignataire = {
+    _count: ConventionSignataireCountAggregateOutputType | null
+    _avg: ConventionSignataireAvgAggregateOutputType | null
+    _sum: ConventionSignataireSumAggregateOutputType | null
+    _min: ConventionSignataireMinAggregateOutputType | null
+    _max: ConventionSignataireMaxAggregateOutputType | null
+  }
+
+  export type ConventionSignataireAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type ConventionSignataireSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type ConventionSignataireMinAggregateOutputType = {
+    id: string | null
+    conventionStagiaireId: string | null
+    role: $Enums.RoleSignataire | null
+    ordre: number | null
+    nom: string | null
+    email: string | null
+    token: string | null
+    statut: $Enums.StatutSignature | null
+    envoyeAt: Date | null
+    signedAt: Date | null
+    refusedAt: Date | null
+    motifRefus: string | null
+    signatureStoragePath: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    documentHash: string | null
+  }
+
+  export type ConventionSignataireMaxAggregateOutputType = {
+    id: string | null
+    conventionStagiaireId: string | null
+    role: $Enums.RoleSignataire | null
+    ordre: number | null
+    nom: string | null
+    email: string | null
+    token: string | null
+    statut: $Enums.StatutSignature | null
+    envoyeAt: Date | null
+    signedAt: Date | null
+    refusedAt: Date | null
+    motifRefus: string | null
+    signatureStoragePath: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    documentHash: string | null
+  }
+
+  export type ConventionSignataireCountAggregateOutputType = {
+    id: number
+    conventionStagiaireId: number
+    role: number
+    ordre: number
+    nom: number
+    email: number
+    token: number
+    statut: number
+    envoyeAt: number
+    signedAt: number
+    refusedAt: number
+    motifRefus: number
+    signatureStoragePath: number
+    ipAddress: number
+    userAgent: number
+    documentHash: number
+    _all: number
+  }
+
+
+  export type ConventionSignataireAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type ConventionSignataireSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type ConventionSignataireMinAggregateInputType = {
+    id?: true
+    conventionStagiaireId?: true
+    role?: true
+    ordre?: true
+    nom?: true
+    email?: true
+    token?: true
+    statut?: true
+    envoyeAt?: true
+    signedAt?: true
+    refusedAt?: true
+    motifRefus?: true
+    signatureStoragePath?: true
+    ipAddress?: true
+    userAgent?: true
+    documentHash?: true
+  }
+
+  export type ConventionSignataireMaxAggregateInputType = {
+    id?: true
+    conventionStagiaireId?: true
+    role?: true
+    ordre?: true
+    nom?: true
+    email?: true
+    token?: true
+    statut?: true
+    envoyeAt?: true
+    signedAt?: true
+    refusedAt?: true
+    motifRefus?: true
+    signatureStoragePath?: true
+    ipAddress?: true
+    userAgent?: true
+    documentHash?: true
+  }
+
+  export type ConventionSignataireCountAggregateInputType = {
+    id?: true
+    conventionStagiaireId?: true
+    role?: true
+    ordre?: true
+    nom?: true
+    email?: true
+    token?: true
+    statut?: true
+    envoyeAt?: true
+    signedAt?: true
+    refusedAt?: true
+    motifRefus?: true
+    signatureStoragePath?: true
+    ipAddress?: true
+    userAgent?: true
+    documentHash?: true
+    _all?: true
+  }
+
+  export type ConventionSignataireAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConventionSignataire to aggregate.
+     */
+    where?: ConventionSignataireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionSignataires to fetch.
+     */
+    orderBy?: ConventionSignataireOrderByWithRelationInput | ConventionSignataireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConventionSignataireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionSignataires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionSignataires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConventionSignataires
+    **/
+    _count?: true | ConventionSignataireCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ConventionSignataireAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConventionSignataireSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConventionSignataireMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConventionSignataireMaxAggregateInputType
+  }
+
+  export type GetConventionSignataireAggregateType<T extends ConventionSignataireAggregateArgs> = {
+        [P in keyof T & keyof AggregateConventionSignataire]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConventionSignataire[P]>
+      : GetScalarType<T[P], AggregateConventionSignataire[P]>
+  }
+
+
+
+
+  export type ConventionSignataireGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConventionSignataireWhereInput
+    orderBy?: ConventionSignataireOrderByWithAggregationInput | ConventionSignataireOrderByWithAggregationInput[]
+    by: ConventionSignataireScalarFieldEnum[] | ConventionSignataireScalarFieldEnum
+    having?: ConventionSignataireScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConventionSignataireCountAggregateInputType | true
+    _avg?: ConventionSignataireAvgAggregateInputType
+    _sum?: ConventionSignataireSumAggregateInputType
+    _min?: ConventionSignataireMinAggregateInputType
+    _max?: ConventionSignataireMaxAggregateInputType
+  }
+
+  export type ConventionSignataireGroupByOutputType = {
+    id: string
+    conventionStagiaireId: string
+    role: $Enums.RoleSignataire
+    ordre: number
+    nom: string
+    email: string
+    token: string
+    statut: $Enums.StatutSignature
+    envoyeAt: Date | null
+    signedAt: Date | null
+    refusedAt: Date | null
+    motifRefus: string | null
+    signatureStoragePath: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    documentHash: string | null
+    _count: ConventionSignataireCountAggregateOutputType | null
+    _avg: ConventionSignataireAvgAggregateOutputType | null
+    _sum: ConventionSignataireSumAggregateOutputType | null
+    _min: ConventionSignataireMinAggregateOutputType | null
+    _max: ConventionSignataireMaxAggregateOutputType | null
+  }
+
+  type GetConventionSignataireGroupByPayload<T extends ConventionSignataireGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConventionSignataireGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConventionSignataireGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConventionSignataireGroupByOutputType[P]>
+            : GetScalarType<T[P], ConventionSignataireGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConventionSignataireSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conventionStagiaireId?: boolean
+    role?: boolean
+    ordre?: boolean
+    nom?: boolean
+    email?: boolean
+    token?: boolean
+    statut?: boolean
+    envoyeAt?: boolean
+    signedAt?: boolean
+    refusedAt?: boolean
+    motifRefus?: boolean
+    signatureStoragePath?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    documentHash?: boolean
+    conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conventionSignataire"]>
+
+  export type ConventionSignataireSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conventionStagiaireId?: boolean
+    role?: boolean
+    ordre?: boolean
+    nom?: boolean
+    email?: boolean
+    token?: boolean
+    statut?: boolean
+    envoyeAt?: boolean
+    signedAt?: boolean
+    refusedAt?: boolean
+    motifRefus?: boolean
+    signatureStoragePath?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    documentHash?: boolean
+    conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conventionSignataire"]>
+
+  export type ConventionSignataireSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    conventionStagiaireId?: boolean
+    role?: boolean
+    ordre?: boolean
+    nom?: boolean
+    email?: boolean
+    token?: boolean
+    statut?: boolean
+    envoyeAt?: boolean
+    signedAt?: boolean
+    refusedAt?: boolean
+    motifRefus?: boolean
+    signatureStoragePath?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    documentHash?: boolean
+    conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conventionSignataire"]>
+
+  export type ConventionSignataireSelectScalar = {
+    id?: boolean
+    conventionStagiaireId?: boolean
+    role?: boolean
+    ordre?: boolean
+    nom?: boolean
+    email?: boolean
+    token?: boolean
+    statut?: boolean
+    envoyeAt?: boolean
+    signedAt?: boolean
+    refusedAt?: boolean
+    motifRefus?: boolean
+    signatureStoragePath?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    documentHash?: boolean
+  }
+
+  export type ConventionSignataireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conventionStagiaireId" | "role" | "ordre" | "nom" | "email" | "token" | "statut" | "envoyeAt" | "signedAt" | "refusedAt" | "motifRefus" | "signatureStoragePath" | "ipAddress" | "userAgent" | "documentHash", ExtArgs["result"]["conventionSignataire"]>
+  export type ConventionSignataireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
+  }
+  export type ConventionSignataireIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
+  }
+  export type ConventionSignataireIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
+  }
+
+  export type $ConventionSignatairePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConventionSignataire"
+    objects: {
+      conventionStagiaire: Prisma.$ConventionStagiairePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      conventionStagiaireId: string
+      role: $Enums.RoleSignataire
+      ordre: number
+      nom: string
+      email: string
+      token: string
+      statut: $Enums.StatutSignature
+      envoyeAt: Date | null
+      signedAt: Date | null
+      refusedAt: Date | null
+      motifRefus: string | null
+      signatureStoragePath: string | null
+      ipAddress: string | null
+      userAgent: string | null
+      documentHash: string | null
+    }, ExtArgs["result"]["conventionSignataire"]>
+    composites: {}
+  }
+
+  type ConventionSignataireGetPayload<S extends boolean | null | undefined | ConventionSignataireDefaultArgs> = $Result.GetResult<Prisma.$ConventionSignatairePayload, S>
+
+  type ConventionSignataireCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConventionSignataireFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConventionSignataireCountAggregateInputType | true
+    }
+
+  export interface ConventionSignataireDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConventionSignataire'], meta: { name: 'ConventionSignataire' } }
+    /**
+     * Find zero or one ConventionSignataire that matches the filter.
+     * @param {ConventionSignataireFindUniqueArgs} args - Arguments to find a ConventionSignataire
+     * @example
+     * // Get one ConventionSignataire
+     * const conventionSignataire = await prisma.conventionSignataire.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConventionSignataireFindUniqueArgs>(args: SelectSubset<T, ConventionSignataireFindUniqueArgs<ExtArgs>>): Prisma__ConventionSignataireClient<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConventionSignataire that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConventionSignataireFindUniqueOrThrowArgs} args - Arguments to find a ConventionSignataire
+     * @example
+     * // Get one ConventionSignataire
+     * const conventionSignataire = await prisma.conventionSignataire.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConventionSignataireFindUniqueOrThrowArgs>(args: SelectSubset<T, ConventionSignataireFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConventionSignataireClient<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConventionSignataire that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionSignataireFindFirstArgs} args - Arguments to find a ConventionSignataire
+     * @example
+     * // Get one ConventionSignataire
+     * const conventionSignataire = await prisma.conventionSignataire.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConventionSignataireFindFirstArgs>(args?: SelectSubset<T, ConventionSignataireFindFirstArgs<ExtArgs>>): Prisma__ConventionSignataireClient<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConventionSignataire that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionSignataireFindFirstOrThrowArgs} args - Arguments to find a ConventionSignataire
+     * @example
+     * // Get one ConventionSignataire
+     * const conventionSignataire = await prisma.conventionSignataire.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConventionSignataireFindFirstOrThrowArgs>(args?: SelectSubset<T, ConventionSignataireFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConventionSignataireClient<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConventionSignataires that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionSignataireFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConventionSignataires
+     * const conventionSignataires = await prisma.conventionSignataire.findMany()
+     * 
+     * // Get first 10 ConventionSignataires
+     * const conventionSignataires = await prisma.conventionSignataire.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conventionSignataireWithIdOnly = await prisma.conventionSignataire.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConventionSignataireFindManyArgs>(args?: SelectSubset<T, ConventionSignataireFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConventionSignataire.
+     * @param {ConventionSignataireCreateArgs} args - Arguments to create a ConventionSignataire.
+     * @example
+     * // Create one ConventionSignataire
+     * const ConventionSignataire = await prisma.conventionSignataire.create({
+     *   data: {
+     *     // ... data to create a ConventionSignataire
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConventionSignataireCreateArgs>(args: SelectSubset<T, ConventionSignataireCreateArgs<ExtArgs>>): Prisma__ConventionSignataireClient<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConventionSignataires.
+     * @param {ConventionSignataireCreateManyArgs} args - Arguments to create many ConventionSignataires.
+     * @example
+     * // Create many ConventionSignataires
+     * const conventionSignataire = await prisma.conventionSignataire.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConventionSignataireCreateManyArgs>(args?: SelectSubset<T, ConventionSignataireCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ConventionSignataires and returns the data saved in the database.
+     * @param {ConventionSignataireCreateManyAndReturnArgs} args - Arguments to create many ConventionSignataires.
+     * @example
+     * // Create many ConventionSignataires
+     * const conventionSignataire = await prisma.conventionSignataire.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ConventionSignataires and only return the `id`
+     * const conventionSignataireWithIdOnly = await prisma.conventionSignataire.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConventionSignataireCreateManyAndReturnArgs>(args?: SelectSubset<T, ConventionSignataireCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ConventionSignataire.
+     * @param {ConventionSignataireDeleteArgs} args - Arguments to delete one ConventionSignataire.
+     * @example
+     * // Delete one ConventionSignataire
+     * const ConventionSignataire = await prisma.conventionSignataire.delete({
+     *   where: {
+     *     // ... filter to delete one ConventionSignataire
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConventionSignataireDeleteArgs>(args: SelectSubset<T, ConventionSignataireDeleteArgs<ExtArgs>>): Prisma__ConventionSignataireClient<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConventionSignataire.
+     * @param {ConventionSignataireUpdateArgs} args - Arguments to update one ConventionSignataire.
+     * @example
+     * // Update one ConventionSignataire
+     * const conventionSignataire = await prisma.conventionSignataire.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConventionSignataireUpdateArgs>(args: SelectSubset<T, ConventionSignataireUpdateArgs<ExtArgs>>): Prisma__ConventionSignataireClient<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConventionSignataires.
+     * @param {ConventionSignataireDeleteManyArgs} args - Arguments to filter ConventionSignataires to delete.
+     * @example
+     * // Delete a few ConventionSignataires
+     * const { count } = await prisma.conventionSignataire.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConventionSignataireDeleteManyArgs>(args?: SelectSubset<T, ConventionSignataireDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConventionSignataires.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionSignataireUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConventionSignataires
+     * const conventionSignataire = await prisma.conventionSignataire.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConventionSignataireUpdateManyArgs>(args: SelectSubset<T, ConventionSignataireUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConventionSignataires and returns the data updated in the database.
+     * @param {ConventionSignataireUpdateManyAndReturnArgs} args - Arguments to update many ConventionSignataires.
+     * @example
+     * // Update many ConventionSignataires
+     * const conventionSignataire = await prisma.conventionSignataire.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ConventionSignataires and only return the `id`
+     * const conventionSignataireWithIdOnly = await prisma.conventionSignataire.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConventionSignataireUpdateManyAndReturnArgs>(args: SelectSubset<T, ConventionSignataireUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ConventionSignataire.
+     * @param {ConventionSignataireUpsertArgs} args - Arguments to update or create a ConventionSignataire.
+     * @example
+     * // Update or create a ConventionSignataire
+     * const conventionSignataire = await prisma.conventionSignataire.upsert({
+     *   create: {
+     *     // ... data to create a ConventionSignataire
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConventionSignataire we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConventionSignataireUpsertArgs>(args: SelectSubset<T, ConventionSignataireUpsertArgs<ExtArgs>>): Prisma__ConventionSignataireClient<$Result.GetResult<Prisma.$ConventionSignatairePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConventionSignataires.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionSignataireCountArgs} args - Arguments to filter ConventionSignataires to count.
+     * @example
+     * // Count the number of ConventionSignataires
+     * const count = await prisma.conventionSignataire.count({
+     *   where: {
+     *     // ... the filter for the ConventionSignataires we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConventionSignataireCountArgs>(
+      args?: Subset<T, ConventionSignataireCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConventionSignataireCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConventionSignataire.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionSignataireAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConventionSignataireAggregateArgs>(args: Subset<T, ConventionSignataireAggregateArgs>): Prisma.PrismaPromise<GetConventionSignataireAggregateType<T>>
+
+    /**
+     * Group by ConventionSignataire.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConventionSignataireGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConventionSignataireGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConventionSignataireGroupByArgs['orderBy'] }
+        : { orderBy?: ConventionSignataireGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConventionSignataireGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConventionSignataireGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConventionSignataire model
+   */
+  readonly fields: ConventionSignataireFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConventionSignataire.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConventionSignataireClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    conventionStagiaire<T extends ConventionStagiaireDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConventionStagiaireDefaultArgs<ExtArgs>>): Prisma__ConventionStagiaireClient<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConventionSignataire model
+   */
+  interface ConventionSignataireFieldRefs {
+    readonly id: FieldRef<"ConventionSignataire", 'String'>
+    readonly conventionStagiaireId: FieldRef<"ConventionSignataire", 'String'>
+    readonly role: FieldRef<"ConventionSignataire", 'RoleSignataire'>
+    readonly ordre: FieldRef<"ConventionSignataire", 'Int'>
+    readonly nom: FieldRef<"ConventionSignataire", 'String'>
+    readonly email: FieldRef<"ConventionSignataire", 'String'>
+    readonly token: FieldRef<"ConventionSignataire", 'String'>
+    readonly statut: FieldRef<"ConventionSignataire", 'StatutSignature'>
+    readonly envoyeAt: FieldRef<"ConventionSignataire", 'DateTime'>
+    readonly signedAt: FieldRef<"ConventionSignataire", 'DateTime'>
+    readonly refusedAt: FieldRef<"ConventionSignataire", 'DateTime'>
+    readonly motifRefus: FieldRef<"ConventionSignataire", 'String'>
+    readonly signatureStoragePath: FieldRef<"ConventionSignataire", 'String'>
+    readonly ipAddress: FieldRef<"ConventionSignataire", 'String'>
+    readonly userAgent: FieldRef<"ConventionSignataire", 'String'>
+    readonly documentHash: FieldRef<"ConventionSignataire", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConventionSignataire findUnique
+   */
+  export type ConventionSignataireFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionSignataire to fetch.
+     */
+    where: ConventionSignataireWhereUniqueInput
+  }
+
+  /**
+   * ConventionSignataire findUniqueOrThrow
+   */
+  export type ConventionSignataireFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionSignataire to fetch.
+     */
+    where: ConventionSignataireWhereUniqueInput
+  }
+
+  /**
+   * ConventionSignataire findFirst
+   */
+  export type ConventionSignataireFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionSignataire to fetch.
+     */
+    where?: ConventionSignataireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionSignataires to fetch.
+     */
+    orderBy?: ConventionSignataireOrderByWithRelationInput | ConventionSignataireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConventionSignataires.
+     */
+    cursor?: ConventionSignataireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionSignataires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionSignataires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConventionSignataires.
+     */
+    distinct?: ConventionSignataireScalarFieldEnum | ConventionSignataireScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionSignataire findFirstOrThrow
+   */
+  export type ConventionSignataireFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionSignataire to fetch.
+     */
+    where?: ConventionSignataireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionSignataires to fetch.
+     */
+    orderBy?: ConventionSignataireOrderByWithRelationInput | ConventionSignataireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConventionSignataires.
+     */
+    cursor?: ConventionSignataireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionSignataires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionSignataires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConventionSignataires.
+     */
+    distinct?: ConventionSignataireScalarFieldEnum | ConventionSignataireScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionSignataire findMany
+   */
+  export type ConventionSignataireFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    /**
+     * Filter, which ConventionSignataires to fetch.
+     */
+    where?: ConventionSignataireWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConventionSignataires to fetch.
+     */
+    orderBy?: ConventionSignataireOrderByWithRelationInput | ConventionSignataireOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConventionSignataires.
+     */
+    cursor?: ConventionSignataireWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConventionSignataires from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConventionSignataires.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConventionSignataires.
+     */
+    distinct?: ConventionSignataireScalarFieldEnum | ConventionSignataireScalarFieldEnum[]
+  }
+
+  /**
+   * ConventionSignataire create
+   */
+  export type ConventionSignataireCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ConventionSignataire.
+     */
+    data: XOR<ConventionSignataireCreateInput, ConventionSignataireUncheckedCreateInput>
+  }
+
+  /**
+   * ConventionSignataire createMany
+   */
+  export type ConventionSignataireCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConventionSignataires.
+     */
+    data: ConventionSignataireCreateManyInput | ConventionSignataireCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConventionSignataire createManyAndReturn
+   */
+  export type ConventionSignataireCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * The data used to create many ConventionSignataires.
+     */
+    data: ConventionSignataireCreateManyInput | ConventionSignataireCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConventionSignataire update
+   */
+  export type ConventionSignataireUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ConventionSignataire.
+     */
+    data: XOR<ConventionSignataireUpdateInput, ConventionSignataireUncheckedUpdateInput>
+    /**
+     * Choose, which ConventionSignataire to update.
+     */
+    where: ConventionSignataireWhereUniqueInput
+  }
+
+  /**
+   * ConventionSignataire updateMany
+   */
+  export type ConventionSignataireUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConventionSignataires.
+     */
+    data: XOR<ConventionSignataireUpdateManyMutationInput, ConventionSignataireUncheckedUpdateManyInput>
+    /**
+     * Filter which ConventionSignataires to update
+     */
+    where?: ConventionSignataireWhereInput
+    /**
+     * Limit how many ConventionSignataires to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConventionSignataire updateManyAndReturn
+   */
+  export type ConventionSignataireUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * The data used to update ConventionSignataires.
+     */
+    data: XOR<ConventionSignataireUpdateManyMutationInput, ConventionSignataireUncheckedUpdateManyInput>
+    /**
+     * Filter which ConventionSignataires to update
+     */
+    where?: ConventionSignataireWhereInput
+    /**
+     * Limit how many ConventionSignataires to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConventionSignataire upsert
+   */
+  export type ConventionSignataireUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ConventionSignataire to update in case it exists.
+     */
+    where: ConventionSignataireWhereUniqueInput
+    /**
+     * In case the ConventionSignataire found by the `where` argument doesn't exist, create a new ConventionSignataire with this data.
+     */
+    create: XOR<ConventionSignataireCreateInput, ConventionSignataireUncheckedCreateInput>
+    /**
+     * In case the ConventionSignataire was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConventionSignataireUpdateInput, ConventionSignataireUncheckedUpdateInput>
+  }
+
+  /**
+   * ConventionSignataire delete
+   */
+  export type ConventionSignataireDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
+    /**
+     * Filter which ConventionSignataire to delete.
+     */
+    where: ConventionSignataireWhereUniqueInput
+  }
+
+  /**
+   * ConventionSignataire deleteMany
+   */
+  export type ConventionSignataireDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConventionSignataires to delete
+     */
+    where?: ConventionSignataireWhereInput
+    /**
+     * Limit how many ConventionSignataires to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConventionSignataire without action
+   */
+  export type ConventionSignataireDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConventionSignataire
+     */
+    select?: ConventionSignataireSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConventionSignataire
+     */
+    omit?: ConventionSignataireOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConventionSignataireInclude<ExtArgs> | null
   }
 
 
@@ -33502,6 +37708,11 @@ export namespace Prisma {
     modeInscription: 'modeInscription',
     lienFffStagiaire: 'lienFffStagiaire',
     lienFffClub: 'lienFffClub',
+    conventionTemplateId: 'conventionTemplateId',
+    responsablePedagogiqueNom: 'responsablePedagogiqueNom',
+    responsablePedagogiquePrenom: 'responsablePedagogiquePrenom',
+    responsablePedagogiqueEmail: 'responsablePedagogiqueEmail',
+    responsablePedagogiqueTelephone: 'responsablePedagogiqueTelephone',
     groupeEquivalence: 'groupeEquivalence',
     varianteNode: 'varianteNode',
     badgeNode: 'badgeNode',
@@ -33612,6 +37823,73 @@ export namespace Prisma {
   };
 
   export type SignatureScalarFieldEnum = (typeof SignatureScalarFieldEnum)[keyof typeof SignatureScalarFieldEnum]
+
+
+  export const ConventionTemplateScalarFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    storagePath: 'storagePath',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ConventionTemplateScalarFieldEnum = (typeof ConventionTemplateScalarFieldEnum)[keyof typeof ConventionTemplateScalarFieldEnum]
+
+
+  export const ConventionStagiaireScalarFieldEnum: {
+    id: 'id',
+    formationId: 'formationId',
+    club: 'club',
+    numeroAffiliationClub: 'numeroAffiliationClub',
+    emailClub: 'emailClub',
+    civilite: 'civilite',
+    nom: 'nom',
+    prenom: 'prenom',
+    dateNaissance: 'dateNaissance',
+    adresse: 'adresse',
+    cp: 'cp',
+    ville: 'ville',
+    telephone: 'telephone',
+    email: 'email',
+    tuteurNom: 'tuteurNom',
+    tuteurPrenom: 'tuteurPrenom',
+    tuteurEmail: 'tuteurEmail',
+    maitreDeStageNom: 'maitreDeStageNom',
+    maitreDeStagePrenom: 'maitreDeStagePrenom',
+    maitreDeStageAdresse: 'maitreDeStageAdresse',
+    maitreDeStageCp: 'maitreDeStageCp',
+    maitreDeStageVille: 'maitreDeStageVille',
+    maitreDeStageEmail: 'maitreDeStageEmail',
+    donneesSupplementaires: 'donneesSupplementaires',
+    pdfStoragePath: 'pdfStoragePath',
+    envoyeAt: 'envoyeAt',
+    completedAt: 'completedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type ConventionStagiaireScalarFieldEnum = (typeof ConventionStagiaireScalarFieldEnum)[keyof typeof ConventionStagiaireScalarFieldEnum]
+
+
+  export const ConventionSignataireScalarFieldEnum: {
+    id: 'id',
+    conventionStagiaireId: 'conventionStagiaireId',
+    role: 'role',
+    ordre: 'ordre',
+    nom: 'nom',
+    email: 'email',
+    token: 'token',
+    statut: 'statut',
+    envoyeAt: 'envoyeAt',
+    signedAt: 'signedAt',
+    refusedAt: 'refusedAt',
+    motifRefus: 'motifRefus',
+    signatureStoragePath: 'signatureStoragePath',
+    ipAddress: 'ipAddress',
+    userAgent: 'userAgent',
+    documentHash: 'documentHash'
+  };
+
+  export type ConventionSignataireScalarFieldEnum = (typeof ConventionSignataireScalarFieldEnum)[keyof typeof ConventionSignataireScalarFieldEnum]
 
 
   export const MessageScalarFieldEnum: {
@@ -34145,6 +38423,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'RoleSignataire'
+   */
+  export type EnumRoleSignataireFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoleSignataire'>
+    
+
+
+  /**
+   * Reference to a field of type 'RoleSignataire[]'
+   */
+  export type ListEnumRoleSignataireFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RoleSignataire[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutSignature'
+   */
+  export type EnumStatutSignatureFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutSignature'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutSignature[]'
+   */
+  export type ListEnumStatutSignatureFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutSignature[]'>
+    
+
+
+  /**
    * Reference to a field of type 'StatutCovoiturage'
    */
   export type EnumStatutCovoiturageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutCovoiturage'>
@@ -34422,6 +38728,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
+    conventionTemplateId?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueNom?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
@@ -34436,6 +38747,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurListRelationFilter
     messages?: MessageListRelationFilter
     covoiturages?: CovoiturageListRelationFilter
+    conventionTemplate?: XOR<ConventionTemplateNullableScalarRelationFilter, ConventionTemplateWhereInput> | null
+    conventionStagiaires?: ConventionStagiaireListRelationFilter
   }
 
   export type FormationOrderByWithRelationInput = {
@@ -34463,6 +38776,11 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrderInput | SortOrder
     lienFffClub?: SortOrderInput | SortOrder
+    conventionTemplateId?: SortOrderInput | SortOrder
+    responsablePedagogiqueNom?: SortOrderInput | SortOrder
+    responsablePedagogiquePrenom?: SortOrderInput | SortOrder
+    responsablePedagogiqueEmail?: SortOrderInput | SortOrder
+    responsablePedagogiqueTelephone?: SortOrderInput | SortOrder
     groupeEquivalence?: SortOrderInput | SortOrder
     varianteNode?: SortOrderInput | SortOrder
     badgeNode?: SortOrderInput | SortOrder
@@ -34477,6 +38795,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
     covoiturages?: CovoiturageOrderByRelationAggregateInput
+    conventionTemplate?: ConventionTemplateOrderByWithRelationInput
+    conventionStagiaires?: ConventionStagiaireOrderByRelationAggregateInput
   }
 
   export type FormationWhereUniqueInput = Prisma.AtLeast<{
@@ -34507,6 +38827,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
+    conventionTemplateId?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueNom?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
@@ -34521,6 +38846,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurListRelationFilter
     messages?: MessageListRelationFilter
     covoiturages?: CovoiturageListRelationFilter
+    conventionTemplate?: XOR<ConventionTemplateNullableScalarRelationFilter, ConventionTemplateWhereInput> | null
+    conventionStagiaires?: ConventionStagiaireListRelationFilter
   }, "id" | "slug">
 
   export type FormationOrderByWithAggregationInput = {
@@ -34548,6 +38875,11 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrderInput | SortOrder
     lienFffClub?: SortOrderInput | SortOrder
+    conventionTemplateId?: SortOrderInput | SortOrder
+    responsablePedagogiqueNom?: SortOrderInput | SortOrder
+    responsablePedagogiquePrenom?: SortOrderInput | SortOrder
+    responsablePedagogiqueEmail?: SortOrderInput | SortOrder
+    responsablePedagogiqueTelephone?: SortOrderInput | SortOrder
     groupeEquivalence?: SortOrderInput | SortOrder
     varianteNode?: SortOrderInput | SortOrder
     badgeNode?: SortOrderInput | SortOrder
@@ -34589,6 +38921,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionWithAggregatesFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     lienFffClub?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    conventionTemplateId?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    responsablePedagogiqueNom?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    responsablePedagogiquePrenom?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    responsablePedagogiqueEmail?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    responsablePedagogiqueTelephone?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableWithAggregatesFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableWithAggregatesFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableWithAggregatesFilter<"Formation"> | string | null
@@ -35125,6 +39462,348 @@ export namespace Prisma {
     ipAddress?: StringNullableWithAggregatesFilter<"Signature"> | string | null
     userAgent?: StringNullableWithAggregatesFilter<"Signature"> | string | null
     documentHash?: StringNullableWithAggregatesFilter<"Signature"> | string | null
+  }
+
+  export type ConventionTemplateWhereInput = {
+    AND?: ConventionTemplateWhereInput | ConventionTemplateWhereInput[]
+    OR?: ConventionTemplateWhereInput[]
+    NOT?: ConventionTemplateWhereInput | ConventionTemplateWhereInput[]
+    id?: StringFilter<"ConventionTemplate"> | string
+    nom?: StringFilter<"ConventionTemplate"> | string
+    storagePath?: StringFilter<"ConventionTemplate"> | string
+    createdAt?: DateTimeFilter<"ConventionTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"ConventionTemplate"> | Date | string
+    formations?: FormationListRelationFilter
+  }
+
+  export type ConventionTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    formations?: FormationOrderByRelationAggregateInput
+  }
+
+  export type ConventionTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ConventionTemplateWhereInput | ConventionTemplateWhereInput[]
+    OR?: ConventionTemplateWhereInput[]
+    NOT?: ConventionTemplateWhereInput | ConventionTemplateWhereInput[]
+    nom?: StringFilter<"ConventionTemplate"> | string
+    storagePath?: StringFilter<"ConventionTemplate"> | string
+    createdAt?: DateTimeFilter<"ConventionTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"ConventionTemplate"> | Date | string
+    formations?: FormationListRelationFilter
+  }, "id">
+
+  export type ConventionTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ConventionTemplateCountOrderByAggregateInput
+    _max?: ConventionTemplateMaxOrderByAggregateInput
+    _min?: ConventionTemplateMinOrderByAggregateInput
+  }
+
+  export type ConventionTemplateScalarWhereWithAggregatesInput = {
+    AND?: ConventionTemplateScalarWhereWithAggregatesInput | ConventionTemplateScalarWhereWithAggregatesInput[]
+    OR?: ConventionTemplateScalarWhereWithAggregatesInput[]
+    NOT?: ConventionTemplateScalarWhereWithAggregatesInput | ConventionTemplateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ConventionTemplate"> | string
+    nom?: StringWithAggregatesFilter<"ConventionTemplate"> | string
+    storagePath?: StringWithAggregatesFilter<"ConventionTemplate"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ConventionTemplate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ConventionTemplate"> | Date | string
+  }
+
+  export type ConventionStagiaireWhereInput = {
+    AND?: ConventionStagiaireWhereInput | ConventionStagiaireWhereInput[]
+    OR?: ConventionStagiaireWhereInput[]
+    NOT?: ConventionStagiaireWhereInput | ConventionStagiaireWhereInput[]
+    id?: StringFilter<"ConventionStagiaire"> | string
+    formationId?: StringFilter<"ConventionStagiaire"> | string
+    club?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    numeroAffiliationClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    emailClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    civilite?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    nom?: StringFilter<"ConventionStagiaire"> | string
+    prenom?: StringFilter<"ConventionStagiaire"> | string
+    dateNaissance?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    adresse?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    cp?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    ville?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    telephone?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    email?: StringFilter<"ConventionStagiaire"> | string
+    tuteurNom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    tuteurPrenom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    tuteurEmail?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageNom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStagePrenom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageAdresse?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageCp?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageVille?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageEmail?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    donneesSupplementaires?: JsonNullableFilter<"ConventionStagiaire">
+    pdfStoragePath?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    envoyeAt?: DateTimeNullableFilter<"ConventionStagiaire"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"ConventionStagiaire"> | Date | string | null
+    createdAt?: DateTimeFilter<"ConventionStagiaire"> | Date | string
+    formation?: XOR<FormationScalarRelationFilter, FormationWhereInput>
+    signataires?: ConventionSignataireListRelationFilter
+  }
+
+  export type ConventionStagiaireOrderByWithRelationInput = {
+    id?: SortOrder
+    formationId?: SortOrder
+    club?: SortOrderInput | SortOrder
+    numeroAffiliationClub?: SortOrderInput | SortOrder
+    emailClub?: SortOrderInput | SortOrder
+    civilite?: SortOrderInput | SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    dateNaissance?: SortOrderInput | SortOrder
+    adresse?: SortOrderInput | SortOrder
+    cp?: SortOrderInput | SortOrder
+    ville?: SortOrderInput | SortOrder
+    telephone?: SortOrderInput | SortOrder
+    email?: SortOrder
+    tuteurNom?: SortOrderInput | SortOrder
+    tuteurPrenom?: SortOrderInput | SortOrder
+    tuteurEmail?: SortOrderInput | SortOrder
+    maitreDeStageNom?: SortOrderInput | SortOrder
+    maitreDeStagePrenom?: SortOrderInput | SortOrder
+    maitreDeStageAdresse?: SortOrderInput | SortOrder
+    maitreDeStageCp?: SortOrderInput | SortOrder
+    maitreDeStageVille?: SortOrderInput | SortOrder
+    maitreDeStageEmail?: SortOrderInput | SortOrder
+    donneesSupplementaires?: SortOrderInput | SortOrder
+    pdfStoragePath?: SortOrderInput | SortOrder
+    envoyeAt?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    formation?: FormationOrderByWithRelationInput
+    signataires?: ConventionSignataireOrderByRelationAggregateInput
+  }
+
+  export type ConventionStagiaireWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    formationId_email?: ConventionStagiaireFormationIdEmailCompoundUniqueInput
+    AND?: ConventionStagiaireWhereInput | ConventionStagiaireWhereInput[]
+    OR?: ConventionStagiaireWhereInput[]
+    NOT?: ConventionStagiaireWhereInput | ConventionStagiaireWhereInput[]
+    formationId?: StringFilter<"ConventionStagiaire"> | string
+    club?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    numeroAffiliationClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    emailClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    civilite?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    nom?: StringFilter<"ConventionStagiaire"> | string
+    prenom?: StringFilter<"ConventionStagiaire"> | string
+    dateNaissance?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    adresse?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    cp?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    ville?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    telephone?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    email?: StringFilter<"ConventionStagiaire"> | string
+    tuteurNom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    tuteurPrenom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    tuteurEmail?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageNom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStagePrenom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageAdresse?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageCp?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageVille?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageEmail?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    donneesSupplementaires?: JsonNullableFilter<"ConventionStagiaire">
+    pdfStoragePath?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    envoyeAt?: DateTimeNullableFilter<"ConventionStagiaire"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"ConventionStagiaire"> | Date | string | null
+    createdAt?: DateTimeFilter<"ConventionStagiaire"> | Date | string
+    formation?: XOR<FormationScalarRelationFilter, FormationWhereInput>
+    signataires?: ConventionSignataireListRelationFilter
+  }, "id" | "formationId_email">
+
+  export type ConventionStagiaireOrderByWithAggregationInput = {
+    id?: SortOrder
+    formationId?: SortOrder
+    club?: SortOrderInput | SortOrder
+    numeroAffiliationClub?: SortOrderInput | SortOrder
+    emailClub?: SortOrderInput | SortOrder
+    civilite?: SortOrderInput | SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    dateNaissance?: SortOrderInput | SortOrder
+    adresse?: SortOrderInput | SortOrder
+    cp?: SortOrderInput | SortOrder
+    ville?: SortOrderInput | SortOrder
+    telephone?: SortOrderInput | SortOrder
+    email?: SortOrder
+    tuteurNom?: SortOrderInput | SortOrder
+    tuteurPrenom?: SortOrderInput | SortOrder
+    tuteurEmail?: SortOrderInput | SortOrder
+    maitreDeStageNom?: SortOrderInput | SortOrder
+    maitreDeStagePrenom?: SortOrderInput | SortOrder
+    maitreDeStageAdresse?: SortOrderInput | SortOrder
+    maitreDeStageCp?: SortOrderInput | SortOrder
+    maitreDeStageVille?: SortOrderInput | SortOrder
+    maitreDeStageEmail?: SortOrderInput | SortOrder
+    donneesSupplementaires?: SortOrderInput | SortOrder
+    pdfStoragePath?: SortOrderInput | SortOrder
+    envoyeAt?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: ConventionStagiaireCountOrderByAggregateInput
+    _max?: ConventionStagiaireMaxOrderByAggregateInput
+    _min?: ConventionStagiaireMinOrderByAggregateInput
+  }
+
+  export type ConventionStagiaireScalarWhereWithAggregatesInput = {
+    AND?: ConventionStagiaireScalarWhereWithAggregatesInput | ConventionStagiaireScalarWhereWithAggregatesInput[]
+    OR?: ConventionStagiaireScalarWhereWithAggregatesInput[]
+    NOT?: ConventionStagiaireScalarWhereWithAggregatesInput | ConventionStagiaireScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ConventionStagiaire"> | string
+    formationId?: StringWithAggregatesFilter<"ConventionStagiaire"> | string
+    club?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    numeroAffiliationClub?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    emailClub?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    civilite?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    nom?: StringWithAggregatesFilter<"ConventionStagiaire"> | string
+    prenom?: StringWithAggregatesFilter<"ConventionStagiaire"> | string
+    dateNaissance?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    adresse?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    cp?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    ville?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    telephone?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    email?: StringWithAggregatesFilter<"ConventionStagiaire"> | string
+    tuteurNom?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    tuteurPrenom?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    tuteurEmail?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageNom?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    maitreDeStagePrenom?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageAdresse?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageCp?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageVille?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageEmail?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    donneesSupplementaires?: JsonNullableWithAggregatesFilter<"ConventionStagiaire">
+    pdfStoragePath?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    envoyeAt?: DateTimeNullableWithAggregatesFilter<"ConventionStagiaire"> | Date | string | null
+    completedAt?: DateTimeNullableWithAggregatesFilter<"ConventionStagiaire"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ConventionStagiaire"> | Date | string
+  }
+
+  export type ConventionSignataireWhereInput = {
+    AND?: ConventionSignataireWhereInput | ConventionSignataireWhereInput[]
+    OR?: ConventionSignataireWhereInput[]
+    NOT?: ConventionSignataireWhereInput | ConventionSignataireWhereInput[]
+    id?: StringFilter<"ConventionSignataire"> | string
+    conventionStagiaireId?: StringFilter<"ConventionSignataire"> | string
+    role?: EnumRoleSignataireFilter<"ConventionSignataire"> | $Enums.RoleSignataire
+    ordre?: IntFilter<"ConventionSignataire"> | number
+    nom?: StringFilter<"ConventionSignataire"> | string
+    email?: StringFilter<"ConventionSignataire"> | string
+    token?: StringFilter<"ConventionSignataire"> | string
+    statut?: EnumStatutSignatureFilter<"ConventionSignataire"> | $Enums.StatutSignature
+    envoyeAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
+    signedAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
+    refusedAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
+    motifRefus?: StringNullableFilter<"ConventionSignataire"> | string | null
+    signatureStoragePath?: StringNullableFilter<"ConventionSignataire"> | string | null
+    ipAddress?: StringNullableFilter<"ConventionSignataire"> | string | null
+    userAgent?: StringNullableFilter<"ConventionSignataire"> | string | null
+    documentHash?: StringNullableFilter<"ConventionSignataire"> | string | null
+    conventionStagiaire?: XOR<ConventionStagiaireScalarRelationFilter, ConventionStagiaireWhereInput>
+  }
+
+  export type ConventionSignataireOrderByWithRelationInput = {
+    id?: SortOrder
+    conventionStagiaireId?: SortOrder
+    role?: SortOrder
+    ordre?: SortOrder
+    nom?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    statut?: SortOrder
+    envoyeAt?: SortOrderInput | SortOrder
+    signedAt?: SortOrderInput | SortOrder
+    refusedAt?: SortOrderInput | SortOrder
+    motifRefus?: SortOrderInput | SortOrder
+    signatureStoragePath?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    documentHash?: SortOrderInput | SortOrder
+    conventionStagiaire?: ConventionStagiaireOrderByWithRelationInput
+  }
+
+  export type ConventionSignataireWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    conventionStagiaireId_role?: ConventionSignataireConventionStagiaireIdRoleCompoundUniqueInput
+    AND?: ConventionSignataireWhereInput | ConventionSignataireWhereInput[]
+    OR?: ConventionSignataireWhereInput[]
+    NOT?: ConventionSignataireWhereInput | ConventionSignataireWhereInput[]
+    conventionStagiaireId?: StringFilter<"ConventionSignataire"> | string
+    role?: EnumRoleSignataireFilter<"ConventionSignataire"> | $Enums.RoleSignataire
+    ordre?: IntFilter<"ConventionSignataire"> | number
+    nom?: StringFilter<"ConventionSignataire"> | string
+    email?: StringFilter<"ConventionSignataire"> | string
+    statut?: EnumStatutSignatureFilter<"ConventionSignataire"> | $Enums.StatutSignature
+    envoyeAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
+    signedAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
+    refusedAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
+    motifRefus?: StringNullableFilter<"ConventionSignataire"> | string | null
+    signatureStoragePath?: StringNullableFilter<"ConventionSignataire"> | string | null
+    ipAddress?: StringNullableFilter<"ConventionSignataire"> | string | null
+    userAgent?: StringNullableFilter<"ConventionSignataire"> | string | null
+    documentHash?: StringNullableFilter<"ConventionSignataire"> | string | null
+    conventionStagiaire?: XOR<ConventionStagiaireScalarRelationFilter, ConventionStagiaireWhereInput>
+  }, "id" | "token" | "conventionStagiaireId_role">
+
+  export type ConventionSignataireOrderByWithAggregationInput = {
+    id?: SortOrder
+    conventionStagiaireId?: SortOrder
+    role?: SortOrder
+    ordre?: SortOrder
+    nom?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    statut?: SortOrder
+    envoyeAt?: SortOrderInput | SortOrder
+    signedAt?: SortOrderInput | SortOrder
+    refusedAt?: SortOrderInput | SortOrder
+    motifRefus?: SortOrderInput | SortOrder
+    signatureStoragePath?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    documentHash?: SortOrderInput | SortOrder
+    _count?: ConventionSignataireCountOrderByAggregateInput
+    _avg?: ConventionSignataireAvgOrderByAggregateInput
+    _max?: ConventionSignataireMaxOrderByAggregateInput
+    _min?: ConventionSignataireMinOrderByAggregateInput
+    _sum?: ConventionSignataireSumOrderByAggregateInput
+  }
+
+  export type ConventionSignataireScalarWhereWithAggregatesInput = {
+    AND?: ConventionSignataireScalarWhereWithAggregatesInput | ConventionSignataireScalarWhereWithAggregatesInput[]
+    OR?: ConventionSignataireScalarWhereWithAggregatesInput[]
+    NOT?: ConventionSignataireScalarWhereWithAggregatesInput | ConventionSignataireScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ConventionSignataire"> | string
+    conventionStagiaireId?: StringWithAggregatesFilter<"ConventionSignataire"> | string
+    role?: EnumRoleSignataireWithAggregatesFilter<"ConventionSignataire"> | $Enums.RoleSignataire
+    ordre?: IntWithAggregatesFilter<"ConventionSignataire"> | number
+    nom?: StringWithAggregatesFilter<"ConventionSignataire"> | string
+    email?: StringWithAggregatesFilter<"ConventionSignataire"> | string
+    token?: StringWithAggregatesFilter<"ConventionSignataire"> | string
+    statut?: EnumStatutSignatureWithAggregatesFilter<"ConventionSignataire"> | $Enums.StatutSignature
+    envoyeAt?: DateTimeNullableWithAggregatesFilter<"ConventionSignataire"> | Date | string | null
+    signedAt?: DateTimeNullableWithAggregatesFilter<"ConventionSignataire"> | Date | string | null
+    refusedAt?: DateTimeNullableWithAggregatesFilter<"ConventionSignataire"> | Date | string | null
+    motifRefus?: StringNullableWithAggregatesFilter<"ConventionSignataire"> | string | null
+    signatureStoragePath?: StringNullableWithAggregatesFilter<"ConventionSignataire"> | string | null
+    ipAddress?: StringNullableWithAggregatesFilter<"ConventionSignataire"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"ConventionSignataire"> | string | null
+    documentHash?: StringNullableWithAggregatesFilter<"ConventionSignataire"> | string | null
   }
 
   export type MessageWhereInput = {
@@ -36559,6 +41238,10 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -36573,6 +41256,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateInput = {
@@ -36600,6 +41285,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -36614,6 +41304,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUpdateInput = {
@@ -36641,6 +41332,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36655,6 +41350,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateInput = {
@@ -36682,6 +41379,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36696,6 +41398,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationCreateManyInput = {
@@ -36723,6 +41426,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -36756,6 +41464,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36789,6 +41501,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -37349,6 +42066,418 @@ export namespace Prisma {
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     signatureUrl?: NullableStringFieldUpdateOperationsInput | string | null
     consentText?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ConventionTemplateCreateInput = {
+    id?: string
+    nom: string
+    storagePath: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    formations?: FormationCreateNestedManyWithoutConventionTemplateInput
+  }
+
+  export type ConventionTemplateUncheckedCreateInput = {
+    id?: string
+    nom: string
+    storagePath: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    formations?: FormationUncheckedCreateNestedManyWithoutConventionTemplateInput
+  }
+
+  export type ConventionTemplateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    formations?: FormationUpdateManyWithoutConventionTemplateNestedInput
+  }
+
+  export type ConventionTemplateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    formations?: FormationUncheckedUpdateManyWithoutConventionTemplateNestedInput
+  }
+
+  export type ConventionTemplateCreateManyInput = {
+    id?: string
+    nom: string
+    storagePath: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConventionTemplateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConventionTemplateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConventionStagiaireCreateInput = {
+    id?: string
+    club?: string | null
+    numeroAffiliationClub?: string | null
+    emailClub?: string | null
+    civilite?: string | null
+    nom: string
+    prenom: string
+    dateNaissance?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    telephone?: string | null
+    email: string
+    tuteurNom?: string | null
+    tuteurPrenom?: string | null
+    tuteurEmail?: string | null
+    maitreDeStageNom?: string | null
+    maitreDeStagePrenom?: string | null
+    maitreDeStageAdresse?: string | null
+    maitreDeStageCp?: string | null
+    maitreDeStageVille?: string | null
+    maitreDeStageEmail?: string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: string | null
+    envoyeAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    formation: FormationCreateNestedOneWithoutConventionStagiairesInput
+    signataires?: ConventionSignataireCreateNestedManyWithoutConventionStagiaireInput
+  }
+
+  export type ConventionStagiaireUncheckedCreateInput = {
+    id?: string
+    formationId: string
+    club?: string | null
+    numeroAffiliationClub?: string | null
+    emailClub?: string | null
+    civilite?: string | null
+    nom: string
+    prenom: string
+    dateNaissance?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    telephone?: string | null
+    email: string
+    tuteurNom?: string | null
+    tuteurPrenom?: string | null
+    tuteurEmail?: string | null
+    maitreDeStageNom?: string | null
+    maitreDeStagePrenom?: string | null
+    maitreDeStageAdresse?: string | null
+    maitreDeStageCp?: string | null
+    maitreDeStageVille?: string | null
+    maitreDeStageEmail?: string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: string | null
+    envoyeAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    signataires?: ConventionSignataireUncheckedCreateNestedManyWithoutConventionStagiaireInput
+  }
+
+  export type ConventionStagiaireUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    club?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
+    emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    civilite?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    tuteurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurPrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageNom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStagePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    formation?: FormationUpdateOneRequiredWithoutConventionStagiairesNestedInput
+    signataires?: ConventionSignataireUpdateManyWithoutConventionStagiaireNestedInput
+  }
+
+  export type ConventionStagiaireUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    formationId?: StringFieldUpdateOperationsInput | string
+    club?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
+    emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    civilite?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    tuteurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurPrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageNom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStagePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signataires?: ConventionSignataireUncheckedUpdateManyWithoutConventionStagiaireNestedInput
+  }
+
+  export type ConventionStagiaireCreateManyInput = {
+    id?: string
+    formationId: string
+    club?: string | null
+    numeroAffiliationClub?: string | null
+    emailClub?: string | null
+    civilite?: string | null
+    nom: string
+    prenom: string
+    dateNaissance?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    telephone?: string | null
+    email: string
+    tuteurNom?: string | null
+    tuteurPrenom?: string | null
+    tuteurEmail?: string | null
+    maitreDeStageNom?: string | null
+    maitreDeStagePrenom?: string | null
+    maitreDeStageAdresse?: string | null
+    maitreDeStageCp?: string | null
+    maitreDeStageVille?: string | null
+    maitreDeStageEmail?: string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: string | null
+    envoyeAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type ConventionStagiaireUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    club?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
+    emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    civilite?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    tuteurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurPrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageNom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStagePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConventionStagiaireUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    formationId?: StringFieldUpdateOperationsInput | string
+    club?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
+    emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    civilite?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    tuteurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurPrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageNom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStagePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConventionSignataireCreateInput = {
+    id?: string
+    role: $Enums.RoleSignataire
+    ordre: number
+    nom: string
+    email: string
+    token?: string
+    statut?: $Enums.StatutSignature
+    envoyeAt?: Date | string | null
+    signedAt?: Date | string | null
+    refusedAt?: Date | string | null
+    motifRefus?: string | null
+    signatureStoragePath?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
+    conventionStagiaire: ConventionStagiaireCreateNestedOneWithoutSignatairesInput
+  }
+
+  export type ConventionSignataireUncheckedCreateInput = {
+    id?: string
+    conventionStagiaireId: string
+    role: $Enums.RoleSignataire
+    ordre: number
+    nom: string
+    email: string
+    token?: string
+    statut?: $Enums.StatutSignature
+    envoyeAt?: Date | string | null
+    signedAt?: Date | string | null
+    refusedAt?: Date | string | null
+    motifRefus?: string | null
+    signatureStoragePath?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
+  }
+
+  export type ConventionSignataireUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleSignataireFieldUpdateOperationsInput | $Enums.RoleSignataire
+    ordre?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutSignatureFieldUpdateOperationsInput | $Enums.StatutSignature
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refusedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    motifRefus?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionStagiaire?: ConventionStagiaireUpdateOneRequiredWithoutSignatairesNestedInput
+  }
+
+  export type ConventionSignataireUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conventionStagiaireId?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleSignataireFieldUpdateOperationsInput | $Enums.RoleSignataire
+    ordre?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutSignatureFieldUpdateOperationsInput | $Enums.StatutSignature
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refusedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    motifRefus?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ConventionSignataireCreateManyInput = {
+    id?: string
+    conventionStagiaireId: string
+    role: $Enums.RoleSignataire
+    ordre: number
+    nom: string
+    email: string
+    token?: string
+    statut?: $Enums.StatutSignature
+    envoyeAt?: Date | string | null
+    signedAt?: Date | string | null
+    refusedAt?: Date | string | null
+    motifRefus?: string | null
+    signatureStoragePath?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
+  }
+
+  export type ConventionSignataireUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleSignataireFieldUpdateOperationsInput | $Enums.RoleSignataire
+    ordre?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutSignatureFieldUpdateOperationsInput | $Enums.StatutSignature
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refusedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    motifRefus?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ConventionSignataireUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conventionStagiaireId?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleSignataireFieldUpdateOperationsInput | $Enums.RoleSignataire
+    ordre?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutSignatureFieldUpdateOperationsInput | $Enums.StatutSignature
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refusedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    motifRefus?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     documentHash?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39147,11 +44276,26 @@ export namespace Prisma {
     none?: HeroSlideWhereInput
   }
 
+  export type ConventionTemplateNullableScalarRelationFilter = {
+    is?: ConventionTemplateWhereInput | null
+    isNot?: ConventionTemplateWhereInput | null
+  }
+
+  export type ConventionStagiaireListRelationFilter = {
+    every?: ConventionStagiaireWhereInput
+    some?: ConventionStagiaireWhereInput
+    none?: ConventionStagiaireWhereInput
+  }
+
   export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type HeroSlideOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConventionStagiaireOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -39180,6 +44324,11 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
+    conventionTemplateId?: SortOrder
+    responsablePedagogiqueNom?: SortOrder
+    responsablePedagogiquePrenom?: SortOrder
+    responsablePedagogiqueEmail?: SortOrder
+    responsablePedagogiqueTelephone?: SortOrder
     groupeEquivalence?: SortOrder
     varianteNode?: SortOrder
     badgeNode?: SortOrder
@@ -39219,6 +44368,11 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
+    conventionTemplateId?: SortOrder
+    responsablePedagogiqueNom?: SortOrder
+    responsablePedagogiquePrenom?: SortOrder
+    responsablePedagogiqueEmail?: SortOrder
+    responsablePedagogiqueTelephone?: SortOrder
     groupeEquivalence?: SortOrder
     varianteNode?: SortOrder
     badgeNode?: SortOrder
@@ -39251,6 +44405,11 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
+    conventionTemplateId?: SortOrder
+    responsablePedagogiqueNom?: SortOrder
+    responsablePedagogiquePrenom?: SortOrder
+    responsablePedagogiqueEmail?: SortOrder
+    responsablePedagogiqueTelephone?: SortOrder
     groupeEquivalence?: SortOrder
     varianteNode?: SortOrder
     badgeNode?: SortOrder
@@ -39763,6 +44922,280 @@ export namespace Prisma {
     documentHash?: SortOrder
   }
 
+  export type FormationListRelationFilter = {
+    every?: FormationWhereInput
+    some?: FormationWhereInput
+    none?: FormationWhereInput
+  }
+
+  export type FormationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConventionTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConventionTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConventionTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type ConventionSignataireListRelationFilter = {
+    every?: ConventionSignataireWhereInput
+    some?: ConventionSignataireWhereInput
+    none?: ConventionSignataireWhereInput
+  }
+
+  export type ConventionSignataireOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConventionStagiaireFormationIdEmailCompoundUniqueInput = {
+    formationId: string
+    email: string
+  }
+
+  export type ConventionStagiaireCountOrderByAggregateInput = {
+    id?: SortOrder
+    formationId?: SortOrder
+    club?: SortOrder
+    numeroAffiliationClub?: SortOrder
+    emailClub?: SortOrder
+    civilite?: SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    dateNaissance?: SortOrder
+    adresse?: SortOrder
+    cp?: SortOrder
+    ville?: SortOrder
+    telephone?: SortOrder
+    email?: SortOrder
+    tuteurNom?: SortOrder
+    tuteurPrenom?: SortOrder
+    tuteurEmail?: SortOrder
+    maitreDeStageNom?: SortOrder
+    maitreDeStagePrenom?: SortOrder
+    maitreDeStageAdresse?: SortOrder
+    maitreDeStageCp?: SortOrder
+    maitreDeStageVille?: SortOrder
+    maitreDeStageEmail?: SortOrder
+    donneesSupplementaires?: SortOrder
+    pdfStoragePath?: SortOrder
+    envoyeAt?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ConventionStagiaireMaxOrderByAggregateInput = {
+    id?: SortOrder
+    formationId?: SortOrder
+    club?: SortOrder
+    numeroAffiliationClub?: SortOrder
+    emailClub?: SortOrder
+    civilite?: SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    dateNaissance?: SortOrder
+    adresse?: SortOrder
+    cp?: SortOrder
+    ville?: SortOrder
+    telephone?: SortOrder
+    email?: SortOrder
+    tuteurNom?: SortOrder
+    tuteurPrenom?: SortOrder
+    tuteurEmail?: SortOrder
+    maitreDeStageNom?: SortOrder
+    maitreDeStagePrenom?: SortOrder
+    maitreDeStageAdresse?: SortOrder
+    maitreDeStageCp?: SortOrder
+    maitreDeStageVille?: SortOrder
+    maitreDeStageEmail?: SortOrder
+    pdfStoragePath?: SortOrder
+    envoyeAt?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ConventionStagiaireMinOrderByAggregateInput = {
+    id?: SortOrder
+    formationId?: SortOrder
+    club?: SortOrder
+    numeroAffiliationClub?: SortOrder
+    emailClub?: SortOrder
+    civilite?: SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    dateNaissance?: SortOrder
+    adresse?: SortOrder
+    cp?: SortOrder
+    ville?: SortOrder
+    telephone?: SortOrder
+    email?: SortOrder
+    tuteurNom?: SortOrder
+    tuteurPrenom?: SortOrder
+    tuteurEmail?: SortOrder
+    maitreDeStageNom?: SortOrder
+    maitreDeStagePrenom?: SortOrder
+    maitreDeStageAdresse?: SortOrder
+    maitreDeStageCp?: SortOrder
+    maitreDeStageVille?: SortOrder
+    maitreDeStageEmail?: SortOrder
+    pdfStoragePath?: SortOrder
+    envoyeAt?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumRoleSignataireFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleSignataire | EnumRoleSignataireFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleSignataire[] | ListEnumRoleSignataireFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleSignataire[] | ListEnumRoleSignataireFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleSignataireFilter<$PrismaModel> | $Enums.RoleSignataire
+  }
+
+  export type EnumStatutSignatureFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutSignature | EnumStatutSignatureFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutSignature[] | ListEnumStatutSignatureFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutSignature[] | ListEnumStatutSignatureFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutSignatureFilter<$PrismaModel> | $Enums.StatutSignature
+  }
+
+  export type ConventionStagiaireScalarRelationFilter = {
+    is?: ConventionStagiaireWhereInput
+    isNot?: ConventionStagiaireWhereInput
+  }
+
+  export type ConventionSignataireConventionStagiaireIdRoleCompoundUniqueInput = {
+    conventionStagiaireId: string
+    role: $Enums.RoleSignataire
+  }
+
+  export type ConventionSignataireCountOrderByAggregateInput = {
+    id?: SortOrder
+    conventionStagiaireId?: SortOrder
+    role?: SortOrder
+    ordre?: SortOrder
+    nom?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    statut?: SortOrder
+    envoyeAt?: SortOrder
+    signedAt?: SortOrder
+    refusedAt?: SortOrder
+    motifRefus?: SortOrder
+    signatureStoragePath?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    documentHash?: SortOrder
+  }
+
+  export type ConventionSignataireAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type ConventionSignataireMaxOrderByAggregateInput = {
+    id?: SortOrder
+    conventionStagiaireId?: SortOrder
+    role?: SortOrder
+    ordre?: SortOrder
+    nom?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    statut?: SortOrder
+    envoyeAt?: SortOrder
+    signedAt?: SortOrder
+    refusedAt?: SortOrder
+    motifRefus?: SortOrder
+    signatureStoragePath?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    documentHash?: SortOrder
+  }
+
+  export type ConventionSignataireMinOrderByAggregateInput = {
+    id?: SortOrder
+    conventionStagiaireId?: SortOrder
+    role?: SortOrder
+    ordre?: SortOrder
+    nom?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    statut?: SortOrder
+    envoyeAt?: SortOrder
+    signedAt?: SortOrder
+    refusedAt?: SortOrder
+    motifRefus?: SortOrder
+    signatureStoragePath?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    documentHash?: SortOrder
+  }
+
+  export type ConventionSignataireSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type EnumRoleSignataireWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleSignataire | EnumRoleSignataireFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleSignataire[] | ListEnumRoleSignataireFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleSignataire[] | ListEnumRoleSignataireFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleSignataireWithAggregatesFilter<$PrismaModel> | $Enums.RoleSignataire
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleSignataireFilter<$PrismaModel>
+    _max?: NestedEnumRoleSignataireFilter<$PrismaModel>
+  }
+
+  export type EnumStatutSignatureWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutSignature | EnumStatutSignatureFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutSignature[] | ListEnumStatutSignatureFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutSignature[] | ListEnumStatutSignatureFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutSignatureWithAggregatesFilter<$PrismaModel> | $Enums.StatutSignature
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutSignatureFilter<$PrismaModel>
+    _max?: NestedEnumStatutSignatureFilter<$PrismaModel>
+  }
+
   export type DocumentNullableScalarRelationFilter = {
     is?: DocumentWhereInput | null
     isNot?: DocumentWhereInput | null
@@ -39798,17 +45231,6 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type MessageScalarRelationFilter = {
     is?: MessageWhereInput
     isNot?: MessageWhereInput
@@ -39841,20 +45263,6 @@ export namespace Prisma {
     userId?: SortOrder
     lu?: SortOrder
     luAt?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumStatutCovoiturageFilter<$PrismaModel = never> = {
@@ -41210,6 +46618,19 @@ export namespace Prisma {
     connect?: CovoiturageWhereUniqueInput | CovoiturageWhereUniqueInput[]
   }
 
+  export type ConventionTemplateCreateNestedOneWithoutFormationsInput = {
+    create?: XOR<ConventionTemplateCreateWithoutFormationsInput, ConventionTemplateUncheckedCreateWithoutFormationsInput>
+    connectOrCreate?: ConventionTemplateCreateOrConnectWithoutFormationsInput
+    connect?: ConventionTemplateWhereUniqueInput
+  }
+
+  export type ConventionStagiaireCreateNestedManyWithoutFormationInput = {
+    create?: XOR<ConventionStagiaireCreateWithoutFormationInput, ConventionStagiaireUncheckedCreateWithoutFormationInput> | ConventionStagiaireCreateWithoutFormationInput[] | ConventionStagiaireUncheckedCreateWithoutFormationInput[]
+    connectOrCreate?: ConventionStagiaireCreateOrConnectWithoutFormationInput | ConventionStagiaireCreateOrConnectWithoutFormationInput[]
+    createMany?: ConventionStagiaireCreateManyFormationInputEnvelope
+    connect?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutFormationInput = {
     create?: XOR<SessionCreateWithoutFormationInput, SessionUncheckedCreateWithoutFormationInput> | SessionCreateWithoutFormationInput[] | SessionUncheckedCreateWithoutFormationInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutFormationInput | SessionCreateOrConnectWithoutFormationInput[]
@@ -41264,6 +46685,13 @@ export namespace Prisma {
     connectOrCreate?: CovoiturageCreateOrConnectWithoutFormationInput | CovoiturageCreateOrConnectWithoutFormationInput[]
     createMany?: CovoiturageCreateManyFormationInputEnvelope
     connect?: CovoiturageWhereUniqueInput | CovoiturageWhereUniqueInput[]
+  }
+
+  export type ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput = {
+    create?: XOR<ConventionStagiaireCreateWithoutFormationInput, ConventionStagiaireUncheckedCreateWithoutFormationInput> | ConventionStagiaireCreateWithoutFormationInput[] | ConventionStagiaireUncheckedCreateWithoutFormationInput[]
+    connectOrCreate?: ConventionStagiaireCreateOrConnectWithoutFormationInput | ConventionStagiaireCreateOrConnectWithoutFormationInput[]
+    createMany?: ConventionStagiaireCreateManyFormationInputEnvelope
+    connect?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
   }
 
   export type EnumTypeFormationFieldUpdateOperationsInput = {
@@ -41430,6 +46858,30 @@ export namespace Prisma {
     deleteMany?: CovoiturageScalarWhereInput | CovoiturageScalarWhereInput[]
   }
 
+  export type ConventionTemplateUpdateOneWithoutFormationsNestedInput = {
+    create?: XOR<ConventionTemplateCreateWithoutFormationsInput, ConventionTemplateUncheckedCreateWithoutFormationsInput>
+    connectOrCreate?: ConventionTemplateCreateOrConnectWithoutFormationsInput
+    upsert?: ConventionTemplateUpsertWithoutFormationsInput
+    disconnect?: ConventionTemplateWhereInput | boolean
+    delete?: ConventionTemplateWhereInput | boolean
+    connect?: ConventionTemplateWhereUniqueInput
+    update?: XOR<XOR<ConventionTemplateUpdateToOneWithWhereWithoutFormationsInput, ConventionTemplateUpdateWithoutFormationsInput>, ConventionTemplateUncheckedUpdateWithoutFormationsInput>
+  }
+
+  export type ConventionStagiaireUpdateManyWithoutFormationNestedInput = {
+    create?: XOR<ConventionStagiaireCreateWithoutFormationInput, ConventionStagiaireUncheckedCreateWithoutFormationInput> | ConventionStagiaireCreateWithoutFormationInput[] | ConventionStagiaireUncheckedCreateWithoutFormationInput[]
+    connectOrCreate?: ConventionStagiaireCreateOrConnectWithoutFormationInput | ConventionStagiaireCreateOrConnectWithoutFormationInput[]
+    upsert?: ConventionStagiaireUpsertWithWhereUniqueWithoutFormationInput | ConventionStagiaireUpsertWithWhereUniqueWithoutFormationInput[]
+    createMany?: ConventionStagiaireCreateManyFormationInputEnvelope
+    set?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
+    disconnect?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
+    delete?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
+    connect?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
+    update?: ConventionStagiaireUpdateWithWhereUniqueWithoutFormationInput | ConventionStagiaireUpdateWithWhereUniqueWithoutFormationInput[]
+    updateMany?: ConventionStagiaireUpdateManyWithWhereWithoutFormationInput | ConventionStagiaireUpdateManyWithWhereWithoutFormationInput[]
+    deleteMany?: ConventionStagiaireScalarWhereInput | ConventionStagiaireScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutFormationNestedInput = {
     create?: XOR<SessionCreateWithoutFormationInput, SessionUncheckedCreateWithoutFormationInput> | SessionCreateWithoutFormationInput[] | SessionUncheckedCreateWithoutFormationInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutFormationInput | SessionCreateOrConnectWithoutFormationInput[]
@@ -41540,6 +46992,20 @@ export namespace Prisma {
     update?: CovoiturageUpdateWithWhereUniqueWithoutFormationInput | CovoiturageUpdateWithWhereUniqueWithoutFormationInput[]
     updateMany?: CovoiturageUpdateManyWithWhereWithoutFormationInput | CovoiturageUpdateManyWithWhereWithoutFormationInput[]
     deleteMany?: CovoiturageScalarWhereInput | CovoiturageScalarWhereInput[]
+  }
+
+  export type ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput = {
+    create?: XOR<ConventionStagiaireCreateWithoutFormationInput, ConventionStagiaireUncheckedCreateWithoutFormationInput> | ConventionStagiaireCreateWithoutFormationInput[] | ConventionStagiaireUncheckedCreateWithoutFormationInput[]
+    connectOrCreate?: ConventionStagiaireCreateOrConnectWithoutFormationInput | ConventionStagiaireCreateOrConnectWithoutFormationInput[]
+    upsert?: ConventionStagiaireUpsertWithWhereUniqueWithoutFormationInput | ConventionStagiaireUpsertWithWhereUniqueWithoutFormationInput[]
+    createMany?: ConventionStagiaireCreateManyFormationInputEnvelope
+    set?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
+    disconnect?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
+    delete?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
+    connect?: ConventionStagiaireWhereUniqueInput | ConventionStagiaireWhereUniqueInput[]
+    update?: ConventionStagiaireUpdateWithWhereUniqueWithoutFormationInput | ConventionStagiaireUpdateWithWhereUniqueWithoutFormationInput[]
+    updateMany?: ConventionStagiaireUpdateManyWithWhereWithoutFormationInput | ConventionStagiaireUpdateManyWithWhereWithoutFormationInput[]
+    deleteMany?: ConventionStagiaireScalarWhereInput | ConventionStagiaireScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutFormationsEnChargeInput = {
@@ -41807,6 +47273,130 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSignaturesInput, UserUpdateWithoutSignaturesInput>, UserUncheckedUpdateWithoutSignaturesInput>
   }
 
+  export type FormationCreateNestedManyWithoutConventionTemplateInput = {
+    create?: XOR<FormationCreateWithoutConventionTemplateInput, FormationUncheckedCreateWithoutConventionTemplateInput> | FormationCreateWithoutConventionTemplateInput[] | FormationUncheckedCreateWithoutConventionTemplateInput[]
+    connectOrCreate?: FormationCreateOrConnectWithoutConventionTemplateInput | FormationCreateOrConnectWithoutConventionTemplateInput[]
+    createMany?: FormationCreateManyConventionTemplateInputEnvelope
+    connect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+  }
+
+  export type FormationUncheckedCreateNestedManyWithoutConventionTemplateInput = {
+    create?: XOR<FormationCreateWithoutConventionTemplateInput, FormationUncheckedCreateWithoutConventionTemplateInput> | FormationCreateWithoutConventionTemplateInput[] | FormationUncheckedCreateWithoutConventionTemplateInput[]
+    connectOrCreate?: FormationCreateOrConnectWithoutConventionTemplateInput | FormationCreateOrConnectWithoutConventionTemplateInput[]
+    createMany?: FormationCreateManyConventionTemplateInputEnvelope
+    connect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+  }
+
+  export type FormationUpdateManyWithoutConventionTemplateNestedInput = {
+    create?: XOR<FormationCreateWithoutConventionTemplateInput, FormationUncheckedCreateWithoutConventionTemplateInput> | FormationCreateWithoutConventionTemplateInput[] | FormationUncheckedCreateWithoutConventionTemplateInput[]
+    connectOrCreate?: FormationCreateOrConnectWithoutConventionTemplateInput | FormationCreateOrConnectWithoutConventionTemplateInput[]
+    upsert?: FormationUpsertWithWhereUniqueWithoutConventionTemplateInput | FormationUpsertWithWhereUniqueWithoutConventionTemplateInput[]
+    createMany?: FormationCreateManyConventionTemplateInputEnvelope
+    set?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    disconnect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    delete?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    connect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    update?: FormationUpdateWithWhereUniqueWithoutConventionTemplateInput | FormationUpdateWithWhereUniqueWithoutConventionTemplateInput[]
+    updateMany?: FormationUpdateManyWithWhereWithoutConventionTemplateInput | FormationUpdateManyWithWhereWithoutConventionTemplateInput[]
+    deleteMany?: FormationScalarWhereInput | FormationScalarWhereInput[]
+  }
+
+  export type FormationUncheckedUpdateManyWithoutConventionTemplateNestedInput = {
+    create?: XOR<FormationCreateWithoutConventionTemplateInput, FormationUncheckedCreateWithoutConventionTemplateInput> | FormationCreateWithoutConventionTemplateInput[] | FormationUncheckedCreateWithoutConventionTemplateInput[]
+    connectOrCreate?: FormationCreateOrConnectWithoutConventionTemplateInput | FormationCreateOrConnectWithoutConventionTemplateInput[]
+    upsert?: FormationUpsertWithWhereUniqueWithoutConventionTemplateInput | FormationUpsertWithWhereUniqueWithoutConventionTemplateInput[]
+    createMany?: FormationCreateManyConventionTemplateInputEnvelope
+    set?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    disconnect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    delete?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    connect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    update?: FormationUpdateWithWhereUniqueWithoutConventionTemplateInput | FormationUpdateWithWhereUniqueWithoutConventionTemplateInput[]
+    updateMany?: FormationUpdateManyWithWhereWithoutConventionTemplateInput | FormationUpdateManyWithWhereWithoutConventionTemplateInput[]
+    deleteMany?: FormationScalarWhereInput | FormationScalarWhereInput[]
+  }
+
+  export type FormationCreateNestedOneWithoutConventionStagiairesInput = {
+    create?: XOR<FormationCreateWithoutConventionStagiairesInput, FormationUncheckedCreateWithoutConventionStagiairesInput>
+    connectOrCreate?: FormationCreateOrConnectWithoutConventionStagiairesInput
+    connect?: FormationWhereUniqueInput
+  }
+
+  export type ConventionSignataireCreateNestedManyWithoutConventionStagiaireInput = {
+    create?: XOR<ConventionSignataireCreateWithoutConventionStagiaireInput, ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput> | ConventionSignataireCreateWithoutConventionStagiaireInput[] | ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput[]
+    connectOrCreate?: ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput | ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput[]
+    createMany?: ConventionSignataireCreateManyConventionStagiaireInputEnvelope
+    connect?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+  }
+
+  export type ConventionSignataireUncheckedCreateNestedManyWithoutConventionStagiaireInput = {
+    create?: XOR<ConventionSignataireCreateWithoutConventionStagiaireInput, ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput> | ConventionSignataireCreateWithoutConventionStagiaireInput[] | ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput[]
+    connectOrCreate?: ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput | ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput[]
+    createMany?: ConventionSignataireCreateManyConventionStagiaireInputEnvelope
+    connect?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type FormationUpdateOneRequiredWithoutConventionStagiairesNestedInput = {
+    create?: XOR<FormationCreateWithoutConventionStagiairesInput, FormationUncheckedCreateWithoutConventionStagiairesInput>
+    connectOrCreate?: FormationCreateOrConnectWithoutConventionStagiairesInput
+    upsert?: FormationUpsertWithoutConventionStagiairesInput
+    connect?: FormationWhereUniqueInput
+    update?: XOR<XOR<FormationUpdateToOneWithWhereWithoutConventionStagiairesInput, FormationUpdateWithoutConventionStagiairesInput>, FormationUncheckedUpdateWithoutConventionStagiairesInput>
+  }
+
+  export type ConventionSignataireUpdateManyWithoutConventionStagiaireNestedInput = {
+    create?: XOR<ConventionSignataireCreateWithoutConventionStagiaireInput, ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput> | ConventionSignataireCreateWithoutConventionStagiaireInput[] | ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput[]
+    connectOrCreate?: ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput | ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput[]
+    upsert?: ConventionSignataireUpsertWithWhereUniqueWithoutConventionStagiaireInput | ConventionSignataireUpsertWithWhereUniqueWithoutConventionStagiaireInput[]
+    createMany?: ConventionSignataireCreateManyConventionStagiaireInputEnvelope
+    set?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+    disconnect?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+    delete?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+    connect?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+    update?: ConventionSignataireUpdateWithWhereUniqueWithoutConventionStagiaireInput | ConventionSignataireUpdateWithWhereUniqueWithoutConventionStagiaireInput[]
+    updateMany?: ConventionSignataireUpdateManyWithWhereWithoutConventionStagiaireInput | ConventionSignataireUpdateManyWithWhereWithoutConventionStagiaireInput[]
+    deleteMany?: ConventionSignataireScalarWhereInput | ConventionSignataireScalarWhereInput[]
+  }
+
+  export type ConventionSignataireUncheckedUpdateManyWithoutConventionStagiaireNestedInput = {
+    create?: XOR<ConventionSignataireCreateWithoutConventionStagiaireInput, ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput> | ConventionSignataireCreateWithoutConventionStagiaireInput[] | ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput[]
+    connectOrCreate?: ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput | ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput[]
+    upsert?: ConventionSignataireUpsertWithWhereUniqueWithoutConventionStagiaireInput | ConventionSignataireUpsertWithWhereUniqueWithoutConventionStagiaireInput[]
+    createMany?: ConventionSignataireCreateManyConventionStagiaireInputEnvelope
+    set?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+    disconnect?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+    delete?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+    connect?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
+    update?: ConventionSignataireUpdateWithWhereUniqueWithoutConventionStagiaireInput | ConventionSignataireUpdateWithWhereUniqueWithoutConventionStagiaireInput[]
+    updateMany?: ConventionSignataireUpdateManyWithWhereWithoutConventionStagiaireInput | ConventionSignataireUpdateManyWithWhereWithoutConventionStagiaireInput[]
+    deleteMany?: ConventionSignataireScalarWhereInput | ConventionSignataireScalarWhereInput[]
+  }
+
+  export type ConventionStagiaireCreateNestedOneWithoutSignatairesInput = {
+    create?: XOR<ConventionStagiaireCreateWithoutSignatairesInput, ConventionStagiaireUncheckedCreateWithoutSignatairesInput>
+    connectOrCreate?: ConventionStagiaireCreateOrConnectWithoutSignatairesInput
+    connect?: ConventionStagiaireWhereUniqueInput
+  }
+
+  export type EnumRoleSignataireFieldUpdateOperationsInput = {
+    set?: $Enums.RoleSignataire
+  }
+
+  export type EnumStatutSignatureFieldUpdateOperationsInput = {
+    set?: $Enums.StatutSignature
+  }
+
+  export type ConventionStagiaireUpdateOneRequiredWithoutSignatairesNestedInput = {
+    create?: XOR<ConventionStagiaireCreateWithoutSignatairesInput, ConventionStagiaireUncheckedCreateWithoutSignatairesInput>
+    connectOrCreate?: ConventionStagiaireCreateOrConnectWithoutSignatairesInput
+    upsert?: ConventionStagiaireUpsertWithoutSignatairesInput
+    connect?: ConventionStagiaireWhereUniqueInput
+    update?: XOR<XOR<ConventionStagiaireUpdateToOneWithWhereWithoutSignatairesInput, ConventionStagiaireUpdateWithoutSignatairesInput>, ConventionStagiaireUncheckedUpdateWithoutSignatairesInput>
+  }
+
   export type UserCreateNestedOneWithoutMessagesEnvoyesInput = {
     create?: XOR<UserCreateWithoutMessagesEnvoyesInput, UserUncheckedCreateWithoutMessagesEnvoyesInput>
     connectOrCreate?: UserCreateOrConnectWithoutMessagesEnvoyesInput
@@ -41905,10 +47495,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutMessagesRecusInput, UserUncheckedCreateWithoutMessagesRecusInput>
     connectOrCreate?: UserCreateOrConnectWithoutMessagesRecusInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type MessageUpdateOneRequiredWithoutDestinatairesNestedInput = {
@@ -42530,6 +48116,40 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRoleSignataireFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleSignataire | EnumRoleSignataireFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleSignataire[] | ListEnumRoleSignataireFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleSignataire[] | ListEnumRoleSignataireFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleSignataireFilter<$PrismaModel> | $Enums.RoleSignataire
+  }
+
+  export type NestedEnumStatutSignatureFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutSignature | EnumStatutSignatureFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutSignature[] | ListEnumStatutSignatureFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutSignature[] | ListEnumStatutSignatureFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutSignatureFilter<$PrismaModel> | $Enums.StatutSignature
+  }
+
+  export type NestedEnumRoleSignataireWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RoleSignataire | EnumRoleSignataireFieldRefInput<$PrismaModel>
+    in?: $Enums.RoleSignataire[] | ListEnumRoleSignataireFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RoleSignataire[] | ListEnumRoleSignataireFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleSignataireWithAggregatesFilter<$PrismaModel> | $Enums.RoleSignataire
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleSignataireFilter<$PrismaModel>
+    _max?: NestedEnumRoleSignataireFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatutSignatureWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutSignature | EnumStatutSignatureFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutSignature[] | ListEnumStatutSignatureFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutSignature[] | ListEnumStatutSignatureFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutSignatureWithAggregatesFilter<$PrismaModel> | $Enums.StatutSignature
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutSignatureFilter<$PrismaModel>
+    _max?: NestedEnumStatutSignatureFilter<$PrismaModel>
   }
 
   export type NestedEnumStatutCovoiturageFilter<$PrismaModel = never> = {
@@ -43615,6 +49235,99 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ConventionTemplateCreateWithoutFormationsInput = {
+    id?: string
+    nom: string
+    storagePath: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConventionTemplateUncheckedCreateWithoutFormationsInput = {
+    id?: string
+    nom: string
+    storagePath: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConventionTemplateCreateOrConnectWithoutFormationsInput = {
+    where: ConventionTemplateWhereUniqueInput
+    create: XOR<ConventionTemplateCreateWithoutFormationsInput, ConventionTemplateUncheckedCreateWithoutFormationsInput>
+  }
+
+  export type ConventionStagiaireCreateWithoutFormationInput = {
+    id?: string
+    club?: string | null
+    numeroAffiliationClub?: string | null
+    emailClub?: string | null
+    civilite?: string | null
+    nom: string
+    prenom: string
+    dateNaissance?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    telephone?: string | null
+    email: string
+    tuteurNom?: string | null
+    tuteurPrenom?: string | null
+    tuteurEmail?: string | null
+    maitreDeStageNom?: string | null
+    maitreDeStagePrenom?: string | null
+    maitreDeStageAdresse?: string | null
+    maitreDeStageCp?: string | null
+    maitreDeStageVille?: string | null
+    maitreDeStageEmail?: string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: string | null
+    envoyeAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    signataires?: ConventionSignataireCreateNestedManyWithoutConventionStagiaireInput
+  }
+
+  export type ConventionStagiaireUncheckedCreateWithoutFormationInput = {
+    id?: string
+    club?: string | null
+    numeroAffiliationClub?: string | null
+    emailClub?: string | null
+    civilite?: string | null
+    nom: string
+    prenom: string
+    dateNaissance?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    telephone?: string | null
+    email: string
+    tuteurNom?: string | null
+    tuteurPrenom?: string | null
+    tuteurEmail?: string | null
+    maitreDeStageNom?: string | null
+    maitreDeStagePrenom?: string | null
+    maitreDeStageAdresse?: string | null
+    maitreDeStageCp?: string | null
+    maitreDeStageVille?: string | null
+    maitreDeStageEmail?: string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: string | null
+    envoyeAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    signataires?: ConventionSignataireUncheckedCreateNestedManyWithoutConventionStagiaireInput
+  }
+
+  export type ConventionStagiaireCreateOrConnectWithoutFormationInput = {
+    where: ConventionStagiaireWhereUniqueInput
+    create: XOR<ConventionStagiaireCreateWithoutFormationInput, ConventionStagiaireUncheckedCreateWithoutFormationInput>
+  }
+
+  export type ConventionStagiaireCreateManyFormationInputEnvelope = {
+    data: ConventionStagiaireCreateManyFormationInput | ConventionStagiaireCreateManyFormationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutFormationInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutFormationInput, SessionUncheckedUpdateWithoutFormationInput>
@@ -43781,6 +49494,83 @@ export namespace Prisma {
     data: XOR<CovoiturageUpdateManyMutationInput, CovoiturageUncheckedUpdateManyWithoutFormationInput>
   }
 
+  export type ConventionTemplateUpsertWithoutFormationsInput = {
+    update: XOR<ConventionTemplateUpdateWithoutFormationsInput, ConventionTemplateUncheckedUpdateWithoutFormationsInput>
+    create: XOR<ConventionTemplateCreateWithoutFormationsInput, ConventionTemplateUncheckedCreateWithoutFormationsInput>
+    where?: ConventionTemplateWhereInput
+  }
+
+  export type ConventionTemplateUpdateToOneWithWhereWithoutFormationsInput = {
+    where?: ConventionTemplateWhereInput
+    data: XOR<ConventionTemplateUpdateWithoutFormationsInput, ConventionTemplateUncheckedUpdateWithoutFormationsInput>
+  }
+
+  export type ConventionTemplateUpdateWithoutFormationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConventionTemplateUncheckedUpdateWithoutFormationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConventionStagiaireUpsertWithWhereUniqueWithoutFormationInput = {
+    where: ConventionStagiaireWhereUniqueInput
+    update: XOR<ConventionStagiaireUpdateWithoutFormationInput, ConventionStagiaireUncheckedUpdateWithoutFormationInput>
+    create: XOR<ConventionStagiaireCreateWithoutFormationInput, ConventionStagiaireUncheckedCreateWithoutFormationInput>
+  }
+
+  export type ConventionStagiaireUpdateWithWhereUniqueWithoutFormationInput = {
+    where: ConventionStagiaireWhereUniqueInput
+    data: XOR<ConventionStagiaireUpdateWithoutFormationInput, ConventionStagiaireUncheckedUpdateWithoutFormationInput>
+  }
+
+  export type ConventionStagiaireUpdateManyWithWhereWithoutFormationInput = {
+    where: ConventionStagiaireScalarWhereInput
+    data: XOR<ConventionStagiaireUpdateManyMutationInput, ConventionStagiaireUncheckedUpdateManyWithoutFormationInput>
+  }
+
+  export type ConventionStagiaireScalarWhereInput = {
+    AND?: ConventionStagiaireScalarWhereInput | ConventionStagiaireScalarWhereInput[]
+    OR?: ConventionStagiaireScalarWhereInput[]
+    NOT?: ConventionStagiaireScalarWhereInput | ConventionStagiaireScalarWhereInput[]
+    id?: StringFilter<"ConventionStagiaire"> | string
+    formationId?: StringFilter<"ConventionStagiaire"> | string
+    club?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    numeroAffiliationClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    emailClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    civilite?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    nom?: StringFilter<"ConventionStagiaire"> | string
+    prenom?: StringFilter<"ConventionStagiaire"> | string
+    dateNaissance?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    adresse?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    cp?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    ville?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    telephone?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    email?: StringFilter<"ConventionStagiaire"> | string
+    tuteurNom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    tuteurPrenom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    tuteurEmail?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageNom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStagePrenom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageAdresse?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageCp?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageVille?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    maitreDeStageEmail?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    donneesSupplementaires?: JsonNullableFilter<"ConventionStagiaire">
+    pdfStoragePath?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    envoyeAt?: DateTimeNullableFilter<"ConventionStagiaire"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"ConventionStagiaire"> | Date | string | null
+    createdAt?: DateTimeFilter<"ConventionStagiaire"> | Date | string
+  }
+
   export type UserCreateWithoutFormationsEnChargeInput = {
     id?: string
     email: string
@@ -43855,6 +49645,10 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -43868,6 +49662,8 @@ export namespace Prisma {
     heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateWithoutFormateursInput = {
@@ -43895,6 +49691,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -43908,6 +49709,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationCreateOrConnectWithoutFormateursInput = {
@@ -44006,6 +49808,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44019,6 +49825,8 @@ export namespace Prisma {
     heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateWithoutFormateursInput = {
@@ -44046,6 +49854,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44059,6 +49872,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationCreateWithoutSessionsInput = {
@@ -44086,6 +49900,10 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -44099,6 +49917,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateWithoutSessionsInput = {
@@ -44126,6 +49946,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -44139,6 +49964,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationCreateOrConnectWithoutSessionsInput = {
@@ -44182,6 +50008,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44195,6 +50025,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateWithoutSessionsInput = {
@@ -44222,6 +50054,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44235,6 +50072,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type UserCreateWithoutInscriptionsInput = {
@@ -44311,6 +50149,10 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -44324,6 +50166,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateWithoutInscriptionsInput = {
@@ -44351,6 +50195,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -44364,6 +50213,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationCreateOrConnectWithoutInscriptionsInput = {
@@ -44462,6 +50312,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44475,6 +50329,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateWithoutInscriptionsInput = {
@@ -44502,6 +50358,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44515,6 +50376,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationCreateWithoutDemandesInput = {
@@ -44542,6 +50404,10 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -44555,6 +50421,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateWithoutDemandesInput = {
@@ -44582,6 +50450,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -44595,6 +50468,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationCreateOrConnectWithoutDemandesInput = {
@@ -44687,6 +50561,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44700,6 +50578,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateWithoutDemandesInput = {
@@ -44727,6 +50607,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44740,6 +50625,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type UserUpsertWithoutDemandesInscriptionInput = {
@@ -44871,6 +50757,10 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -44884,6 +50774,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateWithoutDocumentsInput = {
@@ -44911,6 +50803,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -44924,6 +50821,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationCreateOrConnectWithoutDocumentsInput = {
@@ -45084,6 +50982,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45097,6 +50999,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateWithoutDocumentsInput = {
@@ -45124,6 +51028,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45137,6 +51046,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type SignatureUpsertWithWhereUniqueWithoutDocumentInput = {
@@ -45355,6 +51265,589 @@ export namespace Prisma {
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type FormationCreateWithoutConventionTemplateInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
+    documents?: DocumentCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
+    messages?: MessageCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
+  }
+
+  export type FormationUncheckedCreateWithoutConventionTemplateInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionUncheckedCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionUncheckedCreateNestedManyWithoutFormationInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
+  }
+
+  export type FormationCreateOrConnectWithoutConventionTemplateInput = {
+    where: FormationWhereUniqueInput
+    create: XOR<FormationCreateWithoutConventionTemplateInput, FormationUncheckedCreateWithoutConventionTemplateInput>
+  }
+
+  export type FormationCreateManyConventionTemplateInputEnvelope = {
+    data: FormationCreateManyConventionTemplateInput | FormationCreateManyConventionTemplateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FormationUpsertWithWhereUniqueWithoutConventionTemplateInput = {
+    where: FormationWhereUniqueInput
+    update: XOR<FormationUpdateWithoutConventionTemplateInput, FormationUncheckedUpdateWithoutConventionTemplateInput>
+    create: XOR<FormationCreateWithoutConventionTemplateInput, FormationUncheckedCreateWithoutConventionTemplateInput>
+  }
+
+  export type FormationUpdateWithWhereUniqueWithoutConventionTemplateInput = {
+    where: FormationWhereUniqueInput
+    data: XOR<FormationUpdateWithoutConventionTemplateInput, FormationUncheckedUpdateWithoutConventionTemplateInput>
+  }
+
+  export type FormationUpdateManyWithWhereWithoutConventionTemplateInput = {
+    where: FormationScalarWhereInput
+    data: XOR<FormationUpdateManyMutationInput, FormationUncheckedUpdateManyWithoutConventionTemplateInput>
+  }
+
+  export type FormationScalarWhereInput = {
+    AND?: FormationScalarWhereInput | FormationScalarWhereInput[]
+    OR?: FormationScalarWhereInput[]
+    NOT?: FormationScalarWhereInput | FormationScalarWhereInput[]
+    id?: StringFilter<"Formation"> | string
+    slug?: StringFilter<"Formation"> | string
+    titre?: StringFilter<"Formation"> | string
+    description?: StringNullableFilter<"Formation"> | string | null
+    type?: EnumTypeFormationFilter<"Formation"> | $Enums.TypeFormation
+    statut?: EnumStatutFormationFilter<"Formation"> | $Enums.StatutFormation
+    dureeHeures?: IntNullableFilter<"Formation"> | number | null
+    dureeLabel?: StringNullableFilter<"Formation"> | string | null
+    modeLabel?: StringNullableFilter<"Formation"> | string | null
+    lieu?: StringNullableFilter<"Formation"> | string | null
+    prix?: FloatNullableFilter<"Formation"> | number | null
+    places?: IntNullableFilter<"Formation"> | number | null
+    lienVisio?: StringNullableFilter<"Formation"> | string | null
+    image?: StringNullableFilter<"Formation"> | string | null
+    programme?: JsonNullableFilter<"Formation">
+    formateurNom?: StringNullableFilter<"Formation"> | string | null
+    formateurRole?: StringNullableFilter<"Formation"> | string | null
+    ordre?: IntFilter<"Formation"> | number
+    categorie?: EnumCategorieFormationFilter<"Formation"> | $Enums.CategorieFormation
+    filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
+    cpfEligible?: BoolFilter<"Formation"> | boolean
+    modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
+    lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
+    lienFffClub?: StringNullableFilter<"Formation"> | string | null
+    conventionTemplateId?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueNom?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
+    groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
+    varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
+    badgeNode?: StringNullableFilter<"Formation"> | string | null
+    shortNode?: StringNullableFilter<"Formation"> | string | null
+    createdAt?: DateTimeFilter<"Formation"> | Date | string
+    updatedAt?: DateTimeFilter<"Formation"> | Date | string
+  }
+
+  export type FormationCreateWithoutConventionStagiairesInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
+    documents?: DocumentCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
+    messages?: MessageCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+  }
+
+  export type FormationUncheckedCreateWithoutConventionStagiairesInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionUncheckedCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionUncheckedCreateNestedManyWithoutFormationInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+  }
+
+  export type FormationCreateOrConnectWithoutConventionStagiairesInput = {
+    where: FormationWhereUniqueInput
+    create: XOR<FormationCreateWithoutConventionStagiairesInput, FormationUncheckedCreateWithoutConventionStagiairesInput>
+  }
+
+  export type ConventionSignataireCreateWithoutConventionStagiaireInput = {
+    id?: string
+    role: $Enums.RoleSignataire
+    ordre: number
+    nom: string
+    email: string
+    token?: string
+    statut?: $Enums.StatutSignature
+    envoyeAt?: Date | string | null
+    signedAt?: Date | string | null
+    refusedAt?: Date | string | null
+    motifRefus?: string | null
+    signatureStoragePath?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
+  }
+
+  export type ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput = {
+    id?: string
+    role: $Enums.RoleSignataire
+    ordre: number
+    nom: string
+    email: string
+    token?: string
+    statut?: $Enums.StatutSignature
+    envoyeAt?: Date | string | null
+    signedAt?: Date | string | null
+    refusedAt?: Date | string | null
+    motifRefus?: string | null
+    signatureStoragePath?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
+  }
+
+  export type ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput = {
+    where: ConventionSignataireWhereUniqueInput
+    create: XOR<ConventionSignataireCreateWithoutConventionStagiaireInput, ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput>
+  }
+
+  export type ConventionSignataireCreateManyConventionStagiaireInputEnvelope = {
+    data: ConventionSignataireCreateManyConventionStagiaireInput | ConventionSignataireCreateManyConventionStagiaireInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FormationUpsertWithoutConventionStagiairesInput = {
+    update: XOR<FormationUpdateWithoutConventionStagiairesInput, FormationUncheckedUpdateWithoutConventionStagiairesInput>
+    create: XOR<FormationCreateWithoutConventionStagiairesInput, FormationUncheckedCreateWithoutConventionStagiairesInput>
+    where?: FormationWhereInput
+  }
+
+  export type FormationUpdateToOneWithWhereWithoutConventionStagiairesInput = {
+    where?: FormationWhereInput
+    data: XOR<FormationUpdateWithoutConventionStagiairesInput, FormationUncheckedUpdateWithoutConventionStagiairesInput>
+  }
+
+  export type FormationUpdateWithoutConventionStagiairesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
+    messages?: MessageUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+  }
+
+  export type FormationUncheckedUpdateWithoutConventionStagiairesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+  }
+
+  export type ConventionSignataireUpsertWithWhereUniqueWithoutConventionStagiaireInput = {
+    where: ConventionSignataireWhereUniqueInput
+    update: XOR<ConventionSignataireUpdateWithoutConventionStagiaireInput, ConventionSignataireUncheckedUpdateWithoutConventionStagiaireInput>
+    create: XOR<ConventionSignataireCreateWithoutConventionStagiaireInput, ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput>
+  }
+
+  export type ConventionSignataireUpdateWithWhereUniqueWithoutConventionStagiaireInput = {
+    where: ConventionSignataireWhereUniqueInput
+    data: XOR<ConventionSignataireUpdateWithoutConventionStagiaireInput, ConventionSignataireUncheckedUpdateWithoutConventionStagiaireInput>
+  }
+
+  export type ConventionSignataireUpdateManyWithWhereWithoutConventionStagiaireInput = {
+    where: ConventionSignataireScalarWhereInput
+    data: XOR<ConventionSignataireUpdateManyMutationInput, ConventionSignataireUncheckedUpdateManyWithoutConventionStagiaireInput>
+  }
+
+  export type ConventionSignataireScalarWhereInput = {
+    AND?: ConventionSignataireScalarWhereInput | ConventionSignataireScalarWhereInput[]
+    OR?: ConventionSignataireScalarWhereInput[]
+    NOT?: ConventionSignataireScalarWhereInput | ConventionSignataireScalarWhereInput[]
+    id?: StringFilter<"ConventionSignataire"> | string
+    conventionStagiaireId?: StringFilter<"ConventionSignataire"> | string
+    role?: EnumRoleSignataireFilter<"ConventionSignataire"> | $Enums.RoleSignataire
+    ordre?: IntFilter<"ConventionSignataire"> | number
+    nom?: StringFilter<"ConventionSignataire"> | string
+    email?: StringFilter<"ConventionSignataire"> | string
+    token?: StringFilter<"ConventionSignataire"> | string
+    statut?: EnumStatutSignatureFilter<"ConventionSignataire"> | $Enums.StatutSignature
+    envoyeAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
+    signedAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
+    refusedAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
+    motifRefus?: StringNullableFilter<"ConventionSignataire"> | string | null
+    signatureStoragePath?: StringNullableFilter<"ConventionSignataire"> | string | null
+    ipAddress?: StringNullableFilter<"ConventionSignataire"> | string | null
+    userAgent?: StringNullableFilter<"ConventionSignataire"> | string | null
+    documentHash?: StringNullableFilter<"ConventionSignataire"> | string | null
+  }
+
+  export type ConventionStagiaireCreateWithoutSignatairesInput = {
+    id?: string
+    club?: string | null
+    numeroAffiliationClub?: string | null
+    emailClub?: string | null
+    civilite?: string | null
+    nom: string
+    prenom: string
+    dateNaissance?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    telephone?: string | null
+    email: string
+    tuteurNom?: string | null
+    tuteurPrenom?: string | null
+    tuteurEmail?: string | null
+    maitreDeStageNom?: string | null
+    maitreDeStagePrenom?: string | null
+    maitreDeStageAdresse?: string | null
+    maitreDeStageCp?: string | null
+    maitreDeStageVille?: string | null
+    maitreDeStageEmail?: string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: string | null
+    envoyeAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    formation: FormationCreateNestedOneWithoutConventionStagiairesInput
+  }
+
+  export type ConventionStagiaireUncheckedCreateWithoutSignatairesInput = {
+    id?: string
+    formationId: string
+    club?: string | null
+    numeroAffiliationClub?: string | null
+    emailClub?: string | null
+    civilite?: string | null
+    nom: string
+    prenom: string
+    dateNaissance?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    telephone?: string | null
+    email: string
+    tuteurNom?: string | null
+    tuteurPrenom?: string | null
+    tuteurEmail?: string | null
+    maitreDeStageNom?: string | null
+    maitreDeStagePrenom?: string | null
+    maitreDeStageAdresse?: string | null
+    maitreDeStageCp?: string | null
+    maitreDeStageVille?: string | null
+    maitreDeStageEmail?: string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: string | null
+    envoyeAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type ConventionStagiaireCreateOrConnectWithoutSignatairesInput = {
+    where: ConventionStagiaireWhereUniqueInput
+    create: XOR<ConventionStagiaireCreateWithoutSignatairesInput, ConventionStagiaireUncheckedCreateWithoutSignatairesInput>
+  }
+
+  export type ConventionStagiaireUpsertWithoutSignatairesInput = {
+    update: XOR<ConventionStagiaireUpdateWithoutSignatairesInput, ConventionStagiaireUncheckedUpdateWithoutSignatairesInput>
+    create: XOR<ConventionStagiaireCreateWithoutSignatairesInput, ConventionStagiaireUncheckedCreateWithoutSignatairesInput>
+    where?: ConventionStagiaireWhereInput
+  }
+
+  export type ConventionStagiaireUpdateToOneWithWhereWithoutSignatairesInput = {
+    where?: ConventionStagiaireWhereInput
+    data: XOR<ConventionStagiaireUpdateWithoutSignatairesInput, ConventionStagiaireUncheckedUpdateWithoutSignatairesInput>
+  }
+
+  export type ConventionStagiaireUpdateWithoutSignatairesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    club?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
+    emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    civilite?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    tuteurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurPrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageNom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStagePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    formation?: FormationUpdateOneRequiredWithoutConventionStagiairesNestedInput
+  }
+
+  export type ConventionStagiaireUncheckedUpdateWithoutSignatairesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    formationId?: StringFieldUpdateOperationsInput | string
+    club?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
+    emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    civilite?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    tuteurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurPrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageNom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStagePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutMessagesEnvoyesInput = {
     id?: string
     email: string
@@ -45453,6 +51946,10 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -45466,6 +51963,8 @@ export namespace Prisma {
     heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateWithoutMessagesInput = {
@@ -45493,6 +51992,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -45506,6 +52010,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationCreateOrConnectWithoutMessagesInput = {
@@ -45657,6 +52162,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45670,6 +52179,8 @@ export namespace Prisma {
     heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateWithoutMessagesInput = {
@@ -45697,6 +52208,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45710,6 +52226,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type DocumentUpsertWithoutMessagesInput = {
@@ -46011,6 +52528,10 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -46024,6 +52545,8 @@ export namespace Prisma {
     heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateWithoutCovoituragesInput = {
@@ -46051,6 +52574,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -46064,6 +52592,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationCreateOrConnectWithoutCovoituragesInput = {
@@ -46178,6 +52707,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46191,6 +52724,8 @@ export namespace Prisma {
     heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateWithoutCovoituragesInput = {
@@ -46218,6 +52753,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46231,6 +52771,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type CovoiturageCreateWithoutPassagersInput = {
@@ -46534,6 +53075,10 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -46547,6 +53092,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateWithoutHeroSlidesInput = {
@@ -46574,6 +53121,11 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -46587,6 +53139,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationCreateOrConnectWithoutHeroSlidesInput = {
@@ -46630,6 +53183,10 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46643,6 +53200,8 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateWithoutHeroSlidesInput = {
@@ -46670,6 +53229,11 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46683,6 +53247,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type InscriptionCreateManyUserInput = {
@@ -47182,6 +53747,36 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ConventionStagiaireCreateManyFormationInput = {
+    id?: string
+    club?: string | null
+    numeroAffiliationClub?: string | null
+    emailClub?: string | null
+    civilite?: string | null
+    nom: string
+    prenom: string
+    dateNaissance?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    telephone?: string | null
+    email: string
+    tuteurNom?: string | null
+    tuteurPrenom?: string | null
+    tuteurEmail?: string | null
+    maitreDeStageNom?: string | null
+    maitreDeStagePrenom?: string | null
+    maitreDeStageAdresse?: string | null
+    maitreDeStageCp?: string | null
+    maitreDeStageVille?: string | null
+    maitreDeStageEmail?: string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: string | null
+    envoyeAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
   export type SessionUpdateWithoutFormationInput = {
     id?: StringFieldUpdateOperationsInput | string
     dateDebut?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47469,6 +54064,98 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ConventionStagiaireUpdateWithoutFormationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    club?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
+    emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    civilite?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    tuteurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurPrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageNom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStagePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signataires?: ConventionSignataireUpdateManyWithoutConventionStagiaireNestedInput
+  }
+
+  export type ConventionStagiaireUncheckedUpdateWithoutFormationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    club?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
+    emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    civilite?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    tuteurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurPrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageNom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStagePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signataires?: ConventionSignataireUncheckedUpdateManyWithoutConventionStagiaireNestedInput
+  }
+
+  export type ConventionStagiaireUncheckedUpdateManyWithoutFormationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    club?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
+    emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    civilite?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    dateNaissance?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    tuteurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurPrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    tuteurEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageNom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStagePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
+    maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
+    pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SignatureCreateManyDocumentInput = {
     id?: string
     userId: string
@@ -47549,6 +54236,244 @@ export namespace Prisma {
     contenu?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationCreateManyConventionTemplateInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FormationUpdateWithoutConventionTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
+    messages?: MessageUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
+  }
+
+  export type FormationUncheckedUpdateWithoutConventionTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
+  }
+
+  export type FormationUncheckedUpdateManyWithoutConventionTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConventionSignataireCreateManyConventionStagiaireInput = {
+    id?: string
+    role: $Enums.RoleSignataire
+    ordre: number
+    nom: string
+    email: string
+    token?: string
+    statut?: $Enums.StatutSignature
+    envoyeAt?: Date | string | null
+    signedAt?: Date | string | null
+    refusedAt?: Date | string | null
+    motifRefus?: string | null
+    signatureStoragePath?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    documentHash?: string | null
+  }
+
+  export type ConventionSignataireUpdateWithoutConventionStagiaireInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleSignataireFieldUpdateOperationsInput | $Enums.RoleSignataire
+    ordre?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutSignatureFieldUpdateOperationsInput | $Enums.StatutSignature
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refusedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    motifRefus?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ConventionSignataireUncheckedUpdateWithoutConventionStagiaireInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleSignataireFieldUpdateOperationsInput | $Enums.RoleSignataire
+    ordre?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutSignatureFieldUpdateOperationsInput | $Enums.StatutSignature
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refusedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    motifRefus?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ConventionSignataireUncheckedUpdateManyWithoutConventionStagiaireInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleSignataireFieldUpdateOperationsInput | $Enums.RoleSignataire
+    ordre?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutSignatureFieldUpdateOperationsInput | $Enums.StatutSignature
+    envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    refusedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    motifRefus?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MessageDestinataireCreateManyMessageInput = {

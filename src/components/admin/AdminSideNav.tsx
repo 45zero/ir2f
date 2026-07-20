@@ -8,6 +8,7 @@ const ITEMS = [
   { href: "/admin/accueil", label: "Page d'accueil", enabled: true },
   { href: "/admin/pages-hero", label: "Bandeaux (Hero)", enabled: true },
   { href: "/admin/formations", label: "Formations", enabled: true },
+  { href: "/admin/conventions/templates", label: "Modèles de convention", enabled: true },
   { href: "/admin/formations-page", label: "Page « Nos Formations »", enabled: true },
   { href: "/admin/inscriptions", label: "Inscriptions", enabled: true },
   { href: "/admin/demandes-contact", label: "Demandes de contact", enabled: true },

@@ -133,6 +133,28 @@ enum TypeLien {
   @@schema("ir2f")
 }
 
+// Les 5 étapes du circuit de signature d'une convention de stage, dans cet
+// ordre : le stagiaire signe d'abord, puis le document circule automatiquement
+// vers le club, le tuteur, le maître de stage et enfin le responsable pédagogique.
+enum RoleSignataire {
+  STAGIAIRE
+  CLUB
+  TUTEUR
+  MAITRE_DE_STAGE
+  RESPONSABLE_PEDAGOGIQUE
+
+  @@schema("ir2f")
+}
+
+enum StatutSignature {
+  NON_ENVOYE
+  EN_ATTENTE
+  SIGNE
+  REFUSE
+
+  @@schema("ir2f")
+}
+
 // ─── UTILISATEURS ────────────────────────────────────
 
 model User {
@@ -193,6 +215,15 @@ model Formation {
   lienFffStagiaire String?
   lienFffClub      String?
 
+  // Convention de stage : modèle PDF associé + responsable pédagogique (fixe pour toute la
+  // formation — le tuteur et le maître de stage, eux, sont saisis par stagiaire, voir
+  // ConventionStagiaire, car ils varient selon le club d'accueil de chacun)
+  conventionTemplateId            String?
+  responsablePedagogiqueNom       String?
+  responsablePedagogiquePrenom    String?
+  responsablePedagogiqueEmail     String?
+  responsablePedagogiqueTelephone String?
+
   // Diagramme "équivalences et passerelles" — null si hors diagramme
   groupeEquivalence GroupeEquivalence?
   varianteNode      VarianteNode?
@@ -210,6 +241,9 @@ model Formation {
   formateurs   FormationFormateur[]
   messages     Message[]
   covoiturages Covoiturage[]
+
+  conventionTemplate   ConventionTemplate?   @relation(fields: [conventionTemplateId], references: [id])
+  conventionStagiaires ConventionStagiaire[]
 
   @@schema("ir2f")
 }
@@ -334,6 +368,102 @@ model Signature {
   user     User     @relation(fields: [userId], references: [id])
 
   @@unique([documentId, userId])
+  @@schema("ir2f")
+}
+
+// ─── CONVENTIONS DE STAGE ────────────────────────────
+
+// Bibliothèque de modèles PDF réutilisables entre formations. Chaque modèle
+// est un PDF fillable (champs de formulaire nommés selon le contrat documenté
+// dans src/lib/conventions/variables.ts) que l'admin associe à une formation.
+model ConventionTemplate {
+  id          String   @id @default(uuid())
+  nom         String
+  storagePath String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  formations Formation[]
+
+  @@schema("ir2f")
+}
+
+// Un stagiaire importé via Excel pour les besoins de la convention de stage d'une formation
+// (gabarit LGEF : club d'accueil, stagiaire, tuteur, maître de stage — voir
+// src/lib/actions/convention-stagiaires.ts pour le mapping exact des colonnes). Pas de compte
+// User associé (signature par lien à token, pas de connexion à IR2F) — voir ConventionSignataire.
+// Le tuteur et le maître de stage sont propres à chaque stagiaire (varient selon son club
+// d'accueil) ; seul le responsable pédagogique est fixe pour la formation (voir Formation).
+model ConventionStagiaire {
+  id          String @id @default(uuid())
+  formationId String
+
+  // Club d'accueil
+  club                  String?
+  numeroAffiliationClub String?
+  emailClub             String?
+
+  // Stagiaire
+  civilite      String?
+  nom           String
+  prenom        String
+  dateNaissance String?
+  adresse       String?
+  cp            String?
+  ville         String?
+  telephone     String?
+  email         String
+
+  // Tuteur (propre à ce stagiaire)
+  tuteurNom    String?
+  tuteurPrenom String?
+  tuteurEmail  String?
+
+  // Maître de stage (propre à ce stagiaire)
+  maitreDeStageNom     String?
+  maitreDeStagePrenom  String?
+  maitreDeStageAdresse String?
+  maitreDeStageCp      String?
+  maitreDeStageVille   String?
+  maitreDeStageEmail   String?
+
+  donneesSupplementaires Json?
+  pdfStoragePath         String?
+  envoyeAt               DateTime?
+  completedAt            DateTime?
+  createdAt              DateTime  @default(now())
+
+  formation   Formation              @relation(fields: [formationId], references: [id])
+  signataires ConventionSignataire[]
+
+  @@unique([formationId, email])
+  @@schema("ir2f")
+}
+
+// Une étape du circuit de signature (5 lignes par ConventionStagiaire, une
+// par RoleSignataire). Le signataire accède via un lien à token — aucun
+// compte requis, y compris pour le stagiaire lui-même.
+model ConventionSignataire {
+  id                    String          @id @default(uuid())
+  conventionStagiaireId String
+  role                  RoleSignataire
+  ordre                 Int
+  nom                   String
+  email                 String
+  token                 String          @unique @default(uuid())
+  statut                StatutSignature @default(NON_ENVOYE)
+  envoyeAt              DateTime?
+  signedAt              DateTime?
+  refusedAt             DateTime?
+  motifRefus            String?
+  signatureStoragePath  String?
+  ipAddress             String?
+  userAgent             String?
+  documentHash          String?
+
+  conventionStagiaire ConventionStagiaire @relation(fields: [conventionStagiaireId], references: [id])
+
+  @@unique([conventionStagiaireId, role])
   @@schema("ir2f")
 }
 

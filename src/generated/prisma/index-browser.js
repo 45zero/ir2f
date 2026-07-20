@@ -158,6 +158,11 @@ exports.Prisma.FormationScalarFieldEnum = {
   modeInscription: 'modeInscription',
   lienFffStagiaire: 'lienFffStagiaire',
   lienFffClub: 'lienFffClub',
+  conventionTemplateId: 'conventionTemplateId',
+  responsablePedagogiqueNom: 'responsablePedagogiqueNom',
+  responsablePedagogiquePrenom: 'responsablePedagogiquePrenom',
+  responsablePedagogiqueEmail: 'responsablePedagogiqueEmail',
+  responsablePedagogiqueTelephone: 'responsablePedagogiqueTelephone',
   groupeEquivalence: 'groupeEquivalence',
   varianteNode: 'varianteNode',
   badgeNode: 'badgeNode',
@@ -241,6 +246,64 @@ exports.Prisma.SignatureScalarFieldEnum = {
   signedAt: 'signedAt',
   signatureUrl: 'signatureUrl',
   consentText: 'consentText',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  documentHash: 'documentHash'
+};
+
+exports.Prisma.ConventionTemplateScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  storagePath: 'storagePath',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ConventionStagiaireScalarFieldEnum = {
+  id: 'id',
+  formationId: 'formationId',
+  club: 'club',
+  numeroAffiliationClub: 'numeroAffiliationClub',
+  emailClub: 'emailClub',
+  civilite: 'civilite',
+  nom: 'nom',
+  prenom: 'prenom',
+  dateNaissance: 'dateNaissance',
+  adresse: 'adresse',
+  cp: 'cp',
+  ville: 'ville',
+  telephone: 'telephone',
+  email: 'email',
+  tuteurNom: 'tuteurNom',
+  tuteurPrenom: 'tuteurPrenom',
+  tuteurEmail: 'tuteurEmail',
+  maitreDeStageNom: 'maitreDeStageNom',
+  maitreDeStagePrenom: 'maitreDeStagePrenom',
+  maitreDeStageAdresse: 'maitreDeStageAdresse',
+  maitreDeStageCp: 'maitreDeStageCp',
+  maitreDeStageVille: 'maitreDeStageVille',
+  maitreDeStageEmail: 'maitreDeStageEmail',
+  donneesSupplementaires: 'donneesSupplementaires',
+  pdfStoragePath: 'pdfStoragePath',
+  envoyeAt: 'envoyeAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ConventionSignataireScalarFieldEnum = {
+  id: 'id',
+  conventionStagiaireId: 'conventionStagiaireId',
+  role: 'role',
+  ordre: 'ordre',
+  nom: 'nom',
+  email: 'email',
+  token: 'token',
+  statut: 'statut',
+  envoyeAt: 'envoyeAt',
+  signedAt: 'signedAt',
+  refusedAt: 'refusedAt',
+  motifRefus: 'motifRefus',
+  signatureStoragePath: 'signatureStoragePath',
   ipAddress: 'ipAddress',
   userAgent: 'userAgent',
   documentHash: 'documentHash'
@@ -548,6 +611,21 @@ exports.DocumentCategorie = exports.$Enums.DocumentCategorie = {
   PEDAGOGIQUE: 'PEDAGOGIQUE'
 };
 
+exports.RoleSignataire = exports.$Enums.RoleSignataire = {
+  STAGIAIRE: 'STAGIAIRE',
+  CLUB: 'CLUB',
+  TUTEUR: 'TUTEUR',
+  MAITRE_DE_STAGE: 'MAITRE_DE_STAGE',
+  RESPONSABLE_PEDAGOGIQUE: 'RESPONSABLE_PEDAGOGIQUE'
+};
+
+exports.StatutSignature = exports.$Enums.StatutSignature = {
+  NON_ENVOYE: 'NON_ENVOYE',
+  EN_ATTENTE: 'EN_ATTENTE',
+  SIGNE: 'SIGNE',
+  REFUSE: 'REFUSE'
+};
+
 exports.StatutCovoiturage = exports.$Enums.StatutCovoiturage = {
   OUVERT: 'OUVERT',
   COMPLET: 'COMPLET',
@@ -627,6 +705,9 @@ exports.Prisma.ModelName = {
   DemandeContact: 'DemandeContact',
   Document: 'Document',
   Signature: 'Signature',
+  ConventionTemplate: 'ConventionTemplate',
+  ConventionStagiaire: 'ConventionStagiaire',
+  ConventionSignataire: 'ConventionSignataire',
   Message: 'Message',
   MessageDestinataire: 'MessageDestinataire',
   Covoiturage: 'Covoiturage',

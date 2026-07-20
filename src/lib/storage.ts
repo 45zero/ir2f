@@ -118,6 +118,23 @@ export async function resolveImageUrl(formData: FormData, fieldName: string, key
   return existing || null
 }
 
+/** Télécharge les octets d'un fichier déjà présent dans le bucket documents (ex. modèle de convention, PDF généré). */
+export async function downloadStorageFile(storagePath: string): Promise<Buffer> {
+  const client = getStorageClient()
+  const { data, error } = await client.storage.from(BUCKET).download(storagePath)
+  if (error || !data) throw new Error(`Échec du téléchargement du fichier : ${error?.message ?? "introuvable"}`)
+  return Buffer.from(await data.arrayBuffer())
+}
+
+/** Upload générique d'octets déjà en mémoire (PDF généré, image de signature) dans le bucket documents. */
+export async function uploadBytes(bytes: Uint8Array, storagePath: string, contentType: string): Promise<{ storagePath: string }> {
+  const client = getStorageClient()
+  await ensureBucket(client)
+  const { error } = await client.storage.from(BUCKET).upload(storagePath, bytes, { contentType, upsert: true })
+  if (error) throw new Error(`Échec de l'upload du fichier : ${error.message}`)
+  return { storagePath }
+}
+
 export async function getSignedDocumentUrl(storagePath: string, expiresInSeconds = 3600): Promise<string | null> {
   const client = getStorageClient()
   const { data, error } = await client.storage.from(BUCKET).createSignedUrl(storagePath, expiresInSeconds)

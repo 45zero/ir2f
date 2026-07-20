@@ -54,6 +54,11 @@ export type FormationFormInitial = {
   programme: ProgrammeStep[]
   sessions: SessionRow[]
   formateurIds: string[]
+  conventionTemplateId: string
+  responsablePedagogiqueNom: string
+  responsablePedagogiquePrenom: string
+  responsablePedagogiqueEmail: string
+  responsablePedagogiqueTelephone: string
 }
 
 const EMPTY: FormationFormInitial = {
@@ -85,6 +90,11 @@ const EMPTY: FormationFormInitial = {
   programme: [],
   sessions: [],
   formateurIds: [],
+  conventionTemplateId: "",
+  responsablePedagogiqueNom: "",
+  responsablePedagogiquePrenom: "",
+  responsablePedagogiqueEmail: "",
+  responsablePedagogiqueTelephone: "",
 }
 
 const fieldStyle = {
@@ -134,11 +144,13 @@ export function FormationForm({
   initial,
   submitLabel,
   formateurUsers,
+  conventionTemplates,
 }: {
   action: (formData: FormData) => Promise<void>
   initial?: FormationFormInitial
   submitLabel: string
   formateurUsers: { id: string; nom: string; prenom: string }[]
+  conventionTemplates: { id: string; nom: string }[]
 }) {
   const data = initial ?? EMPTY
   const [titre, setTitre] = useState(data.titre)
@@ -335,6 +347,45 @@ export function FormationForm({
             ))}
           </div>
         </Field>
+      </SectionCard>
+
+      <SectionCard title="Convention de stage">
+        <Field label="Modèle PDF associé">
+          <select name="conventionTemplateId" defaultValue={data.conventionTemplateId} style={fieldStyle}>
+            <option value="">— Aucun —</option>
+            {conventionTemplates.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.nom}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <p style={{ color: colors.textLight, fontSize: 12, margin: 0 }}>
+          Gérer la bibliothèque de modèles depuis{" "}
+          <a href="/admin/conventions/templates" style={{ color: colors.navy, fontWeight: 700 }}>
+            Modèles de convention
+          </a>
+          .
+        </p>
+        <p style={{ fontSize: 13, fontWeight: 700, color: colors.navy, margin: "6px 0 0" }}>Responsable pédagogique</p>
+        <p style={{ color: colors.textLight, fontSize: 12, margin: 0 }}>
+          Ces coordonnées sont insérées automatiquement dans chaque convention générée pour cette formation. Le
+          tuteur et le maître de stage, eux, sont propres à chaque stagiaire et proviennent de l&apos;import Excel.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 12 }}>
+          <Field label="Prénom">
+            <input name="responsablePedagogiquePrenom" defaultValue={data.responsablePedagogiquePrenom} style={fieldStyle} />
+          </Field>
+          <Field label="Nom">
+            <input name="responsablePedagogiqueNom" defaultValue={data.responsablePedagogiqueNom} style={fieldStyle} />
+          </Field>
+          <Field label="Email">
+            <input name="responsablePedagogiqueEmail" type="email" defaultValue={data.responsablePedagogiqueEmail} style={fieldStyle} />
+          </Field>
+          <Field label="Téléphone">
+            <input name="responsablePedagogiqueTelephone" defaultValue={data.responsablePedagogiqueTelephone} style={fieldStyle} />
+          </Field>
+        </div>
       </SectionCard>
 
       <SectionCard title="Programme détaillé">
