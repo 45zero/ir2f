@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber } from "@/lib/actions/form-utils"
-import type { IconeAccompagnement } from "@/generated/prisma"
+import { resolveImageUrl } from "@/lib/storage"
+import type { IconeAccompagnement, TransitionHero } from "@/generated/prisma"
 
 export type AccueilActionState = { error: string | null }
 
@@ -23,16 +24,19 @@ export async function saveHeroSlide(
   const id = optionalStr(formData, "id")
   const badge = str(formData, "badge")
   const titre = str(formData, "titre")
-  const image = str(formData, "image")
+  const image = await resolveImageUrl(formData, "image", "hero-slides")
   const ctaLabel = str(formData, "ctaLabel") || "En savoir plus"
   const formationId = optionalStr(formData, "formationId")
   const ordre = optionalNumber(formData, "ordre") ?? 0
+  const overlayColor = str(formData, "overlayColor") || "#0a162e"
+  const overlayOpacity = optionalNumber(formData, "overlayOpacity") ?? 60
+  const transition = (str(formData, "transition") || "FADE") as TransitionHero
 
   if (!badge || !titre || !image) {
     return { error: "Le badge, le titre et l'image sont obligatoires." }
   }
 
-  const data = { badge, titre, image, ctaLabel, formationId, ordre }
+  const data = { badge, titre, image, ctaLabel, formationId, ordre, overlayColor, overlayOpacity, transition }
   if (id) {
     await prisma.heroSlide.update({ where: { id }, data })
   } else {

@@ -14,9 +14,10 @@ import {
   saveAccueilContenu,
   type AccueilActionState,
 } from "@/lib/actions/accueil"
-import { ICONE_LABELS } from "@/lib/accueil-shared"
+import { ICONE_LABELS, TRANSITION_LABELS } from "@/lib/accueil-shared"
+import { ImageField } from "@/components/admin/ImageField"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import type { IconeAccompagnement } from "@/generated/prisma"
+import type { IconeAccompagnement, TransitionHero } from "@/generated/prisma"
 
 const fieldStyle = {
   border: "1px solid #e2e5ea",
@@ -137,6 +138,9 @@ export type AdminHeroSlide = {
   image: string
   ctaLabel: string
   formationId: string | null
+  overlayColor: string
+  overlayOpacity: number
+  transition: TransitionHero
   ordre: number
   actif: boolean
 }
@@ -210,7 +214,9 @@ function HeroSlideForm({
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10 }}>
         <input name="badge" placeholder="Badge (ex : Formation à venir)" required defaultValue={item?.badge} style={fieldStyle} />
         <input name="titre" placeholder="Titre affiché" required defaultValue={item?.titre} style={fieldStyle} />
-        <input name="image" placeholder="Image (URL)" required defaultValue={item?.image} style={{ ...fieldStyle, gridColumn: "1/-1" }} />
+        <div style={{ gridColumn: "1/-1" }}>
+          <ImageField name="image" label="Image de fond" defaultUrl={item?.image} required />
+        </div>
         <input name="ctaLabel" placeholder="Texte du bouton" defaultValue={item?.ctaLabel ?? "En savoir plus"} style={fieldStyle} />
         <select name="formationId" defaultValue={item?.formationId ?? ""} style={fieldStyle}>
           <option value="">Aucune formation liée</option>
@@ -222,6 +228,40 @@ function HeroSlideForm({
         </select>
         <input name="ordre" type="number" placeholder="Ordre" defaultValue={item?.ordre ?? 0} style={fieldStyle} />
       </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, borderTop: "1px solid #eef0f3", paddingTop: 12 }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Superposition sur l&apos;image & transition</span>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: 10, alignItems: "center" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: colors.textLight }}>
+            Couleur
+            <input
+              name="overlayColor"
+              type="color"
+              defaultValue={item?.overlayColor ?? "#0a162e"}
+              style={{ width: 44, height: 30, border: "1px solid #e2e5ea", borderRadius: 5, padding: 2, cursor: "pointer" }}
+            />
+          </label>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: colors.textLight }}>
+            Opacité
+            <input
+              name="overlayOpacity"
+              type="range"
+              min={0}
+              max={100}
+              defaultValue={item?.overlayOpacity ?? 60}
+              style={{ flex: 1 }}
+            />
+          </label>
+          <select name="transition" defaultValue={item?.transition ?? "FADE"} style={fieldStyle}>
+            {Object.entries(TRANSITION_LABELS).map(([v, l]) => (
+              <option key={v} value={v}>
+                {l}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
       <div style={{ display: "flex", gap: 8 }}>
         <button type="submit" disabled={pending} style={submitButtonStyle}>

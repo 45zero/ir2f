@@ -1,4 +1,4 @@
-import type { IconeAccompagnement } from "@/generated/prisma"
+import type { IconeAccompagnement, TransitionHero } from "@/generated/prisma"
 
 export const ICONE_LABELS: Record<IconeAccompagnement, string> = {
   FINANCEMENT: "Financement (cercle)",
@@ -7,4 +7,10 @@ export const ICONE_LABELS: Record<IconeAccompagnement, string> = {
   CONTACT: "Contact (personnes)",
   DOCUMENT: "Document (feuille)",
   VALIDATION: "Validation (coche)",
+}
+
+export const TRANSITION_LABELS: Record<TransitionHero, string> = {
+  FADE: "Fondu",
+  SLIDE_GAUCHE: "Glissement vers la gauche",
+  SLIDE_DROITE: "Glissement vers la droite",
 }

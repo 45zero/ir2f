@@ -9,6 +9,9 @@ export type HeroSlideData = {
   image: string
   ctaLabel: string
   formationSlug: string | null
+  overlayColor: string
+  overlayOpacity: number
+  transition: "FADE" | "SLIDE_GAUCHE" | "SLIDE_DROITE"
 }
 
 export async function getHeroSlides(): Promise<HeroSlideData[]> {
@@ -24,6 +27,9 @@ export async function getHeroSlides(): Promise<HeroSlideData[]> {
     image: s.image,
     ctaLabel: s.ctaLabel,
     formationSlug: s.formation?.slug ?? null,
+    overlayColor: s.overlayColor,
+    overlayOpacity: s.overlayOpacity,
+    transition: s.transition,
   }))
 }
 

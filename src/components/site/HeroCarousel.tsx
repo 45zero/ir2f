@@ -8,6 +8,20 @@ import type { HeroSlideData } from "@/lib/home"
 
 const AUTOPLAY_MS = 6500
 
+const TRANSITION_ANIMATIONS = {
+  FADE: "ir2fFadeIn",
+  SLIDE_GAUCHE: "ir2fSlideInLeft",
+  SLIDE_DROITE: "ir2fSlideInRight",
+} as const
+
+function hexToRgba(hex: string, alpha: number) {
+  const clean = hex.replace("#", "")
+  const r = parseInt(clean.slice(0, 2) || "0a", 16)
+  const g = parseInt(clean.slice(2, 4) || "16", 16)
+  const b = parseInt(clean.slice(4, 6) || "2e", 16)
+  return `rgba(${r},${g},${b},${alpha})`
+}
+
 export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -34,14 +48,14 @@ export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
           backgroundImage: `url('${slide.image}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          animation: "ir2fFadeIn 0.5s ease",
+          animation: `${TRANSITION_ANIMATIONS[slide.transition]} 0.6s ease`,
         }}
       />
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(0deg,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.15) 45%,rgba(0,0,0,0) 70%)",
+          background: `linear-gradient(0deg,${hexToRgba(slide.overlayColor, slide.overlayOpacity / 100)} 0%,${hexToRgba(slide.overlayColor, (slide.overlayOpacity / 100) * 0.3)} 45%,${hexToRgba(slide.overlayColor, 0)} 70%)`,
         }}
       />
       <div

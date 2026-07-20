@@ -245,6 +245,15 @@ export const IconeAccompagnement: {
 export type IconeAccompagnement = (typeof IconeAccompagnement)[keyof typeof IconeAccompagnement]
 
 
+export const TransitionHero: {
+  FADE: 'FADE',
+  SLIDE_GAUCHE: 'SLIDE_GAUCHE',
+  SLIDE_DROITE: 'SLIDE_DROITE'
+};
+
+export type TransitionHero = (typeof TransitionHero)[keyof typeof TransitionHero]
+
+
 export const SectionEmploi: {
   FINANCEMENTS: 'FINANCEMENTS',
   GESTION_EMPLOI: 'GESTION_EMPLOI',
@@ -306,6 +315,10 @@ export const StatutCovoiturage: typeof $Enums.StatutCovoiturage
 export type IconeAccompagnement = $Enums.IconeAccompagnement
 
 export const IconeAccompagnement: typeof $Enums.IconeAccompagnement
+
+export type TransitionHero = $Enums.TransitionHero
+
+export const TransitionHero: typeof $Enums.TransitionHero
 
 export type SectionEmploi = $Enums.SectionEmploi
 
@@ -22030,10 +22043,12 @@ export namespace Prisma {
   }
 
   export type HeroSlideAvgAggregateOutputType = {
+    overlayOpacity: number | null
     ordre: number | null
   }
 
   export type HeroSlideSumAggregateOutputType = {
+    overlayOpacity: number | null
     ordre: number | null
   }
 
@@ -22044,6 +22059,9 @@ export namespace Prisma {
     image: string | null
     ctaLabel: string | null
     formationId: string | null
+    overlayColor: string | null
+    overlayOpacity: number | null
+    transition: $Enums.TransitionHero | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -22057,6 +22075,9 @@ export namespace Prisma {
     image: string | null
     ctaLabel: string | null
     formationId: string | null
+    overlayColor: string | null
+    overlayOpacity: number | null
+    transition: $Enums.TransitionHero | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -22070,6 +22091,9 @@ export namespace Prisma {
     image: number
     ctaLabel: number
     formationId: number
+    overlayColor: number
+    overlayOpacity: number
+    transition: number
     ordre: number
     actif: number
     createdAt: number
@@ -22079,10 +22103,12 @@ export namespace Prisma {
 
 
   export type HeroSlideAvgAggregateInputType = {
+    overlayOpacity?: true
     ordre?: true
   }
 
   export type HeroSlideSumAggregateInputType = {
+    overlayOpacity?: true
     ordre?: true
   }
 
@@ -22093,6 +22119,9 @@ export namespace Prisma {
     image?: true
     ctaLabel?: true
     formationId?: true
+    overlayColor?: true
+    overlayOpacity?: true
+    transition?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -22106,6 +22135,9 @@ export namespace Prisma {
     image?: true
     ctaLabel?: true
     formationId?: true
+    overlayColor?: true
+    overlayOpacity?: true
+    transition?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -22119,6 +22151,9 @@ export namespace Prisma {
     image?: true
     ctaLabel?: true
     formationId?: true
+    overlayColor?: true
+    overlayOpacity?: true
+    transition?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -22219,6 +22254,9 @@ export namespace Prisma {
     image: string
     ctaLabel: string
     formationId: string | null
+    overlayColor: string
+    overlayOpacity: number
+    transition: $Enums.TransitionHero
     ordre: number
     actif: boolean
     createdAt: Date
@@ -22251,6 +22289,9 @@ export namespace Prisma {
     image?: boolean
     ctaLabel?: boolean
     formationId?: boolean
+    overlayColor?: boolean
+    overlayOpacity?: boolean
+    transition?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -22265,6 +22306,9 @@ export namespace Prisma {
     image?: boolean
     ctaLabel?: boolean
     formationId?: boolean
+    overlayColor?: boolean
+    overlayOpacity?: boolean
+    transition?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -22279,6 +22323,9 @@ export namespace Prisma {
     image?: boolean
     ctaLabel?: boolean
     formationId?: boolean
+    overlayColor?: boolean
+    overlayOpacity?: boolean
+    transition?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -22293,13 +22340,16 @@ export namespace Prisma {
     image?: boolean
     ctaLabel?: boolean
     formationId?: boolean
+    overlayColor?: boolean
+    overlayOpacity?: boolean
+    transition?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type HeroSlideOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "badge" | "titre" | "image" | "ctaLabel" | "formationId" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["heroSlide"]>
+  export type HeroSlideOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "badge" | "titre" | "image" | "ctaLabel" | "formationId" | "overlayColor" | "overlayOpacity" | "transition" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["heroSlide"]>
   export type HeroSlideInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     formation?: boolean | HeroSlide$formationArgs<ExtArgs>
   }
@@ -22322,6 +22372,9 @@ export namespace Prisma {
       image: string
       ctaLabel: string
       formationId: string | null
+      overlayColor: string
+      overlayOpacity: number
+      transition: $Enums.TransitionHero
       ordre: number
       actif: boolean
       createdAt: Date
@@ -22756,6 +22809,9 @@ export namespace Prisma {
     readonly image: FieldRef<"HeroSlide", 'String'>
     readonly ctaLabel: FieldRef<"HeroSlide", 'String'>
     readonly formationId: FieldRef<"HeroSlide", 'String'>
+    readonly overlayColor: FieldRef<"HeroSlide", 'String'>
+    readonly overlayOpacity: FieldRef<"HeroSlide", 'Int'>
+    readonly transition: FieldRef<"HeroSlide", 'TransitionHero'>
     readonly ordre: FieldRef<"HeroSlide", 'Int'>
     readonly actif: FieldRef<"HeroSlide", 'Boolean'>
     readonly createdAt: FieldRef<"HeroSlide", 'DateTime'>
@@ -29817,6 +29873,9 @@ export namespace Prisma {
     image: 'image',
     ctaLabel: 'ctaLabel',
     formationId: 'formationId',
+    overlayColor: 'overlayColor',
+    overlayOpacity: 'overlayOpacity',
+    transition: 'transition',
     ordre: 'ordre',
     actif: 'actif',
     createdAt: 'createdAt',
@@ -30183,6 +30242,20 @@ export namespace Prisma {
    * Reference to a field of type 'IconeAccompagnement[]'
    */
   export type ListEnumIconeAccompagnementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IconeAccompagnement[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransitionHero'
+   */
+  export type EnumTransitionHeroFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransitionHero'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransitionHero[]'
+   */
+  export type ListEnumTransitionHeroFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransitionHero[]'>
     
 
 
@@ -31530,6 +31603,9 @@ export namespace Prisma {
     image?: StringFilter<"HeroSlide"> | string
     ctaLabel?: StringFilter<"HeroSlide"> | string
     formationId?: StringNullableFilter<"HeroSlide"> | string | null
+    overlayColor?: StringFilter<"HeroSlide"> | string
+    overlayOpacity?: IntFilter<"HeroSlide"> | number
+    transition?: EnumTransitionHeroFilter<"HeroSlide"> | $Enums.TransitionHero
     ordre?: IntFilter<"HeroSlide"> | number
     actif?: BoolFilter<"HeroSlide"> | boolean
     createdAt?: DateTimeFilter<"HeroSlide"> | Date | string
@@ -31544,6 +31620,9 @@ export namespace Prisma {
     image?: SortOrder
     ctaLabel?: SortOrder
     formationId?: SortOrderInput | SortOrder
+    overlayColor?: SortOrder
+    overlayOpacity?: SortOrder
+    transition?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -31561,6 +31640,9 @@ export namespace Prisma {
     image?: StringFilter<"HeroSlide"> | string
     ctaLabel?: StringFilter<"HeroSlide"> | string
     formationId?: StringNullableFilter<"HeroSlide"> | string | null
+    overlayColor?: StringFilter<"HeroSlide"> | string
+    overlayOpacity?: IntFilter<"HeroSlide"> | number
+    transition?: EnumTransitionHeroFilter<"HeroSlide"> | $Enums.TransitionHero
     ordre?: IntFilter<"HeroSlide"> | number
     actif?: BoolFilter<"HeroSlide"> | boolean
     createdAt?: DateTimeFilter<"HeroSlide"> | Date | string
@@ -31575,6 +31657,9 @@ export namespace Prisma {
     image?: SortOrder
     ctaLabel?: SortOrder
     formationId?: SortOrderInput | SortOrder
+    overlayColor?: SortOrder
+    overlayOpacity?: SortOrder
+    transition?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -31596,6 +31681,9 @@ export namespace Prisma {
     image?: StringWithAggregatesFilter<"HeroSlide"> | string
     ctaLabel?: StringWithAggregatesFilter<"HeroSlide"> | string
     formationId?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
+    overlayColor?: StringWithAggregatesFilter<"HeroSlide"> | string
+    overlayOpacity?: IntWithAggregatesFilter<"HeroSlide"> | number
+    transition?: EnumTransitionHeroWithAggregatesFilter<"HeroSlide"> | $Enums.TransitionHero
     ordre?: IntWithAggregatesFilter<"HeroSlide"> | number
     actif?: BoolWithAggregatesFilter<"HeroSlide"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"HeroSlide"> | Date | string
@@ -33431,6 +33519,9 @@ export namespace Prisma {
     titre: string
     image: string
     ctaLabel?: string
+    overlayColor?: string
+    overlayOpacity?: number
+    transition?: $Enums.TransitionHero
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -33445,6 +33536,9 @@ export namespace Prisma {
     image: string
     ctaLabel?: string
     formationId?: string | null
+    overlayColor?: string
+    overlayOpacity?: number
+    transition?: $Enums.TransitionHero
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -33457,6 +33551,9 @@ export namespace Prisma {
     titre?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: StringFieldUpdateOperationsInput | string
+    overlayColor?: StringFieldUpdateOperationsInput | string
+    overlayOpacity?: IntFieldUpdateOperationsInput | number
+    transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33471,6 +33568,9 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
+    overlayColor?: StringFieldUpdateOperationsInput | string
+    overlayOpacity?: IntFieldUpdateOperationsInput | number
+    transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33484,6 +33584,9 @@ export namespace Prisma {
     image: string
     ctaLabel?: string
     formationId?: string | null
+    overlayColor?: string
+    overlayOpacity?: number
+    transition?: $Enums.TransitionHero
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -33496,6 +33599,9 @@ export namespace Prisma {
     titre?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: StringFieldUpdateOperationsInput | string
+    overlayColor?: StringFieldUpdateOperationsInput | string
+    overlayOpacity?: IntFieldUpdateOperationsInput | number
+    transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33509,6 +33615,9 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
+    overlayColor?: StringFieldUpdateOperationsInput | string
+    overlayOpacity?: IntFieldUpdateOperationsInput | number
+    transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35260,6 +35369,13 @@ export namespace Prisma {
     ordre?: SortOrder
   }
 
+  export type EnumTransitionHeroFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransitionHero | EnumTransitionHeroFieldRefInput<$PrismaModel>
+    in?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransitionHeroFilter<$PrismaModel> | $Enums.TransitionHero
+  }
+
   export type HeroSlideCountOrderByAggregateInput = {
     id?: SortOrder
     badge?: SortOrder
@@ -35267,6 +35383,9 @@ export namespace Prisma {
     image?: SortOrder
     ctaLabel?: SortOrder
     formationId?: SortOrder
+    overlayColor?: SortOrder
+    overlayOpacity?: SortOrder
+    transition?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -35274,6 +35393,7 @@ export namespace Prisma {
   }
 
   export type HeroSlideAvgOrderByAggregateInput = {
+    overlayOpacity?: SortOrder
     ordre?: SortOrder
   }
 
@@ -35284,6 +35404,9 @@ export namespace Prisma {
     image?: SortOrder
     ctaLabel?: SortOrder
     formationId?: SortOrder
+    overlayColor?: SortOrder
+    overlayOpacity?: SortOrder
+    transition?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -35297,6 +35420,9 @@ export namespace Prisma {
     image?: SortOrder
     ctaLabel?: SortOrder
     formationId?: SortOrder
+    overlayColor?: SortOrder
+    overlayOpacity?: SortOrder
+    transition?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -35304,7 +35430,18 @@ export namespace Prisma {
   }
 
   export type HeroSlideSumOrderByAggregateInput = {
+    overlayOpacity?: SortOrder
     ordre?: SortOrder
+  }
+
+  export type EnumTransitionHeroWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransitionHero | EnumTransitionHeroFieldRefInput<$PrismaModel>
+    in?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransitionHeroWithAggregatesFilter<$PrismaModel> | $Enums.TransitionHero
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransitionHeroFilter<$PrismaModel>
+    _max?: NestedEnumTransitionHeroFilter<$PrismaModel>
   }
 
   export type CategorieInfoCountOrderByAggregateInput = {
@@ -36922,6 +37059,10 @@ export namespace Prisma {
     connect?: FormationWhereUniqueInput
   }
 
+  export type EnumTransitionHeroFieldUpdateOperationsInput = {
+    set?: $Enums.TransitionHero
+  }
+
   export type FormationUpdateOneWithoutHeroSlidesNestedInput = {
     create?: XOR<FormationCreateWithoutHeroSlidesInput, FormationUncheckedCreateWithoutHeroSlidesInput>
     connectOrCreate?: FormationCreateOrConnectWithoutHeroSlidesInput
@@ -37386,6 +37527,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumIconeAccompagnementFilter<$PrismaModel>
     _max?: NestedEnumIconeAccompagnementFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTransitionHeroFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransitionHero | EnumTransitionHeroFieldRefInput<$PrismaModel>
+    in?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransitionHeroFilter<$PrismaModel> | $Enums.TransitionHero
+  }
+
+  export type NestedEnumTransitionHeroWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransitionHero | EnumTransitionHeroFieldRefInput<$PrismaModel>
+    in?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransitionHeroWithAggregatesFilter<$PrismaModel> | $Enums.TransitionHero
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransitionHeroFilter<$PrismaModel>
+    _max?: NestedEnumTransitionHeroFilter<$PrismaModel>
   }
 
   export type NestedEnumTypeDocumentFilter<$PrismaModel = never> = {
@@ -38181,6 +38339,9 @@ export namespace Prisma {
     titre: string
     image: string
     ctaLabel?: string
+    overlayColor?: string
+    overlayOpacity?: number
+    transition?: $Enums.TransitionHero
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -38193,6 +38354,9 @@ export namespace Prisma {
     titre: string
     image: string
     ctaLabel?: string
+    overlayColor?: string
+    overlayOpacity?: number
+    transition?: $Enums.TransitionHero
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -38401,6 +38565,9 @@ export namespace Prisma {
     image?: StringFilter<"HeroSlide"> | string
     ctaLabel?: StringFilter<"HeroSlide"> | string
     formationId?: StringNullableFilter<"HeroSlide"> | string | null
+    overlayColor?: StringFilter<"HeroSlide"> | string
+    overlayOpacity?: IntFilter<"HeroSlide"> | number
+    transition?: EnumTransitionHeroFilter<"HeroSlide"> | $Enums.TransitionHero
     ordre?: IntFilter<"HeroSlide"> | number
     actif?: BoolFilter<"HeroSlide"> | boolean
     createdAt?: DateTimeFilter<"HeroSlide"> | Date | string
@@ -41714,6 +41881,9 @@ export namespace Prisma {
     titre: string
     image: string
     ctaLabel?: string
+    overlayColor?: string
+    overlayOpacity?: number
+    transition?: $Enums.TransitionHero
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -41892,6 +42062,9 @@ export namespace Prisma {
     titre?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: StringFieldUpdateOperationsInput | string
+    overlayColor?: StringFieldUpdateOperationsInput | string
+    overlayOpacity?: IntFieldUpdateOperationsInput | number
+    transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41904,6 +42077,9 @@ export namespace Prisma {
     titre?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: StringFieldUpdateOperationsInput | string
+    overlayColor?: StringFieldUpdateOperationsInput | string
+    overlayOpacity?: IntFieldUpdateOperationsInput | number
+    transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41916,6 +42092,9 @@ export namespace Prisma {
     titre?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: StringFieldUpdateOperationsInput | string
+    overlayColor?: StringFieldUpdateOperationsInput | string
+    overlayOpacity?: IntFieldUpdateOperationsInput | number
+    transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -424,17 +424,28 @@ model StatCle {
   @@schema("ir2f")
 }
 
+enum TransitionHero {
+  FADE
+  SLIDE_GAUCHE
+  SLIDE_DROITE
+
+  @@schema("ir2f")
+}
+
 model HeroSlide {
-  id          String   @id @default(uuid())
-  badge       String
-  titre       String
-  image       String
-  ctaLabel    String   @default("En savoir plus")
-  formationId String?
-  ordre       Int      @default(0)
-  actif       Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             String         @id @default(uuid())
+  badge          String
+  titre          String
+  image          String
+  ctaLabel       String         @default("En savoir plus")
+  formationId    String?
+  overlayColor   String         @default("#0a162e")
+  overlayOpacity Int            @default(60)
+  transition     TransitionHero @default(FADE)
+  ordre          Int            @default(0)
+  actif          Boolean        @default(true)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 
   formation Formation? @relation(fields: [formationId], references: [id])
 

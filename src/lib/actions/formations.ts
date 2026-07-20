@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber, parseJsonArray } from "@/lib/actions/form-utils"
+import { resolveImageUrl } from "@/lib/storage"
 import type {
   CategorieFormation,
   Filiere,
@@ -17,7 +18,7 @@ import type {
 type ProgrammeStep = { n: string; title: string; desc: string }
 type SessionInput = { dateDebut: string; lieu: string; places: string }
 
-function buildFormationData(formData: FormData) {
+async function buildFormationData(formData: FormData) {
   const programme = parseJsonArray<ProgrammeStep>(formData, "programme").filter(
     (p) => p.title?.trim() || p.desc?.trim()
   )
@@ -25,6 +26,7 @@ function buildFormationData(formData: FormData) {
   const groupeEquivalence = optionalStr(formData, "groupeEquivalence") as GroupeEquivalence | null
   const varianteNode = optionalStr(formData, "varianteNode") as VarianteNode | null
   const filiere = optionalStr(formData, "filiere") as Filiere | null
+  const image = await resolveImageUrl(formData, "image", "formations")
 
   return {
     titre: str(formData, "titre"),
@@ -40,7 +42,7 @@ function buildFormationData(formData: FormData) {
     prix: optionalNumber(formData, "prix"),
     places: optionalNumber(formData, "places"),
     lienVisio: optionalStr(formData, "lienVisio"),
-    image: optionalStr(formData, "image"),
+    image,
     cpfEligible: formData.get("cpfEligible") === "on",
     formateurNom: optionalStr(formData, "formateurNom"),
     formateurRole: optionalStr(formData, "formateurRole"),
@@ -94,7 +96,7 @@ function revalidateFormationPaths(slug: string, previousSlug?: string) {
 export async function createFormation(formData: FormData) {
   await requireAdmin()
 
-  const data = buildFormationData(formData)
+  const data = await buildFormationData(formData)
   const formation = await prisma.formation.create({ data })
   await replaceSessions(formation.id, formData)
   await replaceFormateurs(formation.id, formData)
@@ -107,7 +109,7 @@ export async function updateFormation(id: string, formData: FormData) {
   await requireAdmin()
 
   const existing = await prisma.formation.findUnique({ where: { id }, select: { slug: true } })
-  const data = buildFormationData(formData)
+  const data = await buildFormationData(formData)
   const formation = await prisma.formation.update({ where: { id }, data })
   await replaceSessions(formation.id, formData)
   await replaceFormateurs(formation.id, formData)

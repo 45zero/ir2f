@@ -320,6 +320,9 @@ exports.Prisma.HeroSlideScalarFieldEnum = {
   image: 'image',
   ctaLabel: 'ctaLabel',
   formationId: 'formationId',
+  overlayColor: 'overlayColor',
+  overlayOpacity: 'overlayOpacity',
+  transition: 'transition',
   ordre: 'ordre',
   actif: 'actif',
   createdAt: 'createdAt',
@@ -493,6 +496,12 @@ exports.IconeAccompagnement = exports.$Enums.IconeAccompagnement = {
   CONTACT: 'CONTACT',
   DOCUMENT: 'DOCUMENT',
   VALIDATION: 'VALIDATION'
+};
+
+exports.TransitionHero = exports.$Enums.TransitionHero = {
+  FADE: 'FADE',
+  SLIDE_GAUCHE: 'SLIDE_GAUCHE',
+  SLIDE_DROITE: 'SLIDE_DROITE'
 };
 
 exports.TypeDocument = exports.$Enums.TypeDocument = {

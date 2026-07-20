@@ -11,6 +11,7 @@ import {
   slugify,
 } from "@/lib/formations-shared"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
+import { ImageField } from "@/components/admin/ImageField"
 import type {
   CategorieFormation,
   Filiere,
@@ -243,9 +244,7 @@ export function FormationForm({
           <Field label="Lien visio">
             <input name="lienVisio" defaultValue={data.lienVisio} style={fieldStyle} />
           </Field>
-          <Field label="Image (URL)">
-            <input name="image" defaultValue={data.image} style={fieldStyle} />
-          </Field>
+          <ImageField name="image" label="Image" defaultUrl={data.image} />
           <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text, marginTop: 20 }}>
             <input type="checkbox" name="cpfEligible" defaultChecked={data.cpfEligible} style={{ width: 15, height: 15 }} />
             Éligible CPF

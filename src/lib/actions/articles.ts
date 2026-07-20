@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr } from "@/lib/actions/form-utils"
+import { resolveImageUrl } from "@/lib/storage"
 import type { CategorieFormation } from "@/generated/prisma"
 
 export type ArticleActionState = { error: string | null }
@@ -17,12 +18,12 @@ function revalidateArticles(slug?: string, previousSlug?: string) {
   if (previousSlug && previousSlug !== slug) revalidatePath(`/actualites/${previousSlug}`)
 }
 
-function buildArticleData(formData: FormData) {
+async function buildArticleData(formData: FormData) {
   return {
     titre: str(formData, "titre"),
     slug: str(formData, "slug"),
     contenu: str(formData, "contenu"),
-    image: optionalStr(formData, "image"),
+    image: await resolveImageUrl(formData, "image", "articles"),
     categorie: optionalStr(formData, "categorie") as CategorieFormation | null,
     publie: formData.get("publie") === "on",
   }
@@ -34,7 +35,7 @@ export async function createArticle(
 ): Promise<ArticleActionState> {
   const session = await requireAdmin()
 
-  const data = buildArticleData(formData)
+  const data = await buildArticleData(formData)
   if (!data.titre || !data.slug || !data.contenu) {
     return { error: "Le titre, le slug et le contenu sont obligatoires." }
   }
@@ -52,7 +53,7 @@ export async function updateArticle(id: string, formData: FormData): Promise<Art
 
   const existing = await prisma.article.findUnique({ where: { id }, select: { slug: true } })
 
-  const data = buildArticleData(formData)
+  const data = await buildArticleData(formData)
   if (!data.titre || !data.slug || !data.contenu) {
     return { error: "Le titre, le slug et le contenu sont obligatoires." }
   }

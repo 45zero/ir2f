@@ -4,6 +4,7 @@ import { useActionState } from "react"
 import { colors, fontBody } from "@/lib/theme"
 import { CATEGORIE_LABELS } from "@/lib/formations-shared"
 import { createArticle, updateArticle, type ArticleActionState } from "@/lib/actions/articles"
+import { ImageField } from "@/components/admin/ImageField"
 import type { CategorieFormation } from "@/generated/prisma"
 
 const fieldStyle = {
@@ -65,9 +66,8 @@ export function ArticleForm({
         <input name="slug" required defaultValue={initial?.slug} style={fieldStyle} />
       </div>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 5, flex: "1 1 260px" }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Image (URL)</span>
-          <input name="image" defaultValue={initial?.image} style={fieldStyle} />
+        <div style={{ flex: "1 1 260px" }}>
+          <ImageField name="image" label="Image" defaultUrl={initial?.image} />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 5, flex: "1 1 200px" }}>
           <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Catégorie</span>
