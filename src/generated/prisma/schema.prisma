@@ -432,13 +432,25 @@ enum TransitionHero {
   @@schema("ir2f")
 }
 
+enum AlignementHero {
+  GAUCHE
+  CENTRE
+  DROITE
+
+  @@schema("ir2f")
+}
+
 model HeroSlide {
   id             String         @id @default(uuid())
-  badge          String
+  badge          String?
   titre          String
+  sousTitre      String?
+  logoUrl        String?
   image          String
-  ctaLabel       String         @default("En savoir plus")
+  ctaLabel       String?        @default("En savoir plus")
   formationId    String?
+  youtubeUrl     String?
+  alignement     AlignementHero @default(GAUCHE)
   overlayColor   String         @default("#0a162e")
   overlayOpacity Int            @default(60)
   transition     TransitionHero @default(FADE)

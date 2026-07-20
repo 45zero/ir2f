@@ -317,9 +317,13 @@ exports.Prisma.HeroSlideScalarFieldEnum = {
   id: 'id',
   badge: 'badge',
   titre: 'titre',
+  sousTitre: 'sousTitre',
+  logoUrl: 'logoUrl',
   image: 'image',
   ctaLabel: 'ctaLabel',
   formationId: 'formationId',
+  youtubeUrl: 'youtubeUrl',
+  alignement: 'alignement',
   overlayColor: 'overlayColor',
   overlayOpacity: 'overlayOpacity',
   transition: 'transition',
@@ -496,6 +500,12 @@ exports.IconeAccompagnement = exports.$Enums.IconeAccompagnement = {
   CONTACT: 'CONTACT',
   DOCUMENT: 'DOCUMENT',
   VALIDATION: 'VALIDATION'
+};
+
+exports.AlignementHero = exports.$Enums.AlignementHero = {
+  GAUCHE: 'GAUCHE',
+  CENTRE: 'CENTRE',
+  DROITE: 'DROITE'
 };
 
 exports.TransitionHero = exports.$Enums.TransitionHero = {

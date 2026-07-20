@@ -4,11 +4,15 @@ import { getPublishedArticles, type ArticleListItem } from "@/lib/actualites"
 
 export type HeroSlideData = {
   id: string
-  badge: string
+  badge: string | null
   titre: string
+  sousTitre: string | null
+  logoUrl: string | null
   image: string
-  ctaLabel: string
+  ctaLabel: string | null
   formationSlug: string | null
+  youtubeUrl: string | null
+  alignement: "GAUCHE" | "CENTRE" | "DROITE"
   overlayColor: string
   overlayOpacity: number
   transition: "FADE" | "SLIDE_GAUCHE" | "SLIDE_DROITE"
@@ -24,9 +28,13 @@ export async function getHeroSlides(): Promise<HeroSlideData[]> {
     id: s.id,
     badge: s.badge,
     titre: s.titre,
+    sousTitre: s.sousTitre,
+    logoUrl: s.logoUrl,
     image: s.image,
     ctaLabel: s.ctaLabel,
     formationSlug: s.formation?.slug ?? null,
+    youtubeUrl: s.youtubeUrl,
+    alignement: s.alignement,
     overlayColor: s.overlayColor,
     overlayOpacity: s.overlayOpacity,
     transition: s.transition,

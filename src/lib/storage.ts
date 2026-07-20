@@ -1,6 +1,7 @@
 import "server-only"
 import { randomUUID } from "crypto"
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
+import sharp from "sharp"
 
 const BUCKET = "ir2f-documents"
 
@@ -55,16 +56,49 @@ async function ensureImagesBucket(client: SupabaseClient) {
   imagesBucketEnsured = true
 }
 
+const IMAGE_MAX_DIMENSION = 1920
+const IMAGE_TARGET_BYTES = 2 * 1024 * 1024
+
+/**
+ * Filet de sécurité côté serveur : redimensionne/compresse toute image publique avant
+ * stockage, même si la compression déjà faite dans le navigateur a été contournée. Garantit
+ * qu'aucune image servie publiquement ne dépasse ~2 Mo, quelle que soit la taille envoyée.
+ */
+async function compressForStorage(bytes: ArrayBuffer, mimeType: string): Promise<{ buffer: Buffer; contentType: string; ext: string }> {
+  if (mimeType === "image/svg+xml") {
+    return { buffer: Buffer.from(bytes), contentType: mimeType, ext: "svg" }
+  }
+
+  const input = Buffer.from(bytes)
+  let quality = 85
+  let output = await sharp(input)
+    .rotate()
+    .resize({ width: IMAGE_MAX_DIMENSION, height: IMAGE_MAX_DIMENSION, fit: "inside", withoutEnlargement: true })
+    .jpeg({ quality, mozjpeg: true })
+    .toBuffer()
+
+  while (output.length > IMAGE_TARGET_BYTES && quality > 35) {
+    quality -= 12
+    output = await sharp(input)
+      .rotate()
+      .resize({ width: IMAGE_MAX_DIMENSION, height: IMAGE_MAX_DIMENSION, fit: "inside", withoutEnlargement: true })
+      .jpeg({ quality, mozjpeg: true })
+      .toBuffer()
+  }
+
+  return { buffer: output, contentType: "image/jpeg", ext: "jpg" }
+}
+
 export async function uploadPublicImage(file: File, keyHint: string): Promise<string> {
   const client = getStorageClient()
   await ensureImagesBucket(client)
 
-  const ext = file.name.includes(".") ? file.name.split(".").pop() : "jpg"
-  const storagePath = `${keyHint}/${randomUUID()}.${ext}`
   const bytes = await file.arrayBuffer()
+  const { buffer, contentType, ext } = await compressForStorage(bytes, file.type || "image/jpeg")
+  const storagePath = `${keyHint}/${randomUUID()}.${ext}`
 
-  const { error } = await client.storage.from(IMAGES_BUCKET).upload(storagePath, bytes, {
-    contentType: file.type || "image/jpeg",
+  const { error } = await client.storage.from(IMAGES_BUCKET).upload(storagePath, buffer, {
+    contentType,
     upsert: false,
   })
   if (error) throw new Error(`Échec de l'upload de l'image : ${error.message}`)

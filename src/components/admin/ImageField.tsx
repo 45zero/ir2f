@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, type ChangeEvent } from "react"
+import { useRef, useState, type ChangeEvent } from "react"
 import { colors, fontBody } from "@/lib/theme"
+import { compressImageFile } from "@/lib/image-compress"
 
 export function ImageField({
   name,
@@ -16,12 +17,34 @@ export function ImageField({
 }) {
   const [preview, setPreview] = useState(defaultUrl ?? "")
   const [fileName, setFileName] = useState<string | null>(null)
+  const [compressing, setCompressing] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  function onChange(e: ChangeEvent<HTMLInputElement>) {
+  async function onChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
-    setPreview(URL.createObjectURL(file))
-    setFileName(file.name)
+
+    setCompressing(true)
+    try {
+      let toUse = file
+      try {
+        toUse = await compressImageFile(file)
+      } catch {
+        // La compression a échoué (format non décodable côté navigateur, etc.) : on envoie
+        // l'original tel quel, le filet de sécurité côté serveur s'occupera de le réduire.
+      }
+
+      // Remplace le fichier de l'input par la version compressée, pour que l'envoi du
+      // formulaire transmette bien la version réduite (et pas la photo d'origine).
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(toUse)
+      if (inputRef.current) inputRef.current.files = dataTransfer.files
+
+      setPreview(URL.createObjectURL(toUse))
+      setFileName(toUse.name)
+    } finally {
+      setCompressing(false)
+    }
   }
 
   return (
@@ -73,13 +96,21 @@ export function ImageField({
           }}
         >
           {fileName ? "Changer l'image" : "Choisir une image"}
-          <input type="file" name={`${name}File`} accept="image/*" onChange={onChange} style={{ display: "none" }} />
+          <input
+            ref={inputRef}
+            type="file"
+            name={`${name}File`}
+            accept="image/*"
+            onChange={onChange}
+            style={{ display: "none" }}
+          />
         </label>
-        {fileName && <span style={{ fontSize: 12, color: colors.textLight }}>{fileName}</span>}
+        {compressing && <span style={{ fontSize: 12, color: colors.textLight }}>Compression…</span>}
+        {!compressing && fileName && <span style={{ fontSize: 12, color: colors.textLight }}>{fileName}</span>}
       </div>
       <input type="hidden" name={name} defaultValue={defaultUrl ?? ""} />
       {required && !defaultUrl && (
-        <span style={{ fontSize: 11, color: colors.textLight }}>Format JPG, PNG ou WebP.</span>
+        <span style={{ fontSize: 11, color: colors.textLight }}>Format JPG, PNG ou WebP. Redimensionnée et compressée automatiquement.</span>
       )}
     </div>
   )

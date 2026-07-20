@@ -254,6 +254,15 @@ export const TransitionHero: {
 export type TransitionHero = (typeof TransitionHero)[keyof typeof TransitionHero]
 
 
+export const AlignementHero: {
+  GAUCHE: 'GAUCHE',
+  CENTRE: 'CENTRE',
+  DROITE: 'DROITE'
+};
+
+export type AlignementHero = (typeof AlignementHero)[keyof typeof AlignementHero]
+
+
 export const SectionEmploi: {
   FINANCEMENTS: 'FINANCEMENTS',
   GESTION_EMPLOI: 'GESTION_EMPLOI',
@@ -319,6 +328,10 @@ export const IconeAccompagnement: typeof $Enums.IconeAccompagnement
 export type TransitionHero = $Enums.TransitionHero
 
 export const TransitionHero: typeof $Enums.TransitionHero
+
+export type AlignementHero = $Enums.AlignementHero
+
+export const AlignementHero: typeof $Enums.AlignementHero
 
 export type SectionEmploi = $Enums.SectionEmploi
 
@@ -22056,9 +22069,13 @@ export namespace Prisma {
     id: string | null
     badge: string | null
     titre: string | null
+    sousTitre: string | null
+    logoUrl: string | null
     image: string | null
     ctaLabel: string | null
     formationId: string | null
+    youtubeUrl: string | null
+    alignement: $Enums.AlignementHero | null
     overlayColor: string | null
     overlayOpacity: number | null
     transition: $Enums.TransitionHero | null
@@ -22072,9 +22089,13 @@ export namespace Prisma {
     id: string | null
     badge: string | null
     titre: string | null
+    sousTitre: string | null
+    logoUrl: string | null
     image: string | null
     ctaLabel: string | null
     formationId: string | null
+    youtubeUrl: string | null
+    alignement: $Enums.AlignementHero | null
     overlayColor: string | null
     overlayOpacity: number | null
     transition: $Enums.TransitionHero | null
@@ -22088,9 +22109,13 @@ export namespace Prisma {
     id: number
     badge: number
     titre: number
+    sousTitre: number
+    logoUrl: number
     image: number
     ctaLabel: number
     formationId: number
+    youtubeUrl: number
+    alignement: number
     overlayColor: number
     overlayOpacity: number
     transition: number
@@ -22116,9 +22141,13 @@ export namespace Prisma {
     id?: true
     badge?: true
     titre?: true
+    sousTitre?: true
+    logoUrl?: true
     image?: true
     ctaLabel?: true
     formationId?: true
+    youtubeUrl?: true
+    alignement?: true
     overlayColor?: true
     overlayOpacity?: true
     transition?: true
@@ -22132,9 +22161,13 @@ export namespace Prisma {
     id?: true
     badge?: true
     titre?: true
+    sousTitre?: true
+    logoUrl?: true
     image?: true
     ctaLabel?: true
     formationId?: true
+    youtubeUrl?: true
+    alignement?: true
     overlayColor?: true
     overlayOpacity?: true
     transition?: true
@@ -22148,9 +22181,13 @@ export namespace Prisma {
     id?: true
     badge?: true
     titre?: true
+    sousTitre?: true
+    logoUrl?: true
     image?: true
     ctaLabel?: true
     formationId?: true
+    youtubeUrl?: true
+    alignement?: true
     overlayColor?: true
     overlayOpacity?: true
     transition?: true
@@ -22249,11 +22286,15 @@ export namespace Prisma {
 
   export type HeroSlideGroupByOutputType = {
     id: string
-    badge: string
+    badge: string | null
     titre: string
+    sousTitre: string | null
+    logoUrl: string | null
     image: string
-    ctaLabel: string
+    ctaLabel: string | null
     formationId: string | null
+    youtubeUrl: string | null
+    alignement: $Enums.AlignementHero
     overlayColor: string
     overlayOpacity: number
     transition: $Enums.TransitionHero
@@ -22286,9 +22327,13 @@ export namespace Prisma {
     id?: boolean
     badge?: boolean
     titre?: boolean
+    sousTitre?: boolean
+    logoUrl?: boolean
     image?: boolean
     ctaLabel?: boolean
     formationId?: boolean
+    youtubeUrl?: boolean
+    alignement?: boolean
     overlayColor?: boolean
     overlayOpacity?: boolean
     transition?: boolean
@@ -22303,9 +22348,13 @@ export namespace Prisma {
     id?: boolean
     badge?: boolean
     titre?: boolean
+    sousTitre?: boolean
+    logoUrl?: boolean
     image?: boolean
     ctaLabel?: boolean
     formationId?: boolean
+    youtubeUrl?: boolean
+    alignement?: boolean
     overlayColor?: boolean
     overlayOpacity?: boolean
     transition?: boolean
@@ -22320,9 +22369,13 @@ export namespace Prisma {
     id?: boolean
     badge?: boolean
     titre?: boolean
+    sousTitre?: boolean
+    logoUrl?: boolean
     image?: boolean
     ctaLabel?: boolean
     formationId?: boolean
+    youtubeUrl?: boolean
+    alignement?: boolean
     overlayColor?: boolean
     overlayOpacity?: boolean
     transition?: boolean
@@ -22337,9 +22390,13 @@ export namespace Prisma {
     id?: boolean
     badge?: boolean
     titre?: boolean
+    sousTitre?: boolean
+    logoUrl?: boolean
     image?: boolean
     ctaLabel?: boolean
     formationId?: boolean
+    youtubeUrl?: boolean
+    alignement?: boolean
     overlayColor?: boolean
     overlayOpacity?: boolean
     transition?: boolean
@@ -22349,7 +22406,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type HeroSlideOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "badge" | "titre" | "image" | "ctaLabel" | "formationId" | "overlayColor" | "overlayOpacity" | "transition" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["heroSlide"]>
+  export type HeroSlideOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "badge" | "titre" | "sousTitre" | "logoUrl" | "image" | "ctaLabel" | "formationId" | "youtubeUrl" | "alignement" | "overlayColor" | "overlayOpacity" | "transition" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["heroSlide"]>
   export type HeroSlideInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     formation?: boolean | HeroSlide$formationArgs<ExtArgs>
   }
@@ -22367,11 +22424,15 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      badge: string
+      badge: string | null
       titre: string
+      sousTitre: string | null
+      logoUrl: string | null
       image: string
-      ctaLabel: string
+      ctaLabel: string | null
       formationId: string | null
+      youtubeUrl: string | null
+      alignement: $Enums.AlignementHero
       overlayColor: string
       overlayOpacity: number
       transition: $Enums.TransitionHero
@@ -22806,9 +22867,13 @@ export namespace Prisma {
     readonly id: FieldRef<"HeroSlide", 'String'>
     readonly badge: FieldRef<"HeroSlide", 'String'>
     readonly titre: FieldRef<"HeroSlide", 'String'>
+    readonly sousTitre: FieldRef<"HeroSlide", 'String'>
+    readonly logoUrl: FieldRef<"HeroSlide", 'String'>
     readonly image: FieldRef<"HeroSlide", 'String'>
     readonly ctaLabel: FieldRef<"HeroSlide", 'String'>
     readonly formationId: FieldRef<"HeroSlide", 'String'>
+    readonly youtubeUrl: FieldRef<"HeroSlide", 'String'>
+    readonly alignement: FieldRef<"HeroSlide", 'AlignementHero'>
     readonly overlayColor: FieldRef<"HeroSlide", 'String'>
     readonly overlayOpacity: FieldRef<"HeroSlide", 'Int'>
     readonly transition: FieldRef<"HeroSlide", 'TransitionHero'>
@@ -29870,9 +29935,13 @@ export namespace Prisma {
     id: 'id',
     badge: 'badge',
     titre: 'titre',
+    sousTitre: 'sousTitre',
+    logoUrl: 'logoUrl',
     image: 'image',
     ctaLabel: 'ctaLabel',
     formationId: 'formationId',
+    youtubeUrl: 'youtubeUrl',
+    alignement: 'alignement',
     overlayColor: 'overlayColor',
     overlayOpacity: 'overlayOpacity',
     transition: 'transition',
@@ -30242,6 +30311,20 @@ export namespace Prisma {
    * Reference to a field of type 'IconeAccompagnement[]'
    */
   export type ListEnumIconeAccompagnementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IconeAccompagnement[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'AlignementHero'
+   */
+  export type EnumAlignementHeroFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AlignementHero'>
+    
+
+
+  /**
+   * Reference to a field of type 'AlignementHero[]'
+   */
+  export type ListEnumAlignementHeroFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AlignementHero[]'>
     
 
 
@@ -31598,11 +31681,15 @@ export namespace Prisma {
     OR?: HeroSlideWhereInput[]
     NOT?: HeroSlideWhereInput | HeroSlideWhereInput[]
     id?: StringFilter<"HeroSlide"> | string
-    badge?: StringFilter<"HeroSlide"> | string
+    badge?: StringNullableFilter<"HeroSlide"> | string | null
     titre?: StringFilter<"HeroSlide"> | string
+    sousTitre?: StringNullableFilter<"HeroSlide"> | string | null
+    logoUrl?: StringNullableFilter<"HeroSlide"> | string | null
     image?: StringFilter<"HeroSlide"> | string
-    ctaLabel?: StringFilter<"HeroSlide"> | string
+    ctaLabel?: StringNullableFilter<"HeroSlide"> | string | null
     formationId?: StringNullableFilter<"HeroSlide"> | string | null
+    youtubeUrl?: StringNullableFilter<"HeroSlide"> | string | null
+    alignement?: EnumAlignementHeroFilter<"HeroSlide"> | $Enums.AlignementHero
     overlayColor?: StringFilter<"HeroSlide"> | string
     overlayOpacity?: IntFilter<"HeroSlide"> | number
     transition?: EnumTransitionHeroFilter<"HeroSlide"> | $Enums.TransitionHero
@@ -31615,11 +31702,15 @@ export namespace Prisma {
 
   export type HeroSlideOrderByWithRelationInput = {
     id?: SortOrder
-    badge?: SortOrder
+    badge?: SortOrderInput | SortOrder
     titre?: SortOrder
+    sousTitre?: SortOrderInput | SortOrder
+    logoUrl?: SortOrderInput | SortOrder
     image?: SortOrder
-    ctaLabel?: SortOrder
+    ctaLabel?: SortOrderInput | SortOrder
     formationId?: SortOrderInput | SortOrder
+    youtubeUrl?: SortOrderInput | SortOrder
+    alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
@@ -31635,11 +31726,15 @@ export namespace Prisma {
     AND?: HeroSlideWhereInput | HeroSlideWhereInput[]
     OR?: HeroSlideWhereInput[]
     NOT?: HeroSlideWhereInput | HeroSlideWhereInput[]
-    badge?: StringFilter<"HeroSlide"> | string
+    badge?: StringNullableFilter<"HeroSlide"> | string | null
     titre?: StringFilter<"HeroSlide"> | string
+    sousTitre?: StringNullableFilter<"HeroSlide"> | string | null
+    logoUrl?: StringNullableFilter<"HeroSlide"> | string | null
     image?: StringFilter<"HeroSlide"> | string
-    ctaLabel?: StringFilter<"HeroSlide"> | string
+    ctaLabel?: StringNullableFilter<"HeroSlide"> | string | null
     formationId?: StringNullableFilter<"HeroSlide"> | string | null
+    youtubeUrl?: StringNullableFilter<"HeroSlide"> | string | null
+    alignement?: EnumAlignementHeroFilter<"HeroSlide"> | $Enums.AlignementHero
     overlayColor?: StringFilter<"HeroSlide"> | string
     overlayOpacity?: IntFilter<"HeroSlide"> | number
     transition?: EnumTransitionHeroFilter<"HeroSlide"> | $Enums.TransitionHero
@@ -31652,11 +31747,15 @@ export namespace Prisma {
 
   export type HeroSlideOrderByWithAggregationInput = {
     id?: SortOrder
-    badge?: SortOrder
+    badge?: SortOrderInput | SortOrder
     titre?: SortOrder
+    sousTitre?: SortOrderInput | SortOrder
+    logoUrl?: SortOrderInput | SortOrder
     image?: SortOrder
-    ctaLabel?: SortOrder
+    ctaLabel?: SortOrderInput | SortOrder
     formationId?: SortOrderInput | SortOrder
+    youtubeUrl?: SortOrderInput | SortOrder
+    alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
@@ -31676,11 +31775,15 @@ export namespace Prisma {
     OR?: HeroSlideScalarWhereWithAggregatesInput[]
     NOT?: HeroSlideScalarWhereWithAggregatesInput | HeroSlideScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"HeroSlide"> | string
-    badge?: StringWithAggregatesFilter<"HeroSlide"> | string
+    badge?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
     titre?: StringWithAggregatesFilter<"HeroSlide"> | string
+    sousTitre?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
+    logoUrl?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
     image?: StringWithAggregatesFilter<"HeroSlide"> | string
-    ctaLabel?: StringWithAggregatesFilter<"HeroSlide"> | string
+    ctaLabel?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
     formationId?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
+    youtubeUrl?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
+    alignement?: EnumAlignementHeroWithAggregatesFilter<"HeroSlide"> | $Enums.AlignementHero
     overlayColor?: StringWithAggregatesFilter<"HeroSlide"> | string
     overlayOpacity?: IntWithAggregatesFilter<"HeroSlide"> | number
     transition?: EnumTransitionHeroWithAggregatesFilter<"HeroSlide"> | $Enums.TransitionHero
@@ -33515,10 +33618,14 @@ export namespace Prisma {
 
   export type HeroSlideCreateInput = {
     id?: string
-    badge: string
+    badge?: string | null
     titre: string
+    sousTitre?: string | null
+    logoUrl?: string | null
     image: string
-    ctaLabel?: string
+    ctaLabel?: string | null
+    youtubeUrl?: string | null
+    alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
@@ -33531,11 +33638,15 @@ export namespace Prisma {
 
   export type HeroSlideUncheckedCreateInput = {
     id?: string
-    badge: string
+    badge?: string | null
     titre: string
+    sousTitre?: string | null
+    logoUrl?: string | null
     image: string
-    ctaLabel?: string
+    ctaLabel?: string | null
     formationId?: string | null
+    youtubeUrl?: string | null
+    alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
@@ -33547,10 +33658,14 @@ export namespace Prisma {
 
   export type HeroSlideUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    badge?: StringFieldUpdateOperationsInput | string
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    ctaLabel?: StringFieldUpdateOperationsInput | string
+    ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
@@ -33563,11 +33678,15 @@ export namespace Prisma {
 
   export type HeroSlideUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    badge?: StringFieldUpdateOperationsInput | string
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    ctaLabel?: StringFieldUpdateOperationsInput | string
+    ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
@@ -33579,11 +33698,15 @@ export namespace Prisma {
 
   export type HeroSlideCreateManyInput = {
     id?: string
-    badge: string
+    badge?: string | null
     titre: string
+    sousTitre?: string | null
+    logoUrl?: string | null
     image: string
-    ctaLabel?: string
+    ctaLabel?: string | null
     formationId?: string | null
+    youtubeUrl?: string | null
+    alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
@@ -33595,10 +33718,14 @@ export namespace Prisma {
 
   export type HeroSlideUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    badge?: StringFieldUpdateOperationsInput | string
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    ctaLabel?: StringFieldUpdateOperationsInput | string
+    ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
@@ -33610,11 +33737,15 @@ export namespace Prisma {
 
   export type HeroSlideUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    badge?: StringFieldUpdateOperationsInput | string
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    ctaLabel?: StringFieldUpdateOperationsInput | string
+    ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
@@ -35369,6 +35500,13 @@ export namespace Prisma {
     ordre?: SortOrder
   }
 
+  export type EnumAlignementHeroFilter<$PrismaModel = never> = {
+    equals?: $Enums.AlignementHero | EnumAlignementHeroFieldRefInput<$PrismaModel>
+    in?: $Enums.AlignementHero[] | ListEnumAlignementHeroFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AlignementHero[] | ListEnumAlignementHeroFieldRefInput<$PrismaModel>
+    not?: NestedEnumAlignementHeroFilter<$PrismaModel> | $Enums.AlignementHero
+  }
+
   export type EnumTransitionHeroFilter<$PrismaModel = never> = {
     equals?: $Enums.TransitionHero | EnumTransitionHeroFieldRefInput<$PrismaModel>
     in?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
@@ -35380,9 +35518,13 @@ export namespace Prisma {
     id?: SortOrder
     badge?: SortOrder
     titre?: SortOrder
+    sousTitre?: SortOrder
+    logoUrl?: SortOrder
     image?: SortOrder
     ctaLabel?: SortOrder
     formationId?: SortOrder
+    youtubeUrl?: SortOrder
+    alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
@@ -35401,9 +35543,13 @@ export namespace Prisma {
     id?: SortOrder
     badge?: SortOrder
     titre?: SortOrder
+    sousTitre?: SortOrder
+    logoUrl?: SortOrder
     image?: SortOrder
     ctaLabel?: SortOrder
     formationId?: SortOrder
+    youtubeUrl?: SortOrder
+    alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
@@ -35417,9 +35563,13 @@ export namespace Prisma {
     id?: SortOrder
     badge?: SortOrder
     titre?: SortOrder
+    sousTitre?: SortOrder
+    logoUrl?: SortOrder
     image?: SortOrder
     ctaLabel?: SortOrder
     formationId?: SortOrder
+    youtubeUrl?: SortOrder
+    alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
@@ -35432,6 +35582,16 @@ export namespace Prisma {
   export type HeroSlideSumOrderByAggregateInput = {
     overlayOpacity?: SortOrder
     ordre?: SortOrder
+  }
+
+  export type EnumAlignementHeroWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AlignementHero | EnumAlignementHeroFieldRefInput<$PrismaModel>
+    in?: $Enums.AlignementHero[] | ListEnumAlignementHeroFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AlignementHero[] | ListEnumAlignementHeroFieldRefInput<$PrismaModel>
+    not?: NestedEnumAlignementHeroWithAggregatesFilter<$PrismaModel> | $Enums.AlignementHero
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAlignementHeroFilter<$PrismaModel>
+    _max?: NestedEnumAlignementHeroFilter<$PrismaModel>
   }
 
   export type EnumTransitionHeroWithAggregatesFilter<$PrismaModel = never> = {
@@ -37059,6 +37219,10 @@ export namespace Prisma {
     connect?: FormationWhereUniqueInput
   }
 
+  export type EnumAlignementHeroFieldUpdateOperationsInput = {
+    set?: $Enums.AlignementHero
+  }
+
   export type EnumTransitionHeroFieldUpdateOperationsInput = {
     set?: $Enums.TransitionHero
   }
@@ -37529,11 +37693,28 @@ export namespace Prisma {
     _max?: NestedEnumIconeAccompagnementFilter<$PrismaModel>
   }
 
+  export type NestedEnumAlignementHeroFilter<$PrismaModel = never> = {
+    equals?: $Enums.AlignementHero | EnumAlignementHeroFieldRefInput<$PrismaModel>
+    in?: $Enums.AlignementHero[] | ListEnumAlignementHeroFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AlignementHero[] | ListEnumAlignementHeroFieldRefInput<$PrismaModel>
+    not?: NestedEnumAlignementHeroFilter<$PrismaModel> | $Enums.AlignementHero
+  }
+
   export type NestedEnumTransitionHeroFilter<$PrismaModel = never> = {
     equals?: $Enums.TransitionHero | EnumTransitionHeroFieldRefInput<$PrismaModel>
     in?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
     notIn?: $Enums.TransitionHero[] | ListEnumTransitionHeroFieldRefInput<$PrismaModel>
     not?: NestedEnumTransitionHeroFilter<$PrismaModel> | $Enums.TransitionHero
+  }
+
+  export type NestedEnumAlignementHeroWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AlignementHero | EnumAlignementHeroFieldRefInput<$PrismaModel>
+    in?: $Enums.AlignementHero[] | ListEnumAlignementHeroFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AlignementHero[] | ListEnumAlignementHeroFieldRefInput<$PrismaModel>
+    not?: NestedEnumAlignementHeroWithAggregatesFilter<$PrismaModel> | $Enums.AlignementHero
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAlignementHeroFilter<$PrismaModel>
+    _max?: NestedEnumAlignementHeroFilter<$PrismaModel>
   }
 
   export type NestedEnumTransitionHeroWithAggregatesFilter<$PrismaModel = never> = {
@@ -38335,10 +38516,14 @@ export namespace Prisma {
 
   export type HeroSlideCreateWithoutFormationInput = {
     id?: string
-    badge: string
+    badge?: string | null
     titre: string
+    sousTitre?: string | null
+    logoUrl?: string | null
     image: string
-    ctaLabel?: string
+    ctaLabel?: string | null
+    youtubeUrl?: string | null
+    alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
@@ -38350,10 +38535,14 @@ export namespace Prisma {
 
   export type HeroSlideUncheckedCreateWithoutFormationInput = {
     id?: string
-    badge: string
+    badge?: string | null
     titre: string
+    sousTitre?: string | null
+    logoUrl?: string | null
     image: string
-    ctaLabel?: string
+    ctaLabel?: string | null
+    youtubeUrl?: string | null
+    alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
@@ -38560,11 +38749,15 @@ export namespace Prisma {
     OR?: HeroSlideScalarWhereInput[]
     NOT?: HeroSlideScalarWhereInput | HeroSlideScalarWhereInput[]
     id?: StringFilter<"HeroSlide"> | string
-    badge?: StringFilter<"HeroSlide"> | string
+    badge?: StringNullableFilter<"HeroSlide"> | string | null
     titre?: StringFilter<"HeroSlide"> | string
+    sousTitre?: StringNullableFilter<"HeroSlide"> | string | null
+    logoUrl?: StringNullableFilter<"HeroSlide"> | string | null
     image?: StringFilter<"HeroSlide"> | string
-    ctaLabel?: StringFilter<"HeroSlide"> | string
+    ctaLabel?: StringNullableFilter<"HeroSlide"> | string | null
     formationId?: StringNullableFilter<"HeroSlide"> | string | null
+    youtubeUrl?: StringNullableFilter<"HeroSlide"> | string | null
+    alignement?: EnumAlignementHeroFilter<"HeroSlide"> | $Enums.AlignementHero
     overlayColor?: StringFilter<"HeroSlide"> | string
     overlayOpacity?: IntFilter<"HeroSlide"> | number
     transition?: EnumTransitionHeroFilter<"HeroSlide"> | $Enums.TransitionHero
@@ -41877,10 +42070,14 @@ export namespace Prisma {
 
   export type HeroSlideCreateManyFormationInput = {
     id?: string
-    badge: string
+    badge?: string | null
     titre: string
+    sousTitre?: string | null
+    logoUrl?: string | null
     image: string
-    ctaLabel?: string
+    ctaLabel?: string | null
+    youtubeUrl?: string | null
+    alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
@@ -42058,10 +42255,14 @@ export namespace Prisma {
 
   export type HeroSlideUpdateWithoutFormationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    badge?: StringFieldUpdateOperationsInput | string
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    ctaLabel?: StringFieldUpdateOperationsInput | string
+    ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
@@ -42073,10 +42274,14 @@ export namespace Prisma {
 
   export type HeroSlideUncheckedUpdateWithoutFormationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    badge?: StringFieldUpdateOperationsInput | string
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    ctaLabel?: StringFieldUpdateOperationsInput | string
+    ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
@@ -42088,10 +42293,14 @@ export namespace Prisma {
 
   export type HeroSlideUncheckedUpdateManyWithoutFormationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    badge?: StringFieldUpdateOperationsInput | string
+    badge?: NullableStringFieldUpdateOperationsInput | string | null
     titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
-    ctaLabel?: StringFieldUpdateOperationsInput | string
+    ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero

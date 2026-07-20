@@ -14,10 +14,10 @@ import {
   saveAccueilContenu,
   type AccueilActionState,
 } from "@/lib/actions/accueil"
-import { ICONE_LABELS, TRANSITION_LABELS } from "@/lib/accueil-shared"
+import { ICONE_LABELS, TRANSITION_LABELS, ALIGNEMENT_LABELS } from "@/lib/accueil-shared"
 import { ImageField } from "@/components/admin/ImageField"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import type { IconeAccompagnement, TransitionHero } from "@/generated/prisma"
+import type { IconeAccompagnement, TransitionHero, AlignementHero } from "@/generated/prisma"
 
 const fieldStyle = {
   border: "1px solid #e2e5ea",
@@ -133,11 +133,15 @@ function EmptyState({ label }: { label: string }) {
 
 export type AdminHeroSlide = {
   id: string
-  badge: string
+  badge: string | null
   titre: string
+  sousTitre: string | null
+  logoUrl: string | null
   image: string
-  ctaLabel: string
+  ctaLabel: string | null
   formationId: string | null
+  youtubeUrl: string | null
+  alignement: AlignementHero
   overlayColor: string
   overlayOpacity: number
   transition: TransitionHero
@@ -171,7 +175,7 @@ function HeroSlidesSection({ items, formationOptions }: { items: AdminHeroSlide[
               <div>
                 <span style={{ fontWeight: 700, fontSize: 14 }}>{item.titre}</span>
                 <div style={{ fontSize: 12, color: colors.textLight }}>
-                  {item.badge} · ordre {item.ordre}
+                  {[item.badge, ALIGNEMENT_LABELS[item.alignement], `ordre ${item.ordre}`].filter(Boolean).join(" · ")}
                 </div>
               </div>
               <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -211,21 +215,63 @@ function HeroSlideForm({
   return (
     <form action={formAction} style={{ ...cardStyle, border: `1px solid ${colors.gold}` }}>
       {item && <input type="hidden" name="id" value={item.id} />}
+
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10 }}>
-        <input name="badge" placeholder="Badge (ex : Formation à venir)" required defaultValue={item?.badge} style={fieldStyle} />
+        <input name="badge" placeholder="Badge (optionnel, ex : Formation à venir)" defaultValue={item?.badge ?? ""} style={fieldStyle} />
         <input name="titre" placeholder="Titre affiché" required defaultValue={item?.titre} style={fieldStyle} />
+        <textarea
+          name="sousTitre"
+          placeholder="Sous-titre (optionnel, texte affiché sous le titre)"
+          rows={2}
+          defaultValue={item?.sousTitre ?? ""}
+          style={{ ...fieldStyle, gridColumn: "1/-1", resize: "vertical" }}
+        />
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10, borderTop: "1px solid #eef0f3", paddingTop: 12 }}>
         <div style={{ gridColumn: "1/-1" }}>
           <ImageField name="image" label="Image de fond" defaultUrl={item?.image} required />
         </div>
-        <input name="ctaLabel" placeholder="Texte du bouton" defaultValue={item?.ctaLabel ?? "En savoir plus"} style={fieldStyle} />
-        <select name="formationId" defaultValue={item?.formationId ?? ""} style={fieldStyle}>
-          <option value="">Aucune formation liée</option>
-          {formationOptions.map((f) => (
-            <option key={f.id} value={f.id}>
-              {f.titre}
-            </option>
-          ))}
-        </select>
+        <div>
+          <ImageField name="logo" label="Logo (optionnel, affiché au-dessus du titre)" defaultUrl={item?.logoUrl} />
+        </div>
+        <label style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Position du contenu</span>
+          <select name="alignement" defaultValue={item?.alignement ?? "GAUCHE"} style={fieldStyle}>
+            {Object.entries(ALIGNEMENT_LABELS).map(([v, l]) => (
+              <option key={v} value={v}>
+                {l}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10, borderTop: "1px solid #eef0f3", paddingTop: 12 }}>
+        <label style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Bouton (optionnel)</span>
+          <input name="ctaLabel" placeholder="Texte du bouton (laisser vide = pas de bouton)" defaultValue={item?.ctaLabel ?? ""} style={fieldStyle} />
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Formation liée au bouton</span>
+          <select name="formationId" defaultValue={item?.formationId ?? ""} style={fieldStyle}>
+            <option value="">Aucune formation liée</option>
+            {formationOptions.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.titre}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Vidéo (optionnel)</span>
+          <input
+            name="youtubeUrl"
+            placeholder="Lien YouTube (affiche un bouton lecture)"
+            defaultValue={item?.youtubeUrl ?? ""}
+            style={fieldStyle}
+          />
+        </label>
         <input name="ordre" type="number" placeholder="Ordre" defaultValue={item?.ordre ?? 0} style={fieldStyle} />
       </div>
 

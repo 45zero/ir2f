@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber } from "@/lib/actions/form-utils"
 import { resolveImageUrl } from "@/lib/storage"
-import type { IconeAccompagnement, TransitionHero } from "@/generated/prisma"
+import type { IconeAccompagnement, TransitionHero, AlignementHero } from "@/generated/prisma"
 
 export type AccueilActionState = { error: string | null }
 
@@ -22,21 +22,39 @@ export async function saveHeroSlide(
 ): Promise<AccueilActionState> {
   await requireAdmin()
   const id = optionalStr(formData, "id")
-  const badge = str(formData, "badge")
+  const badge = optionalStr(formData, "badge")
   const titre = str(formData, "titre")
+  const sousTitre = optionalStr(formData, "sousTitre")
   const image = await resolveImageUrl(formData, "image", "hero-slides")
-  const ctaLabel = str(formData, "ctaLabel") || "En savoir plus"
+  const logoUrl = await resolveImageUrl(formData, "logo", "hero-slides-logos")
+  const ctaLabel = optionalStr(formData, "ctaLabel")
   const formationId = optionalStr(formData, "formationId")
+  const youtubeUrl = optionalStr(formData, "youtubeUrl")
+  const alignement = (str(formData, "alignement") || "GAUCHE") as AlignementHero
   const ordre = optionalNumber(formData, "ordre") ?? 0
   const overlayColor = str(formData, "overlayColor") || "#0a162e"
   const overlayOpacity = optionalNumber(formData, "overlayOpacity") ?? 60
   const transition = (str(formData, "transition") || "FADE") as TransitionHero
 
-  if (!badge || !titre || !image) {
-    return { error: "Le badge, le titre et l'image sont obligatoires." }
+  if (!titre || !image) {
+    return { error: "Le titre et l'image sont obligatoires." }
   }
 
-  const data = { badge, titre, image, ctaLabel, formationId, ordre, overlayColor, overlayOpacity, transition }
+  const data = {
+    badge,
+    titre,
+    sousTitre,
+    image,
+    logoUrl,
+    ctaLabel,
+    formationId,
+    youtubeUrl,
+    alignement,
+    ordre,
+    overlayColor,
+    overlayOpacity,
+    transition,
+  }
   if (id) {
     await prisma.heroSlide.update({ where: { id }, data })
   } else {
