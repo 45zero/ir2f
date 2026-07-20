@@ -1,6 +1,8 @@
 import { getEmploiPageData } from "@/lib/emploi"
+import { getPageHero } from "@/lib/page-hero"
 import { SECTION_EMPLOI_LABELS } from "@/lib/emploi-shared"
 import { HoverLink } from "@/components/ui/HoverLink"
+import { PageHero } from "@/components/site/PageHero"
 import { colors, fontHeading } from "@/lib/theme"
 import type { SectionEmploi } from "@/generated/prisma"
 
@@ -28,33 +30,14 @@ const SECTION_ICON: Record<SectionEmploi, React.ReactNode> = {
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" })
 
 export default async function EmploiPage() {
-  const { sections, partenaires, webinaires } = await getEmploiPageData()
+  const [{ sections, partenaires, webinaires }, hero] = await Promise.all([
+    getEmploiPageData(),
+    getPageHero("EMPLOI"),
+  ])
 
   return (
     <main>
-      <section style={{ padding: "clamp(24px,3vw,36px) clamp(20px,5vw,60px) 0", backgroundColor: "#FFFFFF" }}>
-        <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", flexDirection: "column", gap: 12 }}>
-          <span style={{ color: colors.red, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase" }}>
-            IR2F vous accompagne
-          </span>
-          <h1
-            style={{
-              fontFamily: fontHeading,
-              fontSize: "clamp(28px,3.4vw,44px)",
-              fontWeight: 800,
-              color: colors.navy,
-              margin: 0,
-              lineHeight: 1.08,
-            }}
-          >
-            Accompagnement Emploi
-          </h1>
-          <p style={{ fontSize: 15, lineHeight: 1.6, color: colors.textMuted, margin: 0, maxWidth: 640 }}>
-            Financements, gestion de l&apos;emploi, formation-employabilité : retrouvez ici les ressources, contacts
-            et vidéos pour vous accompagner dans vos démarches.
-          </p>
-        </div>
-      </section>
+      <PageHero {...hero} />
 
       <section style={{ maxWidth: 1160, margin: "0 auto", padding: "40px 20px 0", display: "flex", flexDirection: "column", gap: 48 }}>
         {sections.map((s) => (

@@ -393,32 +393,6 @@ const STATS = [
   { valeur: "25+", label: "Formations disponibles", ordre: 3 },
 ]
 
-const CATEGORY_INFO = [
-  {
-    categorie: "EDUCATEUR" as const,
-    titre: "ÉDUCATEUR : FORMER LES ENCADRANTS DE DEMAIN",
-    corps:
-      "Découvrez le catalogue de formations Éducateur de l'IR2F ! Des parcours en présentiel, visioconférence et e-learning pour accompagner les éducateurs à tous les niveaux, du foot animation jusqu'au haut niveau régional, et leur donner les outils pédagogiques, tactiques et humains pour progresser dans leurs missions.",
-  },
-  {
-    categorie: "ARBITRAGE" as const,
-    titre: "ARBITRAGE : DEVENIR ET PROGRESSER COMME ARBITRE",
-    corps:
-      "Le catalogue de formations Arbitrage de l'IR2F s'adresse à tous ceux qui souhaitent devenir arbitre ou se perfectionner. Lois du jeu, placement, gestion de match : des formations en présentiel et en visioconférence pour progresser à son rythme et gagner en confiance sur le terrain.",
-  },
-  {
-    categorie: "TERRAIN" as const,
-    titre: "TOUT TERRAIN : LE PARCOURS DE FORMATION DES ACTEURS DU CLUB",
-    corps:
-      "Découvrez le nouveau catalogue de formation Tout Terrain à destination de tous les acteurs du club !\n\nCes formations qui sont disponibles en présentiel, en visioconférence et en e-learning ont vocation de permettre à tous les acteurs du club, dirigeants, bénévoles, arbitres, éducateurs et parents de licenciés, d'acquérir de nouvelles compétences, leur transmettre de nouveaux outils et surtout les conforter dans leurs missions. Les formations répondent à une approche pédagogique ludique et participative permettant de nombreux échanges entre les participants qui deviennent acteurs de leurs formations !",
-  },
-  {
-    categorie: "DEV" as const,
-    titre: "CHARGÉ DE DÉVELOPPEMENT : PILOTER LES PROJETS DU FOOTBALL RÉGIONAL",
-    corps:
-      "Ce catalogue s'adresse aux futurs chargés de développement et responsables emploi-formation. Diagnostic territorial, conduite de projet, financements : des parcours longs, en présentiel et à distance, pour structurer et développer le football sur son territoire.",
-  },
-]
 
 const HERO_SLIDES = [
   {
@@ -510,13 +484,6 @@ async function main() {
     }
   }
 
-  for (const c of CATEGORY_INFO) {
-    await prisma.categorieInfo.upsert({
-      where: { categorie: c.categorie },
-      update: { titre: c.titre, corps: c.corps },
-      create: c,
-    })
-  }
 
   await prisma.statCle.deleteMany()
   await prisma.statCle.createMany({ data: STATS.map((s) => ({ ...s, actif: true })) })

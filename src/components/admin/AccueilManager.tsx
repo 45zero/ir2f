@@ -17,7 +17,7 @@ import {
 import { ICONE_LABELS, TRANSITION_LABELS, ALIGNEMENT_LABELS } from "@/lib/accueil-shared"
 import { ImageField } from "@/components/admin/ImageField"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import type { IconeAccompagnement, TransitionHero, AlignementHero } from "@/generated/prisma"
+import type { IconeAccompagnement, TransitionHero, AlignementHero, TypeLien } from "@/generated/prisma"
 
 const fieldStyle = {
   border: "1px solid #e2e5ea",
@@ -145,6 +145,7 @@ export type AdminHeroSlide = {
   overlayColor: string
   overlayOpacity: number
   transition: TransitionHero
+  dureeAffichage: number
   ordre: number
   actif: boolean
 }
@@ -308,6 +309,18 @@ function HeroSlideForm({
         </div>
       </div>
 
+      <label style={{ display: "flex", flexDirection: "column", gap: 5, borderTop: "1px solid #eef0f3", paddingTop: 12 }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Durée d&apos;affichage (secondes)</span>
+        <input
+          name="dureeAffichage"
+          type="number"
+          min={1}
+          placeholder="Durée d'affichage (secondes)"
+          defaultValue={item?.dureeAffichage ?? 7}
+          style={{ ...fieldStyle, maxWidth: 140 }}
+        />
+      </label>
+
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
       <div style={{ display: "flex", gap: 8 }}>
         <button type="submit" disabled={pending} style={submitButtonStyle}>
@@ -325,10 +338,57 @@ function HeroSlideForm({
 
 export type AdminAccueilContenu = {
   bandeauEmploiTitre: string
+  bandeauEmploiActif: boolean
+  bandeauBouton1Label: string
+  bandeauBouton1Type: TypeLien
+  bandeauBouton1Url: string
+  bandeauBouton2Label: string
+  bandeauBouton2Type: TypeLien
+  bandeauBouton2Url: string
   accompagnementEyebrow: string
   accompagnementTitre: string
   contactTitre: string
   contactSousTitre: string
+}
+
+function BandeauBoutonFields({
+  index,
+  label,
+  defaultLabel,
+  defaultType,
+  defaultUrl,
+}: {
+  index: 1 | 2
+  label: string
+  defaultLabel: string
+  defaultType: TypeLien
+  defaultUrl: string
+}) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: 10 }}>
+      <label style={{ display: "flex", flexDirection: "column", gap: 5, gridColumn: "1/-1" }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>{label}</span>
+        <input name={`bandeauBouton${index}Label`} placeholder="Texte du bouton" required defaultValue={defaultLabel} style={fieldStyle} />
+      </label>
+      <label style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 12.5, color: colors.textLight }}>
+        <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+          <input type="radio" name={`bandeauBouton${index}Type`} value="INTERNE" defaultChecked={defaultType === "INTERNE"} />
+          Page interne
+        </span>
+        <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+          <input type="radio" name={`bandeauBouton${index}Type`} value="EXTERNE" defaultChecked={defaultType === "EXTERNE"} />
+          URL externe
+        </span>
+      </label>
+      <input
+        name={`bandeauBouton${index}Url`}
+        placeholder="Ex : /emploi ou https://..."
+        required
+        defaultValue={defaultUrl}
+        style={{ ...fieldStyle, gridColumn: "1/-1" }}
+      />
+    </div>
+  )
 }
 
 function TextesSection({ contenu }: { contenu: AdminAccueilContenu }) {
@@ -346,9 +406,27 @@ function TextesSection({ contenu }: { contenu: AdminAccueilContenu }) {
     >
       <SectionTitle title="Textes de la page" subtitle="Les titres et phrases affichés à différents endroits de l'accueil." />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10, borderBottom: "1px solid #eef0f3", paddingBottom: 16 }}>
         <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Bandeau « accompagnement emploi »</span>
-        <input name="bandeauEmploiTitre" defaultValue={contenu.bandeauEmploiTitre} required style={fieldStyle} />
+        <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: colors.textLight }}>
+          <input type="checkbox" name="bandeauEmploiActif" defaultChecked={contenu.bandeauEmploiActif} style={{ width: 15, height: 15 }} />
+          Afficher le bandeau sur l&apos;accueil
+        </label>
+        <input name="bandeauEmploiTitre" placeholder="Texte du bandeau" defaultValue={contenu.bandeauEmploiTitre} required style={fieldStyle} />
+        <BandeauBoutonFields
+          index={1}
+          label="1er bouton"
+          defaultLabel={contenu.bandeauBouton1Label}
+          defaultType={contenu.bandeauBouton1Type}
+          defaultUrl={contenu.bandeauBouton1Url}
+        />
+        <BandeauBoutonFields
+          index={2}
+          label="2e bouton"
+          defaultLabel={contenu.bandeauBouton2Label}
+          defaultType={contenu.bandeauBouton2Type}
+          defaultUrl={contenu.bandeauBouton2Url}
+        />
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>

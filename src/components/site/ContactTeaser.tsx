@@ -4,7 +4,6 @@ import { useActionState, useState } from "react"
 import { Hoverable } from "@/components/ui/Hoverable"
 import { submitContactRequest } from "@/lib/actions/contact"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import type { FormationOption } from "@/lib/formations-shared"
 import { CONTACT_THEMES } from "@/lib/contact-themes"
 
 const inputStyle = {
@@ -36,12 +35,10 @@ const typeActiveStyle = {
 }
 
 export function ContactTeaser({
-  formations,
   startOpen = false,
   titre = "Je souhaite être contacté",
   sousTitre = "Un conseiller IR2F revient vers vous sous 48h.",
 }: {
-  formations: FormationOption[]
   startOpen?: boolean
   titre?: string
   sousTitre?: string
@@ -157,16 +154,6 @@ export function ContactTeaser({
                   <input name="telephone" placeholder="Téléphone" style={inputStyle} />
                   {type === "club" && (
                     <input name="clubNom" placeholder="Nom du club" style={{ ...inputStyle, gridColumn: "1/-1" }} />
-                  )}
-                  {type === "stagiaire" && (
-                    <select name="formationId" defaultValue="" style={{ ...inputStyle, gridColumn: "1/-1" }}>
-                      <option value="">Formation souhaitée (optionnel)</option>
-                      {formations.map((f) => (
-                        <option key={f.id} value={f.id}>
-                          {f.titre}
-                        </option>
-                      ))}
-                    </select>
                   )}
                   <textarea name="message" placeholder="Votre message" rows={3} style={{ ...inputStyle, gridColumn: "1/-1", resize: "vertical" }} />
                 </div>

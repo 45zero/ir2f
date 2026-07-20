@@ -208,6 +208,17 @@ exports.Prisma.DemandeInscriptionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DemandeContactScalarFieldEnum = {
+  id: 'id',
+  thematique: 'thematique',
+  nom: 'nom',
+  prenom: 'prenom',
+  email: 'email',
+  telephone: 'telephone',
+  message: 'message',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.DocumentScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
@@ -300,6 +311,13 @@ exports.Prisma.AccompagnementCardScalarFieldEnum = {
 exports.Prisma.AccueilContenuScalarFieldEnum = {
   id: 'id',
   bandeauEmploiTitre: 'bandeauEmploiTitre',
+  bandeauEmploiActif: 'bandeauEmploiActif',
+  bandeauBouton1Label: 'bandeauBouton1Label',
+  bandeauBouton1Type: 'bandeauBouton1Type',
+  bandeauBouton1Url: 'bandeauBouton1Url',
+  bandeauBouton2Label: 'bandeauBouton2Label',
+  bandeauBouton2Type: 'bandeauBouton2Type',
+  bandeauBouton2Url: 'bandeauBouton2Url',
   accompagnementEyebrow: 'accompagnementEyebrow',
   accompagnementTitre: 'accompagnementTitre',
   contactTitre: 'contactTitre',
@@ -331,17 +349,45 @@ exports.Prisma.HeroSlideScalarFieldEnum = {
   overlayColor: 'overlayColor',
   overlayOpacity: 'overlayOpacity',
   transition: 'transition',
+  dureeAffichage: 'dureeAffichage',
   ordre: 'ordre',
   actif: 'actif',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.CategorieInfoScalarFieldEnum = {
+exports.Prisma.FormationTuileScalarFieldEnum = {
   id: 'id',
   categorie: 'categorie',
+  label: 'label',
+  image: 'image',
+  backgroundColor: 'backgroundColor',
+  opacity: 'opacity',
+  effetVisuel: 'effetVisuel',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FormationOngletScalarFieldEnum = {
+  id: 'id',
+  categorie: 'categorie',
+  onglet: 'onglet',
   titre: 'titre',
-  corps: 'corps',
+  contenu: 'contenu',
+  videoUrl: 'videoUrl',
+  image: 'image',
+  imageTaille: 'imageTaille',
+  backgroundColor: 'backgroundColor',
+  opacity: 'opacity',
+  effetVisuel: 'effetVisuel',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PageHeroScalarFieldEnum = {
+  id: 'id',
+  page: 'page',
+  titre: 'titre',
+  sousTitre: 'sousTitre',
+  image: 'image',
   updatedAt: 'updatedAt'
 };
 
@@ -517,6 +563,11 @@ exports.IconeAccompagnement = exports.$Enums.IconeAccompagnement = {
   VALIDATION: 'VALIDATION'
 };
 
+exports.TypeLien = exports.$Enums.TypeLien = {
+  INTERNE: 'INTERNE',
+  EXTERNE: 'EXTERNE'
+};
+
 exports.AlignementHero = exports.$Enums.AlignementHero = {
   GAUCHE: 'GAUCHE',
   CENTRE: 'CENTRE',
@@ -527,6 +578,32 @@ exports.TransitionHero = exports.$Enums.TransitionHero = {
   FADE: 'FADE',
   SLIDE_GAUCHE: 'SLIDE_GAUCHE',
   SLIDE_DROITE: 'SLIDE_DROITE'
+};
+
+exports.EffetVisuel = exports.$Enums.EffetVisuel = {
+  AUCUN: 'AUCUN',
+  FONDU: 'FONDU',
+  ZOOM: 'ZOOM',
+  PARALLAXE: 'PARALLAXE',
+  NOIR_BLANC: 'NOIR_BLANC',
+  FLOU: 'FLOU'
+};
+
+exports.FormationOngletCle = exports.$Enums.FormationOngletCle = {
+  INFO: 'INFO',
+  PARCOURS: 'PARCOURS',
+  CLUB: 'CLUB',
+  EDU_PRESENTATION: 'EDU_PRESENTATION',
+  EDU_PRO: 'EDU_PRO',
+  EDU_BENEVOLE: 'EDU_BENEVOLE',
+  EDU_EQUIVALENCES: 'EDU_EQUIVALENCES'
+};
+
+exports.PageCle = exports.$Enums.PageCle = {
+  FORMATIONS: 'FORMATIONS',
+  CONTACT: 'CONTACT',
+  EMPLOI: 'EMPLOI',
+  ACTUALITES: 'ACTUALITES'
 };
 
 exports.TypeDocument = exports.$Enums.TypeDocument = {
@@ -547,6 +624,7 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   Inscription: 'Inscription',
   DemandeInscription: 'DemandeInscription',
+  DemandeContact: 'DemandeContact',
   Document: 'Document',
   Signature: 'Signature',
   Message: 'Message',
@@ -558,7 +636,9 @@ exports.Prisma.ModelName = {
   AccueilContenu: 'AccueilContenu',
   StatCle: 'StatCle',
   HeroSlide: 'HeroSlide',
-  CategorieInfo: 'CategorieInfo',
+  FormationTuile: 'FormationTuile',
+  FormationOnglet: 'FormationOnglet',
+  PageHero: 'PageHero',
   DocumentPasserelle: 'DocumentPasserelle',
   Partenaire: 'Partenaire',
   Contact: 'Contact',

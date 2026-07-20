@@ -1,7 +1,15 @@
 import "server-only"
 import { prisma } from "@/lib/prisma"
-import type { CategorieFormation, Filiere, GroupeEquivalence, VarianteNode } from "@/generated/prisma"
+import type { CategorieFormation, EffetVisuel, Filiere, GroupeEquivalence, VarianteNode } from "@/generated/prisma"
 import { toCard, type FormationCard, type CatalogueFormation, type FormationOption } from "@/lib/formations-shared"
+import {
+  ONGLET_KEYS,
+  TUILE_CATEGORIES,
+  TUILE_DEFAULTS,
+  ongletDefaultContenu,
+  ongletDefaultTitre,
+  ongletKeyId,
+} from "@/lib/formations-page-shared"
 
 export { CATEGORIE_LABELS, TYPE_LABELS } from "@/lib/formations-shared"
 export type { FormationCard, CatalogueFormation, FormationOption } from "@/lib/formations-shared"
@@ -63,21 +71,62 @@ export async function getCatalogueFormations(): Promise<CatalogueFormation[]> {
   }))
 }
 
-export async function getCategorieInfos(): Promise<
-  Record<CategorieFormation, { titre: string; corps: string } | null>
-> {
-  const rows = await prisma.categorieInfo.findMany()
-  const map = {
-    EDUCATEUR: null,
-    ARBITRAGE: null,
-    TERRAIN: null,
-    CLUB: null,
-    DEV: null,
-  } as Record<CategorieFormation, { titre: string; corps: string } | null>
-  for (const row of rows) {
-    map[row.categorie] = { titre: row.titre, corps: row.corps }
+export type FormationTuileData = {
+  categorie: CategorieFormation
+  label: string
+  image: string | null
+  backgroundColor: string
+  opacity: number
+  effetVisuel: EffetVisuel
+}
+
+export async function getFormationTuiles(): Promise<FormationTuileData[]> {
+  const rows = await prisma.formationTuile.findMany()
+  const byCategorie = new Map(rows.map((r) => [r.categorie, r]))
+  return TUILE_CATEGORIES.map((categorie) => {
+    const row = byCategorie.get(categorie)
+    const fallback = TUILE_DEFAULTS[categorie]
+    return {
+      categorie,
+      label: row?.label ?? fallback.label,
+      image: row?.image ?? null,
+      backgroundColor: row?.backgroundColor ?? fallback.backgroundColor,
+      opacity: row?.opacity ?? 100,
+      effetVisuel: row?.effetVisuel ?? "AUCUN",
+    }
+  })
+}
+
+export type FormationOngletData = {
+  titre: string | null
+  contenu: string | null
+  videoUrl: string | null
+  image: string | null
+  imageTaille: number
+  backgroundColor: string
+  opacity: number
+  effetVisuel: EffetVisuel
+}
+
+export async function getFormationOnglets(): Promise<Record<string, FormationOngletData>> {
+  const rows = await prisma.formationOnglet.findMany()
+  const byKey = new Map(rows.map((r) => [ongletKeyId(r.categorie, r.onglet), r]))
+  const result: Record<string, FormationOngletData> = {}
+  for (const { categorie, onglet } of ONGLET_KEYS) {
+    const key = ongletKeyId(categorie, onglet)
+    const row = byKey.get(key)
+    result[key] = {
+      titre: row?.titre ?? ongletDefaultTitre(categorie, onglet),
+      contenu: row?.contenu ?? ongletDefaultContenu(categorie, onglet),
+      videoUrl: row?.videoUrl ?? null,
+      image: row?.image ?? null,
+      imageTaille: row?.imageTaille ?? 100,
+      backgroundColor: row?.backgroundColor ?? "#f5f7fb",
+      opacity: row?.opacity ?? 100,
+      effetVisuel: row?.effetVisuel ?? "AUCUN",
+    }
   }
-  return map
+  return result
 }
 
 export async function getFormationOptions(): Promise<FormationOption[]> {

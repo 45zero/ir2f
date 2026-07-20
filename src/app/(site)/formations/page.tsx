@@ -1,10 +1,20 @@
-import { getCatalogueFormations, getCategorieInfos } from "@/lib/formations"
+import { getCatalogueFormations, getFormationTuiles, getFormationOnglets } from "@/lib/formations"
+import { getPageHero } from "@/lib/page-hero"
 import { FormationsCatalogue } from "@/components/site/FormationsCatalogue"
+import { PageHero } from "@/components/site/PageHero"
 
 export default async function FormationsPage() {
-  const [formations, categoryInfo] = await Promise.all([getCatalogueFormations(), getCategorieInfos()])
+  const [formations, tuiles, onglets, hero] = await Promise.all([
+    getCatalogueFormations(),
+    getFormationTuiles(),
+    getFormationOnglets(),
+    getPageHero("FORMATIONS"),
+  ])
 
   return (
-    <FormationsCatalogue formations={formations} categoryInfo={categoryInfo} initialCategory="EDUCATEUR" />
+    <>
+      <PageHero {...hero} />
+      <FormationsCatalogue formations={formations} tuiles={tuiles} onglets={onglets} initialCategory="EDUCATEUR" />
+    </>
   )
 }

@@ -19,6 +19,8 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ]
 
+const HERO_PATHS = new Set(["/", "/formations", "/contact", "/emploi", "/actualites"])
+
 const ROLE_LABELS: Record<string, string> = {
   STAGIAIRE: "Stagiaire",
   FORMATEUR: "Formateur",
@@ -41,17 +43,17 @@ export function Header({ user }: { user: HeaderUser }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  const isHome = pathname === "/"
+  const hasHero = HERO_PATHS.has(pathname)
 
   useEffect(() => {
-    if (!isHome) return
+    if (!hasHero) return
     const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
-  }, [isHome])
+  }, [hasHero])
 
-  const overlay = isHome && !scrolled
+  const overlay = hasHero && !scrolled
 
   return (
     <header

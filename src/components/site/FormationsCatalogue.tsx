@@ -1,22 +1,16 @@
 "use client"
 
-import { useMemo, useState, type CSSProperties } from "react"
+import { useMemo, useState, type CSSProperties, type ReactNode } from "react"
 import Link from "next/link"
 import { Hoverable } from "@/components/ui/Hoverable"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import { CATEGORIE_LABELS, FILIERE_LABELS, type CatalogueFormation } from "@/lib/formations-shared"
-import type { CategorieFormation, GroupeEquivalence, VarianteNode } from "@/generated/prisma"
-
-type CategoryInfo = { titre: string; corps: string } | null
+import { ONGLET_LABEL, ongletKeyId } from "@/lib/formations-page-shared"
+import { effetVisuelStyle, effetVisuelHoverStyle } from "@/lib/effet-visuel"
+import type { FormationOngletData, FormationTuileData } from "@/lib/formations"
+import type { CategorieFormation, FormationOngletCle, GroupeEquivalence, VarianteNode } from "@/generated/prisma"
 
 type ExpandedTab = "info" | "parcours" | "club" | "eduPresentation" | "eduPro" | "eduBenevole" | "eduEquivalences"
-
-const TILES: { id: CategorieFormation; label: string }[] = [
-  { id: "EDUCATEUR", label: "Éducateurs" },
-  { id: "ARBITRAGE", label: "Arbitres" },
-  { id: "TERRAIN", label: "Tout Terrain" },
-  { id: "DEV", label: "Chargé de Développement de Structures Sportives et Associatives (CDSSA)" },
-]
 
 const SIDEBAR_CATEGORIES: CategorieFormation[] = ["EDUCATEUR", "ARBITRAGE", "TERRAIN", "CLUB", "DEV"]
 
@@ -74,6 +68,24 @@ const tabActive: CSSProperties = {
   color: "#fff",
 }
 
+const tabTitleStyle: CSSProperties = {
+  fontFamily: fontHeading,
+  color: colors.navy,
+  fontSize: "clamp(18px,2.2vw,24px)",
+  fontWeight: 800,
+  margin: 0,
+  lineHeight: 1.2,
+}
+
+const tabTextStyle: CSSProperties = {
+  color: colors.textMuted,
+  fontSize: 14,
+  lineHeight: 1.65,
+  margin: 0,
+  whiteSpace: "pre-line",
+  maxWidth: 640,
+}
+
 function nodeChipStyle(f: CatalogueFormation): CSSProperties {
   return {
     ...VARIANT_STYLES[f.varianteNode ?? "NAVY"],
@@ -115,13 +127,77 @@ function NodeBadge({ f }: { f: CatalogueFormation }) {
   )
 }
 
+function getYoutubeEmbedUrl(url: string): string | null {
+  const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
+  return match ? `https://www.youtube-nocookie.com/embed/${match[1]}` : null
+}
+
+// Bloc vidéo/image d'un onglet : vidéo YouTube si renseignée, sinon l'image
+// (taille, couleur de fond, opacité, effet visuel administrables), sinon le
+// contenu de repli fourni (utilisé pour l'onglet "Présentation").
+function OngletMedia({ data, fallback }: { data: FormationOngletData; fallback?: ReactNode }) {
+  const embedUrl = data.videoUrl ? getYoutubeEmbedUrl(data.videoUrl) : null
+
+  const containerStyle: CSSProperties = {
+    flex: "1 1 280px",
+    minWidth: 240,
+    aspectRatio: "16/9",
+    borderRadius: 8,
+    overflow: "hidden",
+    position: "relative",
+    background: data.backgroundColor,
+  }
+
+  if (embedUrl) {
+    return (
+      <div style={containerStyle}>
+        <iframe
+          src={embedUrl}
+          title="Vidéo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          style={{ width: "100%", height: "100%", border: "none" }}
+        />
+      </div>
+    )
+  }
+
+  if (data.image) {
+    return (
+      <div style={{ ...containerStyle, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Hoverable
+          as="div"
+          style={{
+            width: `${data.imageTaille}%`,
+            height: `${data.imageTaille}%`,
+            backgroundImage: `url('${data.image}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            borderRadius: 6,
+            opacity: data.opacity / 100,
+            transition: "transform 0.3s ease",
+            ...effetVisuelStyle(data.effetVisuel),
+          }}
+          hoverStyle={effetVisuelHoverStyle(data.effetVisuel)}
+        />
+      </div>
+    )
+  }
+
+  if (fallback) return <div style={containerStyle}>{fallback}</div>
+
+  return null
+}
+
 export function FormationsCatalogue({
   formations,
-  categoryInfo,
+  tuiles,
+  onglets,
   initialCategory,
 }: {
   formations: CatalogueFormation[]
-  categoryInfo: Record<CategorieFormation, CategoryInfo>
+  tuiles: FormationTuileData[]
+  onglets: Record<string, FormationOngletData>
   initialCategory: CategorieFormation
 }) {
   const [sidebarCategory, setSidebarCategory] = useState<CategorieFormation>(initialCategory)
@@ -129,6 +205,21 @@ export function FormationsCatalogue({
   const [expandedTab, setExpandedTab] = useState<ExpandedTab>(initialCategory === "EDUCATEUR" ? "eduPresentation" : "info")
   const [eduTrackFilter, setEduTrackFilter] = useState<"pro" | "benevole" | null>(null)
   const [popupFormationId, setPopupFormationId] = useState<string | null>(null)
+
+  function getOnglet(categorie: CategorieFormation, onglet: FormationOngletCle): FormationOngletData {
+    return (
+      onglets[ongletKeyId(categorie, onglet)] ?? {
+        titre: null,
+        contenu: null,
+        videoUrl: null,
+        image: null,
+        imageTaille: 100,
+        backgroundColor: "#f5f7fb",
+        opacity: 100,
+        effetVisuel: "AUCUN",
+      }
+    )
+  }
 
   const byCategory = useMemo(() => {
     const map = new Map<CategorieFormation, CatalogueFormation[]>()
@@ -154,7 +245,7 @@ export function FormationsCatalogue({
   function toggleCategoryPanel(cat: CategorieFormation) {
     setSidebarCategory(cat)
     setExpandedCategory((current) => (current === cat ? null : cat))
-    setExpandedTab("info")
+    setExpandedTab(cat === "EDUCATEUR" ? "eduPresentation" : "info")
     setPopupFormationId(null)
   }
 
@@ -166,40 +257,44 @@ export function FormationsCatalogue({
   }, [byCategory, sidebarCategory, eduTrackFilter])
 
   const popupFormation = popupFormationId ? formations.find((f) => f.id === popupFormationId) ?? null : null
-  const info = expandedCategory ? categoryInfo[expandedCategory] : null
 
   return (
     <main style={{ animation: "ir2fFadeIn 0.4s ease" }}>
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "44px 20px 8px" }}>
-        <span style={{ color: colors.red, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase" }}>
-          Catalogue
-        </span>
-        <div style={{ margin: "6px 0 28px" }}>
-          <h1 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, margin: 0 }}>
-          NOTRE OFFRE DE FORMATION
-          </h1>
-        </div>
-      </section>
-
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "0 20px 40px" }}>
+      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "36px 20px 40px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 14 }}>
-          {TILES.map((tile) => (
+          {tuiles.map((tile) => (
             <div
-              key={tile.id}
-              onClick={() => toggleCategoryPanel(tile.id)}
+              key={tile.categorie}
+              onClick={() => toggleCategoryPanel(tile.categorie)}
               style={{
                 cursor: "pointer",
                 position: "relative",
                 minHeight: 150,
                 borderRadius: 8,
                 overflow: "hidden",
-                background: "repeating-linear-gradient(135deg,#c9a84c,#c9a84c 12px,#b3934a 12px,#b3934a 24px)",
+                background: tile.backgroundColor,
                 display: "flex",
                 alignItems: "flex-end",
                 padding: 18,
-                boxShadow: sidebarCategory === tile.id ? "0 0 0 3px #1a3a6b inset" : undefined,
+                boxShadow: sidebarCategory === tile.categorie ? "0 0 0 3px #1a3a6b inset" : undefined,
               }}
             >
+              {tile.image && (
+                <Hoverable
+                  as="div"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    backgroundImage: `url('${tile.image}')`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    opacity: tile.opacity / 100,
+                    transition: "transform 0.3s ease",
+                    ...effetVisuelStyle(tile.effetVisuel),
+                  }}
+                  hoverStyle={effetVisuelHoverStyle(tile.effetVisuel)}
+                />
+              )}
               <img
                 src="/images/logo-lgef.png"
                 alt=""
@@ -219,7 +314,7 @@ export function FormationsCatalogue({
                   style={{
                     color: colors.navy,
                     fontFamily: fontHeading,
-                    fontSize: tile.id === "DEV" ? 13 : 19,
+                    fontSize: tile.categorie === "DEV" ? 13 : 19,
                     fontWeight: 800,
                     lineHeight: 1.15,
                   }}
@@ -281,235 +376,277 @@ export function FormationsCatalogue({
             {expandedCategory === "EDUCATEUR" ? (
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingRight: 40 }}>
                 <button style={expandedTab === "eduPresentation" ? tabActive : tabBase} onClick={() => setExpandedTab("eduPresentation")}>
-                  Présentation et parcours
+                  {ONGLET_LABEL.EDU_PRESENTATION}
                 </button>
                 <button style={expandedTab === "eduPro" ? tabActive : tabBase} onClick={() => setExpandedTab("eduPro")}>
-                  Formations professionnelles
+                  {ONGLET_LABEL.EDU_PRO}
                 </button>
                 <button style={expandedTab === "eduBenevole" ? tabActive : tabBase} onClick={() => setExpandedTab("eduBenevole")}>
-                  Formations bénévoles
+                  {ONGLET_LABEL.EDU_BENEVOLE}
                 </button>
                 <button style={expandedTab === "eduEquivalences" ? tabActive : tabBase} onClick={() => setExpandedTab("eduEquivalences")}>
-                  Équivalences et passerelles
+                  {ONGLET_LABEL.EDU_EQUIVALENCES}
                 </button>
               </div>
             ) : (
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingRight: 40 }}>
                 <button style={expandedTab === "info" ? tabActive : tabBase} onClick={() => setExpandedTab("info")}>
-                  Présentation
+                  {ONGLET_LABEL.INFO}
                 </button>
                 <button style={expandedTab === "parcours" ? tabActive : tabBase} onClick={() => setExpandedTab("parcours")}>
-                  Les différents parcours
+                  {ONGLET_LABEL.PARCOURS}
                 </button>
                 {expandedCategory === "TERRAIN" && (
                   <button style={expandedTab === "club" ? tabActive : tabBase} onClick={() => setExpandedTab("club")}>
-                    Accueillir une formation dans mon club
+                    {ONGLET_LABEL.CLUB}
                   </button>
                 )}
               </div>
             )}
 
-            {expandedTab === "info" && info && (
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
-                <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 12 }}>
-                  <h3 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: "clamp(18px,2.2vw,24px)", fontWeight: 800, margin: 0, lineHeight: 1.2 }}>
-                    {info.titre}
-                  </h3>
-                  <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, whiteSpace: "pre-line", maxWidth: 640 }}>
-                    {info.corps}
-                  </p>
-                </div>
-                <div
-                  style={{
-                    flex: "1 1 280px",
-                    minWidth: 240,
-                    aspectRatio: "16/9",
-                    borderRadius: 8,
-                    overflow: "hidden",
-                    position: "relative",
-                    background: "repeating-linear-gradient(135deg,#1a3a6b,#1a3a6b 12px,#16305a 12px,#16305a 24px)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill={colors.navy}>
-                      <polygon points="6 4 20 12 6 20 6 4" />
-                    </svg>
+            {expandedTab === "info" && expandedCategory !== "EDUCATEUR" && (() => {
+              const data = getOnglet(expandedCategory, "INFO")
+              return (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
+                  <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 12 }}>
+                    {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
+                    {data.contenu && <p style={tabTextStyle}>{data.contenu}</p>}
                   </div>
-                  <span style={{ position: "absolute", bottom: 10, left: 12, fontFamily: "monospace", fontSize: 11, color: "rgba(255,255,255,0.85)" }}>
-                    VIDÉO — {info.titre}
-                  </span>
+                  <OngletMedia
+                    data={data}
+                    fallback={
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          background: "repeating-linear-gradient(135deg,#1a3a6b,#1a3a6b 12px,#16305a 12px,#16305a 24px)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(255,255,255,0.9)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill={colors.navy}>
+                            <polygon points="6 4 20 12 6 20 6 4" />
+                          </svg>
+                        </div>
+                        <span style={{ position: "absolute", bottom: 10, left: 12, fontFamily: "monospace", fontSize: 11, color: "rgba(255,255,255,0.85)" }}>
+                          VIDÉO — {data.titre}
+                        </span>
+                      </div>
+                    }
+                  />
                 </div>
-              </div>
-            )}
+              )
+            })()}
 
-            {expandedTab === "parcours" && expandedCategory !== "EDUCATEUR" && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                <p style={{ color: colors.textMuted, fontSize: 13, margin: 0 }}>
-                  Cliquez sur une formation pour en voir le détail.
-                </p>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))", gap: 12 }}>
-                  {(byCategory.get(expandedCategory) ?? []).map((f) => (
+            {expandedTab === "parcours" && expandedCategory !== "EDUCATEUR" && (() => {
+              const data = getOnglet(expandedCategory, "PARCOURS")
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
+                    <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 12 }}>
+                      {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
+                      {data.contenu && <p style={{ ...tabTextStyle, fontSize: 13 }}>{data.contenu}</p>}
+                    </div>
+                    <OngletMedia data={data} />
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))", gap: 12 }}>
+                    {(byCategory.get(expandedCategory) ?? []).map((f) => (
+                      <Hoverable
+                        as="div"
+                        key={f.id}
+                        onClick={() => setPopupFormationId(f.id)}
+                        style={{
+                          cursor: "pointer",
+                          background: "#fff",
+                          border: "1px solid #e4e9f2",
+                          borderRadius: 8,
+                          padding: 16,
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 8,
+                          transition: "box-shadow 0.15s",
+                        }}
+                        hoverStyle={{ boxShadow: "0 6px 18px rgba(20,33,61,0.12)" }}
+                      >
+                        <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy, lineHeight: 1.3 }}>{f.titre}</span>
+                        <span style={{ fontSize: 11, color: colors.textLight }}>
+                          {f.dureeLabel} · {f.modeLabel}
+                        </span>
+                      </Hoverable>
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
+
+            {expandedTab === "club" && expandedCategory === "TERRAIN" && (() => {
+              const data = getOnglet("TERRAIN", "CLUB")
+              return (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
+                  <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
+                    {data.titre && <h3 style={{ ...tabTitleStyle, maxWidth: 820 }}>{data.titre}</h3>}
+                    {data.contenu && <p style={{ ...tabTextStyle, maxWidth: 820 }}>{data.contenu}</p>}
                     <Hoverable
-                      as="div"
-                      key={f.id}
-                      onClick={() => setPopupFormationId(f.id)}
+                      as={Link}
+                      href="/contact"
                       style={{
+                        alignSelf: "flex-start",
+                        background: colors.red,
+                        color: "#fff",
+                        border: "none",
+                        padding: "13px 26px",
+                        borderRadius: 4,
+                        fontSize: 14,
+                        fontWeight: 700,
+                        fontFamily: fontBody,
                         cursor: "pointer",
-                        background: "#fff",
-                        border: "1px solid #e4e9f2",
-                        borderRadius: 8,
-                        padding: 16,
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 8,
-                        transition: "box-shadow 0.15s",
+                        textDecoration: "none",
                       }}
-                      hoverStyle={{ boxShadow: "0 6px 18px rgba(20,33,61,0.12)" }}
+                      hoverStyle={{ background: colors.redDark }}
                     >
-                      <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy, lineHeight: 1.3 }}>{f.titre}</span>
-                      <span style={{ fontSize: 11, color: colors.textLight }}>
-                        {f.dureeLabel} · {f.modeLabel}
-                      </span>
+                      Remplir le formulaire de contact
                     </Hoverable>
-                  ))}
+                  </div>
+                  <OngletMedia data={data} />
                 </div>
-              </div>
-            )}
+              )
+            })()}
 
-            {expandedTab === "club" && expandedCategory === "TERRAIN" && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                <h3 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: "clamp(18px,2.2vw,24px)", fontWeight: 800, margin: 0, lineHeight: 1.2, maxWidth: 820 }}>
-                  ACCUEILLIR UNE FORMATION AU SEIN DE MON CLUB
-                </h3>
-                <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
-                  L&apos;Institut Régional de Formation du Football de la Ligue du Grand Est souhaite recueillir les besoins en
-                  formations « Tout Terrain » (dirigeants, bénévoles, éducateurs, arbitres, parents) des clubs sur le territoire afin
-                  de proposer une offre adaptée à vos besoins.
-                </p>
-                <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
-                  Veuillez remplir le formulaire ci-dessous pour recevoir une formation au sein des locaux de votre club et former
-                  vos bénévoles !
-                </p>
-                <Hoverable
-                  as={Link}
-                  href="/contact"
-                  style={{
-                    alignSelf: "flex-start",
-                    background: colors.red,
-                    color: "#fff",
-                    border: "none",
-                    padding: "13px 26px",
-                    borderRadius: 4,
-                    fontSize: 14,
-                    fontWeight: 700,
-                    fontFamily: fontBody,
-                    cursor: "pointer",
-                    textDecoration: "none",
-                  }}
-                  hoverStyle={{ background: colors.redDark }}
-                >
-                  Remplir le formulaire de contact
-                </Hoverable>
-              </div>
-            )}
+            {expandedTab === "eduPresentation" && expandedCategory === "EDUCATEUR" && (() => {
+              const data = getOnglet("EDUCATEUR", "EDU_PRESENTATION")
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
+                    <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 12, maxWidth: 820 }}>
+                      {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
+                      {data.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{data.contenu}</p>}
+                    </div>
+                    <OngletMedia data={data} />
+                  </div>
 
-            {expandedTab === "eduPresentation" && expandedCategory === "EDUCATEUR" && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 820 }}>
-                  <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0 }}>
-                    La filière de formation des éducateurs de la FFF s&apos;adapte à vos besoins en proposant deux parcours :
-                    bénévole ou professionnel. Selon votre projet, si vous souhaitez perfectionner vos compétences
-                    d&apos;éducateur(rice) sans en faire votre métier, choisissez le parcours bénévole. Plusieurs types de
-                    formations existent, dont la durée peut varier de 8h à 161h permettant d&apos;encadrer différents publics
-                    (enfants, jeunes et seniors) et toutes les pratiques comme le Futsal, Futnet, Beach soccer,
-                    l&apos;Handi-foot …
-                  </p>
-                  <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0 }}>
-                    En revanche, si vous souhaitez devenir éducateur(rice) ou entraîneur(e) et en faire votre métier,
-                    choisissez le parcours professionnel en commençant par le Brevet de moniteur de football (BMF) ou le
-                    Brevet d&apos;entraîneur de football (BEF) si vous justifiez des prérequis spécifiques. Le BMF est
-                    accessible sous différentes formes, en apprentissage, par la formation continue.
-                  </p>
-                </div>
-
-                <div style={{ overflowX: "auto" }}>
-                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-                    <thead>
-                      <tr>
-                        {["Formation", "Filière", "Durée", "Format", "CPF"].map((h) => (
-                          <th
-                            key={h}
-                            style={{
-                              textAlign: "left",
-                              padding: "10px 12px",
-                              background: colors.navy,
-                              color: "#fff",
-                              fontSize: 11,
-                              fontWeight: 700,
-                              textTransform: "uppercase",
-                              letterSpacing: 0.4,
-                            }}
-                          >
-                            {h}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {(byCategory.get("EDUCATEUR") ?? []).map((f, i) => (
-                        <tr key={f.id} style={{ background: i % 2 === 0 ? "#fff" : "#f5f7fb" }}>
-                          <td style={{ padding: "9px 12px", fontWeight: 600, color: colors.navy }}>{f.titre}</td>
-                          <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.filiere ? FILIERE_LABELS[f.filiere] : "—"}</td>
-                          <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.dureeLabel}</td>
-                          <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.modeLabel}</td>
-                          <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.cpfEligible ? "Éligible" : "—"}</td>
+                  <div style={{ overflowX: "auto" }}>
+                    <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                      <thead>
+                        <tr>
+                          {["Formation", "Filière", "Durée", "Format", "CPF"].map((h) => (
+                            <th
+                              key={h}
+                              style={{
+                                textAlign: "left",
+                                padding: "10px 12px",
+                                background: colors.navy,
+                                color: "#fff",
+                                fontSize: 11,
+                                fontWeight: 700,
+                                textTransform: "uppercase",
+                                letterSpacing: 0.4,
+                              }}
+                            >
+                              {h}
+                            </th>
+                          ))}
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {(byCategory.get("EDUCATEUR") ?? []).map((f, i) => (
+                          <tr key={f.id} style={{ background: i % 2 === 0 ? "#fff" : "#f5f7fb" }}>
+                            <td style={{ padding: "9px 12px", fontWeight: 600, color: colors.navy }}>{f.titre}</td>
+                            <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.filiere ? FILIERE_LABELS[f.filiere] : "—"}</td>
+                            <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.dureeLabel}</td>
+                            <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.modeLabel}</td>
+                            <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.cpfEligible ? "Éligible" : "—"}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-            )}
+              )
+            })()}
 
-            {expandedTab === "eduPro" && expandedCategory === "EDUCATEUR" && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 560 }}>
-                <div
-                  style={{
-                    background: colors.gold,
-                    color: colors.navy,
-                    fontFamily: fontHeading,
-                    fontSize: 16,
-                    fontWeight: 800,
-                    letterSpacing: 0.5,
-                    textTransform: "uppercase",
-                    padding: "12px 16px",
-                    borderRadius: 6,
-                    textAlign: "center",
-                  }}
-                >
-                  Formations professionnelles (BEF, BMF, FPC)
-                </div>
+            {expandedTab === "eduPro" && expandedCategory === "EDUCATEUR" && (() => {
+              const data = getOnglet("EDUCATEUR", "EDU_PRO")
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 560 }}>
+                  {data.titre && (
+                    <div
+                      style={{
+                        background: colors.gold,
+                        color: colors.navy,
+                        fontFamily: fontHeading,
+                        fontSize: 16,
+                        fontWeight: 800,
+                        letterSpacing: 0.5,
+                        textTransform: "uppercase",
+                        padding: "12px 16px",
+                        borderRadius: 6,
+                        textAlign: "center",
+                      }}
+                    >
+                      {data.titre}
+                    </div>
+                  )}
+                  {data.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{data.contenu}</p>}
+                  {(data.videoUrl || data.image) && <OngletMedia data={data} />}
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                  {(equivalenceByGroup.get("PRO_TOP") ?? []).map((f) => (
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                    {(equivalenceByGroup.get("PRO_TOP") ?? []).map((f) => (
+                      <Hoverable
+                        as={Link}
+                        key={f.id}
+                        href={`/formations/${f.slug}`}
+                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                        hoverStyle={{ opacity: 0.85 }}
+                      >
+                        <NodeBadge f={f} />
+                        <span>{f.shortNode}</span>
+                      </Hoverable>
+                    ))}
+                  </div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
+                    {(equivalenceByGroup.get("PRO_MID") ?? []).map((f) => (
+                      <Hoverable
+                        as={Link}
+                        key={f.id}
+                        href={`/formations/${f.slug}`}
+                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                        hoverStyle={{ opacity: 0.85 }}
+                      >
+                        {f.titre}
+                      </Hoverable>
+                    ))}
+                  </div>
+
+                  {(equivalenceByGroup.get("PRO_BEF") ?? []).map((f) => (
                     <Hoverable
                       as={Link}
                       key={f.id}
                       href={`/formations/${f.slug}`}
-                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
                       hoverStyle={{ opacity: 0.85 }}
                     >
                       <NodeBadge f={f} />
-                      <span>{f.shortNode}</span>
+                      <span>{f.shortNode} — {f.titre}</span>
                     </Hoverable>
                   ))}
-                </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
-                  {(equivalenceByGroup.get("PRO_MID") ?? []).map((f) => (
+                  {(equivalenceByGroup.get("PRO_BMF") ?? []).map((f) => (
+                    <Hoverable
+                      as={Link}
+                      key={f.id}
+                      href={`/formations/${f.slug}`}
+                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
+                      hoverStyle={{ opacity: 0.85 }}
+                    >
+                      <NodeBadge f={f} />
+                      <span>{f.shortNode} — {f.titre}</span>
+                    </Hoverable>
+                  ))}
+
+                  {(equivalenceByGroup.get("PRO_MID2") ?? []).map((f) => (
                     <Hoverable
                       as={Link}
                       key={f.id}
@@ -520,154 +657,122 @@ export function FormationsCatalogue({
                       {f.titre}
                     </Hoverable>
                   ))}
-                </div>
 
-                {(equivalenceByGroup.get("PRO_BEF") ?? []).map((f) => (
-                  <Hoverable
-                    as={Link}
-                    key={f.id}
-                    href={`/formations/${f.slug}`}
-                    style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
-                    hoverStyle={{ opacity: 0.85 }}
-                  >
-                    <NodeBadge f={f} />
-                    <span>{f.shortNode} — {f.titre}</span>
-                  </Hoverable>
-                ))}
-
-                {(equivalenceByGroup.get("PRO_BMF") ?? []).map((f) => (
-                  <Hoverable
-                    as={Link}
-                    key={f.id}
-                    href={`/formations/${f.slug}`}
-                    style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
-                    hoverStyle={{ opacity: 0.85 }}
-                  >
-                    <NodeBadge f={f} />
-                    <span>{f.shortNode} — {f.titre}</span>
-                  </Hoverable>
-                ))}
-
-                {(equivalenceByGroup.get("PRO_MID2") ?? []).map((f) => (
-                  <Hoverable
-                    as={Link}
-                    key={f.id}
-                    href={`/formations/${f.slug}`}
-                    style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
-                    hoverStyle={{ opacity: 0.85 }}
-                  >
-                    {f.titre}
-                  </Hoverable>
-                ))}
-
-                {(equivalenceByGroup.get("PRO_BOTTOM") ?? []).map((f) => (
-                  <Hoverable
-                    as={Link}
-                    key={f.id}
-                    href={`/formations/${f.slug}`}
-                    style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13, marginTop: 4 }}
-                    hoverStyle={{ opacity: 0.85 }}
-                  >
-                    {f.shortNode} — {f.titre}
-                  </Hoverable>
-                ))}
-              </div>
-            )}
-
-            {expandedTab === "eduBenevole" && expandedCategory === "EDUCATEUR" && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 700 }}>
-                <div
-                  style={{
-                    background: colors.red,
-                    color: "#fff",
-                    fontFamily: fontHeading,
-                    fontSize: 16,
-                    fontWeight: 800,
-                    letterSpacing: 0.5,
-                    textTransform: "uppercase",
-                    padding: "12px 16px",
-                    borderRadius: 6,
-                    textAlign: "center",
-                  }}
-                >
-                  Formations bénévoles (AF, CFI, DF, Certifications)
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, alignItems: "start" }}>
-                  {BENEVOLE_COLUMNS.map((col) => (
-                    <div key={col.groupe} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                      <div
-                        style={{
-                          background: colors.navy,
-                          color: "#fff",
-                          fontSize: 11,
-                          fontWeight: 700,
-                          textAlign: "center",
-                          padding: "8px 6px",
-                          borderRadius: 5,
-                          letterSpacing: 0.3,
-                        }}
-                      >
-                        {col.label}
-                      </div>
-                      {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
-                        <Hoverable
-                          as={Link}
-                          key={f.id}
-                          href={`/formations/${f.slug}`}
-                          style={nodeChipStyle(f)}
-                          hoverStyle={{ opacity: 0.85 }}
-                        >
-                          <NodeBadge f={f} />
-                          <span>{f.titre}</span>
-                        </Hoverable>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-                <div
-                  style={{
-                    background: colors.navy,
-                    color: "#fff",
-                    fontSize: 11,
-                    fontWeight: 700,
-                    textAlign: "center",
-                    padding: "8px 6px",
-                    borderRadius: 5,
-                    letterSpacing: 0.3,
-                    marginTop: 4,
-                  }}
-                >
-                  CERTIFICATIONS
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
-                  {(equivalenceByGroup.get("CERTIF") ?? []).map((f) => (
+                  {(equivalenceByGroup.get("PRO_BOTTOM") ?? []).map((f) => (
                     <Hoverable
                       as={Link}
                       key={f.id}
                       href={`/formations/${f.slug}`}
-                      style={{ ...nodeChipStyle(f), textAlign: "center", justifyContent: "center" }}
+                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13, marginTop: 4 }}
                       hoverStyle={{ opacity: 0.85 }}
                     >
-                      {f.titre}
+                      {f.shortNode} — {f.titre}
                     </Hoverable>
                   ))}
                 </div>
-              </div>
-            )}
+              )
+            })()}
 
-            {expandedTab === "eduEquivalences" && expandedCategory === "EDUCATEUR" && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                <p style={{ color: colors.textMuted, fontSize: 14, lineHeight: 1.65, margin: 0, maxWidth: 820 }}>
-                  Certaines formations bénévoles permettent d&apos;obtenir des équivalences vers les diplômes fédéraux, sous
-                  conditions.
-                </p>
-                <p style={{ color: colors.red, fontSize: 12, lineHeight: 1.6, margin: 0, fontWeight: 600, maxWidth: 820 }}>
-                  Attention : seules les personnes titulaires du CFF2 certifié ou du CFF3 certifié peuvent s&apos;inscrire sur
-                  les journées complémentaires pour obtenir les équivalences des Diplômes Fédéraux. Les personnes titulaires de
-                  CFI (même certifiés) ne sont pas éligibles aux journées complémentaires.
-                </p>
-              </div>
-            )}
+            {expandedTab === "eduBenevole" && expandedCategory === "EDUCATEUR" && (() => {
+              const data = getOnglet("EDUCATEUR", "EDU_BENEVOLE")
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 700 }}>
+                  {data.titre && (
+                    <div
+                      style={{
+                        background: colors.red,
+                        color: "#fff",
+                        fontFamily: fontHeading,
+                        fontSize: 16,
+                        fontWeight: 800,
+                        letterSpacing: 0.5,
+                        textTransform: "uppercase",
+                        padding: "12px 16px",
+                        borderRadius: 6,
+                        textAlign: "center",
+                      }}
+                    >
+                      {data.titre}
+                    </div>
+                  )}
+                  {data.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{data.contenu}</p>}
+                  {(data.videoUrl || data.image) && <OngletMedia data={data} />}
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, alignItems: "start" }}>
+                    {BENEVOLE_COLUMNS.map((col) => (
+                      <div key={col.groupe} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                        <div
+                          style={{
+                            background: colors.navy,
+                            color: "#fff",
+                            fontSize: 11,
+                            fontWeight: 700,
+                            textAlign: "center",
+                            padding: "8px 6px",
+                            borderRadius: 5,
+                            letterSpacing: 0.3,
+                          }}
+                        >
+                          {col.label}
+                        </div>
+                        {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
+                          <Hoverable
+                            as={Link}
+                            key={f.id}
+                            href={`/formations/${f.slug}`}
+                            style={nodeChipStyle(f)}
+                            hoverStyle={{ opacity: 0.85 }}
+                          >
+                            <NodeBadge f={f} />
+                            <span>{f.titre}</span>
+                          </Hoverable>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                  <div
+                    style={{
+                      background: colors.navy,
+                      color: "#fff",
+                      fontSize: 11,
+                      fontWeight: 700,
+                      textAlign: "center",
+                      padding: "8px 6px",
+                      borderRadius: 5,
+                      letterSpacing: 0.3,
+                      marginTop: 4,
+                    }}
+                  >
+                    CERTIFICATIONS
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+                    {(equivalenceByGroup.get("CERTIF") ?? []).map((f) => (
+                      <Hoverable
+                        as={Link}
+                        key={f.id}
+                        href={`/formations/${f.slug}`}
+                        style={{ ...nodeChipStyle(f), textAlign: "center", justifyContent: "center" }}
+                        hoverStyle={{ opacity: 0.85 }}
+                      >
+                        {f.titre}
+                      </Hoverable>
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
+
+            {expandedTab === "eduEquivalences" && expandedCategory === "EDUCATEUR" && (() => {
+              const data = getOnglet("EDUCATEUR", "EDU_EQUIVALENCES")
+              return (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
+                  <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
+                    {data.titre && <h3 style={{ ...tabTitleStyle, maxWidth: 820 }}>{data.titre}</h3>}
+                    {data.contenu && <p style={{ ...tabTextStyle, maxWidth: 820 }}>{data.contenu}</p>}
+                  </div>
+                  <OngletMedia data={data} />
+                </div>
+              )
+            })()}
           </div>
         </section>
       )}

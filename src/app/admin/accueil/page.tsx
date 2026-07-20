@@ -11,6 +11,13 @@ import { colors, fontHeading } from "@/lib/theme"
 
 const CONTENU_DEFAUT = {
   bandeauEmploiTitre: "Je souhaite créer un emploi dans mon club",
+  bandeauEmploiActif: true,
+  bandeauBouton1Label: "Je donne mes infos",
+  bandeauBouton1Type: "INTERNE" as const,
+  bandeauBouton1Url: "#contact",
+  bandeauBouton2Label: "En savoir plus",
+  bandeauBouton2Type: "INTERNE" as const,
+  bandeauBouton2Url: "/emploi",
   accompagnementEyebrow: "IR2F vous accompagne",
   accompagnementTitre: "Accompagnement Emploi",
   contactTitre: "Je souhaite être contacté",

@@ -44,6 +44,11 @@ export type Inscription = $Result.DefaultSelection<Prisma.$InscriptionPayload>
  */
 export type DemandeInscription = $Result.DefaultSelection<Prisma.$DemandeInscriptionPayload>
 /**
+ * Model DemandeContact
+ * 
+ */
+export type DemandeContact = $Result.DefaultSelection<Prisma.$DemandeContactPayload>
+/**
  * Model Document
  * 
  */
@@ -99,10 +104,20 @@ export type StatCle = $Result.DefaultSelection<Prisma.$StatClePayload>
  */
 export type HeroSlide = $Result.DefaultSelection<Prisma.$HeroSlidePayload>
 /**
- * Model CategorieInfo
+ * Model FormationTuile
  * 
  */
-export type CategorieInfo = $Result.DefaultSelection<Prisma.$CategorieInfoPayload>
+export type FormationTuile = $Result.DefaultSelection<Prisma.$FormationTuilePayload>
+/**
+ * Model FormationOnglet
+ * 
+ */
+export type FormationOnglet = $Result.DefaultSelection<Prisma.$FormationOngletPayload>
+/**
+ * Model PageHero
+ * 
+ */
+export type PageHero = $Result.DefaultSelection<Prisma.$PageHeroPayload>
 /**
  * Model DocumentPasserelle
  * 
@@ -250,6 +265,14 @@ export const OrigineInscription: {
 export type OrigineInscription = (typeof OrigineInscription)[keyof typeof OrigineInscription]
 
 
+export const TypeLien: {
+  INTERNE: 'INTERNE',
+  EXTERNE: 'EXTERNE'
+};
+
+export type TypeLien = (typeof TypeLien)[keyof typeof TypeLien]
+
+
 export const IconeAccompagnement: {
   FINANCEMENT: 'FINANCEMENT',
   GESTION: 'GESTION',
@@ -278,6 +301,41 @@ export const AlignementHero: {
 };
 
 export type AlignementHero = (typeof AlignementHero)[keyof typeof AlignementHero]
+
+
+export const EffetVisuel: {
+  AUCUN: 'AUCUN',
+  FONDU: 'FONDU',
+  ZOOM: 'ZOOM',
+  PARALLAXE: 'PARALLAXE',
+  NOIR_BLANC: 'NOIR_BLANC',
+  FLOU: 'FLOU'
+};
+
+export type EffetVisuel = (typeof EffetVisuel)[keyof typeof EffetVisuel]
+
+
+export const FormationOngletCle: {
+  INFO: 'INFO',
+  PARCOURS: 'PARCOURS',
+  CLUB: 'CLUB',
+  EDU_PRESENTATION: 'EDU_PRESENTATION',
+  EDU_PRO: 'EDU_PRO',
+  EDU_BENEVOLE: 'EDU_BENEVOLE',
+  EDU_EQUIVALENCES: 'EDU_EQUIVALENCES'
+};
+
+export type FormationOngletCle = (typeof FormationOngletCle)[keyof typeof FormationOngletCle]
+
+
+export const PageCle: {
+  FORMATIONS: 'FORMATIONS',
+  CONTACT: 'CONTACT',
+  EMPLOI: 'EMPLOI',
+  ACTUALITES: 'ACTUALITES'
+};
+
+export type PageCle = (typeof PageCle)[keyof typeof PageCle]
 
 
 export const SectionEmploi: {
@@ -346,6 +404,10 @@ export type OrigineInscription = $Enums.OrigineInscription
 
 export const OrigineInscription: typeof $Enums.OrigineInscription
 
+export type TypeLien = $Enums.TypeLien
+
+export const TypeLien: typeof $Enums.TypeLien
+
 export type IconeAccompagnement = $Enums.IconeAccompagnement
 
 export const IconeAccompagnement: typeof $Enums.IconeAccompagnement
@@ -357,6 +419,18 @@ export const TransitionHero: typeof $Enums.TransitionHero
 export type AlignementHero = $Enums.AlignementHero
 
 export const AlignementHero: typeof $Enums.AlignementHero
+
+export type EffetVisuel = $Enums.EffetVisuel
+
+export const EffetVisuel: typeof $Enums.EffetVisuel
+
+export type FormationOngletCle = $Enums.FormationOngletCle
+
+export const FormationOngletCle: typeof $Enums.FormationOngletCle
+
+export type PageCle = $Enums.PageCle
+
+export const PageCle: typeof $Enums.PageCle
 
 export type SectionEmploi = $Enums.SectionEmploi
 
@@ -548,6 +622,16 @@ export class PrismaClient<
   get demandeInscription(): Prisma.DemandeInscriptionDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.demandeContact`: Exposes CRUD operations for the **DemandeContact** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DemandeContacts
+    * const demandeContacts = await prisma.demandeContact.findMany()
+    * ```
+    */
+  get demandeContact(): Prisma.DemandeContactDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.document`: Exposes CRUD operations for the **Document** model.
     * Example usage:
     * ```ts
@@ -658,14 +742,34 @@ export class PrismaClient<
   get heroSlide(): Prisma.HeroSlideDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.categorieInfo`: Exposes CRUD operations for the **CategorieInfo** model.
+   * `prisma.formationTuile`: Exposes CRUD operations for the **FormationTuile** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more CategorieInfos
-    * const categorieInfos = await prisma.categorieInfo.findMany()
+    * // Fetch zero or more FormationTuiles
+    * const formationTuiles = await prisma.formationTuile.findMany()
     * ```
     */
-  get categorieInfo(): Prisma.CategorieInfoDelegate<ExtArgs, ClientOptions>;
+  get formationTuile(): Prisma.FormationTuileDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.formationOnglet`: Exposes CRUD operations for the **FormationOnglet** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FormationOnglets
+    * const formationOnglets = await prisma.formationOnglet.findMany()
+    * ```
+    */
+  get formationOnglet(): Prisma.FormationOngletDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pageHero`: Exposes CRUD operations for the **PageHero** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PageHeroes
+    * const pageHeroes = await prisma.pageHero.findMany()
+    * ```
+    */
+  get pageHero(): Prisma.PageHeroDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.documentPasserelle`: Exposes CRUD operations for the **DocumentPasserelle** model.
@@ -1156,6 +1260,7 @@ export namespace Prisma {
     Session: 'Session',
     Inscription: 'Inscription',
     DemandeInscription: 'DemandeInscription',
+    DemandeContact: 'DemandeContact',
     Document: 'Document',
     Signature: 'Signature',
     Message: 'Message',
@@ -1167,7 +1272,9 @@ export namespace Prisma {
     AccueilContenu: 'AccueilContenu',
     StatCle: 'StatCle',
     HeroSlide: 'HeroSlide',
-    CategorieInfo: 'CategorieInfo',
+    FormationTuile: 'FormationTuile',
+    FormationOnglet: 'FormationOnglet',
+    PageHero: 'PageHero',
     DocumentPasserelle: 'DocumentPasserelle',
     Partenaire: 'Partenaire',
     Contact: 'Contact',
@@ -1188,7 +1295,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "document" | "signature" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "categorieInfo" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "signature" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1633,6 +1740,80 @@ export namespace Prisma {
           count: {
             args: Prisma.DemandeInscriptionCountArgs<ExtArgs>
             result: $Utils.Optional<DemandeInscriptionCountAggregateOutputType> | number
+          }
+        }
+      }
+      DemandeContact: {
+        payload: Prisma.$DemandeContactPayload<ExtArgs>
+        fields: Prisma.DemandeContactFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DemandeContactFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DemandeContactFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload>
+          }
+          findFirst: {
+            args: Prisma.DemandeContactFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DemandeContactFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload>
+          }
+          findMany: {
+            args: Prisma.DemandeContactFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload>[]
+          }
+          create: {
+            args: Prisma.DemandeContactCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload>
+          }
+          createMany: {
+            args: Prisma.DemandeContactCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DemandeContactCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload>[]
+          }
+          delete: {
+            args: Prisma.DemandeContactDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload>
+          }
+          update: {
+            args: Prisma.DemandeContactUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload>
+          }
+          deleteMany: {
+            args: Prisma.DemandeContactDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DemandeContactUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DemandeContactUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload>[]
+          }
+          upsert: {
+            args: Prisma.DemandeContactUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DemandeContactPayload>
+          }
+          aggregate: {
+            args: Prisma.DemandeContactAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDemandeContact>
+          }
+          groupBy: {
+            args: Prisma.DemandeContactGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DemandeContactGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DemandeContactCountArgs<ExtArgs>
+            result: $Utils.Optional<DemandeContactCountAggregateOutputType> | number
           }
         }
       }
@@ -2450,77 +2631,225 @@ export namespace Prisma {
           }
         }
       }
-      CategorieInfo: {
-        payload: Prisma.$CategorieInfoPayload<ExtArgs>
-        fields: Prisma.CategorieInfoFieldRefs
+      FormationTuile: {
+        payload: Prisma.$FormationTuilePayload<ExtArgs>
+        fields: Prisma.FormationTuileFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.CategorieInfoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload> | null
+            args: Prisma.FormationTuileFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.CategorieInfoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload>
+            args: Prisma.FormationTuileFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload>
           }
           findFirst: {
-            args: Prisma.CategorieInfoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload> | null
+            args: Prisma.FormationTuileFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.CategorieInfoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload>
+            args: Prisma.FormationTuileFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload>
           }
           findMany: {
-            args: Prisma.CategorieInfoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload>[]
+            args: Prisma.FormationTuileFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload>[]
           }
           create: {
-            args: Prisma.CategorieInfoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload>
+            args: Prisma.FormationTuileCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload>
           }
           createMany: {
-            args: Prisma.CategorieInfoCreateManyArgs<ExtArgs>
+            args: Prisma.FormationTuileCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.CategorieInfoCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload>[]
+            args: Prisma.FormationTuileCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload>[]
           }
           delete: {
-            args: Prisma.CategorieInfoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload>
+            args: Prisma.FormationTuileDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload>
           }
           update: {
-            args: Prisma.CategorieInfoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload>
+            args: Prisma.FormationTuileUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload>
           }
           deleteMany: {
-            args: Prisma.CategorieInfoDeleteManyArgs<ExtArgs>
+            args: Prisma.FormationTuileDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.CategorieInfoUpdateManyArgs<ExtArgs>
+            args: Prisma.FormationTuileUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.CategorieInfoUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload>[]
+            args: Prisma.FormationTuileUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload>[]
           }
           upsert: {
-            args: Prisma.CategorieInfoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CategorieInfoPayload>
+            args: Prisma.FormationTuileUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationTuilePayload>
           }
           aggregate: {
-            args: Prisma.CategorieInfoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCategorieInfo>
+            args: Prisma.FormationTuileAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFormationTuile>
           }
           groupBy: {
-            args: Prisma.CategorieInfoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CategorieInfoGroupByOutputType>[]
+            args: Prisma.FormationTuileGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FormationTuileGroupByOutputType>[]
           }
           count: {
-            args: Prisma.CategorieInfoCountArgs<ExtArgs>
-            result: $Utils.Optional<CategorieInfoCountAggregateOutputType> | number
+            args: Prisma.FormationTuileCountArgs<ExtArgs>
+            result: $Utils.Optional<FormationTuileCountAggregateOutputType> | number
+          }
+        }
+      }
+      FormationOnglet: {
+        payload: Prisma.$FormationOngletPayload<ExtArgs>
+        fields: Prisma.FormationOngletFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FormationOngletFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FormationOngletFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload>
+          }
+          findFirst: {
+            args: Prisma.FormationOngletFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FormationOngletFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload>
+          }
+          findMany: {
+            args: Prisma.FormationOngletFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload>[]
+          }
+          create: {
+            args: Prisma.FormationOngletCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload>
+          }
+          createMany: {
+            args: Prisma.FormationOngletCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FormationOngletCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload>[]
+          }
+          delete: {
+            args: Prisma.FormationOngletDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload>
+          }
+          update: {
+            args: Prisma.FormationOngletUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload>
+          }
+          deleteMany: {
+            args: Prisma.FormationOngletDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FormationOngletUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FormationOngletUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload>[]
+          }
+          upsert: {
+            args: Prisma.FormationOngletUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletPayload>
+          }
+          aggregate: {
+            args: Prisma.FormationOngletAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFormationOnglet>
+          }
+          groupBy: {
+            args: Prisma.FormationOngletGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FormationOngletGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FormationOngletCountArgs<ExtArgs>
+            result: $Utils.Optional<FormationOngletCountAggregateOutputType> | number
+          }
+        }
+      }
+      PageHero: {
+        payload: Prisma.$PageHeroPayload<ExtArgs>
+        fields: Prisma.PageHeroFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PageHeroFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PageHeroFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload>
+          }
+          findFirst: {
+            args: Prisma.PageHeroFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PageHeroFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload>
+          }
+          findMany: {
+            args: Prisma.PageHeroFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload>[]
+          }
+          create: {
+            args: Prisma.PageHeroCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload>
+          }
+          createMany: {
+            args: Prisma.PageHeroCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PageHeroCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload>[]
+          }
+          delete: {
+            args: Prisma.PageHeroDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload>
+          }
+          update: {
+            args: Prisma.PageHeroUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload>
+          }
+          deleteMany: {
+            args: Prisma.PageHeroDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PageHeroUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PageHeroUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload>[]
+          }
+          upsert: {
+            args: Prisma.PageHeroUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PageHeroPayload>
+          }
+          aggregate: {
+            args: Prisma.PageHeroAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePageHero>
+          }
+          groupBy: {
+            args: Prisma.PageHeroGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PageHeroGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PageHeroCountArgs<ExtArgs>
+            result: $Utils.Optional<PageHeroCountAggregateOutputType> | number
           }
         }
       }
@@ -3008,6 +3337,7 @@ export namespace Prisma {
     session?: SessionOmit
     inscription?: InscriptionOmit
     demandeInscription?: DemandeInscriptionOmit
+    demandeContact?: DemandeContactOmit
     document?: DocumentOmit
     signature?: SignatureOmit
     message?: MessageOmit
@@ -3019,7 +3349,9 @@ export namespace Prisma {
     accueilContenu?: AccueilContenuOmit
     statCle?: StatCleOmit
     heroSlide?: HeroSlideOmit
-    categorieInfo?: CategorieInfoOmit
+    formationTuile?: FormationTuileOmit
+    formationOnglet?: FormationOngletOmit
+    pageHero?: PageHeroOmit
     documentPasserelle?: DocumentPasserelleOmit
     partenaire?: PartenaireOmit
     contact?: ContactOmit
@@ -10917,6 +11249,1045 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: DemandeInscriptionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DemandeContact
+   */
+
+  export type AggregateDemandeContact = {
+    _count: DemandeContactCountAggregateOutputType | null
+    _min: DemandeContactMinAggregateOutputType | null
+    _max: DemandeContactMaxAggregateOutputType | null
+  }
+
+  export type DemandeContactMinAggregateOutputType = {
+    id: string | null
+    thematique: string | null
+    nom: string | null
+    prenom: string | null
+    email: string | null
+    telephone: string | null
+    message: string | null
+    createdAt: Date | null
+  }
+
+  export type DemandeContactMaxAggregateOutputType = {
+    id: string | null
+    thematique: string | null
+    nom: string | null
+    prenom: string | null
+    email: string | null
+    telephone: string | null
+    message: string | null
+    createdAt: Date | null
+  }
+
+  export type DemandeContactCountAggregateOutputType = {
+    id: number
+    thematique: number
+    nom: number
+    prenom: number
+    email: number
+    telephone: number
+    message: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type DemandeContactMinAggregateInputType = {
+    id?: true
+    thematique?: true
+    nom?: true
+    prenom?: true
+    email?: true
+    telephone?: true
+    message?: true
+    createdAt?: true
+  }
+
+  export type DemandeContactMaxAggregateInputType = {
+    id?: true
+    thematique?: true
+    nom?: true
+    prenom?: true
+    email?: true
+    telephone?: true
+    message?: true
+    createdAt?: true
+  }
+
+  export type DemandeContactCountAggregateInputType = {
+    id?: true
+    thematique?: true
+    nom?: true
+    prenom?: true
+    email?: true
+    telephone?: true
+    message?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type DemandeContactAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DemandeContact to aggregate.
+     */
+    where?: DemandeContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DemandeContacts to fetch.
+     */
+    orderBy?: DemandeContactOrderByWithRelationInput | DemandeContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DemandeContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DemandeContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DemandeContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DemandeContacts
+    **/
+    _count?: true | DemandeContactCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DemandeContactMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DemandeContactMaxAggregateInputType
+  }
+
+  export type GetDemandeContactAggregateType<T extends DemandeContactAggregateArgs> = {
+        [P in keyof T & keyof AggregateDemandeContact]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDemandeContact[P]>
+      : GetScalarType<T[P], AggregateDemandeContact[P]>
+  }
+
+
+
+
+  export type DemandeContactGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DemandeContactWhereInput
+    orderBy?: DemandeContactOrderByWithAggregationInput | DemandeContactOrderByWithAggregationInput[]
+    by: DemandeContactScalarFieldEnum[] | DemandeContactScalarFieldEnum
+    having?: DemandeContactScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DemandeContactCountAggregateInputType | true
+    _min?: DemandeContactMinAggregateInputType
+    _max?: DemandeContactMaxAggregateInputType
+  }
+
+  export type DemandeContactGroupByOutputType = {
+    id: string
+    thematique: string
+    nom: string
+    prenom: string
+    email: string
+    telephone: string | null
+    message: string | null
+    createdAt: Date
+    _count: DemandeContactCountAggregateOutputType | null
+    _min: DemandeContactMinAggregateOutputType | null
+    _max: DemandeContactMaxAggregateOutputType | null
+  }
+
+  type GetDemandeContactGroupByPayload<T extends DemandeContactGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DemandeContactGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DemandeContactGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DemandeContactGroupByOutputType[P]>
+            : GetScalarType<T[P], DemandeContactGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DemandeContactSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    thematique?: boolean
+    nom?: boolean
+    prenom?: boolean
+    email?: boolean
+    telephone?: boolean
+    message?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["demandeContact"]>
+
+  export type DemandeContactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    thematique?: boolean
+    nom?: boolean
+    prenom?: boolean
+    email?: boolean
+    telephone?: boolean
+    message?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["demandeContact"]>
+
+  export type DemandeContactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    thematique?: boolean
+    nom?: boolean
+    prenom?: boolean
+    email?: boolean
+    telephone?: boolean
+    message?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["demandeContact"]>
+
+  export type DemandeContactSelectScalar = {
+    id?: boolean
+    thematique?: boolean
+    nom?: boolean
+    prenom?: boolean
+    email?: boolean
+    telephone?: boolean
+    message?: boolean
+    createdAt?: boolean
+  }
+
+  export type DemandeContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "thematique" | "nom" | "prenom" | "email" | "telephone" | "message" | "createdAt", ExtArgs["result"]["demandeContact"]>
+
+  export type $DemandeContactPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DemandeContact"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      thematique: string
+      nom: string
+      prenom: string
+      email: string
+      telephone: string | null
+      message: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["demandeContact"]>
+    composites: {}
+  }
+
+  type DemandeContactGetPayload<S extends boolean | null | undefined | DemandeContactDefaultArgs> = $Result.GetResult<Prisma.$DemandeContactPayload, S>
+
+  type DemandeContactCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DemandeContactFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DemandeContactCountAggregateInputType | true
+    }
+
+  export interface DemandeContactDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DemandeContact'], meta: { name: 'DemandeContact' } }
+    /**
+     * Find zero or one DemandeContact that matches the filter.
+     * @param {DemandeContactFindUniqueArgs} args - Arguments to find a DemandeContact
+     * @example
+     * // Get one DemandeContact
+     * const demandeContact = await prisma.demandeContact.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DemandeContactFindUniqueArgs>(args: SelectSubset<T, DemandeContactFindUniqueArgs<ExtArgs>>): Prisma__DemandeContactClient<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DemandeContact that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DemandeContactFindUniqueOrThrowArgs} args - Arguments to find a DemandeContact
+     * @example
+     * // Get one DemandeContact
+     * const demandeContact = await prisma.demandeContact.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DemandeContactFindUniqueOrThrowArgs>(args: SelectSubset<T, DemandeContactFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DemandeContactClient<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DemandeContact that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DemandeContactFindFirstArgs} args - Arguments to find a DemandeContact
+     * @example
+     * // Get one DemandeContact
+     * const demandeContact = await prisma.demandeContact.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DemandeContactFindFirstArgs>(args?: SelectSubset<T, DemandeContactFindFirstArgs<ExtArgs>>): Prisma__DemandeContactClient<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DemandeContact that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DemandeContactFindFirstOrThrowArgs} args - Arguments to find a DemandeContact
+     * @example
+     * // Get one DemandeContact
+     * const demandeContact = await prisma.demandeContact.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DemandeContactFindFirstOrThrowArgs>(args?: SelectSubset<T, DemandeContactFindFirstOrThrowArgs<ExtArgs>>): Prisma__DemandeContactClient<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DemandeContacts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DemandeContactFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DemandeContacts
+     * const demandeContacts = await prisma.demandeContact.findMany()
+     * 
+     * // Get first 10 DemandeContacts
+     * const demandeContacts = await prisma.demandeContact.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const demandeContactWithIdOnly = await prisma.demandeContact.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DemandeContactFindManyArgs>(args?: SelectSubset<T, DemandeContactFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DemandeContact.
+     * @param {DemandeContactCreateArgs} args - Arguments to create a DemandeContact.
+     * @example
+     * // Create one DemandeContact
+     * const DemandeContact = await prisma.demandeContact.create({
+     *   data: {
+     *     // ... data to create a DemandeContact
+     *   }
+     * })
+     * 
+     */
+    create<T extends DemandeContactCreateArgs>(args: SelectSubset<T, DemandeContactCreateArgs<ExtArgs>>): Prisma__DemandeContactClient<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DemandeContacts.
+     * @param {DemandeContactCreateManyArgs} args - Arguments to create many DemandeContacts.
+     * @example
+     * // Create many DemandeContacts
+     * const demandeContact = await prisma.demandeContact.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DemandeContactCreateManyArgs>(args?: SelectSubset<T, DemandeContactCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DemandeContacts and returns the data saved in the database.
+     * @param {DemandeContactCreateManyAndReturnArgs} args - Arguments to create many DemandeContacts.
+     * @example
+     * // Create many DemandeContacts
+     * const demandeContact = await prisma.demandeContact.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DemandeContacts and only return the `id`
+     * const demandeContactWithIdOnly = await prisma.demandeContact.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DemandeContactCreateManyAndReturnArgs>(args?: SelectSubset<T, DemandeContactCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DemandeContact.
+     * @param {DemandeContactDeleteArgs} args - Arguments to delete one DemandeContact.
+     * @example
+     * // Delete one DemandeContact
+     * const DemandeContact = await prisma.demandeContact.delete({
+     *   where: {
+     *     // ... filter to delete one DemandeContact
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DemandeContactDeleteArgs>(args: SelectSubset<T, DemandeContactDeleteArgs<ExtArgs>>): Prisma__DemandeContactClient<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DemandeContact.
+     * @param {DemandeContactUpdateArgs} args - Arguments to update one DemandeContact.
+     * @example
+     * // Update one DemandeContact
+     * const demandeContact = await prisma.demandeContact.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DemandeContactUpdateArgs>(args: SelectSubset<T, DemandeContactUpdateArgs<ExtArgs>>): Prisma__DemandeContactClient<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DemandeContacts.
+     * @param {DemandeContactDeleteManyArgs} args - Arguments to filter DemandeContacts to delete.
+     * @example
+     * // Delete a few DemandeContacts
+     * const { count } = await prisma.demandeContact.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DemandeContactDeleteManyArgs>(args?: SelectSubset<T, DemandeContactDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DemandeContacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DemandeContactUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DemandeContacts
+     * const demandeContact = await prisma.demandeContact.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DemandeContactUpdateManyArgs>(args: SelectSubset<T, DemandeContactUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DemandeContacts and returns the data updated in the database.
+     * @param {DemandeContactUpdateManyAndReturnArgs} args - Arguments to update many DemandeContacts.
+     * @example
+     * // Update many DemandeContacts
+     * const demandeContact = await prisma.demandeContact.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DemandeContacts and only return the `id`
+     * const demandeContactWithIdOnly = await prisma.demandeContact.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DemandeContactUpdateManyAndReturnArgs>(args: SelectSubset<T, DemandeContactUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DemandeContact.
+     * @param {DemandeContactUpsertArgs} args - Arguments to update or create a DemandeContact.
+     * @example
+     * // Update or create a DemandeContact
+     * const demandeContact = await prisma.demandeContact.upsert({
+     *   create: {
+     *     // ... data to create a DemandeContact
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DemandeContact we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DemandeContactUpsertArgs>(args: SelectSubset<T, DemandeContactUpsertArgs<ExtArgs>>): Prisma__DemandeContactClient<$Result.GetResult<Prisma.$DemandeContactPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DemandeContacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DemandeContactCountArgs} args - Arguments to filter DemandeContacts to count.
+     * @example
+     * // Count the number of DemandeContacts
+     * const count = await prisma.demandeContact.count({
+     *   where: {
+     *     // ... the filter for the DemandeContacts we want to count
+     *   }
+     * })
+    **/
+    count<T extends DemandeContactCountArgs>(
+      args?: Subset<T, DemandeContactCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DemandeContactCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DemandeContact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DemandeContactAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DemandeContactAggregateArgs>(args: Subset<T, DemandeContactAggregateArgs>): Prisma.PrismaPromise<GetDemandeContactAggregateType<T>>
+
+    /**
+     * Group by DemandeContact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DemandeContactGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DemandeContactGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DemandeContactGroupByArgs['orderBy'] }
+        : { orderBy?: DemandeContactGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DemandeContactGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDemandeContactGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DemandeContact model
+   */
+  readonly fields: DemandeContactFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DemandeContact.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DemandeContactClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DemandeContact model
+   */
+  interface DemandeContactFieldRefs {
+    readonly id: FieldRef<"DemandeContact", 'String'>
+    readonly thematique: FieldRef<"DemandeContact", 'String'>
+    readonly nom: FieldRef<"DemandeContact", 'String'>
+    readonly prenom: FieldRef<"DemandeContact", 'String'>
+    readonly email: FieldRef<"DemandeContact", 'String'>
+    readonly telephone: FieldRef<"DemandeContact", 'String'>
+    readonly message: FieldRef<"DemandeContact", 'String'>
+    readonly createdAt: FieldRef<"DemandeContact", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DemandeContact findUnique
+   */
+  export type DemandeContactFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * Filter, which DemandeContact to fetch.
+     */
+    where: DemandeContactWhereUniqueInput
+  }
+
+  /**
+   * DemandeContact findUniqueOrThrow
+   */
+  export type DemandeContactFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * Filter, which DemandeContact to fetch.
+     */
+    where: DemandeContactWhereUniqueInput
+  }
+
+  /**
+   * DemandeContact findFirst
+   */
+  export type DemandeContactFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * Filter, which DemandeContact to fetch.
+     */
+    where?: DemandeContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DemandeContacts to fetch.
+     */
+    orderBy?: DemandeContactOrderByWithRelationInput | DemandeContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DemandeContacts.
+     */
+    cursor?: DemandeContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DemandeContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DemandeContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DemandeContacts.
+     */
+    distinct?: DemandeContactScalarFieldEnum | DemandeContactScalarFieldEnum[]
+  }
+
+  /**
+   * DemandeContact findFirstOrThrow
+   */
+  export type DemandeContactFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * Filter, which DemandeContact to fetch.
+     */
+    where?: DemandeContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DemandeContacts to fetch.
+     */
+    orderBy?: DemandeContactOrderByWithRelationInput | DemandeContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DemandeContacts.
+     */
+    cursor?: DemandeContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DemandeContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DemandeContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DemandeContacts.
+     */
+    distinct?: DemandeContactScalarFieldEnum | DemandeContactScalarFieldEnum[]
+  }
+
+  /**
+   * DemandeContact findMany
+   */
+  export type DemandeContactFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * Filter, which DemandeContacts to fetch.
+     */
+    where?: DemandeContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DemandeContacts to fetch.
+     */
+    orderBy?: DemandeContactOrderByWithRelationInput | DemandeContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DemandeContacts.
+     */
+    cursor?: DemandeContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DemandeContacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DemandeContacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DemandeContacts.
+     */
+    distinct?: DemandeContactScalarFieldEnum | DemandeContactScalarFieldEnum[]
+  }
+
+  /**
+   * DemandeContact create
+   */
+  export type DemandeContactCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * The data needed to create a DemandeContact.
+     */
+    data: XOR<DemandeContactCreateInput, DemandeContactUncheckedCreateInput>
+  }
+
+  /**
+   * DemandeContact createMany
+   */
+  export type DemandeContactCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DemandeContacts.
+     */
+    data: DemandeContactCreateManyInput | DemandeContactCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DemandeContact createManyAndReturn
+   */
+  export type DemandeContactCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * The data used to create many DemandeContacts.
+     */
+    data: DemandeContactCreateManyInput | DemandeContactCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DemandeContact update
+   */
+  export type DemandeContactUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * The data needed to update a DemandeContact.
+     */
+    data: XOR<DemandeContactUpdateInput, DemandeContactUncheckedUpdateInput>
+    /**
+     * Choose, which DemandeContact to update.
+     */
+    where: DemandeContactWhereUniqueInput
+  }
+
+  /**
+   * DemandeContact updateMany
+   */
+  export type DemandeContactUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DemandeContacts.
+     */
+    data: XOR<DemandeContactUpdateManyMutationInput, DemandeContactUncheckedUpdateManyInput>
+    /**
+     * Filter which DemandeContacts to update
+     */
+    where?: DemandeContactWhereInput
+    /**
+     * Limit how many DemandeContacts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DemandeContact updateManyAndReturn
+   */
+  export type DemandeContactUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * The data used to update DemandeContacts.
+     */
+    data: XOR<DemandeContactUpdateManyMutationInput, DemandeContactUncheckedUpdateManyInput>
+    /**
+     * Filter which DemandeContacts to update
+     */
+    where?: DemandeContactWhereInput
+    /**
+     * Limit how many DemandeContacts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DemandeContact upsert
+   */
+  export type DemandeContactUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * The filter to search for the DemandeContact to update in case it exists.
+     */
+    where: DemandeContactWhereUniqueInput
+    /**
+     * In case the DemandeContact found by the `where` argument doesn't exist, create a new DemandeContact with this data.
+     */
+    create: XOR<DemandeContactCreateInput, DemandeContactUncheckedCreateInput>
+    /**
+     * In case the DemandeContact was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DemandeContactUpdateInput, DemandeContactUncheckedUpdateInput>
+  }
+
+  /**
+   * DemandeContact delete
+   */
+  export type DemandeContactDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
+    /**
+     * Filter which DemandeContact to delete.
+     */
+    where: DemandeContactWhereUniqueInput
+  }
+
+  /**
+   * DemandeContact deleteMany
+   */
+  export type DemandeContactDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DemandeContacts to delete
+     */
+    where?: DemandeContactWhereInput
+    /**
+     * Limit how many DemandeContacts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DemandeContact without action
+   */
+  export type DemandeContactDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DemandeContact
+     */
+    select?: DemandeContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DemandeContact
+     */
+    omit?: DemandeContactOmit<ExtArgs> | null
   }
 
 
@@ -20047,6 +21418,13 @@ export namespace Prisma {
   export type AccueilContenuMinAggregateOutputType = {
     id: string | null
     bandeauEmploiTitre: string | null
+    bandeauEmploiActif: boolean | null
+    bandeauBouton1Label: string | null
+    bandeauBouton1Type: $Enums.TypeLien | null
+    bandeauBouton1Url: string | null
+    bandeauBouton2Label: string | null
+    bandeauBouton2Type: $Enums.TypeLien | null
+    bandeauBouton2Url: string | null
     accompagnementEyebrow: string | null
     accompagnementTitre: string | null
     contactTitre: string | null
@@ -20057,6 +21435,13 @@ export namespace Prisma {
   export type AccueilContenuMaxAggregateOutputType = {
     id: string | null
     bandeauEmploiTitre: string | null
+    bandeauEmploiActif: boolean | null
+    bandeauBouton1Label: string | null
+    bandeauBouton1Type: $Enums.TypeLien | null
+    bandeauBouton1Url: string | null
+    bandeauBouton2Label: string | null
+    bandeauBouton2Type: $Enums.TypeLien | null
+    bandeauBouton2Url: string | null
     accompagnementEyebrow: string | null
     accompagnementTitre: string | null
     contactTitre: string | null
@@ -20067,6 +21452,13 @@ export namespace Prisma {
   export type AccueilContenuCountAggregateOutputType = {
     id: number
     bandeauEmploiTitre: number
+    bandeauEmploiActif: number
+    bandeauBouton1Label: number
+    bandeauBouton1Type: number
+    bandeauBouton1Url: number
+    bandeauBouton2Label: number
+    bandeauBouton2Type: number
+    bandeauBouton2Url: number
     accompagnementEyebrow: number
     accompagnementTitre: number
     contactTitre: number
@@ -20079,6 +21471,13 @@ export namespace Prisma {
   export type AccueilContenuMinAggregateInputType = {
     id?: true
     bandeauEmploiTitre?: true
+    bandeauEmploiActif?: true
+    bandeauBouton1Label?: true
+    bandeauBouton1Type?: true
+    bandeauBouton1Url?: true
+    bandeauBouton2Label?: true
+    bandeauBouton2Type?: true
+    bandeauBouton2Url?: true
     accompagnementEyebrow?: true
     accompagnementTitre?: true
     contactTitre?: true
@@ -20089,6 +21488,13 @@ export namespace Prisma {
   export type AccueilContenuMaxAggregateInputType = {
     id?: true
     bandeauEmploiTitre?: true
+    bandeauEmploiActif?: true
+    bandeauBouton1Label?: true
+    bandeauBouton1Type?: true
+    bandeauBouton1Url?: true
+    bandeauBouton2Label?: true
+    bandeauBouton2Type?: true
+    bandeauBouton2Url?: true
     accompagnementEyebrow?: true
     accompagnementTitre?: true
     contactTitre?: true
@@ -20099,6 +21505,13 @@ export namespace Prisma {
   export type AccueilContenuCountAggregateInputType = {
     id?: true
     bandeauEmploiTitre?: true
+    bandeauEmploiActif?: true
+    bandeauBouton1Label?: true
+    bandeauBouton1Type?: true
+    bandeauBouton1Url?: true
+    bandeauBouton2Label?: true
+    bandeauBouton2Type?: true
+    bandeauBouton2Url?: true
     accompagnementEyebrow?: true
     accompagnementTitre?: true
     contactTitre?: true
@@ -20182,6 +21595,13 @@ export namespace Prisma {
   export type AccueilContenuGroupByOutputType = {
     id: string
     bandeauEmploiTitre: string
+    bandeauEmploiActif: boolean
+    bandeauBouton1Label: string
+    bandeauBouton1Type: $Enums.TypeLien
+    bandeauBouton1Url: string
+    bandeauBouton2Label: string
+    bandeauBouton2Type: $Enums.TypeLien
+    bandeauBouton2Url: string
     accompagnementEyebrow: string
     accompagnementTitre: string
     contactTitre: string
@@ -20209,6 +21629,13 @@ export namespace Prisma {
   export type AccueilContenuSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     bandeauEmploiTitre?: boolean
+    bandeauEmploiActif?: boolean
+    bandeauBouton1Label?: boolean
+    bandeauBouton1Type?: boolean
+    bandeauBouton1Url?: boolean
+    bandeauBouton2Label?: boolean
+    bandeauBouton2Type?: boolean
+    bandeauBouton2Url?: boolean
     accompagnementEyebrow?: boolean
     accompagnementTitre?: boolean
     contactTitre?: boolean
@@ -20219,6 +21646,13 @@ export namespace Prisma {
   export type AccueilContenuSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     bandeauEmploiTitre?: boolean
+    bandeauEmploiActif?: boolean
+    bandeauBouton1Label?: boolean
+    bandeauBouton1Type?: boolean
+    bandeauBouton1Url?: boolean
+    bandeauBouton2Label?: boolean
+    bandeauBouton2Type?: boolean
+    bandeauBouton2Url?: boolean
     accompagnementEyebrow?: boolean
     accompagnementTitre?: boolean
     contactTitre?: boolean
@@ -20229,6 +21663,13 @@ export namespace Prisma {
   export type AccueilContenuSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     bandeauEmploiTitre?: boolean
+    bandeauEmploiActif?: boolean
+    bandeauBouton1Label?: boolean
+    bandeauBouton1Type?: boolean
+    bandeauBouton1Url?: boolean
+    bandeauBouton2Label?: boolean
+    bandeauBouton2Type?: boolean
+    bandeauBouton2Url?: boolean
     accompagnementEyebrow?: boolean
     accompagnementTitre?: boolean
     contactTitre?: boolean
@@ -20239,6 +21680,13 @@ export namespace Prisma {
   export type AccueilContenuSelectScalar = {
     id?: boolean
     bandeauEmploiTitre?: boolean
+    bandeauEmploiActif?: boolean
+    bandeauBouton1Label?: boolean
+    bandeauBouton1Type?: boolean
+    bandeauBouton1Url?: boolean
+    bandeauBouton2Label?: boolean
+    bandeauBouton2Type?: boolean
+    bandeauBouton2Url?: boolean
     accompagnementEyebrow?: boolean
     accompagnementTitre?: boolean
     contactTitre?: boolean
@@ -20246,7 +21694,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AccueilContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bandeauEmploiTitre" | "accompagnementEyebrow" | "accompagnementTitre" | "contactTitre" | "contactSousTitre" | "updatedAt", ExtArgs["result"]["accueilContenu"]>
+  export type AccueilContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bandeauEmploiTitre" | "bandeauEmploiActif" | "bandeauBouton1Label" | "bandeauBouton1Type" | "bandeauBouton1Url" | "bandeauBouton2Label" | "bandeauBouton2Type" | "bandeauBouton2Url" | "accompagnementEyebrow" | "accompagnementTitre" | "contactTitre" | "contactSousTitre" | "updatedAt", ExtArgs["result"]["accueilContenu"]>
 
   export type $AccueilContenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AccueilContenu"
@@ -20254,6 +21702,13 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       bandeauEmploiTitre: string
+      bandeauEmploiActif: boolean
+      bandeauBouton1Label: string
+      bandeauBouton1Type: $Enums.TypeLien
+      bandeauBouton1Url: string
+      bandeauBouton2Label: string
+      bandeauBouton2Type: $Enums.TypeLien
+      bandeauBouton2Url: string
       accompagnementEyebrow: string
       accompagnementTitre: string
       contactTitre: string
@@ -20684,6 +22139,13 @@ export namespace Prisma {
   interface AccueilContenuFieldRefs {
     readonly id: FieldRef<"AccueilContenu", 'String'>
     readonly bandeauEmploiTitre: FieldRef<"AccueilContenu", 'String'>
+    readonly bandeauEmploiActif: FieldRef<"AccueilContenu", 'Boolean'>
+    readonly bandeauBouton1Label: FieldRef<"AccueilContenu", 'String'>
+    readonly bandeauBouton1Type: FieldRef<"AccueilContenu", 'TypeLien'>
+    readonly bandeauBouton1Url: FieldRef<"AccueilContenu", 'String'>
+    readonly bandeauBouton2Label: FieldRef<"AccueilContenu", 'String'>
+    readonly bandeauBouton2Type: FieldRef<"AccueilContenu", 'TypeLien'>
+    readonly bandeauBouton2Url: FieldRef<"AccueilContenu", 'String'>
     readonly accompagnementEyebrow: FieldRef<"AccueilContenu", 'String'>
     readonly accompagnementTitre: FieldRef<"AccueilContenu", 'String'>
     readonly contactTitre: FieldRef<"AccueilContenu", 'String'>
@@ -22134,11 +23596,13 @@ export namespace Prisma {
 
   export type HeroSlideAvgAggregateOutputType = {
     overlayOpacity: number | null
+    dureeAffichage: number | null
     ordre: number | null
   }
 
   export type HeroSlideSumAggregateOutputType = {
     overlayOpacity: number | null
+    dureeAffichage: number | null
     ordre: number | null
   }
 
@@ -22156,6 +23620,7 @@ export namespace Prisma {
     overlayColor: string | null
     overlayOpacity: number | null
     transition: $Enums.TransitionHero | null
+    dureeAffichage: number | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -22176,6 +23641,7 @@ export namespace Prisma {
     overlayColor: string | null
     overlayOpacity: number | null
     transition: $Enums.TransitionHero | null
+    dureeAffichage: number | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -22196,6 +23662,7 @@ export namespace Prisma {
     overlayColor: number
     overlayOpacity: number
     transition: number
+    dureeAffichage: number
     ordre: number
     actif: number
     createdAt: number
@@ -22206,11 +23673,13 @@ export namespace Prisma {
 
   export type HeroSlideAvgAggregateInputType = {
     overlayOpacity?: true
+    dureeAffichage?: true
     ordre?: true
   }
 
   export type HeroSlideSumAggregateInputType = {
     overlayOpacity?: true
+    dureeAffichage?: true
     ordre?: true
   }
 
@@ -22228,6 +23697,7 @@ export namespace Prisma {
     overlayColor?: true
     overlayOpacity?: true
     transition?: true
+    dureeAffichage?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -22248,6 +23718,7 @@ export namespace Prisma {
     overlayColor?: true
     overlayOpacity?: true
     transition?: true
+    dureeAffichage?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -22268,6 +23739,7 @@ export namespace Prisma {
     overlayColor?: true
     overlayOpacity?: true
     transition?: true
+    dureeAffichage?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -22375,6 +23847,7 @@ export namespace Prisma {
     overlayColor: string
     overlayOpacity: number
     transition: $Enums.TransitionHero
+    dureeAffichage: number
     ordre: number
     actif: boolean
     createdAt: Date
@@ -22414,6 +23887,7 @@ export namespace Prisma {
     overlayColor?: boolean
     overlayOpacity?: boolean
     transition?: boolean
+    dureeAffichage?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -22435,6 +23909,7 @@ export namespace Prisma {
     overlayColor?: boolean
     overlayOpacity?: boolean
     transition?: boolean
+    dureeAffichage?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -22456,6 +23931,7 @@ export namespace Prisma {
     overlayColor?: boolean
     overlayOpacity?: boolean
     transition?: boolean
+    dureeAffichage?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -22477,13 +23953,14 @@ export namespace Prisma {
     overlayColor?: boolean
     overlayOpacity?: boolean
     transition?: boolean
+    dureeAffichage?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type HeroSlideOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "badge" | "titre" | "sousTitre" | "logoUrl" | "image" | "ctaLabel" | "formationId" | "youtubeUrl" | "alignement" | "overlayColor" | "overlayOpacity" | "transition" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["heroSlide"]>
+  export type HeroSlideOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "badge" | "titre" | "sousTitre" | "logoUrl" | "image" | "ctaLabel" | "formationId" | "youtubeUrl" | "alignement" | "overlayColor" | "overlayOpacity" | "transition" | "dureeAffichage" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["heroSlide"]>
   export type HeroSlideInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     formation?: boolean | HeroSlide$formationArgs<ExtArgs>
   }
@@ -22513,6 +23990,7 @@ export namespace Prisma {
       overlayColor: string
       overlayOpacity: number
       transition: $Enums.TransitionHero
+      dureeAffichage: number
       ordre: number
       actif: boolean
       createdAt: Date
@@ -22954,6 +24432,7 @@ export namespace Prisma {
     readonly overlayColor: FieldRef<"HeroSlide", 'String'>
     readonly overlayOpacity: FieldRef<"HeroSlide", 'Int'>
     readonly transition: FieldRef<"HeroSlide", 'TransitionHero'>
+    readonly dureeAffichage: FieldRef<"HeroSlide", 'Int'>
     readonly ordre: FieldRef<"HeroSlide", 'Int'>
     readonly actif: FieldRef<"HeroSlide", 'Boolean'>
     readonly createdAt: FieldRef<"HeroSlide", 'DateTime'>
@@ -23397,336 +24876,406 @@ export namespace Prisma {
 
 
   /**
-   * Model CategorieInfo
+   * Model FormationTuile
    */
 
-  export type AggregateCategorieInfo = {
-    _count: CategorieInfoCountAggregateOutputType | null
-    _min: CategorieInfoMinAggregateOutputType | null
-    _max: CategorieInfoMaxAggregateOutputType | null
+  export type AggregateFormationTuile = {
+    _count: FormationTuileCountAggregateOutputType | null
+    _avg: FormationTuileAvgAggregateOutputType | null
+    _sum: FormationTuileSumAggregateOutputType | null
+    _min: FormationTuileMinAggregateOutputType | null
+    _max: FormationTuileMaxAggregateOutputType | null
   }
 
-  export type CategorieInfoMinAggregateOutputType = {
+  export type FormationTuileAvgAggregateOutputType = {
+    opacity: number | null
+  }
+
+  export type FormationTuileSumAggregateOutputType = {
+    opacity: number | null
+  }
+
+  export type FormationTuileMinAggregateOutputType = {
     id: string | null
     categorie: $Enums.CategorieFormation | null
-    titre: string | null
-    corps: string | null
+    label: string | null
+    image: string | null
+    backgroundColor: string | null
+    opacity: number | null
+    effetVisuel: $Enums.EffetVisuel | null
     updatedAt: Date | null
   }
 
-  export type CategorieInfoMaxAggregateOutputType = {
+  export type FormationTuileMaxAggregateOutputType = {
     id: string | null
     categorie: $Enums.CategorieFormation | null
-    titre: string | null
-    corps: string | null
+    label: string | null
+    image: string | null
+    backgroundColor: string | null
+    opacity: number | null
+    effetVisuel: $Enums.EffetVisuel | null
     updatedAt: Date | null
   }
 
-  export type CategorieInfoCountAggregateOutputType = {
+  export type FormationTuileCountAggregateOutputType = {
     id: number
     categorie: number
-    titre: number
-    corps: number
+    label: number
+    image: number
+    backgroundColor: number
+    opacity: number
+    effetVisuel: number
     updatedAt: number
     _all: number
   }
 
 
-  export type CategorieInfoMinAggregateInputType = {
+  export type FormationTuileAvgAggregateInputType = {
+    opacity?: true
+  }
+
+  export type FormationTuileSumAggregateInputType = {
+    opacity?: true
+  }
+
+  export type FormationTuileMinAggregateInputType = {
     id?: true
     categorie?: true
-    titre?: true
-    corps?: true
+    label?: true
+    image?: true
+    backgroundColor?: true
+    opacity?: true
+    effetVisuel?: true
     updatedAt?: true
   }
 
-  export type CategorieInfoMaxAggregateInputType = {
+  export type FormationTuileMaxAggregateInputType = {
     id?: true
     categorie?: true
-    titre?: true
-    corps?: true
+    label?: true
+    image?: true
+    backgroundColor?: true
+    opacity?: true
+    effetVisuel?: true
     updatedAt?: true
   }
 
-  export type CategorieInfoCountAggregateInputType = {
+  export type FormationTuileCountAggregateInputType = {
     id?: true
     categorie?: true
-    titre?: true
-    corps?: true
+    label?: true
+    image?: true
+    backgroundColor?: true
+    opacity?: true
+    effetVisuel?: true
     updatedAt?: true
     _all?: true
   }
 
-  export type CategorieInfoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which CategorieInfo to aggregate.
+     * Filter which FormationTuile to aggregate.
      */
-    where?: CategorieInfoWhereInput
+    where?: FormationTuileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of CategorieInfos to fetch.
+     * Determine the order of FormationTuiles to fetch.
      */
-    orderBy?: CategorieInfoOrderByWithRelationInput | CategorieInfoOrderByWithRelationInput[]
+    orderBy?: FormationTuileOrderByWithRelationInput | FormationTuileOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: CategorieInfoWhereUniqueInput
+    cursor?: FormationTuileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` CategorieInfos from the position of the cursor.
+     * Take `±n` FormationTuiles from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` CategorieInfos.
+     * Skip the first `n` FormationTuiles.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned CategorieInfos
+     * Count returned FormationTuiles
     **/
-    _count?: true | CategorieInfoCountAggregateInputType
+    _count?: true | FormationTuileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FormationTuileAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FormationTuileSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: CategorieInfoMinAggregateInputType
+    _min?: FormationTuileMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: CategorieInfoMaxAggregateInputType
+    _max?: FormationTuileMaxAggregateInputType
   }
 
-  export type GetCategorieInfoAggregateType<T extends CategorieInfoAggregateArgs> = {
-        [P in keyof T & keyof AggregateCategorieInfo]: P extends '_count' | 'count'
+  export type GetFormationTuileAggregateType<T extends FormationTuileAggregateArgs> = {
+        [P in keyof T & keyof AggregateFormationTuile]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateCategorieInfo[P]>
-      : GetScalarType<T[P], AggregateCategorieInfo[P]>
+        : GetScalarType<T[P], AggregateFormationTuile[P]>
+      : GetScalarType<T[P], AggregateFormationTuile[P]>
   }
 
 
 
 
-  export type CategorieInfoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CategorieInfoWhereInput
-    orderBy?: CategorieInfoOrderByWithAggregationInput | CategorieInfoOrderByWithAggregationInput[]
-    by: CategorieInfoScalarFieldEnum[] | CategorieInfoScalarFieldEnum
-    having?: CategorieInfoScalarWhereWithAggregatesInput
+  export type FormationTuileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormationTuileWhereInput
+    orderBy?: FormationTuileOrderByWithAggregationInput | FormationTuileOrderByWithAggregationInput[]
+    by: FormationTuileScalarFieldEnum[] | FormationTuileScalarFieldEnum
+    having?: FormationTuileScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: CategorieInfoCountAggregateInputType | true
-    _min?: CategorieInfoMinAggregateInputType
-    _max?: CategorieInfoMaxAggregateInputType
+    _count?: FormationTuileCountAggregateInputType | true
+    _avg?: FormationTuileAvgAggregateInputType
+    _sum?: FormationTuileSumAggregateInputType
+    _min?: FormationTuileMinAggregateInputType
+    _max?: FormationTuileMaxAggregateInputType
   }
 
-  export type CategorieInfoGroupByOutputType = {
+  export type FormationTuileGroupByOutputType = {
     id: string
     categorie: $Enums.CategorieFormation
-    titre: string
-    corps: string
+    label: string
+    image: string | null
+    backgroundColor: string
+    opacity: number
+    effetVisuel: $Enums.EffetVisuel
     updatedAt: Date
-    _count: CategorieInfoCountAggregateOutputType | null
-    _min: CategorieInfoMinAggregateOutputType | null
-    _max: CategorieInfoMaxAggregateOutputType | null
+    _count: FormationTuileCountAggregateOutputType | null
+    _avg: FormationTuileAvgAggregateOutputType | null
+    _sum: FormationTuileSumAggregateOutputType | null
+    _min: FormationTuileMinAggregateOutputType | null
+    _max: FormationTuileMaxAggregateOutputType | null
   }
 
-  type GetCategorieInfoGroupByPayload<T extends CategorieInfoGroupByArgs> = Prisma.PrismaPromise<
+  type GetFormationTuileGroupByPayload<T extends FormationTuileGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<CategorieInfoGroupByOutputType, T['by']> &
+      PickEnumerable<FormationTuileGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof CategorieInfoGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof FormationTuileGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], CategorieInfoGroupByOutputType[P]>
-            : GetScalarType<T[P], CategorieInfoGroupByOutputType[P]>
+              : GetScalarType<T[P], FormationTuileGroupByOutputType[P]>
+            : GetScalarType<T[P], FormationTuileGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type CategorieInfoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type FormationTuileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     categorie?: boolean
-    titre?: boolean
-    corps?: boolean
+    label?: boolean
+    image?: boolean
+    backgroundColor?: boolean
+    opacity?: boolean
+    effetVisuel?: boolean
     updatedAt?: boolean
-  }, ExtArgs["result"]["categorieInfo"]>
+  }, ExtArgs["result"]["formationTuile"]>
 
-  export type CategorieInfoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type FormationTuileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     categorie?: boolean
-    titre?: boolean
-    corps?: boolean
+    label?: boolean
+    image?: boolean
+    backgroundColor?: boolean
+    opacity?: boolean
+    effetVisuel?: boolean
     updatedAt?: boolean
-  }, ExtArgs["result"]["categorieInfo"]>
+  }, ExtArgs["result"]["formationTuile"]>
 
-  export type CategorieInfoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type FormationTuileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     categorie?: boolean
-    titre?: boolean
-    corps?: boolean
+    label?: boolean
+    image?: boolean
+    backgroundColor?: boolean
+    opacity?: boolean
+    effetVisuel?: boolean
     updatedAt?: boolean
-  }, ExtArgs["result"]["categorieInfo"]>
+  }, ExtArgs["result"]["formationTuile"]>
 
-  export type CategorieInfoSelectScalar = {
+  export type FormationTuileSelectScalar = {
     id?: boolean
     categorie?: boolean
-    titre?: boolean
-    corps?: boolean
+    label?: boolean
+    image?: boolean
+    backgroundColor?: boolean
+    opacity?: boolean
+    effetVisuel?: boolean
     updatedAt?: boolean
   }
 
-  export type CategorieInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "titre" | "corps" | "updatedAt", ExtArgs["result"]["categorieInfo"]>
+  export type FormationTuileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "label" | "image" | "backgroundColor" | "opacity" | "effetVisuel" | "updatedAt", ExtArgs["result"]["formationTuile"]>
 
-  export type $CategorieInfoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "CategorieInfo"
+  export type $FormationTuilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FormationTuile"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       categorie: $Enums.CategorieFormation
-      titre: string
-      corps: string
+      label: string
+      image: string | null
+      backgroundColor: string
+      opacity: number
+      effetVisuel: $Enums.EffetVisuel
       updatedAt: Date
-    }, ExtArgs["result"]["categorieInfo"]>
+    }, ExtArgs["result"]["formationTuile"]>
     composites: {}
   }
 
-  type CategorieInfoGetPayload<S extends boolean | null | undefined | CategorieInfoDefaultArgs> = $Result.GetResult<Prisma.$CategorieInfoPayload, S>
+  type FormationTuileGetPayload<S extends boolean | null | undefined | FormationTuileDefaultArgs> = $Result.GetResult<Prisma.$FormationTuilePayload, S>
 
-  type CategorieInfoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CategorieInfoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CategorieInfoCountAggregateInputType | true
+  type FormationTuileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FormationTuileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FormationTuileCountAggregateInputType | true
     }
 
-  export interface CategorieInfoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CategorieInfo'], meta: { name: 'CategorieInfo' } }
+  export interface FormationTuileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FormationTuile'], meta: { name: 'FormationTuile' } }
     /**
-     * Find zero or one CategorieInfo that matches the filter.
-     * @param {CategorieInfoFindUniqueArgs} args - Arguments to find a CategorieInfo
+     * Find zero or one FormationTuile that matches the filter.
+     * @param {FormationTuileFindUniqueArgs} args - Arguments to find a FormationTuile
      * @example
-     * // Get one CategorieInfo
-     * const categorieInfo = await prisma.categorieInfo.findUnique({
+     * // Get one FormationTuile
+     * const formationTuile = await prisma.formationTuile.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends CategorieInfoFindUniqueArgs>(args: SelectSubset<T, CategorieInfoFindUniqueArgs<ExtArgs>>): Prisma__CategorieInfoClient<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends FormationTuileFindUniqueArgs>(args: SelectSubset<T, FormationTuileFindUniqueArgs<ExtArgs>>): Prisma__FormationTuileClient<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one CategorieInfo that matches the filter or throw an error with `error.code='P2025'`
+     * Find one FormationTuile that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {CategorieInfoFindUniqueOrThrowArgs} args - Arguments to find a CategorieInfo
+     * @param {FormationTuileFindUniqueOrThrowArgs} args - Arguments to find a FormationTuile
      * @example
-     * // Get one CategorieInfo
-     * const categorieInfo = await prisma.categorieInfo.findUniqueOrThrow({
+     * // Get one FormationTuile
+     * const formationTuile = await prisma.formationTuile.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CategorieInfoFindUniqueOrThrowArgs>(args: SelectSubset<T, CategorieInfoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CategorieInfoClient<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends FormationTuileFindUniqueOrThrowArgs>(args: SelectSubset<T, FormationTuileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FormationTuileClient<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first CategorieInfo that matches the filter.
+     * Find the first FormationTuile that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CategorieInfoFindFirstArgs} args - Arguments to find a CategorieInfo
+     * @param {FormationTuileFindFirstArgs} args - Arguments to find a FormationTuile
      * @example
-     * // Get one CategorieInfo
-     * const categorieInfo = await prisma.categorieInfo.findFirst({
+     * // Get one FormationTuile
+     * const formationTuile = await prisma.formationTuile.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends CategorieInfoFindFirstArgs>(args?: SelectSubset<T, CategorieInfoFindFirstArgs<ExtArgs>>): Prisma__CategorieInfoClient<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends FormationTuileFindFirstArgs>(args?: SelectSubset<T, FormationTuileFindFirstArgs<ExtArgs>>): Prisma__FormationTuileClient<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first CategorieInfo that matches the filter or
+     * Find the first FormationTuile that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CategorieInfoFindFirstOrThrowArgs} args - Arguments to find a CategorieInfo
+     * @param {FormationTuileFindFirstOrThrowArgs} args - Arguments to find a FormationTuile
      * @example
-     * // Get one CategorieInfo
-     * const categorieInfo = await prisma.categorieInfo.findFirstOrThrow({
+     * // Get one FormationTuile
+     * const formationTuile = await prisma.formationTuile.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends CategorieInfoFindFirstOrThrowArgs>(args?: SelectSubset<T, CategorieInfoFindFirstOrThrowArgs<ExtArgs>>): Prisma__CategorieInfoClient<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends FormationTuileFindFirstOrThrowArgs>(args?: SelectSubset<T, FormationTuileFindFirstOrThrowArgs<ExtArgs>>): Prisma__FormationTuileClient<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more CategorieInfos that matches the filter.
+     * Find zero or more FormationTuiles that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CategorieInfoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {FormationTuileFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all CategorieInfos
-     * const categorieInfos = await prisma.categorieInfo.findMany()
+     * // Get all FormationTuiles
+     * const formationTuiles = await prisma.formationTuile.findMany()
      * 
-     * // Get first 10 CategorieInfos
-     * const categorieInfos = await prisma.categorieInfo.findMany({ take: 10 })
+     * // Get first 10 FormationTuiles
+     * const formationTuiles = await prisma.formationTuile.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const categorieInfoWithIdOnly = await prisma.categorieInfo.findMany({ select: { id: true } })
+     * const formationTuileWithIdOnly = await prisma.formationTuile.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CategorieInfoFindManyArgs>(args?: SelectSubset<T, CategorieInfoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends FormationTuileFindManyArgs>(args?: SelectSubset<T, FormationTuileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a CategorieInfo.
-     * @param {CategorieInfoCreateArgs} args - Arguments to create a CategorieInfo.
+     * Create a FormationTuile.
+     * @param {FormationTuileCreateArgs} args - Arguments to create a FormationTuile.
      * @example
-     * // Create one CategorieInfo
-     * const CategorieInfo = await prisma.categorieInfo.create({
+     * // Create one FormationTuile
+     * const FormationTuile = await prisma.formationTuile.create({
      *   data: {
-     *     // ... data to create a CategorieInfo
+     *     // ... data to create a FormationTuile
      *   }
      * })
      * 
      */
-    create<T extends CategorieInfoCreateArgs>(args: SelectSubset<T, CategorieInfoCreateArgs<ExtArgs>>): Prisma__CategorieInfoClient<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends FormationTuileCreateArgs>(args: SelectSubset<T, FormationTuileCreateArgs<ExtArgs>>): Prisma__FormationTuileClient<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many CategorieInfos.
-     * @param {CategorieInfoCreateManyArgs} args - Arguments to create many CategorieInfos.
+     * Create many FormationTuiles.
+     * @param {FormationTuileCreateManyArgs} args - Arguments to create many FormationTuiles.
      * @example
-     * // Create many CategorieInfos
-     * const categorieInfo = await prisma.categorieInfo.createMany({
+     * // Create many FormationTuiles
+     * const formationTuile = await prisma.formationTuile.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends CategorieInfoCreateManyArgs>(args?: SelectSubset<T, CategorieInfoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends FormationTuileCreateManyArgs>(args?: SelectSubset<T, FormationTuileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many CategorieInfos and returns the data saved in the database.
-     * @param {CategorieInfoCreateManyAndReturnArgs} args - Arguments to create many CategorieInfos.
+     * Create many FormationTuiles and returns the data saved in the database.
+     * @param {FormationTuileCreateManyAndReturnArgs} args - Arguments to create many FormationTuiles.
      * @example
-     * // Create many CategorieInfos
-     * const categorieInfo = await prisma.categorieInfo.createManyAndReturn({
+     * // Create many FormationTuiles
+     * const formationTuile = await prisma.formationTuile.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many CategorieInfos and only return the `id`
-     * const categorieInfoWithIdOnly = await prisma.categorieInfo.createManyAndReturn({
+     * // Create many FormationTuiles and only return the `id`
+     * const formationTuileWithIdOnly = await prisma.formationTuile.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -23736,28 +25285,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CategorieInfoCreateManyAndReturnArgs>(args?: SelectSubset<T, CategorieInfoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends FormationTuileCreateManyAndReturnArgs>(args?: SelectSubset<T, FormationTuileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a CategorieInfo.
-     * @param {CategorieInfoDeleteArgs} args - Arguments to delete one CategorieInfo.
+     * Delete a FormationTuile.
+     * @param {FormationTuileDeleteArgs} args - Arguments to delete one FormationTuile.
      * @example
-     * // Delete one CategorieInfo
-     * const CategorieInfo = await prisma.categorieInfo.delete({
+     * // Delete one FormationTuile
+     * const FormationTuile = await prisma.formationTuile.delete({
      *   where: {
-     *     // ... filter to delete one CategorieInfo
+     *     // ... filter to delete one FormationTuile
      *   }
      * })
      * 
      */
-    delete<T extends CategorieInfoDeleteArgs>(args: SelectSubset<T, CategorieInfoDeleteArgs<ExtArgs>>): Prisma__CategorieInfoClient<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends FormationTuileDeleteArgs>(args: SelectSubset<T, FormationTuileDeleteArgs<ExtArgs>>): Prisma__FormationTuileClient<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one CategorieInfo.
-     * @param {CategorieInfoUpdateArgs} args - Arguments to update one CategorieInfo.
+     * Update one FormationTuile.
+     * @param {FormationTuileUpdateArgs} args - Arguments to update one FormationTuile.
      * @example
-     * // Update one CategorieInfo
-     * const categorieInfo = await prisma.categorieInfo.update({
+     * // Update one FormationTuile
+     * const formationTuile = await prisma.formationTuile.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -23767,30 +25316,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CategorieInfoUpdateArgs>(args: SelectSubset<T, CategorieInfoUpdateArgs<ExtArgs>>): Prisma__CategorieInfoClient<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends FormationTuileUpdateArgs>(args: SelectSubset<T, FormationTuileUpdateArgs<ExtArgs>>): Prisma__FormationTuileClient<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more CategorieInfos.
-     * @param {CategorieInfoDeleteManyArgs} args - Arguments to filter CategorieInfos to delete.
+     * Delete zero or more FormationTuiles.
+     * @param {FormationTuileDeleteManyArgs} args - Arguments to filter FormationTuiles to delete.
      * @example
-     * // Delete a few CategorieInfos
-     * const { count } = await prisma.categorieInfo.deleteMany({
+     * // Delete a few FormationTuiles
+     * const { count } = await prisma.formationTuile.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends CategorieInfoDeleteManyArgs>(args?: SelectSubset<T, CategorieInfoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends FormationTuileDeleteManyArgs>(args?: SelectSubset<T, FormationTuileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more CategorieInfos.
+     * Update zero or more FormationTuiles.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CategorieInfoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {FormationTuileUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many CategorieInfos
-     * const categorieInfo = await prisma.categorieInfo.updateMany({
+     * // Update many FormationTuiles
+     * const formationTuile = await prisma.formationTuile.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -23800,14 +25349,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends CategorieInfoUpdateManyArgs>(args: SelectSubset<T, CategorieInfoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends FormationTuileUpdateManyArgs>(args: SelectSubset<T, FormationTuileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more CategorieInfos and returns the data updated in the database.
-     * @param {CategorieInfoUpdateManyAndReturnArgs} args - Arguments to update many CategorieInfos.
+     * Update zero or more FormationTuiles and returns the data updated in the database.
+     * @param {FormationTuileUpdateManyAndReturnArgs} args - Arguments to update many FormationTuiles.
      * @example
-     * // Update many CategorieInfos
-     * const categorieInfo = await prisma.categorieInfo.updateManyAndReturn({
+     * // Update many FormationTuiles
+     * const formationTuile = await prisma.formationTuile.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -23816,8 +25365,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more CategorieInfos and only return the `id`
-     * const categorieInfoWithIdOnly = await prisma.categorieInfo.updateManyAndReturn({
+     * // Update zero or more FormationTuiles and only return the `id`
+     * const formationTuileWithIdOnly = await prisma.formationTuile.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -23830,56 +25379,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CategorieInfoUpdateManyAndReturnArgs>(args: SelectSubset<T, CategorieInfoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends FormationTuileUpdateManyAndReturnArgs>(args: SelectSubset<T, FormationTuileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one CategorieInfo.
-     * @param {CategorieInfoUpsertArgs} args - Arguments to update or create a CategorieInfo.
+     * Create or update one FormationTuile.
+     * @param {FormationTuileUpsertArgs} args - Arguments to update or create a FormationTuile.
      * @example
-     * // Update or create a CategorieInfo
-     * const categorieInfo = await prisma.categorieInfo.upsert({
+     * // Update or create a FormationTuile
+     * const formationTuile = await prisma.formationTuile.upsert({
      *   create: {
-     *     // ... data to create a CategorieInfo
+     *     // ... data to create a FormationTuile
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the CategorieInfo we want to update
+     *     // ... the filter for the FormationTuile we want to update
      *   }
      * })
      */
-    upsert<T extends CategorieInfoUpsertArgs>(args: SelectSubset<T, CategorieInfoUpsertArgs<ExtArgs>>): Prisma__CategorieInfoClient<$Result.GetResult<Prisma.$CategorieInfoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends FormationTuileUpsertArgs>(args: SelectSubset<T, FormationTuileUpsertArgs<ExtArgs>>): Prisma__FormationTuileClient<$Result.GetResult<Prisma.$FormationTuilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of CategorieInfos.
+     * Count the number of FormationTuiles.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CategorieInfoCountArgs} args - Arguments to filter CategorieInfos to count.
+     * @param {FormationTuileCountArgs} args - Arguments to filter FormationTuiles to count.
      * @example
-     * // Count the number of CategorieInfos
-     * const count = await prisma.categorieInfo.count({
+     * // Count the number of FormationTuiles
+     * const count = await prisma.formationTuile.count({
      *   where: {
-     *     // ... the filter for the CategorieInfos we want to count
+     *     // ... the filter for the FormationTuiles we want to count
      *   }
      * })
     **/
-    count<T extends CategorieInfoCountArgs>(
-      args?: Subset<T, CategorieInfoCountArgs>,
+    count<T extends FormationTuileCountArgs>(
+      args?: Subset<T, FormationTuileCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], CategorieInfoCountAggregateOutputType>
+          : GetScalarType<T['select'], FormationTuileCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a CategorieInfo.
+     * Allows you to perform aggregations operations on a FormationTuile.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CategorieInfoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {FormationTuileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -23899,13 +25448,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends CategorieInfoAggregateArgs>(args: Subset<T, CategorieInfoAggregateArgs>): Prisma.PrismaPromise<GetCategorieInfoAggregateType<T>>
+    aggregate<T extends FormationTuileAggregateArgs>(args: Subset<T, FormationTuileAggregateArgs>): Prisma.PrismaPromise<GetFormationTuileAggregateType<T>>
 
     /**
-     * Group by CategorieInfo.
+     * Group by FormationTuile.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CategorieInfoGroupByArgs} args - Group by arguments.
+     * @param {FormationTuileGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -23920,14 +25469,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends CategorieInfoGroupByArgs,
+      T extends FormationTuileGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CategorieInfoGroupByArgs['orderBy'] }
-        : { orderBy?: CategorieInfoGroupByArgs['orderBy'] },
+        ? { orderBy: FormationTuileGroupByArgs['orderBy'] }
+        : { orderBy?: FormationTuileGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -23976,20 +25525,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, CategorieInfoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCategorieInfoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, FormationTuileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFormationTuileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the CategorieInfo model
+   * Fields of the FormationTuile model
    */
-  readonly fields: CategorieInfoFieldRefs;
+  readonly fields: FormationTuileFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for CategorieInfo.
+   * The delegate class that acts as a "Promise-like" for FormationTuile.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CategorieInfoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__FormationTuileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -24017,382 +25566,2527 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the CategorieInfo model
+   * Fields of the FormationTuile model
    */
-  interface CategorieInfoFieldRefs {
-    readonly id: FieldRef<"CategorieInfo", 'String'>
-    readonly categorie: FieldRef<"CategorieInfo", 'CategorieFormation'>
-    readonly titre: FieldRef<"CategorieInfo", 'String'>
-    readonly corps: FieldRef<"CategorieInfo", 'String'>
-    readonly updatedAt: FieldRef<"CategorieInfo", 'DateTime'>
+  interface FormationTuileFieldRefs {
+    readonly id: FieldRef<"FormationTuile", 'String'>
+    readonly categorie: FieldRef<"FormationTuile", 'CategorieFormation'>
+    readonly label: FieldRef<"FormationTuile", 'String'>
+    readonly image: FieldRef<"FormationTuile", 'String'>
+    readonly backgroundColor: FieldRef<"FormationTuile", 'String'>
+    readonly opacity: FieldRef<"FormationTuile", 'Int'>
+    readonly effetVisuel: FieldRef<"FormationTuile", 'EffetVisuel'>
+    readonly updatedAt: FieldRef<"FormationTuile", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * CategorieInfo findUnique
+   * FormationTuile findUnique
    */
-  export type CategorieInfoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * Filter, which CategorieInfo to fetch.
+     * Filter, which FormationTuile to fetch.
      */
-    where: CategorieInfoWhereUniqueInput
+    where: FormationTuileWhereUniqueInput
   }
 
   /**
-   * CategorieInfo findUniqueOrThrow
+   * FormationTuile findUniqueOrThrow
    */
-  export type CategorieInfoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * Filter, which CategorieInfo to fetch.
+     * Filter, which FormationTuile to fetch.
      */
-    where: CategorieInfoWhereUniqueInput
+    where: FormationTuileWhereUniqueInput
   }
 
   /**
-   * CategorieInfo findFirst
+   * FormationTuile findFirst
    */
-  export type CategorieInfoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * Filter, which CategorieInfo to fetch.
+     * Filter, which FormationTuile to fetch.
      */
-    where?: CategorieInfoWhereInput
+    where?: FormationTuileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of CategorieInfos to fetch.
+     * Determine the order of FormationTuiles to fetch.
      */
-    orderBy?: CategorieInfoOrderByWithRelationInput | CategorieInfoOrderByWithRelationInput[]
+    orderBy?: FormationTuileOrderByWithRelationInput | FormationTuileOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for CategorieInfos.
+     * Sets the position for searching for FormationTuiles.
      */
-    cursor?: CategorieInfoWhereUniqueInput
+    cursor?: FormationTuileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` CategorieInfos from the position of the cursor.
+     * Take `±n` FormationTuiles from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` CategorieInfos.
+     * Skip the first `n` FormationTuiles.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of CategorieInfos.
+     * Filter by unique combinations of FormationTuiles.
      */
-    distinct?: CategorieInfoScalarFieldEnum | CategorieInfoScalarFieldEnum[]
+    distinct?: FormationTuileScalarFieldEnum | FormationTuileScalarFieldEnum[]
   }
 
   /**
-   * CategorieInfo findFirstOrThrow
+   * FormationTuile findFirstOrThrow
    */
-  export type CategorieInfoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * Filter, which CategorieInfo to fetch.
+     * Filter, which FormationTuile to fetch.
      */
-    where?: CategorieInfoWhereInput
+    where?: FormationTuileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of CategorieInfos to fetch.
+     * Determine the order of FormationTuiles to fetch.
      */
-    orderBy?: CategorieInfoOrderByWithRelationInput | CategorieInfoOrderByWithRelationInput[]
+    orderBy?: FormationTuileOrderByWithRelationInput | FormationTuileOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for CategorieInfos.
+     * Sets the position for searching for FormationTuiles.
      */
-    cursor?: CategorieInfoWhereUniqueInput
+    cursor?: FormationTuileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` CategorieInfos from the position of the cursor.
+     * Take `±n` FormationTuiles from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` CategorieInfos.
+     * Skip the first `n` FormationTuiles.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of CategorieInfos.
+     * Filter by unique combinations of FormationTuiles.
      */
-    distinct?: CategorieInfoScalarFieldEnum | CategorieInfoScalarFieldEnum[]
+    distinct?: FormationTuileScalarFieldEnum | FormationTuileScalarFieldEnum[]
   }
 
   /**
-   * CategorieInfo findMany
+   * FormationTuile findMany
    */
-  export type CategorieInfoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * Filter, which CategorieInfos to fetch.
+     * Filter, which FormationTuiles to fetch.
      */
-    where?: CategorieInfoWhereInput
+    where?: FormationTuileWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of CategorieInfos to fetch.
+     * Determine the order of FormationTuiles to fetch.
      */
-    orderBy?: CategorieInfoOrderByWithRelationInput | CategorieInfoOrderByWithRelationInput[]
+    orderBy?: FormationTuileOrderByWithRelationInput | FormationTuileOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing CategorieInfos.
+     * Sets the position for listing FormationTuiles.
      */
-    cursor?: CategorieInfoWhereUniqueInput
+    cursor?: FormationTuileWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` CategorieInfos from the position of the cursor.
+     * Take `±n` FormationTuiles from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` CategorieInfos.
+     * Skip the first `n` FormationTuiles.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of CategorieInfos.
+     * Filter by unique combinations of FormationTuiles.
      */
-    distinct?: CategorieInfoScalarFieldEnum | CategorieInfoScalarFieldEnum[]
+    distinct?: FormationTuileScalarFieldEnum | FormationTuileScalarFieldEnum[]
   }
 
   /**
-   * CategorieInfo create
+   * FormationTuile create
    */
-  export type CategorieInfoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * The data needed to create a CategorieInfo.
+     * The data needed to create a FormationTuile.
      */
-    data: XOR<CategorieInfoCreateInput, CategorieInfoUncheckedCreateInput>
+    data: XOR<FormationTuileCreateInput, FormationTuileUncheckedCreateInput>
   }
 
   /**
-   * CategorieInfo createMany
+   * FormationTuile createMany
    */
-  export type CategorieInfoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many CategorieInfos.
+     * The data used to create many FormationTuiles.
      */
-    data: CategorieInfoCreateManyInput | CategorieInfoCreateManyInput[]
+    data: FormationTuileCreateManyInput | FormationTuileCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * CategorieInfo createManyAndReturn
+   * FormationTuile createManyAndReturn
    */
-  export type CategorieInfoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelectCreateManyAndReturn<ExtArgs> | null
+    select?: FormationTuileSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * The data used to create many CategorieInfos.
+     * The data used to create many FormationTuiles.
      */
-    data: CategorieInfoCreateManyInput | CategorieInfoCreateManyInput[]
+    data: FormationTuileCreateManyInput | FormationTuileCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * CategorieInfo update
+   * FormationTuile update
    */
-  export type CategorieInfoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * The data needed to update a CategorieInfo.
+     * The data needed to update a FormationTuile.
      */
-    data: XOR<CategorieInfoUpdateInput, CategorieInfoUncheckedUpdateInput>
+    data: XOR<FormationTuileUpdateInput, FormationTuileUncheckedUpdateInput>
     /**
-     * Choose, which CategorieInfo to update.
+     * Choose, which FormationTuile to update.
      */
-    where: CategorieInfoWhereUniqueInput
+    where: FormationTuileWhereUniqueInput
   }
 
   /**
-   * CategorieInfo updateMany
+   * FormationTuile updateMany
    */
-  export type CategorieInfoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update CategorieInfos.
+     * The data used to update FormationTuiles.
      */
-    data: XOR<CategorieInfoUpdateManyMutationInput, CategorieInfoUncheckedUpdateManyInput>
+    data: XOR<FormationTuileUpdateManyMutationInput, FormationTuileUncheckedUpdateManyInput>
     /**
-     * Filter which CategorieInfos to update
+     * Filter which FormationTuiles to update
      */
-    where?: CategorieInfoWhereInput
+    where?: FormationTuileWhereInput
     /**
-     * Limit how many CategorieInfos to update.
+     * Limit how many FormationTuiles to update.
      */
     limit?: number
   }
 
   /**
-   * CategorieInfo updateManyAndReturn
+   * FormationTuile updateManyAndReturn
    */
-  export type CategorieInfoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: FormationTuileSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * The data used to update CategorieInfos.
+     * The data used to update FormationTuiles.
      */
-    data: XOR<CategorieInfoUpdateManyMutationInput, CategorieInfoUncheckedUpdateManyInput>
+    data: XOR<FormationTuileUpdateManyMutationInput, FormationTuileUncheckedUpdateManyInput>
     /**
-     * Filter which CategorieInfos to update
+     * Filter which FormationTuiles to update
      */
-    where?: CategorieInfoWhereInput
+    where?: FormationTuileWhereInput
     /**
-     * Limit how many CategorieInfos to update.
+     * Limit how many FormationTuiles to update.
      */
     limit?: number
   }
 
   /**
-   * CategorieInfo upsert
+   * FormationTuile upsert
    */
-  export type CategorieInfoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * The filter to search for the CategorieInfo to update in case it exists.
+     * The filter to search for the FormationTuile to update in case it exists.
      */
-    where: CategorieInfoWhereUniqueInput
+    where: FormationTuileWhereUniqueInput
     /**
-     * In case the CategorieInfo found by the `where` argument doesn't exist, create a new CategorieInfo with this data.
+     * In case the FormationTuile found by the `where` argument doesn't exist, create a new FormationTuile with this data.
      */
-    create: XOR<CategorieInfoCreateInput, CategorieInfoUncheckedCreateInput>
+    create: XOR<FormationTuileCreateInput, FormationTuileUncheckedCreateInput>
     /**
-     * In case the CategorieInfo was found with the provided `where` argument, update it with this data.
+     * In case the FormationTuile was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<CategorieInfoUpdateInput, CategorieInfoUncheckedUpdateInput>
+    update: XOR<FormationTuileUpdateInput, FormationTuileUncheckedUpdateInput>
   }
 
   /**
-   * CategorieInfo delete
+   * FormationTuile delete
    */
-  export type CategorieInfoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
     /**
-     * Filter which CategorieInfo to delete.
+     * Filter which FormationTuile to delete.
      */
-    where: CategorieInfoWhereUniqueInput
+    where: FormationTuileWhereUniqueInput
   }
 
   /**
-   * CategorieInfo deleteMany
+   * FormationTuile deleteMany
    */
-  export type CategorieInfoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which CategorieInfos to delete
+     * Filter which FormationTuiles to delete
      */
-    where?: CategorieInfoWhereInput
+    where?: FormationTuileWhereInput
     /**
-     * Limit how many CategorieInfos to delete.
+     * Limit how many FormationTuiles to delete.
      */
     limit?: number
   }
 
   /**
-   * CategorieInfo without action
+   * FormationTuile without action
    */
-  export type CategorieInfoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FormationTuileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the CategorieInfo
+     * Select specific fields to fetch from the FormationTuile
      */
-    select?: CategorieInfoSelect<ExtArgs> | null
+    select?: FormationTuileSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the CategorieInfo
+     * Omit specific fields from the FormationTuile
      */
-    omit?: CategorieInfoOmit<ExtArgs> | null
+    omit?: FormationTuileOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FormationOnglet
+   */
+
+  export type AggregateFormationOnglet = {
+    _count: FormationOngletCountAggregateOutputType | null
+    _avg: FormationOngletAvgAggregateOutputType | null
+    _sum: FormationOngletSumAggregateOutputType | null
+    _min: FormationOngletMinAggregateOutputType | null
+    _max: FormationOngletMaxAggregateOutputType | null
+  }
+
+  export type FormationOngletAvgAggregateOutputType = {
+    imageTaille: number | null
+    opacity: number | null
+  }
+
+  export type FormationOngletSumAggregateOutputType = {
+    imageTaille: number | null
+    opacity: number | null
+  }
+
+  export type FormationOngletMinAggregateOutputType = {
+    id: string | null
+    categorie: $Enums.CategorieFormation | null
+    onglet: $Enums.FormationOngletCle | null
+    titre: string | null
+    contenu: string | null
+    videoUrl: string | null
+    image: string | null
+    imageTaille: number | null
+    backgroundColor: string | null
+    opacity: number | null
+    effetVisuel: $Enums.EffetVisuel | null
+    updatedAt: Date | null
+  }
+
+  export type FormationOngletMaxAggregateOutputType = {
+    id: string | null
+    categorie: $Enums.CategorieFormation | null
+    onglet: $Enums.FormationOngletCle | null
+    titre: string | null
+    contenu: string | null
+    videoUrl: string | null
+    image: string | null
+    imageTaille: number | null
+    backgroundColor: string | null
+    opacity: number | null
+    effetVisuel: $Enums.EffetVisuel | null
+    updatedAt: Date | null
+  }
+
+  export type FormationOngletCountAggregateOutputType = {
+    id: number
+    categorie: number
+    onglet: number
+    titre: number
+    contenu: number
+    videoUrl: number
+    image: number
+    imageTaille: number
+    backgroundColor: number
+    opacity: number
+    effetVisuel: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FormationOngletAvgAggregateInputType = {
+    imageTaille?: true
+    opacity?: true
+  }
+
+  export type FormationOngletSumAggregateInputType = {
+    imageTaille?: true
+    opacity?: true
+  }
+
+  export type FormationOngletMinAggregateInputType = {
+    id?: true
+    categorie?: true
+    onglet?: true
+    titre?: true
+    contenu?: true
+    videoUrl?: true
+    image?: true
+    imageTaille?: true
+    backgroundColor?: true
+    opacity?: true
+    effetVisuel?: true
+    updatedAt?: true
+  }
+
+  export type FormationOngletMaxAggregateInputType = {
+    id?: true
+    categorie?: true
+    onglet?: true
+    titre?: true
+    contenu?: true
+    videoUrl?: true
+    image?: true
+    imageTaille?: true
+    backgroundColor?: true
+    opacity?: true
+    effetVisuel?: true
+    updatedAt?: true
+  }
+
+  export type FormationOngletCountAggregateInputType = {
+    id?: true
+    categorie?: true
+    onglet?: true
+    titre?: true
+    contenu?: true
+    videoUrl?: true
+    image?: true
+    imageTaille?: true
+    backgroundColor?: true
+    opacity?: true
+    effetVisuel?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FormationOngletAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormationOnglet to aggregate.
+     */
+    where?: FormationOngletWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOnglets to fetch.
+     */
+    orderBy?: FormationOngletOrderByWithRelationInput | FormationOngletOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FormationOngletWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOnglets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOnglets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FormationOnglets
+    **/
+    _count?: true | FormationOngletCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FormationOngletAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FormationOngletSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FormationOngletMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FormationOngletMaxAggregateInputType
+  }
+
+  export type GetFormationOngletAggregateType<T extends FormationOngletAggregateArgs> = {
+        [P in keyof T & keyof AggregateFormationOnglet]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFormationOnglet[P]>
+      : GetScalarType<T[P], AggregateFormationOnglet[P]>
+  }
+
+
+
+
+  export type FormationOngletGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormationOngletWhereInput
+    orderBy?: FormationOngletOrderByWithAggregationInput | FormationOngletOrderByWithAggregationInput[]
+    by: FormationOngletScalarFieldEnum[] | FormationOngletScalarFieldEnum
+    having?: FormationOngletScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FormationOngletCountAggregateInputType | true
+    _avg?: FormationOngletAvgAggregateInputType
+    _sum?: FormationOngletSumAggregateInputType
+    _min?: FormationOngletMinAggregateInputType
+    _max?: FormationOngletMaxAggregateInputType
+  }
+
+  export type FormationOngletGroupByOutputType = {
+    id: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre: string | null
+    contenu: string | null
+    videoUrl: string | null
+    image: string | null
+    imageTaille: number
+    backgroundColor: string
+    opacity: number
+    effetVisuel: $Enums.EffetVisuel
+    updatedAt: Date
+    _count: FormationOngletCountAggregateOutputType | null
+    _avg: FormationOngletAvgAggregateOutputType | null
+    _sum: FormationOngletSumAggregateOutputType | null
+    _min: FormationOngletMinAggregateOutputType | null
+    _max: FormationOngletMaxAggregateOutputType | null
+  }
+
+  type GetFormationOngletGroupByPayload<T extends FormationOngletGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FormationOngletGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FormationOngletGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FormationOngletGroupByOutputType[P]>
+            : GetScalarType<T[P], FormationOngletGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FormationOngletSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    contenu?: boolean
+    videoUrl?: boolean
+    image?: boolean
+    imageTaille?: boolean
+    backgroundColor?: boolean
+    opacity?: boolean
+    effetVisuel?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["formationOnglet"]>
+
+  export type FormationOngletSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    contenu?: boolean
+    videoUrl?: boolean
+    image?: boolean
+    imageTaille?: boolean
+    backgroundColor?: boolean
+    opacity?: boolean
+    effetVisuel?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["formationOnglet"]>
+
+  export type FormationOngletSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    contenu?: boolean
+    videoUrl?: boolean
+    image?: boolean
+    imageTaille?: boolean
+    backgroundColor?: boolean
+    opacity?: boolean
+    effetVisuel?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["formationOnglet"]>
+
+  export type FormationOngletSelectScalar = {
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    contenu?: boolean
+    videoUrl?: boolean
+    image?: boolean
+    imageTaille?: boolean
+    backgroundColor?: boolean
+    opacity?: boolean
+    effetVisuel?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FormationOngletOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "onglet" | "titre" | "contenu" | "videoUrl" | "image" | "imageTaille" | "backgroundColor" | "opacity" | "effetVisuel" | "updatedAt", ExtArgs["result"]["formationOnglet"]>
+
+  export type $FormationOngletPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FormationOnglet"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      categorie: $Enums.CategorieFormation
+      onglet: $Enums.FormationOngletCle
+      titre: string | null
+      contenu: string | null
+      videoUrl: string | null
+      image: string | null
+      imageTaille: number
+      backgroundColor: string
+      opacity: number
+      effetVisuel: $Enums.EffetVisuel
+      updatedAt: Date
+    }, ExtArgs["result"]["formationOnglet"]>
+    composites: {}
+  }
+
+  type FormationOngletGetPayload<S extends boolean | null | undefined | FormationOngletDefaultArgs> = $Result.GetResult<Prisma.$FormationOngletPayload, S>
+
+  type FormationOngletCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FormationOngletFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FormationOngletCountAggregateInputType | true
+    }
+
+  export interface FormationOngletDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FormationOnglet'], meta: { name: 'FormationOnglet' } }
+    /**
+     * Find zero or one FormationOnglet that matches the filter.
+     * @param {FormationOngletFindUniqueArgs} args - Arguments to find a FormationOnglet
+     * @example
+     * // Get one FormationOnglet
+     * const formationOnglet = await prisma.formationOnglet.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FormationOngletFindUniqueArgs>(args: SelectSubset<T, FormationOngletFindUniqueArgs<ExtArgs>>): Prisma__FormationOngletClient<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FormationOnglet that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FormationOngletFindUniqueOrThrowArgs} args - Arguments to find a FormationOnglet
+     * @example
+     * // Get one FormationOnglet
+     * const formationOnglet = await prisma.formationOnglet.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FormationOngletFindUniqueOrThrowArgs>(args: SelectSubset<T, FormationOngletFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FormationOngletClient<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormationOnglet that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletFindFirstArgs} args - Arguments to find a FormationOnglet
+     * @example
+     * // Get one FormationOnglet
+     * const formationOnglet = await prisma.formationOnglet.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FormationOngletFindFirstArgs>(args?: SelectSubset<T, FormationOngletFindFirstArgs<ExtArgs>>): Prisma__FormationOngletClient<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormationOnglet that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletFindFirstOrThrowArgs} args - Arguments to find a FormationOnglet
+     * @example
+     * // Get one FormationOnglet
+     * const formationOnglet = await prisma.formationOnglet.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FormationOngletFindFirstOrThrowArgs>(args?: SelectSubset<T, FormationOngletFindFirstOrThrowArgs<ExtArgs>>): Prisma__FormationOngletClient<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FormationOnglets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FormationOnglets
+     * const formationOnglets = await prisma.formationOnglet.findMany()
+     * 
+     * // Get first 10 FormationOnglets
+     * const formationOnglets = await prisma.formationOnglet.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const formationOngletWithIdOnly = await prisma.formationOnglet.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FormationOngletFindManyArgs>(args?: SelectSubset<T, FormationOngletFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FormationOnglet.
+     * @param {FormationOngletCreateArgs} args - Arguments to create a FormationOnglet.
+     * @example
+     * // Create one FormationOnglet
+     * const FormationOnglet = await prisma.formationOnglet.create({
+     *   data: {
+     *     // ... data to create a FormationOnglet
+     *   }
+     * })
+     * 
+     */
+    create<T extends FormationOngletCreateArgs>(args: SelectSubset<T, FormationOngletCreateArgs<ExtArgs>>): Prisma__FormationOngletClient<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FormationOnglets.
+     * @param {FormationOngletCreateManyArgs} args - Arguments to create many FormationOnglets.
+     * @example
+     * // Create many FormationOnglets
+     * const formationOnglet = await prisma.formationOnglet.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FormationOngletCreateManyArgs>(args?: SelectSubset<T, FormationOngletCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FormationOnglets and returns the data saved in the database.
+     * @param {FormationOngletCreateManyAndReturnArgs} args - Arguments to create many FormationOnglets.
+     * @example
+     * // Create many FormationOnglets
+     * const formationOnglet = await prisma.formationOnglet.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FormationOnglets and only return the `id`
+     * const formationOngletWithIdOnly = await prisma.formationOnglet.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FormationOngletCreateManyAndReturnArgs>(args?: SelectSubset<T, FormationOngletCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FormationOnglet.
+     * @param {FormationOngletDeleteArgs} args - Arguments to delete one FormationOnglet.
+     * @example
+     * // Delete one FormationOnglet
+     * const FormationOnglet = await prisma.formationOnglet.delete({
+     *   where: {
+     *     // ... filter to delete one FormationOnglet
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FormationOngletDeleteArgs>(args: SelectSubset<T, FormationOngletDeleteArgs<ExtArgs>>): Prisma__FormationOngletClient<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FormationOnglet.
+     * @param {FormationOngletUpdateArgs} args - Arguments to update one FormationOnglet.
+     * @example
+     * // Update one FormationOnglet
+     * const formationOnglet = await prisma.formationOnglet.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FormationOngletUpdateArgs>(args: SelectSubset<T, FormationOngletUpdateArgs<ExtArgs>>): Prisma__FormationOngletClient<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FormationOnglets.
+     * @param {FormationOngletDeleteManyArgs} args - Arguments to filter FormationOnglets to delete.
+     * @example
+     * // Delete a few FormationOnglets
+     * const { count } = await prisma.formationOnglet.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FormationOngletDeleteManyArgs>(args?: SelectSubset<T, FormationOngletDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormationOnglets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FormationOnglets
+     * const formationOnglet = await prisma.formationOnglet.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FormationOngletUpdateManyArgs>(args: SelectSubset<T, FormationOngletUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormationOnglets and returns the data updated in the database.
+     * @param {FormationOngletUpdateManyAndReturnArgs} args - Arguments to update many FormationOnglets.
+     * @example
+     * // Update many FormationOnglets
+     * const formationOnglet = await prisma.formationOnglet.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FormationOnglets and only return the `id`
+     * const formationOngletWithIdOnly = await prisma.formationOnglet.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FormationOngletUpdateManyAndReturnArgs>(args: SelectSubset<T, FormationOngletUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FormationOnglet.
+     * @param {FormationOngletUpsertArgs} args - Arguments to update or create a FormationOnglet.
+     * @example
+     * // Update or create a FormationOnglet
+     * const formationOnglet = await prisma.formationOnglet.upsert({
+     *   create: {
+     *     // ... data to create a FormationOnglet
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FormationOnglet we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FormationOngletUpsertArgs>(args: SelectSubset<T, FormationOngletUpsertArgs<ExtArgs>>): Prisma__FormationOngletClient<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FormationOnglets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletCountArgs} args - Arguments to filter FormationOnglets to count.
+     * @example
+     * // Count the number of FormationOnglets
+     * const count = await prisma.formationOnglet.count({
+     *   where: {
+     *     // ... the filter for the FormationOnglets we want to count
+     *   }
+     * })
+    **/
+    count<T extends FormationOngletCountArgs>(
+      args?: Subset<T, FormationOngletCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FormationOngletCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FormationOnglet.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FormationOngletAggregateArgs>(args: Subset<T, FormationOngletAggregateArgs>): Prisma.PrismaPromise<GetFormationOngletAggregateType<T>>
+
+    /**
+     * Group by FormationOnglet.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FormationOngletGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FormationOngletGroupByArgs['orderBy'] }
+        : { orderBy?: FormationOngletGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FormationOngletGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFormationOngletGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FormationOnglet model
+   */
+  readonly fields: FormationOngletFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FormationOnglet.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FormationOngletClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FormationOnglet model
+   */
+  interface FormationOngletFieldRefs {
+    readonly id: FieldRef<"FormationOnglet", 'String'>
+    readonly categorie: FieldRef<"FormationOnglet", 'CategorieFormation'>
+    readonly onglet: FieldRef<"FormationOnglet", 'FormationOngletCle'>
+    readonly titre: FieldRef<"FormationOnglet", 'String'>
+    readonly contenu: FieldRef<"FormationOnglet", 'String'>
+    readonly videoUrl: FieldRef<"FormationOnglet", 'String'>
+    readonly image: FieldRef<"FormationOnglet", 'String'>
+    readonly imageTaille: FieldRef<"FormationOnglet", 'Int'>
+    readonly backgroundColor: FieldRef<"FormationOnglet", 'String'>
+    readonly opacity: FieldRef<"FormationOnglet", 'Int'>
+    readonly effetVisuel: FieldRef<"FormationOnglet", 'EffetVisuel'>
+    readonly updatedAt: FieldRef<"FormationOnglet", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FormationOnglet findUnique
+   */
+  export type FormationOngletFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOnglet to fetch.
+     */
+    where: FormationOngletWhereUniqueInput
+  }
+
+  /**
+   * FormationOnglet findUniqueOrThrow
+   */
+  export type FormationOngletFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOnglet to fetch.
+     */
+    where: FormationOngletWhereUniqueInput
+  }
+
+  /**
+   * FormationOnglet findFirst
+   */
+  export type FormationOngletFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOnglet to fetch.
+     */
+    where?: FormationOngletWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOnglets to fetch.
+     */
+    orderBy?: FormationOngletOrderByWithRelationInput | FormationOngletOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormationOnglets.
+     */
+    cursor?: FormationOngletWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOnglets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOnglets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationOnglets.
+     */
+    distinct?: FormationOngletScalarFieldEnum | FormationOngletScalarFieldEnum[]
+  }
+
+  /**
+   * FormationOnglet findFirstOrThrow
+   */
+  export type FormationOngletFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOnglet to fetch.
+     */
+    where?: FormationOngletWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOnglets to fetch.
+     */
+    orderBy?: FormationOngletOrderByWithRelationInput | FormationOngletOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormationOnglets.
+     */
+    cursor?: FormationOngletWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOnglets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOnglets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationOnglets.
+     */
+    distinct?: FormationOngletScalarFieldEnum | FormationOngletScalarFieldEnum[]
+  }
+
+  /**
+   * FormationOnglet findMany
+   */
+  export type FormationOngletFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOnglets to fetch.
+     */
+    where?: FormationOngletWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOnglets to fetch.
+     */
+    orderBy?: FormationOngletOrderByWithRelationInput | FormationOngletOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FormationOnglets.
+     */
+    cursor?: FormationOngletWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOnglets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOnglets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationOnglets.
+     */
+    distinct?: FormationOngletScalarFieldEnum | FormationOngletScalarFieldEnum[]
+  }
+
+  /**
+   * FormationOnglet create
+   */
+  export type FormationOngletCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FormationOnglet.
+     */
+    data: XOR<FormationOngletCreateInput, FormationOngletUncheckedCreateInput>
+  }
+
+  /**
+   * FormationOnglet createMany
+   */
+  export type FormationOngletCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FormationOnglets.
+     */
+    data: FormationOngletCreateManyInput | FormationOngletCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormationOnglet createManyAndReturn
+   */
+  export type FormationOngletCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * The data used to create many FormationOnglets.
+     */
+    data: FormationOngletCreateManyInput | FormationOngletCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormationOnglet update
+   */
+  export type FormationOngletUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FormationOnglet.
+     */
+    data: XOR<FormationOngletUpdateInput, FormationOngletUncheckedUpdateInput>
+    /**
+     * Choose, which FormationOnglet to update.
+     */
+    where: FormationOngletWhereUniqueInput
+  }
+
+  /**
+   * FormationOnglet updateMany
+   */
+  export type FormationOngletUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FormationOnglets.
+     */
+    data: XOR<FormationOngletUpdateManyMutationInput, FormationOngletUncheckedUpdateManyInput>
+    /**
+     * Filter which FormationOnglets to update
+     */
+    where?: FormationOngletWhereInput
+    /**
+     * Limit how many FormationOnglets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationOnglet updateManyAndReturn
+   */
+  export type FormationOngletUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * The data used to update FormationOnglets.
+     */
+    data: XOR<FormationOngletUpdateManyMutationInput, FormationOngletUncheckedUpdateManyInput>
+    /**
+     * Filter which FormationOnglets to update
+     */
+    where?: FormationOngletWhereInput
+    /**
+     * Limit how many FormationOnglets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationOnglet upsert
+   */
+  export type FormationOngletUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FormationOnglet to update in case it exists.
+     */
+    where: FormationOngletWhereUniqueInput
+    /**
+     * In case the FormationOnglet found by the `where` argument doesn't exist, create a new FormationOnglet with this data.
+     */
+    create: XOR<FormationOngletCreateInput, FormationOngletUncheckedCreateInput>
+    /**
+     * In case the FormationOnglet was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FormationOngletUpdateInput, FormationOngletUncheckedUpdateInput>
+  }
+
+  /**
+   * FormationOnglet delete
+   */
+  export type FormationOngletDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Filter which FormationOnglet to delete.
+     */
+    where: FormationOngletWhereUniqueInput
+  }
+
+  /**
+   * FormationOnglet deleteMany
+   */
+  export type FormationOngletDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormationOnglets to delete
+     */
+    where?: FormationOngletWhereInput
+    /**
+     * Limit how many FormationOnglets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationOnglet without action
+   */
+  export type FormationOngletDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PageHero
+   */
+
+  export type AggregatePageHero = {
+    _count: PageHeroCountAggregateOutputType | null
+    _min: PageHeroMinAggregateOutputType | null
+    _max: PageHeroMaxAggregateOutputType | null
+  }
+
+  export type PageHeroMinAggregateOutputType = {
+    id: string | null
+    page: $Enums.PageCle | null
+    titre: string | null
+    sousTitre: string | null
+    image: string | null
+    updatedAt: Date | null
+  }
+
+  export type PageHeroMaxAggregateOutputType = {
+    id: string | null
+    page: $Enums.PageCle | null
+    titre: string | null
+    sousTitre: string | null
+    image: string | null
+    updatedAt: Date | null
+  }
+
+  export type PageHeroCountAggregateOutputType = {
+    id: number
+    page: number
+    titre: number
+    sousTitre: number
+    image: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PageHeroMinAggregateInputType = {
+    id?: true
+    page?: true
+    titre?: true
+    sousTitre?: true
+    image?: true
+    updatedAt?: true
+  }
+
+  export type PageHeroMaxAggregateInputType = {
+    id?: true
+    page?: true
+    titre?: true
+    sousTitre?: true
+    image?: true
+    updatedAt?: true
+  }
+
+  export type PageHeroCountAggregateInputType = {
+    id?: true
+    page?: true
+    titre?: true
+    sousTitre?: true
+    image?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PageHeroAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PageHero to aggregate.
+     */
+    where?: PageHeroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PageHeroes to fetch.
+     */
+    orderBy?: PageHeroOrderByWithRelationInput | PageHeroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PageHeroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PageHeroes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PageHeroes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PageHeroes
+    **/
+    _count?: true | PageHeroCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PageHeroMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PageHeroMaxAggregateInputType
+  }
+
+  export type GetPageHeroAggregateType<T extends PageHeroAggregateArgs> = {
+        [P in keyof T & keyof AggregatePageHero]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePageHero[P]>
+      : GetScalarType<T[P], AggregatePageHero[P]>
+  }
+
+
+
+
+  export type PageHeroGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PageHeroWhereInput
+    orderBy?: PageHeroOrderByWithAggregationInput | PageHeroOrderByWithAggregationInput[]
+    by: PageHeroScalarFieldEnum[] | PageHeroScalarFieldEnum
+    having?: PageHeroScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PageHeroCountAggregateInputType | true
+    _min?: PageHeroMinAggregateInputType
+    _max?: PageHeroMaxAggregateInputType
+  }
+
+  export type PageHeroGroupByOutputType = {
+    id: string
+    page: $Enums.PageCle
+    titre: string
+    sousTitre: string | null
+    image: string | null
+    updatedAt: Date
+    _count: PageHeroCountAggregateOutputType | null
+    _min: PageHeroMinAggregateOutputType | null
+    _max: PageHeroMaxAggregateOutputType | null
+  }
+
+  type GetPageHeroGroupByPayload<T extends PageHeroGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PageHeroGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PageHeroGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PageHeroGroupByOutputType[P]>
+            : GetScalarType<T[P], PageHeroGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PageHeroSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    page?: boolean
+    titre?: boolean
+    sousTitre?: boolean
+    image?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pageHero"]>
+
+  export type PageHeroSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    page?: boolean
+    titre?: boolean
+    sousTitre?: boolean
+    image?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pageHero"]>
+
+  export type PageHeroSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    page?: boolean
+    titre?: boolean
+    sousTitre?: boolean
+    image?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["pageHero"]>
+
+  export type PageHeroSelectScalar = {
+    id?: boolean
+    page?: boolean
+    titre?: boolean
+    sousTitre?: boolean
+    image?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PageHeroOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "page" | "titre" | "sousTitre" | "image" | "updatedAt", ExtArgs["result"]["pageHero"]>
+
+  export type $PageHeroPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PageHero"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      page: $Enums.PageCle
+      titre: string
+      sousTitre: string | null
+      image: string | null
+      updatedAt: Date
+    }, ExtArgs["result"]["pageHero"]>
+    composites: {}
+  }
+
+  type PageHeroGetPayload<S extends boolean | null | undefined | PageHeroDefaultArgs> = $Result.GetResult<Prisma.$PageHeroPayload, S>
+
+  type PageHeroCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PageHeroFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PageHeroCountAggregateInputType | true
+    }
+
+  export interface PageHeroDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PageHero'], meta: { name: 'PageHero' } }
+    /**
+     * Find zero or one PageHero that matches the filter.
+     * @param {PageHeroFindUniqueArgs} args - Arguments to find a PageHero
+     * @example
+     * // Get one PageHero
+     * const pageHero = await prisma.pageHero.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PageHeroFindUniqueArgs>(args: SelectSubset<T, PageHeroFindUniqueArgs<ExtArgs>>): Prisma__PageHeroClient<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PageHero that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PageHeroFindUniqueOrThrowArgs} args - Arguments to find a PageHero
+     * @example
+     * // Get one PageHero
+     * const pageHero = await prisma.pageHero.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PageHeroFindUniqueOrThrowArgs>(args: SelectSubset<T, PageHeroFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PageHeroClient<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PageHero that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PageHeroFindFirstArgs} args - Arguments to find a PageHero
+     * @example
+     * // Get one PageHero
+     * const pageHero = await prisma.pageHero.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PageHeroFindFirstArgs>(args?: SelectSubset<T, PageHeroFindFirstArgs<ExtArgs>>): Prisma__PageHeroClient<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PageHero that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PageHeroFindFirstOrThrowArgs} args - Arguments to find a PageHero
+     * @example
+     * // Get one PageHero
+     * const pageHero = await prisma.pageHero.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PageHeroFindFirstOrThrowArgs>(args?: SelectSubset<T, PageHeroFindFirstOrThrowArgs<ExtArgs>>): Prisma__PageHeroClient<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PageHeroes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PageHeroFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PageHeroes
+     * const pageHeroes = await prisma.pageHero.findMany()
+     * 
+     * // Get first 10 PageHeroes
+     * const pageHeroes = await prisma.pageHero.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pageHeroWithIdOnly = await prisma.pageHero.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PageHeroFindManyArgs>(args?: SelectSubset<T, PageHeroFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PageHero.
+     * @param {PageHeroCreateArgs} args - Arguments to create a PageHero.
+     * @example
+     * // Create one PageHero
+     * const PageHero = await prisma.pageHero.create({
+     *   data: {
+     *     // ... data to create a PageHero
+     *   }
+     * })
+     * 
+     */
+    create<T extends PageHeroCreateArgs>(args: SelectSubset<T, PageHeroCreateArgs<ExtArgs>>): Prisma__PageHeroClient<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PageHeroes.
+     * @param {PageHeroCreateManyArgs} args - Arguments to create many PageHeroes.
+     * @example
+     * // Create many PageHeroes
+     * const pageHero = await prisma.pageHero.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PageHeroCreateManyArgs>(args?: SelectSubset<T, PageHeroCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PageHeroes and returns the data saved in the database.
+     * @param {PageHeroCreateManyAndReturnArgs} args - Arguments to create many PageHeroes.
+     * @example
+     * // Create many PageHeroes
+     * const pageHero = await prisma.pageHero.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PageHeroes and only return the `id`
+     * const pageHeroWithIdOnly = await prisma.pageHero.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PageHeroCreateManyAndReturnArgs>(args?: SelectSubset<T, PageHeroCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PageHero.
+     * @param {PageHeroDeleteArgs} args - Arguments to delete one PageHero.
+     * @example
+     * // Delete one PageHero
+     * const PageHero = await prisma.pageHero.delete({
+     *   where: {
+     *     // ... filter to delete one PageHero
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PageHeroDeleteArgs>(args: SelectSubset<T, PageHeroDeleteArgs<ExtArgs>>): Prisma__PageHeroClient<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PageHero.
+     * @param {PageHeroUpdateArgs} args - Arguments to update one PageHero.
+     * @example
+     * // Update one PageHero
+     * const pageHero = await prisma.pageHero.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PageHeroUpdateArgs>(args: SelectSubset<T, PageHeroUpdateArgs<ExtArgs>>): Prisma__PageHeroClient<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PageHeroes.
+     * @param {PageHeroDeleteManyArgs} args - Arguments to filter PageHeroes to delete.
+     * @example
+     * // Delete a few PageHeroes
+     * const { count } = await prisma.pageHero.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PageHeroDeleteManyArgs>(args?: SelectSubset<T, PageHeroDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PageHeroes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PageHeroUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PageHeroes
+     * const pageHero = await prisma.pageHero.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PageHeroUpdateManyArgs>(args: SelectSubset<T, PageHeroUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PageHeroes and returns the data updated in the database.
+     * @param {PageHeroUpdateManyAndReturnArgs} args - Arguments to update many PageHeroes.
+     * @example
+     * // Update many PageHeroes
+     * const pageHero = await prisma.pageHero.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PageHeroes and only return the `id`
+     * const pageHeroWithIdOnly = await prisma.pageHero.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PageHeroUpdateManyAndReturnArgs>(args: SelectSubset<T, PageHeroUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PageHero.
+     * @param {PageHeroUpsertArgs} args - Arguments to update or create a PageHero.
+     * @example
+     * // Update or create a PageHero
+     * const pageHero = await prisma.pageHero.upsert({
+     *   create: {
+     *     // ... data to create a PageHero
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PageHero we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PageHeroUpsertArgs>(args: SelectSubset<T, PageHeroUpsertArgs<ExtArgs>>): Prisma__PageHeroClient<$Result.GetResult<Prisma.$PageHeroPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PageHeroes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PageHeroCountArgs} args - Arguments to filter PageHeroes to count.
+     * @example
+     * // Count the number of PageHeroes
+     * const count = await prisma.pageHero.count({
+     *   where: {
+     *     // ... the filter for the PageHeroes we want to count
+     *   }
+     * })
+    **/
+    count<T extends PageHeroCountArgs>(
+      args?: Subset<T, PageHeroCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PageHeroCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PageHero.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PageHeroAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PageHeroAggregateArgs>(args: Subset<T, PageHeroAggregateArgs>): Prisma.PrismaPromise<GetPageHeroAggregateType<T>>
+
+    /**
+     * Group by PageHero.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PageHeroGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PageHeroGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PageHeroGroupByArgs['orderBy'] }
+        : { orderBy?: PageHeroGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PageHeroGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPageHeroGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PageHero model
+   */
+  readonly fields: PageHeroFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PageHero.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PageHeroClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PageHero model
+   */
+  interface PageHeroFieldRefs {
+    readonly id: FieldRef<"PageHero", 'String'>
+    readonly page: FieldRef<"PageHero", 'PageCle'>
+    readonly titre: FieldRef<"PageHero", 'String'>
+    readonly sousTitre: FieldRef<"PageHero", 'String'>
+    readonly image: FieldRef<"PageHero", 'String'>
+    readonly updatedAt: FieldRef<"PageHero", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PageHero findUnique
+   */
+  export type PageHeroFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * Filter, which PageHero to fetch.
+     */
+    where: PageHeroWhereUniqueInput
+  }
+
+  /**
+   * PageHero findUniqueOrThrow
+   */
+  export type PageHeroFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * Filter, which PageHero to fetch.
+     */
+    where: PageHeroWhereUniqueInput
+  }
+
+  /**
+   * PageHero findFirst
+   */
+  export type PageHeroFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * Filter, which PageHero to fetch.
+     */
+    where?: PageHeroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PageHeroes to fetch.
+     */
+    orderBy?: PageHeroOrderByWithRelationInput | PageHeroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PageHeroes.
+     */
+    cursor?: PageHeroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PageHeroes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PageHeroes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PageHeroes.
+     */
+    distinct?: PageHeroScalarFieldEnum | PageHeroScalarFieldEnum[]
+  }
+
+  /**
+   * PageHero findFirstOrThrow
+   */
+  export type PageHeroFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * Filter, which PageHero to fetch.
+     */
+    where?: PageHeroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PageHeroes to fetch.
+     */
+    orderBy?: PageHeroOrderByWithRelationInput | PageHeroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PageHeroes.
+     */
+    cursor?: PageHeroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PageHeroes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PageHeroes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PageHeroes.
+     */
+    distinct?: PageHeroScalarFieldEnum | PageHeroScalarFieldEnum[]
+  }
+
+  /**
+   * PageHero findMany
+   */
+  export type PageHeroFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * Filter, which PageHeroes to fetch.
+     */
+    where?: PageHeroWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PageHeroes to fetch.
+     */
+    orderBy?: PageHeroOrderByWithRelationInput | PageHeroOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PageHeroes.
+     */
+    cursor?: PageHeroWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PageHeroes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PageHeroes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PageHeroes.
+     */
+    distinct?: PageHeroScalarFieldEnum | PageHeroScalarFieldEnum[]
+  }
+
+  /**
+   * PageHero create
+   */
+  export type PageHeroCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PageHero.
+     */
+    data: XOR<PageHeroCreateInput, PageHeroUncheckedCreateInput>
+  }
+
+  /**
+   * PageHero createMany
+   */
+  export type PageHeroCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PageHeroes.
+     */
+    data: PageHeroCreateManyInput | PageHeroCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PageHero createManyAndReturn
+   */
+  export type PageHeroCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * The data used to create many PageHeroes.
+     */
+    data: PageHeroCreateManyInput | PageHeroCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PageHero update
+   */
+  export type PageHeroUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PageHero.
+     */
+    data: XOR<PageHeroUpdateInput, PageHeroUncheckedUpdateInput>
+    /**
+     * Choose, which PageHero to update.
+     */
+    where: PageHeroWhereUniqueInput
+  }
+
+  /**
+   * PageHero updateMany
+   */
+  export type PageHeroUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PageHeroes.
+     */
+    data: XOR<PageHeroUpdateManyMutationInput, PageHeroUncheckedUpdateManyInput>
+    /**
+     * Filter which PageHeroes to update
+     */
+    where?: PageHeroWhereInput
+    /**
+     * Limit how many PageHeroes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PageHero updateManyAndReturn
+   */
+  export type PageHeroUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * The data used to update PageHeroes.
+     */
+    data: XOR<PageHeroUpdateManyMutationInput, PageHeroUncheckedUpdateManyInput>
+    /**
+     * Filter which PageHeroes to update
+     */
+    where?: PageHeroWhereInput
+    /**
+     * Limit how many PageHeroes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PageHero upsert
+   */
+  export type PageHeroUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PageHero to update in case it exists.
+     */
+    where: PageHeroWhereUniqueInput
+    /**
+     * In case the PageHero found by the `where` argument doesn't exist, create a new PageHero with this data.
+     */
+    create: XOR<PageHeroCreateInput, PageHeroUncheckedCreateInput>
+    /**
+     * In case the PageHero was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PageHeroUpdateInput, PageHeroUncheckedUpdateInput>
+  }
+
+  /**
+   * PageHero delete
+   */
+  export type PageHeroDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
+    /**
+     * Filter which PageHero to delete.
+     */
+    where: PageHeroWhereUniqueInput
+  }
+
+  /**
+   * PageHero deleteMany
+   */
+  export type PageHeroDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PageHeroes to delete
+     */
+    where?: PageHeroWhereInput
+    /**
+     * Limit how many PageHeroes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PageHero without action
+   */
+  export type PageHeroDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PageHero
+     */
+    select?: PageHeroSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PageHero
+     */
+    omit?: PageHeroOmit<ExtArgs> | null
   }
 
 
@@ -29873,6 +33567,20 @@ export namespace Prisma {
   export type DemandeInscriptionScalarFieldEnum = (typeof DemandeInscriptionScalarFieldEnum)[keyof typeof DemandeInscriptionScalarFieldEnum]
 
 
+  export const DemandeContactScalarFieldEnum: {
+    id: 'id',
+    thematique: 'thematique',
+    nom: 'nom',
+    prenom: 'prenom',
+    email: 'email',
+    telephone: 'telephone',
+    message: 'message',
+    createdAt: 'createdAt'
+  };
+
+  export type DemandeContactScalarFieldEnum = (typeof DemandeContactScalarFieldEnum)[keyof typeof DemandeContactScalarFieldEnum]
+
+
   export const DocumentScalarFieldEnum: {
     id: 'id',
     nom: 'nom',
@@ -29989,6 +33697,13 @@ export namespace Prisma {
   export const AccueilContenuScalarFieldEnum: {
     id: 'id',
     bandeauEmploiTitre: 'bandeauEmploiTitre',
+    bandeauEmploiActif: 'bandeauEmploiActif',
+    bandeauBouton1Label: 'bandeauBouton1Label',
+    bandeauBouton1Type: 'bandeauBouton1Type',
+    bandeauBouton1Url: 'bandeauBouton1Url',
+    bandeauBouton2Label: 'bandeauBouton2Label',
+    bandeauBouton2Type: 'bandeauBouton2Type',
+    bandeauBouton2Url: 'bandeauBouton2Url',
     accompagnementEyebrow: 'accompagnementEyebrow',
     accompagnementTitre: 'accompagnementTitre',
     contactTitre: 'contactTitre',
@@ -30026,6 +33741,7 @@ export namespace Prisma {
     overlayColor: 'overlayColor',
     overlayOpacity: 'overlayOpacity',
     transition: 'transition',
+    dureeAffichage: 'dureeAffichage',
     ordre: 'ordre',
     actif: 'actif',
     createdAt: 'createdAt',
@@ -30035,15 +33751,48 @@ export namespace Prisma {
   export type HeroSlideScalarFieldEnum = (typeof HeroSlideScalarFieldEnum)[keyof typeof HeroSlideScalarFieldEnum]
 
 
-  export const CategorieInfoScalarFieldEnum: {
+  export const FormationTuileScalarFieldEnum: {
     id: 'id',
     categorie: 'categorie',
-    titre: 'titre',
-    corps: 'corps',
+    label: 'label',
+    image: 'image',
+    backgroundColor: 'backgroundColor',
+    opacity: 'opacity',
+    effetVisuel: 'effetVisuel',
     updatedAt: 'updatedAt'
   };
 
-  export type CategorieInfoScalarFieldEnum = (typeof CategorieInfoScalarFieldEnum)[keyof typeof CategorieInfoScalarFieldEnum]
+  export type FormationTuileScalarFieldEnum = (typeof FormationTuileScalarFieldEnum)[keyof typeof FormationTuileScalarFieldEnum]
+
+
+  export const FormationOngletScalarFieldEnum: {
+    id: 'id',
+    categorie: 'categorie',
+    onglet: 'onglet',
+    titre: 'titre',
+    contenu: 'contenu',
+    videoUrl: 'videoUrl',
+    image: 'image',
+    imageTaille: 'imageTaille',
+    backgroundColor: 'backgroundColor',
+    opacity: 'opacity',
+    effetVisuel: 'effetVisuel',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FormationOngletScalarFieldEnum = (typeof FormationOngletScalarFieldEnum)[keyof typeof FormationOngletScalarFieldEnum]
+
+
+  export const PageHeroScalarFieldEnum: {
+    id: 'id',
+    page: 'page',
+    titre: 'titre',
+    sousTitre: 'sousTitre',
+    image: 'image',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PageHeroScalarFieldEnum = (typeof PageHeroScalarFieldEnum)[keyof typeof PageHeroScalarFieldEnum]
 
 
   export const DocumentPasserelleScalarFieldEnum: {
@@ -30424,6 +34173,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TypeLien'
+   */
+  export type EnumTypeLienFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeLien'>
+    
+
+
+  /**
+   * Reference to a field of type 'TypeLien[]'
+   */
+  export type ListEnumTypeLienFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeLien[]'>
+    
+
+
+  /**
    * Reference to a field of type 'AlignementHero'
    */
   export type EnumAlignementHeroFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AlignementHero'>
@@ -30448,6 +34211,48 @@ export namespace Prisma {
    * Reference to a field of type 'TransitionHero[]'
    */
   export type ListEnumTransitionHeroFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransitionHero[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'EffetVisuel'
+   */
+  export type EnumEffetVisuelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EffetVisuel'>
+    
+
+
+  /**
+   * Reference to a field of type 'EffetVisuel[]'
+   */
+  export type ListEnumEffetVisuelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EffetVisuel[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'FormationOngletCle'
+   */
+  export type EnumFormationOngletCleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FormationOngletCle'>
+    
+
+
+  /**
+   * Reference to a field of type 'FormationOngletCle[]'
+   */
+  export type ListEnumFormationOngletCleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FormationOngletCle[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PageCle'
+   */
+  export type EnumPageCleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PageCle'>
+    
+
+
+  /**
+   * Reference to a field of type 'PageCle[]'
+   */
+  export type ListEnumPageCleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PageCle[]'>
     
 
 
@@ -31075,6 +34880,73 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"DemandeInscription"> | Date | string
   }
 
+  export type DemandeContactWhereInput = {
+    AND?: DemandeContactWhereInput | DemandeContactWhereInput[]
+    OR?: DemandeContactWhereInput[]
+    NOT?: DemandeContactWhereInput | DemandeContactWhereInput[]
+    id?: StringFilter<"DemandeContact"> | string
+    thematique?: StringFilter<"DemandeContact"> | string
+    nom?: StringFilter<"DemandeContact"> | string
+    prenom?: StringFilter<"DemandeContact"> | string
+    email?: StringFilter<"DemandeContact"> | string
+    telephone?: StringNullableFilter<"DemandeContact"> | string | null
+    message?: StringNullableFilter<"DemandeContact"> | string | null
+    createdAt?: DateTimeFilter<"DemandeContact"> | Date | string
+  }
+
+  export type DemandeContactOrderByWithRelationInput = {
+    id?: SortOrder
+    thematique?: SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    email?: SortOrder
+    telephone?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DemandeContactWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DemandeContactWhereInput | DemandeContactWhereInput[]
+    OR?: DemandeContactWhereInput[]
+    NOT?: DemandeContactWhereInput | DemandeContactWhereInput[]
+    thematique?: StringFilter<"DemandeContact"> | string
+    nom?: StringFilter<"DemandeContact"> | string
+    prenom?: StringFilter<"DemandeContact"> | string
+    email?: StringFilter<"DemandeContact"> | string
+    telephone?: StringNullableFilter<"DemandeContact"> | string | null
+    message?: StringNullableFilter<"DemandeContact"> | string | null
+    createdAt?: DateTimeFilter<"DemandeContact"> | Date | string
+  }, "id">
+
+  export type DemandeContactOrderByWithAggregationInput = {
+    id?: SortOrder
+    thematique?: SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    email?: SortOrder
+    telephone?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: DemandeContactCountOrderByAggregateInput
+    _max?: DemandeContactMaxOrderByAggregateInput
+    _min?: DemandeContactMinOrderByAggregateInput
+  }
+
+  export type DemandeContactScalarWhereWithAggregatesInput = {
+    AND?: DemandeContactScalarWhereWithAggregatesInput | DemandeContactScalarWhereWithAggregatesInput[]
+    OR?: DemandeContactScalarWhereWithAggregatesInput[]
+    NOT?: DemandeContactScalarWhereWithAggregatesInput | DemandeContactScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DemandeContact"> | string
+    thematique?: StringWithAggregatesFilter<"DemandeContact"> | string
+    nom?: StringWithAggregatesFilter<"DemandeContact"> | string
+    prenom?: StringWithAggregatesFilter<"DemandeContact"> | string
+    email?: StringWithAggregatesFilter<"DemandeContact"> | string
+    telephone?: StringNullableWithAggregatesFilter<"DemandeContact"> | string | null
+    message?: StringNullableWithAggregatesFilter<"DemandeContact"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"DemandeContact"> | Date | string
+  }
+
   export type DocumentWhereInput = {
     AND?: DocumentWhereInput | DocumentWhereInput[]
     OR?: DocumentWhereInput[]
@@ -31685,6 +35557,13 @@ export namespace Prisma {
     NOT?: AccueilContenuWhereInput | AccueilContenuWhereInput[]
     id?: StringFilter<"AccueilContenu"> | string
     bandeauEmploiTitre?: StringFilter<"AccueilContenu"> | string
+    bandeauEmploiActif?: BoolFilter<"AccueilContenu"> | boolean
+    bandeauBouton1Label?: StringFilter<"AccueilContenu"> | string
+    bandeauBouton1Type?: EnumTypeLienFilter<"AccueilContenu"> | $Enums.TypeLien
+    bandeauBouton1Url?: StringFilter<"AccueilContenu"> | string
+    bandeauBouton2Label?: StringFilter<"AccueilContenu"> | string
+    bandeauBouton2Type?: EnumTypeLienFilter<"AccueilContenu"> | $Enums.TypeLien
+    bandeauBouton2Url?: StringFilter<"AccueilContenu"> | string
     accompagnementEyebrow?: StringFilter<"AccueilContenu"> | string
     accompagnementTitre?: StringFilter<"AccueilContenu"> | string
     contactTitre?: StringFilter<"AccueilContenu"> | string
@@ -31695,6 +35574,13 @@ export namespace Prisma {
   export type AccueilContenuOrderByWithRelationInput = {
     id?: SortOrder
     bandeauEmploiTitre?: SortOrder
+    bandeauEmploiActif?: SortOrder
+    bandeauBouton1Label?: SortOrder
+    bandeauBouton1Type?: SortOrder
+    bandeauBouton1Url?: SortOrder
+    bandeauBouton2Label?: SortOrder
+    bandeauBouton2Type?: SortOrder
+    bandeauBouton2Url?: SortOrder
     accompagnementEyebrow?: SortOrder
     accompagnementTitre?: SortOrder
     contactTitre?: SortOrder
@@ -31708,6 +35594,13 @@ export namespace Prisma {
     OR?: AccueilContenuWhereInput[]
     NOT?: AccueilContenuWhereInput | AccueilContenuWhereInput[]
     bandeauEmploiTitre?: StringFilter<"AccueilContenu"> | string
+    bandeauEmploiActif?: BoolFilter<"AccueilContenu"> | boolean
+    bandeauBouton1Label?: StringFilter<"AccueilContenu"> | string
+    bandeauBouton1Type?: EnumTypeLienFilter<"AccueilContenu"> | $Enums.TypeLien
+    bandeauBouton1Url?: StringFilter<"AccueilContenu"> | string
+    bandeauBouton2Label?: StringFilter<"AccueilContenu"> | string
+    bandeauBouton2Type?: EnumTypeLienFilter<"AccueilContenu"> | $Enums.TypeLien
+    bandeauBouton2Url?: StringFilter<"AccueilContenu"> | string
     accompagnementEyebrow?: StringFilter<"AccueilContenu"> | string
     accompagnementTitre?: StringFilter<"AccueilContenu"> | string
     contactTitre?: StringFilter<"AccueilContenu"> | string
@@ -31718,6 +35611,13 @@ export namespace Prisma {
   export type AccueilContenuOrderByWithAggregationInput = {
     id?: SortOrder
     bandeauEmploiTitre?: SortOrder
+    bandeauEmploiActif?: SortOrder
+    bandeauBouton1Label?: SortOrder
+    bandeauBouton1Type?: SortOrder
+    bandeauBouton1Url?: SortOrder
+    bandeauBouton2Label?: SortOrder
+    bandeauBouton2Type?: SortOrder
+    bandeauBouton2Url?: SortOrder
     accompagnementEyebrow?: SortOrder
     accompagnementTitre?: SortOrder
     contactTitre?: SortOrder
@@ -31734,6 +35634,13 @@ export namespace Prisma {
     NOT?: AccueilContenuScalarWhereWithAggregatesInput | AccueilContenuScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AccueilContenu"> | string
     bandeauEmploiTitre?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    bandeauEmploiActif?: BoolWithAggregatesFilter<"AccueilContenu"> | boolean
+    bandeauBouton1Label?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    bandeauBouton1Type?: EnumTypeLienWithAggregatesFilter<"AccueilContenu"> | $Enums.TypeLien
+    bandeauBouton1Url?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    bandeauBouton2Label?: StringWithAggregatesFilter<"AccueilContenu"> | string
+    bandeauBouton2Type?: EnumTypeLienWithAggregatesFilter<"AccueilContenu"> | $Enums.TypeLien
+    bandeauBouton2Url?: StringWithAggregatesFilter<"AccueilContenu"> | string
     accompagnementEyebrow?: StringWithAggregatesFilter<"AccueilContenu"> | string
     accompagnementTitre?: StringWithAggregatesFilter<"AccueilContenu"> | string
     contactTitre?: StringWithAggregatesFilter<"AccueilContenu"> | string
@@ -31822,6 +35729,7 @@ export namespace Prisma {
     overlayColor?: StringFilter<"HeroSlide"> | string
     overlayOpacity?: IntFilter<"HeroSlide"> | number
     transition?: EnumTransitionHeroFilter<"HeroSlide"> | $Enums.TransitionHero
+    dureeAffichage?: IntFilter<"HeroSlide"> | number
     ordre?: IntFilter<"HeroSlide"> | number
     actif?: BoolFilter<"HeroSlide"> | boolean
     createdAt?: DateTimeFilter<"HeroSlide"> | Date | string
@@ -31843,6 +35751,7 @@ export namespace Prisma {
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
+    dureeAffichage?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -31867,6 +35776,7 @@ export namespace Prisma {
     overlayColor?: StringFilter<"HeroSlide"> | string
     overlayOpacity?: IntFilter<"HeroSlide"> | number
     transition?: EnumTransitionHeroFilter<"HeroSlide"> | $Enums.TransitionHero
+    dureeAffichage?: IntFilter<"HeroSlide"> | number
     ordre?: IntFilter<"HeroSlide"> | number
     actif?: BoolFilter<"HeroSlide"> | boolean
     createdAt?: DateTimeFilter<"HeroSlide"> | Date | string
@@ -31888,6 +35798,7 @@ export namespace Prisma {
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
+    dureeAffichage?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -31916,62 +35827,227 @@ export namespace Prisma {
     overlayColor?: StringWithAggregatesFilter<"HeroSlide"> | string
     overlayOpacity?: IntWithAggregatesFilter<"HeroSlide"> | number
     transition?: EnumTransitionHeroWithAggregatesFilter<"HeroSlide"> | $Enums.TransitionHero
+    dureeAffichage?: IntWithAggregatesFilter<"HeroSlide"> | number
     ordre?: IntWithAggregatesFilter<"HeroSlide"> | number
     actif?: BoolWithAggregatesFilter<"HeroSlide"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"HeroSlide"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"HeroSlide"> | Date | string
   }
 
-  export type CategorieInfoWhereInput = {
-    AND?: CategorieInfoWhereInput | CategorieInfoWhereInput[]
-    OR?: CategorieInfoWhereInput[]
-    NOT?: CategorieInfoWhereInput | CategorieInfoWhereInput[]
-    id?: StringFilter<"CategorieInfo"> | string
-    categorie?: EnumCategorieFormationFilter<"CategorieInfo"> | $Enums.CategorieFormation
-    titre?: StringFilter<"CategorieInfo"> | string
-    corps?: StringFilter<"CategorieInfo"> | string
-    updatedAt?: DateTimeFilter<"CategorieInfo"> | Date | string
+  export type FormationTuileWhereInput = {
+    AND?: FormationTuileWhereInput | FormationTuileWhereInput[]
+    OR?: FormationTuileWhereInput[]
+    NOT?: FormationTuileWhereInput | FormationTuileWhereInput[]
+    id?: StringFilter<"FormationTuile"> | string
+    categorie?: EnumCategorieFormationFilter<"FormationTuile"> | $Enums.CategorieFormation
+    label?: StringFilter<"FormationTuile"> | string
+    image?: StringNullableFilter<"FormationTuile"> | string | null
+    backgroundColor?: StringFilter<"FormationTuile"> | string
+    opacity?: IntFilter<"FormationTuile"> | number
+    effetVisuel?: EnumEffetVisuelFilter<"FormationTuile"> | $Enums.EffetVisuel
+    updatedAt?: DateTimeFilter<"FormationTuile"> | Date | string
   }
 
-  export type CategorieInfoOrderByWithRelationInput = {
+  export type FormationTuileOrderByWithRelationInput = {
     id?: SortOrder
     categorie?: SortOrder
-    titre?: SortOrder
-    corps?: SortOrder
+    label?: SortOrder
+    image?: SortOrderInput | SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type CategorieInfoWhereUniqueInput = Prisma.AtLeast<{
+  export type FormationTuileWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     categorie?: $Enums.CategorieFormation
-    AND?: CategorieInfoWhereInput | CategorieInfoWhereInput[]
-    OR?: CategorieInfoWhereInput[]
-    NOT?: CategorieInfoWhereInput | CategorieInfoWhereInput[]
-    titre?: StringFilter<"CategorieInfo"> | string
-    corps?: StringFilter<"CategorieInfo"> | string
-    updatedAt?: DateTimeFilter<"CategorieInfo"> | Date | string
+    AND?: FormationTuileWhereInput | FormationTuileWhereInput[]
+    OR?: FormationTuileWhereInput[]
+    NOT?: FormationTuileWhereInput | FormationTuileWhereInput[]
+    label?: StringFilter<"FormationTuile"> | string
+    image?: StringNullableFilter<"FormationTuile"> | string | null
+    backgroundColor?: StringFilter<"FormationTuile"> | string
+    opacity?: IntFilter<"FormationTuile"> | number
+    effetVisuel?: EnumEffetVisuelFilter<"FormationTuile"> | $Enums.EffetVisuel
+    updatedAt?: DateTimeFilter<"FormationTuile"> | Date | string
   }, "id" | "categorie">
 
-  export type CategorieInfoOrderByWithAggregationInput = {
+  export type FormationTuileOrderByWithAggregationInput = {
     id?: SortOrder
     categorie?: SortOrder
-    titre?: SortOrder
-    corps?: SortOrder
+    label?: SortOrder
+    image?: SortOrderInput | SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
     updatedAt?: SortOrder
-    _count?: CategorieInfoCountOrderByAggregateInput
-    _max?: CategorieInfoMaxOrderByAggregateInput
-    _min?: CategorieInfoMinOrderByAggregateInput
+    _count?: FormationTuileCountOrderByAggregateInput
+    _avg?: FormationTuileAvgOrderByAggregateInput
+    _max?: FormationTuileMaxOrderByAggregateInput
+    _min?: FormationTuileMinOrderByAggregateInput
+    _sum?: FormationTuileSumOrderByAggregateInput
   }
 
-  export type CategorieInfoScalarWhereWithAggregatesInput = {
-    AND?: CategorieInfoScalarWhereWithAggregatesInput | CategorieInfoScalarWhereWithAggregatesInput[]
-    OR?: CategorieInfoScalarWhereWithAggregatesInput[]
-    NOT?: CategorieInfoScalarWhereWithAggregatesInput | CategorieInfoScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"CategorieInfo"> | string
-    categorie?: EnumCategorieFormationWithAggregatesFilter<"CategorieInfo"> | $Enums.CategorieFormation
-    titre?: StringWithAggregatesFilter<"CategorieInfo"> | string
-    corps?: StringWithAggregatesFilter<"CategorieInfo"> | string
-    updatedAt?: DateTimeWithAggregatesFilter<"CategorieInfo"> | Date | string
+  export type FormationTuileScalarWhereWithAggregatesInput = {
+    AND?: FormationTuileScalarWhereWithAggregatesInput | FormationTuileScalarWhereWithAggregatesInput[]
+    OR?: FormationTuileScalarWhereWithAggregatesInput[]
+    NOT?: FormationTuileScalarWhereWithAggregatesInput | FormationTuileScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FormationTuile"> | string
+    categorie?: EnumCategorieFormationWithAggregatesFilter<"FormationTuile"> | $Enums.CategorieFormation
+    label?: StringWithAggregatesFilter<"FormationTuile"> | string
+    image?: StringNullableWithAggregatesFilter<"FormationTuile"> | string | null
+    backgroundColor?: StringWithAggregatesFilter<"FormationTuile"> | string
+    opacity?: IntWithAggregatesFilter<"FormationTuile"> | number
+    effetVisuel?: EnumEffetVisuelWithAggregatesFilter<"FormationTuile"> | $Enums.EffetVisuel
+    updatedAt?: DateTimeWithAggregatesFilter<"FormationTuile"> | Date | string
+  }
+
+  export type FormationOngletWhereInput = {
+    AND?: FormationOngletWhereInput | FormationOngletWhereInput[]
+    OR?: FormationOngletWhereInput[]
+    NOT?: FormationOngletWhereInput | FormationOngletWhereInput[]
+    id?: StringFilter<"FormationOnglet"> | string
+    categorie?: EnumCategorieFormationFilter<"FormationOnglet"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFilter<"FormationOnglet"> | $Enums.FormationOngletCle
+    titre?: StringNullableFilter<"FormationOnglet"> | string | null
+    contenu?: StringNullableFilter<"FormationOnglet"> | string | null
+    videoUrl?: StringNullableFilter<"FormationOnglet"> | string | null
+    image?: StringNullableFilter<"FormationOnglet"> | string | null
+    imageTaille?: IntFilter<"FormationOnglet"> | number
+    backgroundColor?: StringFilter<"FormationOnglet"> | string
+    opacity?: IntFilter<"FormationOnglet"> | number
+    effetVisuel?: EnumEffetVisuelFilter<"FormationOnglet"> | $Enums.EffetVisuel
+    updatedAt?: DateTimeFilter<"FormationOnglet"> | Date | string
+  }
+
+  export type FormationOngletOrderByWithRelationInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrderInput | SortOrder
+    contenu?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    imageTaille?: SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormationOngletWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    categorie_onglet?: FormationOngletCategorieOngletCompoundUniqueInput
+    AND?: FormationOngletWhereInput | FormationOngletWhereInput[]
+    OR?: FormationOngletWhereInput[]
+    NOT?: FormationOngletWhereInput | FormationOngletWhereInput[]
+    categorie?: EnumCategorieFormationFilter<"FormationOnglet"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFilter<"FormationOnglet"> | $Enums.FormationOngletCle
+    titre?: StringNullableFilter<"FormationOnglet"> | string | null
+    contenu?: StringNullableFilter<"FormationOnglet"> | string | null
+    videoUrl?: StringNullableFilter<"FormationOnglet"> | string | null
+    image?: StringNullableFilter<"FormationOnglet"> | string | null
+    imageTaille?: IntFilter<"FormationOnglet"> | number
+    backgroundColor?: StringFilter<"FormationOnglet"> | string
+    opacity?: IntFilter<"FormationOnglet"> | number
+    effetVisuel?: EnumEffetVisuelFilter<"FormationOnglet"> | $Enums.EffetVisuel
+    updatedAt?: DateTimeFilter<"FormationOnglet"> | Date | string
+  }, "id" | "categorie_onglet">
+
+  export type FormationOngletOrderByWithAggregationInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrderInput | SortOrder
+    contenu?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    imageTaille?: SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FormationOngletCountOrderByAggregateInput
+    _avg?: FormationOngletAvgOrderByAggregateInput
+    _max?: FormationOngletMaxOrderByAggregateInput
+    _min?: FormationOngletMinOrderByAggregateInput
+    _sum?: FormationOngletSumOrderByAggregateInput
+  }
+
+  export type FormationOngletScalarWhereWithAggregatesInput = {
+    AND?: FormationOngletScalarWhereWithAggregatesInput | FormationOngletScalarWhereWithAggregatesInput[]
+    OR?: FormationOngletScalarWhereWithAggregatesInput[]
+    NOT?: FormationOngletScalarWhereWithAggregatesInput | FormationOngletScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FormationOnglet"> | string
+    categorie?: EnumCategorieFormationWithAggregatesFilter<"FormationOnglet"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleWithAggregatesFilter<"FormationOnglet"> | $Enums.FormationOngletCle
+    titre?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
+    contenu?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
+    videoUrl?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
+    image?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
+    imageTaille?: IntWithAggregatesFilter<"FormationOnglet"> | number
+    backgroundColor?: StringWithAggregatesFilter<"FormationOnglet"> | string
+    opacity?: IntWithAggregatesFilter<"FormationOnglet"> | number
+    effetVisuel?: EnumEffetVisuelWithAggregatesFilter<"FormationOnglet"> | $Enums.EffetVisuel
+    updatedAt?: DateTimeWithAggregatesFilter<"FormationOnglet"> | Date | string
+  }
+
+  export type PageHeroWhereInput = {
+    AND?: PageHeroWhereInput | PageHeroWhereInput[]
+    OR?: PageHeroWhereInput[]
+    NOT?: PageHeroWhereInput | PageHeroWhereInput[]
+    id?: StringFilter<"PageHero"> | string
+    page?: EnumPageCleFilter<"PageHero"> | $Enums.PageCle
+    titre?: StringFilter<"PageHero"> | string
+    sousTitre?: StringNullableFilter<"PageHero"> | string | null
+    image?: StringNullableFilter<"PageHero"> | string | null
+    updatedAt?: DateTimeFilter<"PageHero"> | Date | string
+  }
+
+  export type PageHeroOrderByWithRelationInput = {
+    id?: SortOrder
+    page?: SortOrder
+    titre?: SortOrder
+    sousTitre?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PageHeroWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    page?: $Enums.PageCle
+    AND?: PageHeroWhereInput | PageHeroWhereInput[]
+    OR?: PageHeroWhereInput[]
+    NOT?: PageHeroWhereInput | PageHeroWhereInput[]
+    titre?: StringFilter<"PageHero"> | string
+    sousTitre?: StringNullableFilter<"PageHero"> | string | null
+    image?: StringNullableFilter<"PageHero"> | string | null
+    updatedAt?: DateTimeFilter<"PageHero"> | Date | string
+  }, "id" | "page">
+
+  export type PageHeroOrderByWithAggregationInput = {
+    id?: SortOrder
+    page?: SortOrder
+    titre?: SortOrder
+    sousTitre?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: PageHeroCountOrderByAggregateInput
+    _max?: PageHeroMaxOrderByAggregateInput
+    _min?: PageHeroMinOrderByAggregateInput
+  }
+
+  export type PageHeroScalarWhereWithAggregatesInput = {
+    AND?: PageHeroScalarWhereWithAggregatesInput | PageHeroScalarWhereWithAggregatesInput[]
+    OR?: PageHeroScalarWhereWithAggregatesInput[]
+    NOT?: PageHeroScalarWhereWithAggregatesInput | PageHeroScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PageHero"> | string
+    page?: EnumPageCleWithAggregatesFilter<"PageHero"> | $Enums.PageCle
+    titre?: StringWithAggregatesFilter<"PageHero"> | string
+    sousTitre?: StringNullableWithAggregatesFilter<"PageHero"> | string | null
+    image?: StringNullableWithAggregatesFilter<"PageHero"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"PageHero"> | Date | string
   }
 
   export type DocumentPasserelleWhereInput = {
@@ -33008,6 +37084,83 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DemandeContactCreateInput = {
+    id?: string
+    thematique: string
+    nom: string
+    prenom: string
+    email: string
+    telephone?: string | null
+    message?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DemandeContactUncheckedCreateInput = {
+    id?: string
+    thematique: string
+    nom: string
+    prenom: string
+    email: string
+    telephone?: string | null
+    message?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DemandeContactUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    thematique?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DemandeContactUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    thematique?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DemandeContactCreateManyInput = {
+    id?: string
+    thematique: string
+    nom: string
+    prenom: string
+    email: string
+    telephone?: string | null
+    message?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DemandeContactUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    thematique?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DemandeContactUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    thematique?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type DocumentCreateInput = {
     id?: string
     nom: string
@@ -33636,6 +37789,13 @@ export namespace Prisma {
   export type AccueilContenuCreateInput = {
     id?: string
     bandeauEmploiTitre?: string
+    bandeauEmploiActif?: boolean
+    bandeauBouton1Label?: string
+    bandeauBouton1Type?: $Enums.TypeLien
+    bandeauBouton1Url?: string
+    bandeauBouton2Label?: string
+    bandeauBouton2Type?: $Enums.TypeLien
+    bandeauBouton2Url?: string
     accompagnementEyebrow?: string
     accompagnementTitre?: string
     contactTitre?: string
@@ -33646,6 +37806,13 @@ export namespace Prisma {
   export type AccueilContenuUncheckedCreateInput = {
     id?: string
     bandeauEmploiTitre?: string
+    bandeauEmploiActif?: boolean
+    bandeauBouton1Label?: string
+    bandeauBouton1Type?: $Enums.TypeLien
+    bandeauBouton1Url?: string
+    bandeauBouton2Label?: string
+    bandeauBouton2Type?: $Enums.TypeLien
+    bandeauBouton2Url?: string
     accompagnementEyebrow?: string
     accompagnementTitre?: string
     contactTitre?: string
@@ -33656,6 +37823,13 @@ export namespace Prisma {
   export type AccueilContenuUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     bandeauEmploiTitre?: StringFieldUpdateOperationsInput | string
+    bandeauEmploiActif?: BoolFieldUpdateOperationsInput | boolean
+    bandeauBouton1Label?: StringFieldUpdateOperationsInput | string
+    bandeauBouton1Type?: EnumTypeLienFieldUpdateOperationsInput | $Enums.TypeLien
+    bandeauBouton1Url?: StringFieldUpdateOperationsInput | string
+    bandeauBouton2Label?: StringFieldUpdateOperationsInput | string
+    bandeauBouton2Type?: EnumTypeLienFieldUpdateOperationsInput | $Enums.TypeLien
+    bandeauBouton2Url?: StringFieldUpdateOperationsInput | string
     accompagnementEyebrow?: StringFieldUpdateOperationsInput | string
     accompagnementTitre?: StringFieldUpdateOperationsInput | string
     contactTitre?: StringFieldUpdateOperationsInput | string
@@ -33666,6 +37840,13 @@ export namespace Prisma {
   export type AccueilContenuUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     bandeauEmploiTitre?: StringFieldUpdateOperationsInput | string
+    bandeauEmploiActif?: BoolFieldUpdateOperationsInput | boolean
+    bandeauBouton1Label?: StringFieldUpdateOperationsInput | string
+    bandeauBouton1Type?: EnumTypeLienFieldUpdateOperationsInput | $Enums.TypeLien
+    bandeauBouton1Url?: StringFieldUpdateOperationsInput | string
+    bandeauBouton2Label?: StringFieldUpdateOperationsInput | string
+    bandeauBouton2Type?: EnumTypeLienFieldUpdateOperationsInput | $Enums.TypeLien
+    bandeauBouton2Url?: StringFieldUpdateOperationsInput | string
     accompagnementEyebrow?: StringFieldUpdateOperationsInput | string
     accompagnementTitre?: StringFieldUpdateOperationsInput | string
     contactTitre?: StringFieldUpdateOperationsInput | string
@@ -33676,6 +37857,13 @@ export namespace Prisma {
   export type AccueilContenuCreateManyInput = {
     id?: string
     bandeauEmploiTitre?: string
+    bandeauEmploiActif?: boolean
+    bandeauBouton1Label?: string
+    bandeauBouton1Type?: $Enums.TypeLien
+    bandeauBouton1Url?: string
+    bandeauBouton2Label?: string
+    bandeauBouton2Type?: $Enums.TypeLien
+    bandeauBouton2Url?: string
     accompagnementEyebrow?: string
     accompagnementTitre?: string
     contactTitre?: string
@@ -33686,6 +37874,13 @@ export namespace Prisma {
   export type AccueilContenuUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     bandeauEmploiTitre?: StringFieldUpdateOperationsInput | string
+    bandeauEmploiActif?: BoolFieldUpdateOperationsInput | boolean
+    bandeauBouton1Label?: StringFieldUpdateOperationsInput | string
+    bandeauBouton1Type?: EnumTypeLienFieldUpdateOperationsInput | $Enums.TypeLien
+    bandeauBouton1Url?: StringFieldUpdateOperationsInput | string
+    bandeauBouton2Label?: StringFieldUpdateOperationsInput | string
+    bandeauBouton2Type?: EnumTypeLienFieldUpdateOperationsInput | $Enums.TypeLien
+    bandeauBouton2Url?: StringFieldUpdateOperationsInput | string
     accompagnementEyebrow?: StringFieldUpdateOperationsInput | string
     accompagnementTitre?: StringFieldUpdateOperationsInput | string
     contactTitre?: StringFieldUpdateOperationsInput | string
@@ -33696,6 +37891,13 @@ export namespace Prisma {
   export type AccueilContenuUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     bandeauEmploiTitre?: StringFieldUpdateOperationsInput | string
+    bandeauEmploiActif?: BoolFieldUpdateOperationsInput | boolean
+    bandeauBouton1Label?: StringFieldUpdateOperationsInput | string
+    bandeauBouton1Type?: EnumTypeLienFieldUpdateOperationsInput | $Enums.TypeLien
+    bandeauBouton1Url?: StringFieldUpdateOperationsInput | string
+    bandeauBouton2Label?: StringFieldUpdateOperationsInput | string
+    bandeauBouton2Type?: EnumTypeLienFieldUpdateOperationsInput | $Enums.TypeLien
+    bandeauBouton2Url?: StringFieldUpdateOperationsInput | string
     accompagnementEyebrow?: StringFieldUpdateOperationsInput | string
     accompagnementTitre?: StringFieldUpdateOperationsInput | string
     contactTitre?: StringFieldUpdateOperationsInput | string
@@ -33786,6 +37988,7 @@ export namespace Prisma {
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
+    dureeAffichage?: number
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -33807,6 +38010,7 @@ export namespace Prisma {
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
+    dureeAffichage?: number
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -33826,6 +38030,7 @@ export namespace Prisma {
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
+    dureeAffichage?: IntFieldUpdateOperationsInput | number
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33847,6 +38052,7 @@ export namespace Prisma {
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
+    dureeAffichage?: IntFieldUpdateOperationsInput | number
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33867,6 +38073,7 @@ export namespace Prisma {
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
+    dureeAffichage?: number
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -33886,6 +38093,7 @@ export namespace Prisma {
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
+    dureeAffichage?: IntFieldUpdateOperationsInput | number
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33906,65 +38114,255 @@ export namespace Prisma {
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
+    dureeAffichage?: IntFieldUpdateOperationsInput | number
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CategorieInfoCreateInput = {
+  export type FormationTuileCreateInput = {
     id?: string
     categorie: $Enums.CategorieFormation
-    titre: string
-    corps: string
+    label: string
+    image?: string | null
+    backgroundColor?: string
+    opacity?: number
+    effetVisuel?: $Enums.EffetVisuel
     updatedAt?: Date | string
   }
 
-  export type CategorieInfoUncheckedCreateInput = {
+  export type FormationTuileUncheckedCreateInput = {
     id?: string
     categorie: $Enums.CategorieFormation
-    titre: string
-    corps: string
+    label: string
+    image?: string | null
+    backgroundColor?: string
+    opacity?: number
+    effetVisuel?: $Enums.EffetVisuel
     updatedAt?: Date | string
   }
 
-  export type CategorieInfoUpdateInput = {
+  export type FormationTuileUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
-    titre?: StringFieldUpdateOperationsInput | string
-    corps?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CategorieInfoUncheckedUpdateInput = {
+  export type FormationTuileUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
-    titre?: StringFieldUpdateOperationsInput | string
-    corps?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CategorieInfoCreateManyInput = {
+  export type FormationTuileCreateManyInput = {
     id?: string
     categorie: $Enums.CategorieFormation
-    titre: string
-    corps: string
+    label: string
+    image?: string | null
+    backgroundColor?: string
+    opacity?: number
+    effetVisuel?: $Enums.EffetVisuel
     updatedAt?: Date | string
   }
 
-  export type CategorieInfoUpdateManyMutationInput = {
+  export type FormationTuileUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
-    titre?: StringFieldUpdateOperationsInput | string
-    corps?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CategorieInfoUncheckedUpdateManyInput = {
+  export type FormationTuileUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    label?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationOngletCreateInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    contenu?: string | null
+    videoUrl?: string | null
+    image?: string | null
+    imageTaille?: number
+    backgroundColor?: string
+    opacity?: number
+    effetVisuel?: $Enums.EffetVisuel
+    updatedAt?: Date | string
+  }
+
+  export type FormationOngletUncheckedCreateInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    contenu?: string | null
+    videoUrl?: string | null
+    image?: string | null
+    imageTaille?: number
+    backgroundColor?: string
+    opacity?: number
+    effetVisuel?: $Enums.EffetVisuel
+    updatedAt?: Date | string
+  }
+
+  export type FormationOngletUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageTaille?: IntFieldUpdateOperationsInput | number
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationOngletUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageTaille?: IntFieldUpdateOperationsInput | number
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationOngletCreateManyInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    contenu?: string | null
+    videoUrl?: string | null
+    image?: string | null
+    imageTaille?: number
+    backgroundColor?: string
+    opacity?: number
+    effetVisuel?: $Enums.EffetVisuel
+    updatedAt?: Date | string
+  }
+
+  export type FormationOngletUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageTaille?: IntFieldUpdateOperationsInput | number
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationOngletUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageTaille?: IntFieldUpdateOperationsInput | number
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PageHeroCreateInput = {
+    id?: string
+    page: $Enums.PageCle
+    titre: string
+    sousTitre?: string | null
+    image?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type PageHeroUncheckedCreateInput = {
+    id?: string
+    page: $Enums.PageCle
+    titre: string
+    sousTitre?: string | null
+    image?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type PageHeroUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    page?: EnumPageCleFieldUpdateOperationsInput | $Enums.PageCle
     titre?: StringFieldUpdateOperationsInput | string
-    corps?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PageHeroUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    page?: EnumPageCleFieldUpdateOperationsInput | $Enums.PageCle
+    titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PageHeroCreateManyInput = {
+    id?: string
+    page: $Enums.PageCle
+    titre: string
+    sousTitre?: string | null
+    image?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type PageHeroUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    page?: EnumPageCleFieldUpdateOperationsInput | $Enums.PageCle
+    titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PageHeroUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    page?: EnumPageCleFieldUpdateOperationsInput | $Enums.PageCle
+    titre?: StringFieldUpdateOperationsInput | string
+    sousTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -35210,6 +39608,39 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type DemandeContactCountOrderByAggregateInput = {
+    id?: SortOrder
+    thematique?: SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    email?: SortOrder
+    telephone?: SortOrder
+    message?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DemandeContactMaxOrderByAggregateInput = {
+    id?: SortOrder
+    thematique?: SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    email?: SortOrder
+    telephone?: SortOrder
+    message?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DemandeContactMinOrderByAggregateInput = {
+    id?: SortOrder
+    thematique?: SortOrder
+    nom?: SortOrder
+    prenom?: SortOrder
+    email?: SortOrder
+    telephone?: SortOrder
+    message?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type EnumRoleNullableListFilter<$PrismaModel = never> = {
     equals?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
     has?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel> | null
@@ -35635,9 +40066,23 @@ export namespace Prisma {
     _max?: NestedEnumIconeAccompagnementFilter<$PrismaModel>
   }
 
+  export type EnumTypeLienFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeLien | EnumTypeLienFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeLien[] | ListEnumTypeLienFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeLien[] | ListEnumTypeLienFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeLienFilter<$PrismaModel> | $Enums.TypeLien
+  }
+
   export type AccueilContenuCountOrderByAggregateInput = {
     id?: SortOrder
     bandeauEmploiTitre?: SortOrder
+    bandeauEmploiActif?: SortOrder
+    bandeauBouton1Label?: SortOrder
+    bandeauBouton1Type?: SortOrder
+    bandeauBouton1Url?: SortOrder
+    bandeauBouton2Label?: SortOrder
+    bandeauBouton2Type?: SortOrder
+    bandeauBouton2Url?: SortOrder
     accompagnementEyebrow?: SortOrder
     accompagnementTitre?: SortOrder
     contactTitre?: SortOrder
@@ -35648,6 +40093,13 @@ export namespace Prisma {
   export type AccueilContenuMaxOrderByAggregateInput = {
     id?: SortOrder
     bandeauEmploiTitre?: SortOrder
+    bandeauEmploiActif?: SortOrder
+    bandeauBouton1Label?: SortOrder
+    bandeauBouton1Type?: SortOrder
+    bandeauBouton1Url?: SortOrder
+    bandeauBouton2Label?: SortOrder
+    bandeauBouton2Type?: SortOrder
+    bandeauBouton2Url?: SortOrder
     accompagnementEyebrow?: SortOrder
     accompagnementTitre?: SortOrder
     contactTitre?: SortOrder
@@ -35658,11 +40110,28 @@ export namespace Prisma {
   export type AccueilContenuMinOrderByAggregateInput = {
     id?: SortOrder
     bandeauEmploiTitre?: SortOrder
+    bandeauEmploiActif?: SortOrder
+    bandeauBouton1Label?: SortOrder
+    bandeauBouton1Type?: SortOrder
+    bandeauBouton1Url?: SortOrder
+    bandeauBouton2Label?: SortOrder
+    bandeauBouton2Type?: SortOrder
+    bandeauBouton2Url?: SortOrder
     accompagnementEyebrow?: SortOrder
     accompagnementTitre?: SortOrder
     contactTitre?: SortOrder
     contactSousTitre?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumTypeLienWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeLien | EnumTypeLienFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeLien[] | ListEnumTypeLienFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeLien[] | ListEnumTypeLienFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeLienWithAggregatesFilter<$PrismaModel> | $Enums.TypeLien
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeLienFilter<$PrismaModel>
+    _max?: NestedEnumTypeLienFilter<$PrismaModel>
   }
 
   export type StatCleCountOrderByAggregateInput = {
@@ -35731,6 +40200,7 @@ export namespace Prisma {
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
+    dureeAffichage?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -35739,6 +40209,7 @@ export namespace Prisma {
 
   export type HeroSlideAvgOrderByAggregateInput = {
     overlayOpacity?: SortOrder
+    dureeAffichage?: SortOrder
     ordre?: SortOrder
   }
 
@@ -35756,6 +40227,7 @@ export namespace Prisma {
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
+    dureeAffichage?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -35776,6 +40248,7 @@ export namespace Prisma {
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
     transition?: SortOrder
+    dureeAffichage?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -35784,6 +40257,7 @@ export namespace Prisma {
 
   export type HeroSlideSumOrderByAggregateInput = {
     overlayOpacity?: SortOrder
+    dureeAffichage?: SortOrder
     ordre?: SortOrder
   }
 
@@ -35807,28 +40281,183 @@ export namespace Prisma {
     _max?: NestedEnumTransitionHeroFilter<$PrismaModel>
   }
 
-  export type CategorieInfoCountOrderByAggregateInput = {
+  export type EnumEffetVisuelFilter<$PrismaModel = never> = {
+    equals?: $Enums.EffetVisuel | EnumEffetVisuelFieldRefInput<$PrismaModel>
+    in?: $Enums.EffetVisuel[] | ListEnumEffetVisuelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EffetVisuel[] | ListEnumEffetVisuelFieldRefInput<$PrismaModel>
+    not?: NestedEnumEffetVisuelFilter<$PrismaModel> | $Enums.EffetVisuel
+  }
+
+  export type FormationTuileCountOrderByAggregateInput = {
     id?: SortOrder
     categorie?: SortOrder
-    titre?: SortOrder
-    corps?: SortOrder
+    label?: SortOrder
+    image?: SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type CategorieInfoMaxOrderByAggregateInput = {
+  export type FormationTuileAvgOrderByAggregateInput = {
+    opacity?: SortOrder
+  }
+
+  export type FormationTuileMaxOrderByAggregateInput = {
     id?: SortOrder
     categorie?: SortOrder
-    titre?: SortOrder
-    corps?: SortOrder
+    label?: SortOrder
+    image?: SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type CategorieInfoMinOrderByAggregateInput = {
+  export type FormationTuileMinOrderByAggregateInput = {
     id?: SortOrder
     categorie?: SortOrder
-    titre?: SortOrder
-    corps?: SortOrder
+    label?: SortOrder
+    image?: SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type FormationTuileSumOrderByAggregateInput = {
+    opacity?: SortOrder
+  }
+
+  export type EnumEffetVisuelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EffetVisuel | EnumEffetVisuelFieldRefInput<$PrismaModel>
+    in?: $Enums.EffetVisuel[] | ListEnumEffetVisuelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EffetVisuel[] | ListEnumEffetVisuelFieldRefInput<$PrismaModel>
+    not?: NestedEnumEffetVisuelWithAggregatesFilter<$PrismaModel> | $Enums.EffetVisuel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEffetVisuelFilter<$PrismaModel>
+    _max?: NestedEnumEffetVisuelFilter<$PrismaModel>
+  }
+
+  export type EnumFormationOngletCleFilter<$PrismaModel = never> = {
+    equals?: $Enums.FormationOngletCle | EnumFormationOngletCleFieldRefInput<$PrismaModel>
+    in?: $Enums.FormationOngletCle[] | ListEnumFormationOngletCleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FormationOngletCle[] | ListEnumFormationOngletCleFieldRefInput<$PrismaModel>
+    not?: NestedEnumFormationOngletCleFilter<$PrismaModel> | $Enums.FormationOngletCle
+  }
+
+  export type FormationOngletCategorieOngletCompoundUniqueInput = {
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+  }
+
+  export type FormationOngletCountOrderByAggregateInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrder
+    contenu?: SortOrder
+    videoUrl?: SortOrder
+    image?: SortOrder
+    imageTaille?: SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormationOngletAvgOrderByAggregateInput = {
+    imageTaille?: SortOrder
+    opacity?: SortOrder
+  }
+
+  export type FormationOngletMaxOrderByAggregateInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrder
+    contenu?: SortOrder
+    videoUrl?: SortOrder
+    image?: SortOrder
+    imageTaille?: SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormationOngletMinOrderByAggregateInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrder
+    contenu?: SortOrder
+    videoUrl?: SortOrder
+    image?: SortOrder
+    imageTaille?: SortOrder
+    backgroundColor?: SortOrder
+    opacity?: SortOrder
+    effetVisuel?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormationOngletSumOrderByAggregateInput = {
+    imageTaille?: SortOrder
+    opacity?: SortOrder
+  }
+
+  export type EnumFormationOngletCleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FormationOngletCle | EnumFormationOngletCleFieldRefInput<$PrismaModel>
+    in?: $Enums.FormationOngletCle[] | ListEnumFormationOngletCleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FormationOngletCle[] | ListEnumFormationOngletCleFieldRefInput<$PrismaModel>
+    not?: NestedEnumFormationOngletCleWithAggregatesFilter<$PrismaModel> | $Enums.FormationOngletCle
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFormationOngletCleFilter<$PrismaModel>
+    _max?: NestedEnumFormationOngletCleFilter<$PrismaModel>
+  }
+
+  export type EnumPageCleFilter<$PrismaModel = never> = {
+    equals?: $Enums.PageCle | EnumPageCleFieldRefInput<$PrismaModel>
+    in?: $Enums.PageCle[] | ListEnumPageCleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PageCle[] | ListEnumPageCleFieldRefInput<$PrismaModel>
+    not?: NestedEnumPageCleFilter<$PrismaModel> | $Enums.PageCle
+  }
+
+  export type PageHeroCountOrderByAggregateInput = {
+    id?: SortOrder
+    page?: SortOrder
+    titre?: SortOrder
+    sousTitre?: SortOrder
+    image?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PageHeroMaxOrderByAggregateInput = {
+    id?: SortOrder
+    page?: SortOrder
+    titre?: SortOrder
+    sousTitre?: SortOrder
+    image?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PageHeroMinOrderByAggregateInput = {
+    id?: SortOrder
+    page?: SortOrder
+    titre?: SortOrder
+    sousTitre?: SortOrder
+    image?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumPageCleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PageCle | EnumPageCleFieldRefInput<$PrismaModel>
+    in?: $Enums.PageCle[] | ListEnumPageCleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PageCle[] | ListEnumPageCleFieldRefInput<$PrismaModel>
+    not?: NestedEnumPageCleWithAggregatesFilter<$PrismaModel> | $Enums.PageCle
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPageCleFilter<$PrismaModel>
+    _max?: NestedEnumPageCleFilter<$PrismaModel>
   }
 
   export type EnumTypeDocumentFilter<$PrismaModel = never> = {
@@ -37424,6 +42053,10 @@ export namespace Prisma {
     set?: $Enums.IconeAccompagnement
   }
 
+  export type EnumTypeLienFieldUpdateOperationsInput = {
+    set?: $Enums.TypeLien
+  }
+
   export type FormationCreateNestedOneWithoutHeroSlidesInput = {
     create?: XOR<FormationCreateWithoutHeroSlidesInput, FormationUncheckedCreateWithoutHeroSlidesInput>
     connectOrCreate?: FormationCreateOrConnectWithoutHeroSlidesInput
@@ -37446,6 +42079,18 @@ export namespace Prisma {
     delete?: FormationWhereInput | boolean
     connect?: FormationWhereUniqueInput
     update?: XOR<XOR<FormationUpdateToOneWithWhereWithoutHeroSlidesInput, FormationUpdateWithoutHeroSlidesInput>, FormationUncheckedUpdateWithoutHeroSlidesInput>
+  }
+
+  export type EnumEffetVisuelFieldUpdateOperationsInput = {
+    set?: $Enums.EffetVisuel
+  }
+
+  export type EnumFormationOngletCleFieldUpdateOperationsInput = {
+    set?: $Enums.FormationOngletCle
+  }
+
+  export type EnumPageCleFieldUpdateOperationsInput = {
+    set?: $Enums.PageCle
   }
 
   export type EnumTypeDocumentFieldUpdateOperationsInput = {
@@ -37938,6 +42583,23 @@ export namespace Prisma {
     _max?: NestedEnumIconeAccompagnementFilter<$PrismaModel>
   }
 
+  export type NestedEnumTypeLienFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeLien | EnumTypeLienFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeLien[] | ListEnumTypeLienFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeLien[] | ListEnumTypeLienFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeLienFilter<$PrismaModel> | $Enums.TypeLien
+  }
+
+  export type NestedEnumTypeLienWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeLien | EnumTypeLienFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeLien[] | ListEnumTypeLienFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeLien[] | ListEnumTypeLienFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeLienWithAggregatesFilter<$PrismaModel> | $Enums.TypeLien
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeLienFilter<$PrismaModel>
+    _max?: NestedEnumTypeLienFilter<$PrismaModel>
+  }
+
   export type NestedEnumAlignementHeroFilter<$PrismaModel = never> = {
     equals?: $Enums.AlignementHero | EnumAlignementHeroFieldRefInput<$PrismaModel>
     in?: $Enums.AlignementHero[] | ListEnumAlignementHeroFieldRefInput<$PrismaModel>
@@ -37970,6 +42632,57 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTransitionHeroFilter<$PrismaModel>
     _max?: NestedEnumTransitionHeroFilter<$PrismaModel>
+  }
+
+  export type NestedEnumEffetVisuelFilter<$PrismaModel = never> = {
+    equals?: $Enums.EffetVisuel | EnumEffetVisuelFieldRefInput<$PrismaModel>
+    in?: $Enums.EffetVisuel[] | ListEnumEffetVisuelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EffetVisuel[] | ListEnumEffetVisuelFieldRefInput<$PrismaModel>
+    not?: NestedEnumEffetVisuelFilter<$PrismaModel> | $Enums.EffetVisuel
+  }
+
+  export type NestedEnumEffetVisuelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EffetVisuel | EnumEffetVisuelFieldRefInput<$PrismaModel>
+    in?: $Enums.EffetVisuel[] | ListEnumEffetVisuelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EffetVisuel[] | ListEnumEffetVisuelFieldRefInput<$PrismaModel>
+    not?: NestedEnumEffetVisuelWithAggregatesFilter<$PrismaModel> | $Enums.EffetVisuel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEffetVisuelFilter<$PrismaModel>
+    _max?: NestedEnumEffetVisuelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumFormationOngletCleFilter<$PrismaModel = never> = {
+    equals?: $Enums.FormationOngletCle | EnumFormationOngletCleFieldRefInput<$PrismaModel>
+    in?: $Enums.FormationOngletCle[] | ListEnumFormationOngletCleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FormationOngletCle[] | ListEnumFormationOngletCleFieldRefInput<$PrismaModel>
+    not?: NestedEnumFormationOngletCleFilter<$PrismaModel> | $Enums.FormationOngletCle
+  }
+
+  export type NestedEnumFormationOngletCleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FormationOngletCle | EnumFormationOngletCleFieldRefInput<$PrismaModel>
+    in?: $Enums.FormationOngletCle[] | ListEnumFormationOngletCleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FormationOngletCle[] | ListEnumFormationOngletCleFieldRefInput<$PrismaModel>
+    not?: NestedEnumFormationOngletCleWithAggregatesFilter<$PrismaModel> | $Enums.FormationOngletCle
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFormationOngletCleFilter<$PrismaModel>
+    _max?: NestedEnumFormationOngletCleFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPageCleFilter<$PrismaModel = never> = {
+    equals?: $Enums.PageCle | EnumPageCleFieldRefInput<$PrismaModel>
+    in?: $Enums.PageCle[] | ListEnumPageCleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PageCle[] | ListEnumPageCleFieldRefInput<$PrismaModel>
+    not?: NestedEnumPageCleFilter<$PrismaModel> | $Enums.PageCle
+  }
+
+  export type NestedEnumPageCleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PageCle | EnumPageCleFieldRefInput<$PrismaModel>
+    in?: $Enums.PageCle[] | ListEnumPageCleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PageCle[] | ListEnumPageCleFieldRefInput<$PrismaModel>
+    not?: NestedEnumPageCleWithAggregatesFilter<$PrismaModel> | $Enums.PageCle
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPageCleFilter<$PrismaModel>
+    _max?: NestedEnumPageCleFilter<$PrismaModel>
   }
 
   export type NestedEnumTypeDocumentFilter<$PrismaModel = never> = {
@@ -38777,6 +43490,7 @@ export namespace Prisma {
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
+    dureeAffichage?: number
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -38796,6 +43510,7 @@ export namespace Prisma {
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
+    dureeAffichage?: number
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -39011,6 +43726,7 @@ export namespace Prisma {
     overlayColor?: StringFilter<"HeroSlide"> | string
     overlayOpacity?: IntFilter<"HeroSlide"> | number
     transition?: EnumTransitionHeroFilter<"HeroSlide"> | $Enums.TransitionHero
+    dureeAffichage?: IntFilter<"HeroSlide"> | number
     ordre?: IntFilter<"HeroSlide"> | number
     actif?: BoolFilter<"HeroSlide"> | boolean
     createdAt?: DateTimeFilter<"HeroSlide"> | Date | string
@@ -42432,6 +47148,7 @@ export namespace Prisma {
     overlayColor?: string
     overlayOpacity?: number
     transition?: $Enums.TransitionHero
+    dureeAffichage?: number
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -42620,6 +47337,7 @@ export namespace Prisma {
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
+    dureeAffichage?: IntFieldUpdateOperationsInput | number
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42639,6 +47357,7 @@ export namespace Prisma {
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
+    dureeAffichage?: IntFieldUpdateOperationsInput | number
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42658,6 +47377,7 @@ export namespace Prisma {
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
     transition?: EnumTransitionHeroFieldUpdateOperationsInput | $Enums.TransitionHero
+    dureeAffichage?: IntFieldUpdateOperationsInput | number
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

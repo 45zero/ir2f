@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber } from "@/lib/actions/form-utils"
 import { resolveImageUrl } from "@/lib/storage"
-import type { IconeAccompagnement, TransitionHero, AlignementHero } from "@/generated/prisma"
+import type { IconeAccompagnement, TransitionHero, AlignementHero, TypeLien } from "@/generated/prisma"
 
 export type AccueilActionState = { error: string | null }
 
@@ -35,6 +35,7 @@ export async function saveHeroSlide(
   const overlayColor = str(formData, "overlayColor") || "#0a162e"
   const overlayOpacity = optionalNumber(formData, "overlayOpacity") ?? 60
   const transition = (str(formData, "transition") || "FADE") as TransitionHero
+  const dureeAffichage = optionalNumber(formData, "dureeAffichage") ?? 7
 
   if (!titre || !image) {
     return { error: "Le titre et l'image sont obligatoires." }
@@ -54,6 +55,7 @@ export async function saveHeroSlide(
     overlayColor,
     overlayOpacity,
     transition,
+    dureeAffichage,
   }
   if (id) {
     await prisma.heroSlide.update({ where: { id }, data })
@@ -161,16 +163,27 @@ export async function saveAccueilContenu(
 ): Promise<AccueilActionState> {
   await requireAdmin()
 
-  const data = {
+  const requiredData = {
     bandeauEmploiTitre: str(formData, "bandeauEmploiTitre"),
+    bandeauBouton1Label: str(formData, "bandeauBouton1Label"),
+    bandeauBouton1Url: str(formData, "bandeauBouton1Url"),
+    bandeauBouton2Label: str(formData, "bandeauBouton2Label"),
+    bandeauBouton2Url: str(formData, "bandeauBouton2Url"),
     accompagnementEyebrow: str(formData, "accompagnementEyebrow"),
     accompagnementTitre: str(formData, "accompagnementTitre"),
     contactTitre: str(formData, "contactTitre"),
     contactSousTitre: str(formData, "contactSousTitre"),
   }
 
-  if (Object.values(data).some((v) => !v)) {
+  if (Object.values(requiredData).some((v) => !v)) {
     return { error: "Tous les champs sont obligatoires." }
+  }
+
+  const data = {
+    ...requiredData,
+    bandeauEmploiActif: formData.get("bandeauEmploiActif") === "on",
+    bandeauBouton1Type: (str(formData, "bandeauBouton1Type") || "INTERNE") as TypeLien,
+    bandeauBouton2Type: (str(formData, "bandeauBouton2Type") || "INTERNE") as TypeLien,
   }
 
   await prisma.accueilContenu.upsert({

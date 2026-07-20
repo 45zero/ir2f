@@ -1,11 +1,10 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { str, optionalStr } from "@/lib/actions/form-utils"
 import { sendEmail } from "@/lib/emails/send"
-import { NouvelleDemandeAdminEmail } from "@/lib/emails/NouvelleDemandeAdminEmail"
+import { NouvelleDemandeContactEmail } from "@/lib/emails/NouvelleDemandeContactEmail"
 import { getAdminNotificationEmails } from "@/lib/emails/admin-recipients"
 import { getContactTheme } from "@/lib/contact-themes"
 
@@ -22,7 +21,6 @@ export async function submitContactRequest(
   const email = str(formData, "email")
   const telephone = optionalStr(formData, "telephone")
   const clubNom = optionalStr(formData, "clubNom")
-  const formationId = optionalStr(formData, "formationId")
   const messageRaw = optionalStr(formData, "message")
 
   const theme = getContactTheme(thematiqueValue)
@@ -35,38 +33,24 @@ export async function submitContactRequest(
     return { status: "error", message: "Merci de renseigner votre nom, prénom et email." }
   }
 
-  const parts: string[] = [`Thématique : ${theme.label}`]
+  const parts: string[] = []
   if (type === "club" && clubNom) parts.push(`Club : ${clubNom}`)
   if (messageRaw) parts.push(messageRaw)
-
-  const session = await auth()
   const message = parts.length > 0 ? parts.join("\n\n") : null
 
-  const formation = formationId
-    ? await prisma.formation.findUnique({ where: { id: formationId }, select: { titre: true } })
-    : null
-
-  await prisma.demandeInscription.create({
-    data: {
-      nom,
-      prenom,
-      email,
-      telephone,
-      formationId: formationId || null,
-      userId: session?.user?.id ?? null,
-      message,
-    },
+  await prisma.demandeContact.create({
+    data: { thematique: thematiqueValue, nom, prenom, email, telephone, message },
   })
 
-  revalidatePath("/admin/inscriptions")
+  revalidatePath("/admin/demandes-contact")
 
   const adminEmails = await getAdminNotificationEmails()
   const recipients = Array.from(new Set([...adminEmails, theme.email]))
   if (recipients.length > 0) {
     await sendEmail({
       to: recipients,
-      subject: `Nouvelle demande d'inscription IR2F — ${theme.label}`,
-      react: NouvelleDemandeAdminEmail({ nom, prenom, email, formationTitre: formation?.titre, message }),
+      subject: `Nouvelle demande de contact IR2F — ${theme.label}`,
+      react: NouvelleDemandeContactEmail({ thematiqueLabel: theme.label, nom, prenom, email, telephone, message }),
     })
   }
 

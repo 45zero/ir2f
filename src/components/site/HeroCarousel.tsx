@@ -6,8 +6,6 @@ import { Hoverable } from "@/components/ui/Hoverable"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import type { HeroSlideData } from "@/lib/home"
 
-const AUTOPLAY_MS = 6500
-
 const TRANSITION_ANIMATIONS = {
   FADE: "ir2fFadeIn",
   SLIDE_GAUCHE: "ir2fSlideInLeft",
@@ -33,12 +31,13 @@ export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
   const [videoUrl, setVideoUrl] = useState<string | null>(null)
 
   useEffect(() => {
-    if (slides.length < 2) return
-    const timer = setInterval(() => {
-      setIndex((i) => (paused || videoUrl ? i : (i + 1) % slides.length))
-    }, AUTOPLAY_MS)
-    return () => clearInterval(timer)
-  }, [paused, videoUrl, slides.length])
+    if (slides.length < 2 || paused || videoUrl) return
+    const dureeMs = (slides[index]?.dureeAffichage ?? 7) * 1000
+    const timer = setTimeout(() => {
+      setIndex((i) => (i + 1) % slides.length)
+    }, dureeMs)
+    return () => clearTimeout(timer)
+  }, [index, paused, videoUrl, slides])
 
   if (slides.length === 0) return null
 

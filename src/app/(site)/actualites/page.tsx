@@ -1,31 +1,15 @@
 import { getPublishedArticles } from "@/lib/actualites"
+import { getPageHero } from "@/lib/page-hero"
 import { HoverLink } from "@/components/ui/HoverLink"
+import { PageHero } from "@/components/site/PageHero"
 import { colors, fontHeading } from "@/lib/theme"
 
 export default async function ActualitesPage() {
-  const articles = await getPublishedArticles()
+  const [articles, hero] = await Promise.all([getPublishedArticles(), getPageHero("ACTUALITES")])
 
   return (
     <main>
-      <section style={{ padding: "clamp(24px,3vw,36px) clamp(20px,5vw,60px) 0", backgroundColor: "#FFFFFF" }}>
-        <div style={{ maxWidth: 920, margin: "0 auto", display: "flex", flexDirection: "column", gap: 12 }}>
-          <span style={{ color: colors.red, fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase" }}>
-            IR2F
-          </span>
-          <h1
-            style={{
-              fontFamily: fontHeading,
-              fontSize: "clamp(28px,3.4vw,44px)",
-              fontWeight: 800,
-              color: colors.navy,
-              margin: 0,
-              lineHeight: 1.08,
-            }}
-          >
-            Toutes les actualités
-          </h1>
-        </div>
-      </section>
+      <PageHero {...hero} />
 
       <section style={{ maxWidth: 1160, margin: "0 auto", padding: "40px 20px 72px" }}>
         {articles.length === 0 ? (

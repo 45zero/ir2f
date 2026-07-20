@@ -125,6 +125,14 @@ enum OrigineInscription {
   @@schema("ir2f")
 }
 
+// Type de lien pour les boutons configurables de l'accueil (bandeau emploi)
+enum TypeLien {
+  INTERNE
+  EXTERNE
+
+  @@schema("ir2f")
+}
+
 // ─── UTILISATEURS ────────────────────────────────────
 
 model User {
@@ -267,6 +275,22 @@ model DemandeInscription {
 
   formation Formation? @relation(fields: [formationId], references: [id])
   user      User?      @relation(fields: [userId], references: [id])
+
+  @@schema("ir2f")
+}
+
+// Demande envoyée depuis le formulaire "Je souhaite être contacté" de l'accueil —
+// distincte de DemandeInscription qui déclenche un vrai workflow d'inscription
+// (validation, création de compte). Ici : simple prise de contact, sans compte.
+model DemandeContact {
+  id         String   @id @default(uuid())
+  thematique String
+  nom        String
+  prenom     String
+  email      String
+  telephone  String?
+  message    String?
+  createdAt  DateTime @default(now())
 
   @@schema("ir2f")
 }
@@ -430,6 +454,13 @@ model AccompagnementCard {
 model AccueilContenu {
   id                     String   @id @default("accueil")
   bandeauEmploiTitre     String   @default("Je souhaite créer un emploi dans mon club")
+  bandeauEmploiActif     Boolean  @default(true)
+  bandeauBouton1Label    String   @default("Je donne mes infos")
+  bandeauBouton1Type     TypeLien @default(INTERNE)
+  bandeauBouton1Url      String   @default("#contact")
+  bandeauBouton2Label    String   @default("En savoir plus")
+  bandeauBouton2Type     TypeLien @default(INTERNE)
+  bandeauBouton2Url      String   @default("/emploi")
   accompagnementEyebrow  String   @default("IR2F vous accompagne")
   accompagnementTitre    String   @default("Accompagnement Emploi")
   contactTitre           String   @default("Je souhaite être contacté")
@@ -481,6 +512,7 @@ model HeroSlide {
   overlayColor   String         @default("#0a162e")
   overlayOpacity Int            @default(60)
   transition     TransitionHero @default(FADE)
+  dureeAffichage Int            @default(7)
   ordre          Int            @default(0)
   actif          Boolean        @default(true)
   createdAt      DateTime       @default(now())
@@ -491,12 +523,89 @@ model HeroSlide {
   @@schema("ir2f")
 }
 
-model CategorieInfo {
-  id        String             @id @default(uuid())
-  categorie CategorieFormation @unique
+// Effet visuel appliqué aux images/vidéos des tuiles et onglets de la page
+// "Nos Formations" (voir FormationTuile / FormationOnglet ci-dessous).
+enum EffetVisuel {
+  AUCUN
+  FONDU
+  ZOOM
+  PARALLAXE
+  NOIR_BLANC
+  FLOU
+
+  @@schema("ir2f")
+}
+
+// Les 4 tuiles cliquables en haut de la page "Nos Formations" (Éducateurs,
+// Arbitres, Tout Terrain, DEV). Entièrement administrables : image, couleur
+// de fond, opacité et effet visuel.
+model FormationTuile {
+  id              String             @id @default(uuid())
+  categorie       CategorieFormation @unique
+  label           String
+  image           String?
+  backgroundColor String             @default("#c9a84c")
+  opacity         Int                @default(100)
+  effetVisuel     EffetVisuel        @default(AUCUN)
+  updatedAt       DateTime           @updatedAt
+
+  @@schema("ir2f")
+}
+
+// Les onglets affichés dans le panneau déroulé d'une catégorie sur la page
+// "Nos Formations" (ex : Présentation, Les différents parcours...).
+enum FormationOngletCle {
+  INFO
+  PARCOURS
+  CLUB
+  EDU_PRESENTATION
+  EDU_PRO
+  EDU_BENEVOLE
+  EDU_EQUIVALENCES
+
+  @@schema("ir2f")
+}
+
+model FormationOnglet {
+  id              String             @id @default(uuid())
+  categorie       CategorieFormation
+  onglet          FormationOngletCle
+  titre           String?
+  contenu         String?
+  videoUrl        String?
+  image           String?
+  imageTaille     Int                @default(100)
+  backgroundColor String             @default("#f5f7fb")
+  opacity         Int                @default(100)
+  effetVisuel     EffetVisuel        @default(AUCUN)
+  updatedAt       DateTime           @updatedAt
+
+  @@unique([categorie, onglet])
+  @@schema("ir2f")
+}
+
+// ─── HERO PAR PAGE ───────────────────────────────────
+
+// Pages statiques disposant d'un bandeau Hero (image de fond) éditable en
+// admin. L'accueil a son propre système de Hero (HeroSlide, carrousel) et
+// n'en fait pas partie ; les pages de détail (fiche formation, article) non
+// plus, elles ont déjà leur propre visuel.
+enum PageCle {
+  FORMATIONS
+  CONTACT
+  EMPLOI
+  ACTUALITES
+
+  @@schema("ir2f")
+}
+
+model PageHero {
+  id        String   @id @default(uuid())
+  page      PageCle  @unique
   titre     String
-  corps     String
-  updatedAt DateTime           @updatedAt
+  sousTitre String?
+  image     String?
+  updatedAt DateTime @updatedAt
 
   @@schema("ir2f")
 }

@@ -16,6 +16,7 @@ export type HeroSlideData = {
   overlayColor: string
   overlayOpacity: number
   transition: "FADE" | "SLIDE_GAUCHE" | "SLIDE_DROITE"
+  dureeAffichage: number
 }
 
 export async function getHeroSlides(): Promise<HeroSlideData[]> {
@@ -38,6 +39,7 @@ export async function getHeroSlides(): Promise<HeroSlideData[]> {
     overlayColor: s.overlayColor,
     overlayOpacity: s.overlayOpacity,
     transition: s.transition,
+    dureeAffichage: s.dureeAffichage,
   }))
 }
 
@@ -77,6 +79,13 @@ export async function getAccompagnementCards(): Promise<AccompagnementCardData[]
 
 export type AccueilContenuData = {
   bandeauEmploiTitre: string
+  bandeauEmploiActif: boolean
+  bandeauBouton1Label: string
+  bandeauBouton1Type: "INTERNE" | "EXTERNE"
+  bandeauBouton1Url: string
+  bandeauBouton2Label: string
+  bandeauBouton2Type: "INTERNE" | "EXTERNE"
+  bandeauBouton2Url: string
   accompagnementEyebrow: string
   accompagnementTitre: string
   contactTitre: string
@@ -85,6 +94,13 @@ export type AccueilContenuData = {
 
 const CONTENU_DEFAUT: AccueilContenuData = {
   bandeauEmploiTitre: "Je souhaite créer un emploi dans mon club",
+  bandeauEmploiActif: true,
+  bandeauBouton1Label: "Je donne mes infos",
+  bandeauBouton1Type: "INTERNE",
+  bandeauBouton1Url: "#contact",
+  bandeauBouton2Label: "En savoir plus",
+  bandeauBouton2Type: "INTERNE",
+  bandeauBouton2Url: "/emploi",
   accompagnementEyebrow: "IR2F vous accompagne",
   accompagnementTitre: "Accompagnement Emploi",
   contactTitre: "Je souhaite être contacté",
