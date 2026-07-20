@@ -5,6 +5,7 @@ import { Hoverable } from "@/components/ui/Hoverable"
 import { submitContactRequest } from "@/lib/actions/contact"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import type { FormationOption } from "@/lib/formations-shared"
+import { CONTACT_THEMES } from "@/lib/contact-themes"
 
 const inputStyle = {
   border: "1px solid #e2e5ea",
@@ -135,6 +136,21 @@ export function ContactTeaser({
               <form action={formAction} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 <input type="hidden" name="type" value={type} />
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 14 }}>
+                  <select
+                    name="thematique"
+                    required
+                    defaultValue=""
+                    style={{ ...inputStyle, gridColumn: "1/-1" }}
+                  >
+                    <option value="" disabled>
+                      Quelle est votre thématique ? *
+                    </option>
+                    {CONTACT_THEMES.map((t) => (
+                      <option key={t.value} value={t.value}>
+                        {t.label}
+                      </option>
+                    ))}
+                  </select>
                   <input name="nom" placeholder="Nom" required style={inputStyle} />
                   <input name="prenom" placeholder="Prénom" required style={inputStyle} />
                   <input name="email" type="email" placeholder="Email" required style={inputStyle} />

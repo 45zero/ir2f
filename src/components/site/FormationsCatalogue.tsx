@@ -175,7 +175,7 @@ export function FormationsCatalogue({
         </span>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16, margin: "6px 0 28px" }}>
           <h1 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, margin: 0 }}>
-            Nos formations
+          NOTRE OFFRE DE FORMATION
           </h1>
           <Hoverable
             as="button"
