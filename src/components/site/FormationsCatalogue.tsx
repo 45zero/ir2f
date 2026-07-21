@@ -4,15 +4,13 @@ import { useMemo, useState, type CSSProperties, type ReactNode } from "react"
 import Link from "next/link"
 import { Hoverable } from "@/components/ui/Hoverable"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import { CATEGORIE_LABELS, type CatalogueFormation } from "@/lib/formations-shared"
+import type { CatalogueFormation } from "@/lib/formations-shared"
 import { ONGLET_LABEL, ongletKeyId } from "@/lib/formations-page-shared"
 import { effetVisuelStyle, effetVisuelHoverStyle } from "@/lib/effet-visuel"
 import type { FormationOngletData, FormationTuileData } from "@/lib/formations"
 import type { CategorieFormation, FormationOngletCle, GroupeEquivalence, VarianteNode } from "@/generated/prisma"
 
 type ExpandedTab = "info" | "parcours" | "club" | "eduPresentation" | "eduPro" | "eduBenevole" | "eduEquivalences"
-
-const SIDEBAR_CATEGORIES: CategorieFormation[] = ["EDUCATEUR", "ARBITRAGE", "TERRAIN", "CLUB", "DEV"]
 
 const VARIANT_STYLES: Record<VarianteNode, CSSProperties> = {
   NAVY: { background: colors.navy, color: "#ffffff" },
@@ -26,27 +24,6 @@ const BENEVOLE_COLUMNS: { groupe: GroupeEquivalence; label: string }[] = [
   { groupe: "CFI", label: "CERTIFICATS FÉDÉRAUX INITIATEURS (CFI)" },
   { groupe: "DF", label: "DIPLÔMES FÉDÉRAUX (DF)" },
 ]
-
-const chipBase: CSSProperties = {
-  border: "1.5px solid transparent",
-  background: "#eef2f9",
-  color: colors.navy,
-  padding: "9px 18px",
-  borderRadius: 20,
-  fontSize: 13,
-  fontWeight: 600,
-  fontFamily: fontBody,
-  cursor: "pointer",
-  whiteSpace: "nowrap",
-}
-
-const chipActive: CSSProperties = {
-  ...chipBase,
-  border: `1.5px solid ${colors.red}`,
-  background: colors.red,
-  color: "#fff",
-  boxShadow: "0 4px 10px rgba(227,6,19,0.25)",
-}
 
 const tabBase: CSSProperties = {
   border: "1.5px solid #d8dde5",
@@ -278,9 +255,7 @@ export function FormationsCatalogue({
   initialCategory: CategorieFormation
 }) {
   const [sidebarCategory, setSidebarCategory] = useState<CategorieFormation>(initialCategory)
-  const [expandedCategory, setExpandedCategory] = useState<CategorieFormation | null>(initialCategory)
   const [expandedTab, setExpandedTab] = useState<ExpandedTab>(initialCategory === "EDUCATEUR" ? "eduPresentation" : "info")
-  const [eduTrackFilter, setEduTrackFilter] = useState<"pro" | "benevole" | null>(null)
   const [popupFormationId, setPopupFormationId] = useState<string | null>(null)
 
   function getOnglet(categorie: CategorieFormation, onglet: FormationOngletCle): FormationOngletData {
@@ -319,139 +294,102 @@ export function FormationsCatalogue({
     return map
   }, [formations])
 
-  function toggleCategoryPanel(cat: CategorieFormation) {
+  function selectCategory(cat: CategorieFormation) {
     setSidebarCategory(cat)
-    setExpandedCategory((current) => (current === cat ? null : cat))
     setExpandedTab(cat === "EDUCATEUR" ? "eduPresentation" : "info")
     setPopupFormationId(null)
   }
-
-  const formationsPageList = useMemo(() => {
-    const pool = byCategory.get(sidebarCategory) ?? []
-    if (sidebarCategory !== "EDUCATEUR" || !eduTrackFilter) return pool
-    const wanted = eduTrackFilter === "pro" ? "PROFESSIONNELLE" : "BENEVOLE"
-    return pool.filter((f) => f.filiere === wanted)
-  }, [byCategory, sidebarCategory, eduTrackFilter])
 
   const popupFormation = popupFormationId ? formations.find((f) => f.id === popupFormationId) ?? null : null
 
   return (
     <main style={{ animation: "ir2fFadeIn 0.4s ease" }}>
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "36px 20px 40px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 14 }}>
-          {tuiles.map((tile) => (
-            <div
-              key={tile.categorie}
-              onClick={() => toggleCategoryPanel(tile.categorie)}
-              style={{
-                cursor: "pointer",
-                position: "relative",
-                minHeight: 150,
-                borderRadius: 8,
-                overflow: "hidden",
-                background: tile.backgroundColor,
-                display: "flex",
-                alignItems: "flex-end",
-                padding: 18,
-                boxShadow: sidebarCategory === tile.categorie ? "0 0 0 3px #1a3a6b inset" : undefined,
-              }}
-            >
-              {tile.image && (
-                <Hoverable
-                  as="div"
+      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "36px 20px 80px" }}>
+        <div style={{ display: "flex", gap: 24, alignItems: "flex-start", flexWrap: "wrap" }}>
+          <div style={{ flex: "0 0 240px", minWidth: 220, display: "flex", flexDirection: "column", gap: 12 }}>
+            {tuiles.map((tile) => (
+              <div
+                key={tile.categorie}
+                onClick={() => selectCategory(tile.categorie)}
+                style={{
+                  cursor: "pointer",
+                  position: "relative",
+                  minHeight: 110,
+                  borderRadius: 8,
+                  overflow: "hidden",
+                  background: tile.backgroundColor,
+                  display: "flex",
+                  alignItems: "flex-end",
+                  padding: 16,
+                  boxShadow: sidebarCategory === tile.categorie ? "0 0 0 3px #1a3a6b inset" : undefined,
+                }}
+              >
+                {tile.image && (
+                  <Hoverable
+                    as="div"
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      backgroundImage: `url('${tile.image}')`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      opacity: tile.opacity / 100,
+                      transition: "transform 0.3s ease",
+                      ...effetVisuelStyle(tile.effetVisuel),
+                    }}
+                    hoverStyle={effetVisuelHoverStyle(tile.effetVisuel)}
+                  />
+                )}
+                <img
+                  src="/images/logo-lgef.png"
+                  alt=""
                   style={{
                     position: "absolute",
-                    inset: 0,
-                    backgroundImage: `url('${tile.image}')`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    opacity: tile.opacity / 100,
-                    transition: "transform 0.3s ease",
-                    ...effetVisuelStyle(tile.effetVisuel),
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%,-50%)",
+                    height: "60%",
+                    width: "auto",
+                    opacity: 0.16,
+                    pointerEvents: "none",
                   }}
-                  hoverStyle={effetVisuelHoverStyle(tile.effetVisuel)}
                 />
-              )}
-              <img
-                src="/images/logo-lgef.png"
-                alt=""
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%,-50%)",
-                  height: "60%",
-                  width: "auto",
-                  opacity: 0.16,
-                  pointerEvents: "none",
-                }}
-              />
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", gap: 8, position: "relative" }}>
-                <span
-                  style={{
-                    color: colors.navy,
-                    fontFamily: fontHeading,
-                    fontSize: tile.categorie === "DEV" ? 13 : 19,
-                    fontWeight: 800,
-                    lineHeight: 1.15,
-                  }}
-                >
-                  {tile.label}
-                </span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2.5" style={{ flexShrink: 0 }}>
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", gap: 8, position: "relative" }}>
+                  <span
+                    style={{
+                      color: colors.navy,
+                      fontFamily: fontHeading,
+                      fontSize: tile.categorie === "DEV" ? 13 : 17,
+                      fontWeight: 800,
+                      lineHeight: 1.15,
+                    }}
+                  >
+                    {tile.label}
+                  </span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2.5" style={{ flexShrink: 0 }}>
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
 
-      {expandedCategory && (
-        <section style={{ maxWidth: 1160, margin: "0 auto", padding: "0 20px 32px" }}>
           <div
             style={{
+              flex: "1 1 600px",
+              minWidth: 280,
               background: "#f5f7fb",
               borderLeft: `4px solid ${colors.gold}`,
               borderRadius: 8,
               padding: "clamp(20px,3vw,32px)",
-              position: "relative",
-              animation: "ir2fFadeIn 0.3s ease",
               display: "flex",
               flexDirection: "column",
               gap: 20,
             }}
           >
-            <button
-              onClick={() => setExpandedCategory(null)}
-              aria-label="Fermer"
-              style={{
-                position: "absolute",
-                top: 16,
-                right: 16,
-                width: 30,
-                height: 30,
-                borderRadius: "50%",
-                border: "none",
-                background: "#fff",
-                color: colors.navy,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 2px 6px rgba(20,33,61,0.12)",
-                zIndex: 2,
-              }}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-
-            {expandedCategory === "EDUCATEUR" ? (
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingRight: 40 }}>
+            {sidebarCategory === "EDUCATEUR" ? (
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <button style={expandedTab === "eduPresentation" ? tabActive : tabBase} onClick={() => setExpandedTab("eduPresentation")}>
                   {ONGLET_LABEL.EDU_PRESENTATION}
                 </button>
@@ -473,7 +411,7 @@ export function FormationsCatalogue({
                 <button style={expandedTab === "parcours" ? tabActive : tabBase} onClick={() => setExpandedTab("parcours")}>
                   {ONGLET_LABEL.PARCOURS}
                 </button>
-                {expandedCategory === "TERRAIN" && (
+                {sidebarCategory === "TERRAIN" && (
                   <button style={expandedTab === "club" ? tabActive : tabBase} onClick={() => setExpandedTab("club")}>
                     {ONGLET_LABEL.CLUB}
                   </button>
@@ -481,8 +419,8 @@ export function FormationsCatalogue({
               </div>
             )}
 
-            {expandedTab === "info" && expandedCategory !== "EDUCATEUR" && (() => {
-              const data = getOnglet(expandedCategory, "INFO")
+            {expandedTab === "info" && sidebarCategory !== "EDUCATEUR" && (() => {
+              const data = getOnglet(sidebarCategory, "INFO")
               return (
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
                   <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 12 }}>
@@ -517,8 +455,8 @@ export function FormationsCatalogue({
               )
             })()}
 
-            {expandedTab === "parcours" && expandedCategory !== "EDUCATEUR" && (() => {
-              const data = getOnglet(expandedCategory, "PARCOURS")
+            {expandedTab === "parcours" && sidebarCategory !== "EDUCATEUR" && (() => {
+              const data = getOnglet(sidebarCategory, "PARCOURS")
               return (
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
@@ -529,7 +467,7 @@ export function FormationsCatalogue({
                     <OngletMedia data={data} />
                   </div>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))", gap: 12 }}>
-                    {(byCategory.get(expandedCategory) ?? []).map((f) => (
+                    {(byCategory.get(sidebarCategory) ?? []).map((f) => (
                       <Hoverable
                         as="div"
                         key={f.id}
@@ -558,7 +496,7 @@ export function FormationsCatalogue({
               )
             })()}
 
-            {expandedTab === "club" && expandedCategory === "TERRAIN" && (() => {
+            {expandedTab === "club" && sidebarCategory === "TERRAIN" && (() => {
               const data = getOnglet("TERRAIN", "CLUB")
               return (
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
@@ -591,7 +529,7 @@ export function FormationsCatalogue({
               )
             })()}
 
-            {expandedTab === "eduPresentation" && expandedCategory === "EDUCATEUR" && (() => {
+            {expandedTab === "eduPresentation" && sidebarCategory === "EDUCATEUR" && (() => {
               const data = getOnglet("EDUCATEUR", "EDU_PRESENTATION")
               const proData = getOnglet("EDUCATEUR", "EDU_PRO")
               const benevoleData = getOnglet("EDUCATEUR", "EDU_BENEVOLE")
@@ -605,7 +543,8 @@ export function FormationsCatalogue({
                     <OngletMedia data={data} />
                   </div>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 560 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(340px,1fr))", gap: 24, alignItems: "start" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                     {proData.titre && (
                       <div
                         style={{
@@ -706,7 +645,7 @@ export function FormationsCatalogue({
                     ))}
                   </div>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 700 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                     {benevoleData.titre && (
                       <div
                         style={{
@@ -787,11 +726,12 @@ export function FormationsCatalogue({
                       ))}
                     </div>
                   </div>
+                  </div>
                 </div>
               )
             })()}
 
-            {expandedTab === "eduPro" && expandedCategory === "EDUCATEUR" && (() => {
+            {expandedTab === "eduPro" && sidebarCategory === "EDUCATEUR" && (() => {
               const data = getOnglet("EDUCATEUR", "EDU_PRO")
               const list = (byCategory.get("EDUCATEUR") ?? []).filter((f) => f.filiere === "PROFESSIONNELLE")
               return (
@@ -808,7 +748,7 @@ export function FormationsCatalogue({
               )
             })()}
 
-            {expandedTab === "eduBenevole" && expandedCategory === "EDUCATEUR" && (() => {
+            {expandedTab === "eduBenevole" && sidebarCategory === "EDUCATEUR" && (() => {
               const data = getOnglet("EDUCATEUR", "EDU_BENEVOLE")
               const list = (byCategory.get("EDUCATEUR") ?? []).filter((f) => f.filiere === "BENEVOLE")
               return (
@@ -825,7 +765,7 @@ export function FormationsCatalogue({
               )
             })()}
 
-            {expandedTab === "eduEquivalences" && expandedCategory === "EDUCATEUR" && (() => {
+            {expandedTab === "eduEquivalences" && sidebarCategory === "EDUCATEUR" && (() => {
               const data = getOnglet("EDUCATEUR", "EDU_EQUIVALENCES")
               return (
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
@@ -838,8 +778,8 @@ export function FormationsCatalogue({
               )
             })()}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {popupFormation && (
         <div
@@ -951,68 +891,6 @@ export function FormationsCatalogue({
           </div>
         </div>
       )}
-
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "12px 20px 80px" }}>
-        <div style={{ display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" }}>
-          <aside
-            style={{
-              flex: "0 0 220px",
-              minWidth: 200,
-              display: "flex",
-              flexDirection: "column",
-              gap: 22,
-              background: "#fff",
-              border: "1px solid #eef0f3",
-              borderRadius: 10,
-              padding: 22,
-            }}
-          >
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.8 }}>
-                Catégorie
-              </span>
-              {SIDEBAR_CATEGORIES.map((cat) => (
-                <label key={cat} style={{ display: "flex", alignItems: "center", gap: 9, fontSize: 13, color: colors.text, cursor: "pointer" }}>
-                  <input
-                    type="checkbox"
-                    checked={sidebarCategory === cat}
-                    onChange={() => {
-                      setSidebarCategory(cat)
-                      setEduTrackFilter(null)
-                    }}
-                    style={{ accentColor: colors.navy, width: 15, height: 15, cursor: "pointer" }}
-                  />
-                  {CATEGORIE_LABELS[cat]}
-                </label>
-              ))}
-            </div>
-          </aside>
-
-          <div style={{ flex: "1 1 600px", minWidth: 280 }}>
-            {sidebarCategory === "EDUCATEUR" && (
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 20 }}>
-                <button
-                  style={eduTrackFilter === "pro" ? chipActive : chipBase}
-                  onClick={() => setEduTrackFilter((v) => (v === "pro" ? null : "pro"))}
-                >
-                  Formation professionnelle
-                </button>
-                <button
-                  style={eduTrackFilter === "benevole" ? chipActive : chipBase}
-                  onClick={() => setEduTrackFilter((v) => (v === "benevole" ? null : "benevole"))}
-                >
-                  Formation bénévole
-                </button>
-              </div>
-            )}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 24 }}>
-              {formationsPageList.map((f) => (
-                <FormationGridCard key={f.id} f={f} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   )
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Hoverable } from "@/components/ui/Hoverable"
 import { logout } from "@/lib/actions/auth"
 import { colors, fontBody } from "@/lib/theme"
@@ -8,6 +9,9 @@ import { ROLE_LABELS } from "@/lib/users-shared"
 import type { Role } from "@/generated/prisma"
 
 export function DashboardTopBar({ user }: { user: { name: string; role: string } }) {
+  const pathname = usePathname()
+  const inAdmin = pathname.startsWith("/admin")
+
   return (
     <header
       style={{
@@ -37,6 +41,27 @@ export function DashboardTopBar({ user }: { user: { name: string; role: string }
             {ROLE_LABELS[user.role as Role] ?? user.role}
           </span>
         </div>
+        {inAdmin && (
+          <Hoverable
+            as={Link}
+            href="/dashboard"
+            style={{
+              background: "transparent",
+              color: "#fff",
+              border: "1px solid rgba(255,255,255,0.3)",
+              padding: "8px 16px",
+              borderRadius: 4,
+              fontSize: 13,
+              fontWeight: 600,
+              fontFamily: fontBody,
+              cursor: "pointer",
+              textDecoration: "none",
+            }}
+            hoverStyle={{ background: "rgba(255,255,255,0.1)" }}
+          >
+            Retour à mon espace
+          </Hoverable>
+        )}
         <form action={logout}>
           <Hoverable
             as="button"

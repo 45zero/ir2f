@@ -204,6 +204,34 @@ export function Header({ user }: { user: HeaderUser }) {
                   </svg>
                   Mon espace
                 </Hoverable>
+                {user.role === "ADMIN" && (
+                  <Hoverable
+                    as={Link}
+                    href="/admin"
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      padding: "10px 12px",
+                      borderRadius: 6,
+                      color: colors.text,
+                      fontSize: 13,
+                      fontWeight: 600,
+                      fontFamily: fontBody,
+                      cursor: "pointer",
+                      textAlign: "left",
+                      textDecoration: "none",
+                      whiteSpace: "nowrap",
+                    }}
+                    hoverStyle={{ background: "#f5f7fb" }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2" style={{ flexShrink: 0 }}>
+                      <path d="M12 2 3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5z" />
+                    </svg>
+                    Interface admin
+                  </Hoverable>
+                )}
                 <form action={logout}>
                   <Hoverable
                     as="button"
@@ -285,7 +313,7 @@ export function Header({ user }: { user: HeaderUser }) {
           }}
           hoverStyle={{ background: colors.redDark }}
         >
-          Accès Formation
+          ActuFormation
         </Hoverable>
       </nav>
     </header>
