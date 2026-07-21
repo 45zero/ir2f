@@ -5,8 +5,8 @@ import { headers } from "next/headers"
 import crypto from "crypto"
 import { prisma } from "@/lib/prisma"
 import { downloadStorageFile, uploadBytes } from "@/lib/storage"
-import { stampSignature, finalizeConvention } from "@/lib/conventions/pdf"
-import { SIGNATURE_FIELD_NAMES, SIGNATAIRE_ORDER } from "@/lib/conventions/variables"
+import { fillConventionTemplate, stampSignature, stampCheckmark, finalizeConvention } from "@/lib/conventions/pdf"
+import { SIGNATURE_FIELD_NAMES, SIGNATAIRE_ORDER, NATURE_INTERVENTION_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS } from "@/lib/conventions/variables"
 import { notifyAdminSignatureProgress } from "@/lib/emails/convention-notifications"
 import { avancerConvention } from "@/lib/actions/conventions"
 import { str, optionalStr } from "@/lib/actions/form-utils"
@@ -50,12 +50,64 @@ export async function signerConvention(
 
   if (!stagiaire.pdfStoragePath) return { error: "Document introuvable.", success: false }
 
+  // Le stagiaire renseigne l'article 3 (nature de l'intervention, public visé, objectifs
+  // pédagogiques) en même temps que sa signature — ces réponses sont propres au stagiaire, pas
+  // aux autres signataires, donc traitées uniquement à cette étape (ordre 0).
+  let natureIntervention: string[] = []
+  let natureInterventionAutre: string | null = null
+  let publicVise: string | null = null
+  let objectifEncadrementSeul: boolean | null = null
+  let objectifEncadrementAutonomie: boolean | null = null
+  let objectifEncadrementPonctuel: boolean | null = null
+
+  if (signataire.role === "STAGIAIRE") {
+    natureIntervention = formData.getAll("nature").map(String)
+    natureInterventionAutre = natureIntervention.includes("AUTRE") ? optionalStr(formData, "natureAutreTexte") : null
+    publicVise = optionalStr(formData, "publicVise")
+    if (!publicVise) return { error: "Merci de préciser le public visé.", success: false }
+    objectifEncadrementSeul = formData.get("objectif_seul") === "OUI"
+    objectifEncadrementAutonomie = formData.get("objectif_autonomie") === "OUI"
+    objectifEncadrementPonctuel = formData.get("objectif_ponctuel") === "OUI"
+
+    await prisma.conventionStagiaire.update({
+      where: { id: stagiaire.id },
+      data: {
+        natureIntervention,
+        natureInterventionAutre,
+        publicVise,
+        objectifEncadrementSeul,
+        objectifEncadrementAutonomie,
+        objectifEncadrementPonctuel,
+      },
+    })
+  }
+
   const signatureStoragePath = `conventions/signatures/${signataire.id}.png`
   await uploadBytes(pngBytes, signatureStoragePath, "image/png")
 
   const signedAt = new Date()
-  const currentPdf = await downloadStorageFile(stagiaire.pdfStoragePath)
-  let updatedPdf = await stampSignature(currentPdf, SIGNATURE_FIELD_NAMES[signataire.role], pngBytes, signedAt)
+  let updatedPdf: Uint8Array = await downloadStorageFile(stagiaire.pdfStoragePath)
+
+  if (signataire.role === "STAGIAIRE") {
+    updatedPdf = await fillConventionTemplate(updatedPdf, {
+      stagiaire_public_vise: publicVise ?? "",
+      nature_intervention_autre_texte: natureInterventionAutre ?? "",
+    })
+    for (const option of NATURE_INTERVENTION_OPTIONS) {
+      if (natureIntervention.includes(option.value)) updatedPdf = await stampCheckmark(updatedPdf, option.champ)
+    }
+    const objectifReponses = {
+      objectifEncadrementSeul,
+      objectifEncadrementAutonomie,
+      objectifEncadrementPonctuel,
+    }
+    for (const o of OBJECTIF_PEDAGOGIQUE_FIELDS) {
+      const reponse = objectifReponses[o.key as keyof typeof objectifReponses]
+      updatedPdf = await stampCheckmark(updatedPdf, reponse ? o.champOui : o.champNon)
+    }
+  }
+
+  updatedPdf = await stampSignature(updatedPdf, SIGNATURE_FIELD_NAMES[signataire.role], pngBytes, signedAt)
   if (signataire.ordre === SIGNATAIRE_ORDER.length - 1) updatedPdf = await finalizeConvention(updatedPdf)
   await uploadBytes(updatedPdf, stagiaire.pdfStoragePath, "application/pdf")
 

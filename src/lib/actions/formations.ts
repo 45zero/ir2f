@@ -19,6 +19,11 @@ import type {
 type ProgrammeStep = { n: string; title: string; desc: string }
 type SessionInput = { dateDebut: string; lieu: string; places: string }
 
+function optionalDate(formData: FormData, key: string): Date | null {
+  const raw = optionalStr(formData, key)
+  return raw ? new Date(raw) : null
+}
+
 async function buildFormationData(formData: FormData) {
   const programme = parseJsonArray<ProgrammeStep>(formData, "programme").filter(
     (p) => p.title?.trim() || p.desc?.trim()
@@ -38,6 +43,8 @@ async function buildFormationData(formData: FormData) {
     statut: str(formData, "statut") as StatutFormation,
     type: str(formData, "type") as TypeFormation,
     dureeLabel: optionalStr(formData, "dureeLabel"),
+    dateDebut: optionalDate(formData, "dateDebut"),
+    dateFin: optionalDate(formData, "dateFin"),
     modeLabel: optionalStr(formData, "modeLabel"),
     lieu: optionalStr(formData, "lieu"),
     prix: optionalNumber(formData, "prix"),

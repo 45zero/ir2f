@@ -27,6 +27,8 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
     statut: formation.statut,
     type: formation.type,
     dureeLabel: formation.dureeLabel ?? "",
+    dateDebut: formation.dateDebut ? formation.dateDebut.toISOString().slice(0, 10) : "",
+    dateFin: formation.dateFin ? formation.dateFin.toISOString().slice(0, 10) : "",
     modeLabel: formation.modeLabel ?? "",
     lieu: formation.lieu ?? "",
     prix: formation.prix?.toString() ?? "",

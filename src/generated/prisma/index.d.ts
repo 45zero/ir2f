@@ -5576,6 +5576,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom: string | null
     responsablePedagogiqueEmail: string | null
     responsablePedagogiqueTelephone: string | null
+    dateDebut: Date | null
+    dateFin: Date | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
@@ -5613,6 +5615,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom: string | null
     responsablePedagogiqueEmail: string | null
     responsablePedagogiqueTelephone: string | null
+    dateDebut: Date | null
+    dateFin: Date | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
@@ -5651,6 +5655,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom: number
     responsablePedagogiqueEmail: number
     responsablePedagogiqueTelephone: number
+    dateDebut: number
+    dateFin: number
     groupeEquivalence: number
     varianteNode: number
     badgeNode: number
@@ -5704,6 +5710,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: true
     responsablePedagogiqueEmail?: true
     responsablePedagogiqueTelephone?: true
+    dateDebut?: true
+    dateFin?: true
     groupeEquivalence?: true
     varianteNode?: true
     badgeNode?: true
@@ -5741,6 +5749,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: true
     responsablePedagogiqueEmail?: true
     responsablePedagogiqueTelephone?: true
+    dateDebut?: true
+    dateFin?: true
     groupeEquivalence?: true
     varianteNode?: true
     badgeNode?: true
@@ -5779,6 +5789,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: true
     responsablePedagogiqueEmail?: true
     responsablePedagogiqueTelephone?: true
+    dateDebut?: true
+    dateFin?: true
     groupeEquivalence?: true
     varianteNode?: true
     badgeNode?: true
@@ -5904,6 +5916,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom: string | null
     responsablePedagogiqueEmail: string | null
     responsablePedagogiqueTelephone: string | null
+    dateDebut: Date | null
+    dateFin: Date | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
@@ -5961,6 +5975,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: boolean
     responsablePedagogiqueEmail?: boolean
     responsablePedagogiqueTelephone?: boolean
+    dateDebut?: boolean
+    dateFin?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -6010,6 +6026,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: boolean
     responsablePedagogiqueEmail?: boolean
     responsablePedagogiqueTelephone?: boolean
+    dateDebut?: boolean
+    dateFin?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -6049,6 +6067,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: boolean
     responsablePedagogiqueEmail?: boolean
     responsablePedagogiqueTelephone?: boolean
+    dateDebut?: boolean
+    dateFin?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -6088,6 +6108,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: boolean
     responsablePedagogiqueEmail?: boolean
     responsablePedagogiqueTelephone?: boolean
+    dateDebut?: boolean
+    dateFin?: boolean
     groupeEquivalence?: boolean
     varianteNode?: boolean
     badgeNode?: boolean
@@ -6096,7 +6118,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
@@ -6161,6 +6183,8 @@ export namespace Prisma {
       responsablePedagogiquePrenom: string | null
       responsablePedagogiqueEmail: string | null
       responsablePedagogiqueTelephone: string | null
+      dateDebut: Date | null
+      dateFin: Date | null
       groupeEquivalence: $Enums.GroupeEquivalence | null
       varianteNode: $Enums.VarianteNode | null
       badgeNode: string | null
@@ -6629,6 +6653,8 @@ export namespace Prisma {
     readonly responsablePedagogiquePrenom: FieldRef<"Formation", 'String'>
     readonly responsablePedagogiqueEmail: FieldRef<"Formation", 'String'>
     readonly responsablePedagogiqueTelephone: FieldRef<"Formation", 'String'>
+    readonly dateDebut: FieldRef<"Formation", 'DateTime'>
+    readonly dateFin: FieldRef<"Formation", 'DateTime'>
     readonly groupeEquivalence: FieldRef<"Formation", 'GroupeEquivalence'>
     readonly varianteNode: FieldRef<"Formation", 'VarianteNode'>
     readonly badgeNode: FieldRef<"Formation", 'String'>
@@ -16307,6 +16333,11 @@ export namespace Prisma {
     maitreDeStageCp: string | null
     maitreDeStageVille: string | null
     maitreDeStageEmail: string | null
+    natureInterventionAutre: string | null
+    publicVise: string | null
+    objectifEncadrementSeul: boolean | null
+    objectifEncadrementAutonomie: boolean | null
+    objectifEncadrementPonctuel: boolean | null
     pdfStoragePath: string | null
     envoyeAt: Date | null
     completedAt: Date | null
@@ -16337,6 +16368,11 @@ export namespace Prisma {
     maitreDeStageCp: string | null
     maitreDeStageVille: string | null
     maitreDeStageEmail: string | null
+    natureInterventionAutre: string | null
+    publicVise: string | null
+    objectifEncadrementSeul: boolean | null
+    objectifEncadrementAutonomie: boolean | null
+    objectifEncadrementPonctuel: boolean | null
     pdfStoragePath: string | null
     envoyeAt: Date | null
     completedAt: Date | null
@@ -16367,6 +16403,12 @@ export namespace Prisma {
     maitreDeStageCp: number
     maitreDeStageVille: number
     maitreDeStageEmail: number
+    natureIntervention: number
+    natureInterventionAutre: number
+    publicVise: number
+    objectifEncadrementSeul: number
+    objectifEncadrementAutonomie: number
+    objectifEncadrementPonctuel: number
     donneesSupplementaires: number
     pdfStoragePath: number
     envoyeAt: number
@@ -16400,6 +16442,11 @@ export namespace Prisma {
     maitreDeStageCp?: true
     maitreDeStageVille?: true
     maitreDeStageEmail?: true
+    natureInterventionAutre?: true
+    publicVise?: true
+    objectifEncadrementSeul?: true
+    objectifEncadrementAutonomie?: true
+    objectifEncadrementPonctuel?: true
     pdfStoragePath?: true
     envoyeAt?: true
     completedAt?: true
@@ -16430,6 +16477,11 @@ export namespace Prisma {
     maitreDeStageCp?: true
     maitreDeStageVille?: true
     maitreDeStageEmail?: true
+    natureInterventionAutre?: true
+    publicVise?: true
+    objectifEncadrementSeul?: true
+    objectifEncadrementAutonomie?: true
+    objectifEncadrementPonctuel?: true
     pdfStoragePath?: true
     envoyeAt?: true
     completedAt?: true
@@ -16460,6 +16512,12 @@ export namespace Prisma {
     maitreDeStageCp?: true
     maitreDeStageVille?: true
     maitreDeStageEmail?: true
+    natureIntervention?: true
+    natureInterventionAutre?: true
+    publicVise?: true
+    objectifEncadrementSeul?: true
+    objectifEncadrementAutonomie?: true
+    objectifEncadrementPonctuel?: true
     donneesSupplementaires?: true
     pdfStoragePath?: true
     envoyeAt?: true
@@ -16564,6 +16622,12 @@ export namespace Prisma {
     maitreDeStageCp: string | null
     maitreDeStageVille: string | null
     maitreDeStageEmail: string | null
+    natureIntervention: string[]
+    natureInterventionAutre: string | null
+    publicVise: string | null
+    objectifEncadrementSeul: boolean | null
+    objectifEncadrementAutonomie: boolean | null
+    objectifEncadrementPonctuel: boolean | null
     donneesSupplementaires: JsonValue | null
     pdfStoragePath: string | null
     envoyeAt: Date | null
@@ -16612,6 +16676,12 @@ export namespace Prisma {
     maitreDeStageCp?: boolean
     maitreDeStageVille?: boolean
     maitreDeStageEmail?: boolean
+    natureIntervention?: boolean
+    natureInterventionAutre?: boolean
+    publicVise?: boolean
+    objectifEncadrementSeul?: boolean
+    objectifEncadrementAutonomie?: boolean
+    objectifEncadrementPonctuel?: boolean
     donneesSupplementaires?: boolean
     pdfStoragePath?: boolean
     envoyeAt?: boolean
@@ -16646,6 +16716,12 @@ export namespace Prisma {
     maitreDeStageCp?: boolean
     maitreDeStageVille?: boolean
     maitreDeStageEmail?: boolean
+    natureIntervention?: boolean
+    natureInterventionAutre?: boolean
+    publicVise?: boolean
+    objectifEncadrementSeul?: boolean
+    objectifEncadrementAutonomie?: boolean
+    objectifEncadrementPonctuel?: boolean
     donneesSupplementaires?: boolean
     pdfStoragePath?: boolean
     envoyeAt?: boolean
@@ -16678,6 +16754,12 @@ export namespace Prisma {
     maitreDeStageCp?: boolean
     maitreDeStageVille?: boolean
     maitreDeStageEmail?: boolean
+    natureIntervention?: boolean
+    natureInterventionAutre?: boolean
+    publicVise?: boolean
+    objectifEncadrementSeul?: boolean
+    objectifEncadrementAutonomie?: boolean
+    objectifEncadrementPonctuel?: boolean
     donneesSupplementaires?: boolean
     pdfStoragePath?: boolean
     envoyeAt?: boolean
@@ -16710,6 +16792,12 @@ export namespace Prisma {
     maitreDeStageCp?: boolean
     maitreDeStageVille?: boolean
     maitreDeStageEmail?: boolean
+    natureIntervention?: boolean
+    natureInterventionAutre?: boolean
+    publicVise?: boolean
+    objectifEncadrementSeul?: boolean
+    objectifEncadrementAutonomie?: boolean
+    objectifEncadrementPonctuel?: boolean
     donneesSupplementaires?: boolean
     pdfStoragePath?: boolean
     envoyeAt?: boolean
@@ -16717,7 +16805,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type ConventionStagiaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formationId" | "club" | "numeroAffiliationClub" | "emailClub" | "civilite" | "nom" | "prenom" | "dateNaissance" | "adresse" | "cp" | "ville" | "telephone" | "email" | "tuteurNom" | "tuteurPrenom" | "tuteurEmail" | "maitreDeStageNom" | "maitreDeStagePrenom" | "maitreDeStageAdresse" | "maitreDeStageCp" | "maitreDeStageVille" | "maitreDeStageEmail" | "donneesSupplementaires" | "pdfStoragePath" | "envoyeAt" | "completedAt" | "createdAt", ExtArgs["result"]["conventionStagiaire"]>
+  export type ConventionStagiaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formationId" | "club" | "numeroAffiliationClub" | "emailClub" | "civilite" | "nom" | "prenom" | "dateNaissance" | "adresse" | "cp" | "ville" | "telephone" | "email" | "tuteurNom" | "tuteurPrenom" | "tuteurEmail" | "maitreDeStageNom" | "maitreDeStagePrenom" | "maitreDeStageAdresse" | "maitreDeStageCp" | "maitreDeStageVille" | "maitreDeStageEmail" | "natureIntervention" | "natureInterventionAutre" | "publicVise" | "objectifEncadrementSeul" | "objectifEncadrementAutonomie" | "objectifEncadrementPonctuel" | "donneesSupplementaires" | "pdfStoragePath" | "envoyeAt" | "completedAt" | "createdAt", ExtArgs["result"]["conventionStagiaire"]>
   export type ConventionStagiaireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     formation?: boolean | FormationDefaultArgs<ExtArgs>
     signataires?: boolean | ConventionStagiaire$signatairesArgs<ExtArgs>
@@ -16760,6 +16848,12 @@ export namespace Prisma {
       maitreDeStageCp: string | null
       maitreDeStageVille: string | null
       maitreDeStageEmail: string | null
+      natureIntervention: string[]
+      natureInterventionAutre: string | null
+      publicVise: string | null
+      objectifEncadrementSeul: boolean | null
+      objectifEncadrementAutonomie: boolean | null
+      objectifEncadrementPonctuel: boolean | null
       donneesSupplementaires: Prisma.JsonValue | null
       pdfStoragePath: string | null
       envoyeAt: Date | null
@@ -17213,6 +17307,12 @@ export namespace Prisma {
     readonly maitreDeStageCp: FieldRef<"ConventionStagiaire", 'String'>
     readonly maitreDeStageVille: FieldRef<"ConventionStagiaire", 'String'>
     readonly maitreDeStageEmail: FieldRef<"ConventionStagiaire", 'String'>
+    readonly natureIntervention: FieldRef<"ConventionStagiaire", 'String[]'>
+    readonly natureInterventionAutre: FieldRef<"ConventionStagiaire", 'String'>
+    readonly publicVise: FieldRef<"ConventionStagiaire", 'String'>
+    readonly objectifEncadrementSeul: FieldRef<"ConventionStagiaire", 'Boolean'>
+    readonly objectifEncadrementAutonomie: FieldRef<"ConventionStagiaire", 'Boolean'>
+    readonly objectifEncadrementPonctuel: FieldRef<"ConventionStagiaire", 'Boolean'>
     readonly donneesSupplementaires: FieldRef<"ConventionStagiaire", 'Json'>
     readonly pdfStoragePath: FieldRef<"ConventionStagiaire", 'String'>
     readonly envoyeAt: FieldRef<"ConventionStagiaire", 'DateTime'>
@@ -37764,6 +37864,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom: 'responsablePedagogiquePrenom',
     responsablePedagogiqueEmail: 'responsablePedagogiqueEmail',
     responsablePedagogiqueTelephone: 'responsablePedagogiqueTelephone',
+    dateDebut: 'dateDebut',
+    dateFin: 'dateFin',
     groupeEquivalence: 'groupeEquivalence',
     varianteNode: 'varianteNode',
     badgeNode: 'badgeNode',
@@ -37911,6 +38013,12 @@ export namespace Prisma {
     maitreDeStageCp: 'maitreDeStageCp',
     maitreDeStageVille: 'maitreDeStageVille',
     maitreDeStageEmail: 'maitreDeStageEmail',
+    natureIntervention: 'natureIntervention',
+    natureInterventionAutre: 'natureInterventionAutre',
+    publicVise: 'publicVise',
+    objectifEncadrementSeul: 'objectifEncadrementSeul',
+    objectifEncadrementAutonomie: 'objectifEncadrementAutonomie',
+    objectifEncadrementPonctuel: 'objectifEncadrementPonctuel',
     donneesSupplementaires: 'donneesSupplementaires',
     pdfStoragePath: 'pdfStoragePath',
     envoyeAt: 'envoyeAt',
@@ -38801,6 +38909,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
+    dateDebut?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    dateFin?: DateTimeNullableFilter<"Formation"> | Date | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
@@ -38849,6 +38959,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrderInput | SortOrder
     responsablePedagogiqueEmail?: SortOrderInput | SortOrder
     responsablePedagogiqueTelephone?: SortOrderInput | SortOrder
+    dateDebut?: SortOrderInput | SortOrder
+    dateFin?: SortOrderInput | SortOrder
     groupeEquivalence?: SortOrderInput | SortOrder
     varianteNode?: SortOrderInput | SortOrder
     badgeNode?: SortOrderInput | SortOrder
@@ -38900,6 +39012,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
+    dateDebut?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    dateFin?: DateTimeNullableFilter<"Formation"> | Date | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
@@ -38948,6 +39062,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrderInput | SortOrder
     responsablePedagogiqueEmail?: SortOrderInput | SortOrder
     responsablePedagogiqueTelephone?: SortOrderInput | SortOrder
+    dateDebut?: SortOrderInput | SortOrder
+    dateFin?: SortOrderInput | SortOrder
     groupeEquivalence?: SortOrderInput | SortOrder
     varianteNode?: SortOrderInput | SortOrder
     badgeNode?: SortOrderInput | SortOrder
@@ -38994,6 +39110,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     responsablePedagogiqueEmail?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     responsablePedagogiqueTelephone?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    dateDebut?: DateTimeNullableWithAggregatesFilter<"Formation"> | Date | string | null
+    dateFin?: DateTimeNullableWithAggregatesFilter<"Formation"> | Date | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableWithAggregatesFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableWithAggregatesFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableWithAggregatesFilter<"Formation"> | string | null
@@ -39614,6 +39732,12 @@ export namespace Prisma {
     maitreDeStageCp?: StringNullableFilter<"ConventionStagiaire"> | string | null
     maitreDeStageVille?: StringNullableFilter<"ConventionStagiaire"> | string | null
     maitreDeStageEmail?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    natureIntervention?: StringNullableListFilter<"ConventionStagiaire">
+    natureInterventionAutre?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    publicVise?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    objectifEncadrementSeul?: BoolNullableFilter<"ConventionStagiaire"> | boolean | null
+    objectifEncadrementAutonomie?: BoolNullableFilter<"ConventionStagiaire"> | boolean | null
+    objectifEncadrementPonctuel?: BoolNullableFilter<"ConventionStagiaire"> | boolean | null
     donneesSupplementaires?: JsonNullableFilter<"ConventionStagiaire">
     pdfStoragePath?: StringNullableFilter<"ConventionStagiaire"> | string | null
     envoyeAt?: DateTimeNullableFilter<"ConventionStagiaire"> | Date | string | null
@@ -39647,6 +39771,12 @@ export namespace Prisma {
     maitreDeStageCp?: SortOrderInput | SortOrder
     maitreDeStageVille?: SortOrderInput | SortOrder
     maitreDeStageEmail?: SortOrderInput | SortOrder
+    natureIntervention?: SortOrder
+    natureInterventionAutre?: SortOrderInput | SortOrder
+    publicVise?: SortOrderInput | SortOrder
+    objectifEncadrementSeul?: SortOrderInput | SortOrder
+    objectifEncadrementAutonomie?: SortOrderInput | SortOrder
+    objectifEncadrementPonctuel?: SortOrderInput | SortOrder
     donneesSupplementaires?: SortOrderInput | SortOrder
     pdfStoragePath?: SortOrderInput | SortOrder
     envoyeAt?: SortOrderInput | SortOrder
@@ -39684,6 +39814,12 @@ export namespace Prisma {
     maitreDeStageCp?: StringNullableFilter<"ConventionStagiaire"> | string | null
     maitreDeStageVille?: StringNullableFilter<"ConventionStagiaire"> | string | null
     maitreDeStageEmail?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    natureIntervention?: StringNullableListFilter<"ConventionStagiaire">
+    natureInterventionAutre?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    publicVise?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    objectifEncadrementSeul?: BoolNullableFilter<"ConventionStagiaire"> | boolean | null
+    objectifEncadrementAutonomie?: BoolNullableFilter<"ConventionStagiaire"> | boolean | null
+    objectifEncadrementPonctuel?: BoolNullableFilter<"ConventionStagiaire"> | boolean | null
     donneesSupplementaires?: JsonNullableFilter<"ConventionStagiaire">
     pdfStoragePath?: StringNullableFilter<"ConventionStagiaire"> | string | null
     envoyeAt?: DateTimeNullableFilter<"ConventionStagiaire"> | Date | string | null
@@ -39717,6 +39853,12 @@ export namespace Prisma {
     maitreDeStageCp?: SortOrderInput | SortOrder
     maitreDeStageVille?: SortOrderInput | SortOrder
     maitreDeStageEmail?: SortOrderInput | SortOrder
+    natureIntervention?: SortOrder
+    natureInterventionAutre?: SortOrderInput | SortOrder
+    publicVise?: SortOrderInput | SortOrder
+    objectifEncadrementSeul?: SortOrderInput | SortOrder
+    objectifEncadrementAutonomie?: SortOrderInput | SortOrder
+    objectifEncadrementPonctuel?: SortOrderInput | SortOrder
     donneesSupplementaires?: SortOrderInput | SortOrder
     pdfStoragePath?: SortOrderInput | SortOrder
     envoyeAt?: SortOrderInput | SortOrder
@@ -39754,6 +39896,12 @@ export namespace Prisma {
     maitreDeStageCp?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
     maitreDeStageVille?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
     maitreDeStageEmail?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    natureIntervention?: StringNullableListFilter<"ConventionStagiaire">
+    natureInterventionAutre?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    publicVise?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    objectifEncadrementSeul?: BoolNullableWithAggregatesFilter<"ConventionStagiaire"> | boolean | null
+    objectifEncadrementAutonomie?: BoolNullableWithAggregatesFilter<"ConventionStagiaire"> | boolean | null
+    objectifEncadrementPonctuel?: BoolNullableWithAggregatesFilter<"ConventionStagiaire"> | boolean | null
     donneesSupplementaires?: JsonNullableWithAggregatesFilter<"ConventionStagiaire">
     pdfStoragePath?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
     envoyeAt?: DateTimeNullableWithAggregatesFilter<"ConventionStagiaire"> | Date | string | null
@@ -41325,6 +41473,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -41373,6 +41523,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -41419,6 +41571,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41467,6 +41621,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41514,6 +41670,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -41551,6 +41709,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41589,6 +41749,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42237,6 +42399,12 @@ export namespace Prisma {
     maitreDeStageCp?: string | null
     maitreDeStageVille?: string | null
     maitreDeStageEmail?: string | null
+    natureIntervention?: ConventionStagiaireCreatenatureInterventionInput | string[]
+    natureInterventionAutre?: string | null
+    publicVise?: string | null
+    objectifEncadrementSeul?: boolean | null
+    objectifEncadrementAutonomie?: boolean | null
+    objectifEncadrementPonctuel?: boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: string | null
     envoyeAt?: Date | string | null
@@ -42270,6 +42438,12 @@ export namespace Prisma {
     maitreDeStageCp?: string | null
     maitreDeStageVille?: string | null
     maitreDeStageEmail?: string | null
+    natureIntervention?: ConventionStagiaireCreatenatureInterventionInput | string[]
+    natureInterventionAutre?: string | null
+    publicVise?: string | null
+    objectifEncadrementSeul?: boolean | null
+    objectifEncadrementAutonomie?: boolean | null
+    objectifEncadrementPonctuel?: boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: string | null
     envoyeAt?: Date | string | null
@@ -42301,6 +42475,12 @@ export namespace Prisma {
     maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    natureIntervention?: ConventionStagiaireUpdatenatureInterventionInput | string[]
+    natureInterventionAutre?: NullableStringFieldUpdateOperationsInput | string | null
+    publicVise?: NullableStringFieldUpdateOperationsInput | string | null
+    objectifEncadrementSeul?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementAutonomie?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementPonctuel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42334,6 +42514,12 @@ export namespace Prisma {
     maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    natureIntervention?: ConventionStagiaireUpdatenatureInterventionInput | string[]
+    natureInterventionAutre?: NullableStringFieldUpdateOperationsInput | string | null
+    publicVise?: NullableStringFieldUpdateOperationsInput | string | null
+    objectifEncadrementSeul?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementAutonomie?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementPonctuel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42366,6 +42552,12 @@ export namespace Prisma {
     maitreDeStageCp?: string | null
     maitreDeStageVille?: string | null
     maitreDeStageEmail?: string | null
+    natureIntervention?: ConventionStagiaireCreatenatureInterventionInput | string[]
+    natureInterventionAutre?: string | null
+    publicVise?: string | null
+    objectifEncadrementSeul?: boolean | null
+    objectifEncadrementAutonomie?: boolean | null
+    objectifEncadrementPonctuel?: boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: string | null
     envoyeAt?: Date | string | null
@@ -42396,6 +42588,12 @@ export namespace Prisma {
     maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    natureIntervention?: ConventionStagiaireUpdatenatureInterventionInput | string[]
+    natureInterventionAutre?: NullableStringFieldUpdateOperationsInput | string | null
+    publicVise?: NullableStringFieldUpdateOperationsInput | string | null
+    objectifEncadrementSeul?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementAutonomie?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementPonctuel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42427,6 +42625,12 @@ export namespace Prisma {
     maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    natureIntervention?: ConventionStagiaireUpdatenatureInterventionInput | string[]
+    natureInterventionAutre?: NullableStringFieldUpdateOperationsInput | string | null
+    publicVise?: NullableStringFieldUpdateOperationsInput | string | null
+    objectifEncadrementSeul?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementAutonomie?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementPonctuel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44354,6 +44558,17 @@ export namespace Prisma {
     not?: NestedEnumModeInscriptionFilter<$PrismaModel> | $Enums.ModeInscription
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type EnumGroupeEquivalenceNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.GroupeEquivalence | EnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
     in?: $Enums.GroupeEquivalence[] | ListEnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
@@ -44433,6 +44648,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrder
     responsablePedagogiqueEmail?: SortOrder
     responsablePedagogiqueTelephone?: SortOrder
+    dateDebut?: SortOrder
+    dateFin?: SortOrder
     groupeEquivalence?: SortOrder
     varianteNode?: SortOrder
     badgeNode?: SortOrder
@@ -44477,6 +44694,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrder
     responsablePedagogiqueEmail?: SortOrder
     responsablePedagogiqueTelephone?: SortOrder
+    dateDebut?: SortOrder
+    dateFin?: SortOrder
     groupeEquivalence?: SortOrder
     varianteNode?: SortOrder
     badgeNode?: SortOrder
@@ -44514,6 +44733,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrder
     responsablePedagogiqueEmail?: SortOrder
     responsablePedagogiqueTelephone?: SortOrder
+    dateDebut?: SortOrder
+    dateFin?: SortOrder
     groupeEquivalence?: SortOrder
     varianteNode?: SortOrder
     badgeNode?: SortOrder
@@ -44651,6 +44872,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumModeInscriptionFilter<$PrismaModel>
     _max?: NestedEnumModeInscriptionFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumGroupeEquivalenceNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -45060,15 +45295,17 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
   export type ConventionSignataireListRelationFilter = {
@@ -45110,6 +45347,12 @@ export namespace Prisma {
     maitreDeStageCp?: SortOrder
     maitreDeStageVille?: SortOrder
     maitreDeStageEmail?: SortOrder
+    natureIntervention?: SortOrder
+    natureInterventionAutre?: SortOrder
+    publicVise?: SortOrder
+    objectifEncadrementSeul?: SortOrder
+    objectifEncadrementAutonomie?: SortOrder
+    objectifEncadrementPonctuel?: SortOrder
     donneesSupplementaires?: SortOrder
     pdfStoragePath?: SortOrder
     envoyeAt?: SortOrder
@@ -45141,6 +45384,11 @@ export namespace Prisma {
     maitreDeStageCp?: SortOrder
     maitreDeStageVille?: SortOrder
     maitreDeStageEmail?: SortOrder
+    natureInterventionAutre?: SortOrder
+    publicVise?: SortOrder
+    objectifEncadrementSeul?: SortOrder
+    objectifEncadrementAutonomie?: SortOrder
+    objectifEncadrementPonctuel?: SortOrder
     pdfStoragePath?: SortOrder
     envoyeAt?: SortOrder
     completedAt?: SortOrder
@@ -45171,24 +45419,23 @@ export namespace Prisma {
     maitreDeStageCp?: SortOrder
     maitreDeStageVille?: SortOrder
     maitreDeStageEmail?: SortOrder
+    natureInterventionAutre?: SortOrder
+    publicVise?: SortOrder
+    objectifEncadrementSeul?: SortOrder
+    objectifEncadrementAutonomie?: SortOrder
+    objectifEncadrementPonctuel?: SortOrder
     pdfStoragePath?: SortOrder
     envoyeAt?: SortOrder
     completedAt?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type EnumRoleSignataireFilter<$PrismaModel = never> = {
@@ -46868,6 +47115,10 @@ export namespace Prisma {
     set?: $Enums.ModeInscription
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type NullableEnumGroupeEquivalenceFieldUpdateOperationsInput = {
     set?: $Enums.GroupeEquivalence | null
   }
@@ -47445,6 +47696,10 @@ export namespace Prisma {
     deleteMany?: FormationScalarWhereInput | FormationScalarWhereInput[]
   }
 
+  export type ConventionStagiaireCreatenatureInterventionInput = {
+    set: string[]
+  }
+
   export type FormationCreateNestedOneWithoutConventionStagiairesInput = {
     create?: XOR<FormationCreateWithoutConventionStagiairesInput, FormationUncheckedCreateWithoutConventionStagiairesInput>
     connectOrCreate?: FormationCreateOrConnectWithoutConventionStagiairesInput
@@ -47465,8 +47720,13 @@ export namespace Prisma {
     connect?: ConventionSignataireWhereUniqueInput | ConventionSignataireWhereUniqueInput[]
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
+  export type ConventionStagiaireUpdatenatureInterventionInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type FormationUpdateOneRequiredWithoutConventionStagiairesNestedInput = {
@@ -48010,6 +48270,17 @@ export namespace Prisma {
     not?: NestedEnumModeInscriptionFilter<$PrismaModel> | $Enums.ModeInscription
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedEnumGroupeEquivalenceNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.GroupeEquivalence | EnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
     in?: $Enums.GroupeEquivalence[] | ListEnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
@@ -48156,6 +48427,20 @@ export namespace Prisma {
     _max?: NestedEnumModeInscriptionFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumGroupeEquivalenceNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.GroupeEquivalence | EnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
     in?: $Enums.GroupeEquivalence[] | ListEnumGroupeEquivalenceFieldRefInput<$PrismaModel> | null
@@ -48227,29 +48512,17 @@ export namespace Prisma {
     _max?: NestedEnumDocumentCategorieFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumRoleSignataireFilter<$PrismaModel = never> = {
@@ -49430,6 +49703,12 @@ export namespace Prisma {
     maitreDeStageCp?: string | null
     maitreDeStageVille?: string | null
     maitreDeStageEmail?: string | null
+    natureIntervention?: ConventionStagiaireCreatenatureInterventionInput | string[]
+    natureInterventionAutre?: string | null
+    publicVise?: string | null
+    objectifEncadrementSeul?: boolean | null
+    objectifEncadrementAutonomie?: boolean | null
+    objectifEncadrementPonctuel?: boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: string | null
     envoyeAt?: Date | string | null
@@ -49461,6 +49740,12 @@ export namespace Prisma {
     maitreDeStageCp?: string | null
     maitreDeStageVille?: string | null
     maitreDeStageEmail?: string | null
+    natureIntervention?: ConventionStagiaireCreatenatureInterventionInput | string[]
+    natureInterventionAutre?: string | null
+    publicVise?: string | null
+    objectifEncadrementSeul?: boolean | null
+    objectifEncadrementAutonomie?: boolean | null
+    objectifEncadrementPonctuel?: boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: string | null
     envoyeAt?: Date | string | null
@@ -49715,6 +50000,12 @@ export namespace Prisma {
     maitreDeStageCp?: StringNullableFilter<"ConventionStagiaire"> | string | null
     maitreDeStageVille?: StringNullableFilter<"ConventionStagiaire"> | string | null
     maitreDeStageEmail?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    natureIntervention?: StringNullableListFilter<"ConventionStagiaire">
+    natureInterventionAutre?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    publicVise?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    objectifEncadrementSeul?: BoolNullableFilter<"ConventionStagiaire"> | boolean | null
+    objectifEncadrementAutonomie?: BoolNullableFilter<"ConventionStagiaire"> | boolean | null
+    objectifEncadrementPonctuel?: BoolNullableFilter<"ConventionStagiaire"> | boolean | null
     donneesSupplementaires?: JsonNullableFilter<"ConventionStagiaire">
     pdfStoragePath?: StringNullableFilter<"ConventionStagiaire"> | string | null
     envoyeAt?: DateTimeNullableFilter<"ConventionStagiaire"> | Date | string | null
@@ -49800,6 +50091,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -49847,6 +50140,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -49963,6 +50258,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50010,6 +50307,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50055,6 +50354,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -50102,6 +50403,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -50163,6 +50466,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50210,6 +50515,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50304,6 +50611,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -50351,6 +50660,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -50467,6 +50778,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50514,6 +50827,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50559,6 +50874,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -50606,6 +50923,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -50716,6 +51035,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50763,6 +51084,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50912,6 +51235,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -50959,6 +51284,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -51137,6 +51464,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51184,6 +51513,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51445,6 +51776,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -51491,6 +51824,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -51567,6 +51902,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
+    dateDebut?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    dateFin?: DateTimeNullableFilter<"Formation"> | Date | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
@@ -51604,6 +51941,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -51651,6 +51990,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -51764,6 +52105,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51811,6 +52154,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51891,6 +52236,12 @@ export namespace Prisma {
     maitreDeStageCp?: string | null
     maitreDeStageVille?: string | null
     maitreDeStageEmail?: string | null
+    natureIntervention?: ConventionStagiaireCreatenatureInterventionInput | string[]
+    natureInterventionAutre?: string | null
+    publicVise?: string | null
+    objectifEncadrementSeul?: boolean | null
+    objectifEncadrementAutonomie?: boolean | null
+    objectifEncadrementPonctuel?: boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: string | null
     envoyeAt?: Date | string | null
@@ -51923,6 +52274,12 @@ export namespace Prisma {
     maitreDeStageCp?: string | null
     maitreDeStageVille?: string | null
     maitreDeStageEmail?: string | null
+    natureIntervention?: ConventionStagiaireCreatenatureInterventionInput | string[]
+    natureInterventionAutre?: string | null
+    publicVise?: string | null
+    objectifEncadrementSeul?: boolean | null
+    objectifEncadrementAutonomie?: boolean | null
+    objectifEncadrementPonctuel?: boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: string | null
     envoyeAt?: Date | string | null
@@ -51969,6 +52326,12 @@ export namespace Prisma {
     maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    natureIntervention?: ConventionStagiaireUpdatenatureInterventionInput | string[]
+    natureInterventionAutre?: NullableStringFieldUpdateOperationsInput | string | null
+    publicVise?: NullableStringFieldUpdateOperationsInput | string | null
+    objectifEncadrementSeul?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementAutonomie?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementPonctuel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52001,6 +52364,12 @@ export namespace Prisma {
     maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    natureIntervention?: ConventionStagiaireUpdatenatureInterventionInput | string[]
+    natureInterventionAutre?: NullableStringFieldUpdateOperationsInput | string | null
+    publicVise?: NullableStringFieldUpdateOperationsInput | string | null
+    objectifEncadrementSeul?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementAutonomie?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementPonctuel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52110,6 +52479,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -52157,6 +52528,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -52326,6 +52699,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52373,6 +52748,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52692,6 +53069,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -52739,6 +53118,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -52871,6 +53252,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52918,6 +53301,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53239,6 +53624,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -53286,6 +53673,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -53347,6 +53736,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53394,6 +53785,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53930,6 +54323,12 @@ export namespace Prisma {
     maitreDeStageCp?: string | null
     maitreDeStageVille?: string | null
     maitreDeStageEmail?: string | null
+    natureIntervention?: ConventionStagiaireCreatenatureInterventionInput | string[]
+    natureInterventionAutre?: string | null
+    publicVise?: string | null
+    objectifEncadrementSeul?: boolean | null
+    objectifEncadrementAutonomie?: boolean | null
+    objectifEncadrementPonctuel?: boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: string | null
     envoyeAt?: Date | string | null
@@ -54247,6 +54646,12 @@ export namespace Prisma {
     maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    natureIntervention?: ConventionStagiaireUpdatenatureInterventionInput | string[]
+    natureInterventionAutre?: NullableStringFieldUpdateOperationsInput | string | null
+    publicVise?: NullableStringFieldUpdateOperationsInput | string | null
+    objectifEncadrementSeul?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementAutonomie?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementPonctuel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54278,6 +54683,12 @@ export namespace Prisma {
     maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    natureIntervention?: ConventionStagiaireUpdatenatureInterventionInput | string[]
+    natureInterventionAutre?: NullableStringFieldUpdateOperationsInput | string | null
+    publicVise?: NullableStringFieldUpdateOperationsInput | string | null
+    objectifEncadrementSeul?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementAutonomie?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementPonctuel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54309,6 +54720,12 @@ export namespace Prisma {
     maitreDeStageCp?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageVille?: NullableStringFieldUpdateOperationsInput | string | null
     maitreDeStageEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    natureIntervention?: ConventionStagiaireUpdatenatureInterventionInput | string[]
+    natureInterventionAutre?: NullableStringFieldUpdateOperationsInput | string | null
+    publicVise?: NullableStringFieldUpdateOperationsInput | string | null
+    objectifEncadrementSeul?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementAutonomie?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    objectifEncadrementPonctuel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     donneesSupplementaires?: NullableJsonNullValueInput | InputJsonValue
     pdfStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
     envoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54427,6 +54844,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
@@ -54464,6 +54883,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54510,6 +54931,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54556,6 +54979,8 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null

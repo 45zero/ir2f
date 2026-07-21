@@ -1,6 +1,9 @@
 import "server-only"
 import type { Formation, ConventionStagiaire, RoleSignataire } from "@/generated/prisma"
 import type { ConventionVariables } from "./pdf"
+import { NATURE_INTERVENTION_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS } from "./variables-shared"
+
+export { NATURE_INTERVENTION_OPTIONS, PUBLIC_VISE_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS } from "./variables-shared"
 
 /** Ordre strict du circuit de signature : chaque étape n'est notifiée qu'une fois la précédente signée. */
 export const SIGNATAIRE_ORDER: RoleSignataire[] = ["STAGIAIRE", "CLUB", "TUTEUR", "MAITRE_DE_STAGE", "RESPONSABLE_PEDAGOGIQUE"]
@@ -16,7 +19,14 @@ export const SIGNATURE_FIELD_NAMES: Record<RoleSignataire, string> = {
 
 type FormationVars = Pick<
   Formation,
-  "titre" | "lieu" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone"
+  | "titre"
+  | "lieu"
+  | "responsablePedagogiqueNom"
+  | "responsablePedagogiquePrenom"
+  | "responsablePedagogiqueEmail"
+  | "responsablePedagogiqueTelephone"
+  | "dateDebut"
+  | "dateFin"
 >
 
 type StagiaireVars = Pick<
@@ -42,7 +52,12 @@ type StagiaireVars = Pick<
   | "maitreDeStageCp"
   | "maitreDeStageVille"
   | "maitreDeStageEmail"
+  | "publicVise"
+  | "natureInterventionAutre"
 >
+
+const formationDateDebutFormatter = new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "2-digit", year: "2-digit" })
+const formationDateFinFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" })
 
 /**
  * Construit l'objet de variables injecté dans le modèle PDF. Les noms de clé ci-dessous sont le
@@ -58,6 +73,8 @@ export function buildConventionVariables(params: { formation: FormationVars; for
     formation_titre: formation.titre,
     formation_lieu: formation.lieu ?? "",
     formation_dates: params.formationDateLabel ?? "",
+    formation_date_debut: formation.dateDebut ? formationDateDebutFormatter.format(formation.dateDebut) : "",
+    formation_date_fin: formation.dateFin ? formationDateFinFormatter.format(formation.dateFin) : "",
 
     stagiaire_civilite: stagiaire.civilite ?? "",
     stagiaire_nom: stagiaire.nom,
@@ -69,6 +86,8 @@ export function buildConventionVariables(params: { formation: FormationVars; for
     stagiaire_ville: stagiaire.ville ?? "",
     stagiaire_telephone: stagiaire.telephone ?? "",
     stagiaire_email: stagiaire.email,
+    stagiaire_public_vise: stagiaire.publicVise ?? "",
+    nature_intervention_autre_texte: stagiaire.natureInterventionAutre ?? "",
 
     club_nom: stagiaire.club ?? "",
     club_numero_affiliation: stagiaire.numeroAffiliationClub ?? "",
@@ -100,6 +119,8 @@ export const ALL_TEMPLATE_FIELD_NAMES: string[] = [
   "formation_titre",
   "formation_lieu",
   "formation_dates",
+  "formation_date_debut",
+  "formation_date_fin",
   "stagiaire_civilite",
   "stagiaire_nom",
   "stagiaire_prenom",
@@ -110,6 +131,8 @@ export const ALL_TEMPLATE_FIELD_NAMES: string[] = [
   "stagiaire_ville",
   "stagiaire_telephone",
   "stagiaire_email",
+  "stagiaire_public_vise",
+  "nature_intervention_autre_texte",
   "club_nom",
   "club_numero_affiliation",
   "club_email",
@@ -129,6 +152,8 @@ export const ALL_TEMPLATE_FIELD_NAMES: string[] = [
   "responsable_pedagogique_nom_prenom",
   "responsable_pedagogique_email",
   "responsable_pedagogique_telephone",
+  ...NATURE_INTERVENTION_OPTIONS.map((o) => o.champ),
+  ...OBJECTIF_PEDAGOGIQUE_FIELDS.flatMap((o) => [o.champOui, o.champNon]),
   ...Object.values(SIGNATURE_FIELD_NAMES),
 ]
 

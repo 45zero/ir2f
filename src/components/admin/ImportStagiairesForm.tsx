@@ -46,6 +46,11 @@ export function ImportStagiairesForm({ formationId }: { formationId: string }) {
           {state.imported} stagiaire{state.imported > 1 ? "s" : ""} importé{state.imported > 1 ? "s" : ""}.
         </span>
       )}
+      {state?.warning && (
+        <span style={{ color: "#7a6423", fontSize: 12, background: "#faf4e6", padding: "4px 10px", borderRadius: 12, flexBasis: "100%" }}>
+          {state.warning}
+        </span>
+      )}
     </form>
   )
 }

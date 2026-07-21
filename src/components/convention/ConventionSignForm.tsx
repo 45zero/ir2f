@@ -4,9 +4,80 @@ import { useActionState, useState } from "react"
 import { signerConvention, refuserConvention } from "@/lib/actions/convention-signature"
 import { SIGNATURE_CONSENT_TEXT } from "@/lib/signature-consent"
 import { SignaturePad } from "@/components/convention/SignaturePad"
+import { NATURE_INTERVENTION_OPTIONS, PUBLIC_VISE_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS } from "@/lib/conventions/variables-shared"
 import { colors, fontBody } from "@/lib/theme"
+import type { RoleSignataire } from "@/generated/prisma"
 
-export function ConventionSignForm({ token }: { token: string }) {
+const fieldStyle = {
+  border: "1px solid #e2e5ea",
+  borderRadius: 5,
+  padding: "9px 12px",
+  fontSize: 13,
+  fontFamily: fontBody,
+  outline: "none",
+}
+
+function ArticleTroisFields() {
+  const [autreChecked, setAutreChecked] = useState(false)
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, background: "#f5f7fb", borderRadius: 8, padding: 16 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>
+          Nature de l&apos;intervention pédagogique <span style={{ fontWeight: 400, color: colors.textLight }}>(plusieurs choix possibles)</span>
+        </span>
+        {NATURE_INTERVENTION_OPTIONS.map((o) => (
+          <label key={o.value} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text }}>
+            <input
+              type="checkbox"
+              name="nature"
+              value={o.value}
+              onChange={o.value === "AUTRE" ? (e) => setAutreChecked(e.target.checked) : undefined}
+              style={{ width: 15, height: 15 }}
+            />
+            {o.label}
+          </label>
+        ))}
+        {autreChecked && (
+          <input name="natureAutreTexte" placeholder="Précisez" style={{ ...fieldStyle, marginLeft: 23 }} />
+        )}
+      </div>
+
+      <label style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>Public visé</span>
+        <select name="publicVise" required style={{ ...fieldStyle, maxWidth: 200 }}>
+          <option value="">— Choisir —</option>
+          {PUBLIC_VISE_OPTIONS.map((v) => (
+            <option key={v} value={v}>
+              {v}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>Objectifs pédagogiques</span>
+        {OBJECTIF_PEDAGOGIQUE_FIELDS.map((o) => (
+          <div key={o.key} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
+            <span style={{ fontSize: 12.5, color: colors.text, flex: "1 1 260px" }}>{o.label}</span>
+            <div style={{ display: "flex", gap: 14 }}>
+              <label style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12.5, color: colors.text }}>
+                <input type="radio" name={o.formKey} value="OUI" required style={{ width: 14, height: 14 }} />
+                Oui
+              </label>
+              <label style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12.5, color: colors.text }}>
+                <input type="radio" name={o.formKey} value="NON" style={{ width: 14, height: 14 }} />
+                Non
+              </label>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export function ConventionSignForm({ token, role }: { token: string; role: RoleSignataire }) {
   const [showRefus, setShowRefus] = useState(false)
   const [signState, signAction, signPending] = useActionState(signerConvention.bind(null, token), undefined)
   const [refusState, refusAction, refusPending] = useActionState(refuserConvention.bind(null, token), undefined)
@@ -58,6 +129,8 @@ export function ConventionSignForm({ token }: { token: string }) {
 
   return (
     <form action={signAction} style={{ display: "flex", flexDirection: "column", gap: 16, background: "#fff", border: "1px solid #eef0f3", borderRadius: 10, padding: 20 }}>
+      {role === "STAGIAIRE" && <ArticleTroisFields />}
+
       <SignaturePad name="signatureImage" />
 
       <label style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 12.5, color: colors.textMuted, lineHeight: 1.5 }}>

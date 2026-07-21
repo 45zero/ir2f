@@ -34,6 +34,8 @@ export type FormationFormInitial = {
   statut: StatutFormation
   type: TypeFormation
   dureeLabel: string
+  dateDebut: string
+  dateFin: string
   modeLabel: string
   lieu: string
   prix: string
@@ -70,6 +72,8 @@ const EMPTY: FormationFormInitial = {
   statut: "BROUILLON",
   type: "PRESENTIEL",
   dureeLabel: "",
+  dateDebut: "",
+  dateFin: "",
   modeLabel: "",
   lieu: "",
   prix: "",
@@ -248,6 +252,12 @@ export function FormationForm({
           </Field>
           <Field label="Durée (libellé, ex. « 3 mois »)">
             <input name="dureeLabel" defaultValue={data.dureeLabel} style={fieldStyle} />
+          </Field>
+          <Field label="Date de début">
+            <input name="dateDebut" type="date" defaultValue={data.dateDebut} style={fieldStyle} />
+          </Field>
+          <Field label="Date de fin">
+            <input name="dateFin" type="date" defaultValue={data.dateFin} style={fieldStyle} />
           </Field>
           <Field label="Format (libellé, override optionnel)">
             <input name="modeLabel" defaultValue={data.modeLabel} style={fieldStyle} />

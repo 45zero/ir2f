@@ -231,6 +231,11 @@ model Formation {
   responsablePedagogiqueEmail     String?
   responsablePedagogiqueTelephone String?
 
+  // Période globale de la formation (« du ... au ... »), affichée à côté de la durée et reportée
+  // dans la convention de stage — indépendante des sessions (qui peuvent être plus fines).
+  dateDebut DateTime?
+  dateFin   DateTime?
+
   // Diagramme "équivalences et passerelles" — null si hors diagramme
   groupeEquivalence GroupeEquivalence?
   varianteNode      VarianteNode?
@@ -433,6 +438,14 @@ model ConventionStagiaire {
   maitreDeStageCp      String?
   maitreDeStageVille   String?
   maitreDeStageEmail   String?
+
+  // Réponses saisies par le stagiaire au moment de sa signature (article 3 de la convention)
+  natureIntervention           String[]
+  natureInterventionAutre      String?
+  publicVise                   String?
+  objectifEncadrementSeul      Boolean?
+  objectifEncadrementAutonomie Boolean?
+  objectifEncadrementPonctuel  Boolean?
 
   donneesSupplementaires Json?
   pdfStoragePath         String?

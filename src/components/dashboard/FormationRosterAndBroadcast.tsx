@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { BroadcastComposerModal } from "@/components/dashboard/BroadcastComposerModal"
 import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
+import { ConventionShareActions } from "@/components/dashboard/ConventionShareActions"
 import { EnvoyerConventionStagiaireButton } from "@/components/dashboard/EnvoyerConventionStagiaireButton"
 import { ImportStagiairesForm } from "@/components/admin/ImportStagiairesForm"
 import { EnvoyerConventionsButton } from "@/components/admin/EnvoyerConventionsButton"
@@ -356,7 +357,11 @@ export function FormationRosterAndBroadcast({
                         </span>
                         <ConventionStatutPills signataires={c.signataires} canManage={isAdmin} />
                         <div style={{ display: "flex", alignItems: "center", gap: 10, marginLeft: "auto" }}>
-                          <DocumentLinkActions viewUrl={c.pdfViewUrl} downloadUrl={c.pdfDownloadUrl} />
+                          <ConventionShareActions
+                            viewUrl={c.pdfViewUrl}
+                            downloadUrl={c.pdfDownloadUrl}
+                            nomPrenom={`${c.prenom} ${c.nom}`}
+                          />
                           {isAdmin && !c.sent && <EnvoyerConventionStagiaireButton stagiaireId={c.id} />}
                         </div>
                       </div>

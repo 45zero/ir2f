@@ -5,7 +5,7 @@ import * as XLSX from "xlsx"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 
-export type ImportStagiairesState = { error: string | null; imported: number | null }
+export type ImportStagiairesState = { error: string | null; imported: number | null; warning?: string | null }
 
 /**
  * Gabarit LGEF (colonnes fixes, 1 ou 2 lignes d'en-tête puis les données — la ligne d'en-tête
@@ -90,6 +90,7 @@ export async function importStagiairesExcel(
   if (rows.length === 0) return { error: "Le fichier ne contient aucune ligne de données.", imported: null }
 
   let imported = 0
+  let reinitialises = 0
   for (const row of rows) {
     const nom = cell(row, COLUMN_INDEX.nom)
     const prenom = cell(row, COLUMN_INDEX.prenom)
@@ -127,11 +128,31 @@ export async function importStagiairesExcel(
       donneesSupplementaires: Object.keys(extra).length > 0 ? extra : undefined,
     }
 
-    await prisma.conventionStagiaire.upsert({
+    const existing = await prisma.conventionStagiaire.findUnique({
       where: { formationId_email: { formationId, email } },
-      update: data,
-      create: { ...data, formationId, email },
+      select: { id: true, pdfStoragePath: true },
     })
+
+    if (existing?.pdfStoragePath) {
+      // Une convention avait déjà été générée (et éventuellement signée) pour cet email — les
+      // informations changent, donc l'ancien PDF/signatures ne sont plus valables : on les efface
+      // pour repartir d'un statut vierge plutôt que d'afficher un statut "signé" qui ne correspond
+      // plus aux données affichées.
+      await prisma.$transaction([
+        prisma.conventionSignataire.deleteMany({ where: { conventionStagiaireId: existing.id } }),
+        prisma.conventionStagiaire.update({
+          where: { id: existing.id },
+          data: { ...data, pdfStoragePath: null, envoyeAt: null, completedAt: null },
+        }),
+      ])
+      reinitialises++
+    } else {
+      await prisma.conventionStagiaire.upsert({
+        where: { formationId_email: { formationId, email } },
+        update: data,
+        create: { ...data, formationId, email },
+      })
+    }
     imported++
   }
 
@@ -139,5 +160,9 @@ export async function importStagiairesExcel(
   return {
     error: imported === 0 ? "Aucune ligne valide importée — Nom, Prénom et Mail du stagiaire sont obligatoires (colonnes E, F, L)." : null,
     imported,
+    warning:
+      reinitialises > 0
+        ? `${reinitialises} stagiaire(s) avaient déjà une convention générée — elle a été réinitialisée suite à la modification de leurs informations, à renvoyer.`
+        : null,
   }
 }

@@ -73,7 +73,7 @@ export default async function ConventionSignPage({ params }: { params: Promise<{
           {blockedMessage}
         </div>
       ) : (
-        <ConventionSignForm token={token} />
+        <ConventionSignForm token={token} role={signataire.role} />
       )}
     </div>
   )

@@ -84,6 +84,33 @@ export async function stampSignature(
   return pdfDoc.save()
 }
 
+/**
+ * Coche une case (article 3 : nature de l'intervention, objectifs pédagogiques) en dessinant une
+ * croix sur son emplacement, puis retire le champ-ancrage — même mécanique que stampSignature
+ * mais sans image, juste un caractère « X ».
+ */
+export async function stampCheckmark(pdfBytes: Uint8Array, fieldName: string): Promise<Uint8Array> {
+  const pdfDoc = await PDFDocument.load(pdfBytes)
+  const form = pdfDoc.getForm()
+  const field = form.getFieldMaybe(fieldName)
+  if (!field) return pdfDoc.save()
+
+  const { page, rect } = findWidgetPageAndRect(pdfDoc, field)
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
+
+  page.drawText("X", {
+    x: rect.x + 1,
+    y: rect.y + 1,
+    size: rect.height,
+    font,
+    color: rgb(0.1, 0.1, 0.1),
+  })
+
+  form.removeField(field)
+
+  return pdfDoc.save()
+}
+
 /** Aplatit le formulaire restant (appelée après la dernière signature) pour figer le PDF final. */
 export async function finalizeConvention(pdfBytes: Uint8Array): Promise<Uint8Array> {
   const pdfDoc = await PDFDocument.load(pdfBytes)
