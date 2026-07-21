@@ -1,10 +1,19 @@
 import "server-only"
 import { PDFDocument as PDFLibDocument, StandardFonts } from "pdf-lib"
+// Import statique (effet de bord) : évalue le worker et pose `globalThis.pdfjsWorker`, ce que le
+// module principal détecte pour utiliser directement ce "fake worker" en mémoire plutôt que
+// d'essayer de résoudre dynamiquement le fichier worker par son chemin — cette résolution
+// dynamique casse une fois le code empaqueté par Turbopack (le fichier n'existe plus au chemin
+// attendu dans .next/...). Import statique = Turbopack l'inclut correctement dans le bundle.
+import "pdfjs-dist/legacy/build/pdf.worker.mjs"
 
 // pdfjs-dist n'exporte que de l'ESM ; import dynamique pour rester compatible avec le
 // bundling Next.js (module utilisé uniquement côté serveur, jamais dans le bundle client).
+let pdfjsPromise: Promise<typeof import("pdfjs-dist/legacy/build/pdf.mjs")> | undefined
+
 async function loadPdfjs() {
-  return import("pdfjs-dist/legacy/build/pdf.mjs")
+  if (!pdfjsPromise) pdfjsPromise = import("pdfjs-dist/legacy/build/pdf.mjs")
+  return pdfjsPromise
 }
 
 export type DetectedFieldKind = "text" | "checkbox" | "signature"
