@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
+import { ConventionTemplateBuilder } from "@/components/admin/ConventionTemplateBuilder"
 import { ConventionTemplateUploadForm } from "@/components/admin/ConventionTemplateUploadForm"
 import { ConventionTemplatesList, type ConventionTemplateRow } from "@/components/admin/ConventionTemplatesList"
 import { ALL_TEMPLATE_FIELD_NAMES } from "@/lib/conventions/variables"
@@ -31,7 +32,21 @@ export default async function ConventionTemplatesPage() {
         </p>
       </div>
 
-      <ConventionTemplateUploadForm />
+      <div>
+        <h2 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 17, fontWeight: 800, margin: "0 0 8px" }}>
+          Préparer un nouveau modèle depuis un PDF brut
+        </h2>
+        <ConventionTemplateBuilder />
+      </div>
+
+      <details style={{ background: "#f5f7fb", border: "1px solid #e4e9f2", borderRadius: 10, padding: "14px 18px" }}>
+        <summary style={{ fontSize: 13, fontWeight: 700, color: colors.navy, cursor: "pointer" }}>
+          Upload direct (le PDF a déjà des champs de formulaire remplissables)
+        </summary>
+        <div style={{ marginTop: 12 }}>
+          <ConventionTemplateUploadForm />
+        </div>
+      </details>
 
       <details style={{ background: "#f5f7fb", border: "1px solid #e4e9f2", borderRadius: 10, padding: "14px 18px" }}>
         <summary style={{ fontSize: 13, fontWeight: 700, color: colors.navy, cursor: "pointer" }}>

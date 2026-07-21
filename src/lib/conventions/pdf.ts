@@ -119,6 +119,57 @@ export async function finalizeConvention(pdfBytes: Uint8Array): Promise<Uint8Arr
   return pdfDoc.save()
 }
 
+export type TemplatePlacement = {
+  name: string
+  page: number
+  x: number
+  y: number
+  width: number
+  height: number
+  /** true pour un champ texte (fond blanc qui efface les pointillés d'origine) — false/absent pour une case à cocher ou un emplacement de signature (fond transparent). */
+  background?: boolean
+}
+
+/**
+ * Construit un PDF remplissable à partir d'un document brut et d'une liste d'emplacements
+ * (position + nom de champ), validés par un humain via l'assistant de préparation de modèle
+ * (voir template-analysis.ts pour la détection automatique des emplacements candidats).
+ */
+export async function buildFillableTemplate(pdfBytes: Uint8Array, placements: TemplatePlacement[]): Promise<Uint8Array> {
+  const pdfDoc = await PDFDocument.load(pdfBytes)
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
+  const form = pdfDoc.getForm()
+  const pages = pdfDoc.getPages()
+
+  const fieldCache = new Map<string, ReturnType<typeof form.createTextField>>()
+  function getOrCreateField(name: string) {
+    let field = fieldCache.get(name)
+    if (!field) {
+      field = form.createTextField(name)
+      fieldCache.set(name, field)
+    }
+    return field
+  }
+
+  for (const p of placements) {
+    const page = pages[p.page - 1]
+    if (!page) throw new Error(`Page ${p.page} introuvable dans le document.`)
+    const field = getOrCreateField(p.name)
+    field.addToPage(page, {
+      x: p.x,
+      y: p.y,
+      width: p.width,
+      height: p.height,
+      font,
+      backgroundColor: p.background ? rgb(1, 1, 1) : undefined,
+      borderWidth: 0,
+    })
+    if (p.background) field.setFontSize(10)
+  }
+
+  return pdfDoc.save()
+}
+
 /** Liste les noms des champs de formulaire d'un PDF, pour vérifier qu'un modèle uploadé contient bien les champs attendus. */
 export async function listTemplateFieldNames(templateBytes: Uint8Array): Promise<string[]> {
   const pdfDoc = await PDFDocument.load(templateBytes)

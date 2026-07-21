@@ -1,21 +1,17 @@
 import "server-only"
 import type { Formation, ConventionStagiaire, RoleSignataire } from "@/generated/prisma"
 import type { ConventionVariables } from "./pdf"
-import { NATURE_INTERVENTION_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS } from "./variables-shared"
 
-export { NATURE_INTERVENTION_OPTIONS, PUBLIC_VISE_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS } from "./variables-shared"
+export {
+  NATURE_INTERVENTION_OPTIONS,
+  PUBLIC_VISE_OPTIONS,
+  OBJECTIF_PEDAGOGIQUE_FIELDS,
+  SIGNATURE_FIELD_NAMES,
+  ALL_TEMPLATE_FIELD_NAMES,
+} from "./variables-shared"
 
 /** Ordre strict du circuit de signature : chaque étape n'est notifiée qu'une fois la précédente signée. */
 export const SIGNATAIRE_ORDER: RoleSignataire[] = ["STAGIAIRE", "CLUB", "TUTEUR", "MAITRE_DE_STAGE", "RESPONSABLE_PEDAGOGIQUE"]
-
-/** Noms des champs-emplacements de signature que le modèle PDF doit contenir (vides, un par rôle). */
-export const SIGNATURE_FIELD_NAMES: Record<RoleSignataire, string> = {
-  STAGIAIRE: "signature_stagiaire",
-  CLUB: "signature_club",
-  TUTEUR: "signature_tuteur",
-  MAITRE_DE_STAGE: "signature_maitre_de_stage",
-  RESPONSABLE_PEDAGOGIQUE: "signature_responsable_pedagogique",
-}
 
 type FormationVars = Pick<
   Formation,
@@ -113,49 +109,6 @@ export function buildConventionVariables(params: { formation: FormationVars; for
     responsable_pedagogique_telephone: formation.responsablePedagogiqueTelephone ?? "",
   }
 }
-
-/** Liste complète des noms de champs attendus dans un modèle PDF fillable — affichée à l'admin comme référence lors de l'upload d'un modèle. */
-export const ALL_TEMPLATE_FIELD_NAMES: string[] = [
-  "formation_titre",
-  "formation_lieu",
-  "formation_dates",
-  "formation_date_debut",
-  "formation_date_fin",
-  "stagiaire_civilite",
-  "stagiaire_nom",
-  "stagiaire_prenom",
-  "stagiaire_nom_prenom",
-  "stagiaire_date_naissance",
-  "stagiaire_adresse",
-  "stagiaire_cp",
-  "stagiaire_ville",
-  "stagiaire_telephone",
-  "stagiaire_email",
-  "stagiaire_public_vise",
-  "nature_intervention_autre_texte",
-  "club_nom",
-  "club_numero_affiliation",
-  "club_email",
-  "tuteur_nom",
-  "tuteur_prenom",
-  "tuteur_nom_prenom",
-  "tuteur_email",
-  "maitre_de_stage_nom",
-  "maitre_de_stage_prenom",
-  "maitre_de_stage_nom_prenom",
-  "maitre_de_stage_adresse",
-  "maitre_de_stage_cp",
-  "maitre_de_stage_ville",
-  "maitre_de_stage_email",
-  "responsable_pedagogique_nom",
-  "responsable_pedagogique_prenom",
-  "responsable_pedagogique_nom_prenom",
-  "responsable_pedagogique_email",
-  "responsable_pedagogique_telephone",
-  ...NATURE_INTERVENTION_OPTIONS.map((o) => o.champ),
-  ...OBJECTIF_PEDAGOGIQUE_FIELDS.flatMap((o) => [o.champOui, o.champNon]),
-  ...Object.values(SIGNATURE_FIELD_NAMES),
-]
 
 /** Résout le nom/email du signataire courant pour une étape donnée. Retourne `null` si l'étape ne peut pas être servie (ex. pas d'email de club/tuteur/maître de stage renseigné à l'import, ou responsable pédagogique manquant sur la formation). */
 export function resolveSignataireContact(role: RoleSignataire, stagiaire: StagiaireVars, formation: FormationVars): { nom: string; email: string } | null {

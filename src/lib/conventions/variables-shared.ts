@@ -1,6 +1,16 @@
-// Constantes de l'article 3 (nature de l'intervention, public visé, objectifs pédagogiques),
-// utilisées à la fois côté serveur (variables.ts, "use server") et côté client (formulaire de
-// signature du stagiaire) — pas d'import "server-only" ici, volontairement.
+// Constantes de conventions partagées entre code serveur (variables.ts) et code client
+// (formulaire de signature, assistant de préparation de modèle) — pas d'import "server-only" ici,
+// volontairement (voir la note "server/client boundary" dans la mémoire du projet).
+import type { RoleSignataire } from "@/generated/prisma"
+
+/** Noms des champs-emplacements de signature que le modèle PDF doit contenir (vides, un par rôle). */
+export const SIGNATURE_FIELD_NAMES: Record<RoleSignataire, string> = {
+  STAGIAIRE: "signature_stagiaire",
+  CLUB: "signature_club",
+  TUTEUR: "signature_tuteur",
+  MAITRE_DE_STAGE: "signature_maitre_de_stage",
+  RESPONSABLE_PEDAGOGIQUE: "signature_responsable_pedagogique",
+}
 
 /** Options de "Nature de l'intervention pédagogique" (article 3) — choix multiple. */
 export const NATURE_INTERVENTION_OPTIONS = [
@@ -41,3 +51,48 @@ export const OBJECTIF_PEDAGOGIQUE_FIELDS = [
     champNon: "check_objectif_ponctuel_non",
   },
 ] as const
+
+/** Variables "données" (hors signature) attendues dans un modèle PDF fillable — la liste que l'admin voit lors de l'upload direct, et parmi laquelle on choisit lors de l'assistant de préparation. */
+export const ASSIGNABLE_TEMPLATE_FIELD_NAMES: string[] = [
+  "formation_titre",
+  "formation_lieu",
+  "formation_dates",
+  "formation_date_debut",
+  "formation_date_fin",
+  "stagiaire_civilite",
+  "stagiaire_nom",
+  "stagiaire_prenom",
+  "stagiaire_nom_prenom",
+  "stagiaire_date_naissance",
+  "stagiaire_adresse",
+  "stagiaire_cp",
+  "stagiaire_ville",
+  "stagiaire_telephone",
+  "stagiaire_email",
+  "stagiaire_public_vise",
+  "nature_intervention_autre_texte",
+  "club_nom",
+  "club_numero_affiliation",
+  "club_email",
+  "tuteur_nom",
+  "tuteur_prenom",
+  "tuteur_nom_prenom",
+  "tuteur_email",
+  "maitre_de_stage_nom",
+  "maitre_de_stage_prenom",
+  "maitre_de_stage_nom_prenom",
+  "maitre_de_stage_adresse",
+  "maitre_de_stage_cp",
+  "maitre_de_stage_ville",
+  "maitre_de_stage_email",
+  "responsable_pedagogique_nom",
+  "responsable_pedagogique_prenom",
+  "responsable_pedagogique_nom_prenom",
+  "responsable_pedagogique_email",
+  "responsable_pedagogique_telephone",
+  ...NATURE_INTERVENTION_OPTIONS.map((o) => o.champ),
+  ...OBJECTIF_PEDAGOGIQUE_FIELDS.flatMap((o) => [o.champOui, o.champNon]),
+]
+
+/** Toutes les variables attendues, signatures comprises. */
+export const ALL_TEMPLATE_FIELD_NAMES: string[] = [...ASSIGNABLE_TEMPLATE_FIELD_NAMES, ...Object.values(SIGNATURE_FIELD_NAMES)]
