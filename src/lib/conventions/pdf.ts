@@ -1,5 +1,7 @@
 import "server-only"
-import { PDFDocument, PDFTextField, type PDFField, type PDFPage } from "pdf-lib"
+import { PDFDocument, PDFTextField, StandardFonts, rgb, type PDFField, type PDFPage } from "pdf-lib"
+
+const signedAtFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short", timeStyle: "short" })
 
 export type ConventionVariables = Record<string, string>
 
@@ -32,28 +34,49 @@ function findWidgetPageAndRect(pdfDoc: PDFDocument, field: PDFField): { page: PD
   throw new Error(`Impossible de localiser la page du champ "${field.getName()}" dans le PDF.`)
 }
 
+const DATE_BAND_HEIGHT = 12
+
 /**
- * Incruste une image de signature (PNG) sur l'emplacement du champ-signature donné, puis retire
- * ce seul champ du formulaire — l'image fait désormais partie du contenu de la page, et les
- * champs-signature des étapes suivantes restent intacts pour être localisés à leur tour.
+ * Incruste une image de signature (PNG) sur l'emplacement du champ-signature donné, avec la date
+ * et l'heure de signature imprimées juste en dessous (visible même à l'impression du PDF), puis
+ * retire ce seul champ du formulaire — l'image et le texte font désormais partie du contenu de la
+ * page, et les champs-signature des étapes suivantes restent intacts pour être localisés à leur tour.
  */
-export async function stampSignature(pdfBytes: Uint8Array, fieldName: string, signaturePngBytes: Uint8Array): Promise<Uint8Array> {
+export async function stampSignature(
+  pdfBytes: Uint8Array,
+  fieldName: string,
+  signaturePngBytes: Uint8Array,
+  signedAt: Date
+): Promise<Uint8Array> {
   const pdfDoc = await PDFDocument.load(pdfBytes)
   const form = pdfDoc.getForm()
   const field = form.getField(fieldName)
   const { page, rect } = findWidgetPageAndRect(pdfDoc, field)
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
 
   const image = await pdfDoc.embedPng(signaturePngBytes)
   const padding = 2
-  const scale = Math.min((rect.width - padding * 2) / image.width, (rect.height - padding * 2) / image.height, 1)
+  const imageAreaHeight = rect.height - DATE_BAND_HEIGHT - padding
+  const scale = Math.min((rect.width - padding * 2) / image.width, imageAreaHeight / image.height, 1)
   const drawWidth = image.width * scale
   const drawHeight = image.height * scale
 
   page.drawImage(image, {
     x: rect.x + (rect.width - drawWidth) / 2,
-    y: rect.y + (rect.height - drawHeight) / 2,
+    y: rect.y + DATE_BAND_HEIGHT + (imageAreaHeight - drawHeight) / 2,
     width: drawWidth,
     height: drawHeight,
+  })
+
+  const dateLabel = `Signé le ${signedAtFormatter.format(signedAt)}`
+  const dateFontSize = 7
+  const dateWidth = font.widthOfTextAtSize(dateLabel, dateFontSize)
+  page.drawText(dateLabel, {
+    x: rect.x + (rect.width - dateWidth) / 2,
+    y: rect.y + 2,
+    size: dateFontSize,
+    font,
+    color: rgb(0.35, 0.38, 0.45),
   })
 
   form.removeField(field)

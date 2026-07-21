@@ -155,6 +155,13 @@ enum StatutSignature {
   @@schema("ir2f")
 }
 
+enum RenvoiCanal {
+  MAIL
+  WHATSAPP
+
+  @@schema("ir2f")
+}
+
 // ─── UTILISATEURS ────────────────────────────────────
 
 model User {
@@ -460,6 +467,11 @@ model ConventionSignataire {
   ipAddress             String?
   userAgent             String?
   documentHash          String?
+
+  // Trace du dernier renvoi manuel (bouton mail/whatsapp) — qui, quand, par quel canal
+  dernierRenvoiPar   String?
+  dernierRenvoiCanal RenvoiCanal?
+  dernierRenvoiAt    DateTime?
 
   conventionStagiaire ConventionStagiaire @relation(fields: [conventionStagiaireId], references: [id])
 

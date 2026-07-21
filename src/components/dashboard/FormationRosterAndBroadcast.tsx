@@ -3,6 +3,10 @@
 import { useState } from "react"
 import { BroadcastComposerModal } from "@/components/dashboard/BroadcastComposerModal"
 import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
+import { EnvoyerConventionStagiaireButton } from "@/components/dashboard/EnvoyerConventionStagiaireButton"
+import { ImportStagiairesForm } from "@/components/admin/ImportStagiairesForm"
+import { EnvoyerConventionsButton } from "@/components/admin/EnvoyerConventionsButton"
+import { ConventionStatutPills, type ConventionSignataireStatut } from "@/components/ui/ConventionStatutPills"
 import { colors, fontBody } from "@/lib/theme"
 import type { OrigineInscription } from "@/generated/prisma"
 
@@ -33,6 +37,16 @@ export type FormateurFormationRow = {
     origine: OrigineInscription
     documents: { id: string; nom: string; signed: boolean; signedAt: string | null; viewUrl: string | null; downloadUrl: string | null }[]
   }[]
+  conventions: {
+    id: string
+    nom: string
+    prenom: string
+    club: string | null
+    sent: boolean
+    pdfViewUrl: string | null
+    pdfDownloadUrl: string | null
+    signataires: ConventionSignataireStatut[]
+  }[]
 }
 
 function initialsOf(prenom: string, nom: string) {
@@ -42,9 +56,11 @@ function initialsOf(prenom: string, nom: string) {
 export function FormationRosterAndBroadcast({
   formations,
   allowBroadcast = true,
+  isAdmin = false,
 }: {
   formations: FormateurFormationRow[]
   allowBroadcast?: boolean
+  isAdmin?: boolean
 }) {
   const [openFormationId, setOpenFormationId] = useState<string | null>(null)
   const [openStagiaireId, setOpenStagiaireId] = useState<string | null>(null)
@@ -306,6 +322,47 @@ export function FormationRosterAndBroadcast({
                     </div>
                   )
                 })}
+
+                {(isAdmin || f.conventions.length > 0) && (
+                  <>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.5, marginTop: 8 }}>
+                      Conventions de stage
+                    </span>
+                    {isAdmin && (
+                      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                        <ImportStagiairesForm formationId={f.id} />
+                        <EnvoyerConventionsButton formationId={f.id} />
+                      </div>
+                    )}
+                    {f.conventions.length === 0 && (
+                      <span style={{ fontSize: 12.5, color: colors.textLight }}>Aucun stagiaire importé pour cette formation.</span>
+                    )}
+                    {f.conventions.map((c) => (
+                      <div
+                        key={c.id}
+                        style={{
+                          background: "#f5f7fb",
+                          borderRadius: 10,
+                          padding: "12px 16px",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 14,
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <span style={{ flex: "1 1 160px", minWidth: 140, fontSize: 13, fontWeight: 700, color: colors.text }}>
+                          {c.prenom} {c.nom}
+                          {c.club && <span style={{ display: "block", fontSize: 11, fontWeight: 400, color: colors.textLight }}>{c.club}</span>}
+                        </span>
+                        <ConventionStatutPills signataires={c.signataires} canManage={isAdmin} />
+                        <div style={{ display: "flex", alignItems: "center", gap: 10, marginLeft: "auto" }}>
+                          <DocumentLinkActions viewUrl={c.pdfViewUrl} downloadUrl={c.pdfDownloadUrl} />
+                          {isAdmin && !c.sent && <EnvoyerConventionStagiaireButton stagiaireId={c.id} />}
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
               </div>
             )}
           </div>

@@ -6,6 +6,7 @@ import { getCovoituragesDisponibles } from "@/lib/covoiturage"
 import { getInbox } from "@/lib/messages"
 import { getFormateurFormations, getFormationRosterForFormateur } from "@/lib/formateur"
 import { getAllFormationsRosterAdmin } from "@/lib/admin/roster"
+import { getConventionStagiairesForRoster } from "@/lib/conventions/roster"
 import { FormationRosterAndBroadcast, type FormateurFormationRow } from "@/components/dashboard/FormationRosterAndBroadcast"
 import {
   StagiaireFormationsManager,
@@ -46,18 +47,24 @@ export default async function DashboardFormationsPage() {
 
 async function AdminFormationsView() {
   const formations = await getAllFormationsRosterAdmin()
-  const rows: FormateurFormationRow[] = formations.map((f) => ({
-    ...f,
-    dateLabel: f.nextSession ? dateFormatter.format(f.nextSession.dateDebut) : null,
-  }))
-  return <FormationRosterAndBroadcast formations={rows} allowBroadcast={false} />
+  const rows: FormateurFormationRow[] = await Promise.all(
+    formations.map(async (f) => ({
+      ...f,
+      dateLabel: f.nextSession ? dateFormatter.format(f.nextSession.dateDebut) : null,
+      conventions: await getConventionStagiairesForRoster(f.id),
+    }))
+  )
+  return <FormationRosterAndBroadcast formations={rows} allowBroadcast={false} isAdmin />
 }
 
 async function FormateurFormationsView({ userId }: { userId: string }) {
   const formations = await getFormateurFormations(userId)
   const rows: FormateurFormationRow[] = await Promise.all(
     formations.map(async (f) => {
-      const roster = (await getFormationRosterForFormateur(f.id, userId)) ?? []
+      const [roster, conventions] = await Promise.all([
+        getFormationRosterForFormateur(f.id, userId),
+        getConventionStagiairesForRoster(f.id),
+      ])
       return {
         id: f.id,
         titre: f.titre,
@@ -68,7 +75,8 @@ async function FormateurFormationsView({ userId }: { userId: string }) {
         documentsCount: f.documentsCount,
         fullySignedDocumentsCount: f.fullySignedDocumentsCount,
         covoiturageCount: f.covoiturageCount,
-        stagiaires: roster,
+        stagiaires: roster ?? [],
+        conventions,
       }
     })
   )

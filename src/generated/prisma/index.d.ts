@@ -309,6 +309,14 @@ export const StatutSignature: {
 export type StatutSignature = (typeof StatutSignature)[keyof typeof StatutSignature]
 
 
+export const RenvoiCanal: {
+  MAIL: 'MAIL',
+  WHATSAPP: 'WHATSAPP'
+};
+
+export type RenvoiCanal = (typeof RenvoiCanal)[keyof typeof RenvoiCanal]
+
+
 export const IconeAccompagnement: {
   FINANCEMENT: 'FINANCEMENT',
   GESTION: 'GESTION',
@@ -451,6 +459,10 @@ export const RoleSignataire: typeof $Enums.RoleSignataire
 export type StatutSignature = $Enums.StatutSignature
 
 export const StatutSignature: typeof $Enums.StatutSignature
+
+export type RenvoiCanal = $Enums.RenvoiCanal
+
+export const RenvoiCanal: typeof $Enums.RenvoiCanal
 
 export type IconeAccompagnement = $Enums.IconeAccompagnement
 
@@ -17686,6 +17698,9 @@ export namespace Prisma {
     ipAddress: string | null
     userAgent: string | null
     documentHash: string | null
+    dernierRenvoiPar: string | null
+    dernierRenvoiCanal: $Enums.RenvoiCanal | null
+    dernierRenvoiAt: Date | null
   }
 
   export type ConventionSignataireMaxAggregateOutputType = {
@@ -17705,6 +17720,9 @@ export namespace Prisma {
     ipAddress: string | null
     userAgent: string | null
     documentHash: string | null
+    dernierRenvoiPar: string | null
+    dernierRenvoiCanal: $Enums.RenvoiCanal | null
+    dernierRenvoiAt: Date | null
   }
 
   export type ConventionSignataireCountAggregateOutputType = {
@@ -17724,6 +17742,9 @@ export namespace Prisma {
     ipAddress: number
     userAgent: number
     documentHash: number
+    dernierRenvoiPar: number
+    dernierRenvoiCanal: number
+    dernierRenvoiAt: number
     _all: number
   }
 
@@ -17753,6 +17774,9 @@ export namespace Prisma {
     ipAddress?: true
     userAgent?: true
     documentHash?: true
+    dernierRenvoiPar?: true
+    dernierRenvoiCanal?: true
+    dernierRenvoiAt?: true
   }
 
   export type ConventionSignataireMaxAggregateInputType = {
@@ -17772,6 +17796,9 @@ export namespace Prisma {
     ipAddress?: true
     userAgent?: true
     documentHash?: true
+    dernierRenvoiPar?: true
+    dernierRenvoiCanal?: true
+    dernierRenvoiAt?: true
   }
 
   export type ConventionSignataireCountAggregateInputType = {
@@ -17791,6 +17818,9 @@ export namespace Prisma {
     ipAddress?: true
     userAgent?: true
     documentHash?: true
+    dernierRenvoiPar?: true
+    dernierRenvoiCanal?: true
+    dernierRenvoiAt?: true
     _all?: true
   }
 
@@ -17897,6 +17927,9 @@ export namespace Prisma {
     ipAddress: string | null
     userAgent: string | null
     documentHash: string | null
+    dernierRenvoiPar: string | null
+    dernierRenvoiCanal: $Enums.RenvoiCanal | null
+    dernierRenvoiAt: Date | null
     _count: ConventionSignataireCountAggregateOutputType | null
     _avg: ConventionSignataireAvgAggregateOutputType | null
     _sum: ConventionSignataireSumAggregateOutputType | null
@@ -17935,6 +17968,9 @@ export namespace Prisma {
     ipAddress?: boolean
     userAgent?: boolean
     documentHash?: boolean
+    dernierRenvoiPar?: boolean
+    dernierRenvoiCanal?: boolean
+    dernierRenvoiAt?: boolean
     conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conventionSignataire"]>
 
@@ -17955,6 +17991,9 @@ export namespace Prisma {
     ipAddress?: boolean
     userAgent?: boolean
     documentHash?: boolean
+    dernierRenvoiPar?: boolean
+    dernierRenvoiCanal?: boolean
+    dernierRenvoiAt?: boolean
     conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conventionSignataire"]>
 
@@ -17975,6 +18014,9 @@ export namespace Prisma {
     ipAddress?: boolean
     userAgent?: boolean
     documentHash?: boolean
+    dernierRenvoiPar?: boolean
+    dernierRenvoiCanal?: boolean
+    dernierRenvoiAt?: boolean
     conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conventionSignataire"]>
 
@@ -17995,9 +18037,12 @@ export namespace Prisma {
     ipAddress?: boolean
     userAgent?: boolean
     documentHash?: boolean
+    dernierRenvoiPar?: boolean
+    dernierRenvoiCanal?: boolean
+    dernierRenvoiAt?: boolean
   }
 
-  export type ConventionSignataireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conventionStagiaireId" | "role" | "ordre" | "nom" | "email" | "token" | "statut" | "envoyeAt" | "signedAt" | "refusedAt" | "motifRefus" | "signatureStoragePath" | "ipAddress" | "userAgent" | "documentHash", ExtArgs["result"]["conventionSignataire"]>
+  export type ConventionSignataireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conventionStagiaireId" | "role" | "ordre" | "nom" | "email" | "token" | "statut" | "envoyeAt" | "signedAt" | "refusedAt" | "motifRefus" | "signatureStoragePath" | "ipAddress" | "userAgent" | "documentHash" | "dernierRenvoiPar" | "dernierRenvoiCanal" | "dernierRenvoiAt", ExtArgs["result"]["conventionSignataire"]>
   export type ConventionSignataireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conventionStagiaire?: boolean | ConventionStagiaireDefaultArgs<ExtArgs>
   }
@@ -18030,6 +18075,9 @@ export namespace Prisma {
       ipAddress: string | null
       userAgent: string | null
       documentHash: string | null
+      dernierRenvoiPar: string | null
+      dernierRenvoiCanal: $Enums.RenvoiCanal | null
+      dernierRenvoiAt: Date | null
     }, ExtArgs["result"]["conventionSignataire"]>
     composites: {}
   }
@@ -18470,6 +18518,9 @@ export namespace Prisma {
     readonly ipAddress: FieldRef<"ConventionSignataire", 'String'>
     readonly userAgent: FieldRef<"ConventionSignataire", 'String'>
     readonly documentHash: FieldRef<"ConventionSignataire", 'String'>
+    readonly dernierRenvoiPar: FieldRef<"ConventionSignataire", 'String'>
+    readonly dernierRenvoiCanal: FieldRef<"ConventionSignataire", 'RenvoiCanal'>
+    readonly dernierRenvoiAt: FieldRef<"ConventionSignataire", 'DateTime'>
   }
     
 
@@ -37886,7 +37937,10 @@ export namespace Prisma {
     signatureStoragePath: 'signatureStoragePath',
     ipAddress: 'ipAddress',
     userAgent: 'userAgent',
-    documentHash: 'documentHash'
+    documentHash: 'documentHash',
+    dernierRenvoiPar: 'dernierRenvoiPar',
+    dernierRenvoiCanal: 'dernierRenvoiCanal',
+    dernierRenvoiAt: 'dernierRenvoiAt'
   };
 
   export type ConventionSignataireScalarFieldEnum = (typeof ConventionSignataireScalarFieldEnum)[keyof typeof ConventionSignataireScalarFieldEnum]
@@ -38447,6 +38501,20 @@ export namespace Prisma {
    * Reference to a field of type 'StatutSignature[]'
    */
   export type ListEnumStatutSignatureFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutSignature[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'RenvoiCanal'
+   */
+  export type EnumRenvoiCanalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RenvoiCanal'>
+    
+
+
+  /**
+   * Reference to a field of type 'RenvoiCanal[]'
+   */
+  export type ListEnumRenvoiCanalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RenvoiCanal[]'>
     
 
 
@@ -39713,6 +39781,9 @@ export namespace Prisma {
     ipAddress?: StringNullableFilter<"ConventionSignataire"> | string | null
     userAgent?: StringNullableFilter<"ConventionSignataire"> | string | null
     documentHash?: StringNullableFilter<"ConventionSignataire"> | string | null
+    dernierRenvoiPar?: StringNullableFilter<"ConventionSignataire"> | string | null
+    dernierRenvoiCanal?: EnumRenvoiCanalNullableFilter<"ConventionSignataire"> | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
     conventionStagiaire?: XOR<ConventionStagiaireScalarRelationFilter, ConventionStagiaireWhereInput>
   }
 
@@ -39733,6 +39804,9 @@ export namespace Prisma {
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     documentHash?: SortOrderInput | SortOrder
+    dernierRenvoiPar?: SortOrderInput | SortOrder
+    dernierRenvoiCanal?: SortOrderInput | SortOrder
+    dernierRenvoiAt?: SortOrderInput | SortOrder
     conventionStagiaire?: ConventionStagiaireOrderByWithRelationInput
   }
 
@@ -39757,6 +39831,9 @@ export namespace Prisma {
     ipAddress?: StringNullableFilter<"ConventionSignataire"> | string | null
     userAgent?: StringNullableFilter<"ConventionSignataire"> | string | null
     documentHash?: StringNullableFilter<"ConventionSignataire"> | string | null
+    dernierRenvoiPar?: StringNullableFilter<"ConventionSignataire"> | string | null
+    dernierRenvoiCanal?: EnumRenvoiCanalNullableFilter<"ConventionSignataire"> | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
     conventionStagiaire?: XOR<ConventionStagiaireScalarRelationFilter, ConventionStagiaireWhereInput>
   }, "id" | "token" | "conventionStagiaireId_role">
 
@@ -39777,6 +39854,9 @@ export namespace Prisma {
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     documentHash?: SortOrderInput | SortOrder
+    dernierRenvoiPar?: SortOrderInput | SortOrder
+    dernierRenvoiCanal?: SortOrderInput | SortOrder
+    dernierRenvoiAt?: SortOrderInput | SortOrder
     _count?: ConventionSignataireCountOrderByAggregateInput
     _avg?: ConventionSignataireAvgOrderByAggregateInput
     _max?: ConventionSignataireMaxOrderByAggregateInput
@@ -39804,6 +39884,9 @@ export namespace Prisma {
     ipAddress?: StringNullableWithAggregatesFilter<"ConventionSignataire"> | string | null
     userAgent?: StringNullableWithAggregatesFilter<"ConventionSignataire"> | string | null
     documentHash?: StringNullableWithAggregatesFilter<"ConventionSignataire"> | string | null
+    dernierRenvoiPar?: StringNullableWithAggregatesFilter<"ConventionSignataire"> | string | null
+    dernierRenvoiCanal?: EnumRenvoiCanalNullableWithAggregatesFilter<"ConventionSignataire"> | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: DateTimeNullableWithAggregatesFilter<"ConventionSignataire"> | Date | string | null
   }
 
   export type MessageWhereInput = {
@@ -42367,6 +42450,9 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     documentHash?: string | null
+    dernierRenvoiPar?: string | null
+    dernierRenvoiCanal?: $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: Date | string | null
     conventionStagiaire: ConventionStagiaireCreateNestedOneWithoutSignatairesInput
   }
 
@@ -42387,6 +42473,9 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     documentHash?: string | null
+    dernierRenvoiPar?: string | null
+    dernierRenvoiCanal?: $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: Date | string | null
   }
 
   export type ConventionSignataireUpdateInput = {
@@ -42405,6 +42494,9 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiPar?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiCanal?: NullableEnumRenvoiCanalFieldUpdateOperationsInput | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     conventionStagiaire?: ConventionStagiaireUpdateOneRequiredWithoutSignatairesNestedInput
   }
 
@@ -42425,6 +42517,9 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiPar?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiCanal?: NullableEnumRenvoiCanalFieldUpdateOperationsInput | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ConventionSignataireCreateManyInput = {
@@ -42444,6 +42539,9 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     documentHash?: string | null
+    dernierRenvoiPar?: string | null
+    dernierRenvoiCanal?: $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: Date | string | null
   }
 
   export type ConventionSignataireUpdateManyMutationInput = {
@@ -42462,6 +42560,9 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiPar?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiCanal?: NullableEnumRenvoiCanalFieldUpdateOperationsInput | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ConventionSignataireUncheckedUpdateManyInput = {
@@ -42481,6 +42582,9 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiPar?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiCanal?: NullableEnumRenvoiCanalFieldUpdateOperationsInput | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type MessageCreateInput = {
@@ -45101,6 +45205,13 @@ export namespace Prisma {
     not?: NestedEnumStatutSignatureFilter<$PrismaModel> | $Enums.StatutSignature
   }
 
+  export type EnumRenvoiCanalNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.RenvoiCanal | EnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    in?: $Enums.RenvoiCanal[] | ListEnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.RenvoiCanal[] | ListEnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumRenvoiCanalNullableFilter<$PrismaModel> | $Enums.RenvoiCanal | null
+  }
+
   export type ConventionStagiaireScalarRelationFilter = {
     is?: ConventionStagiaireWhereInput
     isNot?: ConventionStagiaireWhereInput
@@ -45128,6 +45239,9 @@ export namespace Prisma {
     ipAddress?: SortOrder
     userAgent?: SortOrder
     documentHash?: SortOrder
+    dernierRenvoiPar?: SortOrder
+    dernierRenvoiCanal?: SortOrder
+    dernierRenvoiAt?: SortOrder
   }
 
   export type ConventionSignataireAvgOrderByAggregateInput = {
@@ -45151,6 +45265,9 @@ export namespace Prisma {
     ipAddress?: SortOrder
     userAgent?: SortOrder
     documentHash?: SortOrder
+    dernierRenvoiPar?: SortOrder
+    dernierRenvoiCanal?: SortOrder
+    dernierRenvoiAt?: SortOrder
   }
 
   export type ConventionSignataireMinOrderByAggregateInput = {
@@ -45170,6 +45287,9 @@ export namespace Prisma {
     ipAddress?: SortOrder
     userAgent?: SortOrder
     documentHash?: SortOrder
+    dernierRenvoiPar?: SortOrder
+    dernierRenvoiCanal?: SortOrder
+    dernierRenvoiAt?: SortOrder
   }
 
   export type ConventionSignataireSumOrderByAggregateInput = {
@@ -45194,6 +45314,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutSignatureFilter<$PrismaModel>
     _max?: NestedEnumStatutSignatureFilter<$PrismaModel>
+  }
+
+  export type EnumRenvoiCanalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RenvoiCanal | EnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    in?: $Enums.RenvoiCanal[] | ListEnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.RenvoiCanal[] | ListEnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumRenvoiCanalNullableWithAggregatesFilter<$PrismaModel> | $Enums.RenvoiCanal | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumRenvoiCanalNullableFilter<$PrismaModel>
+    _max?: NestedEnumRenvoiCanalNullableFilter<$PrismaModel>
   }
 
   export type DocumentNullableScalarRelationFilter = {
@@ -47389,6 +47519,10 @@ export namespace Prisma {
     set?: $Enums.StatutSignature
   }
 
+  export type NullableEnumRenvoiCanalFieldUpdateOperationsInput = {
+    set?: $Enums.RenvoiCanal | null
+  }
+
   export type ConventionStagiaireUpdateOneRequiredWithoutSignatairesNestedInput = {
     create?: XOR<ConventionStagiaireCreateWithoutSignatairesInput, ConventionStagiaireUncheckedCreateWithoutSignatairesInput>
     connectOrCreate?: ConventionStagiaireCreateOrConnectWithoutSignatairesInput
@@ -48132,6 +48266,13 @@ export namespace Prisma {
     not?: NestedEnumStatutSignatureFilter<$PrismaModel> | $Enums.StatutSignature
   }
 
+  export type NestedEnumRenvoiCanalNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.RenvoiCanal | EnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    in?: $Enums.RenvoiCanal[] | ListEnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.RenvoiCanal[] | ListEnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumRenvoiCanalNullableFilter<$PrismaModel> | $Enums.RenvoiCanal | null
+  }
+
   export type NestedEnumRoleSignataireWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.RoleSignataire | EnumRoleSignataireFieldRefInput<$PrismaModel>
     in?: $Enums.RoleSignataire[] | ListEnumRoleSignataireFieldRefInput<$PrismaModel>
@@ -48150,6 +48291,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutSignatureFilter<$PrismaModel>
     _max?: NestedEnumStatutSignatureFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRenvoiCanalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RenvoiCanal | EnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    in?: $Enums.RenvoiCanal[] | ListEnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.RenvoiCanal[] | ListEnumRenvoiCanalFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumRenvoiCanalNullableWithAggregatesFilter<$PrismaModel> | $Enums.RenvoiCanal | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumRenvoiCanalNullableFilter<$PrismaModel>
+    _max?: NestedEnumRenvoiCanalNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumStatutCovoiturageFilter<$PrismaModel = never> = {
@@ -51537,6 +51688,9 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     documentHash?: string | null
+    dernierRenvoiPar?: string | null
+    dernierRenvoiCanal?: $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: Date | string | null
   }
 
   export type ConventionSignataireUncheckedCreateWithoutConventionStagiaireInput = {
@@ -51555,6 +51709,9 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     documentHash?: string | null
+    dernierRenvoiPar?: string | null
+    dernierRenvoiCanal?: $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: Date | string | null
   }
 
   export type ConventionSignataireCreateOrConnectWithoutConventionStagiaireInput = {
@@ -51706,6 +51863,9 @@ export namespace Prisma {
     ipAddress?: StringNullableFilter<"ConventionSignataire"> | string | null
     userAgent?: StringNullableFilter<"ConventionSignataire"> | string | null
     documentHash?: StringNullableFilter<"ConventionSignataire"> | string | null
+    dernierRenvoiPar?: StringNullableFilter<"ConventionSignataire"> | string | null
+    dernierRenvoiCanal?: EnumRenvoiCanalNullableFilter<"ConventionSignataire"> | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: DateTimeNullableFilter<"ConventionSignataire"> | Date | string | null
   }
 
   export type ConventionStagiaireCreateWithoutSignatairesInput = {
@@ -54420,6 +54580,9 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     documentHash?: string | null
+    dernierRenvoiPar?: string | null
+    dernierRenvoiCanal?: $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: Date | string | null
   }
 
   export type ConventionSignataireUpdateWithoutConventionStagiaireInput = {
@@ -54438,6 +54601,9 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiPar?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiCanal?: NullableEnumRenvoiCanalFieldUpdateOperationsInput | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ConventionSignataireUncheckedUpdateWithoutConventionStagiaireInput = {
@@ -54456,6 +54622,9 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiPar?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiCanal?: NullableEnumRenvoiCanalFieldUpdateOperationsInput | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ConventionSignataireUncheckedUpdateManyWithoutConventionStagiaireInput = {
@@ -54474,6 +54643,9 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiPar?: NullableStringFieldUpdateOperationsInput | string | null
+    dernierRenvoiCanal?: NullableEnumRenvoiCanalFieldUpdateOperationsInput | $Enums.RenvoiCanal | null
+    dernierRenvoiAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type MessageDestinataireCreateManyMessageInput = {

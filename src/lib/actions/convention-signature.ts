@@ -53,8 +53,9 @@ export async function signerConvention(
   const signatureStoragePath = `conventions/signatures/${signataire.id}.png`
   await uploadBytes(pngBytes, signatureStoragePath, "image/png")
 
+  const signedAt = new Date()
   const currentPdf = await downloadStorageFile(stagiaire.pdfStoragePath)
-  let updatedPdf = await stampSignature(currentPdf, SIGNATURE_FIELD_NAMES[signataire.role], pngBytes)
+  let updatedPdf = await stampSignature(currentPdf, SIGNATURE_FIELD_NAMES[signataire.role], pngBytes, signedAt)
   if (signataire.ordre === SIGNATAIRE_ORDER.length - 1) updatedPdf = await finalizeConvention(updatedPdf)
   await uploadBytes(updatedPdf, stagiaire.pdfStoragePath, "application/pdf")
 
@@ -65,7 +66,7 @@ export async function signerConvention(
 
   await prisma.conventionSignataire.update({
     where: { id: signataire.id },
-    data: { statut: "SIGNE", signedAt: new Date(), ipAddress, userAgent, documentHash, signatureStoragePath },
+    data: { statut: "SIGNE", signedAt, ipAddress, userAgent, documentHash, signatureStoragePath },
   })
 
   await avancerConvention(stagiaire.id, signataire.ordre)

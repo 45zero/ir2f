@@ -16,7 +16,19 @@ export default async function FormationConventionsPage({ params }: { params: Pro
     nom: s.nom,
     prenom: s.prenom,
     club: s.club,
-    signataires: s.signataires.map((sig) => ({ id: sig.id, role: sig.role, statut: sig.statut, motifRefus: sig.motifRefus })),
+    signataires: s.signataires.map((sig) => ({
+      id: sig.id,
+      role: sig.role,
+      statut: sig.statut,
+      motifRefus: sig.motifRefus,
+      signedAt: sig.signedAt?.toISOString() ?? null,
+      ipAddress: sig.ipAddress,
+      token: sig.token,
+      nom: sig.nom,
+      dernierRenvoiPar: sig.dernierRenvoiPar,
+      dernierRenvoiCanal: sig.dernierRenvoiCanal,
+      dernierRenvoiAt: sig.dernierRenvoiAt?.toISOString() ?? null,
+    })),
   }))
 
   const missingResponsablePedagogique = !formation.responsablePedagogiqueEmail

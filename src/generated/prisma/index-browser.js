@@ -306,7 +306,10 @@ exports.Prisma.ConventionSignataireScalarFieldEnum = {
   signatureStoragePath: 'signatureStoragePath',
   ipAddress: 'ipAddress',
   userAgent: 'userAgent',
-  documentHash: 'documentHash'
+  documentHash: 'documentHash',
+  dernierRenvoiPar: 'dernierRenvoiPar',
+  dernierRenvoiCanal: 'dernierRenvoiCanal',
+  dernierRenvoiAt: 'dernierRenvoiAt'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
@@ -624,6 +627,11 @@ exports.StatutSignature = exports.$Enums.StatutSignature = {
   EN_ATTENTE: 'EN_ATTENTE',
   SIGNE: 'SIGNE',
   REFUSE: 'REFUSE'
+};
+
+exports.RenvoiCanal = exports.$Enums.RenvoiCanal = {
+  MAIL: 'MAIL',
+  WHATSAPP: 'WHATSAPP'
 };
 
 exports.StatutCovoiturage = exports.$Enums.StatutCovoiturage = {
