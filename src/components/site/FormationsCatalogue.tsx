@@ -4,7 +4,7 @@ import { useMemo, useState, type CSSProperties, type ReactNode } from "react"
 import Link from "next/link"
 import { Hoverable } from "@/components/ui/Hoverable"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import { CATEGORIE_LABELS, FILIERE_LABELS, type CatalogueFormation } from "@/lib/formations-shared"
+import { CATEGORIE_LABELS, type CatalogueFormation } from "@/lib/formations-shared"
 import { ONGLET_LABEL, ongletKeyId } from "@/lib/formations-page-shared"
 import { effetVisuelStyle, effetVisuelHoverStyle } from "@/lib/effet-visuel"
 import type { FormationOngletData, FormationTuileData } from "@/lib/formations"
@@ -124,6 +124,83 @@ function NodeBadge({ f }: { f: CatalogueFormation }) {
     >
       {f.badgeNode}
     </span>
+  )
+}
+
+function FormationGridCard({ f }: { f: CatalogueFormation }) {
+  return (
+    <Hoverable
+      as={Link}
+      href={`/formations/${f.slug}`}
+      style={{
+        cursor: "pointer",
+        borderRadius: 10,
+        overflow: "hidden",
+        background: "#fff",
+        boxShadow: "0 2px 10px rgba(20,33,61,0.08)",
+        display: "flex",
+        flexDirection: "column",
+        textDecoration: "none",
+        transition: "box-shadow 0.15s",
+      }}
+      hoverStyle={{ boxShadow: "0 10px 28px rgba(20,33,61,0.16)" }}
+    >
+      <div
+        style={{
+          height: 150,
+          backgroundImage: f.image ? `url('${f.image}')` : undefined,
+          backgroundColor: f.image ? undefined : colors.navy,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          position: "relative",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            top: 10,
+            left: 10,
+            background: "rgba(255,255,255,0.9)",
+            color: colors.navy,
+            fontSize: 10,
+            fontWeight: 700,
+            padding: "4px 9px",
+            borderRadius: 3,
+            letterSpacing: 0.4,
+          }}
+        >
+          {f.categorieLabel}
+        </span>
+      </div>
+      <div style={{ padding: "16px 18px", display: "flex", flexDirection: "column", gap: 8, flex: 1 }}>
+        <span style={{ fontSize: 15, fontWeight: 700, color: colors.navy, lineHeight: 1.3, fontFamily: fontHeading }}>
+          {f.titre}
+        </span>
+        <span style={{ fontSize: 12, color: colors.textLight, display: "flex", alignItems: "center", gap: 5 }}>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={colors.textLight} strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          {f.dureeLabel}
+        </span>
+      </div>
+      <div
+        style={{
+          background: f.cpfEligible ? colors.gold : colors.navy,
+          padding: "10px 18px",
+          display: "flex",
+          alignItems: "center",
+          gap: 6,
+        }}
+      >
+        {f.cpfEligible && (
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        )}
+        <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", letterSpacing: 0.3 }}>{f.footerLabel}</span>
+      </div>
+    </Hoverable>
   )
 }
 
@@ -516,6 +593,8 @@ export function FormationsCatalogue({
 
             {expandedTab === "eduPresentation" && expandedCategory === "EDUCATEUR" && (() => {
               const data = getOnglet("EDUCATEUR", "EDU_PRESENTATION")
+              const proData = getOnglet("EDUCATEUR", "EDU_PRO")
+              const benevoleData = getOnglet("EDUCATEUR", "EDU_BENEVOLE")
               return (
                 <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
@@ -526,41 +605,187 @@ export function FormationsCatalogue({
                     <OngletMedia data={data} />
                   </div>
 
-                  <div style={{ overflowX: "auto" }}>
-                    <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-                      <thead>
-                        <tr>
-                          {["Formation", "Filière", "Durée", "Format", "CPF"].map((h) => (
-                            <th
-                              key={h}
-                              style={{
-                                textAlign: "left",
-                                padding: "10px 12px",
-                                background: colors.navy,
-                                color: "#fff",
-                                fontSize: 11,
-                                fontWeight: 700,
-                                textTransform: "uppercase",
-                                letterSpacing: 0.4,
-                              }}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 560 }}>
+                    {proData.titre && (
+                      <div
+                        style={{
+                          background: colors.gold,
+                          color: colors.navy,
+                          fontFamily: fontHeading,
+                          fontSize: 16,
+                          fontWeight: 800,
+                          letterSpacing: 0.5,
+                          textTransform: "uppercase",
+                          padding: "12px 16px",
+                          borderRadius: 6,
+                          textAlign: "center",
+                        }}
+                      >
+                        {proData.titre}
+                      </div>
+                    )}
+                    {proData.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{proData.contenu}</p>}
+
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                      {(equivalenceByGroup.get("PRO_TOP") ?? []).map((f) => (
+                        <Hoverable
+                          as={Link}
+                          key={f.id}
+                          href={`/formations/${f.slug}`}
+                          style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                          hoverStyle={{ opacity: 0.85 }}
+                        >
+                          <NodeBadge f={f} />
+                          <span>{f.shortNode}</span>
+                        </Hoverable>
+                      ))}
+                    </div>
+
+                    <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
+                      {(equivalenceByGroup.get("PRO_MID") ?? []).map((f) => (
+                        <Hoverable
+                          as={Link}
+                          key={f.id}
+                          href={`/formations/${f.slug}`}
+                          style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                          hoverStyle={{ opacity: 0.85 }}
+                        >
+                          {f.titre}
+                        </Hoverable>
+                      ))}
+                    </div>
+
+                    {(equivalenceByGroup.get("PRO_BEF") ?? []).map((f) => (
+                      <Hoverable
+                        as={Link}
+                        key={f.id}
+                        href={`/formations/${f.slug}`}
+                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
+                        hoverStyle={{ opacity: 0.85 }}
+                      >
+                        <NodeBadge f={f} />
+                        <span>{f.shortNode} — {f.titre}</span>
+                      </Hoverable>
+                    ))}
+
+                    {(equivalenceByGroup.get("PRO_BMF") ?? []).map((f) => (
+                      <Hoverable
+                        as={Link}
+                        key={f.id}
+                        href={`/formations/${f.slug}`}
+                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
+                        hoverStyle={{ opacity: 0.85 }}
+                      >
+                        <NodeBadge f={f} />
+                        <span>{f.shortNode} — {f.titre}</span>
+                      </Hoverable>
+                    ))}
+
+                    {(equivalenceByGroup.get("PRO_MID2") ?? []).map((f) => (
+                      <Hoverable
+                        as={Link}
+                        key={f.id}
+                        href={`/formations/${f.slug}`}
+                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                        hoverStyle={{ opacity: 0.85 }}
+                      >
+                        {f.titre}
+                      </Hoverable>
+                    ))}
+
+                    {(equivalenceByGroup.get("PRO_BOTTOM") ?? []).map((f) => (
+                      <Hoverable
+                        as={Link}
+                        key={f.id}
+                        href={`/formations/${f.slug}`}
+                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13, marginTop: 4 }}
+                        hoverStyle={{ opacity: 0.85 }}
+                      >
+                        {f.shortNode} — {f.titre}
+                      </Hoverable>
+                    ))}
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 700 }}>
+                    {benevoleData.titre && (
+                      <div
+                        style={{
+                          background: colors.red,
+                          color: "#fff",
+                          fontFamily: fontHeading,
+                          fontSize: 16,
+                          fontWeight: 800,
+                          letterSpacing: 0.5,
+                          textTransform: "uppercase",
+                          padding: "12px 16px",
+                          borderRadius: 6,
+                          textAlign: "center",
+                        }}
+                      >
+                        {benevoleData.titre}
+                      </div>
+                    )}
+                    {benevoleData.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{benevoleData.contenu}</p>}
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, alignItems: "start" }}>
+                      {BENEVOLE_COLUMNS.map((col) => (
+                        <div key={col.groupe} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                          <div
+                            style={{
+                              background: colors.navy,
+                              color: "#fff",
+                              fontSize: 11,
+                              fontWeight: 700,
+                              textAlign: "center",
+                              padding: "8px 6px",
+                              borderRadius: 5,
+                              letterSpacing: 0.3,
+                            }}
+                          >
+                            {col.label}
+                          </div>
+                          {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
+                            <Hoverable
+                              as={Link}
+                              key={f.id}
+                              href={`/formations/${f.slug}`}
+                              style={nodeChipStyle(f)}
+                              hoverStyle={{ opacity: 0.85 }}
                             >
-                              {h}
-                            </th>
+                              <NodeBadge f={f} />
+                              <span>{f.titre}</span>
+                            </Hoverable>
                           ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {(byCategory.get("EDUCATEUR") ?? []).map((f, i) => (
-                          <tr key={f.id} style={{ background: i % 2 === 0 ? "#fff" : "#f5f7fb" }}>
-                            <td style={{ padding: "9px 12px", fontWeight: 600, color: colors.navy }}>{f.titre}</td>
-                            <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.filiere ? FILIERE_LABELS[f.filiere] : "—"}</td>
-                            <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.dureeLabel}</td>
-                            <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.modeLabel}</td>
-                            <td style={{ padding: "9px 12px", color: colors.textMuted }}>{f.cpfEligible ? "Éligible" : "—"}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </div>
+                      ))}
+                    </div>
+                    <div
+                      style={{
+                        background: colors.navy,
+                        color: "#fff",
+                        fontSize: 11,
+                        fontWeight: 700,
+                        textAlign: "center",
+                        padding: "8px 6px",
+                        borderRadius: 5,
+                        letterSpacing: 0.3,
+                        marginTop: 4,
+                      }}
+                    >
+                      CERTIFICATIONS
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+                      {(equivalenceByGroup.get("CERTIF") ?? []).map((f) => (
+                        <Hoverable
+                          as={Link}
+                          key={f.id}
+                          href={`/formations/${f.slug}`}
+                          style={{ ...nodeChipStyle(f), textAlign: "center", justifyContent: "center" }}
+                          hoverStyle={{ opacity: 0.85 }}
+                        >
+                          {f.titre}
+                        </Hoverable>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )
@@ -568,193 +793,32 @@ export function FormationsCatalogue({
 
             {expandedTab === "eduPro" && expandedCategory === "EDUCATEUR" && (() => {
               const data = getOnglet("EDUCATEUR", "EDU_PRO")
+              const list = (byCategory.get("EDUCATEUR") ?? []).filter((f) => f.filiere === "PROFESSIONNELLE")
               return (
-                <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 560 }}>
-                  {data.titre && (
-                    <div
-                      style={{
-                        background: colors.gold,
-                        color: colors.navy,
-                        fontFamily: fontHeading,
-                        fontSize: 16,
-                        fontWeight: 800,
-                        letterSpacing: 0.5,
-                        textTransform: "uppercase",
-                        padding: "12px 16px",
-                        borderRadius: 6,
-                        textAlign: "center",
-                      }}
-                    >
-                      {data.titre}
-                    </div>
-                  )}
-                  {data.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{data.contenu}</p>}
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
+                  {data.contenu && <p style={tabTextStyle}>{data.contenu}</p>}
                   {(data.videoUrl || data.image) && <OngletMedia data={data} />}
-
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                    {(equivalenceByGroup.get("PRO_TOP") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        <NodeBadge f={f} />
-                        <span>{f.shortNode}</span>
-                      </Hoverable>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
+                    {list.map((f) => (
+                      <FormationGridCard key={f.id} f={f} />
                     ))}
                   </div>
-
-                  <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
-                    {(equivalenceByGroup.get("PRO_MID") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        {f.titre}
-                      </Hoverable>
-                    ))}
-                  </div>
-
-                  {(equivalenceByGroup.get("PRO_BEF") ?? []).map((f) => (
-                    <Hoverable
-                      as={Link}
-                      key={f.id}
-                      href={`/formations/${f.slug}`}
-                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
-                      hoverStyle={{ opacity: 0.85 }}
-                    >
-                      <NodeBadge f={f} />
-                      <span>{f.shortNode} — {f.titre}</span>
-                    </Hoverable>
-                  ))}
-
-                  {(equivalenceByGroup.get("PRO_BMF") ?? []).map((f) => (
-                    <Hoverable
-                      as={Link}
-                      key={f.id}
-                      href={`/formations/${f.slug}`}
-                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
-                      hoverStyle={{ opacity: 0.85 }}
-                    >
-                      <NodeBadge f={f} />
-                      <span>{f.shortNode} — {f.titre}</span>
-                    </Hoverable>
-                  ))}
-
-                  {(equivalenceByGroup.get("PRO_MID2") ?? []).map((f) => (
-                    <Hoverable
-                      as={Link}
-                      key={f.id}
-                      href={`/formations/${f.slug}`}
-                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
-                      hoverStyle={{ opacity: 0.85 }}
-                    >
-                      {f.titre}
-                    </Hoverable>
-                  ))}
-
-                  {(equivalenceByGroup.get("PRO_BOTTOM") ?? []).map((f) => (
-                    <Hoverable
-                      as={Link}
-                      key={f.id}
-                      href={`/formations/${f.slug}`}
-                      style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13, marginTop: 4 }}
-                      hoverStyle={{ opacity: 0.85 }}
-                    >
-                      {f.shortNode} — {f.titre}
-                    </Hoverable>
-                  ))}
                 </div>
               )
             })()}
 
             {expandedTab === "eduBenevole" && expandedCategory === "EDUCATEUR" && (() => {
               const data = getOnglet("EDUCATEUR", "EDU_BENEVOLE")
+              const list = (byCategory.get("EDUCATEUR") ?? []).filter((f) => f.filiere === "BENEVOLE")
               return (
-                <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 700 }}>
-                  {data.titre && (
-                    <div
-                      style={{
-                        background: colors.red,
-                        color: "#fff",
-                        fontFamily: fontHeading,
-                        fontSize: 16,
-                        fontWeight: 800,
-                        letterSpacing: 0.5,
-                        textTransform: "uppercase",
-                        padding: "12px 16px",
-                        borderRadius: 6,
-                        textAlign: "center",
-                      }}
-                    >
-                      {data.titre}
-                    </div>
-                  )}
-                  {data.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{data.contenu}</p>}
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
+                  {data.contenu && <p style={tabTextStyle}>{data.contenu}</p>}
                   {(data.videoUrl || data.image) && <OngletMedia data={data} />}
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, alignItems: "start" }}>
-                    {BENEVOLE_COLUMNS.map((col) => (
-                      <div key={col.groupe} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                        <div
-                          style={{
-                            background: colors.navy,
-                            color: "#fff",
-                            fontSize: 11,
-                            fontWeight: 700,
-                            textAlign: "center",
-                            padding: "8px 6px",
-                            borderRadius: 5,
-                            letterSpacing: 0.3,
-                          }}
-                        >
-                          {col.label}
-                        </div>
-                        {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
-                          <Hoverable
-                            as={Link}
-                            key={f.id}
-                            href={`/formations/${f.slug}`}
-                            style={nodeChipStyle(f)}
-                            hoverStyle={{ opacity: 0.85 }}
-                          >
-                            <NodeBadge f={f} />
-                            <span>{f.titre}</span>
-                          </Hoverable>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                  <div
-                    style={{
-                      background: colors.navy,
-                      color: "#fff",
-                      fontSize: 11,
-                      fontWeight: 700,
-                      textAlign: "center",
-                      padding: "8px 6px",
-                      borderRadius: 5,
-                      letterSpacing: 0.3,
-                      marginTop: 4,
-                    }}
-                  >
-                    CERTIFICATIONS
-                  </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
-                    {(equivalenceByGroup.get("CERTIF") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), textAlign: "center", justifyContent: "center" }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        {f.titre}
-                      </Hoverable>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
+                    {list.map((f) => (
+                      <FormationGridCard key={f.id} f={f} />
                     ))}
                   </div>
                 </div>
@@ -943,79 +1007,7 @@ export function FormationsCatalogue({
             )}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 24 }}>
               {formationsPageList.map((f) => (
-                <Hoverable
-                  as={Link}
-                  href={`/formations/${f.slug}`}
-                  key={f.id}
-                  style={{
-                    cursor: "pointer",
-                    borderRadius: 10,
-                    overflow: "hidden",
-                    background: "#fff",
-                    boxShadow: "0 2px 10px rgba(20,33,61,0.08)",
-                    display: "flex",
-                    flexDirection: "column",
-                    textDecoration: "none",
-                    transition: "box-shadow 0.15s",
-                  }}
-                  hoverStyle={{ boxShadow: "0 10px 28px rgba(20,33,61,0.16)" }}
-                >
-                  <div
-                    style={{
-                      height: 150,
-                      backgroundImage: f.image ? `url('${f.image}')` : undefined,
-                      backgroundColor: f.image ? undefined : colors.navy,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      position: "relative",
-                    }}
-                  >
-                    <span
-                      style={{
-                        position: "absolute",
-                        top: 10,
-                        left: 10,
-                        background: "rgba(255,255,255,0.9)",
-                        color: colors.navy,
-                        fontSize: 10,
-                        fontWeight: 700,
-                        padding: "4px 9px",
-                        borderRadius: 3,
-                        letterSpacing: 0.4,
-                      }}
-                    >
-                      {f.categorieLabel}
-                    </span>
-                  </div>
-                  <div style={{ padding: "16px 18px", display: "flex", flexDirection: "column", gap: 8, flex: 1 }}>
-                    <span style={{ fontSize: 15, fontWeight: 700, color: colors.navy, lineHeight: 1.3, fontFamily: fontHeading }}>
-                      {f.titre}
-                    </span>
-                    <span style={{ fontSize: 12, color: colors.textLight, display: "flex", alignItems: "center", gap: 5 }}>
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={colors.textLight} strokeWidth="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12 6 12 12 16 14" />
-                      </svg>
-                      {f.dureeLabel}
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      background: f.cpfEligible ? colors.gold : colors.navy,
-                      padding: "10px 18px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
-                    }}
-                  >
-                    {f.cpfEligible && (
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    )}
-                    <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", letterSpacing: 0.3 }}>{f.footerLabel}</span>
-                  </div>
-                </Hoverable>
+                <FormationGridCard key={f.id} f={f} />
               ))}
             </div>
           </div>
