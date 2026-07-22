@@ -2,13 +2,11 @@ import { notFound } from "next/navigation"
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { getFormationBySlug, getInscriptionStatusMessage, CATEGORIE_LABELS, TYPE_LABELS } from "@/lib/formations"
-import { Hoverable } from "@/components/ui/Hoverable"
 import { HoverLink } from "@/components/ui/HoverLink"
 import { InscribeButton } from "@/components/site/InscribeButton"
 import { FffInscriptionPanel } from "@/components/site/FffInscriptionPanel"
-import { colors, fontHeading, fontBody } from "@/lib/theme"
-
-type ProgrammeStep = { n: string; title: string; desc: string }
+import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
+import { colors, fontHeading } from "@/lib/theme"
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" })
 
@@ -32,6 +30,8 @@ export default async function FormationDetailPage({ params }: { params: Promise<
   const categorieLabel = CATEGORIE_LABELS[formation.categorie]
   const modeLabel = formation.modeLabel ?? TYPE_LABELS[formation.type]
   const programme = ((formation.programme as ProgrammeStep[] | null) ?? []).filter(Boolean)
+  const resultats = ((formation.resultats as ResultatAnnee[] | null) ?? []).filter(Boolean)
+  const hasIndicateurs = Boolean(formation.tauxReussite || formation.tauxSatisfaction || resultats.length > 0)
 
   return (
     <main style={{ animation: "ir2fFadeIn 0.4s ease" }}>
@@ -166,23 +166,6 @@ export default async function FormationDetailPage({ params }: { params: Promise<
                   initialMessage={inscriptionMessage}
                 />
               )}
-              <Hoverable
-                as="button"
-                style={{
-                  background: "transparent",
-                  color: colors.navy,
-                  border: `1.5px solid ${colors.navy}`,
-                  padding: "15px 26px",
-                  borderRadius: 4,
-                  fontSize: 15,
-                  fontWeight: 700,
-                  fontFamily: fontBody,
-                  cursor: "pointer",
-                }}
-                hoverStyle={{ background: colors.navy, color: "#fff" }}
-              >
-                Recevoir la brochure
-              </Hoverable>
             </div>
           </div>
 
@@ -213,12 +196,104 @@ export default async function FormationDetailPage({ params }: { params: Promise<
               <span style={{ fontFamily: fontHeading, color: colors.gold, fontSize: 22, fontWeight: 800, minWidth: 32 }}>
                 {p.n}
               </span>
-              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8, flex: 1, minWidth: 0 }}>
                 <span style={{ fontSize: 15, fontWeight: 700, color: colors.text }}>{p.title}</span>
                 <span style={{ fontSize: 13, color: colors.textLight, lineHeight: 1.5 }}>{p.desc}</span>
+                {p.table && p.table.headers.length > 0 && (
+                  <div style={{ overflowX: "auto" }}>
+                    <table style={{ borderCollapse: "collapse", width: "100%", fontSize: 13 }}>
+                      <thead>
+                        <tr>
+                          {p.table.headers.map((h, i) => (
+                            <th
+                              key={i}
+                              style={{
+                                textAlign: "left",
+                                padding: "8px 12px",
+                                background: "#f5f7fb",
+                                color: colors.navy,
+                                fontWeight: 700,
+                                borderBottom: `2px solid ${colors.gold}`,
+                              }}
+                            >
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {p.table.rows.map((row, ri) => (
+                          <tr key={ri}>
+                            {row.map((cell, ci) => (
+                              <td key={ci} style={{ padding: "8px 12px", borderBottom: "1px solid #eef0f3", color: colors.text }}>
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             </div>
           ))}
+
+          {hasIndicateurs && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 14, marginTop: 12 }}>
+              <h2 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 22, fontWeight: 800, margin: 0 }}>
+                Indicateurs de résultats
+              </h2>
+              {(formation.tauxReussite || formation.tauxSatisfaction) && (
+                <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+                  {formation.tauxReussite && (
+                    <div style={{ background: "#fff", border: "1px solid #eef0f3", borderRadius: 8, padding: "14px 20px", minWidth: 160 }}>
+                      <div style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 26, fontWeight: 800 }}>
+                        {formation.tauxReussite}
+                      </div>
+                      <div style={{ fontSize: 12, color: colors.textLight }}>Taux de réussite</div>
+                    </div>
+                  )}
+                  {formation.tauxSatisfaction && (
+                    <div style={{ background: "#fff", border: "1px solid #eef0f3", borderRadius: 8, padding: "14px 20px", minWidth: 160 }}>
+                      <div style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 26, fontWeight: 800 }}>
+                        {formation.tauxSatisfaction}
+                      </div>
+                      <div style={{ fontSize: 12, color: colors.textLight }}>Taux de satisfaction</div>
+                    </div>
+                  )}
+                </div>
+              )}
+              {resultats.length > 0 && (
+                <div style={{ overflowX: "auto" }}>
+                  <table style={{ borderCollapse: "collapse", width: "100%", fontSize: 13 }}>
+                    <thead>
+                      <tr>
+                        <th style={{ textAlign: "left", padding: "8px 12px", background: "#f5f7fb", color: colors.navy, fontWeight: 700, borderBottom: `2px solid ${colors.gold}` }}>
+                          Année
+                        </th>
+                        <th style={{ textAlign: "left", padding: "8px 12px", background: "#f5f7fb", color: colors.navy, fontWeight: 700, borderBottom: `2px solid ${colors.gold}` }}>
+                          Taux de sélection
+                        </th>
+                        <th style={{ textAlign: "left", padding: "8px 12px", background: "#f5f7fb", color: colors.navy, fontWeight: 700, borderBottom: `2px solid ${colors.gold}` }}>
+                          Jury final
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {resultats.map((r, i) => (
+                        <tr key={i}>
+                          <td style={{ padding: "8px 12px", borderBottom: "1px solid #eef0f3", fontWeight: 700, color: colors.text }}>{r.annee}</td>
+                          <td style={{ padding: "8px 12px", borderBottom: "1px solid #eef0f3", color: colors.text }}>{r.tauxSelection}</td>
+                          <td style={{ padding: "8px 12px", borderBottom: "1px solid #eef0f3", color: colors.text }}>{r.tauxJuryFinal}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div style={{ flex: "1 1 280px", display: "flex", flexDirection: "column", gap: 24 }}>
@@ -311,6 +386,48 @@ export default async function FormationDetailPage({ params }: { params: Promise<
               </div>
             ))}
           </div>
+
+          {formation.documentsUtiles.length > 0 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <h2 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 22, fontWeight: 800, margin: 0 }}>
+                Documents utiles
+              </h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {formation.documentsUtiles.map(
+                  (doc) =>
+                    doc.url && (
+                      <a
+                        key={doc.id}
+                        href={doc.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 10,
+                          background: "#fff",
+                          border: "1px solid #eef0f3",
+                          borderRadius: 8,
+                          padding: "12px 16px",
+                          fontSize: 13,
+                          fontWeight: 600,
+                          color: colors.navy,
+                          textDecoration: "none",
+                        }}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2" style={{ flexShrink: 0 }}>
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                          <polyline points="14 2 14 8 20 8" />
+                          <line x1="12" y1="18" x2="12" y2="12" />
+                          <polyline points="9 15 12 18 15 15" />
+                        </svg>
+                        {doc.nom}
+                      </a>
+                    )
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </main>

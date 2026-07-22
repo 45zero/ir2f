@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber, parseJsonArray } from "@/lib/actions/form-utils"
 import { resolveImageUrl } from "@/lib/storage"
+import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
 import type {
   CategorieFormation,
   Filiere,
@@ -16,7 +17,6 @@ import type {
   ModeInscription,
 } from "@/generated/prisma"
 
-type ProgrammeStep = { n: string; title: string; desc: string }
 type SessionInput = { dateDebut: string; lieu: string; places: string }
 
 function optionalDate(formData: FormData, key: string): Date | null {
@@ -27,6 +27,9 @@ function optionalDate(formData: FormData, key: string): Date | null {
 async function buildFormationData(formData: FormData) {
   const programme = parseJsonArray<ProgrammeStep>(formData, "programme").filter(
     (p) => p.title?.trim() || p.desc?.trim()
+  )
+  const resultats = parseJsonArray<ResultatAnnee>(formData, "resultats").filter(
+    (r) => r.annee?.trim() || r.tauxSelection?.trim() || r.tauxJuryFinal?.trim()
   )
 
   const groupeEquivalence = optionalStr(formData, "groupeEquivalence") as GroupeEquivalence | null
@@ -68,6 +71,9 @@ async function buildFormationData(formData: FormData) {
     badgeNode: optionalStr(formData, "badgeNode"),
     shortNode: optionalStr(formData, "shortNode"),
     programme: programme.length > 0 ? programme : undefined,
+    tauxReussite: optionalStr(formData, "tauxReussite"),
+    tauxSatisfaction: optionalStr(formData, "tauxSatisfaction"),
+    resultats: resultats.length > 0 ? resultats : undefined,
   }
 }
 

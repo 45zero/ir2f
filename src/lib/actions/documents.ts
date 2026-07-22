@@ -60,6 +60,7 @@ export async function uploadDocument(
   const nom = str(formData, "nom")
   const formationId = optionalStr(formData, "formationId")
   const isPublic = formData.get("public") === "on"
+  const visiblePublic = formData.get("visiblePublic") === "on"
   const categorie = parseCategorie(formData)
   const rolesRequis = parseRolesRequis(formData, categorie)
 
@@ -69,7 +70,16 @@ export async function uploadDocument(
   if ("error" in source) return { error: source.error }
 
   const document = await prisma.document.create({
-    data: { nom, formationId, uploaderId: session.user.id, public: isPublic, rolesRequis, categorie, ...source },
+    data: {
+      nom,
+      formationId,
+      uploaderId: session.user.id,
+      public: isPublic,
+      visiblePublic,
+      rolesRequis,
+      categorie,
+      ...source,
+    },
     include: { formation: { select: { titre: true } } },
   })
 
@@ -212,6 +222,29 @@ export async function signDocument(documentId: string) {
   revalidatePath("/dashboard/documents")
   revalidatePath("/dashboard")
   revalidatePath("/dashboard/formations")
+}
+
+export async function updateFormationDocument(
+  _prev: DocumentActionState | undefined,
+  formData: FormData
+): Promise<DocumentActionState> {
+  const session = await auth()
+  if (session?.user?.role !== "ADMIN" && session?.user?.role !== "DIRECTION") redirect("/dashboard")
+
+  const id = str(formData, "id")
+  const formationId = str(formData, "formationId")
+  const visiblePublic = formData.get("visiblePublic") === "on"
+  const ordre = Number(str(formData, "ordre")) || 0
+
+  const document = await prisma.document.update({
+    where: { id },
+    data: { visiblePublic, ordre },
+    include: { formation: { select: { slug: true } } },
+  })
+
+  revalidatePath(`/admin/formations/${formationId}/documents`)
+  if (document.formation) revalidatePath(`/formations/${document.formation.slug}`)
+  return { error: null }
 }
 
 export async function deleteDocument(id: string): Promise<DocumentActionState> {

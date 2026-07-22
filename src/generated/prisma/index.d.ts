@@ -5582,6 +5582,8 @@ export namespace Prisma {
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
     shortNode: string | null
+    tauxReussite: string | null
+    tauxSatisfaction: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5621,6 +5623,8 @@ export namespace Prisma {
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
     shortNode: string | null
+    tauxReussite: string | null
+    tauxSatisfaction: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5661,6 +5665,9 @@ export namespace Prisma {
     varianteNode: number
     badgeNode: number
     shortNode: number
+    tauxReussite: number
+    tauxSatisfaction: number
+    resultats: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5716,6 +5723,8 @@ export namespace Prisma {
     varianteNode?: true
     badgeNode?: true
     shortNode?: true
+    tauxReussite?: true
+    tauxSatisfaction?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5755,6 +5764,8 @@ export namespace Prisma {
     varianteNode?: true
     badgeNode?: true
     shortNode?: true
+    tauxReussite?: true
+    tauxSatisfaction?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5795,6 +5806,9 @@ export namespace Prisma {
     varianteNode?: true
     badgeNode?: true
     shortNode?: true
+    tauxReussite?: true
+    tauxSatisfaction?: true
+    resultats?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5922,6 +5936,9 @@ export namespace Prisma {
     varianteNode: $Enums.VarianteNode | null
     badgeNode: string | null
     shortNode: string | null
+    tauxReussite: string | null
+    tauxSatisfaction: string | null
+    resultats: JsonValue | null
     createdAt: Date
     updatedAt: Date
     _count: FormationCountAggregateOutputType | null
@@ -5981,6 +5998,9 @@ export namespace Prisma {
     varianteNode?: boolean
     badgeNode?: boolean
     shortNode?: boolean
+    tauxReussite?: boolean
+    tauxSatisfaction?: boolean
+    resultats?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
@@ -6032,6 +6052,9 @@ export namespace Prisma {
     varianteNode?: boolean
     badgeNode?: boolean
     shortNode?: boolean
+    tauxReussite?: boolean
+    tauxSatisfaction?: boolean
+    resultats?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
@@ -6073,6 +6096,9 @@ export namespace Prisma {
     varianteNode?: boolean
     badgeNode?: boolean
     shortNode?: boolean
+    tauxReussite?: boolean
+    tauxSatisfaction?: boolean
+    resultats?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
@@ -6114,11 +6140,14 @@ export namespace Prisma {
     varianteNode?: boolean
     badgeNode?: boolean
     shortNode?: boolean
+    tauxReussite?: boolean
+    tauxSatisfaction?: boolean
+    resultats?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
@@ -6189,6 +6218,9 @@ export namespace Prisma {
       varianteNode: $Enums.VarianteNode | null
       badgeNode: string | null
       shortNode: string | null
+      tauxReussite: string | null
+      tauxSatisfaction: string | null
+      resultats: Prisma.JsonValue | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["formation"]>
@@ -6659,6 +6691,9 @@ export namespace Prisma {
     readonly varianteNode: FieldRef<"Formation", 'VarianteNode'>
     readonly badgeNode: FieldRef<"Formation", 'String'>
     readonly shortNode: FieldRef<"Formation", 'String'>
+    readonly tauxReussite: FieldRef<"Formation", 'String'>
+    readonly tauxSatisfaction: FieldRef<"Formation", 'String'>
+    readonly resultats: FieldRef<"Formation", 'Json'>
     readonly createdAt: FieldRef<"Formation", 'DateTime'>
     readonly updatedAt: FieldRef<"Formation", 'DateTime'>
   }
@@ -12846,10 +12881,12 @@ export namespace Prisma {
 
   export type DocumentAvgAggregateOutputType = {
     taille: number | null
+    ordre: number | null
   }
 
   export type DocumentSumAggregateOutputType = {
     taille: number | null
+    ordre: number | null
   }
 
   export type DocumentMinAggregateOutputType = {
@@ -12862,6 +12899,8 @@ export namespace Prisma {
     uploaderId: string | null
     formationId: string | null
     public: boolean | null
+    visiblePublic: boolean | null
+    ordre: number | null
     categorie: $Enums.DocumentCategorie | null
     createdAt: Date | null
   }
@@ -12876,6 +12915,8 @@ export namespace Prisma {
     uploaderId: string | null
     formationId: string | null
     public: boolean | null
+    visiblePublic: boolean | null
+    ordre: number | null
     categorie: $Enums.DocumentCategorie | null
     createdAt: Date | null
   }
@@ -12890,6 +12931,8 @@ export namespace Prisma {
     uploaderId: number
     formationId: number
     public: number
+    visiblePublic: number
+    ordre: number
     rolesRequis: number
     categorie: number
     createdAt: number
@@ -12899,10 +12942,12 @@ export namespace Prisma {
 
   export type DocumentAvgAggregateInputType = {
     taille?: true
+    ordre?: true
   }
 
   export type DocumentSumAggregateInputType = {
     taille?: true
+    ordre?: true
   }
 
   export type DocumentMinAggregateInputType = {
@@ -12915,6 +12960,8 @@ export namespace Prisma {
     uploaderId?: true
     formationId?: true
     public?: true
+    visiblePublic?: true
+    ordre?: true
     categorie?: true
     createdAt?: true
   }
@@ -12929,6 +12976,8 @@ export namespace Prisma {
     uploaderId?: true
     formationId?: true
     public?: true
+    visiblePublic?: true
+    ordre?: true
     categorie?: true
     createdAt?: true
   }
@@ -12943,6 +12992,8 @@ export namespace Prisma {
     uploaderId?: true
     formationId?: true
     public?: true
+    visiblePublic?: true
+    ordre?: true
     rolesRequis?: true
     categorie?: true
     createdAt?: true
@@ -13045,6 +13096,8 @@ export namespace Prisma {
     uploaderId: string
     formationId: string | null
     public: boolean
+    visiblePublic: boolean
+    ordre: number
     rolesRequis: $Enums.Role[]
     categorie: $Enums.DocumentCategorie
     createdAt: Date
@@ -13079,6 +13132,8 @@ export namespace Prisma {
     uploaderId?: boolean
     formationId?: boolean
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: boolean
     rolesRequis?: boolean
     categorie?: boolean
     createdAt?: boolean
@@ -13099,6 +13154,8 @@ export namespace Prisma {
     uploaderId?: boolean
     formationId?: boolean
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: boolean
     rolesRequis?: boolean
     categorie?: boolean
     createdAt?: boolean
@@ -13116,6 +13173,8 @@ export namespace Prisma {
     uploaderId?: boolean
     formationId?: boolean
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: boolean
     rolesRequis?: boolean
     categorie?: boolean
     createdAt?: boolean
@@ -13133,12 +13192,14 @@ export namespace Prisma {
     uploaderId?: boolean
     formationId?: boolean
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: boolean
     rolesRequis?: boolean
     categorie?: boolean
     createdAt?: boolean
   }
 
-  export type DocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "url" | "storagePath" | "taille" | "mimeType" | "uploaderId" | "formationId" | "public" | "rolesRequis" | "categorie" | "createdAt", ExtArgs["result"]["document"]>
+  export type DocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "url" | "storagePath" | "taille" | "mimeType" | "uploaderId" | "formationId" | "public" | "visiblePublic" | "ordre" | "rolesRequis" | "categorie" | "createdAt", ExtArgs["result"]["document"]>
   export type DocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     uploader?: boolean | UserDefaultArgs<ExtArgs>
     formation?: boolean | Document$formationArgs<ExtArgs>
@@ -13173,6 +13234,8 @@ export namespace Prisma {
       uploaderId: string
       formationId: string | null
       public: boolean
+      visiblePublic: boolean
+      ordre: number
       rolesRequis: $Enums.Role[]
       categorie: $Enums.DocumentCategorie
       createdAt: Date
@@ -13612,6 +13675,8 @@ export namespace Prisma {
     readonly uploaderId: FieldRef<"Document", 'String'>
     readonly formationId: FieldRef<"Document", 'String'>
     readonly public: FieldRef<"Document", 'Boolean'>
+    readonly visiblePublic: FieldRef<"Document", 'Boolean'>
+    readonly ordre: FieldRef<"Document", 'Int'>
     readonly rolesRequis: FieldRef<"Document", 'Role[]'>
     readonly categorie: FieldRef<"Document", 'DocumentCategorie'>
     readonly createdAt: FieldRef<"Document", 'DateTime'>
@@ -37870,6 +37935,9 @@ export namespace Prisma {
     varianteNode: 'varianteNode',
     badgeNode: 'badgeNode',
     shortNode: 'shortNode',
+    tauxReussite: 'tauxReussite',
+    tauxSatisfaction: 'tauxSatisfaction',
+    resultats: 'resultats',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -37955,6 +38023,8 @@ export namespace Prisma {
     uploaderId: 'uploaderId',
     formationId: 'formationId',
     public: 'public',
+    visiblePublic: 'visiblePublic',
+    ordre: 'ordre',
     rolesRequis: 'rolesRequis',
     categorie: 'categorie',
     createdAt: 'createdAt'
@@ -38915,6 +38985,9 @@ export namespace Prisma {
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
     shortNode?: StringNullableFilter<"Formation"> | string | null
+    tauxReussite?: StringNullableFilter<"Formation"> | string | null
+    tauxSatisfaction?: StringNullableFilter<"Formation"> | string | null
+    resultats?: JsonNullableFilter<"Formation">
     createdAt?: DateTimeFilter<"Formation"> | Date | string
     updatedAt?: DateTimeFilter<"Formation"> | Date | string
     sessions?: SessionListRelationFilter
@@ -38965,6 +39038,9 @@ export namespace Prisma {
     varianteNode?: SortOrderInput | SortOrder
     badgeNode?: SortOrderInput | SortOrder
     shortNode?: SortOrderInput | SortOrder
+    tauxReussite?: SortOrderInput | SortOrder
+    tauxSatisfaction?: SortOrderInput | SortOrder
+    resultats?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
@@ -39018,6 +39094,9 @@ export namespace Prisma {
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
     shortNode?: StringNullableFilter<"Formation"> | string | null
+    tauxReussite?: StringNullableFilter<"Formation"> | string | null
+    tauxSatisfaction?: StringNullableFilter<"Formation"> | string | null
+    resultats?: JsonNullableFilter<"Formation">
     createdAt?: DateTimeFilter<"Formation"> | Date | string
     updatedAt?: DateTimeFilter<"Formation"> | Date | string
     sessions?: SessionListRelationFilter
@@ -39068,6 +39147,9 @@ export namespace Prisma {
     varianteNode?: SortOrderInput | SortOrder
     badgeNode?: SortOrderInput | SortOrder
     shortNode?: SortOrderInput | SortOrder
+    tauxReussite?: SortOrderInput | SortOrder
+    tauxSatisfaction?: SortOrderInput | SortOrder
+    resultats?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: FormationCountOrderByAggregateInput
@@ -39116,6 +39198,9 @@ export namespace Prisma {
     varianteNode?: EnumVarianteNodeNullableWithAggregatesFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     shortNode?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    tauxReussite?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    tauxSatisfaction?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    resultats?: JsonNullableWithAggregatesFilter<"Formation">
     createdAt?: DateTimeWithAggregatesFilter<"Formation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Formation"> | Date | string
   }
@@ -39483,6 +39568,8 @@ export namespace Prisma {
     uploaderId?: StringFilter<"Document"> | string
     formationId?: StringNullableFilter<"Document"> | string | null
     public?: BoolFilter<"Document"> | boolean
+    visiblePublic?: BoolFilter<"Document"> | boolean
+    ordre?: IntFilter<"Document"> | number
     rolesRequis?: EnumRoleNullableListFilter<"Document">
     categorie?: EnumDocumentCategorieFilter<"Document"> | $Enums.DocumentCategorie
     createdAt?: DateTimeFilter<"Document"> | Date | string
@@ -39502,6 +39589,8 @@ export namespace Prisma {
     uploaderId?: SortOrder
     formationId?: SortOrderInput | SortOrder
     public?: SortOrder
+    visiblePublic?: SortOrder
+    ordre?: SortOrder
     rolesRequis?: SortOrder
     categorie?: SortOrder
     createdAt?: SortOrder
@@ -39524,6 +39613,8 @@ export namespace Prisma {
     uploaderId?: StringFilter<"Document"> | string
     formationId?: StringNullableFilter<"Document"> | string | null
     public?: BoolFilter<"Document"> | boolean
+    visiblePublic?: BoolFilter<"Document"> | boolean
+    ordre?: IntFilter<"Document"> | number
     rolesRequis?: EnumRoleNullableListFilter<"Document">
     categorie?: EnumDocumentCategorieFilter<"Document"> | $Enums.DocumentCategorie
     createdAt?: DateTimeFilter<"Document"> | Date | string
@@ -39543,6 +39634,8 @@ export namespace Prisma {
     uploaderId?: SortOrder
     formationId?: SortOrderInput | SortOrder
     public?: SortOrder
+    visiblePublic?: SortOrder
+    ordre?: SortOrder
     rolesRequis?: SortOrder
     categorie?: SortOrder
     createdAt?: SortOrder
@@ -39566,6 +39659,8 @@ export namespace Prisma {
     uploaderId?: StringWithAggregatesFilter<"Document"> | string
     formationId?: StringNullableWithAggregatesFilter<"Document"> | string | null
     public?: BoolWithAggregatesFilter<"Document"> | boolean
+    visiblePublic?: BoolWithAggregatesFilter<"Document"> | boolean
+    ordre?: IntWithAggregatesFilter<"Document"> | number
     rolesRequis?: EnumRoleNullableListFilter<"Document">
     categorie?: EnumDocumentCategorieWithAggregatesFilter<"Document"> | $Enums.DocumentCategorie
     createdAt?: DateTimeWithAggregatesFilter<"Document"> | Date | string
@@ -41479,6 +41574,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -41529,6 +41627,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -41577,6 +41678,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -41627,6 +41731,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -41676,6 +41783,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -41715,6 +41825,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41755,6 +41868,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42131,6 +42247,8 @@ export namespace Prisma {
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -42150,6 +42268,8 @@ export namespace Prisma {
     uploaderId: string
     formationId?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -42165,6 +42285,8 @@ export namespace Prisma {
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42184,6 +42306,8 @@ export namespace Prisma {
     uploaderId?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42201,6 +42325,8 @@ export namespace Prisma {
     uploaderId: string
     formationId?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -42214,6 +42340,8 @@ export namespace Prisma {
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42229,6 +42357,8 @@ export namespace Prisma {
     uploaderId?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44654,6 +44784,9 @@ export namespace Prisma {
     varianteNode?: SortOrder
     badgeNode?: SortOrder
     shortNode?: SortOrder
+    tauxReussite?: SortOrder
+    tauxSatisfaction?: SortOrder
+    resultats?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -44700,6 +44833,8 @@ export namespace Prisma {
     varianteNode?: SortOrder
     badgeNode?: SortOrder
     shortNode?: SortOrder
+    tauxReussite?: SortOrder
+    tauxSatisfaction?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -44739,6 +44874,8 @@ export namespace Prisma {
     varianteNode?: SortOrder
     badgeNode?: SortOrder
     shortNode?: SortOrder
+    tauxReussite?: SortOrder
+    tauxSatisfaction?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -45164,6 +45301,8 @@ export namespace Prisma {
     uploaderId?: SortOrder
     formationId?: SortOrder
     public?: SortOrder
+    visiblePublic?: SortOrder
+    ordre?: SortOrder
     rolesRequis?: SortOrder
     categorie?: SortOrder
     createdAt?: SortOrder
@@ -45171,6 +45310,7 @@ export namespace Prisma {
 
   export type DocumentAvgOrderByAggregateInput = {
     taille?: SortOrder
+    ordre?: SortOrder
   }
 
   export type DocumentMaxOrderByAggregateInput = {
@@ -45183,6 +45323,8 @@ export namespace Prisma {
     uploaderId?: SortOrder
     formationId?: SortOrder
     public?: SortOrder
+    visiblePublic?: SortOrder
+    ordre?: SortOrder
     categorie?: SortOrder
     createdAt?: SortOrder
   }
@@ -45197,12 +45339,15 @@ export namespace Prisma {
     uploaderId?: SortOrder
     formationId?: SortOrder
     public?: SortOrder
+    visiblePublic?: SortOrder
+    ordre?: SortOrder
     categorie?: SortOrder
     createdAt?: SortOrder
   }
 
   export type DocumentSumOrderByAggregateInput = {
     taille?: SortOrder
+    ordre?: SortOrder
   }
 
   export type EnumDocumentCategorieWithAggregatesFilter<$PrismaModel = never> = {
@@ -48816,6 +48961,8 @@ export namespace Prisma {
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -48833,6 +48980,8 @@ export namespace Prisma {
     mimeType?: string | null
     formationId?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -49144,6 +49293,8 @@ export namespace Prisma {
     uploaderId?: StringFilter<"Document"> | string
     formationId?: StringNullableFilter<"Document"> | string | null
     public?: BoolFilter<"Document"> | boolean
+    visiblePublic?: BoolFilter<"Document"> | boolean
+    ordre?: IntFilter<"Document"> | number
     rolesRequis?: EnumRoleNullableListFilter<"Document">
     categorie?: EnumDocumentCategorieFilter<"Document"> | $Enums.DocumentCategorie
     createdAt?: DateTimeFilter<"Document"> | Date | string
@@ -49487,6 +49638,8 @@ export namespace Prisma {
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -49504,6 +49657,8 @@ export namespace Prisma {
     mimeType?: string | null
     uploaderId: string
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -50097,6 +50252,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -50146,6 +50304,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -50264,6 +50425,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -50313,6 +50477,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -50360,6 +50527,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
@@ -50409,6 +50579,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     inscriptions?: InscriptionUncheckedCreateNestedManyWithoutFormationInput
@@ -50472,6 +50645,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
@@ -50521,6 +50697,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inscriptions?: InscriptionUncheckedUpdateManyWithoutFormationNestedInput
@@ -50617,6 +50796,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -50666,6 +50848,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -50784,6 +50969,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -50833,6 +51021,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -50880,6 +51071,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -50929,6 +51123,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -51041,6 +51238,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -51090,6 +51290,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -51241,6 +51444,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -51290,6 +51496,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -51470,6 +51679,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -51519,6 +51731,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -51571,6 +51786,8 @@ export namespace Prisma {
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -51589,6 +51806,8 @@ export namespace Prisma {
     uploaderId: string
     formationId?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -51668,6 +51887,8 @@ export namespace Prisma {
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51686,6 +51907,8 @@ export namespace Prisma {
     uploaderId?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51782,6 +52005,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -51830,6 +52056,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -51908,6 +52137,9 @@ export namespace Prisma {
     varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
     badgeNode?: StringNullableFilter<"Formation"> | string | null
     shortNode?: StringNullableFilter<"Formation"> | string | null
+    tauxReussite?: StringNullableFilter<"Formation"> | string | null
+    tauxSatisfaction?: StringNullableFilter<"Formation"> | string | null
+    resultats?: JsonNullableFilter<"Formation">
     createdAt?: DateTimeFilter<"Formation"> | Date | string
     updatedAt?: DateTimeFilter<"Formation"> | Date | string
   }
@@ -51947,6 +52179,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -51996,6 +52231,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -52111,6 +52349,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -52160,6 +52401,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -52485,6 +52729,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -52534,6 +52781,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -52559,6 +52809,8 @@ export namespace Prisma {
     taille?: number | null
     mimeType?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -52577,6 +52829,8 @@ export namespace Prisma {
     uploaderId: string
     formationId?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -52705,6 +52959,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -52754,6 +53011,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -52785,6 +53045,8 @@ export namespace Prisma {
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -52803,6 +53065,8 @@ export namespace Prisma {
     uploaderId?: StringFieldUpdateOperationsInput | string
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53075,6 +53339,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -53124,6 +53391,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -53258,6 +53528,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -53307,6 +53580,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -53630,6 +53906,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -53679,6 +53958,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -53742,6 +54024,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -53791,6 +54076,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -53821,6 +54109,8 @@ export namespace Prisma {
     mimeType?: string | null
     formationId?: string | null
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -53937,6 +54227,8 @@ export namespace Prisma {
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53954,6 +54246,8 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53970,6 +54264,8 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -54248,6 +54544,8 @@ export namespace Prisma {
     mimeType?: string | null
     uploaderId: string
     public?: boolean
+    visiblePublic?: boolean
+    ordre?: number
     rolesRequis?: DocumentCreaterolesRequisInput | $Enums.Role[]
     categorie?: $Enums.DocumentCategorie
     createdAt?: Date | string
@@ -54440,6 +54738,8 @@ export namespace Prisma {
     taille?: NullableIntFieldUpdateOperationsInput | number | null
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -54457,6 +54757,8 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     uploaderId?: StringFieldUpdateOperationsInput | string
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -54473,6 +54775,8 @@ export namespace Prisma {
     mimeType?: NullableStringFieldUpdateOperationsInput | string | null
     uploaderId?: StringFieldUpdateOperationsInput | string
     public?: BoolFieldUpdateOperationsInput | boolean
+    visiblePublic?: BoolFieldUpdateOperationsInput | boolean
+    ordre?: IntFieldUpdateOperationsInput | number
     rolesRequis?: DocumentUpdaterolesRequisInput | $Enums.Role[]
     categorie?: EnumDocumentCategorieFieldUpdateOperationsInput | $Enums.DocumentCategorie
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -54850,6 +55154,9 @@ export namespace Prisma {
     varianteNode?: $Enums.VarianteNode | null
     badgeNode?: string | null
     shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -54889,6 +55196,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -54937,6 +55247,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -54985,6 +55298,9 @@ export namespace Prisma {
     varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
     badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
     shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

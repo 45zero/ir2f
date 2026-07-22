@@ -52,8 +52,8 @@ type StagiaireVars = Pick<
   | "natureInterventionAutre"
 >
 
-const formationDateDebutFormatter = new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "2-digit", year: "2-digit" })
-const formationDateFinFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" })
+const formationDateDebutFormatter = new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "2-digit", year: "2-digit", timeZone: "Europe/Paris" })
+const formationDateFinFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short", timeZone: "Europe/Paris" })
 
 /**
  * Construit l'objet de variables injecté dans le modèle PDF. Les noms de clé ci-dessous sont le

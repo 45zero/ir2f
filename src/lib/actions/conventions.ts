@@ -12,7 +12,7 @@ import type { ConventionStagiaire, Formation } from "@/generated/prisma"
 export type EnvoyerConventionsState = { error: string | null; sent: number; skipped: string[] }
 export type ConventionActionState = { error: string | null }
 
-const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long" })
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "Europe/Paris" })
 
 async function computeFormationDateLabel(formationId: string): Promise<string | null> {
   const now = new Date()

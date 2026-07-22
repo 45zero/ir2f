@@ -1,13 +1,65 @@
 import "server-only"
-import { PDFDocument, PDFTextField, StandardFonts, rgb, type PDFField, type PDFPage } from "pdf-lib"
+import {
+  PDFDocument,
+  PDFTextField,
+  StandardFonts,
+  rgb,
+  PDFArray,
+  PDFRawStream,
+  PDFContentStream,
+  PDFName,
+  decodePDFRawStream,
+  type PDFField,
+  type PDFPage,
+} from "pdf-lib"
 
-const signedAtFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short", timeStyle: "short" })
+const signedAtFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short", timeStyle: "short", timeZone: "Europe/Paris" })
+
+/**
+ * Fusionne le tableau `/Contents` d'une page (s'il en contient plusieurs) en un seul flux
+ * physique. À chaque cycle load→modification→save, pdf-lib enveloppe le `/Contents` existant
+ * dans une nouvelle paire d'opérateurs q/Q (voir `PDFPageLeaf.normalize`) sans jamais fusionner
+ * les flux précédents : au fil des signatures successives (5 cycles indépendants sur le même
+ * document), ce tableau s'empile et finit par produire un déséquilibre de pile graphique qui rend
+ * un tampon invisible de façon imprévisible. Fusionner avant toute autre opération (avant que
+ * `normalize()` ne se déclenche) neutralise l'empilement à la source.
+ */
+function consolidatePageContent(pdfDoc: PDFDocument, page: PDFPage): void {
+  const contents = page.node.Contents()
+  if (!(contents instanceof PDFArray)) return
+
+  const chunks: Uint8Array[] = []
+  for (let i = 0; i < contents.size(); i++) {
+    const stream = pdfDoc.context.lookup(contents.get(i))
+    if (stream instanceof PDFRawStream) {
+      chunks.push(decodePDFRawStream(stream).decode())
+    } else if (stream instanceof PDFContentStream) {
+      chunks.push(stream.getUnencodedContents())
+    }
+    chunks.push(new Uint8Array([0x0a]))
+  }
+
+  const merged = new Uint8Array(chunks.reduce((sum, c) => sum + c.length, 0))
+  let offset = 0
+  for (const chunk of chunks) {
+    merged.set(chunk, offset)
+    offset += chunk.length
+  }
+
+  const ref = pdfDoc.context.register(pdfDoc.context.flateStream(merged, {}))
+  page.node.set(PDFName.of("Contents"), pdfDoc.context.obj([ref]))
+}
+
+function consolidateAllPages(pdfDoc: PDFDocument): void {
+  for (const page of pdfDoc.getPages()) consolidatePageContent(pdfDoc, page)
+}
 
 export type ConventionVariables = Record<string, string>
 
 /** Remplit les champs de formulaire du modèle dont le nom correspond à une variable connue. Les champs absents du modèle (ou les champs-emplacements de signature, laissés vides) sont ignorés. */
 export async function fillConventionTemplate(templateBytes: Uint8Array, variables: ConventionVariables): Promise<Uint8Array> {
   const pdfDoc = await PDFDocument.load(templateBytes)
+  consolidateAllPages(pdfDoc)
   const form = pdfDoc.getForm()
 
   for (const [key, value] of Object.entries(variables)) {
@@ -49,6 +101,7 @@ export async function stampSignature(
   signedAt: Date
 ): Promise<Uint8Array> {
   const pdfDoc = await PDFDocument.load(pdfBytes)
+  consolidateAllPages(pdfDoc)
   const form = pdfDoc.getForm()
   const field = form.getField(fieldName)
   const { page, rect } = findWidgetPageAndRect(pdfDoc, field)
@@ -91,6 +144,7 @@ export async function stampSignature(
  */
 export async function stampCheckmark(pdfBytes: Uint8Array, fieldName: string): Promise<Uint8Array> {
   const pdfDoc = await PDFDocument.load(pdfBytes)
+  consolidateAllPages(pdfDoc)
   const form = pdfDoc.getForm()
   const field = form.getFieldMaybe(fieldName)
   if (!field) return pdfDoc.save()
@@ -114,6 +168,7 @@ export async function stampCheckmark(pdfBytes: Uint8Array, fieldName: string): P
 /** Aplatit le formulaire restant (appelée après la dernière signature) pour figer le PDF final. */
 export async function finalizeConvention(pdfBytes: Uint8Array): Promise<Uint8Array> {
   const pdfDoc = await PDFDocument.load(pdfBytes)
+  consolidateAllPages(pdfDoc)
   const form = pdfDoc.getForm()
   if (form.getFields().length > 0) form.flatten()
   return pdfDoc.save()

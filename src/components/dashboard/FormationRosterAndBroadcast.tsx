@@ -17,7 +17,7 @@ const ORIGINE_LABEL: Record<OrigineInscription, string | null> = {
   FFF_CLUB: "Via FFF — club",
 }
 
-const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" })
+const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Paris" })
 
 export type FormateurFormationRow = {
   id: string

@@ -4,7 +4,7 @@ import { useMemo, useState, type CSSProperties, type ReactNode } from "react"
 import Link from "next/link"
 import { Hoverable } from "@/components/ui/Hoverable"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import type { CatalogueFormation } from "@/lib/formations-shared"
+import { CATEGORIE_LABELS, type CatalogueFormation } from "@/lib/formations-shared"
 import { ONGLET_LABEL, ongletKeyId } from "@/lib/formations-page-shared"
 import { effetVisuelStyle, effetVisuelHoverStyle } from "@/lib/effet-visuel"
 import type { FormationOngletData, FormationTuileData } from "@/lib/formations"
@@ -388,6 +388,19 @@ export function FormationsCatalogue({
               gap: 20,
             }}
           >
+            <span
+              style={{
+                fontFamily: fontHeading,
+                color: colors.navy,
+                fontSize: 13,
+                fontWeight: 800,
+                letterSpacing: 1,
+                textTransform: "uppercase",
+              }}
+            >
+              {CATEGORIE_LABELS[sidebarCategory]}
+            </span>
+
             {sidebarCategory === "EDUCATEUR" ? (
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <button style={expandedTab === "eduPresentation" ? tabActive : tabBase} onClick={() => setExpandedTab("eduPresentation")}>

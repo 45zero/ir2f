@@ -29,8 +29,8 @@ const STATUT_LABEL: Record<StatutSignature, string> = {
   REFUSE: "Refusé",
 }
 
-const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" })
-const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" })
+const dateTimeFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Paris" })
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short", timeZone: "Europe/Paris" })
 
 export type ConventionSignataireStatut = {
   id: string
@@ -129,15 +129,35 @@ function RenvoiButtons({ signataire }: { signataire: ConventionSignataireStatut 
   )
 }
 
-export function ConventionStatutPill({ signataire, canManage }: { signataire: ConventionSignataireStatut | undefined; canManage: boolean }) {
+export function ConventionStatutPill({
+  role,
+  signataire,
+  canManage,
+  showLabel,
+}: {
+  role: RoleSignataire
+  signataire: ConventionSignataireStatut | undefined
+  canManage: boolean
+  showLabel?: boolean
+}) {
+  const label = showLabel ? (
+    <span style={{ fontSize: 9, color: colors.textLight, textAlign: "center", whiteSpace: "nowrap" }}>{CONVENTION_ROLE_LABELS[role]}</span>
+  ) : null
+
   if (!signataire) {
-    return <span style={{ width: 12, height: 12, borderRadius: "50%", background: STATUT_COLOR.NON_ENVOYE, display: "inline-block" }} />
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+        {label}
+        <span style={{ width: 12, height: 12, borderRadius: "50%", background: STATUT_COLOR.NON_ENVOYE, display: "inline-block" }} />
+      </div>
+    )
   }
 
   const canResend = canManage && (signataire.statut === "EN_ATTENTE" || signataire.statut === "REFUSE")
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }} title={tooltipFor(signataire)}>
+      {label}
       <span style={{ width: 12, height: 12, borderRadius: "50%", background: STATUT_COLOR[signataire.statut], display: "inline-block" }} />
       {canResend && <RenvoiButtons signataire={signataire} />}
       {signataire.dernierRenvoiPar && signataire.dernierRenvoiAt && (
@@ -151,7 +171,7 @@ export function ConventionStatutPill({ signataire, canManage }: { signataire: Co
   )
 }
 
-/** Rangée de 5 pastilles (une par étape du circuit de signature). */
+/** Rangée de 5 pastilles (une par étape du circuit de signature), avec le rôle affiché au-dessus de chacune pour indiquer qui doit agir. */
 export function ConventionStatutPills({
   signataires,
   canManage,
@@ -162,7 +182,7 @@ export function ConventionStatutPills({
   return (
     <div style={{ display: "flex", gap: 14 }}>
       {CONVENTION_ROLE_ORDER.map((role) => (
-        <ConventionStatutPill key={role} signataire={signataires.find((s) => s.role === role)} canManage={canManage} />
+        <ConventionStatutPill key={role} role={role} signataire={signataires.find((s) => s.role === role)} canManage={canManage} showLabel />
       ))}
     </div>
   )

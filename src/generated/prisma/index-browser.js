@@ -169,6 +169,9 @@ exports.Prisma.FormationScalarFieldEnum = {
   varianteNode: 'varianteNode',
   badgeNode: 'badgeNode',
   shortNode: 'shortNode',
+  tauxReussite: 'tauxReussite',
+  tauxSatisfaction: 'tauxSatisfaction',
+  resultats: 'resultats',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -236,6 +239,8 @@ exports.Prisma.DocumentScalarFieldEnum = {
   uploaderId: 'uploaderId',
   formationId: 'formationId',
   public: 'public',
+  visiblePublic: 'visiblePublic',
+  ordre: 'ordre',
   rolesRequis: 'rolesRequis',
   categorie: 'categorie',
   createdAt: 'createdAt'

@@ -5,9 +5,8 @@ import { getFormateurUsers } from "@/lib/admin/users"
 import { getConventionTemplatesForSelect } from "@/lib/admin/conventions"
 import { updateFormation } from "@/lib/actions/formations"
 import { FormationForm, type FormationFormInitial } from "@/components/admin/FormationForm"
+import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
 import { colors, fontHeading } from "@/lib/theme"
-
-type ProgrammeStep = { n: string; title: string; desc: string }
 
 export default async function EditFormationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -58,6 +57,9 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
     responsablePedagogiquePrenom: formation.responsablePedagogiquePrenom ?? "",
     responsablePedagogiqueEmail: formation.responsablePedagogiqueEmail ?? "",
     responsablePedagogiqueTelephone: formation.responsablePedagogiqueTelephone ?? "",
+    tauxReussite: formation.tauxReussite ?? "",
+    tauxSatisfaction: formation.tauxSatisfaction ?? "",
+    resultats: (formation.resultats as ResultatAnnee[] | null) ?? [],
   }
 
   const boundUpdate = updateFormation.bind(null, id)
@@ -68,12 +70,20 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
         <h1 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 26, fontWeight: 800, margin: 0 }}>
           Modifier la formation
         </h1>
-        <Link
-          href={`/admin/formations/${id}/conventions`}
-          style={{ color: colors.navy, fontSize: 13, fontWeight: 700, textDecoration: "underline" }}
-        >
-          Conventions de stage →
-        </Link>
+        <div style={{ display: "flex", gap: 16 }}>
+          <Link
+            href={`/admin/formations/${id}/documents`}
+            style={{ color: colors.navy, fontSize: 13, fontWeight: 700, textDecoration: "underline" }}
+          >
+            Documents utiles →
+          </Link>
+          <Link
+            href={`/admin/formations/${id}/conventions`}
+            style={{ color: colors.navy, fontSize: 13, fontWeight: 700, textDecoration: "underline" }}
+          >
+            Conventions de stage →
+          </Link>
+        </div>
       </div>
       <FormationForm
         action={boundUpdate}

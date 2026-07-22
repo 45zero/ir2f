@@ -89,6 +89,15 @@ export type CatalogueFormation = FormationCard & {
 
 export type FormationOption = { id: string; titre: string }
 
+export type ProgrammeStep = {
+  n: string
+  title: string
+  desc: string
+  table?: { headers: string[]; rows: string[][] }
+}
+
+export type ResultatAnnee = { annee: string; tauxSelection: string; tauxJuryFinal: string }
+
 type RawFormation = {
   id: string
   slug: string

@@ -2,6 +2,7 @@ import "server-only"
 import { prisma } from "@/lib/prisma"
 import type { CategorieFormation, EffetVisuel, Filiere, GroupeEquivalence, VarianteNode } from "@/generated/prisma"
 import { toCard, type FormationCard, type CatalogueFormation, type FormationOption } from "@/lib/formations-shared"
+import { getSignedDocumentDownloadUrl } from "@/lib/storage"
 import {
   ONGLET_KEYS,
   TUILE_CATEGORIES,
@@ -139,12 +140,24 @@ export async function getFormationOptions(): Promise<FormationOption[]> {
 }
 
 export async function getFormationBySlug(slug: string) {
-  return prisma.formation.findUnique({
+  const formation = await prisma.formation.findUnique({
     where: { slug },
     include: {
       sessions: { orderBy: { dateDebut: "asc" } },
+      documents: { where: { visiblePublic: true }, orderBy: [{ ordre: "asc" }, { createdAt: "desc" }] },
     },
   })
+  if (!formation) return null
+
+  const documentsUtiles = await Promise.all(
+    formation.documents.map(async (d) => ({
+      id: d.id,
+      nom: d.nom,
+      url: d.storagePath ? await getSignedDocumentDownloadUrl(d.storagePath, d.nom) : d.url,
+    }))
+  )
+
+  return { ...formation, documentsUtiles }
 }
 
 export async function getInscriptionStatusMessage(userId: string, formationId: string): Promise<string | undefined> {

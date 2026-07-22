@@ -242,6 +242,11 @@ model Formation {
   badgeNode         String?
   shortNode         String?
 
+  // Indicateurs de résultats (type Qualiopi) affichés sur la fiche publique
+  tauxReussite     String?
+  tauxSatisfaction String?
+  resultats        Json? // [{ annee, tauxSelection, tauxJuryFinal }]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -353,6 +358,10 @@ model Document {
   uploaderId  String
   formationId String?
   public      Boolean           @default(false)
+  // Distinct de `public` (partage avec les stagiaires connectés) : affiche ce document
+  // dans le bloc "Documents utiles" de la fiche formation publique (site vitrine).
+  visiblePublic Boolean         @default(false)
+  ordre         Int             @default(0)
   rolesRequis Role[]            @default([STAGIAIRE])
   categorie   DocumentCategorie @default(ADMINISTRATIF)
   createdAt   DateTime          @default(now())

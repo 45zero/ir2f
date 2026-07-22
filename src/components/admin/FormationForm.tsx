@@ -10,6 +10,7 @@ import {
   VARIANTE_NODE_LABELS,
   slugify,
 } from "@/lib/formations-shared"
+import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import { ImageField } from "@/components/admin/ImageField"
 import type {
@@ -22,7 +23,6 @@ import type {
   ModeInscription,
 } from "@/generated/prisma"
 
-type ProgrammeStep = { n: string; title: string; desc: string }
 type SessionRow = { dateDebut: string; lieu: string; places: string }
 
 export type FormationFormInitial = {
@@ -61,6 +61,9 @@ export type FormationFormInitial = {
   responsablePedagogiquePrenom: string
   responsablePedagogiqueEmail: string
   responsablePedagogiqueTelephone: string
+  tauxReussite: string
+  tauxSatisfaction: string
+  resultats: ResultatAnnee[]
 }
 
 const EMPTY: FormationFormInitial = {
@@ -99,6 +102,9 @@ const EMPTY: FormationFormInitial = {
   responsablePedagogiquePrenom: "",
   responsablePedagogiqueEmail: "",
   responsablePedagogiqueTelephone: "",
+  tauxReussite: "",
+  tauxSatisfaction: "",
+  resultats: [],
 }
 
 const fieldStyle = {
@@ -162,6 +168,7 @@ export function FormationForm({
   const [slugTouched, setSlugTouched] = useState(Boolean(data.slug))
   const [programme, setProgramme] = useState<ProgrammeStep[]>(data.programme)
   const [sessions, setSessions] = useState<SessionRow[]>(data.sessions)
+  const [resultats, setResultats] = useState<ResultatAnnee[]>(data.resultats)
   const [formateurIds, setFormateurIds] = useState<string[]>(data.formateurIds)
   const [modeInscription, setModeInscription] = useState<ModeInscription>(data.modeInscription)
 
@@ -170,11 +177,13 @@ export function FormationForm({
     [programme]
   )
   const sessionsJson = useMemo(() => JSON.stringify(sessions), [sessions])
+  const resultatsJson = useMemo(() => JSON.stringify(resultats), [resultats])
 
   return (
     <form action={action} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <input type="hidden" name="programme" value={programmeJson} />
       <input type="hidden" name="sessions" value={sessionsJson} />
+      <input type="hidden" name="resultats" value={resultatsJson} />
 
       <SectionCard title="Informations générales">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 14 }}>
@@ -406,6 +415,22 @@ export function FormationForm({
         <SessionsEditor sessions={sessions} setSessions={setSessions} />
       </SectionCard>
 
+      <SectionCard title="Indicateurs de résultats">
+        <p style={{ color: colors.textLight, fontSize: 12, margin: 0 }}>
+          Indicateurs affichés sur la fiche publique de la formation (taux de réussite, de satisfaction, et
+          résultats par année de session — sélection, jury final).
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 14 }}>
+          <Field label="Indicateur de réussite (ex. « 92 % »)">
+            <input name="tauxReussite" defaultValue={data.tauxReussite} style={fieldStyle} />
+          </Field>
+          <Field label="Indicateur de satisfaction (ex. « 4,6/5 »)">
+            <input name="tauxSatisfaction" defaultValue={data.tauxSatisfaction} style={fieldStyle} />
+          </Field>
+        </div>
+        <ResultatsEditor resultats={resultats} setResultats={setResultats} />
+      </SectionCard>
+
       <details>
         <summary style={{ cursor: "pointer", fontSize: 13, fontWeight: 700, color: colors.navy, padding: "4px 0" }}>
           Avancé — diagramme équivalences et passerelles
@@ -476,6 +501,10 @@ function ProgrammeEditor({
   programme: ProgrammeStep[]
   setProgramme: (fn: (p: ProgrammeStep[]) => ProgrammeStep[]) => void
 }) {
+  function updateStep(i: number, patch: Partial<ProgrammeStep>) {
+    setProgramme((p) => p.map((s, idx) => (idx === i ? { ...s, ...patch } : s)))
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {programme.map((step, i) => (
@@ -485,19 +514,30 @@ function ProgrammeEditor({
             <input
               placeholder="Titre de l'étape"
               value={step.title}
-              onChange={(e) =>
-                setProgramme((p) => p.map((s, idx) => (idx === i ? { ...s, title: e.target.value } : s)))
-              }
+              onChange={(e) => updateStep(i, { title: e.target.value })}
               style={fieldStyle}
             />
             <input
               placeholder="Description"
               value={step.desc}
-              onChange={(e) =>
-                setProgramme((p) => p.map((s, idx) => (idx === i ? { ...s, desc: e.target.value } : s)))
-              }
+              onChange={(e) => updateStep(i, { desc: e.target.value })}
               style={fieldStyle}
             />
+            {step.table ? (
+              <StepTableEditor
+                table={step.table}
+                setTable={(fn) => updateStep(i, { table: fn(step.table!) })}
+                onRemove={() => updateStep(i, { table: undefined })}
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={() => updateStep(i, { table: { headers: ["Colonne 1"], rows: [[""]] } })}
+                style={{ ...addButtonStyle, alignSelf: "flex-start" }}
+              >
+                + Tableau
+              </button>
+            )}
           </div>
           <button
             type="button"
@@ -515,6 +555,124 @@ function ProgrammeEditor({
       >
         + Ajouter une étape
       </button>
+    </div>
+  )
+}
+
+type StepTable = NonNullable<ProgrammeStep["table"]>
+
+function StepTableEditor({
+  table,
+  setTable,
+  onRemove,
+}: {
+  table: StepTable
+  setTable: (fn: (t: StepTable) => StepTable) => void
+  onRemove: () => void
+}) {
+  function addColumn() {
+    setTable((t) => ({
+      headers: [...t.headers, `Colonne ${t.headers.length + 1}`],
+      rows: t.rows.map((row) => [...row, ""]),
+    }))
+  }
+
+  function removeColumn(colIdx: number) {
+    setTable((t) => ({
+      headers: t.headers.filter((_, idx) => idx !== colIdx),
+      rows: t.rows.map((row) => row.filter((_, idx) => idx !== colIdx)),
+    }))
+  }
+
+  function addRow() {
+    setTable((t) => ({ ...t, rows: [...t.rows, t.headers.map(() => "")] }))
+  }
+
+  function removeRow(rowIdx: number) {
+    setTable((t) => ({ ...t, rows: t.rows.filter((_, idx) => idx !== rowIdx) }))
+  }
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 8,
+        background: "#f9fafb",
+        border: "1px solid #e2e5ea",
+        borderRadius: 6,
+        padding: 10,
+      }}
+    >
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", width: "100%" }}>
+          <thead>
+            <tr>
+              {table.headers.map((h, colIdx) => (
+                <th key={colIdx} style={{ padding: 4 }}>
+                  <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                    <input
+                      value={h}
+                      onChange={(e) =>
+                        setTable((t) => ({
+                          ...t,
+                          headers: t.headers.map((hh, idx) => (idx === colIdx ? e.target.value : hh)),
+                        }))
+                      }
+                      style={{ ...fieldStyle, fontWeight: 700, minWidth: 100 }}
+                    />
+                    {table.headers.length > 1 && (
+                      <button type="button" onClick={() => removeColumn(colIdx)} style={tableRemoveButtonStyle}>
+                        ✕
+                      </button>
+                    )}
+                  </div>
+                </th>
+              ))}
+              <th style={{ padding: 4 }}>
+                <button type="button" onClick={addColumn} style={addButtonStyle}>
+                  + Colonne
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {table.rows.map((row, rowIdx) => (
+              <tr key={rowIdx}>
+                {row.map((cell, colIdx) => (
+                  <td key={colIdx} style={{ padding: 4 }}>
+                    <input
+                      value={cell}
+                      onChange={(e) =>
+                        setTable((t) => ({
+                          ...t,
+                          rows: t.rows.map((r, rIdx) =>
+                            rIdx === rowIdx ? r.map((c, cIdx) => (cIdx === colIdx ? e.target.value : c)) : r
+                          ),
+                        }))
+                      }
+                      style={{ ...fieldStyle, minWidth: 100 }}
+                    />
+                  </td>
+                ))}
+                <td style={{ padding: 4 }}>
+                  <button type="button" onClick={() => removeRow(rowIdx)} style={tableRemoveButtonStyle}>
+                    Retirer la ligne
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style={{ display: "flex", gap: 8 }}>
+        <button type="button" onClick={addRow} style={addButtonStyle}>
+          + Ligne
+        </button>
+        <button type="button" onClick={onRemove} style={removeButtonStyle}>
+          Retirer le tableau
+        </button>
+      </div>
     </div>
   )
 }
@@ -565,6 +723,65 @@ function SessionsEditor({
   )
 }
 
+function ResultatsEditor({
+  resultats,
+  setResultats,
+}: {
+  resultats: ResultatAnnee[]
+  setResultats: (fn: (r: ResultatAnnee[]) => ResultatAnnee[]) => void
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      {resultats.map((r, i) => (
+        <div key={i} style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+          <input
+            placeholder="Année (ex. 24/25)"
+            value={r.annee}
+            onChange={(e) =>
+              setResultats((prev) => prev.map((row, idx) => (idx === i ? { ...row, annee: e.target.value } : row)))
+            }
+            style={{ ...fieldStyle, flex: "0 1 130px" }}
+          />
+          <input
+            placeholder="Taux de sélection"
+            value={r.tauxSelection}
+            onChange={(e) =>
+              setResultats((prev) =>
+                prev.map((row, idx) => (idx === i ? { ...row, tauxSelection: e.target.value } : row))
+              )
+            }
+            style={{ ...fieldStyle, flex: "1 1 160px" }}
+          />
+          <input
+            placeholder="Jury final"
+            value={r.tauxJuryFinal}
+            onChange={(e) =>
+              setResultats((prev) =>
+                prev.map((row, idx) => (idx === i ? { ...row, tauxJuryFinal: e.target.value } : row))
+              )
+            }
+            style={{ ...fieldStyle, flex: "1 1 160px" }}
+          />
+          <button
+            type="button"
+            onClick={() => setResultats((prev) => prev.filter((_, idx) => idx !== i))}
+            style={removeButtonStyle}
+          >
+            Retirer
+          </button>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={() => setResultats((prev) => [...prev, { annee: "", tauxSelection: "", tauxJuryFinal: "" }])}
+        style={addButtonStyle}
+      >
+        + Ajouter une année
+      </button>
+    </div>
+  )
+}
+
 const addButtonStyle = {
   alignSelf: "flex-start" as const,
   background: "#f5f7fb",
@@ -588,4 +805,17 @@ const removeButtonStyle = {
   fontWeight: 700,
   fontFamily: fontBody,
   cursor: "pointer",
+}
+
+const tableRemoveButtonStyle = {
+  background: "transparent",
+  border: "1px solid #f3c6cb",
+  color: colors.red,
+  padding: "4px 8px",
+  borderRadius: 4,
+  fontSize: 11,
+  fontWeight: 700,
+  fontFamily: fontBody,
+  cursor: "pointer",
+  whiteSpace: "nowrap" as const,
 }

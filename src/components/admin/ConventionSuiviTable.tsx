@@ -45,7 +45,7 @@ export function ConventionSuiviTable({ rows }: { rows: ConventionSuiviRow[] }) {
               {CONVENTION_ROLE_ORDER.map((role) => (
                 <td key={role} style={{ padding: "12px 10px", textAlign: "center" }}>
                   <div style={{ display: "flex", justifyContent: "center" }}>
-                    <ConventionStatutPill signataire={row.signataires.find((s) => s.role === role)} canManage />
+                    <ConventionStatutPill role={role} signataire={row.signataires.find((s) => s.role === role)} canManage />
                   </div>
                 </td>
               ))}
