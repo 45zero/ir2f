@@ -409,6 +409,24 @@ model ConventionTemplate {
   @@schema("ir2f")
 }
 
+// Annuaire des clubs FFF (import périodique depuis l'export LGEF, voir
+// src/lib/actions/clubs.ts) — sert uniquement à pré-remplir l'adresse du club d'accueil à
+// l'import des stagiaires (ConventionStagiaire.club* est une copie figée à l'import, pas une
+// référence : la convention déjà générée ne doit pas bouger si l'annuaire est réimporté plus tard).
+model Club {
+  id                String   @id @default(uuid())
+  nom               String   @unique
+  numeroAffiliation String?
+  adresse           String?
+  cp                String?
+  ville             String?
+  email             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
 // Un stagiaire importé via Excel pour les besoins de la convention de stage d'une formation
 // (gabarit LGEF : club d'accueil, stagiaire, tuteur, maître de stage — voir
 // src/lib/actions/convention-stagiaires.ts pour le mapping exact des colonnes). Pas de compte
@@ -419,10 +437,17 @@ model ConventionStagiaire {
   id          String @id @default(uuid())
   formationId String
 
-  // Club d'accueil
-  club                  String?
-  numeroAffiliationClub String?
-  emailClub             String?
+  // Club d'accueil — nom/numéro/email saisis dans l'Excel stagiaires ; adresse déduite de
+  // l'annuaire Club au moment de l'import (voir Club ci-dessus) ; représentant renseigné par le
+  // stagiaire lui-même au moment de sa signature (article 1), pas connu à l'import.
+  club                    String?
+  numeroAffiliationClub   String?
+  emailClub               String?
+  clubAdresse             String?
+  clubCp                  String?
+  clubVille               String?
+  clubRepresentantNom     String?
+  clubRepresentantQualite String?
 
   // Stagiaire
   civilite      String?

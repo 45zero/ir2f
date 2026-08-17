@@ -89,6 +89,12 @@ export async function importStagiairesExcel(
 
   if (rows.length === 0) return { error: "Le fichier ne contient aucune ligne de données.", imported: null }
 
+  // Annuaire des clubs (voir src/lib/actions/clubs.ts) — sert à pré-remplir l'adresse du club
+  // d'accueil (absente de ce gabarit stagiaires) par rapprochement sur le nom, normalisé pour
+  // tolérer les différences de casse/accents entre les deux fichiers.
+  const clubs = await prisma.club.findMany({ select: { nom: true, adresse: true, cp: true, ville: true } })
+  const clubsByNormalizedNom = new Map(clubs.map((c) => [normalize(c.nom), c]))
+
   let imported = 0
   let reinitialises = 0
   for (const row of rows) {
@@ -104,10 +110,16 @@ export async function importStagiairesExcel(
       extra[cell(detailHeaderRow, i) || `colonne_${i + 1}`] = value
     }
 
+    const clubNom = cell(row, COLUMN_INDEX.clubNom)
+    const club = clubNom ? clubsByNormalizedNom.get(normalize(clubNom)) : undefined
+
     const data = {
-      club: cell(row, COLUMN_INDEX.clubNom) || null,
+      club: clubNom || null,
       numeroAffiliationClub: cell(row, COLUMN_INDEX.clubNumeroAffiliation) || null,
       emailClub: cell(row, COLUMN_INDEX.clubMail) || null,
+      clubAdresse: club?.adresse ?? null,
+      clubCp: club?.cp ?? null,
+      clubVille: club?.ville ?? null,
       civilite: cell(row, COLUMN_INDEX.civilite) || null,
       nom,
       prenom,

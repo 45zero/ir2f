@@ -98,6 +98,50 @@ export async function uploadDocument(
   return { error: null }
 }
 
+export async function updateDocument(
+  _prev: DocumentActionState | undefined,
+  formData: FormData
+): Promise<DocumentActionState> {
+  const session = await auth()
+  if (!session?.user) redirect("/login")
+
+  const id = str(formData, "id")
+  const doc = await prisma.document.findUnique({
+    where: { id },
+    select: { uploaderId: true },
+  })
+  if (!doc) return { error: "Document introuvable." }
+  if (doc.uploaderId !== session.user.id) {
+    return { error: "Vous ne pouvez modifier que vos propres documents." }
+  }
+
+  const nom = str(formData, "nom")
+  const formationId = optionalStr(formData, "formationId")
+  const isPublic = formData.get("public") === "on"
+  const categorie = parseCategorie(formData)
+  const rolesRequis = parseRolesRequis(formData, categorie)
+
+  if (!nom) return { error: "Le nom du document est obligatoire." }
+
+  const file = formData.get("file")
+  const hasNewFile = file instanceof File && file.size > 0
+  const hasNewUrl = str(formData, "url").length > 0
+
+  let source: Awaited<ReturnType<typeof resolveUploadedFile>> | null = null
+  if (hasNewFile || hasNewUrl) {
+    source = await resolveUploadedFile(formData, `uploads/${session.user.id}`, categorie)
+    if ("error" in source) return { error: source.error }
+  }
+
+  await prisma.document.update({
+    where: { id },
+    data: { nom, formationId, public: isPublic, categorie, rolesRequis, ...(source ?? {}) },
+  })
+
+  revalidatePath("/dashboard/documents")
+  return { error: null }
+}
+
 export async function broadcastDocumentToFormation(
   _prev: DocumentActionState | undefined,
   formData: FormData

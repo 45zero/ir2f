@@ -50,17 +50,26 @@ export async function signerConvention(
 
   if (!stagiaire.pdfStoragePath) return { error: "Document introuvable.", success: false }
 
-  // Le stagiaire renseigne l'article 3 (nature de l'intervention, public visé, objectifs
-  // pédagogiques) en même temps que sa signature — ces réponses sont propres au stagiaire, pas
-  // aux autres signataires, donc traitées uniquement à cette étape (ordre 0).
+  // Le stagiaire renseigne l'article 1 (représentant du club) et l'article 3 (nature de
+  // l'intervention, public visé, objectifs pédagogiques) en même temps que sa signature — ces
+  // réponses sont propres au stagiaire, pas aux autres signataires, donc traitées uniquement à
+  // cette étape (ordre 0).
   let natureIntervention: string[] = []
   let natureInterventionAutre: string | null = null
   let publicVise: string | null = null
   let objectifEncadrementSeul: boolean | null = null
   let objectifEncadrementAutonomie: boolean | null = null
   let objectifEncadrementPonctuel: boolean | null = null
+  let clubRepresentantNom: string | null = null
+  let clubRepresentantQualite: string | null = null
 
   if (signataire.role === "STAGIAIRE") {
+    clubRepresentantNom = optionalStr(formData, "clubRepresentantNom")
+    clubRepresentantQualite = optionalStr(formData, "clubRepresentantQualite")
+    if (!clubRepresentantNom || !clubRepresentantQualite) {
+      return { error: "Merci de préciser le nom et la qualité du représentant du club.", success: false }
+    }
+
     natureIntervention = formData.getAll("nature").map(String)
     natureInterventionAutre = natureIntervention.includes("AUTRE") ? optionalStr(formData, "natureAutreTexte") : null
     publicVise = optionalStr(formData, "publicVise")
@@ -72,6 +81,8 @@ export async function signerConvention(
     await prisma.conventionStagiaire.update({
       where: { id: stagiaire.id },
       data: {
+        clubRepresentantNom,
+        clubRepresentantQualite,
         natureIntervention,
         natureInterventionAutre,
         publicVise,
@@ -92,6 +103,8 @@ export async function signerConvention(
     updatedPdf = await fillConventionTemplate(updatedPdf, {
       stagiaire_public_vise: publicVise ?? "",
       nature_intervention_autre_texte: natureInterventionAutre ?? "",
+      club_representant_nom: clubRepresentantNom ?? "",
+      club_representant_qualite: clubRepresentantQualite ?? "",
     })
     for (const option of NATURE_INTERVENTION_OPTIONS) {
       if (natureIntervention.includes(option.value)) updatedPdf = await stampCheckmark(updatedPdf, option.champ)

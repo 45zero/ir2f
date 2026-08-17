@@ -39,6 +39,11 @@ type StagiaireVars = Pick<
   | "club"
   | "numeroAffiliationClub"
   | "emailClub"
+  | "clubAdresse"
+  | "clubCp"
+  | "clubVille"
+  | "clubRepresentantNom"
+  | "clubRepresentantQualite"
   | "tuteurNom"
   | "tuteurPrenom"
   | "tuteurEmail"
@@ -88,6 +93,14 @@ export function buildConventionVariables(params: { formation: FormationVars; for
     club_nom: stagiaire.club ?? "",
     club_numero_affiliation: stagiaire.numeroAffiliationClub ?? "",
     club_email: stagiaire.emailClub ?? "",
+    // "dont le siège est situé ....." (article 1) est une seule ligne dans le PDF, pas des champs
+    // CP/Ville séparés comme pour le stagiaire — club_adresse regroupe donc tout sur une ligne ;
+    // club_cp/club_ville restent disponibles séparément si un futur modèle les sépare.
+    club_adresse: [stagiaire.clubAdresse, [stagiaire.clubCp, stagiaire.clubVille].filter(Boolean).join(" ")].filter(Boolean).join(", "),
+    club_cp: stagiaire.clubCp ?? "",
+    club_ville: stagiaire.clubVille ?? "",
+    club_representant_nom: stagiaire.clubRepresentantNom ?? "",
+    club_representant_qualite: stagiaire.clubRepresentantQualite ?? "",
 
     tuteur_nom: stagiaire.tuteurNom ?? "",
     tuteur_prenom: stagiaire.tuteurPrenom ?? "",

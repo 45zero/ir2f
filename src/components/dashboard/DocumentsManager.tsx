@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useActionState } from "react"
-import { uploadDocument, deleteDocument } from "@/lib/actions/documents"
+import { uploadDocument, updateDocument, deleteDocument } from "@/lib/actions/documents"
 import { SignDocumentButton } from "@/components/dashboard/SignDocumentButton"
 import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
 import { colors, fontBody } from "@/lib/theme"
@@ -39,10 +39,13 @@ export type DashboardDocument = {
   downloadUrl: string | null
   categorie: DocumentCategorie
   public: boolean
+  formationId: string | null
   createdAt: string
   formationTitre: string | null
   uploaderNom: string
   isMine: boolean
+  hasSignatures: boolean
+  rolesRequis: Role[]
   requiresViewerSignature: boolean
   isSignedByViewer: boolean
   signedAt: string | null
@@ -67,7 +70,7 @@ export function DocumentsManager({
           + Ajouter un document
         </button>
       )}
-      {adding && <UploadForm formations={formations} onDone={() => setAdding(false)} />}
+      {adding && <DocumentForm mode="create" formations={formations} onDone={() => setAdding(false)} />}
 
       {documents.length === 0 && !adding && (
         <div style={{ background: "#fff", border: "1px solid #eef0f3", borderRadius: 10, padding: 24, color: colors.textLight, fontSize: 13 }}>
@@ -77,18 +80,23 @@ export function DocumentsManager({
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
         {documents.map((doc) => (
-          <DocumentCard key={doc.id} doc={doc} />
+          <DocumentCard key={doc.id} doc={doc} formations={formations} />
         ))}
       </div>
     </div>
   )
 }
 
-function DocumentCard({ doc }: { doc: DashboardDocument }) {
+function DocumentCard({ doc, formations }: { doc: DashboardDocument; formations: FormationOption[] }) {
+  const [editing, setEditing] = useState(false)
   const [deleteState, deleteAction, deletePending] = useActionState(
     async (_prev: { error: string | null } | undefined) => deleteDocument(doc.id),
     undefined
   )
+
+  if (editing) {
+    return <DocumentForm mode="edit" doc={doc} formations={formations} onDone={() => setEditing(false)} />
+  }
 
   return (
     <div style={{ background: "#fff", border: "1px solid #eef0f3", borderRadius: 8, padding: 16, display: "flex", flexDirection: "column", gap: 8 }}>
@@ -137,43 +145,73 @@ function DocumentCard({ doc }: { doc: DashboardDocument }) {
       )}
 
       {doc.isMine && (
-        <form
-          action={deleteAction}
-          onSubmit={(e) => {
-            if (!confirm(`Supprimer « ${doc.nom} » ?`)) e.preventDefault()
-          }}
-        >
+        <div style={{ display: "flex", gap: 8 }}>
           <button
-            type="submit"
-            disabled={deletePending}
+            type="button"
+            onClick={() => setEditing(true)}
             style={{
               background: "transparent",
-              border: "1px solid #f3c6cb",
-              color: colors.red,
+              border: "1px solid #d8dde5",
+              color: colors.navy,
               fontSize: 12,
               fontWeight: 700,
               padding: "6px 12px",
               borderRadius: 4,
-              cursor: deletePending ? "default" : "pointer",
+              cursor: "pointer",
               fontFamily: fontBody,
             }}
           >
-            Supprimer
+            Modifier
           </button>
-        </form>
+          <form
+            action={deleteAction}
+            onSubmit={(e) => {
+              if (!confirm(`Supprimer « ${doc.nom} » ?`)) e.preventDefault()
+            }}
+          >
+            <button
+              type="submit"
+              disabled={deletePending}
+              style={{
+                background: "transparent",
+                border: "1px solid #f3c6cb",
+                color: colors.red,
+                fontSize: 12,
+                fontWeight: 700,
+                padding: "6px 12px",
+                borderRadius: 4,
+                cursor: deletePending ? "default" : "pointer",
+                fontFamily: fontBody,
+              }}
+            >
+              Supprimer
+            </button>
+          </form>
+        </div>
       )}
       {deleteState?.error && <span style={{ color: colors.red, fontSize: 11 }}>{deleteState.error}</span>}
     </div>
   )
 }
 
-function UploadForm({ formations, onDone }: { formations: FormationOption[]; onDone: () => void }) {
+function DocumentForm({
+  mode: formMode,
+  doc,
+  formations,
+  onDone,
+}: {
+  mode: "create" | "edit"
+  doc?: DashboardDocument
+  formations: FormationOption[]
+  onDone: () => void
+}) {
   const [mode, setMode] = useState<"file" | "url">("file")
-  const [categorie, setCategorie] = useState<DocumentCategorie>("ADMINISTRATIF")
-  const [rolesRequis, setRolesRequis] = useState<Role[]>(["STAGIAIRE"])
+  const [categorie, setCategorie] = useState<DocumentCategorie>(doc?.categorie ?? "ADMINISTRATIF")
+  const [rolesRequis, setRolesRequis] = useState<Role[]>(doc?.rolesRequis ?? ["STAGIAIRE"])
+  const canReplaceSource = formMode === "create" || !doc?.hasSignatures
   const [state, formAction, pending] = useActionState(
     async (prev: { error: string | null } | undefined, formData: FormData) => {
-      const result = await uploadDocument(prev, formData)
+      const result = formMode === "edit" ? await updateDocument(prev, formData) : await uploadDocument(prev, formData)
       if (!result.error) onDone()
       return result
     },
@@ -189,6 +227,7 @@ function UploadForm({ formations, onDone }: { formations: FormationOption[]; onD
       action={formAction}
       style={{ background: "#fff", border: `1px solid ${colors.gold}`, borderRadius: 8, padding: 16, display: "flex", flexDirection: "column", gap: 10 }}
     >
+      {doc && <input type="hidden" name="id" value={doc.id} />}
       <input type="hidden" name="categorie" value={categorie} />
 
       <div style={{ display: "flex", gap: 8 }}>
@@ -201,8 +240,8 @@ function UploadForm({ formations, onDone }: { formations: FormationOption[]; onD
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10 }}>
-        <input name="nom" placeholder="Nom du document" required style={fieldStyle} />
-        <select name="formationId" defaultValue="" style={fieldStyle}>
+        <input name="nom" placeholder="Nom du document" defaultValue={doc?.nom} required style={fieldStyle} />
+        <select name="formationId" defaultValue={doc?.formationId ?? ""} style={fieldStyle}>
           <option value="">Formation associée (optionnel)</option>
           {formations.map((f) => (
             <option key={f.id} value={f.id}>
@@ -212,19 +251,36 @@ function UploadForm({ formations, onDone }: { formations: FormationOption[]; onD
         </select>
       </div>
 
-      <div style={{ display: "flex", gap: 8 }}>
-        <button type="button" onClick={() => setMode("file")} style={mode === "file" ? modeActiveStyle : modeBaseStyle}>
-          {categorie === "ADMINISTRATIF" ? "Fichier PDF" : "Fichier"}
-        </button>
-        <button type="button" onClick={() => setMode("url")} style={mode === "url" ? modeActiveStyle : modeBaseStyle}>
-          Lien externe {categorie === "PEDAGOGIQUE" ? "(vidéo, exercice...)" : ""}
-        </button>
-      </div>
+      {canReplaceSource ? (
+        <>
+          <div style={{ display: "flex", gap: 8 }}>
+            <button type="button" onClick={() => setMode("file")} style={mode === "file" ? modeActiveStyle : modeBaseStyle}>
+              {categorie === "ADMINISTRATIF" ? "Fichier PDF" : "Fichier"}
+            </button>
+            <button type="button" onClick={() => setMode("url")} style={mode === "url" ? modeActiveStyle : modeBaseStyle}>
+              Lien externe {categorie === "PEDAGOGIQUE" ? "(vidéo, exercice...)" : ""}
+            </button>
+          </div>
 
-      {mode === "file" ? (
-        <input name="file" type="file" accept={categorie === "ADMINISTRATIF" ? "application/pdf" : undefined} style={fieldStyle} />
+          {mode === "file" ? (
+            <input name="file" type="file" accept={categorie === "ADMINISTRATIF" ? "application/pdf" : undefined} style={fieldStyle} />
+          ) : (
+            <input
+              name="url"
+              placeholder={categorie === "PEDAGOGIQUE" ? "Lien vidéo, exercice, ressource..." : "Lien du document"}
+              style={fieldStyle}
+            />
+          )}
+          {formMode === "edit" && (
+            <span style={{ fontSize: 11, color: colors.textLight }}>
+              Laissez vide pour conserver le fichier ou lien actuel.
+            </span>
+          )}
+        </>
       ) : (
-        <input name="url" placeholder={categorie === "PEDAGOGIQUE" ? "Lien vidéo, exercice, ressource..." : "Lien du document"} style={fieldStyle} />
+        <span style={{ fontSize: 11.5, color: colors.textLight }}>
+          Fichier/lien non modifiable : ce document a déjà été signé.
+        </span>
       )}
 
       {categorie === "ADMINISTRATIF" && (
@@ -249,7 +305,7 @@ function UploadForm({ formations, onDone }: { formations: FormationOption[]; onD
       )}
 
       <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text }}>
-        <input type="checkbox" name="public" style={{ width: 15, height: 15 }} />
+        <input type="checkbox" name="public" defaultChecked={doc?.public} style={{ width: 15, height: 15 }} />
         Partager avec les autres stagiaires
       </label>
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
@@ -270,7 +326,7 @@ function UploadForm({ formations, onDone }: { formations: FormationOption[]; onD
             cursor: pending ? "default" : "pointer",
           }}
         >
-          {pending ? "Envoi..." : "Ajouter"}
+          {pending ? "Envoi..." : formMode === "edit" ? "Enregistrer" : "Ajouter"}
         </button>
         <button
           type="button"

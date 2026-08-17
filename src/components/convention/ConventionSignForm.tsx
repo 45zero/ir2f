@@ -17,6 +17,27 @@ const fieldStyle = {
   outline: "none",
 }
 
+function ClubRepresentantFields() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, background: "#f5f7fb", borderRadius: 8, padding: 16 }}>
+      <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>Représentant du club d&apos;accueil</span>
+      <p style={{ fontSize: 12, color: colors.textMuted, margin: 0 }}>
+        La convention (article 1) doit préciser qui représente le club et signera en son nom.
+      </p>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 220px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Nom et prénom</span>
+          <input name="clubRepresentantNom" required placeholder="Ex. Julien Chaussec" style={fieldStyle} />
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 220px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>En qualité de</span>
+          <input name="clubRepresentantQualite" required placeholder="Ex. Président" style={fieldStyle} />
+        </label>
+      </div>
+    </div>
+  )
+}
+
 function ArticleTroisFields() {
   const [autreChecked, setAutreChecked] = useState(false)
 
@@ -129,7 +150,12 @@ export function ConventionSignForm({ token, role }: { token: string; role: RoleS
 
   return (
     <form action={signAction} style={{ display: "flex", flexDirection: "column", gap: 16, background: "#fff", border: "1px solid #eef0f3", borderRadius: 10, padding: 20 }}>
-      {role === "STAGIAIRE" && <ArticleTroisFields />}
+      {role === "STAGIAIRE" && (
+        <>
+          <ClubRepresentantFields />
+          <ArticleTroisFields />
+        </>
+      )}
 
       <SignaturePad name="signatureImage" />
 
