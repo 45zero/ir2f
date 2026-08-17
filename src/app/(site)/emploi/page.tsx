@@ -2,11 +2,12 @@ import { getEmploiPageData, type EmploiDocument, type EmploiVideo, type EmploiCo
 import { getPageHero } from "@/lib/page-hero"
 import { getAccueilContenu } from "@/lib/home"
 import { SECTION_EMPLOI_LABELS } from "@/lib/emploi-shared"
-import { getYoutubeEmbedUrl } from "@/lib/youtube"
+import { getYoutubeEmbedUrl, isVideoFileUrl } from "@/lib/youtube"
 import { HoverLink } from "@/components/ui/HoverLink"
 import { PageHero } from "@/components/site/PageHero"
 import { BandeauEmploiCta } from "@/components/site/BandeauEmploiCta"
 import { FinancementsTabs } from "@/components/site/FinancementsTabs"
+import { EmploiSectionTabs, type EmploiSectionTab } from "@/components/site/EmploiSectionTabs"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import type { SectionEmploi, IconePratique } from "@/generated/prisma"
 
@@ -62,6 +63,49 @@ const PRATIQUE_ICON: Record<IconePratique, React.ReactNode> = {
 }
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" })
+
+function VideoBlock({ url, title }: { url: string | null; title: string }) {
+  const embedUrl = url ? getYoutubeEmbedUrl(url) : null
+  const isFile = url ? isVideoFileUrl(url) : false
+  return (
+    <div style={{ flex: "1 1 300px", maxWidth: 380, aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}>
+      {embedUrl ? (
+        <iframe
+          src={embedUrl}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          style={{ width: "100%", height: "100%", border: "none" }}
+        />
+      ) : isFile && url ? (
+        <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+          <source src={url} />
+        </video>
+      ) : (
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            background: `repeating-linear-gradient(135deg,${colors.navy},${colors.navy} 12px,#16305a 12px,#16305a 24px)`,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 8,
+            padding: 20,
+            textAlign: "center",
+          }}
+        >
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8">
+            <polygon points="23 7 16 12 23 17 23 7" />
+            <rect x="1" y="5" width="15" height="14" rx="2" />
+          </svg>
+          <span style={{ color: "#fff", fontFamily: fontHeading, fontWeight: 700, fontSize: 13.5 }}>Vidéo « {title} » à venir</span>
+        </div>
+      )}
+    </div>
+  )
+}
 
 function DocumentsGrid({ documents }: { documents: EmploiDocument[] }) {
   if (documents.length === 0) return null
@@ -186,14 +230,25 @@ function ContactsGrid({ contacts }: { contacts: EmploiContact[] }) {
   )
 }
 
-function SectionHeader({ section }: { section: SectionEmploi }) {
+function PartnerBadge({ nom, logoUrl }: { nom: string; logoUrl: string | null }) {
+  if (logoUrl) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={logoUrl} alt={nom} style={{ height: 48, width: "auto" }} />
+  }
   return (
-    <div id={`section-${section}`} style={{ display: "flex", alignItems: "center", gap: 12, scrollMarginTop: 90 }}>
-      {SECTION_ICON[section]}
-      <h2 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: "clamp(22px,2.6vw,28px)", fontWeight: 800, margin: 0 }}>
-        {SECTION_EMPLOI_LABELS[section]}
-      </h2>
-    </div>
+    <span
+      style={{
+        background: "#f5f7fb",
+        border: "1px solid #e4e9f2",
+        borderRadius: 6,
+        padding: "10px 16px",
+        fontSize: 13,
+        fontWeight: 700,
+        color: colors.navy,
+      }}
+    >
+      {nom}
+    </span>
   )
 }
 
@@ -207,189 +262,137 @@ export default async function EmploiPage() {
 
   const introParagraphes = pageContenu.introTexte.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean)
   const introItems = pageContenu.introListe.split("\n").map((l) => l.trim()).filter(Boolean)
-  const introVideoEmbed = pageContenu.videoCommunauteUrl ? getYoutubeEmbedUrl(pageContenu.videoCommunauteUrl) : null
 
   const creerEmploiParagraphes = gestionEmploiContenu.creerEmploiTexte.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean)
-  const communauteVideoEmbed = gestionEmploiContenu.communauteVideoUrl ? getYoutubeEmbedUrl(gestionEmploiContenu.communauteVideoUrl) : null
+  const communauteVideoUrl = gestionEmploiContenu.communauteVideoUrl
+  const communauteVideoEmbed = communauteVideoUrl ? getYoutubeEmbedUrl(communauteVideoUrl) : null
+  const communauteVideoIsFile = communauteVideoUrl ? isVideoFileUrl(communauteVideoUrl) : false
 
-  return (
-    <main>
-      <PageHero {...hero} />
-
-      {(introParagraphes.length > 0 || introItems.length > 0 || introVideoEmbed) && (
-        <section style={{ maxWidth: 1160, margin: "0 auto", padding: "40px 20px 0" }}>
-          <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "flex-start" }}>
-            <div style={{ flex: "1 1 380px", display: "flex", flexDirection: "column", gap: 12 }}>
-              {introParagraphes.map((p, i) => (
-                <p key={i} style={{ margin: 0, fontSize: 14.5, lineHeight: 1.7, color: colors.text }}>
-                  {p}
-                </p>
-              ))}
-              {introItems.length > 0 && (
-                <ul style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 6 }}>
-                  {introItems.map((item, i) => (
-                    <li key={i} style={{ fontSize: 14, lineHeight: 1.6, color: colors.text }}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            {introVideoEmbed && (
-              <div style={{ flex: "1 1 300px", maxWidth: 380, aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}>
-                <iframe
-                  src={introVideoEmbed}
-                  title="Communauté Employeurs IEFF"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ width: "100%", height: "100%", border: "none" }}
-                />
-              </div>
-            )}
-          </div>
-        </section>
+  const financementsContent = (
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      {dispositifs.length > 0 ? (
+        <FinancementsTabs dispositifs={dispositifs} />
+      ) : (
+        financements.documents.length === 0 &&
+        financements.videos.length === 0 &&
+        financements.contacts.length === 0 && (
+          <p style={{ color: colors.textLight, fontSize: 13, margin: 0 }}>Contenu à venir pour cette section.</p>
+        )
       )}
 
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "32px 20px 0" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 16 }}>
-          {(["FINANCEMENTS", "GESTION_EMPLOI", "FORMATION_EMPLOYABILITE"] as SectionEmploi[]).map((section) => (
-            <a
-              key={section}
-              href={`#section-${section}`}
+      {(financements.documents.length > 0 || financements.videos.length > 0 || financements.contacts.length > 0) && (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            borderTop: dispositifs.length > 0 ? "1px solid #eef0f3" : undefined,
+            paddingTop: dispositifs.length > 0 ? 16 : 0,
+          }}
+        >
+          <DocumentsGrid documents={financements.documents} />
+          <VideosGrid videos={financements.videos} />
+          <ContactsGrid contacts={financements.contacts} />
+        </div>
+      )}
+    </div>
+  )
+
+  const gestionContent = (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      {(creerEmploiParagraphes.length > 0 || gestionEmploiContenu.eLearningLienUrl || gestionEmploiContenu.creerEmploiLienUrl) && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {gestionEmploiContenu.eLearningLienUrl && (
+            <div
               style={{
+                background: "#fff7e6",
+                border: `1px solid ${colors.gold}`,
+                borderRadius: 8,
+                padding: 16,
                 display: "flex",
                 flexDirection: "column",
-                gap: 10,
-                background: colors.navy,
-                borderRadius: 8,
-                padding: 20,
-                textDecoration: "none",
+                gap: 8,
               }}
             >
-              {SECTION_ICON[section]}
-              <span style={{ fontFamily: fontHeading, color: "#fff", fontSize: 16, fontWeight: 700 }}>{SECTION_EMPLOI_LABELS[section]}</span>
-            </a>
+              {gestionEmploiContenu.eLearningTitre && (
+                <span style={{ fontSize: 14, fontWeight: 700, color: colors.navy }}>{gestionEmploiContenu.eLearningTitre}</span>
+              )}
+              {gestionEmploiContenu.eLearningTexte && (
+                <p style={{ margin: 0, fontSize: 13, color: colors.text, lineHeight: 1.6 }}>{gestionEmploiContenu.eLearningTexte}</p>
+              )}
+              <HoverLink
+                href={gestionEmploiContenu.eLearningLienUrl}
+                target="_blank"
+                style={{
+                  alignSelf: "flex-start",
+                  background: colors.red,
+                  color: "#fff",
+                  padding: "9px 18px",
+                  borderRadius: 4,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  fontFamily: fontBody,
+                  textDecoration: "none",
+                }}
+                hoverStyle={{ background: colors.redDark }}
+              >
+                {gestionEmploiContenu.eLearningLienLabel || "Formez-vous !"}
+              </HoverLink>
+            </div>
+          )}
+
+          {creerEmploiParagraphes.map((p, i) => (
+            <p key={i} style={{ margin: 0, fontSize: 14, lineHeight: 1.7, color: colors.text }}>
+              {p}
+            </p>
+          ))}
+
+          {gestionEmploiContenu.creerEmploiLienUrl && (
+            <HoverLink
+              href={gestionEmploiContenu.creerEmploiLienUrl}
+              target="_blank"
+              style={{ alignSelf: "flex-start", fontSize: 13, fontWeight: 700, color: colors.navy, textDecoration: "underline" }}
+            >
+              {gestionEmploiContenu.creerEmploiLienLabel || "Créer un emploi"}
+            </HoverLink>
+          )}
+        </div>
+      )}
+
+      {pratiqueCards.length > 0 && (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 16 }}>
+          {pratiqueCards.map((card) => (
+            <div
+              key={card.id}
+              style={{ background: colors.navy, borderRadius: 8, padding: 22, display: "flex", flexDirection: "column", gap: 10 }}
+            >
+              {PRATIQUE_ICON[card.icone]}
+              <span style={{ fontFamily: fontHeading, color: "#fff", fontSize: 15, fontWeight: 700 }}>{card.titre}</span>
+              {card.description && (
+                <p style={{ margin: 0, color: "rgba(255,255,255,0.75)", fontSize: 12.5, lineHeight: 1.6, whiteSpace: "pre-line" }}>
+                  {card.description}
+                </p>
+              )}
+            </div>
           ))}
         </div>
-      </section>
+      )}
 
-      <div style={{ marginTop: 40 }}>
-        <BandeauEmploiCta contenu={accueilContenu} />
-      </div>
+      {(gestion.documents.length > 0 || gestion.videos.length > 0 || gestion.contacts.length > 0) && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <DocumentsGrid documents={gestion.documents} />
+          <VideosGrid videos={gestion.videos} />
+          <ContactsGrid contacts={gestion.contacts} />
+        </div>
+      )}
 
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "48px 20px 0", display: "flex", flexDirection: "column", gap: 20 }}>
-        <SectionHeader section="FINANCEMENTS" />
-
-        {dispositifs.length > 0 ? (
-          <FinancementsTabs dispositifs={dispositifs} />
-        ) : (
-          financements.documents.length === 0 &&
-          financements.videos.length === 0 &&
-          financements.contacts.length === 0 && (
-            <p style={{ color: colors.textLight, fontSize: 13, margin: 0 }}>Contenu à venir pour cette section.</p>
-          )
-        )}
-
-        {(financements.documents.length > 0 || financements.videos.length > 0 || financements.contacts.length > 0) && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 16, borderTop: dispositifs.length > 0 ? "1px solid #eef0f3" : undefined, paddingTop: dispositifs.length > 0 ? 16 : 0 }}>
-            <DocumentsGrid documents={financements.documents} />
-            <VideosGrid videos={financements.videos} />
-            <ContactsGrid contacts={financements.contacts} />
+      {(gestionEmploiContenu.communauteTitre || gestionEmploiContenu.communauteTexte || communauteVideoEmbed || communauteVideoIsFile) && (
+        <div style={{ background: colors.bg, borderRadius: 8, overflow: "hidden" }}>
+          <div style={{ aspectRatio: "5/1", minHeight: 60 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/emploi-bandeau-communaute.webp" alt="Communauté Employeurs IEFF" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
-        )}
-      </section>
-
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "56px 20px 0", display: "flex", flexDirection: "column", gap: 24 }}>
-        <SectionHeader section="GESTION_EMPLOI" />
-
-        {(creerEmploiParagraphes.length > 0 || gestionEmploiContenu.eLearningLienUrl || gestionEmploiContenu.creerEmploiLienUrl) && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {gestionEmploiContenu.eLearningLienUrl && (
-              <div
-                style={{
-                  background: "#fff7e6",
-                  border: `1px solid ${colors.gold}`,
-                  borderRadius: 8,
-                  padding: 16,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 8,
-                }}
-              >
-                {gestionEmploiContenu.eLearningTitre && (
-                  <span style={{ fontSize: 14, fontWeight: 700, color: colors.navy }}>{gestionEmploiContenu.eLearningTitre}</span>
-                )}
-                {gestionEmploiContenu.eLearningTexte && (
-                  <p style={{ margin: 0, fontSize: 13, color: colors.text, lineHeight: 1.6 }}>{gestionEmploiContenu.eLearningTexte}</p>
-                )}
-                <HoverLink
-                  href={gestionEmploiContenu.eLearningLienUrl}
-                  target="_blank"
-                  style={{
-                    alignSelf: "flex-start",
-                    background: colors.red,
-                    color: "#fff",
-                    padding: "9px 18px",
-                    borderRadius: 4,
-                    fontSize: 13,
-                    fontWeight: 700,
-                    fontFamily: fontBody,
-                    textDecoration: "none",
-                  }}
-                  hoverStyle={{ background: colors.redDark }}
-                >
-                  {gestionEmploiContenu.eLearningLienLabel || "Formez-vous !"}
-                </HoverLink>
-              </div>
-            )}
-
-            {creerEmploiParagraphes.map((p, i) => (
-              <p key={i} style={{ margin: 0, fontSize: 14, lineHeight: 1.7, color: colors.text }}>
-                {p}
-              </p>
-            ))}
-
-            {gestionEmploiContenu.creerEmploiLienUrl && (
-              <HoverLink
-                href={gestionEmploiContenu.creerEmploiLienUrl}
-                target="_blank"
-                style={{ alignSelf: "flex-start", fontSize: 13, fontWeight: 700, color: colors.navy, textDecoration: "underline" }}
-              >
-                {gestionEmploiContenu.creerEmploiLienLabel || "Créer un emploi"}
-              </HoverLink>
-            )}
-          </div>
-        )}
-
-        {pratiqueCards.length > 0 && (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 16 }}>
-            {pratiqueCards.map((card) => (
-              <div
-                key={card.id}
-                style={{ background: colors.navy, borderRadius: 8, padding: 22, display: "flex", flexDirection: "column", gap: 10 }}
-              >
-                {PRATIQUE_ICON[card.icone]}
-                <span style={{ fontFamily: fontHeading, color: "#fff", fontSize: 15, fontWeight: 700 }}>{card.titre}</span>
-                {card.description && (
-                  <p style={{ margin: 0, color: "rgba(255,255,255,0.75)", fontSize: 12.5, lineHeight: 1.6, whiteSpace: "pre-line" }}>
-                    {card.description}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {(gestion.documents.length > 0 || gestion.videos.length > 0 || gestion.contacts.length > 0) && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            <DocumentsGrid documents={gestion.documents} />
-            <VideosGrid videos={gestion.videos} />
-            <ContactsGrid contacts={gestion.contacts} />
-          </div>
-        )}
-
-        {(gestionEmploiContenu.communauteTitre || gestionEmploiContenu.communauteTexte || communauteVideoEmbed) && (
-          <div style={{ background: colors.bg, borderRadius: 8, padding: "clamp(20px,3vw,32px)", display: "flex", gap: 24, flexWrap: "wrap" }}>
+          <div style={{ padding: "clamp(20px,3vw,32px)", display: "flex", gap: 24, flexWrap: "wrap" }}>
             <div style={{ flex: "1 1 280px", display: "flex", flexDirection: "column", gap: 10 }}>
               {gestionEmploiContenu.communauteTitre && (
                 <h3 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 20, fontWeight: 800, margin: 0 }}>
@@ -442,73 +445,126 @@ export default async function EmploiPage() {
                 )}
               </div>
             </div>
-            {communauteVideoEmbed && (
+            {(communauteVideoEmbed || communauteVideoIsFile) && (
               <div style={{ flex: "1 1 300px", maxWidth: 380, aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}>
-                <iframe
-                  src={communauteVideoEmbed}
-                  title="Communauté employeur"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ width: "100%", height: "100%", border: "none" }}
-                />
+                {communauteVideoEmbed ? (
+                  <iframe
+                    src={communauteVideoEmbed}
+                    title="Communauté employeur"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ width: "100%", height: "100%", border: "none" }}
+                  />
+                ) : (
+                  <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+                    <source src={communauteVideoUrl!} />
+                  </video>
+                )}
               </div>
             )}
           </div>
-        )}
+        </div>
+      )}
 
-        {partenaires.length > 0 && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.4 }}>
-              Les partenaires Emploi
-            </span>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "center" }}>
-              {partenaires.map((p) =>
-                p.siteUrl ? (
-                  <HoverLink
-                    key={p.id}
-                    href={p.siteUrl}
-                    target="_blank"
-                    style={{ display: "flex", alignItems: "center", textDecoration: "none" }}
-                    hoverStyle={{ opacity: 0.75 }}
-                  >
-                    <PartnerBadge nom={p.nom} logoUrl={p.logoUrl} />
-                  </HoverLink>
-                ) : (
-                  <div key={p.id}>
-                    <PartnerBadge nom={p.nom} logoUrl={p.logoUrl} />
-                  </div>
-                )
-              )}
-            </div>
+      {partenaires.length > 0 && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.4 }}>
+            Les partenaires Emploi
+          </span>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "center" }}>
+            {partenaires.map((p) =>
+              p.siteUrl ? (
+                <HoverLink
+                  key={p.id}
+                  href={p.siteUrl}
+                  target="_blank"
+                  style={{ display: "flex", alignItems: "center", textDecoration: "none" }}
+                  hoverStyle={{ opacity: 0.75 }}
+                >
+                  <PartnerBadge nom={p.nom} logoUrl={p.logoUrl} />
+                </HoverLink>
+              ) : (
+                <div key={p.id}>
+                  <PartnerBadge nom={p.nom} logoUrl={p.logoUrl} />
+                </div>
+              )
+            )}
           </div>
-        )}
+        </div>
+      )}
+    </div>
+  )
+
+  const formationContent = (
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      {formationEmployabiliteContenu.introTexte && (
+        <p style={{ margin: 0, fontSize: 14, lineHeight: 1.7, color: colors.text }}>{formationEmployabiliteContenu.introTexte}</p>
+      )}
+
+      {formation.documents.length === 0 && formation.videos.length === 0 && formation.contacts.length === 0 && (
+        <p style={{ color: colors.textLight, fontSize: 13, margin: 0 }}>Contenu à venir pour cette section.</p>
+      )}
+
+      <DocumentsGrid documents={formation.documents} />
+      <VideosGrid videos={formation.videos} />
+      <ContactsGrid contacts={formation.contacts} />
+
+      {formationEmployabiliteContenu.indicateursNote && (
+        <div style={{ background: colors.bg, borderRadius: 8, padding: 18, display: "flex", flexDirection: "column", gap: 6 }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.4 }}>
+            Indicateurs employabilité
+          </span>
+          <p style={{ margin: 0, fontSize: 13, lineHeight: 1.6, color: colors.text, whiteSpace: "pre-line" }}>
+            {formationEmployabiliteContenu.indicateursNote}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+
+  const sectionTabs: EmploiSectionTab[] = [
+    { key: "FINANCEMENTS", label: SECTION_EMPLOI_LABELS.FINANCEMENTS, icon: SECTION_ICON.FINANCEMENTS, content: financementsContent },
+    { key: "GESTION_EMPLOI", label: SECTION_EMPLOI_LABELS.GESTION_EMPLOI, icon: SECTION_ICON.GESTION_EMPLOI, content: gestionContent },
+    {
+      key: "FORMATION_EMPLOYABILITE",
+      label: SECTION_EMPLOI_LABELS.FORMATION_EMPLOYABILITE,
+      icon: SECTION_ICON.FORMATION_EMPLOYABILITE,
+      content: formationContent,
+    },
+  ]
+
+  return (
+    <main>
+      <PageHero {...hero} />
+
+      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "40px 20px 0" }}>
+        <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "flex-start" }}>
+          <div style={{ flex: "1 1 380px", display: "flex", flexDirection: "column", gap: 12 }}>
+            {introParagraphes.map((p, i) => (
+              <p key={i} style={{ margin: 0, fontSize: 14.5, lineHeight: 1.7, color: colors.text }}>
+                {p}
+              </p>
+            ))}
+            {introItems.length > 0 && (
+              <ul style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 6 }}>
+                {introItems.map((item, i) => (
+                  <li key={i} style={{ fontSize: 14, lineHeight: 1.6, color: colors.text }}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <VideoBlock url={pageContenu.videoCommunauteUrl} title="Communauté Employeur IEFF" />
+        </div>
       </section>
 
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "56px 20px 0", display: "flex", flexDirection: "column", gap: 20 }}>
-        <SectionHeader section="FORMATION_EMPLOYABILITE" />
+      <div style={{ marginTop: 40 }}>
+        <BandeauEmploiCta contenu={accueilContenu} />
+      </div>
 
-        {formationEmployabiliteContenu.introTexte && (
-          <p style={{ margin: 0, fontSize: 14, lineHeight: 1.7, color: colors.text }}>{formationEmployabiliteContenu.introTexte}</p>
-        )}
-
-        {formation.documents.length === 0 && formation.videos.length === 0 && formation.contacts.length === 0 && (
-          <p style={{ color: colors.textLight, fontSize: 13, margin: 0 }}>Contenu à venir pour cette section.</p>
-        )}
-
-        <DocumentsGrid documents={formation.documents} />
-        <VideosGrid videos={formation.videos} />
-        <ContactsGrid contacts={formation.contacts} />
-
-        {formationEmployabiliteContenu.indicateursNote && (
-          <div style={{ background: colors.bg, borderRadius: 8, padding: 18, display: "flex", flexDirection: "column", gap: 6 }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.4 }}>
-              Indicateurs employabilité
-            </span>
-            <p style={{ margin: 0, fontSize: 13, lineHeight: 1.6, color: colors.text, whiteSpace: "pre-line" }}>
-              {formationEmployabiliteContenu.indicateursNote}
-            </p>
-          </div>
-        )}
+      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "48px 20px 0" }}>
+        <EmploiSectionTabs tabs={sectionTabs} />
       </section>
 
       {webinaires.length > 0 && (
@@ -569,27 +625,5 @@ export default async function EmploiPage() {
 
       <div style={{ paddingBottom: 72 }} />
     </main>
-  )
-}
-
-function PartnerBadge({ nom, logoUrl }: { nom: string; logoUrl: string | null }) {
-  if (logoUrl) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={logoUrl} alt={nom} style={{ height: 48, width: "auto" }} />
-  }
-  return (
-    <span
-      style={{
-        background: "#f5f7fb",
-        border: "1px solid #e4e9f2",
-        borderRadius: 6,
-        padding: "10px 16px",
-        fontSize: 13,
-        fontWeight: 700,
-        color: colors.navy,
-      }}
-    >
-      {nom}
-    </span>
   )
 }
