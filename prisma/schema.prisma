@@ -178,6 +178,7 @@ model User {
 
   inscriptions         Inscription[]
   documentsUpload      Document[]
+  documentsRecus       DocumentDestinataire[]
   signatures           Signature[]
   messagesEnvoyes      Message[]             @relation("Expediteur")
   messagesRecus        MessageDestinataire[]
@@ -364,13 +365,29 @@ model Document {
   ordre         Int               @default(0)
   rolesRequis   Role[]            @default([STAGIAIRE])
   categorie     DocumentCategorie @default(ADMINISTRATIF)
+  // Si vrai, le document n'est visible que par les destinataires listés ci-dessous
+  // (au lieu de l'ensemble des stagiaires validés de la formation).
+  partageIndividuel Boolean       @default(false)
   createdAt     DateTime          @default(now())
 
-  uploader   User        @relation(fields: [uploaderId], references: [id])
-  formation  Formation?  @relation(fields: [formationId], references: [id])
-  signatures Signature[]
-  messages   Message[]
+  uploader      User                   @relation(fields: [uploaderId], references: [id])
+  formation     Formation?             @relation(fields: [formationId], references: [id])
+  signatures    Signature[]
+  messages      Message[]
+  destinataires DocumentDestinataire[]
 
+  @@schema("ir2f")
+}
+
+model DocumentDestinataire {
+  id         String @id @default(uuid())
+  documentId String
+  userId     String
+
+  document Document @relation(fields: [documentId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@unique([documentId, userId])
   @@schema("ir2f")
 }
 

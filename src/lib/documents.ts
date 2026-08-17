@@ -12,7 +12,8 @@ export async function getMesDocuments(userId: string, role: Role) {
       OR: [
         { uploaderId: userId },
         { public: true },
-        { formation: { inscriptions: { some: { userId, statut: "VALIDEE" } } } },
+        { formation: { inscriptions: { some: { userId, statut: "VALIDEE" } } }, partageIndividuel: false },
+        { partageIndividuel: true, destinataires: { some: { userId } } },
         ...(globalRoleVisibility ? [{ rolesRequis: { has: role } }] : []),
       ],
     },
@@ -23,6 +24,7 @@ export async function getMesDocuments(userId: string, role: Role) {
       signatures: {
         select: { userId: true, signedAt: true, user: { select: { role: true, nom: true, prenom: true } } },
       },
+      destinataires: { select: { userId: true } },
     },
   })
 
@@ -40,7 +42,7 @@ export async function getMesDocuments(userId: string, role: Role) {
     rosterByFormation.set(r.formationId, arr)
   }
 
-  return Promise.all(
+  const rows = await Promise.all(
     documents.map(async (d) => {
       const stagiaireRosterIds = d.formationId ? (rosterByFormation.get(d.formationId) ?? []) : null
       const fullySigned = computeDocumentFullySigned({
@@ -56,4 +58,19 @@ export async function getMesDocuments(userId: string, role: Role) {
       }
     })
   )
+
+  return rows
+}
+
+export async function getFormationRosters(): Promise<Record<string, { id: string; nom: string; prenom: string }[]>> {
+  const inscriptions = await prisma.inscription.findMany({
+    where: { statut: "VALIDEE" },
+    select: { formationId: true, user: { select: { id: true, nom: true, prenom: true } } },
+  })
+
+  const rosters: Record<string, { id: string; nom: string; prenom: string }[]> = {}
+  for (const i of inscriptions) {
+    ;(rosters[i.formationId] ??= []).push(i.user)
+  }
+  return rosters
 }

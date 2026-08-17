@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import { auth } from "@/auth"
-import { getMesDocuments } from "@/lib/documents"
+import { getMesDocuments, getFormationRosters } from "@/lib/documents"
 import { getFormationOptions } from "@/lib/formations"
 import { DocumentsManager, type DashboardDocument } from "@/components/dashboard/DocumentsManager"
 import { ROLE_LABELS } from "@/lib/users-shared"
@@ -15,9 +15,10 @@ export default async function DashboardDocumentsPage() {
   if (session.user.role === "FORMATEUR") redirect("/dashboard")
 
   const role = session.user.role as Role
-  const [documents, formations] = await Promise.all([
+  const [documents, formations, rosters] = await Promise.all([
     getMesDocuments(session.user.id, role),
     getFormationOptions(),
+    getFormationRosters(),
   ])
 
   const rows: DashboardDocument[] = documents
@@ -46,7 +47,8 @@ export default async function DashboardDocumentsPage() {
         uploaderNom: `${d.uploader.prenom} ${d.uploader.nom}`,
         isMine: d.uploaderId === session.user.id,
         hasSignatures: d.signatures.length > 0,
-        rolesRequis: d.rolesRequis,
+        partageIndividuel: d.partageIndividuel,
+        destinataireIds: d.destinataires.map((x) => x.userId),
         requiresViewerSignature: d.rolesRequis.includes(role),
         isSignedByViewer,
         signedAt: relevantSignature ? relevantSignature.signedAt.toISOString() : null,
@@ -88,7 +90,7 @@ export default async function DashboardDocumentsPage() {
           </span>
         )}
       </div>
-      <DocumentsManager documents={rows} formations={formations} />
+      <DocumentsManager documents={rows} formations={formations} rosters={rosters} />
     </div>
   )
 }

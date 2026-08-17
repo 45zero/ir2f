@@ -6,8 +6,9 @@ import { SignDocumentButton } from "@/components/dashboard/SignDocumentButton"
 import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
 import { colors, fontBody } from "@/lib/theme"
 import type { FormationOption } from "@/lib/formations-shared"
-import { SIGNATORY_ROLE_OPTIONS } from "@/lib/documents-shared"
-import type { Role, DocumentCategorie } from "@/generated/prisma"
+import type { DocumentCategorie } from "@/generated/prisma"
+
+type Roster = { id: string; nom: string; prenom: string }
 
 const fieldStyle = {
   border: "1px solid #e2e5ea",
@@ -45,7 +46,8 @@ export type DashboardDocument = {
   uploaderNom: string
   isMine: boolean
   hasSignatures: boolean
-  rolesRequis: Role[]
+  partageIndividuel: boolean
+  destinataireIds: string[]
   requiresViewerSignature: boolean
   isSignedByViewer: boolean
   signedAt: string | null
@@ -57,9 +59,11 @@ export type DashboardDocument = {
 export function DocumentsManager({
   documents,
   formations,
+  rosters,
 }: {
   documents: DashboardDocument[]
   formations: FormationOption[]
+  rosters: Record<string, Roster[]>
 }) {
   const [adding, setAdding] = useState(false)
 
@@ -70,7 +74,7 @@ export function DocumentsManager({
           + Ajouter un document
         </button>
       )}
-      {adding && <DocumentForm mode="create" formations={formations} onDone={() => setAdding(false)} />}
+      {adding && <DocumentForm mode="create" formations={formations} rosters={rosters} onDone={() => setAdding(false)} />}
 
       {documents.length === 0 && !adding && (
         <div style={{ background: "#fff", border: "1px solid #eef0f3", borderRadius: 10, padding: 24, color: colors.textLight, fontSize: 13 }}>
@@ -80,14 +84,22 @@ export function DocumentsManager({
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
         {documents.map((doc) => (
-          <DocumentCard key={doc.id} doc={doc} formations={formations} />
+          <DocumentCard key={doc.id} doc={doc} formations={formations} rosters={rosters} />
         ))}
       </div>
     </div>
   )
 }
 
-function DocumentCard({ doc, formations }: { doc: DashboardDocument; formations: FormationOption[] }) {
+function DocumentCard({
+  doc,
+  formations,
+  rosters,
+}: {
+  doc: DashboardDocument
+  formations: FormationOption[]
+  rosters: Record<string, Roster[]>
+}) {
   const [editing, setEditing] = useState(false)
   const [deleteState, deleteAction, deletePending] = useActionState(
     async (_prev: { error: string | null } | undefined) => deleteDocument(doc.id),
@@ -95,7 +107,7 @@ function DocumentCard({ doc, formations }: { doc: DashboardDocument; formations:
   )
 
   if (editing) {
-    return <DocumentForm mode="edit" doc={doc} formations={formations} onDone={() => setEditing(false)} />
+    return <DocumentForm mode="edit" doc={doc} formations={formations} rosters={rosters} onDone={() => setEditing(false)} />
   }
 
   return (
@@ -198,17 +210,23 @@ function DocumentForm({
   mode: formMode,
   doc,
   formations,
+  rosters,
   onDone,
 }: {
   mode: "create" | "edit"
   doc?: DashboardDocument
   formations: FormationOption[]
+  rosters: Record<string, Roster[]>
   onDone: () => void
 }) {
   const [mode, setMode] = useState<"file" | "url">("file")
   const [categorie, setCategorie] = useState<DocumentCategorie>(doc?.categorie ?? "ADMINISTRATIF")
-  const [rolesRequis, setRolesRequis] = useState<Role[]>(doc?.rolesRequis ?? ["STAGIAIRE"])
+  const [formationId, setFormationId] = useState(doc?.formationId ?? "")
+  const [partageMode, setPartageMode] = useState<"groupe" | "individuel">(doc?.partageIndividuel ? "individuel" : "groupe")
+  const [destinataires, setDestinataires] = useState<string[]>(doc?.destinataireIds ?? [])
   const canReplaceSource = formMode === "create" || !doc?.hasSignatures
+  const roster = rosters[formationId] ?? []
+  const allSelected = destinataires.length === roster.length && roster.length > 0
   const [state, formAction, pending] = useActionState(
     async (prev: { error: string | null } | undefined, formData: FormData) => {
       const result = formMode === "edit" ? await updateDocument(prev, formData) : await uploadDocument(prev, formData)
@@ -218,8 +236,12 @@ function DocumentForm({
     undefined
   )
 
-  function toggleRole(role: Role) {
-    setRolesRequis((prev) => (prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role]))
+  function toggleDestinataire(id: string) {
+    setDestinataires((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
+  }
+
+  function toggleAllDestinataires() {
+    setDestinataires(allSelected ? [] : roster.map((s) => s.id))
   }
 
   return (
@@ -241,7 +263,12 @@ function DocumentForm({
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10 }}>
         <input name="nom" placeholder="Nom du document" defaultValue={doc?.nom} required style={fieldStyle} />
-        <select name="formationId" defaultValue={doc?.formationId ?? ""} style={fieldStyle}>
+        <select
+          name="formationId"
+          value={formationId}
+          onChange={(e) => setFormationId(e.target.value)}
+          style={fieldStyle}
+        >
           <option value="">Formation associée (optionnel)</option>
           {formations.map((f) => (
             <option key={f.id} value={f.id}>
@@ -283,24 +310,65 @@ function DocumentForm({
         </span>
       )}
 
-      {categorie === "ADMINISTRATIF" && (
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Qui doit signer ce document ?</span>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            {SIGNATORY_ROLE_OPTIONS.map((r) => (
-              <label key={r.value} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
-                <input
-                  type="checkbox"
-                  name="rolesRequis"
-                  value={r.value}
-                  checked={rolesRequis.includes(r.value)}
-                  onChange={() => toggleRole(r.value)}
-                  style={{ width: 14, height: 14 }}
-                />
-                {r.label}
-              </label>
-            ))}
+      {formationId && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>
+            Partager avec les membres inscrits dans la formation
+          </span>
+          <input type="hidden" name="partageMode" value={partageMode} />
+          <div style={{ display: "flex", gap: 8 }}>
+            <button type="button" onClick={() => setPartageMode("groupe")} style={partageMode === "groupe" ? modeActiveStyle : modeBaseStyle}>
+              Groupé (toute la formation)
+            </button>
+            <button type="button" onClick={() => setPartageMode("individuel")} style={partageMode === "individuel" ? modeActiveStyle : modeBaseStyle}>
+              Individuel
+            </button>
           </div>
+
+          {partageMode === "individuel" && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {roster.length === 0 ? (
+                <span style={{ fontSize: 12, color: colors.textLight }}>
+                  Aucun stagiaire inscrit et validé pour cette formation.
+                </span>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={toggleAllDestinataires}
+                    style={{
+                      alignSelf: "flex-start",
+                      background: "transparent",
+                      border: "none",
+                      color: colors.navy,
+                      fontSize: 12,
+                      fontWeight: 700,
+                      fontFamily: fontBody,
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
+                  >
+                    {allSelected ? "Tout désélectionner" : "Tout sélectionner"}
+                  </button>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: 180, overflowY: "auto" }}>
+                    {roster.map((s) => (
+                      <label key={s.id} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: colors.text }}>
+                        <input
+                          type="checkbox"
+                          name="destinataires"
+                          value={s.id}
+                          checked={destinataires.includes(s.id)}
+                          onChange={() => toggleDestinataire(s.id)}
+                          style={{ width: 14, height: 14 }}
+                        />
+                        {s.prenom} {s.nom}
+                      </label>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
       )}
 
@@ -312,7 +380,7 @@ function DocumentForm({
       <div style={{ display: "flex", gap: 8 }}>
         <button
           type="submit"
-          disabled={pending}
+          disabled={pending || (Boolean(formationId) && partageMode === "individuel" && destinataires.length === 0)}
           style={{
             alignSelf: "flex-start",
             background: colors.red,

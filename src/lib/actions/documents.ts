@@ -28,6 +28,13 @@ function parseRolesRequis(formData: FormData, categorie: DocumentCategorie): Rol
   return roles.length > 0 ? roles : ["STAGIAIRE"]
 }
 
+function parsePartage(formData: FormData, formationId: string | null): { partageIndividuel: boolean; destinataireIds: string[] } {
+  if (!formationId || str(formData, "partageMode") !== "individuel") {
+    return { partageIndividuel: false, destinataireIds: [] }
+  }
+  return { partageIndividuel: true, destinataireIds: formData.getAll("destinataires").map(String).filter(Boolean) }
+}
+
 async function resolveUploadedFile(
   formData: FormData,
   keyHint: string,
@@ -62,37 +69,30 @@ export async function uploadDocument(
   const isPublic = formData.get("public") === "on"
   const visiblePublic = formData.get("visiblePublic") === "on"
   const categorie = parseCategorie(formData)
-  const rolesRequis = parseRolesRequis(formData, categorie)
+  const { partageIndividuel, destinataireIds } = parsePartage(formData, formationId)
 
   if (!nom) return { error: "Le nom du document est obligatoire." }
+  if (partageIndividuel && destinataireIds.length === 0) {
+    return { error: "Sélectionnez au moins un destinataire pour un partage individuel." }
+  }
 
   const source = await resolveUploadedFile(formData, `uploads/${session.user.id}`, categorie)
   if ("error" in source) return { error: source.error }
 
-  const document = await prisma.document.create({
+  await prisma.document.create({
     data: {
       nom,
       formationId,
       uploaderId: session.user.id,
       public: isPublic,
       visiblePublic,
-      rolesRequis,
+      rolesRequis: [],
       categorie,
+      partageIndividuel,
       ...source,
+      ...(partageIndividuel ? { destinataires: { create: destinataireIds.map((userId) => ({ userId })) } } : {}),
     },
-    include: { formation: { select: { titre: true } } },
   })
-
-  const nonStagiaireRoles = rolesRequis.filter((r) => r !== "STAGIAIRE")
-  if (nonStagiaireRoles.length > 0) {
-    await notifyDocumentSignataires({
-      documentNom: nom,
-      formationId,
-      formationTitre: document.formation?.titre ?? null,
-      rolesRequis: nonStagiaireRoles,
-      excludeUserId: session.user.id,
-    })
-  }
 
   revalidatePath("/dashboard/documents")
   return { error: null }
@@ -119,9 +119,12 @@ export async function updateDocument(
   const formationId = optionalStr(formData, "formationId")
   const isPublic = formData.get("public") === "on"
   const categorie = parseCategorie(formData)
-  const rolesRequis = parseRolesRequis(formData, categorie)
+  const { partageIndividuel, destinataireIds } = parsePartage(formData, formationId)
 
   if (!nom) return { error: "Le nom du document est obligatoire." }
+  if (partageIndividuel && destinataireIds.length === 0) {
+    return { error: "Sélectionnez au moins un destinataire pour un partage individuel." }
+  }
 
   const file = formData.get("file")
   const hasNewFile = file instanceof File && file.size > 0
@@ -133,10 +136,16 @@ export async function updateDocument(
     if ("error" in source) return { error: source.error }
   }
 
-  await prisma.document.update({
-    where: { id },
-    data: { nom, formationId, public: isPublic, categorie, rolesRequis, ...(source ?? {}) },
-  })
+  await prisma.$transaction([
+    prisma.document.update({
+      where: { id },
+      data: { nom, formationId, public: isPublic, categorie, rolesRequis: [], partageIndividuel, ...(source ?? {}) },
+    }),
+    prisma.documentDestinataire.deleteMany({ where: { documentId: id } }),
+    ...(partageIndividuel
+      ? [prisma.documentDestinataire.createMany({ data: destinataireIds.map((userId) => ({ documentId: id, userId })) })]
+      : []),
+  ])
 
   revalidatePath("/dashboard/documents")
   return { error: null }

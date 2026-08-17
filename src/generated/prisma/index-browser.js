@@ -243,7 +243,14 @@ exports.Prisma.DocumentScalarFieldEnum = {
   ordre: 'ordre',
   rolesRequis: 'rolesRequis',
   categorie: 'categorie',
+  partageIndividuel: 'partageIndividuel',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.DocumentDestinataireScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  userId: 'userId'
 };
 
 exports.Prisma.SignatureScalarFieldEnum = {
@@ -866,6 +873,7 @@ exports.Prisma.ModelName = {
   DemandeInscription: 'DemandeInscription',
   DemandeContact: 'DemandeContact',
   Document: 'Document',
+  DocumentDestinataire: 'DocumentDestinataire',
   Signature: 'Signature',
   ConventionTemplate: 'ConventionTemplate',
   Club: 'Club',
