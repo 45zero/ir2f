@@ -15,11 +15,12 @@ export type HeaderUser = {
 const NAV_LINKS = [
   { href: "/formations", label: "Formations" },
   { href: "/emploi", label: "Emploi" },
+  { href: "/financement", label: "Financement" },
   { href: "/emploi", label: "Documentation" },
   { href: "/contact", label: "Contact" },
 ]
 
-const HERO_PATHS = new Set(["/", "/formations", "/contact", "/emploi", "/actualites"])
+const HERO_PATHS = new Set(["/", "/formations", "/contact", "/emploi", "/actualites", "/financement"])
 
 const ROLE_LABELS: Record<string, string> = {
   STAGIAIRE: "Stagiaire",

@@ -9,11 +9,13 @@ const ITEMS = [
   { href: "/admin/pages-hero", label: "Bandeaux (Hero)", enabled: true },
   { href: "/admin/formations", label: "Formations", enabled: true },
   { href: "/admin/conventions/templates", label: "Modèles de convention", enabled: true },
+  { href: "/admin/clubs", label: "Annuaire clubs", enabled: true },
   { href: "/admin/formations-page", label: "Page « Nos Formations »", enabled: true },
   { href: "/admin/inscriptions", label: "Inscriptions", enabled: true },
   { href: "/admin/demandes-contact", label: "Demandes de contact", enabled: true },
   { href: "/admin/users", label: "Utilisateurs", enabled: true },
   { href: "/admin/emploi", label: "Emploi", enabled: true },
+  { href: "/admin/financement", label: "Financement", enabled: true },
   { href: "/admin/articles", label: "Actualités", enabled: true },
 ]
 

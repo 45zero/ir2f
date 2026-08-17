@@ -64,6 +64,11 @@ export type Signature = $Result.DefaultSelection<Prisma.$SignaturePayload>
  */
 export type ConventionTemplate = $Result.DefaultSelection<Prisma.$ConventionTemplatePayload>
 /**
+ * Model Club
+ * 
+ */
+export type Club = $Result.DefaultSelection<Prisma.$ClubPayload>
+/**
  * Model ConventionStagiaire
  * 
  */
@@ -188,6 +193,26 @@ export type GestionEmploiContenu = $Result.DefaultSelection<Prisma.$GestionEmplo
  * 
  */
 export type FormationEmployabiliteContenu = $Result.DefaultSelection<Prisma.$FormationEmployabiliteContenuPayload>
+/**
+ * Model DispositifFormation
+ * 
+ */
+export type DispositifFormation = $Result.DefaultSelection<Prisma.$DispositifFormationPayload>
+/**
+ * Model LienFormation
+ * 
+ */
+export type LienFormation = $Result.DefaultSelection<Prisma.$LienFormationPayload>
+/**
+ * Model ContactFormation
+ * 
+ */
+export type ContactFormation = $Result.DefaultSelection<Prisma.$ContactFormationPayload>
+/**
+ * Model DispositifFormationTableau
+ * 
+ */
+export type DispositifFormationTableau = $Result.DefaultSelection<Prisma.$DispositifFormationTableauPayload>
 
 /**
  * Enums
@@ -406,7 +431,8 @@ export const PageCle: {
   FORMATIONS: 'FORMATIONS',
   CONTACT: 'CONTACT',
   EMPLOI: 'EMPLOI',
-  ACTUALITES: 'ACTUALITES'
+  ACTUALITES: 'ACTUALITES',
+  FINANCEMENT: 'FINANCEMENT'
 };
 
 export type PageCle = (typeof PageCle)[keyof typeof PageCle]
@@ -762,6 +788,16 @@ export class PrismaClient<
   get conventionTemplate(): Prisma.ConventionTemplateDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.club`: Exposes CRUD operations for the **Club** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Clubs
+    * const clubs = await prisma.club.findMany()
+    * ```
+    */
+  get club(): Prisma.ClubDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.conventionStagiaire`: Exposes CRUD operations for the **ConventionStagiaire** model.
     * Example usage:
     * ```ts
@@ -1010,6 +1046,46 @@ export class PrismaClient<
     * ```
     */
   get formationEmployabiliteContenu(): Prisma.FormationEmployabiliteContenuDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dispositifFormation`: Exposes CRUD operations for the **DispositifFormation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DispositifFormations
+    * const dispositifFormations = await prisma.dispositifFormation.findMany()
+    * ```
+    */
+  get dispositifFormation(): Prisma.DispositifFormationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.lienFormation`: Exposes CRUD operations for the **LienFormation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LienFormations
+    * const lienFormations = await prisma.lienFormation.findMany()
+    * ```
+    */
+  get lienFormation(): Prisma.LienFormationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contactFormation`: Exposes CRUD operations for the **ContactFormation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContactFormations
+    * const contactFormations = await prisma.contactFormation.findMany()
+    * ```
+    */
+  get contactFormation(): Prisma.ContactFormationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dispositifFormationTableau`: Exposes CRUD operations for the **DispositifFormationTableau** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DispositifFormationTableaus
+    * const dispositifFormationTableaus = await prisma.dispositifFormationTableau.findMany()
+    * ```
+    */
+  get dispositifFormationTableau(): Prisma.DispositifFormationTableauDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1454,6 +1530,7 @@ export namespace Prisma {
     Document: 'Document',
     Signature: 'Signature',
     ConventionTemplate: 'ConventionTemplate',
+    Club: 'Club',
     ConventionStagiaire: 'ConventionStagiaire',
     ConventionSignataire: 'ConventionSignataire',
     Message: 'Message',
@@ -1478,7 +1555,11 @@ export namespace Prisma {
     PratiqueEmploiCard: 'PratiqueEmploiCard',
     EmploiPageContenu: 'EmploiPageContenu',
     GestionEmploiContenu: 'GestionEmploiContenu',
-    FormationEmployabiliteContenu: 'FormationEmployabiliteContenu'
+    FormationEmployabiliteContenu: 'FormationEmployabiliteContenu',
+    DispositifFormation: 'DispositifFormation',
+    LienFormation: 'LienFormation',
+    ContactFormation: 'ContactFormation',
+    DispositifFormationTableau: 'DispositifFormationTableau'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1494,7 +1575,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "signature" | "conventionTemplate" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "signature" | "conventionTemplate" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2235,6 +2316,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ConventionTemplateCountArgs<ExtArgs>
             result: $Utils.Optional<ConventionTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
+      Club: {
+        payload: Prisma.$ClubPayload<ExtArgs>
+        fields: Prisma.ClubFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClubFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClubFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
+          }
+          findFirst: {
+            args: Prisma.ClubFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClubFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
+          }
+          findMany: {
+            args: Prisma.ClubFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>[]
+          }
+          create: {
+            args: Prisma.ClubCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
+          }
+          createMany: {
+            args: Prisma.ClubCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClubCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>[]
+          }
+          delete: {
+            args: Prisma.ClubDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
+          }
+          update: {
+            args: Prisma.ClubUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
+          }
+          deleteMany: {
+            args: Prisma.ClubDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClubUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ClubUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>[]
+          }
+          upsert: {
+            args: Prisma.ClubUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClubPayload>
+          }
+          aggregate: {
+            args: Prisma.ClubAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClub>
+          }
+          groupBy: {
+            args: Prisma.ClubGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClubGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClubCountArgs<ExtArgs>
+            result: $Utils.Optional<ClubCountAggregateOutputType> | number
           }
         }
       }
@@ -4088,6 +4243,302 @@ export namespace Prisma {
           }
         }
       }
+      DispositifFormation: {
+        payload: Prisma.$DispositifFormationPayload<ExtArgs>
+        fields: Prisma.DispositifFormationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DispositifFormationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DispositifFormationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload>
+          }
+          findFirst: {
+            args: Prisma.DispositifFormationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DispositifFormationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload>
+          }
+          findMany: {
+            args: Prisma.DispositifFormationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload>[]
+          }
+          create: {
+            args: Prisma.DispositifFormationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload>
+          }
+          createMany: {
+            args: Prisma.DispositifFormationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DispositifFormationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload>[]
+          }
+          delete: {
+            args: Prisma.DispositifFormationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload>
+          }
+          update: {
+            args: Prisma.DispositifFormationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload>
+          }
+          deleteMany: {
+            args: Prisma.DispositifFormationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DispositifFormationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DispositifFormationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload>[]
+          }
+          upsert: {
+            args: Prisma.DispositifFormationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationPayload>
+          }
+          aggregate: {
+            args: Prisma.DispositifFormationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDispositifFormation>
+          }
+          groupBy: {
+            args: Prisma.DispositifFormationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DispositifFormationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DispositifFormationCountArgs<ExtArgs>
+            result: $Utils.Optional<DispositifFormationCountAggregateOutputType> | number
+          }
+        }
+      }
+      LienFormation: {
+        payload: Prisma.$LienFormationPayload<ExtArgs>
+        fields: Prisma.LienFormationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LienFormationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LienFormationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload>
+          }
+          findFirst: {
+            args: Prisma.LienFormationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LienFormationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload>
+          }
+          findMany: {
+            args: Prisma.LienFormationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload>[]
+          }
+          create: {
+            args: Prisma.LienFormationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload>
+          }
+          createMany: {
+            args: Prisma.LienFormationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LienFormationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload>[]
+          }
+          delete: {
+            args: Prisma.LienFormationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload>
+          }
+          update: {
+            args: Prisma.LienFormationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload>
+          }
+          deleteMany: {
+            args: Prisma.LienFormationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LienFormationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LienFormationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload>[]
+          }
+          upsert: {
+            args: Prisma.LienFormationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LienFormationPayload>
+          }
+          aggregate: {
+            args: Prisma.LienFormationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLienFormation>
+          }
+          groupBy: {
+            args: Prisma.LienFormationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LienFormationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LienFormationCountArgs<ExtArgs>
+            result: $Utils.Optional<LienFormationCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContactFormation: {
+        payload: Prisma.$ContactFormationPayload<ExtArgs>
+        fields: Prisma.ContactFormationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContactFormationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContactFormationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload>
+          }
+          findFirst: {
+            args: Prisma.ContactFormationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContactFormationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload>
+          }
+          findMany: {
+            args: Prisma.ContactFormationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload>[]
+          }
+          create: {
+            args: Prisma.ContactFormationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload>
+          }
+          createMany: {
+            args: Prisma.ContactFormationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContactFormationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload>[]
+          }
+          delete: {
+            args: Prisma.ContactFormationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload>
+          }
+          update: {
+            args: Prisma.ContactFormationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContactFormationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContactFormationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContactFormationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContactFormationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactFormationPayload>
+          }
+          aggregate: {
+            args: Prisma.ContactFormationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContactFormation>
+          }
+          groupBy: {
+            args: Prisma.ContactFormationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContactFormationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContactFormationCountArgs<ExtArgs>
+            result: $Utils.Optional<ContactFormationCountAggregateOutputType> | number
+          }
+        }
+      }
+      DispositifFormationTableau: {
+        payload: Prisma.$DispositifFormationTableauPayload<ExtArgs>
+        fields: Prisma.DispositifFormationTableauFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DispositifFormationTableauFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DispositifFormationTableauFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload>
+          }
+          findFirst: {
+            args: Prisma.DispositifFormationTableauFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DispositifFormationTableauFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload>
+          }
+          findMany: {
+            args: Prisma.DispositifFormationTableauFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload>[]
+          }
+          create: {
+            args: Prisma.DispositifFormationTableauCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload>
+          }
+          createMany: {
+            args: Prisma.DispositifFormationTableauCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DispositifFormationTableauCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload>[]
+          }
+          delete: {
+            args: Prisma.DispositifFormationTableauDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload>
+          }
+          update: {
+            args: Prisma.DispositifFormationTableauUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload>
+          }
+          deleteMany: {
+            args: Prisma.DispositifFormationTableauDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DispositifFormationTableauUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DispositifFormationTableauUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload>[]
+          }
+          upsert: {
+            args: Prisma.DispositifFormationTableauUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFormationTableauPayload>
+          }
+          aggregate: {
+            args: Prisma.DispositifFormationTableauAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDispositifFormationTableau>
+          }
+          groupBy: {
+            args: Prisma.DispositifFormationTableauGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DispositifFormationTableauGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DispositifFormationTableauCountArgs<ExtArgs>
+            result: $Utils.Optional<DispositifFormationTableauCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -4206,6 +4657,7 @@ export namespace Prisma {
     document?: DocumentOmit
     signature?: SignatureOmit
     conventionTemplate?: ConventionTemplateOmit
+    club?: ClubOmit
     conventionStagiaire?: ConventionStagiaireOmit
     conventionSignataire?: ConventionSignataireOmit
     message?: MessageOmit
@@ -4231,6 +4683,10 @@ export namespace Prisma {
     emploiPageContenu?: EmploiPageContenuOmit
     gestionEmploiContenu?: GestionEmploiContenuOmit
     formationEmployabiliteContenu?: FormationEmployabiliteContenuOmit
+    dispositifFormation?: DispositifFormationOmit
+    lienFormation?: LienFormationOmit
+    contactFormation?: ContactFormationOmit
+    dispositifFormationTableau?: DispositifFormationTableauOmit
   }
 
   /* Types for Logging */
@@ -4731,6 +5187,55 @@ export namespace Prisma {
    */
   export type DispositifFinancementCountOutputTypeCountReferentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReferentEmploiWhereInput
+  }
+
+
+  /**
+   * Count Type DispositifFormationCountOutputType
+   */
+
+  export type DispositifFormationCountOutputType = {
+    liens: number
+    contacts: number
+    tableaux: number
+  }
+
+  export type DispositifFormationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    liens?: boolean | DispositifFormationCountOutputTypeCountLiensArgs
+    contacts?: boolean | DispositifFormationCountOutputTypeCountContactsArgs
+    tableaux?: boolean | DispositifFormationCountOutputTypeCountTableauxArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DispositifFormationCountOutputType without action
+   */
+  export type DispositifFormationCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationCountOutputType
+     */
+    select?: DispositifFormationCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DispositifFormationCountOutputType without action
+   */
+  export type DispositifFormationCountOutputTypeCountLiensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LienFormationWhereInput
+  }
+
+  /**
+   * DispositifFormationCountOutputType without action
+   */
+  export type DispositifFormationCountOutputTypeCountContactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactFormationWhereInput
+  }
+
+  /**
+   * DispositifFormationCountOutputType without action
+   */
+  export type DispositifFormationCountOutputTypeCountTableauxArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DispositifFormationTableauWhereInput
   }
 
 
@@ -16974,6 +17479,1058 @@ export namespace Prisma {
 
 
   /**
+   * Model Club
+   */
+
+  export type AggregateClub = {
+    _count: ClubCountAggregateOutputType | null
+    _min: ClubMinAggregateOutputType | null
+    _max: ClubMaxAggregateOutputType | null
+  }
+
+  export type ClubMinAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    numeroAffiliation: string | null
+    adresse: string | null
+    cp: string | null
+    ville: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClubMaxAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    numeroAffiliation: string | null
+    adresse: string | null
+    cp: string | null
+    ville: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ClubCountAggregateOutputType = {
+    id: number
+    nom: number
+    numeroAffiliation: number
+    adresse: number
+    cp: number
+    ville: number
+    email: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ClubMinAggregateInputType = {
+    id?: true
+    nom?: true
+    numeroAffiliation?: true
+    adresse?: true
+    cp?: true
+    ville?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClubMaxAggregateInputType = {
+    id?: true
+    nom?: true
+    numeroAffiliation?: true
+    adresse?: true
+    cp?: true
+    ville?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ClubCountAggregateInputType = {
+    id?: true
+    nom?: true
+    numeroAffiliation?: true
+    adresse?: true
+    cp?: true
+    ville?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ClubAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Club to aggregate.
+     */
+    where?: ClubWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Clubs to fetch.
+     */
+    orderBy?: ClubOrderByWithRelationInput | ClubOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClubWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Clubs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Clubs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Clubs
+    **/
+    _count?: true | ClubCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClubMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClubMaxAggregateInputType
+  }
+
+  export type GetClubAggregateType<T extends ClubAggregateArgs> = {
+        [P in keyof T & keyof AggregateClub]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClub[P]>
+      : GetScalarType<T[P], AggregateClub[P]>
+  }
+
+
+
+
+  export type ClubGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClubWhereInput
+    orderBy?: ClubOrderByWithAggregationInput | ClubOrderByWithAggregationInput[]
+    by: ClubScalarFieldEnum[] | ClubScalarFieldEnum
+    having?: ClubScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClubCountAggregateInputType | true
+    _min?: ClubMinAggregateInputType
+    _max?: ClubMaxAggregateInputType
+  }
+
+  export type ClubGroupByOutputType = {
+    id: string
+    nom: string
+    numeroAffiliation: string | null
+    adresse: string | null
+    cp: string | null
+    ville: string | null
+    email: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ClubCountAggregateOutputType | null
+    _min: ClubMinAggregateOutputType | null
+    _max: ClubMaxAggregateOutputType | null
+  }
+
+  type GetClubGroupByPayload<T extends ClubGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClubGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClubGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClubGroupByOutputType[P]>
+            : GetScalarType<T[P], ClubGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClubSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    numeroAffiliation?: boolean
+    adresse?: boolean
+    cp?: boolean
+    ville?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["club"]>
+
+  export type ClubSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    numeroAffiliation?: boolean
+    adresse?: boolean
+    cp?: boolean
+    ville?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["club"]>
+
+  export type ClubSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    numeroAffiliation?: boolean
+    adresse?: boolean
+    cp?: boolean
+    ville?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["club"]>
+
+  export type ClubSelectScalar = {
+    id?: boolean
+    nom?: boolean
+    numeroAffiliation?: boolean
+    adresse?: boolean
+    cp?: boolean
+    ville?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "numeroAffiliation" | "adresse" | "cp" | "ville" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["club"]>
+
+  export type $ClubPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Club"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nom: string
+      numeroAffiliation: string | null
+      adresse: string | null
+      cp: string | null
+      ville: string | null
+      email: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["club"]>
+    composites: {}
+  }
+
+  type ClubGetPayload<S extends boolean | null | undefined | ClubDefaultArgs> = $Result.GetResult<Prisma.$ClubPayload, S>
+
+  type ClubCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClubFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClubCountAggregateInputType | true
+    }
+
+  export interface ClubDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Club'], meta: { name: 'Club' } }
+    /**
+     * Find zero or one Club that matches the filter.
+     * @param {ClubFindUniqueArgs} args - Arguments to find a Club
+     * @example
+     * // Get one Club
+     * const club = await prisma.club.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClubFindUniqueArgs>(args: SelectSubset<T, ClubFindUniqueArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Club that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClubFindUniqueOrThrowArgs} args - Arguments to find a Club
+     * @example
+     * // Get one Club
+     * const club = await prisma.club.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClubFindUniqueOrThrowArgs>(args: SelectSubset<T, ClubFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Club that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubFindFirstArgs} args - Arguments to find a Club
+     * @example
+     * // Get one Club
+     * const club = await prisma.club.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClubFindFirstArgs>(args?: SelectSubset<T, ClubFindFirstArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Club that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubFindFirstOrThrowArgs} args - Arguments to find a Club
+     * @example
+     * // Get one Club
+     * const club = await prisma.club.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClubFindFirstOrThrowArgs>(args?: SelectSubset<T, ClubFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Clubs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Clubs
+     * const clubs = await prisma.club.findMany()
+     * 
+     * // Get first 10 Clubs
+     * const clubs = await prisma.club.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const clubWithIdOnly = await prisma.club.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClubFindManyArgs>(args?: SelectSubset<T, ClubFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Club.
+     * @param {ClubCreateArgs} args - Arguments to create a Club.
+     * @example
+     * // Create one Club
+     * const Club = await prisma.club.create({
+     *   data: {
+     *     // ... data to create a Club
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClubCreateArgs>(args: SelectSubset<T, ClubCreateArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Clubs.
+     * @param {ClubCreateManyArgs} args - Arguments to create many Clubs.
+     * @example
+     * // Create many Clubs
+     * const club = await prisma.club.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClubCreateManyArgs>(args?: SelectSubset<T, ClubCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Clubs and returns the data saved in the database.
+     * @param {ClubCreateManyAndReturnArgs} args - Arguments to create many Clubs.
+     * @example
+     * // Create many Clubs
+     * const club = await prisma.club.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Clubs and only return the `id`
+     * const clubWithIdOnly = await prisma.club.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClubCreateManyAndReturnArgs>(args?: SelectSubset<T, ClubCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Club.
+     * @param {ClubDeleteArgs} args - Arguments to delete one Club.
+     * @example
+     * // Delete one Club
+     * const Club = await prisma.club.delete({
+     *   where: {
+     *     // ... filter to delete one Club
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClubDeleteArgs>(args: SelectSubset<T, ClubDeleteArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Club.
+     * @param {ClubUpdateArgs} args - Arguments to update one Club.
+     * @example
+     * // Update one Club
+     * const club = await prisma.club.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClubUpdateArgs>(args: SelectSubset<T, ClubUpdateArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Clubs.
+     * @param {ClubDeleteManyArgs} args - Arguments to filter Clubs to delete.
+     * @example
+     * // Delete a few Clubs
+     * const { count } = await prisma.club.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClubDeleteManyArgs>(args?: SelectSubset<T, ClubDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Clubs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Clubs
+     * const club = await prisma.club.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClubUpdateManyArgs>(args: SelectSubset<T, ClubUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Clubs and returns the data updated in the database.
+     * @param {ClubUpdateManyAndReturnArgs} args - Arguments to update many Clubs.
+     * @example
+     * // Update many Clubs
+     * const club = await prisma.club.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Clubs and only return the `id`
+     * const clubWithIdOnly = await prisma.club.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ClubUpdateManyAndReturnArgs>(args: SelectSubset<T, ClubUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Club.
+     * @param {ClubUpsertArgs} args - Arguments to update or create a Club.
+     * @example
+     * // Update or create a Club
+     * const club = await prisma.club.upsert({
+     *   create: {
+     *     // ... data to create a Club
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Club we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClubUpsertArgs>(args: SelectSubset<T, ClubUpsertArgs<ExtArgs>>): Prisma__ClubClient<$Result.GetResult<Prisma.$ClubPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Clubs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubCountArgs} args - Arguments to filter Clubs to count.
+     * @example
+     * // Count the number of Clubs
+     * const count = await prisma.club.count({
+     *   where: {
+     *     // ... the filter for the Clubs we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClubCountArgs>(
+      args?: Subset<T, ClubCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClubCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Club.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClubAggregateArgs>(args: Subset<T, ClubAggregateArgs>): Prisma.PrismaPromise<GetClubAggregateType<T>>
+
+    /**
+     * Group by Club.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClubGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClubGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClubGroupByArgs['orderBy'] }
+        : { orderBy?: ClubGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClubGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClubGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Club model
+   */
+  readonly fields: ClubFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Club.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClubClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Club model
+   */
+  interface ClubFieldRefs {
+    readonly id: FieldRef<"Club", 'String'>
+    readonly nom: FieldRef<"Club", 'String'>
+    readonly numeroAffiliation: FieldRef<"Club", 'String'>
+    readonly adresse: FieldRef<"Club", 'String'>
+    readonly cp: FieldRef<"Club", 'String'>
+    readonly ville: FieldRef<"Club", 'String'>
+    readonly email: FieldRef<"Club", 'String'>
+    readonly createdAt: FieldRef<"Club", 'DateTime'>
+    readonly updatedAt: FieldRef<"Club", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Club findUnique
+   */
+  export type ClubFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * Filter, which Club to fetch.
+     */
+    where: ClubWhereUniqueInput
+  }
+
+  /**
+   * Club findUniqueOrThrow
+   */
+  export type ClubFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * Filter, which Club to fetch.
+     */
+    where: ClubWhereUniqueInput
+  }
+
+  /**
+   * Club findFirst
+   */
+  export type ClubFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * Filter, which Club to fetch.
+     */
+    where?: ClubWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Clubs to fetch.
+     */
+    orderBy?: ClubOrderByWithRelationInput | ClubOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Clubs.
+     */
+    cursor?: ClubWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Clubs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Clubs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Clubs.
+     */
+    distinct?: ClubScalarFieldEnum | ClubScalarFieldEnum[]
+  }
+
+  /**
+   * Club findFirstOrThrow
+   */
+  export type ClubFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * Filter, which Club to fetch.
+     */
+    where?: ClubWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Clubs to fetch.
+     */
+    orderBy?: ClubOrderByWithRelationInput | ClubOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Clubs.
+     */
+    cursor?: ClubWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Clubs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Clubs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Clubs.
+     */
+    distinct?: ClubScalarFieldEnum | ClubScalarFieldEnum[]
+  }
+
+  /**
+   * Club findMany
+   */
+  export type ClubFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * Filter, which Clubs to fetch.
+     */
+    where?: ClubWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Clubs to fetch.
+     */
+    orderBy?: ClubOrderByWithRelationInput | ClubOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Clubs.
+     */
+    cursor?: ClubWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Clubs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Clubs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Clubs.
+     */
+    distinct?: ClubScalarFieldEnum | ClubScalarFieldEnum[]
+  }
+
+  /**
+   * Club create
+   */
+  export type ClubCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Club.
+     */
+    data: XOR<ClubCreateInput, ClubUncheckedCreateInput>
+  }
+
+  /**
+   * Club createMany
+   */
+  export type ClubCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Clubs.
+     */
+    data: ClubCreateManyInput | ClubCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Club createManyAndReturn
+   */
+  export type ClubCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * The data used to create many Clubs.
+     */
+    data: ClubCreateManyInput | ClubCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Club update
+   */
+  export type ClubUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Club.
+     */
+    data: XOR<ClubUpdateInput, ClubUncheckedUpdateInput>
+    /**
+     * Choose, which Club to update.
+     */
+    where: ClubWhereUniqueInput
+  }
+
+  /**
+   * Club updateMany
+   */
+  export type ClubUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Clubs.
+     */
+    data: XOR<ClubUpdateManyMutationInput, ClubUncheckedUpdateManyInput>
+    /**
+     * Filter which Clubs to update
+     */
+    where?: ClubWhereInput
+    /**
+     * Limit how many Clubs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Club updateManyAndReturn
+   */
+  export type ClubUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * The data used to update Clubs.
+     */
+    data: XOR<ClubUpdateManyMutationInput, ClubUncheckedUpdateManyInput>
+    /**
+     * Filter which Clubs to update
+     */
+    where?: ClubWhereInput
+    /**
+     * Limit how many Clubs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Club upsert
+   */
+  export type ClubUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Club to update in case it exists.
+     */
+    where: ClubWhereUniqueInput
+    /**
+     * In case the Club found by the `where` argument doesn't exist, create a new Club with this data.
+     */
+    create: XOR<ClubCreateInput, ClubUncheckedCreateInput>
+    /**
+     * In case the Club was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClubUpdateInput, ClubUncheckedUpdateInput>
+  }
+
+  /**
+   * Club delete
+   */
+  export type ClubDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+    /**
+     * Filter which Club to delete.
+     */
+    where: ClubWhereUniqueInput
+  }
+
+  /**
+   * Club deleteMany
+   */
+  export type ClubDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Clubs to delete
+     */
+    where?: ClubWhereInput
+    /**
+     * Limit how many Clubs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Club without action
+   */
+  export type ClubDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Club
+     */
+    select?: ClubSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Club
+     */
+    omit?: ClubOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model ConventionStagiaire
    */
 
@@ -16989,6 +18546,11 @@ export namespace Prisma {
     club: string | null
     numeroAffiliationClub: string | null
     emailClub: string | null
+    clubAdresse: string | null
+    clubCp: string | null
+    clubVille: string | null
+    clubRepresentantNom: string | null
+    clubRepresentantQualite: string | null
     civilite: string | null
     nom: string | null
     prenom: string | null
@@ -17024,6 +18586,11 @@ export namespace Prisma {
     club: string | null
     numeroAffiliationClub: string | null
     emailClub: string | null
+    clubAdresse: string | null
+    clubCp: string | null
+    clubVille: string | null
+    clubRepresentantNom: string | null
+    clubRepresentantQualite: string | null
     civilite: string | null
     nom: string | null
     prenom: string | null
@@ -17059,6 +18626,11 @@ export namespace Prisma {
     club: number
     numeroAffiliationClub: number
     emailClub: number
+    clubAdresse: number
+    clubCp: number
+    clubVille: number
+    clubRepresentantNom: number
+    clubRepresentantQualite: number
     civilite: number
     nom: number
     prenom: number
@@ -17098,6 +18670,11 @@ export namespace Prisma {
     club?: true
     numeroAffiliationClub?: true
     emailClub?: true
+    clubAdresse?: true
+    clubCp?: true
+    clubVille?: true
+    clubRepresentantNom?: true
+    clubRepresentantQualite?: true
     civilite?: true
     nom?: true
     prenom?: true
@@ -17133,6 +18710,11 @@ export namespace Prisma {
     club?: true
     numeroAffiliationClub?: true
     emailClub?: true
+    clubAdresse?: true
+    clubCp?: true
+    clubVille?: true
+    clubRepresentantNom?: true
+    clubRepresentantQualite?: true
     civilite?: true
     nom?: true
     prenom?: true
@@ -17168,6 +18750,11 @@ export namespace Prisma {
     club?: true
     numeroAffiliationClub?: true
     emailClub?: true
+    clubAdresse?: true
+    clubCp?: true
+    clubVille?: true
+    clubRepresentantNom?: true
+    clubRepresentantQualite?: true
     civilite?: true
     nom?: true
     prenom?: true
@@ -17278,6 +18865,11 @@ export namespace Prisma {
     club: string | null
     numeroAffiliationClub: string | null
     emailClub: string | null
+    clubAdresse: string | null
+    clubCp: string | null
+    clubVille: string | null
+    clubRepresentantNom: string | null
+    clubRepresentantQualite: string | null
     civilite: string | null
     nom: string
     prenom: string
@@ -17332,6 +18924,11 @@ export namespace Prisma {
     club?: boolean
     numeroAffiliationClub?: boolean
     emailClub?: boolean
+    clubAdresse?: boolean
+    clubCp?: boolean
+    clubVille?: boolean
+    clubRepresentantNom?: boolean
+    clubRepresentantQualite?: boolean
     civilite?: boolean
     nom?: boolean
     prenom?: boolean
@@ -17372,6 +18969,11 @@ export namespace Prisma {
     club?: boolean
     numeroAffiliationClub?: boolean
     emailClub?: boolean
+    clubAdresse?: boolean
+    clubCp?: boolean
+    clubVille?: boolean
+    clubRepresentantNom?: boolean
+    clubRepresentantQualite?: boolean
     civilite?: boolean
     nom?: boolean
     prenom?: boolean
@@ -17410,6 +19012,11 @@ export namespace Prisma {
     club?: boolean
     numeroAffiliationClub?: boolean
     emailClub?: boolean
+    clubAdresse?: boolean
+    clubCp?: boolean
+    clubVille?: boolean
+    clubRepresentantNom?: boolean
+    clubRepresentantQualite?: boolean
     civilite?: boolean
     nom?: boolean
     prenom?: boolean
@@ -17448,6 +19055,11 @@ export namespace Prisma {
     club?: boolean
     numeroAffiliationClub?: boolean
     emailClub?: boolean
+    clubAdresse?: boolean
+    clubCp?: boolean
+    clubVille?: boolean
+    clubRepresentantNom?: boolean
+    clubRepresentantQualite?: boolean
     civilite?: boolean
     nom?: boolean
     prenom?: boolean
@@ -17479,7 +19091,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type ConventionStagiaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formationId" | "club" | "numeroAffiliationClub" | "emailClub" | "civilite" | "nom" | "prenom" | "dateNaissance" | "adresse" | "cp" | "ville" | "telephone" | "email" | "tuteurNom" | "tuteurPrenom" | "tuteurEmail" | "maitreDeStageNom" | "maitreDeStagePrenom" | "maitreDeStageAdresse" | "maitreDeStageCp" | "maitreDeStageVille" | "maitreDeStageEmail" | "natureIntervention" | "natureInterventionAutre" | "publicVise" | "objectifEncadrementSeul" | "objectifEncadrementAutonomie" | "objectifEncadrementPonctuel" | "donneesSupplementaires" | "pdfStoragePath" | "envoyeAt" | "completedAt" | "createdAt", ExtArgs["result"]["conventionStagiaire"]>
+  export type ConventionStagiaireOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formationId" | "club" | "numeroAffiliationClub" | "emailClub" | "clubAdresse" | "clubCp" | "clubVille" | "clubRepresentantNom" | "clubRepresentantQualite" | "civilite" | "nom" | "prenom" | "dateNaissance" | "adresse" | "cp" | "ville" | "telephone" | "email" | "tuteurNom" | "tuteurPrenom" | "tuteurEmail" | "maitreDeStageNom" | "maitreDeStagePrenom" | "maitreDeStageAdresse" | "maitreDeStageCp" | "maitreDeStageVille" | "maitreDeStageEmail" | "natureIntervention" | "natureInterventionAutre" | "publicVise" | "objectifEncadrementSeul" | "objectifEncadrementAutonomie" | "objectifEncadrementPonctuel" | "donneesSupplementaires" | "pdfStoragePath" | "envoyeAt" | "completedAt" | "createdAt", ExtArgs["result"]["conventionStagiaire"]>
   export type ConventionStagiaireInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     formation?: boolean | FormationDefaultArgs<ExtArgs>
     signataires?: boolean | ConventionStagiaire$signatairesArgs<ExtArgs>
@@ -17504,6 +19116,11 @@ export namespace Prisma {
       club: string | null
       numeroAffiliationClub: string | null
       emailClub: string | null
+      clubAdresse: string | null
+      clubCp: string | null
+      clubVille: string | null
+      clubRepresentantNom: string | null
+      clubRepresentantQualite: string | null
       civilite: string | null
       nom: string
       prenom: string
@@ -17963,6 +19580,11 @@ export namespace Prisma {
     readonly club: FieldRef<"ConventionStagiaire", 'String'>
     readonly numeroAffiliationClub: FieldRef<"ConventionStagiaire", 'String'>
     readonly emailClub: FieldRef<"ConventionStagiaire", 'String'>
+    readonly clubAdresse: FieldRef<"ConventionStagiaire", 'String'>
+    readonly clubCp: FieldRef<"ConventionStagiaire", 'String'>
+    readonly clubVille: FieldRef<"ConventionStagiaire", 'String'>
+    readonly clubRepresentantNom: FieldRef<"ConventionStagiaire", 'String'>
+    readonly clubRepresentantQualite: FieldRef<"ConventionStagiaire", 'String'>
     readonly civilite: FieldRef<"ConventionStagiaire", 'String'>
     readonly nom: FieldRef<"ConventionStagiaire", 'String'>
     readonly prenom: FieldRef<"ConventionStagiaire", 'String'>
@@ -45199,6 +46821,4610 @@ export namespace Prisma {
 
 
   /**
+   * Model DispositifFormation
+   */
+
+  export type AggregateDispositifFormation = {
+    _count: DispositifFormationCountAggregateOutputType | null
+    _avg: DispositifFormationAvgAggregateOutputType | null
+    _sum: DispositifFormationSumAggregateOutputType | null
+    _min: DispositifFormationMinAggregateOutputType | null
+    _max: DispositifFormationMaxAggregateOutputType | null
+  }
+
+  export type DispositifFormationAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DispositifFormationSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DispositifFormationMinAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    resume: string | null
+    contenu: string | null
+    montantMisEnAvant: string | null
+    image: string | null
+    videoUrl: string | null
+    ordre: number | null
+    actif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DispositifFormationMaxAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    resume: string | null
+    contenu: string | null
+    montantMisEnAvant: string | null
+    image: string | null
+    videoUrl: string | null
+    ordre: number | null
+    actif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DispositifFormationCountAggregateOutputType = {
+    id: number
+    titre: number
+    resume: number
+    contenu: number
+    montantMisEnAvant: number
+    image: number
+    videoUrl: number
+    ordre: number
+    actif: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DispositifFormationAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DispositifFormationSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DispositifFormationMinAggregateInputType = {
+    id?: true
+    titre?: true
+    resume?: true
+    contenu?: true
+    montantMisEnAvant?: true
+    image?: true
+    videoUrl?: true
+    ordre?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DispositifFormationMaxAggregateInputType = {
+    id?: true
+    titre?: true
+    resume?: true
+    contenu?: true
+    montantMisEnAvant?: true
+    image?: true
+    videoUrl?: true
+    ordre?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DispositifFormationCountAggregateInputType = {
+    id?: true
+    titre?: true
+    resume?: true
+    contenu?: true
+    montantMisEnAvant?: true
+    image?: true
+    videoUrl?: true
+    ordre?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DispositifFormationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DispositifFormation to aggregate.
+     */
+    where?: DispositifFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFormations to fetch.
+     */
+    orderBy?: DispositifFormationOrderByWithRelationInput | DispositifFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DispositifFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DispositifFormations
+    **/
+    _count?: true | DispositifFormationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DispositifFormationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DispositifFormationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DispositifFormationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DispositifFormationMaxAggregateInputType
+  }
+
+  export type GetDispositifFormationAggregateType<T extends DispositifFormationAggregateArgs> = {
+        [P in keyof T & keyof AggregateDispositifFormation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDispositifFormation[P]>
+      : GetScalarType<T[P], AggregateDispositifFormation[P]>
+  }
+
+
+
+
+  export type DispositifFormationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DispositifFormationWhereInput
+    orderBy?: DispositifFormationOrderByWithAggregationInput | DispositifFormationOrderByWithAggregationInput[]
+    by: DispositifFormationScalarFieldEnum[] | DispositifFormationScalarFieldEnum
+    having?: DispositifFormationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DispositifFormationCountAggregateInputType | true
+    _avg?: DispositifFormationAvgAggregateInputType
+    _sum?: DispositifFormationSumAggregateInputType
+    _min?: DispositifFormationMinAggregateInputType
+    _max?: DispositifFormationMaxAggregateInputType
+  }
+
+  export type DispositifFormationGroupByOutputType = {
+    id: string
+    titre: string
+    resume: string | null
+    contenu: string
+    montantMisEnAvant: string | null
+    image: string | null
+    videoUrl: string | null
+    ordre: number
+    actif: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: DispositifFormationCountAggregateOutputType | null
+    _avg: DispositifFormationAvgAggregateOutputType | null
+    _sum: DispositifFormationSumAggregateOutputType | null
+    _min: DispositifFormationMinAggregateOutputType | null
+    _max: DispositifFormationMaxAggregateOutputType | null
+  }
+
+  type GetDispositifFormationGroupByPayload<T extends DispositifFormationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DispositifFormationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DispositifFormationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DispositifFormationGroupByOutputType[P]>
+            : GetScalarType<T[P], DispositifFormationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DispositifFormationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    resume?: boolean
+    contenu?: boolean
+    montantMisEnAvant?: boolean
+    image?: boolean
+    videoUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    liens?: boolean | DispositifFormation$liensArgs<ExtArgs>
+    contacts?: boolean | DispositifFormation$contactsArgs<ExtArgs>
+    tableaux?: boolean | DispositifFormation$tableauxArgs<ExtArgs>
+    _count?: boolean | DispositifFormationCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dispositifFormation"]>
+
+  export type DispositifFormationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    resume?: boolean
+    contenu?: boolean
+    montantMisEnAvant?: boolean
+    image?: boolean
+    videoUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dispositifFormation"]>
+
+  export type DispositifFormationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    resume?: boolean
+    contenu?: boolean
+    montantMisEnAvant?: boolean
+    image?: boolean
+    videoUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dispositifFormation"]>
+
+  export type DispositifFormationSelectScalar = {
+    id?: boolean
+    titre?: boolean
+    resume?: boolean
+    contenu?: boolean
+    montantMisEnAvant?: boolean
+    image?: boolean
+    videoUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DispositifFormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "resume" | "contenu" | "montantMisEnAvant" | "image" | "videoUrl" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["dispositifFormation"]>
+  export type DispositifFormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    liens?: boolean | DispositifFormation$liensArgs<ExtArgs>
+    contacts?: boolean | DispositifFormation$contactsArgs<ExtArgs>
+    tableaux?: boolean | DispositifFormation$tableauxArgs<ExtArgs>
+    _count?: boolean | DispositifFormationCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DispositifFormationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type DispositifFormationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $DispositifFormationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DispositifFormation"
+    objects: {
+      liens: Prisma.$LienFormationPayload<ExtArgs>[]
+      contacts: Prisma.$ContactFormationPayload<ExtArgs>[]
+      tableaux: Prisma.$DispositifFormationTableauPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      titre: string
+      resume: string | null
+      contenu: string
+      montantMisEnAvant: string | null
+      image: string | null
+      videoUrl: string | null
+      ordre: number
+      actif: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["dispositifFormation"]>
+    composites: {}
+  }
+
+  type DispositifFormationGetPayload<S extends boolean | null | undefined | DispositifFormationDefaultArgs> = $Result.GetResult<Prisma.$DispositifFormationPayload, S>
+
+  type DispositifFormationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DispositifFormationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DispositifFormationCountAggregateInputType | true
+    }
+
+  export interface DispositifFormationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DispositifFormation'], meta: { name: 'DispositifFormation' } }
+    /**
+     * Find zero or one DispositifFormation that matches the filter.
+     * @param {DispositifFormationFindUniqueArgs} args - Arguments to find a DispositifFormation
+     * @example
+     * // Get one DispositifFormation
+     * const dispositifFormation = await prisma.dispositifFormation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DispositifFormationFindUniqueArgs>(args: SelectSubset<T, DispositifFormationFindUniqueArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DispositifFormation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DispositifFormationFindUniqueOrThrowArgs} args - Arguments to find a DispositifFormation
+     * @example
+     * // Get one DispositifFormation
+     * const dispositifFormation = await prisma.dispositifFormation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DispositifFormationFindUniqueOrThrowArgs>(args: SelectSubset<T, DispositifFormationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DispositifFormation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationFindFirstArgs} args - Arguments to find a DispositifFormation
+     * @example
+     * // Get one DispositifFormation
+     * const dispositifFormation = await prisma.dispositifFormation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DispositifFormationFindFirstArgs>(args?: SelectSubset<T, DispositifFormationFindFirstArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DispositifFormation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationFindFirstOrThrowArgs} args - Arguments to find a DispositifFormation
+     * @example
+     * // Get one DispositifFormation
+     * const dispositifFormation = await prisma.dispositifFormation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DispositifFormationFindFirstOrThrowArgs>(args?: SelectSubset<T, DispositifFormationFindFirstOrThrowArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DispositifFormations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DispositifFormations
+     * const dispositifFormations = await prisma.dispositifFormation.findMany()
+     * 
+     * // Get first 10 DispositifFormations
+     * const dispositifFormations = await prisma.dispositifFormation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dispositifFormationWithIdOnly = await prisma.dispositifFormation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DispositifFormationFindManyArgs>(args?: SelectSubset<T, DispositifFormationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DispositifFormation.
+     * @param {DispositifFormationCreateArgs} args - Arguments to create a DispositifFormation.
+     * @example
+     * // Create one DispositifFormation
+     * const DispositifFormation = await prisma.dispositifFormation.create({
+     *   data: {
+     *     // ... data to create a DispositifFormation
+     *   }
+     * })
+     * 
+     */
+    create<T extends DispositifFormationCreateArgs>(args: SelectSubset<T, DispositifFormationCreateArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DispositifFormations.
+     * @param {DispositifFormationCreateManyArgs} args - Arguments to create many DispositifFormations.
+     * @example
+     * // Create many DispositifFormations
+     * const dispositifFormation = await prisma.dispositifFormation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DispositifFormationCreateManyArgs>(args?: SelectSubset<T, DispositifFormationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DispositifFormations and returns the data saved in the database.
+     * @param {DispositifFormationCreateManyAndReturnArgs} args - Arguments to create many DispositifFormations.
+     * @example
+     * // Create many DispositifFormations
+     * const dispositifFormation = await prisma.dispositifFormation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DispositifFormations and only return the `id`
+     * const dispositifFormationWithIdOnly = await prisma.dispositifFormation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DispositifFormationCreateManyAndReturnArgs>(args?: SelectSubset<T, DispositifFormationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DispositifFormation.
+     * @param {DispositifFormationDeleteArgs} args - Arguments to delete one DispositifFormation.
+     * @example
+     * // Delete one DispositifFormation
+     * const DispositifFormation = await prisma.dispositifFormation.delete({
+     *   where: {
+     *     // ... filter to delete one DispositifFormation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DispositifFormationDeleteArgs>(args: SelectSubset<T, DispositifFormationDeleteArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DispositifFormation.
+     * @param {DispositifFormationUpdateArgs} args - Arguments to update one DispositifFormation.
+     * @example
+     * // Update one DispositifFormation
+     * const dispositifFormation = await prisma.dispositifFormation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DispositifFormationUpdateArgs>(args: SelectSubset<T, DispositifFormationUpdateArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DispositifFormations.
+     * @param {DispositifFormationDeleteManyArgs} args - Arguments to filter DispositifFormations to delete.
+     * @example
+     * // Delete a few DispositifFormations
+     * const { count } = await prisma.dispositifFormation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DispositifFormationDeleteManyArgs>(args?: SelectSubset<T, DispositifFormationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DispositifFormations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DispositifFormations
+     * const dispositifFormation = await prisma.dispositifFormation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DispositifFormationUpdateManyArgs>(args: SelectSubset<T, DispositifFormationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DispositifFormations and returns the data updated in the database.
+     * @param {DispositifFormationUpdateManyAndReturnArgs} args - Arguments to update many DispositifFormations.
+     * @example
+     * // Update many DispositifFormations
+     * const dispositifFormation = await prisma.dispositifFormation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DispositifFormations and only return the `id`
+     * const dispositifFormationWithIdOnly = await prisma.dispositifFormation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DispositifFormationUpdateManyAndReturnArgs>(args: SelectSubset<T, DispositifFormationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DispositifFormation.
+     * @param {DispositifFormationUpsertArgs} args - Arguments to update or create a DispositifFormation.
+     * @example
+     * // Update or create a DispositifFormation
+     * const dispositifFormation = await prisma.dispositifFormation.upsert({
+     *   create: {
+     *     // ... data to create a DispositifFormation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DispositifFormation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DispositifFormationUpsertArgs>(args: SelectSubset<T, DispositifFormationUpsertArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DispositifFormations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationCountArgs} args - Arguments to filter DispositifFormations to count.
+     * @example
+     * // Count the number of DispositifFormations
+     * const count = await prisma.dispositifFormation.count({
+     *   where: {
+     *     // ... the filter for the DispositifFormations we want to count
+     *   }
+     * })
+    **/
+    count<T extends DispositifFormationCountArgs>(
+      args?: Subset<T, DispositifFormationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DispositifFormationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DispositifFormation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DispositifFormationAggregateArgs>(args: Subset<T, DispositifFormationAggregateArgs>): Prisma.PrismaPromise<GetDispositifFormationAggregateType<T>>
+
+    /**
+     * Group by DispositifFormation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DispositifFormationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DispositifFormationGroupByArgs['orderBy'] }
+        : { orderBy?: DispositifFormationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DispositifFormationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDispositifFormationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DispositifFormation model
+   */
+  readonly fields: DispositifFormationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DispositifFormation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DispositifFormationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    liens<T extends DispositifFormation$liensArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFormation$liensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contacts<T extends DispositifFormation$contactsArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFormation$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tableaux<T extends DispositifFormation$tableauxArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFormation$tableauxArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DispositifFormation model
+   */
+  interface DispositifFormationFieldRefs {
+    readonly id: FieldRef<"DispositifFormation", 'String'>
+    readonly titre: FieldRef<"DispositifFormation", 'String'>
+    readonly resume: FieldRef<"DispositifFormation", 'String'>
+    readonly contenu: FieldRef<"DispositifFormation", 'String'>
+    readonly montantMisEnAvant: FieldRef<"DispositifFormation", 'String'>
+    readonly image: FieldRef<"DispositifFormation", 'String'>
+    readonly videoUrl: FieldRef<"DispositifFormation", 'String'>
+    readonly ordre: FieldRef<"DispositifFormation", 'Int'>
+    readonly actif: FieldRef<"DispositifFormation", 'Boolean'>
+    readonly createdAt: FieldRef<"DispositifFormation", 'DateTime'>
+    readonly updatedAt: FieldRef<"DispositifFormation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DispositifFormation findUnique
+   */
+  export type DispositifFormationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormation to fetch.
+     */
+    where: DispositifFormationWhereUniqueInput
+  }
+
+  /**
+   * DispositifFormation findUniqueOrThrow
+   */
+  export type DispositifFormationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormation to fetch.
+     */
+    where: DispositifFormationWhereUniqueInput
+  }
+
+  /**
+   * DispositifFormation findFirst
+   */
+  export type DispositifFormationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormation to fetch.
+     */
+    where?: DispositifFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFormations to fetch.
+     */
+    orderBy?: DispositifFormationOrderByWithRelationInput | DispositifFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DispositifFormations.
+     */
+    cursor?: DispositifFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DispositifFormations.
+     */
+    distinct?: DispositifFormationScalarFieldEnum | DispositifFormationScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFormation findFirstOrThrow
+   */
+  export type DispositifFormationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormation to fetch.
+     */
+    where?: DispositifFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFormations to fetch.
+     */
+    orderBy?: DispositifFormationOrderByWithRelationInput | DispositifFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DispositifFormations.
+     */
+    cursor?: DispositifFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DispositifFormations.
+     */
+    distinct?: DispositifFormationScalarFieldEnum | DispositifFormationScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFormation findMany
+   */
+  export type DispositifFormationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormations to fetch.
+     */
+    where?: DispositifFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFormations to fetch.
+     */
+    orderBy?: DispositifFormationOrderByWithRelationInput | DispositifFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DispositifFormations.
+     */
+    cursor?: DispositifFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DispositifFormations.
+     */
+    distinct?: DispositifFormationScalarFieldEnum | DispositifFormationScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFormation create
+   */
+  export type DispositifFormationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DispositifFormation.
+     */
+    data: XOR<DispositifFormationCreateInput, DispositifFormationUncheckedCreateInput>
+  }
+
+  /**
+   * DispositifFormation createMany
+   */
+  export type DispositifFormationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DispositifFormations.
+     */
+    data: DispositifFormationCreateManyInput | DispositifFormationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DispositifFormation createManyAndReturn
+   */
+  export type DispositifFormationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * The data used to create many DispositifFormations.
+     */
+    data: DispositifFormationCreateManyInput | DispositifFormationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DispositifFormation update
+   */
+  export type DispositifFormationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DispositifFormation.
+     */
+    data: XOR<DispositifFormationUpdateInput, DispositifFormationUncheckedUpdateInput>
+    /**
+     * Choose, which DispositifFormation to update.
+     */
+    where: DispositifFormationWhereUniqueInput
+  }
+
+  /**
+   * DispositifFormation updateMany
+   */
+  export type DispositifFormationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DispositifFormations.
+     */
+    data: XOR<DispositifFormationUpdateManyMutationInput, DispositifFormationUncheckedUpdateManyInput>
+    /**
+     * Filter which DispositifFormations to update
+     */
+    where?: DispositifFormationWhereInput
+    /**
+     * Limit how many DispositifFormations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DispositifFormation updateManyAndReturn
+   */
+  export type DispositifFormationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * The data used to update DispositifFormations.
+     */
+    data: XOR<DispositifFormationUpdateManyMutationInput, DispositifFormationUncheckedUpdateManyInput>
+    /**
+     * Filter which DispositifFormations to update
+     */
+    where?: DispositifFormationWhereInput
+    /**
+     * Limit how many DispositifFormations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DispositifFormation upsert
+   */
+  export type DispositifFormationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DispositifFormation to update in case it exists.
+     */
+    where: DispositifFormationWhereUniqueInput
+    /**
+     * In case the DispositifFormation found by the `where` argument doesn't exist, create a new DispositifFormation with this data.
+     */
+    create: XOR<DispositifFormationCreateInput, DispositifFormationUncheckedCreateInput>
+    /**
+     * In case the DispositifFormation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DispositifFormationUpdateInput, DispositifFormationUncheckedUpdateInput>
+  }
+
+  /**
+   * DispositifFormation delete
+   */
+  export type DispositifFormationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+    /**
+     * Filter which DispositifFormation to delete.
+     */
+    where: DispositifFormationWhereUniqueInput
+  }
+
+  /**
+   * DispositifFormation deleteMany
+   */
+  export type DispositifFormationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DispositifFormations to delete
+     */
+    where?: DispositifFormationWhereInput
+    /**
+     * Limit how many DispositifFormations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DispositifFormation.liens
+   */
+  export type DispositifFormation$liensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    where?: LienFormationWhereInput
+    orderBy?: LienFormationOrderByWithRelationInput | LienFormationOrderByWithRelationInput[]
+    cursor?: LienFormationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LienFormationScalarFieldEnum | LienFormationScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFormation.contacts
+   */
+  export type DispositifFormation$contactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    where?: ContactFormationWhereInput
+    orderBy?: ContactFormationOrderByWithRelationInput | ContactFormationOrderByWithRelationInput[]
+    cursor?: ContactFormationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContactFormationScalarFieldEnum | ContactFormationScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFormation.tableaux
+   */
+  export type DispositifFormation$tableauxArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    where?: DispositifFormationTableauWhereInput
+    orderBy?: DispositifFormationTableauOrderByWithRelationInput | DispositifFormationTableauOrderByWithRelationInput[]
+    cursor?: DispositifFormationTableauWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DispositifFormationTableauScalarFieldEnum | DispositifFormationTableauScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFormation without action
+   */
+  export type DispositifFormationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormation
+     */
+    select?: DispositifFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormation
+     */
+    omit?: DispositifFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LienFormation
+   */
+
+  export type AggregateLienFormation = {
+    _count: LienFormationCountAggregateOutputType | null
+    _avg: LienFormationAvgAggregateOutputType | null
+    _sum: LienFormationSumAggregateOutputType | null
+    _min: LienFormationMinAggregateOutputType | null
+    _max: LienFormationMaxAggregateOutputType | null
+  }
+
+  export type LienFormationAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type LienFormationSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type LienFormationMinAggregateOutputType = {
+    id: string | null
+    dispositifId: string | null
+    label: string | null
+    url: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type LienFormationMaxAggregateOutputType = {
+    id: string | null
+    dispositifId: string | null
+    label: string | null
+    url: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type LienFormationCountAggregateOutputType = {
+    id: number
+    dispositifId: number
+    label: number
+    url: number
+    ordre: number
+    actif: number
+    _all: number
+  }
+
+
+  export type LienFormationAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type LienFormationSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type LienFormationMinAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    label?: true
+    url?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type LienFormationMaxAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    label?: true
+    url?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type LienFormationCountAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    label?: true
+    url?: true
+    ordre?: true
+    actif?: true
+    _all?: true
+  }
+
+  export type LienFormationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LienFormation to aggregate.
+     */
+    where?: LienFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LienFormations to fetch.
+     */
+    orderBy?: LienFormationOrderByWithRelationInput | LienFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LienFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LienFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LienFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LienFormations
+    **/
+    _count?: true | LienFormationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LienFormationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LienFormationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LienFormationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LienFormationMaxAggregateInputType
+  }
+
+  export type GetLienFormationAggregateType<T extends LienFormationAggregateArgs> = {
+        [P in keyof T & keyof AggregateLienFormation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLienFormation[P]>
+      : GetScalarType<T[P], AggregateLienFormation[P]>
+  }
+
+
+
+
+  export type LienFormationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LienFormationWhereInput
+    orderBy?: LienFormationOrderByWithAggregationInput | LienFormationOrderByWithAggregationInput[]
+    by: LienFormationScalarFieldEnum[] | LienFormationScalarFieldEnum
+    having?: LienFormationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LienFormationCountAggregateInputType | true
+    _avg?: LienFormationAvgAggregateInputType
+    _sum?: LienFormationSumAggregateInputType
+    _min?: LienFormationMinAggregateInputType
+    _max?: LienFormationMaxAggregateInputType
+  }
+
+  export type LienFormationGroupByOutputType = {
+    id: string
+    dispositifId: string
+    label: string
+    url: string
+    ordre: number
+    actif: boolean
+    _count: LienFormationCountAggregateOutputType | null
+    _avg: LienFormationAvgAggregateOutputType | null
+    _sum: LienFormationSumAggregateOutputType | null
+    _min: LienFormationMinAggregateOutputType | null
+    _max: LienFormationMaxAggregateOutputType | null
+  }
+
+  type GetLienFormationGroupByPayload<T extends LienFormationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LienFormationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LienFormationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LienFormationGroupByOutputType[P]>
+            : GetScalarType<T[P], LienFormationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LienFormationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    label?: boolean
+    url?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lienFormation"]>
+
+  export type LienFormationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    label?: boolean
+    url?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lienFormation"]>
+
+  export type LienFormationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    label?: boolean
+    url?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lienFormation"]>
+
+  export type LienFormationSelectScalar = {
+    id?: boolean
+    dispositifId?: boolean
+    label?: boolean
+    url?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }
+
+  export type LienFormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dispositifId" | "label" | "url" | "ordre" | "actif", ExtArgs["result"]["lienFormation"]>
+  export type LienFormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }
+  export type LienFormationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }
+  export type LienFormationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }
+
+  export type $LienFormationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LienFormation"
+    objects: {
+      dispositif: Prisma.$DispositifFormationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      dispositifId: string
+      label: string
+      url: string
+      ordre: number
+      actif: boolean
+    }, ExtArgs["result"]["lienFormation"]>
+    composites: {}
+  }
+
+  type LienFormationGetPayload<S extends boolean | null | undefined | LienFormationDefaultArgs> = $Result.GetResult<Prisma.$LienFormationPayload, S>
+
+  type LienFormationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LienFormationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LienFormationCountAggregateInputType | true
+    }
+
+  export interface LienFormationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LienFormation'], meta: { name: 'LienFormation' } }
+    /**
+     * Find zero or one LienFormation that matches the filter.
+     * @param {LienFormationFindUniqueArgs} args - Arguments to find a LienFormation
+     * @example
+     * // Get one LienFormation
+     * const lienFormation = await prisma.lienFormation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LienFormationFindUniqueArgs>(args: SelectSubset<T, LienFormationFindUniqueArgs<ExtArgs>>): Prisma__LienFormationClient<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LienFormation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LienFormationFindUniqueOrThrowArgs} args - Arguments to find a LienFormation
+     * @example
+     * // Get one LienFormation
+     * const lienFormation = await prisma.lienFormation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LienFormationFindUniqueOrThrowArgs>(args: SelectSubset<T, LienFormationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LienFormationClient<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LienFormation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LienFormationFindFirstArgs} args - Arguments to find a LienFormation
+     * @example
+     * // Get one LienFormation
+     * const lienFormation = await prisma.lienFormation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LienFormationFindFirstArgs>(args?: SelectSubset<T, LienFormationFindFirstArgs<ExtArgs>>): Prisma__LienFormationClient<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LienFormation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LienFormationFindFirstOrThrowArgs} args - Arguments to find a LienFormation
+     * @example
+     * // Get one LienFormation
+     * const lienFormation = await prisma.lienFormation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LienFormationFindFirstOrThrowArgs>(args?: SelectSubset<T, LienFormationFindFirstOrThrowArgs<ExtArgs>>): Prisma__LienFormationClient<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LienFormations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LienFormationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LienFormations
+     * const lienFormations = await prisma.lienFormation.findMany()
+     * 
+     * // Get first 10 LienFormations
+     * const lienFormations = await prisma.lienFormation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const lienFormationWithIdOnly = await prisma.lienFormation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LienFormationFindManyArgs>(args?: SelectSubset<T, LienFormationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LienFormation.
+     * @param {LienFormationCreateArgs} args - Arguments to create a LienFormation.
+     * @example
+     * // Create one LienFormation
+     * const LienFormation = await prisma.lienFormation.create({
+     *   data: {
+     *     // ... data to create a LienFormation
+     *   }
+     * })
+     * 
+     */
+    create<T extends LienFormationCreateArgs>(args: SelectSubset<T, LienFormationCreateArgs<ExtArgs>>): Prisma__LienFormationClient<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LienFormations.
+     * @param {LienFormationCreateManyArgs} args - Arguments to create many LienFormations.
+     * @example
+     * // Create many LienFormations
+     * const lienFormation = await prisma.lienFormation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LienFormationCreateManyArgs>(args?: SelectSubset<T, LienFormationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LienFormations and returns the data saved in the database.
+     * @param {LienFormationCreateManyAndReturnArgs} args - Arguments to create many LienFormations.
+     * @example
+     * // Create many LienFormations
+     * const lienFormation = await prisma.lienFormation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LienFormations and only return the `id`
+     * const lienFormationWithIdOnly = await prisma.lienFormation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LienFormationCreateManyAndReturnArgs>(args?: SelectSubset<T, LienFormationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LienFormation.
+     * @param {LienFormationDeleteArgs} args - Arguments to delete one LienFormation.
+     * @example
+     * // Delete one LienFormation
+     * const LienFormation = await prisma.lienFormation.delete({
+     *   where: {
+     *     // ... filter to delete one LienFormation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LienFormationDeleteArgs>(args: SelectSubset<T, LienFormationDeleteArgs<ExtArgs>>): Prisma__LienFormationClient<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LienFormation.
+     * @param {LienFormationUpdateArgs} args - Arguments to update one LienFormation.
+     * @example
+     * // Update one LienFormation
+     * const lienFormation = await prisma.lienFormation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LienFormationUpdateArgs>(args: SelectSubset<T, LienFormationUpdateArgs<ExtArgs>>): Prisma__LienFormationClient<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LienFormations.
+     * @param {LienFormationDeleteManyArgs} args - Arguments to filter LienFormations to delete.
+     * @example
+     * // Delete a few LienFormations
+     * const { count } = await prisma.lienFormation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LienFormationDeleteManyArgs>(args?: SelectSubset<T, LienFormationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LienFormations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LienFormationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LienFormations
+     * const lienFormation = await prisma.lienFormation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LienFormationUpdateManyArgs>(args: SelectSubset<T, LienFormationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LienFormations and returns the data updated in the database.
+     * @param {LienFormationUpdateManyAndReturnArgs} args - Arguments to update many LienFormations.
+     * @example
+     * // Update many LienFormations
+     * const lienFormation = await prisma.lienFormation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LienFormations and only return the `id`
+     * const lienFormationWithIdOnly = await prisma.lienFormation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LienFormationUpdateManyAndReturnArgs>(args: SelectSubset<T, LienFormationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LienFormation.
+     * @param {LienFormationUpsertArgs} args - Arguments to update or create a LienFormation.
+     * @example
+     * // Update or create a LienFormation
+     * const lienFormation = await prisma.lienFormation.upsert({
+     *   create: {
+     *     // ... data to create a LienFormation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LienFormation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LienFormationUpsertArgs>(args: SelectSubset<T, LienFormationUpsertArgs<ExtArgs>>): Prisma__LienFormationClient<$Result.GetResult<Prisma.$LienFormationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LienFormations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LienFormationCountArgs} args - Arguments to filter LienFormations to count.
+     * @example
+     * // Count the number of LienFormations
+     * const count = await prisma.lienFormation.count({
+     *   where: {
+     *     // ... the filter for the LienFormations we want to count
+     *   }
+     * })
+    **/
+    count<T extends LienFormationCountArgs>(
+      args?: Subset<T, LienFormationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LienFormationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LienFormation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LienFormationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LienFormationAggregateArgs>(args: Subset<T, LienFormationAggregateArgs>): Prisma.PrismaPromise<GetLienFormationAggregateType<T>>
+
+    /**
+     * Group by LienFormation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LienFormationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LienFormationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LienFormationGroupByArgs['orderBy'] }
+        : { orderBy?: LienFormationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LienFormationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLienFormationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LienFormation model
+   */
+  readonly fields: LienFormationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LienFormation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LienFormationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    dispositif<T extends DispositifFormationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFormationDefaultArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LienFormation model
+   */
+  interface LienFormationFieldRefs {
+    readonly id: FieldRef<"LienFormation", 'String'>
+    readonly dispositifId: FieldRef<"LienFormation", 'String'>
+    readonly label: FieldRef<"LienFormation", 'String'>
+    readonly url: FieldRef<"LienFormation", 'String'>
+    readonly ordre: FieldRef<"LienFormation", 'Int'>
+    readonly actif: FieldRef<"LienFormation", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LienFormation findUnique
+   */
+  export type LienFormationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which LienFormation to fetch.
+     */
+    where: LienFormationWhereUniqueInput
+  }
+
+  /**
+   * LienFormation findUniqueOrThrow
+   */
+  export type LienFormationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which LienFormation to fetch.
+     */
+    where: LienFormationWhereUniqueInput
+  }
+
+  /**
+   * LienFormation findFirst
+   */
+  export type LienFormationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which LienFormation to fetch.
+     */
+    where?: LienFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LienFormations to fetch.
+     */
+    orderBy?: LienFormationOrderByWithRelationInput | LienFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LienFormations.
+     */
+    cursor?: LienFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LienFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LienFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LienFormations.
+     */
+    distinct?: LienFormationScalarFieldEnum | LienFormationScalarFieldEnum[]
+  }
+
+  /**
+   * LienFormation findFirstOrThrow
+   */
+  export type LienFormationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which LienFormation to fetch.
+     */
+    where?: LienFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LienFormations to fetch.
+     */
+    orderBy?: LienFormationOrderByWithRelationInput | LienFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LienFormations.
+     */
+    cursor?: LienFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LienFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LienFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LienFormations.
+     */
+    distinct?: LienFormationScalarFieldEnum | LienFormationScalarFieldEnum[]
+  }
+
+  /**
+   * LienFormation findMany
+   */
+  export type LienFormationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which LienFormations to fetch.
+     */
+    where?: LienFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LienFormations to fetch.
+     */
+    orderBy?: LienFormationOrderByWithRelationInput | LienFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LienFormations.
+     */
+    cursor?: LienFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LienFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LienFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LienFormations.
+     */
+    distinct?: LienFormationScalarFieldEnum | LienFormationScalarFieldEnum[]
+  }
+
+  /**
+   * LienFormation create
+   */
+  export type LienFormationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LienFormation.
+     */
+    data: XOR<LienFormationCreateInput, LienFormationUncheckedCreateInput>
+  }
+
+  /**
+   * LienFormation createMany
+   */
+  export type LienFormationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LienFormations.
+     */
+    data: LienFormationCreateManyInput | LienFormationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LienFormation createManyAndReturn
+   */
+  export type LienFormationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * The data used to create many LienFormations.
+     */
+    data: LienFormationCreateManyInput | LienFormationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LienFormation update
+   */
+  export type LienFormationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LienFormation.
+     */
+    data: XOR<LienFormationUpdateInput, LienFormationUncheckedUpdateInput>
+    /**
+     * Choose, which LienFormation to update.
+     */
+    where: LienFormationWhereUniqueInput
+  }
+
+  /**
+   * LienFormation updateMany
+   */
+  export type LienFormationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LienFormations.
+     */
+    data: XOR<LienFormationUpdateManyMutationInput, LienFormationUncheckedUpdateManyInput>
+    /**
+     * Filter which LienFormations to update
+     */
+    where?: LienFormationWhereInput
+    /**
+     * Limit how many LienFormations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LienFormation updateManyAndReturn
+   */
+  export type LienFormationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * The data used to update LienFormations.
+     */
+    data: XOR<LienFormationUpdateManyMutationInput, LienFormationUncheckedUpdateManyInput>
+    /**
+     * Filter which LienFormations to update
+     */
+    where?: LienFormationWhereInput
+    /**
+     * Limit how many LienFormations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LienFormation upsert
+   */
+  export type LienFormationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LienFormation to update in case it exists.
+     */
+    where: LienFormationWhereUniqueInput
+    /**
+     * In case the LienFormation found by the `where` argument doesn't exist, create a new LienFormation with this data.
+     */
+    create: XOR<LienFormationCreateInput, LienFormationUncheckedCreateInput>
+    /**
+     * In case the LienFormation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LienFormationUpdateInput, LienFormationUncheckedUpdateInput>
+  }
+
+  /**
+   * LienFormation delete
+   */
+  export type LienFormationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+    /**
+     * Filter which LienFormation to delete.
+     */
+    where: LienFormationWhereUniqueInput
+  }
+
+  /**
+   * LienFormation deleteMany
+   */
+  export type LienFormationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LienFormations to delete
+     */
+    where?: LienFormationWhereInput
+    /**
+     * Limit how many LienFormations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LienFormation without action
+   */
+  export type LienFormationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LienFormation
+     */
+    select?: LienFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LienFormation
+     */
+    omit?: LienFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LienFormationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ContactFormation
+   */
+
+  export type AggregateContactFormation = {
+    _count: ContactFormationCountAggregateOutputType | null
+    _avg: ContactFormationAvgAggregateOutputType | null
+    _sum: ContactFormationSumAggregateOutputType | null
+    _min: ContactFormationMinAggregateOutputType | null
+    _max: ContactFormationMaxAggregateOutputType | null
+  }
+
+  export type ContactFormationAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type ContactFormationSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type ContactFormationMinAggregateOutputType = {
+    id: string | null
+    dispositifId: string | null
+    zone: string | null
+    nom: string | null
+    telephone: string | null
+    email: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type ContactFormationMaxAggregateOutputType = {
+    id: string | null
+    dispositifId: string | null
+    zone: string | null
+    nom: string | null
+    telephone: string | null
+    email: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type ContactFormationCountAggregateOutputType = {
+    id: number
+    dispositifId: number
+    zone: number
+    nom: number
+    telephone: number
+    email: number
+    ordre: number
+    actif: number
+    _all: number
+  }
+
+
+  export type ContactFormationAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type ContactFormationSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type ContactFormationMinAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    zone?: true
+    nom?: true
+    telephone?: true
+    email?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type ContactFormationMaxAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    zone?: true
+    nom?: true
+    telephone?: true
+    email?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type ContactFormationCountAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    zone?: true
+    nom?: true
+    telephone?: true
+    email?: true
+    ordre?: true
+    actif?: true
+    _all?: true
+  }
+
+  export type ContactFormationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactFormation to aggregate.
+     */
+    where?: ContactFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactFormations to fetch.
+     */
+    orderBy?: ContactFormationOrderByWithRelationInput | ContactFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContactFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContactFormations
+    **/
+    _count?: true | ContactFormationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContactFormationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContactFormationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContactFormationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContactFormationMaxAggregateInputType
+  }
+
+  export type GetContactFormationAggregateType<T extends ContactFormationAggregateArgs> = {
+        [P in keyof T & keyof AggregateContactFormation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContactFormation[P]>
+      : GetScalarType<T[P], AggregateContactFormation[P]>
+  }
+
+
+
+
+  export type ContactFormationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactFormationWhereInput
+    orderBy?: ContactFormationOrderByWithAggregationInput | ContactFormationOrderByWithAggregationInput[]
+    by: ContactFormationScalarFieldEnum[] | ContactFormationScalarFieldEnum
+    having?: ContactFormationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContactFormationCountAggregateInputType | true
+    _avg?: ContactFormationAvgAggregateInputType
+    _sum?: ContactFormationSumAggregateInputType
+    _min?: ContactFormationMinAggregateInputType
+    _max?: ContactFormationMaxAggregateInputType
+  }
+
+  export type ContactFormationGroupByOutputType = {
+    id: string
+    dispositifId: string
+    zone: string | null
+    nom: string
+    telephone: string | null
+    email: string | null
+    ordre: number
+    actif: boolean
+    _count: ContactFormationCountAggregateOutputType | null
+    _avg: ContactFormationAvgAggregateOutputType | null
+    _sum: ContactFormationSumAggregateOutputType | null
+    _min: ContactFormationMinAggregateOutputType | null
+    _max: ContactFormationMaxAggregateOutputType | null
+  }
+
+  type GetContactFormationGroupByPayload<T extends ContactFormationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContactFormationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContactFormationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContactFormationGroupByOutputType[P]>
+            : GetScalarType<T[P], ContactFormationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContactFormationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    zone?: boolean
+    nom?: boolean
+    telephone?: boolean
+    email?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contactFormation"]>
+
+  export type ContactFormationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    zone?: boolean
+    nom?: boolean
+    telephone?: boolean
+    email?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contactFormation"]>
+
+  export type ContactFormationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    zone?: boolean
+    nom?: boolean
+    telephone?: boolean
+    email?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contactFormation"]>
+
+  export type ContactFormationSelectScalar = {
+    id?: boolean
+    dispositifId?: boolean
+    zone?: boolean
+    nom?: boolean
+    telephone?: boolean
+    email?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }
+
+  export type ContactFormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dispositifId" | "zone" | "nom" | "telephone" | "email" | "ordre" | "actif", ExtArgs["result"]["contactFormation"]>
+  export type ContactFormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }
+  export type ContactFormationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }
+  export type ContactFormationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }
+
+  export type $ContactFormationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContactFormation"
+    objects: {
+      dispositif: Prisma.$DispositifFormationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      dispositifId: string
+      zone: string | null
+      nom: string
+      telephone: string | null
+      email: string | null
+      ordre: number
+      actif: boolean
+    }, ExtArgs["result"]["contactFormation"]>
+    composites: {}
+  }
+
+  type ContactFormationGetPayload<S extends boolean | null | undefined | ContactFormationDefaultArgs> = $Result.GetResult<Prisma.$ContactFormationPayload, S>
+
+  type ContactFormationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContactFormationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContactFormationCountAggregateInputType | true
+    }
+
+  export interface ContactFormationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContactFormation'], meta: { name: 'ContactFormation' } }
+    /**
+     * Find zero or one ContactFormation that matches the filter.
+     * @param {ContactFormationFindUniqueArgs} args - Arguments to find a ContactFormation
+     * @example
+     * // Get one ContactFormation
+     * const contactFormation = await prisma.contactFormation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContactFormationFindUniqueArgs>(args: SelectSubset<T, ContactFormationFindUniqueArgs<ExtArgs>>): Prisma__ContactFormationClient<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContactFormation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContactFormationFindUniqueOrThrowArgs} args - Arguments to find a ContactFormation
+     * @example
+     * // Get one ContactFormation
+     * const contactFormation = await prisma.contactFormation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContactFormationFindUniqueOrThrowArgs>(args: SelectSubset<T, ContactFormationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContactFormationClient<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContactFormation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFormationFindFirstArgs} args - Arguments to find a ContactFormation
+     * @example
+     * // Get one ContactFormation
+     * const contactFormation = await prisma.contactFormation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContactFormationFindFirstArgs>(args?: SelectSubset<T, ContactFormationFindFirstArgs<ExtArgs>>): Prisma__ContactFormationClient<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContactFormation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFormationFindFirstOrThrowArgs} args - Arguments to find a ContactFormation
+     * @example
+     * // Get one ContactFormation
+     * const contactFormation = await prisma.contactFormation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContactFormationFindFirstOrThrowArgs>(args?: SelectSubset<T, ContactFormationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContactFormationClient<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContactFormations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFormationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContactFormations
+     * const contactFormations = await prisma.contactFormation.findMany()
+     * 
+     * // Get first 10 ContactFormations
+     * const contactFormations = await prisma.contactFormation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contactFormationWithIdOnly = await prisma.contactFormation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContactFormationFindManyArgs>(args?: SelectSubset<T, ContactFormationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContactFormation.
+     * @param {ContactFormationCreateArgs} args - Arguments to create a ContactFormation.
+     * @example
+     * // Create one ContactFormation
+     * const ContactFormation = await prisma.contactFormation.create({
+     *   data: {
+     *     // ... data to create a ContactFormation
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContactFormationCreateArgs>(args: SelectSubset<T, ContactFormationCreateArgs<ExtArgs>>): Prisma__ContactFormationClient<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContactFormations.
+     * @param {ContactFormationCreateManyArgs} args - Arguments to create many ContactFormations.
+     * @example
+     * // Create many ContactFormations
+     * const contactFormation = await prisma.contactFormation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContactFormationCreateManyArgs>(args?: SelectSubset<T, ContactFormationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContactFormations and returns the data saved in the database.
+     * @param {ContactFormationCreateManyAndReturnArgs} args - Arguments to create many ContactFormations.
+     * @example
+     * // Create many ContactFormations
+     * const contactFormation = await prisma.contactFormation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContactFormations and only return the `id`
+     * const contactFormationWithIdOnly = await prisma.contactFormation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContactFormationCreateManyAndReturnArgs>(args?: SelectSubset<T, ContactFormationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContactFormation.
+     * @param {ContactFormationDeleteArgs} args - Arguments to delete one ContactFormation.
+     * @example
+     * // Delete one ContactFormation
+     * const ContactFormation = await prisma.contactFormation.delete({
+     *   where: {
+     *     // ... filter to delete one ContactFormation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContactFormationDeleteArgs>(args: SelectSubset<T, ContactFormationDeleteArgs<ExtArgs>>): Prisma__ContactFormationClient<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContactFormation.
+     * @param {ContactFormationUpdateArgs} args - Arguments to update one ContactFormation.
+     * @example
+     * // Update one ContactFormation
+     * const contactFormation = await prisma.contactFormation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContactFormationUpdateArgs>(args: SelectSubset<T, ContactFormationUpdateArgs<ExtArgs>>): Prisma__ContactFormationClient<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContactFormations.
+     * @param {ContactFormationDeleteManyArgs} args - Arguments to filter ContactFormations to delete.
+     * @example
+     * // Delete a few ContactFormations
+     * const { count } = await prisma.contactFormation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContactFormationDeleteManyArgs>(args?: SelectSubset<T, ContactFormationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContactFormations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFormationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContactFormations
+     * const contactFormation = await prisma.contactFormation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContactFormationUpdateManyArgs>(args: SelectSubset<T, ContactFormationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContactFormations and returns the data updated in the database.
+     * @param {ContactFormationUpdateManyAndReturnArgs} args - Arguments to update many ContactFormations.
+     * @example
+     * // Update many ContactFormations
+     * const contactFormation = await prisma.contactFormation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContactFormations and only return the `id`
+     * const contactFormationWithIdOnly = await prisma.contactFormation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContactFormationUpdateManyAndReturnArgs>(args: SelectSubset<T, ContactFormationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContactFormation.
+     * @param {ContactFormationUpsertArgs} args - Arguments to update or create a ContactFormation.
+     * @example
+     * // Update or create a ContactFormation
+     * const contactFormation = await prisma.contactFormation.upsert({
+     *   create: {
+     *     // ... data to create a ContactFormation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContactFormation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContactFormationUpsertArgs>(args: SelectSubset<T, ContactFormationUpsertArgs<ExtArgs>>): Prisma__ContactFormationClient<$Result.GetResult<Prisma.$ContactFormationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContactFormations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFormationCountArgs} args - Arguments to filter ContactFormations to count.
+     * @example
+     * // Count the number of ContactFormations
+     * const count = await prisma.contactFormation.count({
+     *   where: {
+     *     // ... the filter for the ContactFormations we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContactFormationCountArgs>(
+      args?: Subset<T, ContactFormationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContactFormationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContactFormation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFormationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContactFormationAggregateArgs>(args: Subset<T, ContactFormationAggregateArgs>): Prisma.PrismaPromise<GetContactFormationAggregateType<T>>
+
+    /**
+     * Group by ContactFormation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFormationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContactFormationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContactFormationGroupByArgs['orderBy'] }
+        : { orderBy?: ContactFormationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContactFormationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContactFormationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContactFormation model
+   */
+  readonly fields: ContactFormationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContactFormation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContactFormationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    dispositif<T extends DispositifFormationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFormationDefaultArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContactFormation model
+   */
+  interface ContactFormationFieldRefs {
+    readonly id: FieldRef<"ContactFormation", 'String'>
+    readonly dispositifId: FieldRef<"ContactFormation", 'String'>
+    readonly zone: FieldRef<"ContactFormation", 'String'>
+    readonly nom: FieldRef<"ContactFormation", 'String'>
+    readonly telephone: FieldRef<"ContactFormation", 'String'>
+    readonly email: FieldRef<"ContactFormation", 'String'>
+    readonly ordre: FieldRef<"ContactFormation", 'Int'>
+    readonly actif: FieldRef<"ContactFormation", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContactFormation findUnique
+   */
+  export type ContactFormationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactFormation to fetch.
+     */
+    where: ContactFormationWhereUniqueInput
+  }
+
+  /**
+   * ContactFormation findUniqueOrThrow
+   */
+  export type ContactFormationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactFormation to fetch.
+     */
+    where: ContactFormationWhereUniqueInput
+  }
+
+  /**
+   * ContactFormation findFirst
+   */
+  export type ContactFormationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactFormation to fetch.
+     */
+    where?: ContactFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactFormations to fetch.
+     */
+    orderBy?: ContactFormationOrderByWithRelationInput | ContactFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactFormations.
+     */
+    cursor?: ContactFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactFormations.
+     */
+    distinct?: ContactFormationScalarFieldEnum | ContactFormationScalarFieldEnum[]
+  }
+
+  /**
+   * ContactFormation findFirstOrThrow
+   */
+  export type ContactFormationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactFormation to fetch.
+     */
+    where?: ContactFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactFormations to fetch.
+     */
+    orderBy?: ContactFormationOrderByWithRelationInput | ContactFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactFormations.
+     */
+    cursor?: ContactFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactFormations.
+     */
+    distinct?: ContactFormationScalarFieldEnum | ContactFormationScalarFieldEnum[]
+  }
+
+  /**
+   * ContactFormation findMany
+   */
+  export type ContactFormationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactFormations to fetch.
+     */
+    where?: ContactFormationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactFormations to fetch.
+     */
+    orderBy?: ContactFormationOrderByWithRelationInput | ContactFormationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContactFormations.
+     */
+    cursor?: ContactFormationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactFormations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactFormations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactFormations.
+     */
+    distinct?: ContactFormationScalarFieldEnum | ContactFormationScalarFieldEnum[]
+  }
+
+  /**
+   * ContactFormation create
+   */
+  export type ContactFormationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContactFormation.
+     */
+    data: XOR<ContactFormationCreateInput, ContactFormationUncheckedCreateInput>
+  }
+
+  /**
+   * ContactFormation createMany
+   */
+  export type ContactFormationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContactFormations.
+     */
+    data: ContactFormationCreateManyInput | ContactFormationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContactFormation createManyAndReturn
+   */
+  export type ContactFormationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContactFormations.
+     */
+    data: ContactFormationCreateManyInput | ContactFormationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContactFormation update
+   */
+  export type ContactFormationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContactFormation.
+     */
+    data: XOR<ContactFormationUpdateInput, ContactFormationUncheckedUpdateInput>
+    /**
+     * Choose, which ContactFormation to update.
+     */
+    where: ContactFormationWhereUniqueInput
+  }
+
+  /**
+   * ContactFormation updateMany
+   */
+  export type ContactFormationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContactFormations.
+     */
+    data: XOR<ContactFormationUpdateManyMutationInput, ContactFormationUncheckedUpdateManyInput>
+    /**
+     * Filter which ContactFormations to update
+     */
+    where?: ContactFormationWhereInput
+    /**
+     * Limit how many ContactFormations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactFormation updateManyAndReturn
+   */
+  export type ContactFormationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * The data used to update ContactFormations.
+     */
+    data: XOR<ContactFormationUpdateManyMutationInput, ContactFormationUncheckedUpdateManyInput>
+    /**
+     * Filter which ContactFormations to update
+     */
+    where?: ContactFormationWhereInput
+    /**
+     * Limit how many ContactFormations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContactFormation upsert
+   */
+  export type ContactFormationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContactFormation to update in case it exists.
+     */
+    where: ContactFormationWhereUniqueInput
+    /**
+     * In case the ContactFormation found by the `where` argument doesn't exist, create a new ContactFormation with this data.
+     */
+    create: XOR<ContactFormationCreateInput, ContactFormationUncheckedCreateInput>
+    /**
+     * In case the ContactFormation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContactFormationUpdateInput, ContactFormationUncheckedUpdateInput>
+  }
+
+  /**
+   * ContactFormation delete
+   */
+  export type ContactFormationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+    /**
+     * Filter which ContactFormation to delete.
+     */
+    where: ContactFormationWhereUniqueInput
+  }
+
+  /**
+   * ContactFormation deleteMany
+   */
+  export type ContactFormationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactFormations to delete
+     */
+    where?: ContactFormationWhereInput
+    /**
+     * Limit how many ContactFormations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactFormation without action
+   */
+  export type ContactFormationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactFormation
+     */
+    select?: ContactFormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactFormation
+     */
+    omit?: ContactFormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactFormationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DispositifFormationTableau
+   */
+
+  export type AggregateDispositifFormationTableau = {
+    _count: DispositifFormationTableauCountAggregateOutputType | null
+    _avg: DispositifFormationTableauAvgAggregateOutputType | null
+    _sum: DispositifFormationTableauSumAggregateOutputType | null
+    _min: DispositifFormationTableauMinAggregateOutputType | null
+    _max: DispositifFormationTableauMaxAggregateOutputType | null
+  }
+
+  export type DispositifFormationTableauAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DispositifFormationTableauSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DispositifFormationTableauMinAggregateOutputType = {
+    id: string | null
+    dispositifId: string | null
+    titre: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type DispositifFormationTableauMaxAggregateOutputType = {
+    id: string | null
+    dispositifId: string | null
+    titre: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type DispositifFormationTableauCountAggregateOutputType = {
+    id: number
+    dispositifId: number
+    titre: number
+    entetes: number
+    lignes: number
+    ordre: number
+    actif: number
+    _all: number
+  }
+
+
+  export type DispositifFormationTableauAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DispositifFormationTableauSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DispositifFormationTableauMinAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    titre?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type DispositifFormationTableauMaxAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    titre?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type DispositifFormationTableauCountAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    titre?: true
+    entetes?: true
+    lignes?: true
+    ordre?: true
+    actif?: true
+    _all?: true
+  }
+
+  export type DispositifFormationTableauAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DispositifFormationTableau to aggregate.
+     */
+    where?: DispositifFormationTableauWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFormationTableaus to fetch.
+     */
+    orderBy?: DispositifFormationTableauOrderByWithRelationInput | DispositifFormationTableauOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DispositifFormationTableauWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFormationTableaus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFormationTableaus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DispositifFormationTableaus
+    **/
+    _count?: true | DispositifFormationTableauCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DispositifFormationTableauAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DispositifFormationTableauSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DispositifFormationTableauMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DispositifFormationTableauMaxAggregateInputType
+  }
+
+  export type GetDispositifFormationTableauAggregateType<T extends DispositifFormationTableauAggregateArgs> = {
+        [P in keyof T & keyof AggregateDispositifFormationTableau]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDispositifFormationTableau[P]>
+      : GetScalarType<T[P], AggregateDispositifFormationTableau[P]>
+  }
+
+
+
+
+  export type DispositifFormationTableauGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DispositifFormationTableauWhereInput
+    orderBy?: DispositifFormationTableauOrderByWithAggregationInput | DispositifFormationTableauOrderByWithAggregationInput[]
+    by: DispositifFormationTableauScalarFieldEnum[] | DispositifFormationTableauScalarFieldEnum
+    having?: DispositifFormationTableauScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DispositifFormationTableauCountAggregateInputType | true
+    _avg?: DispositifFormationTableauAvgAggregateInputType
+    _sum?: DispositifFormationTableauSumAggregateInputType
+    _min?: DispositifFormationTableauMinAggregateInputType
+    _max?: DispositifFormationTableauMaxAggregateInputType
+  }
+
+  export type DispositifFormationTableauGroupByOutputType = {
+    id: string
+    dispositifId: string
+    titre: string | null
+    entetes: JsonValue
+    lignes: JsonValue
+    ordre: number
+    actif: boolean
+    _count: DispositifFormationTableauCountAggregateOutputType | null
+    _avg: DispositifFormationTableauAvgAggregateOutputType | null
+    _sum: DispositifFormationTableauSumAggregateOutputType | null
+    _min: DispositifFormationTableauMinAggregateOutputType | null
+    _max: DispositifFormationTableauMaxAggregateOutputType | null
+  }
+
+  type GetDispositifFormationTableauGroupByPayload<T extends DispositifFormationTableauGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DispositifFormationTableauGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DispositifFormationTableauGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DispositifFormationTableauGroupByOutputType[P]>
+            : GetScalarType<T[P], DispositifFormationTableauGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DispositifFormationTableauSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    titre?: boolean
+    entetes?: boolean
+    lignes?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dispositifFormationTableau"]>
+
+  export type DispositifFormationTableauSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    titre?: boolean
+    entetes?: boolean
+    lignes?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dispositifFormationTableau"]>
+
+  export type DispositifFormationTableauSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    titre?: boolean
+    entetes?: boolean
+    lignes?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dispositifFormationTableau"]>
+
+  export type DispositifFormationTableauSelectScalar = {
+    id?: boolean
+    dispositifId?: boolean
+    titre?: boolean
+    entetes?: boolean
+    lignes?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }
+
+  export type DispositifFormationTableauOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dispositifId" | "titre" | "entetes" | "lignes" | "ordre" | "actif", ExtArgs["result"]["dispositifFormationTableau"]>
+  export type DispositifFormationTableauInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }
+  export type DispositifFormationTableauIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }
+  export type DispositifFormationTableauIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFormationDefaultArgs<ExtArgs>
+  }
+
+  export type $DispositifFormationTableauPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DispositifFormationTableau"
+    objects: {
+      dispositif: Prisma.$DispositifFormationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      dispositifId: string
+      titre: string | null
+      entetes: Prisma.JsonValue
+      lignes: Prisma.JsonValue
+      ordre: number
+      actif: boolean
+    }, ExtArgs["result"]["dispositifFormationTableau"]>
+    composites: {}
+  }
+
+  type DispositifFormationTableauGetPayload<S extends boolean | null | undefined | DispositifFormationTableauDefaultArgs> = $Result.GetResult<Prisma.$DispositifFormationTableauPayload, S>
+
+  type DispositifFormationTableauCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DispositifFormationTableauFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DispositifFormationTableauCountAggregateInputType | true
+    }
+
+  export interface DispositifFormationTableauDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DispositifFormationTableau'], meta: { name: 'DispositifFormationTableau' } }
+    /**
+     * Find zero or one DispositifFormationTableau that matches the filter.
+     * @param {DispositifFormationTableauFindUniqueArgs} args - Arguments to find a DispositifFormationTableau
+     * @example
+     * // Get one DispositifFormationTableau
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DispositifFormationTableauFindUniqueArgs>(args: SelectSubset<T, DispositifFormationTableauFindUniqueArgs<ExtArgs>>): Prisma__DispositifFormationTableauClient<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DispositifFormationTableau that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DispositifFormationTableauFindUniqueOrThrowArgs} args - Arguments to find a DispositifFormationTableau
+     * @example
+     * // Get one DispositifFormationTableau
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DispositifFormationTableauFindUniqueOrThrowArgs>(args: SelectSubset<T, DispositifFormationTableauFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DispositifFormationTableauClient<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DispositifFormationTableau that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationTableauFindFirstArgs} args - Arguments to find a DispositifFormationTableau
+     * @example
+     * // Get one DispositifFormationTableau
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DispositifFormationTableauFindFirstArgs>(args?: SelectSubset<T, DispositifFormationTableauFindFirstArgs<ExtArgs>>): Prisma__DispositifFormationTableauClient<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DispositifFormationTableau that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationTableauFindFirstOrThrowArgs} args - Arguments to find a DispositifFormationTableau
+     * @example
+     * // Get one DispositifFormationTableau
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DispositifFormationTableauFindFirstOrThrowArgs>(args?: SelectSubset<T, DispositifFormationTableauFindFirstOrThrowArgs<ExtArgs>>): Prisma__DispositifFormationTableauClient<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DispositifFormationTableaus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationTableauFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DispositifFormationTableaus
+     * const dispositifFormationTableaus = await prisma.dispositifFormationTableau.findMany()
+     * 
+     * // Get first 10 DispositifFormationTableaus
+     * const dispositifFormationTableaus = await prisma.dispositifFormationTableau.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dispositifFormationTableauWithIdOnly = await prisma.dispositifFormationTableau.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DispositifFormationTableauFindManyArgs>(args?: SelectSubset<T, DispositifFormationTableauFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DispositifFormationTableau.
+     * @param {DispositifFormationTableauCreateArgs} args - Arguments to create a DispositifFormationTableau.
+     * @example
+     * // Create one DispositifFormationTableau
+     * const DispositifFormationTableau = await prisma.dispositifFormationTableau.create({
+     *   data: {
+     *     // ... data to create a DispositifFormationTableau
+     *   }
+     * })
+     * 
+     */
+    create<T extends DispositifFormationTableauCreateArgs>(args: SelectSubset<T, DispositifFormationTableauCreateArgs<ExtArgs>>): Prisma__DispositifFormationTableauClient<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DispositifFormationTableaus.
+     * @param {DispositifFormationTableauCreateManyArgs} args - Arguments to create many DispositifFormationTableaus.
+     * @example
+     * // Create many DispositifFormationTableaus
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DispositifFormationTableauCreateManyArgs>(args?: SelectSubset<T, DispositifFormationTableauCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DispositifFormationTableaus and returns the data saved in the database.
+     * @param {DispositifFormationTableauCreateManyAndReturnArgs} args - Arguments to create many DispositifFormationTableaus.
+     * @example
+     * // Create many DispositifFormationTableaus
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DispositifFormationTableaus and only return the `id`
+     * const dispositifFormationTableauWithIdOnly = await prisma.dispositifFormationTableau.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DispositifFormationTableauCreateManyAndReturnArgs>(args?: SelectSubset<T, DispositifFormationTableauCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DispositifFormationTableau.
+     * @param {DispositifFormationTableauDeleteArgs} args - Arguments to delete one DispositifFormationTableau.
+     * @example
+     * // Delete one DispositifFormationTableau
+     * const DispositifFormationTableau = await prisma.dispositifFormationTableau.delete({
+     *   where: {
+     *     // ... filter to delete one DispositifFormationTableau
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DispositifFormationTableauDeleteArgs>(args: SelectSubset<T, DispositifFormationTableauDeleteArgs<ExtArgs>>): Prisma__DispositifFormationTableauClient<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DispositifFormationTableau.
+     * @param {DispositifFormationTableauUpdateArgs} args - Arguments to update one DispositifFormationTableau.
+     * @example
+     * // Update one DispositifFormationTableau
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DispositifFormationTableauUpdateArgs>(args: SelectSubset<T, DispositifFormationTableauUpdateArgs<ExtArgs>>): Prisma__DispositifFormationTableauClient<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DispositifFormationTableaus.
+     * @param {DispositifFormationTableauDeleteManyArgs} args - Arguments to filter DispositifFormationTableaus to delete.
+     * @example
+     * // Delete a few DispositifFormationTableaus
+     * const { count } = await prisma.dispositifFormationTableau.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DispositifFormationTableauDeleteManyArgs>(args?: SelectSubset<T, DispositifFormationTableauDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DispositifFormationTableaus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationTableauUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DispositifFormationTableaus
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DispositifFormationTableauUpdateManyArgs>(args: SelectSubset<T, DispositifFormationTableauUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DispositifFormationTableaus and returns the data updated in the database.
+     * @param {DispositifFormationTableauUpdateManyAndReturnArgs} args - Arguments to update many DispositifFormationTableaus.
+     * @example
+     * // Update many DispositifFormationTableaus
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DispositifFormationTableaus and only return the `id`
+     * const dispositifFormationTableauWithIdOnly = await prisma.dispositifFormationTableau.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DispositifFormationTableauUpdateManyAndReturnArgs>(args: SelectSubset<T, DispositifFormationTableauUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DispositifFormationTableau.
+     * @param {DispositifFormationTableauUpsertArgs} args - Arguments to update or create a DispositifFormationTableau.
+     * @example
+     * // Update or create a DispositifFormationTableau
+     * const dispositifFormationTableau = await prisma.dispositifFormationTableau.upsert({
+     *   create: {
+     *     // ... data to create a DispositifFormationTableau
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DispositifFormationTableau we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DispositifFormationTableauUpsertArgs>(args: SelectSubset<T, DispositifFormationTableauUpsertArgs<ExtArgs>>): Prisma__DispositifFormationTableauClient<$Result.GetResult<Prisma.$DispositifFormationTableauPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DispositifFormationTableaus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationTableauCountArgs} args - Arguments to filter DispositifFormationTableaus to count.
+     * @example
+     * // Count the number of DispositifFormationTableaus
+     * const count = await prisma.dispositifFormationTableau.count({
+     *   where: {
+     *     // ... the filter for the DispositifFormationTableaus we want to count
+     *   }
+     * })
+    **/
+    count<T extends DispositifFormationTableauCountArgs>(
+      args?: Subset<T, DispositifFormationTableauCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DispositifFormationTableauCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DispositifFormationTableau.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationTableauAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DispositifFormationTableauAggregateArgs>(args: Subset<T, DispositifFormationTableauAggregateArgs>): Prisma.PrismaPromise<GetDispositifFormationTableauAggregateType<T>>
+
+    /**
+     * Group by DispositifFormationTableau.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFormationTableauGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DispositifFormationTableauGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DispositifFormationTableauGroupByArgs['orderBy'] }
+        : { orderBy?: DispositifFormationTableauGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DispositifFormationTableauGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDispositifFormationTableauGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DispositifFormationTableau model
+   */
+  readonly fields: DispositifFormationTableauFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DispositifFormationTableau.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DispositifFormationTableauClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    dispositif<T extends DispositifFormationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFormationDefaultArgs<ExtArgs>>): Prisma__DispositifFormationClient<$Result.GetResult<Prisma.$DispositifFormationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DispositifFormationTableau model
+   */
+  interface DispositifFormationTableauFieldRefs {
+    readonly id: FieldRef<"DispositifFormationTableau", 'String'>
+    readonly dispositifId: FieldRef<"DispositifFormationTableau", 'String'>
+    readonly titre: FieldRef<"DispositifFormationTableau", 'String'>
+    readonly entetes: FieldRef<"DispositifFormationTableau", 'Json'>
+    readonly lignes: FieldRef<"DispositifFormationTableau", 'Json'>
+    readonly ordre: FieldRef<"DispositifFormationTableau", 'Int'>
+    readonly actif: FieldRef<"DispositifFormationTableau", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DispositifFormationTableau findUnique
+   */
+  export type DispositifFormationTableauFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormationTableau to fetch.
+     */
+    where: DispositifFormationTableauWhereUniqueInput
+  }
+
+  /**
+   * DispositifFormationTableau findUniqueOrThrow
+   */
+  export type DispositifFormationTableauFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormationTableau to fetch.
+     */
+    where: DispositifFormationTableauWhereUniqueInput
+  }
+
+  /**
+   * DispositifFormationTableau findFirst
+   */
+  export type DispositifFormationTableauFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormationTableau to fetch.
+     */
+    where?: DispositifFormationTableauWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFormationTableaus to fetch.
+     */
+    orderBy?: DispositifFormationTableauOrderByWithRelationInput | DispositifFormationTableauOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DispositifFormationTableaus.
+     */
+    cursor?: DispositifFormationTableauWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFormationTableaus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFormationTableaus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DispositifFormationTableaus.
+     */
+    distinct?: DispositifFormationTableauScalarFieldEnum | DispositifFormationTableauScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFormationTableau findFirstOrThrow
+   */
+  export type DispositifFormationTableauFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormationTableau to fetch.
+     */
+    where?: DispositifFormationTableauWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFormationTableaus to fetch.
+     */
+    orderBy?: DispositifFormationTableauOrderByWithRelationInput | DispositifFormationTableauOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DispositifFormationTableaus.
+     */
+    cursor?: DispositifFormationTableauWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFormationTableaus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFormationTableaus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DispositifFormationTableaus.
+     */
+    distinct?: DispositifFormationTableauScalarFieldEnum | DispositifFormationTableauScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFormationTableau findMany
+   */
+  export type DispositifFormationTableauFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFormationTableaus to fetch.
+     */
+    where?: DispositifFormationTableauWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFormationTableaus to fetch.
+     */
+    orderBy?: DispositifFormationTableauOrderByWithRelationInput | DispositifFormationTableauOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DispositifFormationTableaus.
+     */
+    cursor?: DispositifFormationTableauWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFormationTableaus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFormationTableaus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DispositifFormationTableaus.
+     */
+    distinct?: DispositifFormationTableauScalarFieldEnum | DispositifFormationTableauScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFormationTableau create
+   */
+  export type DispositifFormationTableauCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DispositifFormationTableau.
+     */
+    data: XOR<DispositifFormationTableauCreateInput, DispositifFormationTableauUncheckedCreateInput>
+  }
+
+  /**
+   * DispositifFormationTableau createMany
+   */
+  export type DispositifFormationTableauCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DispositifFormationTableaus.
+     */
+    data: DispositifFormationTableauCreateManyInput | DispositifFormationTableauCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DispositifFormationTableau createManyAndReturn
+   */
+  export type DispositifFormationTableauCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * The data used to create many DispositifFormationTableaus.
+     */
+    data: DispositifFormationTableauCreateManyInput | DispositifFormationTableauCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DispositifFormationTableau update
+   */
+  export type DispositifFormationTableauUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DispositifFormationTableau.
+     */
+    data: XOR<DispositifFormationTableauUpdateInput, DispositifFormationTableauUncheckedUpdateInput>
+    /**
+     * Choose, which DispositifFormationTableau to update.
+     */
+    where: DispositifFormationTableauWhereUniqueInput
+  }
+
+  /**
+   * DispositifFormationTableau updateMany
+   */
+  export type DispositifFormationTableauUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DispositifFormationTableaus.
+     */
+    data: XOR<DispositifFormationTableauUpdateManyMutationInput, DispositifFormationTableauUncheckedUpdateManyInput>
+    /**
+     * Filter which DispositifFormationTableaus to update
+     */
+    where?: DispositifFormationTableauWhereInput
+    /**
+     * Limit how many DispositifFormationTableaus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DispositifFormationTableau updateManyAndReturn
+   */
+  export type DispositifFormationTableauUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * The data used to update DispositifFormationTableaus.
+     */
+    data: XOR<DispositifFormationTableauUpdateManyMutationInput, DispositifFormationTableauUncheckedUpdateManyInput>
+    /**
+     * Filter which DispositifFormationTableaus to update
+     */
+    where?: DispositifFormationTableauWhereInput
+    /**
+     * Limit how many DispositifFormationTableaus to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DispositifFormationTableau upsert
+   */
+  export type DispositifFormationTableauUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DispositifFormationTableau to update in case it exists.
+     */
+    where: DispositifFormationTableauWhereUniqueInput
+    /**
+     * In case the DispositifFormationTableau found by the `where` argument doesn't exist, create a new DispositifFormationTableau with this data.
+     */
+    create: XOR<DispositifFormationTableauCreateInput, DispositifFormationTableauUncheckedCreateInput>
+    /**
+     * In case the DispositifFormationTableau was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DispositifFormationTableauUpdateInput, DispositifFormationTableauUncheckedUpdateInput>
+  }
+
+  /**
+   * DispositifFormationTableau delete
+   */
+  export type DispositifFormationTableauDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+    /**
+     * Filter which DispositifFormationTableau to delete.
+     */
+    where: DispositifFormationTableauWhereUniqueInput
+  }
+
+  /**
+   * DispositifFormationTableau deleteMany
+   */
+  export type DispositifFormationTableauDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DispositifFormationTableaus to delete
+     */
+    where?: DispositifFormationTableauWhereInput
+    /**
+     * Limit how many DispositifFormationTableaus to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DispositifFormationTableau without action
+   */
+  export type DispositifFormationTableauDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFormationTableau
+     */
+    select?: DispositifFormationTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFormationTableau
+     */
+    omit?: DispositifFormationTableauOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFormationTableauInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -45388,12 +51614,32 @@ export namespace Prisma {
   export type ConventionTemplateScalarFieldEnum = (typeof ConventionTemplateScalarFieldEnum)[keyof typeof ConventionTemplateScalarFieldEnum]
 
 
+  export const ClubScalarFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    numeroAffiliation: 'numeroAffiliation',
+    adresse: 'adresse',
+    cp: 'cp',
+    ville: 'ville',
+    email: 'email',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ClubScalarFieldEnum = (typeof ClubScalarFieldEnum)[keyof typeof ClubScalarFieldEnum]
+
+
   export const ConventionStagiaireScalarFieldEnum: {
     id: 'id',
     formationId: 'formationId',
     club: 'club',
     numeroAffiliationClub: 'numeroAffiliationClub',
     emailClub: 'emailClub',
+    clubAdresse: 'clubAdresse',
+    clubCp: 'clubCp',
+    clubVille: 'clubVille',
+    clubRepresentantNom: 'clubRepresentantNom',
+    clubRepresentantQualite: 'clubRepresentantQualite',
     civilite: 'civilite',
     nom: 'nom',
     prenom: 'prenom',
@@ -45792,6 +52038,62 @@ export namespace Prisma {
   export type FormationEmployabiliteContenuScalarFieldEnum = (typeof FormationEmployabiliteContenuScalarFieldEnum)[keyof typeof FormationEmployabiliteContenuScalarFieldEnum]
 
 
+  export const DispositifFormationScalarFieldEnum: {
+    id: 'id',
+    titre: 'titre',
+    resume: 'resume',
+    contenu: 'contenu',
+    montantMisEnAvant: 'montantMisEnAvant',
+    image: 'image',
+    videoUrl: 'videoUrl',
+    ordre: 'ordre',
+    actif: 'actif',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DispositifFormationScalarFieldEnum = (typeof DispositifFormationScalarFieldEnum)[keyof typeof DispositifFormationScalarFieldEnum]
+
+
+  export const LienFormationScalarFieldEnum: {
+    id: 'id',
+    dispositifId: 'dispositifId',
+    label: 'label',
+    url: 'url',
+    ordre: 'ordre',
+    actif: 'actif'
+  };
+
+  export type LienFormationScalarFieldEnum = (typeof LienFormationScalarFieldEnum)[keyof typeof LienFormationScalarFieldEnum]
+
+
+  export const ContactFormationScalarFieldEnum: {
+    id: 'id',
+    dispositifId: 'dispositifId',
+    zone: 'zone',
+    nom: 'nom',
+    telephone: 'telephone',
+    email: 'email',
+    ordre: 'ordre',
+    actif: 'actif'
+  };
+
+  export type ContactFormationScalarFieldEnum = (typeof ContactFormationScalarFieldEnum)[keyof typeof ContactFormationScalarFieldEnum]
+
+
+  export const DispositifFormationTableauScalarFieldEnum: {
+    id: 'id',
+    dispositifId: 'dispositifId',
+    titre: 'titre',
+    entetes: 'entetes',
+    lignes: 'lignes',
+    ordre: 'ordre',
+    actif: 'actif'
+  };
+
+  export type DispositifFormationTableauScalarFieldEnum = (typeof DispositifFormationTableauScalarFieldEnum)[keyof typeof DispositifFormationTableauScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -45806,6 +52108,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -47229,6 +53538,78 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"ConventionTemplate"> | Date | string
   }
 
+  export type ClubWhereInput = {
+    AND?: ClubWhereInput | ClubWhereInput[]
+    OR?: ClubWhereInput[]
+    NOT?: ClubWhereInput | ClubWhereInput[]
+    id?: StringFilter<"Club"> | string
+    nom?: StringFilter<"Club"> | string
+    numeroAffiliation?: StringNullableFilter<"Club"> | string | null
+    adresse?: StringNullableFilter<"Club"> | string | null
+    cp?: StringNullableFilter<"Club"> | string | null
+    ville?: StringNullableFilter<"Club"> | string | null
+    email?: StringNullableFilter<"Club"> | string | null
+    createdAt?: DateTimeFilter<"Club"> | Date | string
+    updatedAt?: DateTimeFilter<"Club"> | Date | string
+  }
+
+  export type ClubOrderByWithRelationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    numeroAffiliation?: SortOrderInput | SortOrder
+    adresse?: SortOrderInput | SortOrder
+    cp?: SortOrderInput | SortOrder
+    ville?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClubWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    nom?: string
+    AND?: ClubWhereInput | ClubWhereInput[]
+    OR?: ClubWhereInput[]
+    NOT?: ClubWhereInput | ClubWhereInput[]
+    numeroAffiliation?: StringNullableFilter<"Club"> | string | null
+    adresse?: StringNullableFilter<"Club"> | string | null
+    cp?: StringNullableFilter<"Club"> | string | null
+    ville?: StringNullableFilter<"Club"> | string | null
+    email?: StringNullableFilter<"Club"> | string | null
+    createdAt?: DateTimeFilter<"Club"> | Date | string
+    updatedAt?: DateTimeFilter<"Club"> | Date | string
+  }, "id" | "nom">
+
+  export type ClubOrderByWithAggregationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    numeroAffiliation?: SortOrderInput | SortOrder
+    adresse?: SortOrderInput | SortOrder
+    cp?: SortOrderInput | SortOrder
+    ville?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ClubCountOrderByAggregateInput
+    _max?: ClubMaxOrderByAggregateInput
+    _min?: ClubMinOrderByAggregateInput
+  }
+
+  export type ClubScalarWhereWithAggregatesInput = {
+    AND?: ClubScalarWhereWithAggregatesInput | ClubScalarWhereWithAggregatesInput[]
+    OR?: ClubScalarWhereWithAggregatesInput[]
+    NOT?: ClubScalarWhereWithAggregatesInput | ClubScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Club"> | string
+    nom?: StringWithAggregatesFilter<"Club"> | string
+    numeroAffiliation?: StringNullableWithAggregatesFilter<"Club"> | string | null
+    adresse?: StringNullableWithAggregatesFilter<"Club"> | string | null
+    cp?: StringNullableWithAggregatesFilter<"Club"> | string | null
+    ville?: StringNullableWithAggregatesFilter<"Club"> | string | null
+    email?: StringNullableWithAggregatesFilter<"Club"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Club"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Club"> | Date | string
+  }
+
   export type ConventionStagiaireWhereInput = {
     AND?: ConventionStagiaireWhereInput | ConventionStagiaireWhereInput[]
     OR?: ConventionStagiaireWhereInput[]
@@ -47238,6 +53619,11 @@ export namespace Prisma {
     club?: StringNullableFilter<"ConventionStagiaire"> | string | null
     numeroAffiliationClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
     emailClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubAdresse?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubCp?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubVille?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubRepresentantNom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubRepresentantQualite?: StringNullableFilter<"ConventionStagiaire"> | string | null
     civilite?: StringNullableFilter<"ConventionStagiaire"> | string | null
     nom?: StringFilter<"ConventionStagiaire"> | string
     prenom?: StringFilter<"ConventionStagiaire"> | string
@@ -47277,6 +53663,11 @@ export namespace Prisma {
     club?: SortOrderInput | SortOrder
     numeroAffiliationClub?: SortOrderInput | SortOrder
     emailClub?: SortOrderInput | SortOrder
+    clubAdresse?: SortOrderInput | SortOrder
+    clubCp?: SortOrderInput | SortOrder
+    clubVille?: SortOrderInput | SortOrder
+    clubRepresentantNom?: SortOrderInput | SortOrder
+    clubRepresentantQualite?: SortOrderInput | SortOrder
     civilite?: SortOrderInput | SortOrder
     nom?: SortOrder
     prenom?: SortOrder
@@ -47320,6 +53711,11 @@ export namespace Prisma {
     club?: StringNullableFilter<"ConventionStagiaire"> | string | null
     numeroAffiliationClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
     emailClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubAdresse?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubCp?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubVille?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubRepresentantNom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubRepresentantQualite?: StringNullableFilter<"ConventionStagiaire"> | string | null
     civilite?: StringNullableFilter<"ConventionStagiaire"> | string | null
     nom?: StringFilter<"ConventionStagiaire"> | string
     prenom?: StringFilter<"ConventionStagiaire"> | string
@@ -47359,6 +53755,11 @@ export namespace Prisma {
     club?: SortOrderInput | SortOrder
     numeroAffiliationClub?: SortOrderInput | SortOrder
     emailClub?: SortOrderInput | SortOrder
+    clubAdresse?: SortOrderInput | SortOrder
+    clubCp?: SortOrderInput | SortOrder
+    clubVille?: SortOrderInput | SortOrder
+    clubRepresentantNom?: SortOrderInput | SortOrder
+    clubRepresentantQualite?: SortOrderInput | SortOrder
     civilite?: SortOrderInput | SortOrder
     nom?: SortOrder
     prenom?: SortOrder
@@ -47402,6 +53803,11 @@ export namespace Prisma {
     club?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
     numeroAffiliationClub?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
     emailClub?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    clubAdresse?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    clubCp?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    clubVille?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    clubRepresentantNom?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
+    clubRepresentantQualite?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
     civilite?: StringNullableWithAggregatesFilter<"ConventionStagiaire"> | string | null
     nom?: StringWithAggregatesFilter<"ConventionStagiaire"> | string
     prenom?: StringWithAggregatesFilter<"ConventionStagiaire"> | string
@@ -49273,6 +55679,300 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"FormationEmployabiliteContenu"> | Date | string
   }
 
+  export type DispositifFormationWhereInput = {
+    AND?: DispositifFormationWhereInput | DispositifFormationWhereInput[]
+    OR?: DispositifFormationWhereInput[]
+    NOT?: DispositifFormationWhereInput | DispositifFormationWhereInput[]
+    id?: StringFilter<"DispositifFormation"> | string
+    titre?: StringFilter<"DispositifFormation"> | string
+    resume?: StringNullableFilter<"DispositifFormation"> | string | null
+    contenu?: StringFilter<"DispositifFormation"> | string
+    montantMisEnAvant?: StringNullableFilter<"DispositifFormation"> | string | null
+    image?: StringNullableFilter<"DispositifFormation"> | string | null
+    videoUrl?: StringNullableFilter<"DispositifFormation"> | string | null
+    ordre?: IntFilter<"DispositifFormation"> | number
+    actif?: BoolFilter<"DispositifFormation"> | boolean
+    createdAt?: DateTimeFilter<"DispositifFormation"> | Date | string
+    updatedAt?: DateTimeFilter<"DispositifFormation"> | Date | string
+    liens?: LienFormationListRelationFilter
+    contacts?: ContactFormationListRelationFilter
+    tableaux?: DispositifFormationTableauListRelationFilter
+  }
+
+  export type DispositifFormationOrderByWithRelationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrderInput | SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    liens?: LienFormationOrderByRelationAggregateInput
+    contacts?: ContactFormationOrderByRelationAggregateInput
+    tableaux?: DispositifFormationTableauOrderByRelationAggregateInput
+  }
+
+  export type DispositifFormationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DispositifFormationWhereInput | DispositifFormationWhereInput[]
+    OR?: DispositifFormationWhereInput[]
+    NOT?: DispositifFormationWhereInput | DispositifFormationWhereInput[]
+    titre?: StringFilter<"DispositifFormation"> | string
+    resume?: StringNullableFilter<"DispositifFormation"> | string | null
+    contenu?: StringFilter<"DispositifFormation"> | string
+    montantMisEnAvant?: StringNullableFilter<"DispositifFormation"> | string | null
+    image?: StringNullableFilter<"DispositifFormation"> | string | null
+    videoUrl?: StringNullableFilter<"DispositifFormation"> | string | null
+    ordre?: IntFilter<"DispositifFormation"> | number
+    actif?: BoolFilter<"DispositifFormation"> | boolean
+    createdAt?: DateTimeFilter<"DispositifFormation"> | Date | string
+    updatedAt?: DateTimeFilter<"DispositifFormation"> | Date | string
+    liens?: LienFormationListRelationFilter
+    contacts?: ContactFormationListRelationFilter
+    tableaux?: DispositifFormationTableauListRelationFilter
+  }, "id">
+
+  export type DispositifFormationOrderByWithAggregationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrderInput | SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DispositifFormationCountOrderByAggregateInput
+    _avg?: DispositifFormationAvgOrderByAggregateInput
+    _max?: DispositifFormationMaxOrderByAggregateInput
+    _min?: DispositifFormationMinOrderByAggregateInput
+    _sum?: DispositifFormationSumOrderByAggregateInput
+  }
+
+  export type DispositifFormationScalarWhereWithAggregatesInput = {
+    AND?: DispositifFormationScalarWhereWithAggregatesInput | DispositifFormationScalarWhereWithAggregatesInput[]
+    OR?: DispositifFormationScalarWhereWithAggregatesInput[]
+    NOT?: DispositifFormationScalarWhereWithAggregatesInput | DispositifFormationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DispositifFormation"> | string
+    titre?: StringWithAggregatesFilter<"DispositifFormation"> | string
+    resume?: StringNullableWithAggregatesFilter<"DispositifFormation"> | string | null
+    contenu?: StringWithAggregatesFilter<"DispositifFormation"> | string
+    montantMisEnAvant?: StringNullableWithAggregatesFilter<"DispositifFormation"> | string | null
+    image?: StringNullableWithAggregatesFilter<"DispositifFormation"> | string | null
+    videoUrl?: StringNullableWithAggregatesFilter<"DispositifFormation"> | string | null
+    ordre?: IntWithAggregatesFilter<"DispositifFormation"> | number
+    actif?: BoolWithAggregatesFilter<"DispositifFormation"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"DispositifFormation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DispositifFormation"> | Date | string
+  }
+
+  export type LienFormationWhereInput = {
+    AND?: LienFormationWhereInput | LienFormationWhereInput[]
+    OR?: LienFormationWhereInput[]
+    NOT?: LienFormationWhereInput | LienFormationWhereInput[]
+    id?: StringFilter<"LienFormation"> | string
+    dispositifId?: StringFilter<"LienFormation"> | string
+    label?: StringFilter<"LienFormation"> | string
+    url?: StringFilter<"LienFormation"> | string
+    ordre?: IntFilter<"LienFormation"> | number
+    actif?: BoolFilter<"LienFormation"> | boolean
+    dispositif?: XOR<DispositifFormationScalarRelationFilter, DispositifFormationWhereInput>
+  }
+
+  export type LienFormationOrderByWithRelationInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    label?: SortOrder
+    url?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    dispositif?: DispositifFormationOrderByWithRelationInput
+  }
+
+  export type LienFormationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LienFormationWhereInput | LienFormationWhereInput[]
+    OR?: LienFormationWhereInput[]
+    NOT?: LienFormationWhereInput | LienFormationWhereInput[]
+    dispositifId?: StringFilter<"LienFormation"> | string
+    label?: StringFilter<"LienFormation"> | string
+    url?: StringFilter<"LienFormation"> | string
+    ordre?: IntFilter<"LienFormation"> | number
+    actif?: BoolFilter<"LienFormation"> | boolean
+    dispositif?: XOR<DispositifFormationScalarRelationFilter, DispositifFormationWhereInput>
+  }, "id">
+
+  export type LienFormationOrderByWithAggregationInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    label?: SortOrder
+    url?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    _count?: LienFormationCountOrderByAggregateInput
+    _avg?: LienFormationAvgOrderByAggregateInput
+    _max?: LienFormationMaxOrderByAggregateInput
+    _min?: LienFormationMinOrderByAggregateInput
+    _sum?: LienFormationSumOrderByAggregateInput
+  }
+
+  export type LienFormationScalarWhereWithAggregatesInput = {
+    AND?: LienFormationScalarWhereWithAggregatesInput | LienFormationScalarWhereWithAggregatesInput[]
+    OR?: LienFormationScalarWhereWithAggregatesInput[]
+    NOT?: LienFormationScalarWhereWithAggregatesInput | LienFormationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LienFormation"> | string
+    dispositifId?: StringWithAggregatesFilter<"LienFormation"> | string
+    label?: StringWithAggregatesFilter<"LienFormation"> | string
+    url?: StringWithAggregatesFilter<"LienFormation"> | string
+    ordre?: IntWithAggregatesFilter<"LienFormation"> | number
+    actif?: BoolWithAggregatesFilter<"LienFormation"> | boolean
+  }
+
+  export type ContactFormationWhereInput = {
+    AND?: ContactFormationWhereInput | ContactFormationWhereInput[]
+    OR?: ContactFormationWhereInput[]
+    NOT?: ContactFormationWhereInput | ContactFormationWhereInput[]
+    id?: StringFilter<"ContactFormation"> | string
+    dispositifId?: StringFilter<"ContactFormation"> | string
+    zone?: StringNullableFilter<"ContactFormation"> | string | null
+    nom?: StringFilter<"ContactFormation"> | string
+    telephone?: StringNullableFilter<"ContactFormation"> | string | null
+    email?: StringNullableFilter<"ContactFormation"> | string | null
+    ordre?: IntFilter<"ContactFormation"> | number
+    actif?: BoolFilter<"ContactFormation"> | boolean
+    dispositif?: XOR<DispositifFormationScalarRelationFilter, DispositifFormationWhereInput>
+  }
+
+  export type ContactFormationOrderByWithRelationInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    zone?: SortOrderInput | SortOrder
+    nom?: SortOrder
+    telephone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    dispositif?: DispositifFormationOrderByWithRelationInput
+  }
+
+  export type ContactFormationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ContactFormationWhereInput | ContactFormationWhereInput[]
+    OR?: ContactFormationWhereInput[]
+    NOT?: ContactFormationWhereInput | ContactFormationWhereInput[]
+    dispositifId?: StringFilter<"ContactFormation"> | string
+    zone?: StringNullableFilter<"ContactFormation"> | string | null
+    nom?: StringFilter<"ContactFormation"> | string
+    telephone?: StringNullableFilter<"ContactFormation"> | string | null
+    email?: StringNullableFilter<"ContactFormation"> | string | null
+    ordre?: IntFilter<"ContactFormation"> | number
+    actif?: BoolFilter<"ContactFormation"> | boolean
+    dispositif?: XOR<DispositifFormationScalarRelationFilter, DispositifFormationWhereInput>
+  }, "id">
+
+  export type ContactFormationOrderByWithAggregationInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    zone?: SortOrderInput | SortOrder
+    nom?: SortOrder
+    telephone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    _count?: ContactFormationCountOrderByAggregateInput
+    _avg?: ContactFormationAvgOrderByAggregateInput
+    _max?: ContactFormationMaxOrderByAggregateInput
+    _min?: ContactFormationMinOrderByAggregateInput
+    _sum?: ContactFormationSumOrderByAggregateInput
+  }
+
+  export type ContactFormationScalarWhereWithAggregatesInput = {
+    AND?: ContactFormationScalarWhereWithAggregatesInput | ContactFormationScalarWhereWithAggregatesInput[]
+    OR?: ContactFormationScalarWhereWithAggregatesInput[]
+    NOT?: ContactFormationScalarWhereWithAggregatesInput | ContactFormationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ContactFormation"> | string
+    dispositifId?: StringWithAggregatesFilter<"ContactFormation"> | string
+    zone?: StringNullableWithAggregatesFilter<"ContactFormation"> | string | null
+    nom?: StringWithAggregatesFilter<"ContactFormation"> | string
+    telephone?: StringNullableWithAggregatesFilter<"ContactFormation"> | string | null
+    email?: StringNullableWithAggregatesFilter<"ContactFormation"> | string | null
+    ordre?: IntWithAggregatesFilter<"ContactFormation"> | number
+    actif?: BoolWithAggregatesFilter<"ContactFormation"> | boolean
+  }
+
+  export type DispositifFormationTableauWhereInput = {
+    AND?: DispositifFormationTableauWhereInput | DispositifFormationTableauWhereInput[]
+    OR?: DispositifFormationTableauWhereInput[]
+    NOT?: DispositifFormationTableauWhereInput | DispositifFormationTableauWhereInput[]
+    id?: StringFilter<"DispositifFormationTableau"> | string
+    dispositifId?: StringFilter<"DispositifFormationTableau"> | string
+    titre?: StringNullableFilter<"DispositifFormationTableau"> | string | null
+    entetes?: JsonFilter<"DispositifFormationTableau">
+    lignes?: JsonFilter<"DispositifFormationTableau">
+    ordre?: IntFilter<"DispositifFormationTableau"> | number
+    actif?: BoolFilter<"DispositifFormationTableau"> | boolean
+    dispositif?: XOR<DispositifFormationScalarRelationFilter, DispositifFormationWhereInput>
+  }
+
+  export type DispositifFormationTableauOrderByWithRelationInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    titre?: SortOrderInput | SortOrder
+    entetes?: SortOrder
+    lignes?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    dispositif?: DispositifFormationOrderByWithRelationInput
+  }
+
+  export type DispositifFormationTableauWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DispositifFormationTableauWhereInput | DispositifFormationTableauWhereInput[]
+    OR?: DispositifFormationTableauWhereInput[]
+    NOT?: DispositifFormationTableauWhereInput | DispositifFormationTableauWhereInput[]
+    dispositifId?: StringFilter<"DispositifFormationTableau"> | string
+    titre?: StringNullableFilter<"DispositifFormationTableau"> | string | null
+    entetes?: JsonFilter<"DispositifFormationTableau">
+    lignes?: JsonFilter<"DispositifFormationTableau">
+    ordre?: IntFilter<"DispositifFormationTableau"> | number
+    actif?: BoolFilter<"DispositifFormationTableau"> | boolean
+    dispositif?: XOR<DispositifFormationScalarRelationFilter, DispositifFormationWhereInput>
+  }, "id">
+
+  export type DispositifFormationTableauOrderByWithAggregationInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    titre?: SortOrderInput | SortOrder
+    entetes?: SortOrder
+    lignes?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    _count?: DispositifFormationTableauCountOrderByAggregateInput
+    _avg?: DispositifFormationTableauAvgOrderByAggregateInput
+    _max?: DispositifFormationTableauMaxOrderByAggregateInput
+    _min?: DispositifFormationTableauMinOrderByAggregateInput
+    _sum?: DispositifFormationTableauSumOrderByAggregateInput
+  }
+
+  export type DispositifFormationTableauScalarWhereWithAggregatesInput = {
+    AND?: DispositifFormationTableauScalarWhereWithAggregatesInput | DispositifFormationTableauScalarWhereWithAggregatesInput[]
+    OR?: DispositifFormationTableauScalarWhereWithAggregatesInput[]
+    NOT?: DispositifFormationTableauScalarWhereWithAggregatesInput | DispositifFormationTableauScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DispositifFormationTableau"> | string
+    dispositifId?: StringWithAggregatesFilter<"DispositifFormationTableau"> | string
+    titre?: StringNullableWithAggregatesFilter<"DispositifFormationTableau"> | string | null
+    entetes?: JsonWithAggregatesFilter<"DispositifFormationTableau">
+    lignes?: JsonWithAggregatesFilter<"DispositifFormationTableau">
+    ordre?: IntWithAggregatesFilter<"DispositifFormationTableau"> | number
+    actif?: BoolWithAggregatesFilter<"DispositifFormationTableau"> | boolean
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -50371,11 +57071,100 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ClubCreateInput = {
+    id?: string
+    nom: string
+    numeroAffiliation?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubUncheckedCreateInput = {
+    id?: string
+    nom: string
+    numeroAffiliation?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    numeroAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    numeroAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubCreateManyInput = {
+    id?: string
+    nom: string
+    numeroAffiliation?: string | null
+    adresse?: string | null
+    cp?: string | null
+    ville?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClubUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    numeroAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClubUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    numeroAffiliation?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    cp?: NullableStringFieldUpdateOperationsInput | string | null
+    ville?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ConventionStagiaireCreateInput = {
     id?: string
     club?: string | null
     numeroAffiliationClub?: string | null
     emailClub?: string | null
+    clubAdresse?: string | null
+    clubCp?: string | null
+    clubVille?: string | null
+    clubRepresentantNom?: string | null
+    clubRepresentantQualite?: string | null
     civilite?: string | null
     nom: string
     prenom: string
@@ -50415,6 +57204,11 @@ export namespace Prisma {
     club?: string | null
     numeroAffiliationClub?: string | null
     emailClub?: string | null
+    clubAdresse?: string | null
+    clubCp?: string | null
+    clubVille?: string | null
+    clubRepresentantNom?: string | null
+    clubRepresentantQualite?: string | null
     civilite?: string | null
     nom: string
     prenom: string
@@ -50452,6 +57246,11 @@ export namespace Prisma {
     club?: NullableStringFieldUpdateOperationsInput | string | null
     numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
     emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    clubAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    clubCp?: NullableStringFieldUpdateOperationsInput | string | null
+    clubVille?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantNom?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantQualite?: NullableStringFieldUpdateOperationsInput | string | null
     civilite?: NullableStringFieldUpdateOperationsInput | string | null
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
@@ -50491,6 +57290,11 @@ export namespace Prisma {
     club?: NullableStringFieldUpdateOperationsInput | string | null
     numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
     emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    clubAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    clubCp?: NullableStringFieldUpdateOperationsInput | string | null
+    clubVille?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantNom?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantQualite?: NullableStringFieldUpdateOperationsInput | string | null
     civilite?: NullableStringFieldUpdateOperationsInput | string | null
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
@@ -50529,6 +57333,11 @@ export namespace Prisma {
     club?: string | null
     numeroAffiliationClub?: string | null
     emailClub?: string | null
+    clubAdresse?: string | null
+    clubCp?: string | null
+    clubVille?: string | null
+    clubRepresentantNom?: string | null
+    clubRepresentantQualite?: string | null
     civilite?: string | null
     nom: string
     prenom: string
@@ -50565,6 +57374,11 @@ export namespace Prisma {
     club?: NullableStringFieldUpdateOperationsInput | string | null
     numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
     emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    clubAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    clubCp?: NullableStringFieldUpdateOperationsInput | string | null
+    clubVille?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantNom?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantQualite?: NullableStringFieldUpdateOperationsInput | string | null
     civilite?: NullableStringFieldUpdateOperationsInput | string | null
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
@@ -50602,6 +57416,11 @@ export namespace Prisma {
     club?: NullableStringFieldUpdateOperationsInput | string | null
     numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
     emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    clubAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    clubCp?: NullableStringFieldUpdateOperationsInput | string | null
+    clubVille?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantNom?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantQualite?: NullableStringFieldUpdateOperationsInput | string | null
     civilite?: NullableStringFieldUpdateOperationsInput | string | null
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
@@ -52682,6 +59501,323 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DispositifFormationCreateInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    liens?: LienFormationCreateNestedManyWithoutDispositifInput
+    contacts?: ContactFormationCreateNestedManyWithoutDispositifInput
+    tableaux?: DispositifFormationTableauCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFormationUncheckedCreateInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    liens?: LienFormationUncheckedCreateNestedManyWithoutDispositifInput
+    contacts?: ContactFormationUncheckedCreateNestedManyWithoutDispositifInput
+    tableaux?: DispositifFormationTableauUncheckedCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFormationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    liens?: LienFormationUpdateManyWithoutDispositifNestedInput
+    contacts?: ContactFormationUpdateManyWithoutDispositifNestedInput
+    tableaux?: DispositifFormationTableauUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFormationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    liens?: LienFormationUncheckedUpdateManyWithoutDispositifNestedInput
+    contacts?: ContactFormationUncheckedUpdateManyWithoutDispositifNestedInput
+    tableaux?: DispositifFormationTableauUncheckedUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFormationCreateManyInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DispositifFormationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DispositifFormationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LienFormationCreateInput = {
+    id?: string
+    label: string
+    url: string
+    ordre?: number
+    actif?: boolean
+    dispositif: DispositifFormationCreateNestedOneWithoutLiensInput
+  }
+
+  export type LienFormationUncheckedCreateInput = {
+    id?: string
+    dispositifId: string
+    label: string
+    url: string
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type LienFormationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    dispositif?: DispositifFormationUpdateOneRequiredWithoutLiensNestedInput
+  }
+
+  export type LienFormationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dispositifId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LienFormationCreateManyInput = {
+    id?: string
+    dispositifId: string
+    label: string
+    url: string
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type LienFormationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LienFormationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dispositifId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContactFormationCreateInput = {
+    id?: string
+    zone?: string | null
+    nom: string
+    telephone?: string | null
+    email?: string | null
+    ordre?: number
+    actif?: boolean
+    dispositif: DispositifFormationCreateNestedOneWithoutContactsInput
+  }
+
+  export type ContactFormationUncheckedCreateInput = {
+    id?: string
+    dispositifId: string
+    zone?: string | null
+    nom: string
+    telephone?: string | null
+    email?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type ContactFormationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    zone?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    dispositif?: DispositifFormationUpdateOneRequiredWithoutContactsNestedInput
+  }
+
+  export type ContactFormationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dispositifId?: StringFieldUpdateOperationsInput | string
+    zone?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContactFormationCreateManyInput = {
+    id?: string
+    dispositifId: string
+    zone?: string | null
+    nom: string
+    telephone?: string | null
+    email?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type ContactFormationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    zone?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContactFormationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dispositifId?: StringFieldUpdateOperationsInput | string
+    zone?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type DispositifFormationTableauCreateInput = {
+    id?: string
+    titre?: string | null
+    entetes: JsonNullValueInput | InputJsonValue
+    lignes: JsonNullValueInput | InputJsonValue
+    ordre?: number
+    actif?: boolean
+    dispositif: DispositifFormationCreateNestedOneWithoutTableauxInput
+  }
+
+  export type DispositifFormationTableauUncheckedCreateInput = {
+    id?: string
+    dispositifId: string
+    titre?: string | null
+    entetes: JsonNullValueInput | InputJsonValue
+    lignes: JsonNullValueInput | InputJsonValue
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type DispositifFormationTableauUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    dispositif?: DispositifFormationUpdateOneRequiredWithoutTableauxNestedInput
+  }
+
+  export type DispositifFormationTableauUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dispositifId?: StringFieldUpdateOperationsInput | string
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type DispositifFormationTableauCreateManyInput = {
+    id?: string
+    dispositifId: string
+    titre?: string | null
+    entetes: JsonNullValueInput | InputJsonValue
+    lignes: JsonNullValueInput | InputJsonValue
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type DispositifFormationTableauUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type DispositifFormationTableauUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dispositifId?: StringFieldUpdateOperationsInput | string
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -53790,6 +60926,42 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type ClubCountOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    numeroAffiliation?: SortOrder
+    adresse?: SortOrder
+    cp?: SortOrder
+    ville?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClubMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    numeroAffiliation?: SortOrder
+    adresse?: SortOrder
+    cp?: SortOrder
+    ville?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClubMinOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    numeroAffiliation?: SortOrder
+    adresse?: SortOrder
+    cp?: SortOrder
+    ville?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type StringNullableListFilter<$PrismaModel = never> = {
     equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     has?: string | StringFieldRefInput<$PrismaModel> | null
@@ -53824,6 +60996,11 @@ export namespace Prisma {
     club?: SortOrder
     numeroAffiliationClub?: SortOrder
     emailClub?: SortOrder
+    clubAdresse?: SortOrder
+    clubCp?: SortOrder
+    clubVille?: SortOrder
+    clubRepresentantNom?: SortOrder
+    clubRepresentantQualite?: SortOrder
     civilite?: SortOrder
     nom?: SortOrder
     prenom?: SortOrder
@@ -53861,6 +61038,11 @@ export namespace Prisma {
     club?: SortOrder
     numeroAffiliationClub?: SortOrder
     emailClub?: SortOrder
+    clubAdresse?: SortOrder
+    clubCp?: SortOrder
+    clubVille?: SortOrder
+    clubRepresentantNom?: SortOrder
+    clubRepresentantQualite?: SortOrder
     civilite?: SortOrder
     nom?: SortOrder
     prenom?: SortOrder
@@ -53896,6 +61078,11 @@ export namespace Prisma {
     club?: SortOrder
     numeroAffiliationClub?: SortOrder
     emailClub?: SortOrder
+    clubAdresse?: SortOrder
+    clubCp?: SortOrder
+    clubVille?: SortOrder
+    clubRepresentantNom?: SortOrder
+    clubRepresentantQualite?: SortOrder
     civilite?: SortOrder
     nom?: SortOrder
     prenom?: SortOrder
@@ -55277,6 +62464,250 @@ export namespace Prisma {
     introTexte?: SortOrder
     indicateursNote?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type LienFormationListRelationFilter = {
+    every?: LienFormationWhereInput
+    some?: LienFormationWhereInput
+    none?: LienFormationWhereInput
+  }
+
+  export type ContactFormationListRelationFilter = {
+    every?: ContactFormationWhereInput
+    some?: ContactFormationWhereInput
+    none?: ContactFormationWhereInput
+  }
+
+  export type DispositifFormationTableauListRelationFilter = {
+    every?: DispositifFormationTableauWhereInput
+    some?: DispositifFormationTableauWhereInput
+    none?: DispositifFormationTableauWhereInput
+  }
+
+  export type LienFormationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContactFormationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DispositifFormationTableauOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DispositifFormationCountOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrder
+    image?: SortOrder
+    videoUrl?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DispositifFormationAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type DispositifFormationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrder
+    image?: SortOrder
+    videoUrl?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DispositifFormationMinOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrder
+    image?: SortOrder
+    videoUrl?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DispositifFormationSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type DispositifFormationScalarRelationFilter = {
+    is?: DispositifFormationWhereInput
+    isNot?: DispositifFormationWhereInput
+  }
+
+  export type LienFormationCountOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    label?: SortOrder
+    url?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type LienFormationAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type LienFormationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    label?: SortOrder
+    url?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type LienFormationMinOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    label?: SortOrder
+    url?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type LienFormationSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type ContactFormationCountOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    zone?: SortOrder
+    nom?: SortOrder
+    telephone?: SortOrder
+    email?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type ContactFormationAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type ContactFormationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    zone?: SortOrder
+    nom?: SortOrder
+    telephone?: SortOrder
+    email?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type ContactFormationMinOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    zone?: SortOrder
+    nom?: SortOrder
+    telephone?: SortOrder
+    email?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type ContactFormationSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type DispositifFormationTableauCountOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    titre?: SortOrder
+    entetes?: SortOrder
+    lignes?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type DispositifFormationTableauAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type DispositifFormationTableauMaxOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    titre?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type DispositifFormationTableauMinOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    titre?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type DispositifFormationTableauSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type InscriptionCreateNestedManyWithoutUserInput = {
@@ -57041,6 +64472,174 @@ export namespace Prisma {
     set?: $Enums.IconePratique
   }
 
+  export type LienFormationCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<LienFormationCreateWithoutDispositifInput, LienFormationUncheckedCreateWithoutDispositifInput> | LienFormationCreateWithoutDispositifInput[] | LienFormationUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: LienFormationCreateOrConnectWithoutDispositifInput | LienFormationCreateOrConnectWithoutDispositifInput[]
+    createMany?: LienFormationCreateManyDispositifInputEnvelope
+    connect?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+  }
+
+  export type ContactFormationCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<ContactFormationCreateWithoutDispositifInput, ContactFormationUncheckedCreateWithoutDispositifInput> | ContactFormationCreateWithoutDispositifInput[] | ContactFormationUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: ContactFormationCreateOrConnectWithoutDispositifInput | ContactFormationCreateOrConnectWithoutDispositifInput[]
+    createMany?: ContactFormationCreateManyDispositifInputEnvelope
+    connect?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+  }
+
+  export type DispositifFormationTableauCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<DispositifFormationTableauCreateWithoutDispositifInput, DispositifFormationTableauUncheckedCreateWithoutDispositifInput> | DispositifFormationTableauCreateWithoutDispositifInput[] | DispositifFormationTableauUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: DispositifFormationTableauCreateOrConnectWithoutDispositifInput | DispositifFormationTableauCreateOrConnectWithoutDispositifInput[]
+    createMany?: DispositifFormationTableauCreateManyDispositifInputEnvelope
+    connect?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+  }
+
+  export type LienFormationUncheckedCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<LienFormationCreateWithoutDispositifInput, LienFormationUncheckedCreateWithoutDispositifInput> | LienFormationCreateWithoutDispositifInput[] | LienFormationUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: LienFormationCreateOrConnectWithoutDispositifInput | LienFormationCreateOrConnectWithoutDispositifInput[]
+    createMany?: LienFormationCreateManyDispositifInputEnvelope
+    connect?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+  }
+
+  export type ContactFormationUncheckedCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<ContactFormationCreateWithoutDispositifInput, ContactFormationUncheckedCreateWithoutDispositifInput> | ContactFormationCreateWithoutDispositifInput[] | ContactFormationUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: ContactFormationCreateOrConnectWithoutDispositifInput | ContactFormationCreateOrConnectWithoutDispositifInput[]
+    createMany?: ContactFormationCreateManyDispositifInputEnvelope
+    connect?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+  }
+
+  export type DispositifFormationTableauUncheckedCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<DispositifFormationTableauCreateWithoutDispositifInput, DispositifFormationTableauUncheckedCreateWithoutDispositifInput> | DispositifFormationTableauCreateWithoutDispositifInput[] | DispositifFormationTableauUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: DispositifFormationTableauCreateOrConnectWithoutDispositifInput | DispositifFormationTableauCreateOrConnectWithoutDispositifInput[]
+    createMany?: DispositifFormationTableauCreateManyDispositifInputEnvelope
+    connect?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+  }
+
+  export type LienFormationUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<LienFormationCreateWithoutDispositifInput, LienFormationUncheckedCreateWithoutDispositifInput> | LienFormationCreateWithoutDispositifInput[] | LienFormationUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: LienFormationCreateOrConnectWithoutDispositifInput | LienFormationCreateOrConnectWithoutDispositifInput[]
+    upsert?: LienFormationUpsertWithWhereUniqueWithoutDispositifInput | LienFormationUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: LienFormationCreateManyDispositifInputEnvelope
+    set?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+    disconnect?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+    delete?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+    connect?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+    update?: LienFormationUpdateWithWhereUniqueWithoutDispositifInput | LienFormationUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: LienFormationUpdateManyWithWhereWithoutDispositifInput | LienFormationUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: LienFormationScalarWhereInput | LienFormationScalarWhereInput[]
+  }
+
+  export type ContactFormationUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<ContactFormationCreateWithoutDispositifInput, ContactFormationUncheckedCreateWithoutDispositifInput> | ContactFormationCreateWithoutDispositifInput[] | ContactFormationUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: ContactFormationCreateOrConnectWithoutDispositifInput | ContactFormationCreateOrConnectWithoutDispositifInput[]
+    upsert?: ContactFormationUpsertWithWhereUniqueWithoutDispositifInput | ContactFormationUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: ContactFormationCreateManyDispositifInputEnvelope
+    set?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+    disconnect?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+    delete?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+    connect?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+    update?: ContactFormationUpdateWithWhereUniqueWithoutDispositifInput | ContactFormationUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: ContactFormationUpdateManyWithWhereWithoutDispositifInput | ContactFormationUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: ContactFormationScalarWhereInput | ContactFormationScalarWhereInput[]
+  }
+
+  export type DispositifFormationTableauUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<DispositifFormationTableauCreateWithoutDispositifInput, DispositifFormationTableauUncheckedCreateWithoutDispositifInput> | DispositifFormationTableauCreateWithoutDispositifInput[] | DispositifFormationTableauUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: DispositifFormationTableauCreateOrConnectWithoutDispositifInput | DispositifFormationTableauCreateOrConnectWithoutDispositifInput[]
+    upsert?: DispositifFormationTableauUpsertWithWhereUniqueWithoutDispositifInput | DispositifFormationTableauUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: DispositifFormationTableauCreateManyDispositifInputEnvelope
+    set?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+    disconnect?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+    delete?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+    connect?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+    update?: DispositifFormationTableauUpdateWithWhereUniqueWithoutDispositifInput | DispositifFormationTableauUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: DispositifFormationTableauUpdateManyWithWhereWithoutDispositifInput | DispositifFormationTableauUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: DispositifFormationTableauScalarWhereInput | DispositifFormationTableauScalarWhereInput[]
+  }
+
+  export type LienFormationUncheckedUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<LienFormationCreateWithoutDispositifInput, LienFormationUncheckedCreateWithoutDispositifInput> | LienFormationCreateWithoutDispositifInput[] | LienFormationUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: LienFormationCreateOrConnectWithoutDispositifInput | LienFormationCreateOrConnectWithoutDispositifInput[]
+    upsert?: LienFormationUpsertWithWhereUniqueWithoutDispositifInput | LienFormationUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: LienFormationCreateManyDispositifInputEnvelope
+    set?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+    disconnect?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+    delete?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+    connect?: LienFormationWhereUniqueInput | LienFormationWhereUniqueInput[]
+    update?: LienFormationUpdateWithWhereUniqueWithoutDispositifInput | LienFormationUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: LienFormationUpdateManyWithWhereWithoutDispositifInput | LienFormationUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: LienFormationScalarWhereInput | LienFormationScalarWhereInput[]
+  }
+
+  export type ContactFormationUncheckedUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<ContactFormationCreateWithoutDispositifInput, ContactFormationUncheckedCreateWithoutDispositifInput> | ContactFormationCreateWithoutDispositifInput[] | ContactFormationUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: ContactFormationCreateOrConnectWithoutDispositifInput | ContactFormationCreateOrConnectWithoutDispositifInput[]
+    upsert?: ContactFormationUpsertWithWhereUniqueWithoutDispositifInput | ContactFormationUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: ContactFormationCreateManyDispositifInputEnvelope
+    set?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+    disconnect?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+    delete?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+    connect?: ContactFormationWhereUniqueInput | ContactFormationWhereUniqueInput[]
+    update?: ContactFormationUpdateWithWhereUniqueWithoutDispositifInput | ContactFormationUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: ContactFormationUpdateManyWithWhereWithoutDispositifInput | ContactFormationUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: ContactFormationScalarWhereInput | ContactFormationScalarWhereInput[]
+  }
+
+  export type DispositifFormationTableauUncheckedUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<DispositifFormationTableauCreateWithoutDispositifInput, DispositifFormationTableauUncheckedCreateWithoutDispositifInput> | DispositifFormationTableauCreateWithoutDispositifInput[] | DispositifFormationTableauUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: DispositifFormationTableauCreateOrConnectWithoutDispositifInput | DispositifFormationTableauCreateOrConnectWithoutDispositifInput[]
+    upsert?: DispositifFormationTableauUpsertWithWhereUniqueWithoutDispositifInput | DispositifFormationTableauUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: DispositifFormationTableauCreateManyDispositifInputEnvelope
+    set?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+    disconnect?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+    delete?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+    connect?: DispositifFormationTableauWhereUniqueInput | DispositifFormationTableauWhereUniqueInput[]
+    update?: DispositifFormationTableauUpdateWithWhereUniqueWithoutDispositifInput | DispositifFormationTableauUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: DispositifFormationTableauUpdateManyWithWhereWithoutDispositifInput | DispositifFormationTableauUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: DispositifFormationTableauScalarWhereInput | DispositifFormationTableauScalarWhereInput[]
+  }
+
+  export type DispositifFormationCreateNestedOneWithoutLiensInput = {
+    create?: XOR<DispositifFormationCreateWithoutLiensInput, DispositifFormationUncheckedCreateWithoutLiensInput>
+    connectOrCreate?: DispositifFormationCreateOrConnectWithoutLiensInput
+    connect?: DispositifFormationWhereUniqueInput
+  }
+
+  export type DispositifFormationUpdateOneRequiredWithoutLiensNestedInput = {
+    create?: XOR<DispositifFormationCreateWithoutLiensInput, DispositifFormationUncheckedCreateWithoutLiensInput>
+    connectOrCreate?: DispositifFormationCreateOrConnectWithoutLiensInput
+    upsert?: DispositifFormationUpsertWithoutLiensInput
+    connect?: DispositifFormationWhereUniqueInput
+    update?: XOR<XOR<DispositifFormationUpdateToOneWithWhereWithoutLiensInput, DispositifFormationUpdateWithoutLiensInput>, DispositifFormationUncheckedUpdateWithoutLiensInput>
+  }
+
+  export type DispositifFormationCreateNestedOneWithoutContactsInput = {
+    create?: XOR<DispositifFormationCreateWithoutContactsInput, DispositifFormationUncheckedCreateWithoutContactsInput>
+    connectOrCreate?: DispositifFormationCreateOrConnectWithoutContactsInput
+    connect?: DispositifFormationWhereUniqueInput
+  }
+
+  export type DispositifFormationUpdateOneRequiredWithoutContactsNestedInput = {
+    create?: XOR<DispositifFormationCreateWithoutContactsInput, DispositifFormationUncheckedCreateWithoutContactsInput>
+    connectOrCreate?: DispositifFormationCreateOrConnectWithoutContactsInput
+    upsert?: DispositifFormationUpsertWithoutContactsInput
+    connect?: DispositifFormationWhereUniqueInput
+    update?: XOR<XOR<DispositifFormationUpdateToOneWithWhereWithoutContactsInput, DispositifFormationUpdateWithoutContactsInput>, DispositifFormationUncheckedUpdateWithoutContactsInput>
+  }
+
+  export type DispositifFormationCreateNestedOneWithoutTableauxInput = {
+    create?: XOR<DispositifFormationCreateWithoutTableauxInput, DispositifFormationUncheckedCreateWithoutTableauxInput>
+    connectOrCreate?: DispositifFormationCreateOrConnectWithoutTableauxInput
+    connect?: DispositifFormationWhereUniqueInput
+  }
+
+  export type DispositifFormationUpdateOneRequiredWithoutTableauxNestedInput = {
+    create?: XOR<DispositifFormationCreateWithoutTableauxInput, DispositifFormationUncheckedCreateWithoutTableauxInput>
+    connectOrCreate?: DispositifFormationCreateOrConnectWithoutTableauxInput
+    upsert?: DispositifFormationUpsertWithoutTableauxInput
+    connect?: DispositifFormationWhereUniqueInput
+    update?: XOR<XOR<DispositifFormationUpdateToOneWithWhereWithoutTableauxInput, DispositifFormationUpdateWithoutTableauxInput>, DispositifFormationUncheckedUpdateWithoutTableauxInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -57751,6 +65350,29 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumIconePratiqueFilter<$PrismaModel>
     _max?: NestedEnumIconePratiqueFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type InscriptionCreateWithoutUserInput = {
@@ -58668,6 +66290,11 @@ export namespace Prisma {
     club?: string | null
     numeroAffiliationClub?: string | null
     emailClub?: string | null
+    clubAdresse?: string | null
+    clubCp?: string | null
+    clubVille?: string | null
+    clubRepresentantNom?: string | null
+    clubRepresentantQualite?: string | null
     civilite?: string | null
     nom: string
     prenom: string
@@ -58705,6 +66332,11 @@ export namespace Prisma {
     club?: string | null
     numeroAffiliationClub?: string | null
     emailClub?: string | null
+    clubAdresse?: string | null
+    clubCp?: string | null
+    clubVille?: string | null
+    clubRepresentantNom?: string | null
+    clubRepresentantQualite?: string | null
     civilite?: string | null
     nom: string
     prenom: string
@@ -58965,6 +66597,11 @@ export namespace Prisma {
     club?: StringNullableFilter<"ConventionStagiaire"> | string | null
     numeroAffiliationClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
     emailClub?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubAdresse?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubCp?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubVille?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubRepresentantNom?: StringNullableFilter<"ConventionStagiaire"> | string | null
+    clubRepresentantQualite?: StringNullableFilter<"ConventionStagiaire"> | string | null
     civilite?: StringNullableFilter<"ConventionStagiaire"> | string | null
     nom?: StringFilter<"ConventionStagiaire"> | string
     prenom?: StringFilter<"ConventionStagiaire"> | string
@@ -61290,6 +68927,11 @@ export namespace Prisma {
     club?: string | null
     numeroAffiliationClub?: string | null
     emailClub?: string | null
+    clubAdresse?: string | null
+    clubCp?: string | null
+    clubVille?: string | null
+    clubRepresentantNom?: string | null
+    clubRepresentantQualite?: string | null
     civilite?: string | null
     nom: string
     prenom: string
@@ -61328,6 +68970,11 @@ export namespace Prisma {
     club?: string | null
     numeroAffiliationClub?: string | null
     emailClub?: string | null
+    clubAdresse?: string | null
+    clubCp?: string | null
+    clubVille?: string | null
+    clubRepresentantNom?: string | null
+    clubRepresentantQualite?: string | null
     civilite?: string | null
     nom: string
     prenom: string
@@ -61380,6 +69027,11 @@ export namespace Prisma {
     club?: NullableStringFieldUpdateOperationsInput | string | null
     numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
     emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    clubAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    clubCp?: NullableStringFieldUpdateOperationsInput | string | null
+    clubVille?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantNom?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantQualite?: NullableStringFieldUpdateOperationsInput | string | null
     civilite?: NullableStringFieldUpdateOperationsInput | string | null
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
@@ -61418,6 +69070,11 @@ export namespace Prisma {
     club?: NullableStringFieldUpdateOperationsInput | string | null
     numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
     emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    clubAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    clubCp?: NullableStringFieldUpdateOperationsInput | string | null
+    clubVille?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantNom?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantQualite?: NullableStringFieldUpdateOperationsInput | string | null
     civilite?: NullableStringFieldUpdateOperationsInput | string | null
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
@@ -63348,6 +71005,417 @@ export namespace Prisma {
     videos?: VideoUncheckedUpdateManyWithoutDispositifNestedInput
   }
 
+  export type LienFormationCreateWithoutDispositifInput = {
+    id?: string
+    label: string
+    url: string
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type LienFormationUncheckedCreateWithoutDispositifInput = {
+    id?: string
+    label: string
+    url: string
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type LienFormationCreateOrConnectWithoutDispositifInput = {
+    where: LienFormationWhereUniqueInput
+    create: XOR<LienFormationCreateWithoutDispositifInput, LienFormationUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type LienFormationCreateManyDispositifInputEnvelope = {
+    data: LienFormationCreateManyDispositifInput | LienFormationCreateManyDispositifInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ContactFormationCreateWithoutDispositifInput = {
+    id?: string
+    zone?: string | null
+    nom: string
+    telephone?: string | null
+    email?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type ContactFormationUncheckedCreateWithoutDispositifInput = {
+    id?: string
+    zone?: string | null
+    nom: string
+    telephone?: string | null
+    email?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type ContactFormationCreateOrConnectWithoutDispositifInput = {
+    where: ContactFormationWhereUniqueInput
+    create: XOR<ContactFormationCreateWithoutDispositifInput, ContactFormationUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type ContactFormationCreateManyDispositifInputEnvelope = {
+    data: ContactFormationCreateManyDispositifInput | ContactFormationCreateManyDispositifInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DispositifFormationTableauCreateWithoutDispositifInput = {
+    id?: string
+    titre?: string | null
+    entetes: JsonNullValueInput | InputJsonValue
+    lignes: JsonNullValueInput | InputJsonValue
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type DispositifFormationTableauUncheckedCreateWithoutDispositifInput = {
+    id?: string
+    titre?: string | null
+    entetes: JsonNullValueInput | InputJsonValue
+    lignes: JsonNullValueInput | InputJsonValue
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type DispositifFormationTableauCreateOrConnectWithoutDispositifInput = {
+    where: DispositifFormationTableauWhereUniqueInput
+    create: XOR<DispositifFormationTableauCreateWithoutDispositifInput, DispositifFormationTableauUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type DispositifFormationTableauCreateManyDispositifInputEnvelope = {
+    data: DispositifFormationTableauCreateManyDispositifInput | DispositifFormationTableauCreateManyDispositifInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LienFormationUpsertWithWhereUniqueWithoutDispositifInput = {
+    where: LienFormationWhereUniqueInput
+    update: XOR<LienFormationUpdateWithoutDispositifInput, LienFormationUncheckedUpdateWithoutDispositifInput>
+    create: XOR<LienFormationCreateWithoutDispositifInput, LienFormationUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type LienFormationUpdateWithWhereUniqueWithoutDispositifInput = {
+    where: LienFormationWhereUniqueInput
+    data: XOR<LienFormationUpdateWithoutDispositifInput, LienFormationUncheckedUpdateWithoutDispositifInput>
+  }
+
+  export type LienFormationUpdateManyWithWhereWithoutDispositifInput = {
+    where: LienFormationScalarWhereInput
+    data: XOR<LienFormationUpdateManyMutationInput, LienFormationUncheckedUpdateManyWithoutDispositifInput>
+  }
+
+  export type LienFormationScalarWhereInput = {
+    AND?: LienFormationScalarWhereInput | LienFormationScalarWhereInput[]
+    OR?: LienFormationScalarWhereInput[]
+    NOT?: LienFormationScalarWhereInput | LienFormationScalarWhereInput[]
+    id?: StringFilter<"LienFormation"> | string
+    dispositifId?: StringFilter<"LienFormation"> | string
+    label?: StringFilter<"LienFormation"> | string
+    url?: StringFilter<"LienFormation"> | string
+    ordre?: IntFilter<"LienFormation"> | number
+    actif?: BoolFilter<"LienFormation"> | boolean
+  }
+
+  export type ContactFormationUpsertWithWhereUniqueWithoutDispositifInput = {
+    where: ContactFormationWhereUniqueInput
+    update: XOR<ContactFormationUpdateWithoutDispositifInput, ContactFormationUncheckedUpdateWithoutDispositifInput>
+    create: XOR<ContactFormationCreateWithoutDispositifInput, ContactFormationUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type ContactFormationUpdateWithWhereUniqueWithoutDispositifInput = {
+    where: ContactFormationWhereUniqueInput
+    data: XOR<ContactFormationUpdateWithoutDispositifInput, ContactFormationUncheckedUpdateWithoutDispositifInput>
+  }
+
+  export type ContactFormationUpdateManyWithWhereWithoutDispositifInput = {
+    where: ContactFormationScalarWhereInput
+    data: XOR<ContactFormationUpdateManyMutationInput, ContactFormationUncheckedUpdateManyWithoutDispositifInput>
+  }
+
+  export type ContactFormationScalarWhereInput = {
+    AND?: ContactFormationScalarWhereInput | ContactFormationScalarWhereInput[]
+    OR?: ContactFormationScalarWhereInput[]
+    NOT?: ContactFormationScalarWhereInput | ContactFormationScalarWhereInput[]
+    id?: StringFilter<"ContactFormation"> | string
+    dispositifId?: StringFilter<"ContactFormation"> | string
+    zone?: StringNullableFilter<"ContactFormation"> | string | null
+    nom?: StringFilter<"ContactFormation"> | string
+    telephone?: StringNullableFilter<"ContactFormation"> | string | null
+    email?: StringNullableFilter<"ContactFormation"> | string | null
+    ordre?: IntFilter<"ContactFormation"> | number
+    actif?: BoolFilter<"ContactFormation"> | boolean
+  }
+
+  export type DispositifFormationTableauUpsertWithWhereUniqueWithoutDispositifInput = {
+    where: DispositifFormationTableauWhereUniqueInput
+    update: XOR<DispositifFormationTableauUpdateWithoutDispositifInput, DispositifFormationTableauUncheckedUpdateWithoutDispositifInput>
+    create: XOR<DispositifFormationTableauCreateWithoutDispositifInput, DispositifFormationTableauUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type DispositifFormationTableauUpdateWithWhereUniqueWithoutDispositifInput = {
+    where: DispositifFormationTableauWhereUniqueInput
+    data: XOR<DispositifFormationTableauUpdateWithoutDispositifInput, DispositifFormationTableauUncheckedUpdateWithoutDispositifInput>
+  }
+
+  export type DispositifFormationTableauUpdateManyWithWhereWithoutDispositifInput = {
+    where: DispositifFormationTableauScalarWhereInput
+    data: XOR<DispositifFormationTableauUpdateManyMutationInput, DispositifFormationTableauUncheckedUpdateManyWithoutDispositifInput>
+  }
+
+  export type DispositifFormationTableauScalarWhereInput = {
+    AND?: DispositifFormationTableauScalarWhereInput | DispositifFormationTableauScalarWhereInput[]
+    OR?: DispositifFormationTableauScalarWhereInput[]
+    NOT?: DispositifFormationTableauScalarWhereInput | DispositifFormationTableauScalarWhereInput[]
+    id?: StringFilter<"DispositifFormationTableau"> | string
+    dispositifId?: StringFilter<"DispositifFormationTableau"> | string
+    titre?: StringNullableFilter<"DispositifFormationTableau"> | string | null
+    entetes?: JsonFilter<"DispositifFormationTableau">
+    lignes?: JsonFilter<"DispositifFormationTableau">
+    ordre?: IntFilter<"DispositifFormationTableau"> | number
+    actif?: BoolFilter<"DispositifFormationTableau"> | boolean
+  }
+
+  export type DispositifFormationCreateWithoutLiensInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contacts?: ContactFormationCreateNestedManyWithoutDispositifInput
+    tableaux?: DispositifFormationTableauCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFormationUncheckedCreateWithoutLiensInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contacts?: ContactFormationUncheckedCreateNestedManyWithoutDispositifInput
+    tableaux?: DispositifFormationTableauUncheckedCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFormationCreateOrConnectWithoutLiensInput = {
+    where: DispositifFormationWhereUniqueInput
+    create: XOR<DispositifFormationCreateWithoutLiensInput, DispositifFormationUncheckedCreateWithoutLiensInput>
+  }
+
+  export type DispositifFormationUpsertWithoutLiensInput = {
+    update: XOR<DispositifFormationUpdateWithoutLiensInput, DispositifFormationUncheckedUpdateWithoutLiensInput>
+    create: XOR<DispositifFormationCreateWithoutLiensInput, DispositifFormationUncheckedCreateWithoutLiensInput>
+    where?: DispositifFormationWhereInput
+  }
+
+  export type DispositifFormationUpdateToOneWithWhereWithoutLiensInput = {
+    where?: DispositifFormationWhereInput
+    data: XOR<DispositifFormationUpdateWithoutLiensInput, DispositifFormationUncheckedUpdateWithoutLiensInput>
+  }
+
+  export type DispositifFormationUpdateWithoutLiensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contacts?: ContactFormationUpdateManyWithoutDispositifNestedInput
+    tableaux?: DispositifFormationTableauUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFormationUncheckedUpdateWithoutLiensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contacts?: ContactFormationUncheckedUpdateManyWithoutDispositifNestedInput
+    tableaux?: DispositifFormationTableauUncheckedUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFormationCreateWithoutContactsInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    liens?: LienFormationCreateNestedManyWithoutDispositifInput
+    tableaux?: DispositifFormationTableauCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFormationUncheckedCreateWithoutContactsInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    liens?: LienFormationUncheckedCreateNestedManyWithoutDispositifInput
+    tableaux?: DispositifFormationTableauUncheckedCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFormationCreateOrConnectWithoutContactsInput = {
+    where: DispositifFormationWhereUniqueInput
+    create: XOR<DispositifFormationCreateWithoutContactsInput, DispositifFormationUncheckedCreateWithoutContactsInput>
+  }
+
+  export type DispositifFormationUpsertWithoutContactsInput = {
+    update: XOR<DispositifFormationUpdateWithoutContactsInput, DispositifFormationUncheckedUpdateWithoutContactsInput>
+    create: XOR<DispositifFormationCreateWithoutContactsInput, DispositifFormationUncheckedCreateWithoutContactsInput>
+    where?: DispositifFormationWhereInput
+  }
+
+  export type DispositifFormationUpdateToOneWithWhereWithoutContactsInput = {
+    where?: DispositifFormationWhereInput
+    data: XOR<DispositifFormationUpdateWithoutContactsInput, DispositifFormationUncheckedUpdateWithoutContactsInput>
+  }
+
+  export type DispositifFormationUpdateWithoutContactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    liens?: LienFormationUpdateManyWithoutDispositifNestedInput
+    tableaux?: DispositifFormationTableauUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFormationUncheckedUpdateWithoutContactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    liens?: LienFormationUncheckedUpdateManyWithoutDispositifNestedInput
+    tableaux?: DispositifFormationTableauUncheckedUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFormationCreateWithoutTableauxInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    liens?: LienFormationCreateNestedManyWithoutDispositifInput
+    contacts?: ContactFormationCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFormationUncheckedCreateWithoutTableauxInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    liens?: LienFormationUncheckedCreateNestedManyWithoutDispositifInput
+    contacts?: ContactFormationUncheckedCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFormationCreateOrConnectWithoutTableauxInput = {
+    where: DispositifFormationWhereUniqueInput
+    create: XOR<DispositifFormationCreateWithoutTableauxInput, DispositifFormationUncheckedCreateWithoutTableauxInput>
+  }
+
+  export type DispositifFormationUpsertWithoutTableauxInput = {
+    update: XOR<DispositifFormationUpdateWithoutTableauxInput, DispositifFormationUncheckedUpdateWithoutTableauxInput>
+    create: XOR<DispositifFormationCreateWithoutTableauxInput, DispositifFormationUncheckedCreateWithoutTableauxInput>
+    where?: DispositifFormationWhereInput
+  }
+
+  export type DispositifFormationUpdateToOneWithWhereWithoutTableauxInput = {
+    where?: DispositifFormationWhereInput
+    data: XOR<DispositifFormationUpdateWithoutTableauxInput, DispositifFormationUncheckedUpdateWithoutTableauxInput>
+  }
+
+  export type DispositifFormationUpdateWithoutTableauxInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    liens?: LienFormationUpdateManyWithoutDispositifNestedInput
+    contacts?: ContactFormationUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFormationUncheckedUpdateWithoutTableauxInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    liens?: LienFormationUncheckedUpdateManyWithoutDispositifNestedInput
+    contacts?: ContactFormationUncheckedUpdateManyWithoutDispositifNestedInput
+  }
+
   export type InscriptionCreateManyUserInput = {
     id?: string
     formationId: string
@@ -63860,6 +71928,11 @@ export namespace Prisma {
     club?: string | null
     numeroAffiliationClub?: string | null
     emailClub?: string | null
+    clubAdresse?: string | null
+    clubCp?: string | null
+    clubVille?: string | null
+    clubRepresentantNom?: string | null
+    clubRepresentantQualite?: string | null
     civilite?: string | null
     nom: string
     prenom: string
@@ -64189,6 +72262,11 @@ export namespace Prisma {
     club?: NullableStringFieldUpdateOperationsInput | string | null
     numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
     emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    clubAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    clubCp?: NullableStringFieldUpdateOperationsInput | string | null
+    clubVille?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantNom?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantQualite?: NullableStringFieldUpdateOperationsInput | string | null
     civilite?: NullableStringFieldUpdateOperationsInput | string | null
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
@@ -64226,6 +72304,11 @@ export namespace Prisma {
     club?: NullableStringFieldUpdateOperationsInput | string | null
     numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
     emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    clubAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    clubCp?: NullableStringFieldUpdateOperationsInput | string | null
+    clubVille?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantNom?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantQualite?: NullableStringFieldUpdateOperationsInput | string | null
     civilite?: NullableStringFieldUpdateOperationsInput | string | null
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
@@ -64263,6 +72346,11 @@ export namespace Prisma {
     club?: NullableStringFieldUpdateOperationsInput | string | null
     numeroAffiliationClub?: NullableStringFieldUpdateOperationsInput | string | null
     emailClub?: NullableStringFieldUpdateOperationsInput | string | null
+    clubAdresse?: NullableStringFieldUpdateOperationsInput | string | null
+    clubCp?: NullableStringFieldUpdateOperationsInput | string | null
+    clubVille?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantNom?: NullableStringFieldUpdateOperationsInput | string | null
+    clubRepresentantQualite?: NullableStringFieldUpdateOperationsInput | string | null
     civilite?: NullableStringFieldUpdateOperationsInput | string | null
     nom?: StringFieldUpdateOperationsInput | string
     prenom?: StringFieldUpdateOperationsInput | string
@@ -64826,6 +72914,114 @@ export namespace Prisma {
     referent?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
     codeFiche?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LienFormationCreateManyDispositifInput = {
+    id?: string
+    label: string
+    url: string
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type ContactFormationCreateManyDispositifInput = {
+    id?: string
+    zone?: string | null
+    nom: string
+    telephone?: string | null
+    email?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type DispositifFormationTableauCreateManyDispositifInput = {
+    id?: string
+    titre?: string | null
+    entetes: JsonNullValueInput | InputJsonValue
+    lignes: JsonNullValueInput | InputJsonValue
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type LienFormationUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LienFormationUncheckedUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type LienFormationUncheckedUpdateManyWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContactFormationUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    zone?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContactFormationUncheckedUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    zone?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ContactFormationUncheckedUpdateManyWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    zone?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type DispositifFormationTableauUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type DispositifFormationTableauUncheckedUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type DispositifFormationTableauUncheckedUpdateManyWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
   }

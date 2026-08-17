@@ -759,6 +759,7 @@ enum PageCle {
   CONTACT
   EMPLOI
   ACTUALITES
+  FINANCEMENT
 
   @@schema("ir2f")
 }
@@ -953,6 +954,70 @@ model FormationEmployabiliteContenu {
   introTexte      String?
   indicateursNote String?
   updatedAt       DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
+// ─── FINANCEMENT (aides individuelles à la formation) ─
+
+model DispositifFormation {
+  id                String   @id @default(uuid())
+  titre             String
+  resume            String?
+  contenu           String
+  montantMisEnAvant String?
+  image             String?
+  videoUrl          String?
+  ordre             Int      @default(0)
+  actif             Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  liens    LienFormation[]
+  contacts ContactFormation[]
+  tableaux DispositifFormationTableau[]
+
+  @@schema("ir2f")
+}
+
+model LienFormation {
+  id           String  @id @default(uuid())
+  dispositifId String
+  label        String
+  url          String
+  ordre        Int     @default(0)
+  actif        Boolean @default(true)
+
+  dispositif DispositifFormation @relation(fields: [dispositifId], references: [id], onDelete: Cascade)
+
+  @@schema("ir2f")
+}
+
+model ContactFormation {
+  id           String  @id @default(uuid())
+  dispositifId String
+  zone         String?
+  nom          String
+  telephone    String?
+  email        String?
+  ordre        Int     @default(0)
+  actif        Boolean @default(true)
+
+  dispositif DispositifFormation @relation(fields: [dispositifId], references: [id], onDelete: Cascade)
+
+  @@schema("ir2f")
+}
+
+model DispositifFormationTableau {
+  id           String  @id @default(uuid())
+  dispositifId String
+  titre        String?
+  entetes      Json
+  lignes       Json
+  ordre        Int     @default(0)
+  actif        Boolean @default(true)
+
+  dispositif DispositifFormation @relation(fields: [dispositifId], references: [id], onDelete: Cascade)
 
   @@schema("ir2f")
 }

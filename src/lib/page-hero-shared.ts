@@ -1,12 +1,13 @@
 import type { PageCle } from "@/generated/prisma"
 
-export const PAGE_CLE_LIST: PageCle[] = ["FORMATIONS", "CONTACT", "EMPLOI", "ACTUALITES"]
+export const PAGE_CLE_LIST: PageCle[] = ["FORMATIONS", "CONTACT", "EMPLOI", "ACTUALITES", "FINANCEMENT"]
 
 export const PAGE_HERO_LABEL: Record<PageCle, string> = {
   FORMATIONS: "Formations",
   CONTACT: "Contact",
   EMPLOI: "Emploi",
   ACTUALITES: "Actualités",
+  FINANCEMENT: "Financement",
 }
 
 export const PAGE_HERO_EYEBROW: Record<PageCle, string> = {
@@ -14,6 +15,7 @@ export const PAGE_HERO_EYEBROW: Record<PageCle, string> = {
   CONTACT: "Contact",
   EMPLOI: "IR2F vous accompagne",
   ACTUALITES: "IR2F",
+  FINANCEMENT: "IR2F vous accompagne",
 }
 
 export const PAGE_HERO_ROUTE: Record<PageCle, string> = {
@@ -21,6 +23,7 @@ export const PAGE_HERO_ROUTE: Record<PageCle, string> = {
   CONTACT: "/contact",
   EMPLOI: "/emploi",
   ACTUALITES: "/actualites",
+  FINANCEMENT: "/financement",
 }
 
 export const PAGE_HERO_DEFAULTS: Record<PageCle, { titre: string; sousTitre: string | null }> = {
@@ -36,4 +39,9 @@ export const PAGE_HERO_DEFAULTS: Record<PageCle, { titre: string; sousTitre: str
       "Financements, gestion de l'emploi, formation-employabilité : retrouvez ici les ressources, contacts et vidéos pour vous accompagner dans vos démarches.",
   },
   ACTUALITES: { titre: "Toutes les actualités", sousTitre: null },
+  FINANCEMENT: {
+    titre: "Financer votre formation",
+    sousTitre:
+      "Bourse FAFA, bons de formation, CPF, AFDAS, France Travail... retrouvez ici tous les dispositifs pour financer votre parcours de formation.",
+  },
 }

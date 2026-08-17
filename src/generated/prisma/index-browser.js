@@ -266,12 +266,29 @@ exports.Prisma.ConventionTemplateScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ClubScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  numeroAffiliation: 'numeroAffiliation',
+  adresse: 'adresse',
+  cp: 'cp',
+  ville: 'ville',
+  email: 'email',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ConventionStagiaireScalarFieldEnum = {
   id: 'id',
   formationId: 'formationId',
   club: 'club',
   numeroAffiliationClub: 'numeroAffiliationClub',
   emailClub: 'emailClub',
+  clubAdresse: 'clubAdresse',
+  clubCp: 'clubCp',
+  clubVille: 'clubVille',
+  clubRepresentantNom: 'clubRepresentantNom',
+  clubRepresentantQualite: 'clubRepresentantQualite',
   civilite: 'civilite',
   nom: 'nom',
   prenom: 'prenom',
@@ -595,6 +612,50 @@ exports.Prisma.FormationEmployabiliteContenuScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DispositifFormationScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  resume: 'resume',
+  contenu: 'contenu',
+  montantMisEnAvant: 'montantMisEnAvant',
+  image: 'image',
+  videoUrl: 'videoUrl',
+  ordre: 'ordre',
+  actif: 'actif',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LienFormationScalarFieldEnum = {
+  id: 'id',
+  dispositifId: 'dispositifId',
+  label: 'label',
+  url: 'url',
+  ordre: 'ordre',
+  actif: 'actif'
+};
+
+exports.Prisma.ContactFormationScalarFieldEnum = {
+  id: 'id',
+  dispositifId: 'dispositifId',
+  zone: 'zone',
+  nom: 'nom',
+  telephone: 'telephone',
+  email: 'email',
+  ordre: 'ordre',
+  actif: 'actif'
+};
+
+exports.Prisma.DispositifFormationTableauScalarFieldEnum = {
+  id: 'id',
+  dispositifId: 'dispositifId',
+  titre: 'titre',
+  entetes: 'entetes',
+  lignes: 'lignes',
+  ordre: 'ordre',
+  actif: 'actif'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -602,6 +663,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -770,7 +835,8 @@ exports.PageCle = exports.$Enums.PageCle = {
   FORMATIONS: 'FORMATIONS',
   CONTACT: 'CONTACT',
   EMPLOI: 'EMPLOI',
-  ACTUALITES: 'ACTUALITES'
+  ACTUALITES: 'ACTUALITES',
+  FINANCEMENT: 'FINANCEMENT'
 };
 
 exports.TypeDocument = exports.$Enums.TypeDocument = {
@@ -802,6 +868,7 @@ exports.Prisma.ModelName = {
   Document: 'Document',
   Signature: 'Signature',
   ConventionTemplate: 'ConventionTemplate',
+  Club: 'Club',
   ConventionStagiaire: 'ConventionStagiaire',
   ConventionSignataire: 'ConventionSignataire',
   Message: 'Message',
@@ -826,7 +893,11 @@ exports.Prisma.ModelName = {
   PratiqueEmploiCard: 'PratiqueEmploiCard',
   EmploiPageContenu: 'EmploiPageContenu',
   GestionEmploiContenu: 'GestionEmploiContenu',
-  FormationEmployabiliteContenu: 'FormationEmployabiliteContenu'
+  FormationEmployabiliteContenu: 'FormationEmployabiliteContenu',
+  DispositifFormation: 'DispositifFormation',
+  LienFormation: 'LienFormation',
+  ContactFormation: 'ContactFormation',
+  DispositifFormationTableau: 'DispositifFormationTableau'
 };
 
 /**

@@ -8,6 +8,7 @@ export default auth((req) => {
     req.nextUrl.pathname === "/" ||
     req.nextUrl.pathname.startsWith("/formations") ||
     req.nextUrl.pathname.startsWith("/emploi") ||
+    req.nextUrl.pathname.startsWith("/financement") ||
     req.nextUrl.pathname.startsWith("/contact") ||
     req.nextUrl.pathname.startsWith("/actualites") ||
     req.nextUrl.pathname.startsWith("/convention")
