@@ -20,8 +20,10 @@ import {
   type EmploiActionState,
 } from "@/lib/actions/emploi"
 import { SECTION_EMPLOI_LABELS, TYPE_DOCUMENT_LABELS } from "@/lib/emploi-shared"
+import { EmploiDispositifsSection } from "@/components/admin/EmploiDispositifsSection"
+import { EmploiContenusSection } from "@/components/admin/EmploiContenusSection"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
-import type { SectionEmploi, TypeDocument } from "@/generated/prisma"
+import type { SectionEmploi, TypeDocument, IconePratique } from "@/generated/prisma"
 
 const fieldStyle = {
   border: "1px solid #e2e5ea",
@@ -95,14 +97,16 @@ const cardStyle = {
   gap: 10,
 }
 
-type Tab = "documents" | "partenaires" | "contacts" | "videos" | "webinaires"
+type Tab = "documents" | "partenaires" | "contacts" | "videos" | "webinaires" | "financements" | "contenus"
 
 const TABS: { value: Tab; label: string }[] = [
+  { value: "financements", label: "Dispositifs de financement" },
   { value: "documents", label: "Documents passerelles" },
   { value: "partenaires", label: "Partenaires" },
   { value: "contacts", label: "Contacts" },
   { value: "videos", label: "Vidéos" },
   { value: "webinaires", label: "Webinaires" },
+  { value: "contenus", label: "Contenus & pratiques" },
 ]
 
 export type AdminDocumentPasserelle = {
@@ -111,6 +115,7 @@ export type AdminDocumentPasserelle = {
   url: string
   type: TypeDocument
   section: SectionEmploi
+  dispositifId: string | null
   ordre: number
   actif: boolean
 }
@@ -132,10 +137,58 @@ export type AdminVideo = {
   url: string
   description: string | null
   section: SectionEmploi | null
+  dispositifId: string | null
   ordre: number
   actif: boolean
 }
 export type AdminWebinaire = { id: string; titre: string; description: string | null; date: string; lien: string | null; actif: boolean }
+
+export type AdminReferentEmploi = {
+  id: string
+  dispositifId: string
+  departement: string
+  referent: string
+  email: string | null
+  codeFiche: string | null
+  ordre: number
+  actif: boolean
+}
+export type AdminDispositifFinancement = {
+  id: string
+  titre: string
+  resume: string | null
+  contenu: string
+  montantMisEnAvant: string | null
+  image: string | null
+  videoUrl: string | null
+  ordre: number
+  actif: boolean
+  referents: AdminReferentEmploi[]
+}
+export type AdminPratiqueCard = {
+  id: string
+  titre: string
+  description: string | null
+  icone: IconePratique
+  ordre: number
+  actif: boolean
+}
+export type AdminEmploiPageContenu = { introTexte: string; introListe: string; videoCommunauteUrl: string | null }
+export type AdminGestionEmploiContenu = {
+  eLearningTitre: string | null
+  eLearningTexte: string | null
+  eLearningLienLabel: string | null
+  eLearningLienUrl: string | null
+  creerEmploiTexte: string
+  creerEmploiLienLabel: string | null
+  creerEmploiLienUrl: string | null
+  communauteTitre: string | null
+  communauteTexte: string | null
+  communauteVideoUrl: string | null
+  communauteLienEnSavoirPlusUrl: string | null
+  communauteLienRejoindreUrl: string | null
+}
+export type AdminFormationEmployabiliteContenu = { introTexte: string | null; indicateursNote: string | null }
 
 export function EmploiManager({
   documents,
@@ -143,14 +196,25 @@ export function EmploiManager({
   contacts,
   videos,
   webinaires,
+  dispositifs,
+  pratiqueCards,
+  pageContenu,
+  gestionEmploiContenu,
+  formationEmployabiliteContenu,
 }: {
   documents: AdminDocumentPasserelle[]
   partenaires: AdminPartenaire[]
   contacts: AdminContact[]
   videos: AdminVideo[]
   webinaires: AdminWebinaire[]
+  dispositifs: AdminDispositifFinancement[]
+  pratiqueCards: AdminPratiqueCard[]
+  pageContenu: AdminEmploiPageContenu
+  gestionEmploiContenu: AdminGestionEmploiContenu
+  formationEmployabiliteContenu: AdminFormationEmployabiliteContenu
 }) {
-  const [tab, setTab] = useState<Tab>("documents")
+  const [tab, setTab] = useState<Tab>("financements")
+  const dispositifOptions = dispositifs.map((d) => ({ id: d.id, titre: d.titre }))
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -162,11 +226,20 @@ export function EmploiManager({
         ))}
       </div>
 
-      {tab === "documents" && <DocumentsSection items={documents} />}
+      {tab === "financements" && <EmploiDispositifsSection items={dispositifs} />}
+      {tab === "documents" && <DocumentsSection items={documents} dispositifOptions={dispositifOptions} />}
       {tab === "partenaires" && <PartenairesSection items={partenaires} />}
       {tab === "contacts" && <ContactsSection items={contacts} />}
-      {tab === "videos" && <VideosSection items={videos} />}
+      {tab === "videos" && <VideosSection items={videos} dispositifOptions={dispositifOptions} />}
       {tab === "webinaires" && <WebinairesSection items={webinaires} />}
+      {tab === "contenus" && (
+        <EmploiContenusSection
+          pageContenu={pageContenu}
+          gestionEmploiContenu={gestionEmploiContenu}
+          formationEmployabiliteContenu={formationEmployabiliteContenu}
+          pratiqueCards={pratiqueCards}
+        />
+      )}
     </div>
   )
 }
@@ -198,7 +271,13 @@ function DeleteButton({ label, onDelete }: { label: string; onDelete: () => void
 
 // ─── Documents passerelles ─────────────────────────────
 
-function DocumentsSection({ items }: { items: AdminDocumentPasserelle[] }) {
+function DocumentsSection({
+  items,
+  dispositifOptions,
+}: {
+  items: AdminDocumentPasserelle[]
+  dispositifOptions: { id: string; titre: string }[]
+}) {
   const [adding, setAdding] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
 
@@ -209,11 +288,11 @@ function DocumentsSection({ items }: { items: AdminDocumentPasserelle[] }) {
           + Ajouter un document
         </button>
       )}
-      {adding && <DocumentForm onDone={() => setAdding(false)} />}
+      {adding && <DocumentForm dispositifOptions={dispositifOptions} onDone={() => setAdding(false)} />}
 
       {items.map((item) =>
         editingId === item.id ? (
-          <DocumentForm key={item.id} item={item} onDone={() => setEditingId(null)} />
+          <DocumentForm key={item.id} item={item} dispositifOptions={dispositifOptions} onDone={() => setEditingId(null)} />
         ) : (
           <div key={item.id} style={cardStyle}>
             <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
@@ -239,7 +318,16 @@ function DocumentsSection({ items }: { items: AdminDocumentPasserelle[] }) {
   )
 }
 
-function DocumentForm({ item, onDone }: { item?: AdminDocumentPasserelle; onDone: () => void }) {
+function DocumentForm({
+  item,
+  dispositifOptions,
+  onDone,
+}: {
+  item?: AdminDocumentPasserelle
+  dispositifOptions: { id: string; titre: string }[]
+  onDone: () => void
+}) {
+  const [section, setSection] = useState<SectionEmploi | "">(item?.section ?? "")
   const [state, formAction, pending] = useActionState(
     async (prev: EmploiActionState | undefined, formData: FormData) => {
       const result = await saveDocumentPasserelle(prev, formData)
@@ -262,7 +350,13 @@ function DocumentForm({ item, onDone }: { item?: AdminDocumentPasserelle; onDone
             </option>
           ))}
         </select>
-        <select name="section" required defaultValue={item?.section ?? ""} style={fieldStyle}>
+        <select
+          name="section"
+          required
+          defaultValue={item?.section ?? ""}
+          onChange={(e) => setSection(e.target.value as SectionEmploi)}
+          style={fieldStyle}
+        >
           <option value="" disabled>
             Section
           </option>
@@ -273,6 +367,16 @@ function DocumentForm({ item, onDone }: { item?: AdminDocumentPasserelle; onDone
           ))}
         </select>
         <input name="ordre" type="number" placeholder="Ordre" defaultValue={item?.ordre ?? 0} style={fieldStyle} />
+        {section === "FINANCEMENTS" && dispositifOptions.length > 0 && (
+          <select name="dispositifId" defaultValue={item?.dispositifId ?? ""} style={fieldStyle}>
+            <option value="">— Général (non rattaché à un onglet) —</option>
+            {dispositifOptions.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.titre}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
       <div style={{ display: "flex", gap: 8 }}>
@@ -450,7 +554,13 @@ function ContactForm({ item, onDone }: { item?: AdminContact; onDone: () => void
 
 // ─── Vidéos ─────────────────────────────────────────────
 
-function VideosSection({ items }: { items: AdminVideo[] }) {
+function VideosSection({
+  items,
+  dispositifOptions,
+}: {
+  items: AdminVideo[]
+  dispositifOptions: { id: string; titre: string }[]
+}) {
   const [adding, setAdding] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
 
@@ -461,11 +571,11 @@ function VideosSection({ items }: { items: AdminVideo[] }) {
           + Ajouter une vidéo
         </button>
       )}
-      {adding && <VideoForm onDone={() => setAdding(false)} />}
+      {adding && <VideoForm dispositifOptions={dispositifOptions} onDone={() => setAdding(false)} />}
 
       {items.map((item) =>
         editingId === item.id ? (
-          <VideoForm key={item.id} item={item} onDone={() => setEditingId(null)} />
+          <VideoForm key={item.id} item={item} dispositifOptions={dispositifOptions} onDone={() => setEditingId(null)} />
         ) : (
           <div key={item.id} style={cardStyle}>
             <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
@@ -491,7 +601,16 @@ function VideosSection({ items }: { items: AdminVideo[] }) {
   )
 }
 
-function VideoForm({ item, onDone }: { item?: AdminVideo; onDone: () => void }) {
+function VideoForm({
+  item,
+  dispositifOptions,
+  onDone,
+}: {
+  item?: AdminVideo
+  dispositifOptions: { id: string; titre: string }[]
+  onDone: () => void
+}) {
+  const [section, setSection] = useState<SectionEmploi | "">(item?.section ?? "")
   const [state, formAction, pending] = useActionState(
     async (prev: EmploiActionState | undefined, formData: FormData) => {
       const result = await saveVideo(prev, formData)
@@ -506,8 +625,8 @@ function VideoForm({ item, onDone }: { item?: AdminVideo; onDone: () => void }) 
       {item && <input type="hidden" name="id" value={item.id} />}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10 }}>
         <input name="titre" placeholder="Titre" required defaultValue={item?.titre} style={fieldStyle} />
-        <input name="url" placeholder="URL" required defaultValue={item?.url} style={fieldStyle} />
-        <select name="section" defaultValue={item?.section ?? ""} style={fieldStyle}>
+        <input name="url" placeholder="URL (YouTube pour intégration, sinon lien externe)" required defaultValue={item?.url} style={fieldStyle} />
+        <select name="section" defaultValue={item?.section ?? ""} onChange={(e) => setSection(e.target.value as SectionEmploi)} style={fieldStyle}>
           <option value="">— Section (optionnel) —</option>
           {Object.entries(SECTION_EMPLOI_LABELS).map(([v, l]) => (
             <option key={v} value={v}>
@@ -516,6 +635,16 @@ function VideoForm({ item, onDone }: { item?: AdminVideo; onDone: () => void }) 
           ))}
         </select>
         <input name="ordre" type="number" placeholder="Ordre" defaultValue={item?.ordre ?? 0} style={fieldStyle} />
+        {section === "FINANCEMENTS" && dispositifOptions.length > 0 && (
+          <select name="dispositifId" defaultValue={item?.dispositifId ?? ""} style={fieldStyle}>
+            <option value="">— Général (non rattaché à un onglet) —</option>
+            {dispositifOptions.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.titre}
+              </option>
+            ))}
+          </select>
+        )}
         <textarea
           name="description"
           placeholder="Description"

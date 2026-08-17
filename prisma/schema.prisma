@@ -218,17 +218,17 @@ model Formation {
 
   // Inscription via le portail FFF (externe à IR2F) — lien distinct selon
   // que ce soit le stagiaire ou le club qui réalise l'inscription
-  modeInscription   ModeInscription @default(INTERNE)
-  lienFffStagiaire  String?
-  lienFffClub       String?
+  modeInscription  ModeInscription @default(INTERNE)
+  lienFffStagiaire String?
+  lienFffClub      String?
 
   // Convention de stage : modèle PDF associé + responsable pédagogique (fixe pour toute la
   // formation — le tuteur et le maître de stage, eux, sont saisis par stagiaire, voir
   // ConventionStagiaire, car ils varient selon le club d'accueil de chacun)
-  conventionTemplateId          String?
-  responsablePedagogiqueNom     String?
-  responsablePedagogiquePrenom  String?
-  responsablePedagogiqueEmail   String?
+  conventionTemplateId            String?
+  responsablePedagogiqueNom       String?
+  responsablePedagogiquePrenom    String?
+  responsablePedagogiqueEmail     String?
   responsablePedagogiqueTelephone String?
 
   // Période globale de la formation (« du ... au ... »), affichée à côté de la durée et reportée
@@ -259,8 +259,8 @@ model Formation {
   messages     Message[]
   covoiturages Covoiturage[]
 
-  conventionTemplate    ConventionTemplate?  @relation(fields: [conventionTemplateId], references: [id])
-  conventionStagiaires  ConventionStagiaire[]
+  conventionTemplate   ConventionTemplate?   @relation(fields: [conventionTemplateId], references: [id])
+  conventionStagiaires ConventionStagiaire[]
 
   @@schema("ir2f")
 }
@@ -349,22 +349,22 @@ model DemandeContact {
 // ─── DOCUMENTS ───────────────────────────────────────
 
 model Document {
-  id          String            @id @default(uuid())
-  nom         String
-  url         String?
-  storagePath String?
-  taille      Int?
-  mimeType    String?
-  uploaderId  String
-  formationId String?
-  public      Boolean           @default(false)
+  id            String            @id @default(uuid())
+  nom           String
+  url           String?
+  storagePath   String?
+  taille        Int?
+  mimeType      String?
+  uploaderId    String
+  formationId   String?
+  public        Boolean           @default(false)
   // Distinct de `public` (partage avec les stagiaires connectés) : affiche ce document
   // dans le bloc "Documents utiles" de la fiche formation publique (site vitrine).
-  visiblePublic Boolean         @default(false)
-  ordre         Int             @default(0)
-  rolesRequis Role[]            @default([STAGIAIRE])
-  categorie   DocumentCategorie @default(ADMINISTRATIF)
-  createdAt   DateTime          @default(now())
+  visiblePublic Boolean           @default(false)
+  ordre         Int               @default(0)
+  rolesRequis   Role[]            @default([STAGIAIRE])
+  categorie     DocumentCategorie @default(ADMINISTRATIF)
+  createdAt     DateTime          @default(now())
 
   uploader   User        @relation(fields: [uploaderId], references: [id])
   formation  Formation?  @relation(fields: [formationId], references: [id])
@@ -416,37 +416,37 @@ model ConventionTemplate {
 // Le tuteur et le maître de stage sont propres à chaque stagiaire (varient selon son club
 // d'accueil) ; seul le responsable pédagogique est fixe pour la formation (voir Formation).
 model ConventionStagiaire {
-  id                       String    @id @default(uuid())
-  formationId              String
+  id          String @id @default(uuid())
+  formationId String
 
   // Club d'accueil
-  club                     String?
-  numeroAffiliationClub    String?
-  emailClub                String?
+  club                  String?
+  numeroAffiliationClub String?
+  emailClub             String?
 
   // Stagiaire
-  civilite                 String?
-  nom                      String
-  prenom                   String
-  dateNaissance            String?
-  adresse                  String?
-  cp                       String?
-  ville                    String?
-  telephone                String?
-  email                    String
+  civilite      String?
+  nom           String
+  prenom        String
+  dateNaissance String?
+  adresse       String?
+  cp            String?
+  ville         String?
+  telephone     String?
+  email         String
 
   // Tuteur (propre à ce stagiaire)
-  tuteurNom                String?
-  tuteurPrenom             String?
-  tuteurEmail              String?
+  tuteurNom    String?
+  tuteurPrenom String?
+  tuteurEmail  String?
 
   // Maître de stage (propre à ce stagiaire)
-  maitreDeStageNom         String?
-  maitreDeStagePrenom      String?
-  maitreDeStageAdresse     String?
-  maitreDeStageCp          String?
-  maitreDeStageVille       String?
-  maitreDeStageEmail       String?
+  maitreDeStageNom     String?
+  maitreDeStagePrenom  String?
+  maitreDeStageAdresse String?
+  maitreDeStageCp      String?
+  maitreDeStageVille   String?
+  maitreDeStageEmail   String?
 
   // Réponses saisies par le stagiaire au moment de sa signature (article 3 de la convention)
   natureIntervention           String[]
@@ -456,13 +456,13 @@ model ConventionStagiaire {
   objectifEncadrementAutonomie Boolean?
   objectifEncadrementPonctuel  Boolean?
 
-  donneesSupplementaires   Json?
-  pdfStoragePath           String?
-  envoyeAt                 DateTime?
-  completedAt              DateTime?
-  createdAt                DateTime  @default(now())
+  donneesSupplementaires Json?
+  pdfStoragePath         String?
+  envoyeAt               DateTime?
+  completedAt            DateTime?
+  createdAt              DateTime  @default(now())
 
-  formation   Formation             @relation(fields: [formationId], references: [id])
+  formation   Formation              @relation(fields: [formationId], references: [id])
   signataires ConventionSignataire[]
 
   @@unique([formationId, email])
@@ -473,14 +473,14 @@ model ConventionStagiaire {
 // par RoleSignataire). Le signataire accède via un lien à token — aucun
 // compte requis, y compris pour le stagiaire lui-même.
 model ConventionSignataire {
-  id                    String           @id @default(uuid())
+  id                    String          @id @default(uuid())
   conventionStagiaireId String
   role                  RoleSignataire
   ordre                 Int
   nom                   String
   email                 String
-  token                 String           @unique @default(uuid())
-  statut                StatutSignature  @default(NON_ENVOYE)
+  token                 String          @unique @default(uuid())
+  statut                StatutSignature @default(NON_ENVOYE)
   envoyeAt              DateTime?
   signedAt              DateTime?
   refusedAt             DateTime?
@@ -491,9 +491,9 @@ model ConventionSignataire {
   documentHash          String?
 
   // Trace du dernier renvoi manuel (bouton mail/whatsapp) — qui, quand, par quel canal
-  dernierRenvoiPar    String?
-  dernierRenvoiCanal  RenvoiCanal?
-  dernierRenvoiAt     DateTime?
+  dernierRenvoiPar   String?
+  dernierRenvoiCanal RenvoiCanal?
+  dernierRenvoiAt    DateTime?
 
   conventionStagiaire ConventionStagiaire @relation(fields: [conventionStagiaireId], references: [id])
 
@@ -616,20 +616,20 @@ model AccompagnementCard {
 
 // Textes éditables de la page d'accueil (une seule ligne, id fixe "accueil")
 model AccueilContenu {
-  id                     String   @id @default("accueil")
-  bandeauEmploiTitre     String   @default("Je souhaite créer un emploi dans mon club")
-  bandeauEmploiActif     Boolean  @default(true)
-  bandeauBouton1Label    String   @default("Je donne mes infos")
-  bandeauBouton1Type     TypeLien @default(INTERNE)
-  bandeauBouton1Url      String   @default("#contact")
-  bandeauBouton2Label    String   @default("En savoir plus")
-  bandeauBouton2Type     TypeLien @default(INTERNE)
-  bandeauBouton2Url      String   @default("/emploi")
-  accompagnementEyebrow  String   @default("IR2F vous accompagne")
-  accompagnementTitre    String   @default("Accompagnement Emploi")
-  contactTitre           String   @default("Je souhaite être contacté")
-  contactSousTitre       String   @default("Un conseiller IR2F revient vers vous sous 48h.")
-  updatedAt              DateTime @updatedAt
+  id                    String   @id @default("accueil")
+  bandeauEmploiTitre    String   @default("Je souhaite créer un emploi dans mon club")
+  bandeauEmploiActif    Boolean  @default(true)
+  bandeauBouton1Label   String   @default("Je donne mes infos")
+  bandeauBouton1Type    TypeLien @default(INTERNE)
+  bandeauBouton1Url     String   @default("#contact")
+  bandeauBouton2Label   String   @default("En savoir plus")
+  bandeauBouton2Type    TypeLien @default(INTERNE)
+  bandeauBouton2Url     String   @default("/emploi")
+  accompagnementEyebrow String   @default("IR2F vous accompagne")
+  accompagnementTitre   String   @default("Accompagnement Emploi")
+  contactTitre          String   @default("Je souhaite être contacté")
+  contactSousTitre      String   @default("Un conseiller IR2F revient vers vous sous 48h.")
+  updatedAt             DateTime @updatedAt
 
   @@schema("ir2f")
 }
@@ -792,15 +792,18 @@ enum TypeDocument {
 }
 
 model DocumentPasserelle {
-  id        String        @id @default(uuid())
-  titre     String
-  url       String
-  type      TypeDocument  @default(LIEN_EXTERNE)
-  section   SectionEmploi
-  ordre     Int           @default(0)
-  actif     Boolean       @default(true)
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+  id           String        @id @default(uuid())
+  titre        String
+  url          String
+  type         TypeDocument  @default(LIEN_EXTERNE)
+  section      SectionEmploi
+  dispositifId String?
+  ordre        Int           @default(0)
+  actif        Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  dispositif DispositifFinancement? @relation(fields: [dispositifId], references: [id], onDelete: SetNull)
 
   @@schema("ir2f")
 }
@@ -833,14 +836,17 @@ model Contact {
 }
 
 model Video {
-  id          String         @id @default(uuid())
-  titre       String
-  url         String
-  description String?
-  section     SectionEmploi?
-  ordre       Int            @default(0)
-  actif       Boolean        @default(true)
-  createdAt   DateTime       @default(now())
+  id           String         @id @default(uuid())
+  titre        String
+  url          String
+  description  String?
+  section      SectionEmploi?
+  dispositifId String?
+  ordre        Int            @default(0)
+  actif        Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+
+  dispositif DispositifFinancement? @relation(fields: [dispositifId], references: [id], onDelete: SetNull)
 
   @@schema("ir2f")
 }
@@ -854,6 +860,99 @@ model Webinaire {
   actif       Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
+model DispositifFinancement {
+  id                String   @id @default(uuid())
+  titre             String
+  resume            String?
+  contenu           String
+  montantMisEnAvant String?
+  image             String?
+  videoUrl          String?
+  ordre             Int      @default(0)
+  actif             Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  documents DocumentPasserelle[]
+  videos    Video[]
+  referents ReferentEmploi[]
+
+  @@schema("ir2f")
+}
+
+model ReferentEmploi {
+  id           String  @id @default(uuid())
+  dispositifId String
+  departement  String
+  referent     String
+  email        String?
+  codeFiche    String?
+  ordre        Int     @default(0)
+  actif        Boolean @default(true)
+
+  dispositif DispositifFinancement @relation(fields: [dispositifId], references: [id], onDelete: Cascade)
+
+  @@schema("ir2f")
+}
+
+enum IconePratique {
+  SOCIETAL
+  COTISATION
+  PARTENARIAT
+  AUTRE
+
+  @@schema("ir2f")
+}
+
+model PratiqueEmploiCard {
+  id          String        @id @default(uuid())
+  titre       String
+  description String?
+  icone       IconePratique @default(AUTRE)
+  ordre       Int           @default(0)
+  actif       Boolean       @default(true)
+
+  @@schema("ir2f")
+}
+
+model EmploiPageContenu {
+  id                 String   @id @default("emploi")
+  introTexte         String   @default("")
+  introListe         String   @default("")
+  videoCommunauteUrl String?
+  updatedAt          DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
+model GestionEmploiContenu {
+  id                            String   @id @default("gestion-emploi")
+  eLearningTitre                String?
+  eLearningTexte                String?
+  eLearningLienLabel            String?
+  eLearningLienUrl              String?
+  creerEmploiTexte              String   @default("")
+  creerEmploiLienLabel          String?
+  creerEmploiLienUrl            String?
+  communauteTitre               String?
+  communauteTexte               String?
+  communauteVideoUrl            String?
+  communauteLienEnSavoirPlusUrl String?
+  communauteLienRejoindreUrl    String?
+  updatedAt                     DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
+model FormationEmployabiliteContenu {
+  id              String   @id @default("formation-employabilite")
+  introTexte      String?
+  indicateursNote String?
+  updatedAt       DateTime @updatedAt
 
   @@schema("ir2f")
 }

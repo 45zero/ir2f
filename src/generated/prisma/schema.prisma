@@ -792,15 +792,18 @@ enum TypeDocument {
 }
 
 model DocumentPasserelle {
-  id        String        @id @default(uuid())
-  titre     String
-  url       String
-  type      TypeDocument  @default(LIEN_EXTERNE)
-  section   SectionEmploi
-  ordre     Int           @default(0)
-  actif     Boolean       @default(true)
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+  id           String        @id @default(uuid())
+  titre        String
+  url          String
+  type         TypeDocument  @default(LIEN_EXTERNE)
+  section      SectionEmploi
+  dispositifId String?
+  ordre        Int           @default(0)
+  actif        Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  dispositif DispositifFinancement? @relation(fields: [dispositifId], references: [id], onDelete: SetNull)
 
   @@schema("ir2f")
 }
@@ -833,14 +836,17 @@ model Contact {
 }
 
 model Video {
-  id          String         @id @default(uuid())
-  titre       String
-  url         String
-  description String?
-  section     SectionEmploi?
-  ordre       Int            @default(0)
-  actif       Boolean        @default(true)
-  createdAt   DateTime       @default(now())
+  id           String         @id @default(uuid())
+  titre        String
+  url          String
+  description  String?
+  section      SectionEmploi?
+  dispositifId String?
+  ordre        Int            @default(0)
+  actif        Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+
+  dispositif DispositifFinancement? @relation(fields: [dispositifId], references: [id], onDelete: SetNull)
 
   @@schema("ir2f")
 }
@@ -854,6 +860,99 @@ model Webinaire {
   actif       Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
+model DispositifFinancement {
+  id                String   @id @default(uuid())
+  titre             String
+  resume            String?
+  contenu           String
+  montantMisEnAvant String?
+  image             String?
+  videoUrl          String?
+  ordre             Int      @default(0)
+  actif             Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  documents DocumentPasserelle[]
+  videos    Video[]
+  referents ReferentEmploi[]
+
+  @@schema("ir2f")
+}
+
+model ReferentEmploi {
+  id           String  @id @default(uuid())
+  dispositifId String
+  departement  String
+  referent     String
+  email        String?
+  codeFiche    String?
+  ordre        Int     @default(0)
+  actif        Boolean @default(true)
+
+  dispositif DispositifFinancement @relation(fields: [dispositifId], references: [id], onDelete: Cascade)
+
+  @@schema("ir2f")
+}
+
+enum IconePratique {
+  SOCIETAL
+  COTISATION
+  PARTENARIAT
+  AUTRE
+
+  @@schema("ir2f")
+}
+
+model PratiqueEmploiCard {
+  id          String        @id @default(uuid())
+  titre       String
+  description String?
+  icone       IconePratique @default(AUTRE)
+  ordre       Int           @default(0)
+  actif       Boolean       @default(true)
+
+  @@schema("ir2f")
+}
+
+model EmploiPageContenu {
+  id                 String   @id @default("emploi")
+  introTexte         String   @default("")
+  introListe         String   @default("")
+  videoCommunauteUrl String?
+  updatedAt          DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
+model GestionEmploiContenu {
+  id                            String   @id @default("gestion-emploi")
+  eLearningTitre                String?
+  eLearningTexte                String?
+  eLearningLienLabel            String?
+  eLearningLienUrl              String?
+  creerEmploiTexte              String   @default("")
+  creerEmploiLienLabel          String?
+  creerEmploiLienUrl            String?
+  communauteTitre               String?
+  communauteTexte               String?
+  communauteVideoUrl            String?
+  communauteLienEnSavoirPlusUrl String?
+  communauteLienRejoindreUrl    String?
+  updatedAt                     DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
+model FormationEmployabiliteContenu {
+  id              String   @id @default("formation-employabilite")
+  introTexte      String?
+  indicateursNote String?
+  updatedAt       DateTime @updatedAt
 
   @@schema("ir2f")
 }

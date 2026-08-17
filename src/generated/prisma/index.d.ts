@@ -158,6 +158,36 @@ export type Video = $Result.DefaultSelection<Prisma.$VideoPayload>
  * 
  */
 export type Webinaire = $Result.DefaultSelection<Prisma.$WebinairePayload>
+/**
+ * Model DispositifFinancement
+ * 
+ */
+export type DispositifFinancement = $Result.DefaultSelection<Prisma.$DispositifFinancementPayload>
+/**
+ * Model ReferentEmploi
+ * 
+ */
+export type ReferentEmploi = $Result.DefaultSelection<Prisma.$ReferentEmploiPayload>
+/**
+ * Model PratiqueEmploiCard
+ * 
+ */
+export type PratiqueEmploiCard = $Result.DefaultSelection<Prisma.$PratiqueEmploiCardPayload>
+/**
+ * Model EmploiPageContenu
+ * 
+ */
+export type EmploiPageContenu = $Result.DefaultSelection<Prisma.$EmploiPageContenuPayload>
+/**
+ * Model GestionEmploiContenu
+ * 
+ */
+export type GestionEmploiContenu = $Result.DefaultSelection<Prisma.$GestionEmploiContenuPayload>
+/**
+ * Model FormationEmployabiliteContenu
+ * 
+ */
+export type FormationEmployabiliteContenu = $Result.DefaultSelection<Prisma.$FormationEmployabiliteContenuPayload>
 
 /**
  * Enums
@@ -398,6 +428,16 @@ export const TypeDocument: {
 
 export type TypeDocument = (typeof TypeDocument)[keyof typeof TypeDocument]
 
+
+export const IconePratique: {
+  SOCIETAL: 'SOCIETAL',
+  COTISATION: 'COTISATION',
+  PARTENARIAT: 'PARTENARIAT',
+  AUTRE: 'AUTRE'
+};
+
+export type IconePratique = (typeof IconePratique)[keyof typeof IconePratique]
+
 }
 
 export type Role = $Enums.Role
@@ -495,6 +535,10 @@ export const SectionEmploi: typeof $Enums.SectionEmploi
 export type TypeDocument = $Enums.TypeDocument
 
 export const TypeDocument: typeof $Enums.TypeDocument
+
+export type IconePratique = $Enums.IconePratique
+
+export const IconePratique: typeof $Enums.IconePratique
 
 /**
  * ##  Prisma Client ʲˢ
@@ -906,6 +950,66 @@ export class PrismaClient<
     * ```
     */
   get webinaire(): Prisma.WebinaireDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dispositifFinancement`: Exposes CRUD operations for the **DispositifFinancement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DispositifFinancements
+    * const dispositifFinancements = await prisma.dispositifFinancement.findMany()
+    * ```
+    */
+  get dispositifFinancement(): Prisma.DispositifFinancementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.referentEmploi`: Exposes CRUD operations for the **ReferentEmploi** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReferentEmplois
+    * const referentEmplois = await prisma.referentEmploi.findMany()
+    * ```
+    */
+  get referentEmploi(): Prisma.ReferentEmploiDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pratiqueEmploiCard`: Exposes CRUD operations for the **PratiqueEmploiCard** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PratiqueEmploiCards
+    * const pratiqueEmploiCards = await prisma.pratiqueEmploiCard.findMany()
+    * ```
+    */
+  get pratiqueEmploiCard(): Prisma.PratiqueEmploiCardDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.emploiPageContenu`: Exposes CRUD operations for the **EmploiPageContenu** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmploiPageContenus
+    * const emploiPageContenus = await prisma.emploiPageContenu.findMany()
+    * ```
+    */
+  get emploiPageContenu(): Prisma.EmploiPageContenuDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.gestionEmploiContenu`: Exposes CRUD operations for the **GestionEmploiContenu** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GestionEmploiContenus
+    * const gestionEmploiContenus = await prisma.gestionEmploiContenu.findMany()
+    * ```
+    */
+  get gestionEmploiContenu(): Prisma.GestionEmploiContenuDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.formationEmployabiliteContenu`: Exposes CRUD operations for the **FormationEmployabiliteContenu** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FormationEmployabiliteContenus
+    * const formationEmployabiliteContenus = await prisma.formationEmployabiliteContenu.findMany()
+    * ```
+    */
+  get formationEmployabiliteContenu(): Prisma.FormationEmployabiliteContenuDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1368,7 +1472,13 @@ export namespace Prisma {
     Partenaire: 'Partenaire',
     Contact: 'Contact',
     Video: 'Video',
-    Webinaire: 'Webinaire'
+    Webinaire: 'Webinaire',
+    DispositifFinancement: 'DispositifFinancement',
+    ReferentEmploi: 'ReferentEmploi',
+    PratiqueEmploiCard: 'PratiqueEmploiCard',
+    EmploiPageContenu: 'EmploiPageContenu',
+    GestionEmploiContenu: 'GestionEmploiContenu',
+    FormationEmployabiliteContenu: 'FormationEmployabiliteContenu'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1384,7 +1494,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "signature" | "conventionTemplate" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "signature" | "conventionTemplate" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3534,6 +3644,450 @@ export namespace Prisma {
           }
         }
       }
+      DispositifFinancement: {
+        payload: Prisma.$DispositifFinancementPayload<ExtArgs>
+        fields: Prisma.DispositifFinancementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DispositifFinancementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DispositifFinancementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload>
+          }
+          findFirst: {
+            args: Prisma.DispositifFinancementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DispositifFinancementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload>
+          }
+          findMany: {
+            args: Prisma.DispositifFinancementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload>[]
+          }
+          create: {
+            args: Prisma.DispositifFinancementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload>
+          }
+          createMany: {
+            args: Prisma.DispositifFinancementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DispositifFinancementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload>[]
+          }
+          delete: {
+            args: Prisma.DispositifFinancementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload>
+          }
+          update: {
+            args: Prisma.DispositifFinancementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload>
+          }
+          deleteMany: {
+            args: Prisma.DispositifFinancementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DispositifFinancementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DispositifFinancementUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload>[]
+          }
+          upsert: {
+            args: Prisma.DispositifFinancementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DispositifFinancementPayload>
+          }
+          aggregate: {
+            args: Prisma.DispositifFinancementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDispositifFinancement>
+          }
+          groupBy: {
+            args: Prisma.DispositifFinancementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DispositifFinancementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DispositifFinancementCountArgs<ExtArgs>
+            result: $Utils.Optional<DispositifFinancementCountAggregateOutputType> | number
+          }
+        }
+      }
+      ReferentEmploi: {
+        payload: Prisma.$ReferentEmploiPayload<ExtArgs>
+        fields: Prisma.ReferentEmploiFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReferentEmploiFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReferentEmploiFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload>
+          }
+          findFirst: {
+            args: Prisma.ReferentEmploiFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReferentEmploiFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload>
+          }
+          findMany: {
+            args: Prisma.ReferentEmploiFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload>[]
+          }
+          create: {
+            args: Prisma.ReferentEmploiCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload>
+          }
+          createMany: {
+            args: Prisma.ReferentEmploiCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReferentEmploiCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload>[]
+          }
+          delete: {
+            args: Prisma.ReferentEmploiDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload>
+          }
+          update: {
+            args: Prisma.ReferentEmploiUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReferentEmploiDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReferentEmploiUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReferentEmploiUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReferentEmploiUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferentEmploiPayload>
+          }
+          aggregate: {
+            args: Prisma.ReferentEmploiAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReferentEmploi>
+          }
+          groupBy: {
+            args: Prisma.ReferentEmploiGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReferentEmploiGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReferentEmploiCountArgs<ExtArgs>
+            result: $Utils.Optional<ReferentEmploiCountAggregateOutputType> | number
+          }
+        }
+      }
+      PratiqueEmploiCard: {
+        payload: Prisma.$PratiqueEmploiCardPayload<ExtArgs>
+        fields: Prisma.PratiqueEmploiCardFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PratiqueEmploiCardFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PratiqueEmploiCardFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload>
+          }
+          findFirst: {
+            args: Prisma.PratiqueEmploiCardFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PratiqueEmploiCardFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload>
+          }
+          findMany: {
+            args: Prisma.PratiqueEmploiCardFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload>[]
+          }
+          create: {
+            args: Prisma.PratiqueEmploiCardCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload>
+          }
+          createMany: {
+            args: Prisma.PratiqueEmploiCardCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PratiqueEmploiCardCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload>[]
+          }
+          delete: {
+            args: Prisma.PratiqueEmploiCardDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload>
+          }
+          update: {
+            args: Prisma.PratiqueEmploiCardUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload>
+          }
+          deleteMany: {
+            args: Prisma.PratiqueEmploiCardDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PratiqueEmploiCardUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PratiqueEmploiCardUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload>[]
+          }
+          upsert: {
+            args: Prisma.PratiqueEmploiCardUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PratiqueEmploiCardPayload>
+          }
+          aggregate: {
+            args: Prisma.PratiqueEmploiCardAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePratiqueEmploiCard>
+          }
+          groupBy: {
+            args: Prisma.PratiqueEmploiCardGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PratiqueEmploiCardGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PratiqueEmploiCardCountArgs<ExtArgs>
+            result: $Utils.Optional<PratiqueEmploiCardCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmploiPageContenu: {
+        payload: Prisma.$EmploiPageContenuPayload<ExtArgs>
+        fields: Prisma.EmploiPageContenuFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmploiPageContenuFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmploiPageContenuFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload>
+          }
+          findFirst: {
+            args: Prisma.EmploiPageContenuFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmploiPageContenuFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload>
+          }
+          findMany: {
+            args: Prisma.EmploiPageContenuFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload>[]
+          }
+          create: {
+            args: Prisma.EmploiPageContenuCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload>
+          }
+          createMany: {
+            args: Prisma.EmploiPageContenuCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmploiPageContenuCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload>[]
+          }
+          delete: {
+            args: Prisma.EmploiPageContenuDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload>
+          }
+          update: {
+            args: Prisma.EmploiPageContenuUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmploiPageContenuDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmploiPageContenuUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmploiPageContenuUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmploiPageContenuUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploiPageContenuPayload>
+          }
+          aggregate: {
+            args: Prisma.EmploiPageContenuAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmploiPageContenu>
+          }
+          groupBy: {
+            args: Prisma.EmploiPageContenuGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmploiPageContenuGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmploiPageContenuCountArgs<ExtArgs>
+            result: $Utils.Optional<EmploiPageContenuCountAggregateOutputType> | number
+          }
+        }
+      }
+      GestionEmploiContenu: {
+        payload: Prisma.$GestionEmploiContenuPayload<ExtArgs>
+        fields: Prisma.GestionEmploiContenuFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GestionEmploiContenuFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GestionEmploiContenuFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload>
+          }
+          findFirst: {
+            args: Prisma.GestionEmploiContenuFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GestionEmploiContenuFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload>
+          }
+          findMany: {
+            args: Prisma.GestionEmploiContenuFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload>[]
+          }
+          create: {
+            args: Prisma.GestionEmploiContenuCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload>
+          }
+          createMany: {
+            args: Prisma.GestionEmploiContenuCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GestionEmploiContenuCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload>[]
+          }
+          delete: {
+            args: Prisma.GestionEmploiContenuDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload>
+          }
+          update: {
+            args: Prisma.GestionEmploiContenuUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload>
+          }
+          deleteMany: {
+            args: Prisma.GestionEmploiContenuDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GestionEmploiContenuUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GestionEmploiContenuUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload>[]
+          }
+          upsert: {
+            args: Prisma.GestionEmploiContenuUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GestionEmploiContenuPayload>
+          }
+          aggregate: {
+            args: Prisma.GestionEmploiContenuAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGestionEmploiContenu>
+          }
+          groupBy: {
+            args: Prisma.GestionEmploiContenuGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GestionEmploiContenuGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GestionEmploiContenuCountArgs<ExtArgs>
+            result: $Utils.Optional<GestionEmploiContenuCountAggregateOutputType> | number
+          }
+        }
+      }
+      FormationEmployabiliteContenu: {
+        payload: Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>
+        fields: Prisma.FormationEmployabiliteContenuFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FormationEmployabiliteContenuFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FormationEmployabiliteContenuFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload>
+          }
+          findFirst: {
+            args: Prisma.FormationEmployabiliteContenuFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FormationEmployabiliteContenuFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload>
+          }
+          findMany: {
+            args: Prisma.FormationEmployabiliteContenuFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload>[]
+          }
+          create: {
+            args: Prisma.FormationEmployabiliteContenuCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload>
+          }
+          createMany: {
+            args: Prisma.FormationEmployabiliteContenuCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FormationEmployabiliteContenuCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload>[]
+          }
+          delete: {
+            args: Prisma.FormationEmployabiliteContenuDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload>
+          }
+          update: {
+            args: Prisma.FormationEmployabiliteContenuUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload>
+          }
+          deleteMany: {
+            args: Prisma.FormationEmployabiliteContenuDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FormationEmployabiliteContenuUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FormationEmployabiliteContenuUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload>[]
+          }
+          upsert: {
+            args: Prisma.FormationEmployabiliteContenuUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationEmployabiliteContenuPayload>
+          }
+          aggregate: {
+            args: Prisma.FormationEmployabiliteContenuAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFormationEmployabiliteContenu>
+          }
+          groupBy: {
+            args: Prisma.FormationEmployabiliteContenuGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FormationEmployabiliteContenuGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FormationEmployabiliteContenuCountArgs<ExtArgs>
+            result: $Utils.Optional<FormationEmployabiliteContenuCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3671,6 +4225,12 @@ export namespace Prisma {
     contact?: ContactOmit
     video?: VideoOmit
     webinaire?: WebinaireOmit
+    dispositifFinancement?: DispositifFinancementOmit
+    referentEmploi?: ReferentEmploiOmit
+    pratiqueEmploiCard?: PratiqueEmploiCardOmit
+    emploiPageContenu?: EmploiPageContenuOmit
+    gestionEmploiContenu?: GestionEmploiContenuOmit
+    formationEmployabiliteContenu?: FormationEmployabiliteContenuOmit
   }
 
   /* Types for Logging */
@@ -4122,6 +4682,55 @@ export namespace Prisma {
    */
   export type CovoiturageCountOutputTypeCountPassagersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CovoituragePassagerWhereInput
+  }
+
+
+  /**
+   * Count Type DispositifFinancementCountOutputType
+   */
+
+  export type DispositifFinancementCountOutputType = {
+    documents: number
+    videos: number
+    referents: number
+  }
+
+  export type DispositifFinancementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documents?: boolean | DispositifFinancementCountOutputTypeCountDocumentsArgs
+    videos?: boolean | DispositifFinancementCountOutputTypeCountVideosArgs
+    referents?: boolean | DispositifFinancementCountOutputTypeCountReferentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DispositifFinancementCountOutputType without action
+   */
+  export type DispositifFinancementCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancementCountOutputType
+     */
+    select?: DispositifFinancementCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DispositifFinancementCountOutputType without action
+   */
+  export type DispositifFinancementCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DocumentPasserelleWhereInput
+  }
+
+  /**
+   * DispositifFinancementCountOutputType without action
+   */
+  export type DispositifFinancementCountOutputTypeCountVideosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideoWhereInput
+  }
+
+  /**
+   * DispositifFinancementCountOutputType without action
+   */
+  export type DispositifFinancementCountOutputTypeCountReferentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReferentEmploiWhereInput
   }
 
 
@@ -32538,6 +33147,7 @@ export namespace Prisma {
     url: string | null
     type: $Enums.TypeDocument | null
     section: $Enums.SectionEmploi | null
+    dispositifId: string | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -32550,6 +33160,7 @@ export namespace Prisma {
     url: string | null
     type: $Enums.TypeDocument | null
     section: $Enums.SectionEmploi | null
+    dispositifId: string | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -32562,6 +33173,7 @@ export namespace Prisma {
     url: number
     type: number
     section: number
+    dispositifId: number
     ordre: number
     actif: number
     createdAt: number
@@ -32584,6 +33196,7 @@ export namespace Prisma {
     url?: true
     type?: true
     section?: true
+    dispositifId?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -32596,6 +33209,7 @@ export namespace Prisma {
     url?: true
     type?: true
     section?: true
+    dispositifId?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -32608,6 +33222,7 @@ export namespace Prisma {
     url?: true
     type?: true
     section?: true
+    dispositifId?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -32707,6 +33322,7 @@ export namespace Prisma {
     url: string
     type: $Enums.TypeDocument
     section: $Enums.SectionEmploi
+    dispositifId: string | null
     ordre: number
     actif: boolean
     createdAt: Date
@@ -32738,10 +33354,12 @@ export namespace Prisma {
     url?: boolean
     type?: boolean
     section?: boolean
+    dispositifId?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dispositif?: boolean | DocumentPasserelle$dispositifArgs<ExtArgs>
   }, ExtArgs["result"]["documentPasserelle"]>
 
   export type DocumentPasserelleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -32750,10 +33368,12 @@ export namespace Prisma {
     url?: boolean
     type?: boolean
     section?: boolean
+    dispositifId?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dispositif?: boolean | DocumentPasserelle$dispositifArgs<ExtArgs>
   }, ExtArgs["result"]["documentPasserelle"]>
 
   export type DocumentPasserelleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -32762,10 +33382,12 @@ export namespace Prisma {
     url?: boolean
     type?: boolean
     section?: boolean
+    dispositifId?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    dispositif?: boolean | DocumentPasserelle$dispositifArgs<ExtArgs>
   }, ExtArgs["result"]["documentPasserelle"]>
 
   export type DocumentPasserelleSelectScalar = {
@@ -32774,23 +33396,36 @@ export namespace Prisma {
     url?: boolean
     type?: boolean
     section?: boolean
+    dispositifId?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DocumentPasserelleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "url" | "type" | "section" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["documentPasserelle"]>
+  export type DocumentPasserelleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "url" | "type" | "section" | "dispositifId" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["documentPasserelle"]>
+  export type DocumentPasserelleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DocumentPasserelle$dispositifArgs<ExtArgs>
+  }
+  export type DocumentPasserelleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DocumentPasserelle$dispositifArgs<ExtArgs>
+  }
+  export type DocumentPasserelleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DocumentPasserelle$dispositifArgs<ExtArgs>
+  }
 
   export type $DocumentPasserellePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "DocumentPasserelle"
-    objects: {}
+    objects: {
+      dispositif: Prisma.$DispositifFinancementPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       titre: string
       url: string
       type: $Enums.TypeDocument
       section: $Enums.SectionEmploi
+      dispositifId: string | null
       ordre: number
       actif: boolean
       createdAt: Date
@@ -33189,6 +33824,7 @@ export namespace Prisma {
    */
   export interface Prisma__DocumentPasserelleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    dispositif<T extends DocumentPasserelle$dispositifArgs<ExtArgs> = {}>(args?: Subset<T, DocumentPasserelle$dispositifArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -33223,6 +33859,7 @@ export namespace Prisma {
     readonly url: FieldRef<"DocumentPasserelle", 'String'>
     readonly type: FieldRef<"DocumentPasserelle", 'TypeDocument'>
     readonly section: FieldRef<"DocumentPasserelle", 'SectionEmploi'>
+    readonly dispositifId: FieldRef<"DocumentPasserelle", 'String'>
     readonly ordre: FieldRef<"DocumentPasserelle", 'Int'>
     readonly actif: FieldRef<"DocumentPasserelle", 'Boolean'>
     readonly createdAt: FieldRef<"DocumentPasserelle", 'DateTime'>
@@ -33244,6 +33881,10 @@ export namespace Prisma {
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
+    /**
      * Filter, which DocumentPasserelle to fetch.
      */
     where: DocumentPasserelleWhereUniqueInput
@@ -33262,6 +33903,10 @@ export namespace Prisma {
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
+    /**
      * Filter, which DocumentPasserelle to fetch.
      */
     where: DocumentPasserelleWhereUniqueInput
@@ -33279,6 +33924,10 @@ export namespace Prisma {
      * Omit specific fields from the DocumentPasserelle
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
     /**
      * Filter, which DocumentPasserelle to fetch.
      */
@@ -33328,6 +33977,10 @@ export namespace Prisma {
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
+    /**
      * Filter, which DocumentPasserelle to fetch.
      */
     where?: DocumentPasserelleWhereInput
@@ -33375,6 +34028,10 @@ export namespace Prisma {
      * Omit specific fields from the DocumentPasserelle
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
     /**
      * Filter, which DocumentPasserelles to fetch.
      */
@@ -33424,6 +34081,10 @@ export namespace Prisma {
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
+    /**
      * The data needed to create a DocumentPasserelle.
      */
     data: XOR<DocumentPasserelleCreateInput, DocumentPasserelleUncheckedCreateInput>
@@ -33457,6 +34118,10 @@ export namespace Prisma {
      */
     data: DocumentPasserelleCreateManyInput | DocumentPasserelleCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -33471,6 +34136,10 @@ export namespace Prisma {
      * Omit specific fields from the DocumentPasserelle
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
     /**
      * The data needed to update a DocumentPasserelle.
      */
@@ -33523,6 +34192,10 @@ export namespace Prisma {
      * Limit how many DocumentPasserelles to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -33537,6 +34210,10 @@ export namespace Prisma {
      * Omit specific fields from the DocumentPasserelle
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
     /**
      * The filter to search for the DocumentPasserelle to update in case it exists.
      */
@@ -33564,6 +34241,10 @@ export namespace Prisma {
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
+    /**
      * Filter which DocumentPasserelle to delete.
      */
     where: DocumentPasserelleWhereUniqueInput
@@ -33584,6 +34265,25 @@ export namespace Prisma {
   }
 
   /**
+   * DocumentPasserelle.dispositif
+   */
+  export type DocumentPasserelle$dispositifArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    where?: DispositifFinancementWhereInput
+  }
+
+  /**
    * DocumentPasserelle without action
    */
   export type DocumentPasserelleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -33595,6 +34295,10 @@ export namespace Prisma {
      * Omit specific fields from the DocumentPasserelle
      */
     omit?: DocumentPasserelleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
   }
 
 
@@ -35783,6 +36487,7 @@ export namespace Prisma {
     url: string | null
     description: string | null
     section: $Enums.SectionEmploi | null
+    dispositifId: string | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -35794,6 +36499,7 @@ export namespace Prisma {
     url: string | null
     description: string | null
     section: $Enums.SectionEmploi | null
+    dispositifId: string | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -35805,6 +36511,7 @@ export namespace Prisma {
     url: number
     description: number
     section: number
+    dispositifId: number
     ordre: number
     actif: number
     createdAt: number
@@ -35826,6 +36533,7 @@ export namespace Prisma {
     url?: true
     description?: true
     section?: true
+    dispositifId?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -35837,6 +36545,7 @@ export namespace Prisma {
     url?: true
     description?: true
     section?: true
+    dispositifId?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -35848,6 +36557,7 @@ export namespace Prisma {
     url?: true
     description?: true
     section?: true
+    dispositifId?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -35946,6 +36656,7 @@ export namespace Prisma {
     url: string
     description: string | null
     section: $Enums.SectionEmploi | null
+    dispositifId: string | null
     ordre: number
     actif: boolean
     createdAt: Date
@@ -35976,9 +36687,11 @@ export namespace Prisma {
     url?: boolean
     description?: boolean
     section?: boolean
+    dispositifId?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
+    dispositif?: boolean | Video$dispositifArgs<ExtArgs>
   }, ExtArgs["result"]["video"]>
 
   export type VideoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -35987,9 +36700,11 @@ export namespace Prisma {
     url?: boolean
     description?: boolean
     section?: boolean
+    dispositifId?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
+    dispositif?: boolean | Video$dispositifArgs<ExtArgs>
   }, ExtArgs["result"]["video"]>
 
   export type VideoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -35998,9 +36713,11 @@ export namespace Prisma {
     url?: boolean
     description?: boolean
     section?: boolean
+    dispositifId?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
+    dispositif?: boolean | Video$dispositifArgs<ExtArgs>
   }, ExtArgs["result"]["video"]>
 
   export type VideoSelectScalar = {
@@ -36009,22 +36726,35 @@ export namespace Prisma {
     url?: boolean
     description?: boolean
     section?: boolean
+    dispositifId?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
   }
 
-  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "url" | "description" | "section" | "ordre" | "actif" | "createdAt", ExtArgs["result"]["video"]>
+  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "url" | "description" | "section" | "dispositifId" | "ordre" | "actif" | "createdAt", ExtArgs["result"]["video"]>
+  export type VideoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | Video$dispositifArgs<ExtArgs>
+  }
+  export type VideoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | Video$dispositifArgs<ExtArgs>
+  }
+  export type VideoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | Video$dispositifArgs<ExtArgs>
+  }
 
   export type $VideoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Video"
-    objects: {}
+    objects: {
+      dispositif: Prisma.$DispositifFinancementPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       titre: string
       url: string
       description: string | null
       section: $Enums.SectionEmploi | null
+      dispositifId: string | null
       ordre: number
       actif: boolean
       createdAt: Date
@@ -36422,6 +37152,7 @@ export namespace Prisma {
    */
   export interface Prisma__VideoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    dispositif<T extends Video$dispositifArgs<ExtArgs> = {}>(args?: Subset<T, Video$dispositifArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -36456,6 +37187,7 @@ export namespace Prisma {
     readonly url: FieldRef<"Video", 'String'>
     readonly description: FieldRef<"Video", 'String'>
     readonly section: FieldRef<"Video", 'SectionEmploi'>
+    readonly dispositifId: FieldRef<"Video", 'String'>
     readonly ordre: FieldRef<"Video", 'Int'>
     readonly actif: FieldRef<"Video", 'Boolean'>
     readonly createdAt: FieldRef<"Video", 'DateTime'>
@@ -36476,6 +37208,10 @@ export namespace Prisma {
      */
     omit?: VideoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
      * Filter, which Video to fetch.
      */
     where: VideoWhereUniqueInput
@@ -36494,6 +37230,10 @@ export namespace Prisma {
      */
     omit?: VideoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
      * Filter, which Video to fetch.
      */
     where: VideoWhereUniqueInput
@@ -36511,6 +37251,10 @@ export namespace Prisma {
      * Omit specific fields from the Video
      */
     omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
     /**
      * Filter, which Video to fetch.
      */
@@ -36560,6 +37304,10 @@ export namespace Prisma {
      */
     omit?: VideoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
      * Filter, which Video to fetch.
      */
     where?: VideoWhereInput
@@ -36607,6 +37355,10 @@ export namespace Prisma {
      * Omit specific fields from the Video
      */
     omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
     /**
      * Filter, which Videos to fetch.
      */
@@ -36656,6 +37408,10 @@ export namespace Prisma {
      */
     omit?: VideoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
      * The data needed to create a Video.
      */
     data: XOR<VideoCreateInput, VideoUncheckedCreateInput>
@@ -36689,6 +37445,10 @@ export namespace Prisma {
      */
     data: VideoCreateManyInput | VideoCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -36703,6 +37463,10 @@ export namespace Prisma {
      * Omit specific fields from the Video
      */
     omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
     /**
      * The data needed to update a Video.
      */
@@ -36755,6 +37519,10 @@ export namespace Prisma {
      * Limit how many Videos to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -36769,6 +37537,10 @@ export namespace Prisma {
      * Omit specific fields from the Video
      */
     omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
     /**
      * The filter to search for the Video to update in case it exists.
      */
@@ -36796,6 +37568,10 @@ export namespace Prisma {
      */
     omit?: VideoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    /**
      * Filter which Video to delete.
      */
     where: VideoWhereUniqueInput
@@ -36816,6 +37592,25 @@ export namespace Prisma {
   }
 
   /**
+   * Video.dispositif
+   */
+  export type Video$dispositifArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    where?: DispositifFinancementWhereInput
+  }
+
+  /**
    * Video without action
    */
   export type VideoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -36827,6 +37622,10 @@ export namespace Prisma {
      * Omit specific fields from the Video
      */
     omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
   }
 
 
@@ -37870,6 +38669,6536 @@ export namespace Prisma {
 
 
   /**
+   * Model DispositifFinancement
+   */
+
+  export type AggregateDispositifFinancement = {
+    _count: DispositifFinancementCountAggregateOutputType | null
+    _avg: DispositifFinancementAvgAggregateOutputType | null
+    _sum: DispositifFinancementSumAggregateOutputType | null
+    _min: DispositifFinancementMinAggregateOutputType | null
+    _max: DispositifFinancementMaxAggregateOutputType | null
+  }
+
+  export type DispositifFinancementAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DispositifFinancementSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DispositifFinancementMinAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    resume: string | null
+    contenu: string | null
+    montantMisEnAvant: string | null
+    image: string | null
+    videoUrl: string | null
+    ordre: number | null
+    actif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DispositifFinancementMaxAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    resume: string | null
+    contenu: string | null
+    montantMisEnAvant: string | null
+    image: string | null
+    videoUrl: string | null
+    ordre: number | null
+    actif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DispositifFinancementCountAggregateOutputType = {
+    id: number
+    titre: number
+    resume: number
+    contenu: number
+    montantMisEnAvant: number
+    image: number
+    videoUrl: number
+    ordre: number
+    actif: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DispositifFinancementAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DispositifFinancementSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DispositifFinancementMinAggregateInputType = {
+    id?: true
+    titre?: true
+    resume?: true
+    contenu?: true
+    montantMisEnAvant?: true
+    image?: true
+    videoUrl?: true
+    ordre?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DispositifFinancementMaxAggregateInputType = {
+    id?: true
+    titre?: true
+    resume?: true
+    contenu?: true
+    montantMisEnAvant?: true
+    image?: true
+    videoUrl?: true
+    ordre?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DispositifFinancementCountAggregateInputType = {
+    id?: true
+    titre?: true
+    resume?: true
+    contenu?: true
+    montantMisEnAvant?: true
+    image?: true
+    videoUrl?: true
+    ordre?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DispositifFinancementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DispositifFinancement to aggregate.
+     */
+    where?: DispositifFinancementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFinancements to fetch.
+     */
+    orderBy?: DispositifFinancementOrderByWithRelationInput | DispositifFinancementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DispositifFinancementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFinancements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFinancements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DispositifFinancements
+    **/
+    _count?: true | DispositifFinancementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DispositifFinancementAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DispositifFinancementSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DispositifFinancementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DispositifFinancementMaxAggregateInputType
+  }
+
+  export type GetDispositifFinancementAggregateType<T extends DispositifFinancementAggregateArgs> = {
+        [P in keyof T & keyof AggregateDispositifFinancement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDispositifFinancement[P]>
+      : GetScalarType<T[P], AggregateDispositifFinancement[P]>
+  }
+
+
+
+
+  export type DispositifFinancementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DispositifFinancementWhereInput
+    orderBy?: DispositifFinancementOrderByWithAggregationInput | DispositifFinancementOrderByWithAggregationInput[]
+    by: DispositifFinancementScalarFieldEnum[] | DispositifFinancementScalarFieldEnum
+    having?: DispositifFinancementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DispositifFinancementCountAggregateInputType | true
+    _avg?: DispositifFinancementAvgAggregateInputType
+    _sum?: DispositifFinancementSumAggregateInputType
+    _min?: DispositifFinancementMinAggregateInputType
+    _max?: DispositifFinancementMaxAggregateInputType
+  }
+
+  export type DispositifFinancementGroupByOutputType = {
+    id: string
+    titre: string
+    resume: string | null
+    contenu: string
+    montantMisEnAvant: string | null
+    image: string | null
+    videoUrl: string | null
+    ordre: number
+    actif: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: DispositifFinancementCountAggregateOutputType | null
+    _avg: DispositifFinancementAvgAggregateOutputType | null
+    _sum: DispositifFinancementSumAggregateOutputType | null
+    _min: DispositifFinancementMinAggregateOutputType | null
+    _max: DispositifFinancementMaxAggregateOutputType | null
+  }
+
+  type GetDispositifFinancementGroupByPayload<T extends DispositifFinancementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DispositifFinancementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DispositifFinancementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DispositifFinancementGroupByOutputType[P]>
+            : GetScalarType<T[P], DispositifFinancementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DispositifFinancementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    resume?: boolean
+    contenu?: boolean
+    montantMisEnAvant?: boolean
+    image?: boolean
+    videoUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    documents?: boolean | DispositifFinancement$documentsArgs<ExtArgs>
+    videos?: boolean | DispositifFinancement$videosArgs<ExtArgs>
+    referents?: boolean | DispositifFinancement$referentsArgs<ExtArgs>
+    _count?: boolean | DispositifFinancementCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dispositifFinancement"]>
+
+  export type DispositifFinancementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    resume?: boolean
+    contenu?: boolean
+    montantMisEnAvant?: boolean
+    image?: boolean
+    videoUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dispositifFinancement"]>
+
+  export type DispositifFinancementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    resume?: boolean
+    contenu?: boolean
+    montantMisEnAvant?: boolean
+    image?: boolean
+    videoUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dispositifFinancement"]>
+
+  export type DispositifFinancementSelectScalar = {
+    id?: boolean
+    titre?: boolean
+    resume?: boolean
+    contenu?: boolean
+    montantMisEnAvant?: boolean
+    image?: boolean
+    videoUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DispositifFinancementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "resume" | "contenu" | "montantMisEnAvant" | "image" | "videoUrl" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["dispositifFinancement"]>
+  export type DispositifFinancementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documents?: boolean | DispositifFinancement$documentsArgs<ExtArgs>
+    videos?: boolean | DispositifFinancement$videosArgs<ExtArgs>
+    referents?: boolean | DispositifFinancement$referentsArgs<ExtArgs>
+    _count?: boolean | DispositifFinancementCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DispositifFinancementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type DispositifFinancementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $DispositifFinancementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DispositifFinancement"
+    objects: {
+      documents: Prisma.$DocumentPasserellePayload<ExtArgs>[]
+      videos: Prisma.$VideoPayload<ExtArgs>[]
+      referents: Prisma.$ReferentEmploiPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      titre: string
+      resume: string | null
+      contenu: string
+      montantMisEnAvant: string | null
+      image: string | null
+      videoUrl: string | null
+      ordre: number
+      actif: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["dispositifFinancement"]>
+    composites: {}
+  }
+
+  type DispositifFinancementGetPayload<S extends boolean | null | undefined | DispositifFinancementDefaultArgs> = $Result.GetResult<Prisma.$DispositifFinancementPayload, S>
+
+  type DispositifFinancementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DispositifFinancementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DispositifFinancementCountAggregateInputType | true
+    }
+
+  export interface DispositifFinancementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DispositifFinancement'], meta: { name: 'DispositifFinancement' } }
+    /**
+     * Find zero or one DispositifFinancement that matches the filter.
+     * @param {DispositifFinancementFindUniqueArgs} args - Arguments to find a DispositifFinancement
+     * @example
+     * // Get one DispositifFinancement
+     * const dispositifFinancement = await prisma.dispositifFinancement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DispositifFinancementFindUniqueArgs>(args: SelectSubset<T, DispositifFinancementFindUniqueArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DispositifFinancement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DispositifFinancementFindUniqueOrThrowArgs} args - Arguments to find a DispositifFinancement
+     * @example
+     * // Get one DispositifFinancement
+     * const dispositifFinancement = await prisma.dispositifFinancement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DispositifFinancementFindUniqueOrThrowArgs>(args: SelectSubset<T, DispositifFinancementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DispositifFinancement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFinancementFindFirstArgs} args - Arguments to find a DispositifFinancement
+     * @example
+     * // Get one DispositifFinancement
+     * const dispositifFinancement = await prisma.dispositifFinancement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DispositifFinancementFindFirstArgs>(args?: SelectSubset<T, DispositifFinancementFindFirstArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DispositifFinancement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFinancementFindFirstOrThrowArgs} args - Arguments to find a DispositifFinancement
+     * @example
+     * // Get one DispositifFinancement
+     * const dispositifFinancement = await prisma.dispositifFinancement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DispositifFinancementFindFirstOrThrowArgs>(args?: SelectSubset<T, DispositifFinancementFindFirstOrThrowArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DispositifFinancements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFinancementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DispositifFinancements
+     * const dispositifFinancements = await prisma.dispositifFinancement.findMany()
+     * 
+     * // Get first 10 DispositifFinancements
+     * const dispositifFinancements = await prisma.dispositifFinancement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dispositifFinancementWithIdOnly = await prisma.dispositifFinancement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DispositifFinancementFindManyArgs>(args?: SelectSubset<T, DispositifFinancementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DispositifFinancement.
+     * @param {DispositifFinancementCreateArgs} args - Arguments to create a DispositifFinancement.
+     * @example
+     * // Create one DispositifFinancement
+     * const DispositifFinancement = await prisma.dispositifFinancement.create({
+     *   data: {
+     *     // ... data to create a DispositifFinancement
+     *   }
+     * })
+     * 
+     */
+    create<T extends DispositifFinancementCreateArgs>(args: SelectSubset<T, DispositifFinancementCreateArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DispositifFinancements.
+     * @param {DispositifFinancementCreateManyArgs} args - Arguments to create many DispositifFinancements.
+     * @example
+     * // Create many DispositifFinancements
+     * const dispositifFinancement = await prisma.dispositifFinancement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DispositifFinancementCreateManyArgs>(args?: SelectSubset<T, DispositifFinancementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DispositifFinancements and returns the data saved in the database.
+     * @param {DispositifFinancementCreateManyAndReturnArgs} args - Arguments to create many DispositifFinancements.
+     * @example
+     * // Create many DispositifFinancements
+     * const dispositifFinancement = await prisma.dispositifFinancement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DispositifFinancements and only return the `id`
+     * const dispositifFinancementWithIdOnly = await prisma.dispositifFinancement.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DispositifFinancementCreateManyAndReturnArgs>(args?: SelectSubset<T, DispositifFinancementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DispositifFinancement.
+     * @param {DispositifFinancementDeleteArgs} args - Arguments to delete one DispositifFinancement.
+     * @example
+     * // Delete one DispositifFinancement
+     * const DispositifFinancement = await prisma.dispositifFinancement.delete({
+     *   where: {
+     *     // ... filter to delete one DispositifFinancement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DispositifFinancementDeleteArgs>(args: SelectSubset<T, DispositifFinancementDeleteArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DispositifFinancement.
+     * @param {DispositifFinancementUpdateArgs} args - Arguments to update one DispositifFinancement.
+     * @example
+     * // Update one DispositifFinancement
+     * const dispositifFinancement = await prisma.dispositifFinancement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DispositifFinancementUpdateArgs>(args: SelectSubset<T, DispositifFinancementUpdateArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DispositifFinancements.
+     * @param {DispositifFinancementDeleteManyArgs} args - Arguments to filter DispositifFinancements to delete.
+     * @example
+     * // Delete a few DispositifFinancements
+     * const { count } = await prisma.dispositifFinancement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DispositifFinancementDeleteManyArgs>(args?: SelectSubset<T, DispositifFinancementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DispositifFinancements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFinancementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DispositifFinancements
+     * const dispositifFinancement = await prisma.dispositifFinancement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DispositifFinancementUpdateManyArgs>(args: SelectSubset<T, DispositifFinancementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DispositifFinancements and returns the data updated in the database.
+     * @param {DispositifFinancementUpdateManyAndReturnArgs} args - Arguments to update many DispositifFinancements.
+     * @example
+     * // Update many DispositifFinancements
+     * const dispositifFinancement = await prisma.dispositifFinancement.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DispositifFinancements and only return the `id`
+     * const dispositifFinancementWithIdOnly = await prisma.dispositifFinancement.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DispositifFinancementUpdateManyAndReturnArgs>(args: SelectSubset<T, DispositifFinancementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DispositifFinancement.
+     * @param {DispositifFinancementUpsertArgs} args - Arguments to update or create a DispositifFinancement.
+     * @example
+     * // Update or create a DispositifFinancement
+     * const dispositifFinancement = await prisma.dispositifFinancement.upsert({
+     *   create: {
+     *     // ... data to create a DispositifFinancement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DispositifFinancement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DispositifFinancementUpsertArgs>(args: SelectSubset<T, DispositifFinancementUpsertArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DispositifFinancements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFinancementCountArgs} args - Arguments to filter DispositifFinancements to count.
+     * @example
+     * // Count the number of DispositifFinancements
+     * const count = await prisma.dispositifFinancement.count({
+     *   where: {
+     *     // ... the filter for the DispositifFinancements we want to count
+     *   }
+     * })
+    **/
+    count<T extends DispositifFinancementCountArgs>(
+      args?: Subset<T, DispositifFinancementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DispositifFinancementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DispositifFinancement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFinancementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DispositifFinancementAggregateArgs>(args: Subset<T, DispositifFinancementAggregateArgs>): Prisma.PrismaPromise<GetDispositifFinancementAggregateType<T>>
+
+    /**
+     * Group by DispositifFinancement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DispositifFinancementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DispositifFinancementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DispositifFinancementGroupByArgs['orderBy'] }
+        : { orderBy?: DispositifFinancementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DispositifFinancementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDispositifFinancementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DispositifFinancement model
+   */
+  readonly fields: DispositifFinancementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DispositifFinancement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DispositifFinancementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    documents<T extends DispositifFinancement$documentsArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFinancement$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentPasserellePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    videos<T extends DispositifFinancement$videosArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFinancement$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    referents<T extends DispositifFinancement$referentsArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFinancement$referentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DispositifFinancement model
+   */
+  interface DispositifFinancementFieldRefs {
+    readonly id: FieldRef<"DispositifFinancement", 'String'>
+    readonly titre: FieldRef<"DispositifFinancement", 'String'>
+    readonly resume: FieldRef<"DispositifFinancement", 'String'>
+    readonly contenu: FieldRef<"DispositifFinancement", 'String'>
+    readonly montantMisEnAvant: FieldRef<"DispositifFinancement", 'String'>
+    readonly image: FieldRef<"DispositifFinancement", 'String'>
+    readonly videoUrl: FieldRef<"DispositifFinancement", 'String'>
+    readonly ordre: FieldRef<"DispositifFinancement", 'Int'>
+    readonly actif: FieldRef<"DispositifFinancement", 'Boolean'>
+    readonly createdAt: FieldRef<"DispositifFinancement", 'DateTime'>
+    readonly updatedAt: FieldRef<"DispositifFinancement", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DispositifFinancement findUnique
+   */
+  export type DispositifFinancementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFinancement to fetch.
+     */
+    where: DispositifFinancementWhereUniqueInput
+  }
+
+  /**
+   * DispositifFinancement findUniqueOrThrow
+   */
+  export type DispositifFinancementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFinancement to fetch.
+     */
+    where: DispositifFinancementWhereUniqueInput
+  }
+
+  /**
+   * DispositifFinancement findFirst
+   */
+  export type DispositifFinancementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFinancement to fetch.
+     */
+    where?: DispositifFinancementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFinancements to fetch.
+     */
+    orderBy?: DispositifFinancementOrderByWithRelationInput | DispositifFinancementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DispositifFinancements.
+     */
+    cursor?: DispositifFinancementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFinancements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFinancements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DispositifFinancements.
+     */
+    distinct?: DispositifFinancementScalarFieldEnum | DispositifFinancementScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFinancement findFirstOrThrow
+   */
+  export type DispositifFinancementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFinancement to fetch.
+     */
+    where?: DispositifFinancementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFinancements to fetch.
+     */
+    orderBy?: DispositifFinancementOrderByWithRelationInput | DispositifFinancementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DispositifFinancements.
+     */
+    cursor?: DispositifFinancementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFinancements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFinancements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DispositifFinancements.
+     */
+    distinct?: DispositifFinancementScalarFieldEnum | DispositifFinancementScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFinancement findMany
+   */
+  export type DispositifFinancementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    /**
+     * Filter, which DispositifFinancements to fetch.
+     */
+    where?: DispositifFinancementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DispositifFinancements to fetch.
+     */
+    orderBy?: DispositifFinancementOrderByWithRelationInput | DispositifFinancementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DispositifFinancements.
+     */
+    cursor?: DispositifFinancementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DispositifFinancements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DispositifFinancements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DispositifFinancements.
+     */
+    distinct?: DispositifFinancementScalarFieldEnum | DispositifFinancementScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFinancement create
+   */
+  export type DispositifFinancementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DispositifFinancement.
+     */
+    data: XOR<DispositifFinancementCreateInput, DispositifFinancementUncheckedCreateInput>
+  }
+
+  /**
+   * DispositifFinancement createMany
+   */
+  export type DispositifFinancementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DispositifFinancements.
+     */
+    data: DispositifFinancementCreateManyInput | DispositifFinancementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DispositifFinancement createManyAndReturn
+   */
+  export type DispositifFinancementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * The data used to create many DispositifFinancements.
+     */
+    data: DispositifFinancementCreateManyInput | DispositifFinancementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DispositifFinancement update
+   */
+  export type DispositifFinancementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DispositifFinancement.
+     */
+    data: XOR<DispositifFinancementUpdateInput, DispositifFinancementUncheckedUpdateInput>
+    /**
+     * Choose, which DispositifFinancement to update.
+     */
+    where: DispositifFinancementWhereUniqueInput
+  }
+
+  /**
+   * DispositifFinancement updateMany
+   */
+  export type DispositifFinancementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DispositifFinancements.
+     */
+    data: XOR<DispositifFinancementUpdateManyMutationInput, DispositifFinancementUncheckedUpdateManyInput>
+    /**
+     * Filter which DispositifFinancements to update
+     */
+    where?: DispositifFinancementWhereInput
+    /**
+     * Limit how many DispositifFinancements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DispositifFinancement updateManyAndReturn
+   */
+  export type DispositifFinancementUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * The data used to update DispositifFinancements.
+     */
+    data: XOR<DispositifFinancementUpdateManyMutationInput, DispositifFinancementUncheckedUpdateManyInput>
+    /**
+     * Filter which DispositifFinancements to update
+     */
+    where?: DispositifFinancementWhereInput
+    /**
+     * Limit how many DispositifFinancements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DispositifFinancement upsert
+   */
+  export type DispositifFinancementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DispositifFinancement to update in case it exists.
+     */
+    where: DispositifFinancementWhereUniqueInput
+    /**
+     * In case the DispositifFinancement found by the `where` argument doesn't exist, create a new DispositifFinancement with this data.
+     */
+    create: XOR<DispositifFinancementCreateInput, DispositifFinancementUncheckedCreateInput>
+    /**
+     * In case the DispositifFinancement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DispositifFinancementUpdateInput, DispositifFinancementUncheckedUpdateInput>
+  }
+
+  /**
+   * DispositifFinancement delete
+   */
+  export type DispositifFinancementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+    /**
+     * Filter which DispositifFinancement to delete.
+     */
+    where: DispositifFinancementWhereUniqueInput
+  }
+
+  /**
+   * DispositifFinancement deleteMany
+   */
+  export type DispositifFinancementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DispositifFinancements to delete
+     */
+    where?: DispositifFinancementWhereInput
+    /**
+     * Limit how many DispositifFinancements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DispositifFinancement.documents
+   */
+  export type DispositifFinancement$documentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentPasserelle
+     */
+    select?: DocumentPasserelleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentPasserelle
+     */
+    omit?: DocumentPasserelleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentPasserelleInclude<ExtArgs> | null
+    where?: DocumentPasserelleWhereInput
+    orderBy?: DocumentPasserelleOrderByWithRelationInput | DocumentPasserelleOrderByWithRelationInput[]
+    cursor?: DocumentPasserelleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DocumentPasserelleScalarFieldEnum | DocumentPasserelleScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFinancement.videos
+   */
+  export type DispositifFinancement$videosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    where?: VideoWhereInput
+    orderBy?: VideoOrderByWithRelationInput | VideoOrderByWithRelationInput[]
+    cursor?: VideoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideoScalarFieldEnum | VideoScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFinancement.referents
+   */
+  export type DispositifFinancement$referentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    where?: ReferentEmploiWhereInput
+    orderBy?: ReferentEmploiOrderByWithRelationInput | ReferentEmploiOrderByWithRelationInput[]
+    cursor?: ReferentEmploiWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReferentEmploiScalarFieldEnum | ReferentEmploiScalarFieldEnum[]
+  }
+
+  /**
+   * DispositifFinancement without action
+   */
+  export type DispositifFinancementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DispositifFinancement
+     */
+    select?: DispositifFinancementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DispositifFinancement
+     */
+    omit?: DispositifFinancementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DispositifFinancementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ReferentEmploi
+   */
+
+  export type AggregateReferentEmploi = {
+    _count: ReferentEmploiCountAggregateOutputType | null
+    _avg: ReferentEmploiAvgAggregateOutputType | null
+    _sum: ReferentEmploiSumAggregateOutputType | null
+    _min: ReferentEmploiMinAggregateOutputType | null
+    _max: ReferentEmploiMaxAggregateOutputType | null
+  }
+
+  export type ReferentEmploiAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type ReferentEmploiSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type ReferentEmploiMinAggregateOutputType = {
+    id: string | null
+    dispositifId: string | null
+    departement: string | null
+    referent: string | null
+    email: string | null
+    codeFiche: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type ReferentEmploiMaxAggregateOutputType = {
+    id: string | null
+    dispositifId: string | null
+    departement: string | null
+    referent: string | null
+    email: string | null
+    codeFiche: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type ReferentEmploiCountAggregateOutputType = {
+    id: number
+    dispositifId: number
+    departement: number
+    referent: number
+    email: number
+    codeFiche: number
+    ordre: number
+    actif: number
+    _all: number
+  }
+
+
+  export type ReferentEmploiAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type ReferentEmploiSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type ReferentEmploiMinAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    departement?: true
+    referent?: true
+    email?: true
+    codeFiche?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type ReferentEmploiMaxAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    departement?: true
+    referent?: true
+    email?: true
+    codeFiche?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type ReferentEmploiCountAggregateInputType = {
+    id?: true
+    dispositifId?: true
+    departement?: true
+    referent?: true
+    email?: true
+    codeFiche?: true
+    ordre?: true
+    actif?: true
+    _all?: true
+  }
+
+  export type ReferentEmploiAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReferentEmploi to aggregate.
+     */
+    where?: ReferentEmploiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReferentEmplois to fetch.
+     */
+    orderBy?: ReferentEmploiOrderByWithRelationInput | ReferentEmploiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReferentEmploiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReferentEmplois from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReferentEmplois.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ReferentEmplois
+    **/
+    _count?: true | ReferentEmploiCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ReferentEmploiAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ReferentEmploiSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReferentEmploiMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReferentEmploiMaxAggregateInputType
+  }
+
+  export type GetReferentEmploiAggregateType<T extends ReferentEmploiAggregateArgs> = {
+        [P in keyof T & keyof AggregateReferentEmploi]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReferentEmploi[P]>
+      : GetScalarType<T[P], AggregateReferentEmploi[P]>
+  }
+
+
+
+
+  export type ReferentEmploiGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReferentEmploiWhereInput
+    orderBy?: ReferentEmploiOrderByWithAggregationInput | ReferentEmploiOrderByWithAggregationInput[]
+    by: ReferentEmploiScalarFieldEnum[] | ReferentEmploiScalarFieldEnum
+    having?: ReferentEmploiScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReferentEmploiCountAggregateInputType | true
+    _avg?: ReferentEmploiAvgAggregateInputType
+    _sum?: ReferentEmploiSumAggregateInputType
+    _min?: ReferentEmploiMinAggregateInputType
+    _max?: ReferentEmploiMaxAggregateInputType
+  }
+
+  export type ReferentEmploiGroupByOutputType = {
+    id: string
+    dispositifId: string
+    departement: string
+    referent: string
+    email: string | null
+    codeFiche: string | null
+    ordre: number
+    actif: boolean
+    _count: ReferentEmploiCountAggregateOutputType | null
+    _avg: ReferentEmploiAvgAggregateOutputType | null
+    _sum: ReferentEmploiSumAggregateOutputType | null
+    _min: ReferentEmploiMinAggregateOutputType | null
+    _max: ReferentEmploiMaxAggregateOutputType | null
+  }
+
+  type GetReferentEmploiGroupByPayload<T extends ReferentEmploiGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReferentEmploiGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReferentEmploiGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReferentEmploiGroupByOutputType[P]>
+            : GetScalarType<T[P], ReferentEmploiGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReferentEmploiSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    departement?: boolean
+    referent?: boolean
+    email?: boolean
+    codeFiche?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFinancementDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["referentEmploi"]>
+
+  export type ReferentEmploiSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    departement?: boolean
+    referent?: boolean
+    email?: boolean
+    codeFiche?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFinancementDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["referentEmploi"]>
+
+  export type ReferentEmploiSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dispositifId?: boolean
+    departement?: boolean
+    referent?: boolean
+    email?: boolean
+    codeFiche?: boolean
+    ordre?: boolean
+    actif?: boolean
+    dispositif?: boolean | DispositifFinancementDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["referentEmploi"]>
+
+  export type ReferentEmploiSelectScalar = {
+    id?: boolean
+    dispositifId?: boolean
+    departement?: boolean
+    referent?: boolean
+    email?: boolean
+    codeFiche?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }
+
+  export type ReferentEmploiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dispositifId" | "departement" | "referent" | "email" | "codeFiche" | "ordre" | "actif", ExtArgs["result"]["referentEmploi"]>
+  export type ReferentEmploiInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFinancementDefaultArgs<ExtArgs>
+  }
+  export type ReferentEmploiIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFinancementDefaultArgs<ExtArgs>
+  }
+  export type ReferentEmploiIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispositif?: boolean | DispositifFinancementDefaultArgs<ExtArgs>
+  }
+
+  export type $ReferentEmploiPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ReferentEmploi"
+    objects: {
+      dispositif: Prisma.$DispositifFinancementPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      dispositifId: string
+      departement: string
+      referent: string
+      email: string | null
+      codeFiche: string | null
+      ordre: number
+      actif: boolean
+    }, ExtArgs["result"]["referentEmploi"]>
+    composites: {}
+  }
+
+  type ReferentEmploiGetPayload<S extends boolean | null | undefined | ReferentEmploiDefaultArgs> = $Result.GetResult<Prisma.$ReferentEmploiPayload, S>
+
+  type ReferentEmploiCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReferentEmploiFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReferentEmploiCountAggregateInputType | true
+    }
+
+  export interface ReferentEmploiDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReferentEmploi'], meta: { name: 'ReferentEmploi' } }
+    /**
+     * Find zero or one ReferentEmploi that matches the filter.
+     * @param {ReferentEmploiFindUniqueArgs} args - Arguments to find a ReferentEmploi
+     * @example
+     * // Get one ReferentEmploi
+     * const referentEmploi = await prisma.referentEmploi.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReferentEmploiFindUniqueArgs>(args: SelectSubset<T, ReferentEmploiFindUniqueArgs<ExtArgs>>): Prisma__ReferentEmploiClient<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ReferentEmploi that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReferentEmploiFindUniqueOrThrowArgs} args - Arguments to find a ReferentEmploi
+     * @example
+     * // Get one ReferentEmploi
+     * const referentEmploi = await prisma.referentEmploi.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReferentEmploiFindUniqueOrThrowArgs>(args: SelectSubset<T, ReferentEmploiFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReferentEmploiClient<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReferentEmploi that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferentEmploiFindFirstArgs} args - Arguments to find a ReferentEmploi
+     * @example
+     * // Get one ReferentEmploi
+     * const referentEmploi = await prisma.referentEmploi.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReferentEmploiFindFirstArgs>(args?: SelectSubset<T, ReferentEmploiFindFirstArgs<ExtArgs>>): Prisma__ReferentEmploiClient<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReferentEmploi that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferentEmploiFindFirstOrThrowArgs} args - Arguments to find a ReferentEmploi
+     * @example
+     * // Get one ReferentEmploi
+     * const referentEmploi = await prisma.referentEmploi.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReferentEmploiFindFirstOrThrowArgs>(args?: SelectSubset<T, ReferentEmploiFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReferentEmploiClient<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ReferentEmplois that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferentEmploiFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ReferentEmplois
+     * const referentEmplois = await prisma.referentEmploi.findMany()
+     * 
+     * // Get first 10 ReferentEmplois
+     * const referentEmplois = await prisma.referentEmploi.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const referentEmploiWithIdOnly = await prisma.referentEmploi.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReferentEmploiFindManyArgs>(args?: SelectSubset<T, ReferentEmploiFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ReferentEmploi.
+     * @param {ReferentEmploiCreateArgs} args - Arguments to create a ReferentEmploi.
+     * @example
+     * // Create one ReferentEmploi
+     * const ReferentEmploi = await prisma.referentEmploi.create({
+     *   data: {
+     *     // ... data to create a ReferentEmploi
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReferentEmploiCreateArgs>(args: SelectSubset<T, ReferentEmploiCreateArgs<ExtArgs>>): Prisma__ReferentEmploiClient<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ReferentEmplois.
+     * @param {ReferentEmploiCreateManyArgs} args - Arguments to create many ReferentEmplois.
+     * @example
+     * // Create many ReferentEmplois
+     * const referentEmploi = await prisma.referentEmploi.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReferentEmploiCreateManyArgs>(args?: SelectSubset<T, ReferentEmploiCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ReferentEmplois and returns the data saved in the database.
+     * @param {ReferentEmploiCreateManyAndReturnArgs} args - Arguments to create many ReferentEmplois.
+     * @example
+     * // Create many ReferentEmplois
+     * const referentEmploi = await prisma.referentEmploi.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ReferentEmplois and only return the `id`
+     * const referentEmploiWithIdOnly = await prisma.referentEmploi.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReferentEmploiCreateManyAndReturnArgs>(args?: SelectSubset<T, ReferentEmploiCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ReferentEmploi.
+     * @param {ReferentEmploiDeleteArgs} args - Arguments to delete one ReferentEmploi.
+     * @example
+     * // Delete one ReferentEmploi
+     * const ReferentEmploi = await prisma.referentEmploi.delete({
+     *   where: {
+     *     // ... filter to delete one ReferentEmploi
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReferentEmploiDeleteArgs>(args: SelectSubset<T, ReferentEmploiDeleteArgs<ExtArgs>>): Prisma__ReferentEmploiClient<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ReferentEmploi.
+     * @param {ReferentEmploiUpdateArgs} args - Arguments to update one ReferentEmploi.
+     * @example
+     * // Update one ReferentEmploi
+     * const referentEmploi = await prisma.referentEmploi.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReferentEmploiUpdateArgs>(args: SelectSubset<T, ReferentEmploiUpdateArgs<ExtArgs>>): Prisma__ReferentEmploiClient<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ReferentEmplois.
+     * @param {ReferentEmploiDeleteManyArgs} args - Arguments to filter ReferentEmplois to delete.
+     * @example
+     * // Delete a few ReferentEmplois
+     * const { count } = await prisma.referentEmploi.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReferentEmploiDeleteManyArgs>(args?: SelectSubset<T, ReferentEmploiDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReferentEmplois.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferentEmploiUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ReferentEmplois
+     * const referentEmploi = await prisma.referentEmploi.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReferentEmploiUpdateManyArgs>(args: SelectSubset<T, ReferentEmploiUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReferentEmplois and returns the data updated in the database.
+     * @param {ReferentEmploiUpdateManyAndReturnArgs} args - Arguments to update many ReferentEmplois.
+     * @example
+     * // Update many ReferentEmplois
+     * const referentEmploi = await prisma.referentEmploi.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ReferentEmplois and only return the `id`
+     * const referentEmploiWithIdOnly = await prisma.referentEmploi.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReferentEmploiUpdateManyAndReturnArgs>(args: SelectSubset<T, ReferentEmploiUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ReferentEmploi.
+     * @param {ReferentEmploiUpsertArgs} args - Arguments to update or create a ReferentEmploi.
+     * @example
+     * // Update or create a ReferentEmploi
+     * const referentEmploi = await prisma.referentEmploi.upsert({
+     *   create: {
+     *     // ... data to create a ReferentEmploi
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ReferentEmploi we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReferentEmploiUpsertArgs>(args: SelectSubset<T, ReferentEmploiUpsertArgs<ExtArgs>>): Prisma__ReferentEmploiClient<$Result.GetResult<Prisma.$ReferentEmploiPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ReferentEmplois.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferentEmploiCountArgs} args - Arguments to filter ReferentEmplois to count.
+     * @example
+     * // Count the number of ReferentEmplois
+     * const count = await prisma.referentEmploi.count({
+     *   where: {
+     *     // ... the filter for the ReferentEmplois we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReferentEmploiCountArgs>(
+      args?: Subset<T, ReferentEmploiCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReferentEmploiCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ReferentEmploi.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferentEmploiAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReferentEmploiAggregateArgs>(args: Subset<T, ReferentEmploiAggregateArgs>): Prisma.PrismaPromise<GetReferentEmploiAggregateType<T>>
+
+    /**
+     * Group by ReferentEmploi.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferentEmploiGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReferentEmploiGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReferentEmploiGroupByArgs['orderBy'] }
+        : { orderBy?: ReferentEmploiGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReferentEmploiGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReferentEmploiGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ReferentEmploi model
+   */
+  readonly fields: ReferentEmploiFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ReferentEmploi.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReferentEmploiClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    dispositif<T extends DispositifFinancementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DispositifFinancementDefaultArgs<ExtArgs>>): Prisma__DispositifFinancementClient<$Result.GetResult<Prisma.$DispositifFinancementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ReferentEmploi model
+   */
+  interface ReferentEmploiFieldRefs {
+    readonly id: FieldRef<"ReferentEmploi", 'String'>
+    readonly dispositifId: FieldRef<"ReferentEmploi", 'String'>
+    readonly departement: FieldRef<"ReferentEmploi", 'String'>
+    readonly referent: FieldRef<"ReferentEmploi", 'String'>
+    readonly email: FieldRef<"ReferentEmploi", 'String'>
+    readonly codeFiche: FieldRef<"ReferentEmploi", 'String'>
+    readonly ordre: FieldRef<"ReferentEmploi", 'Int'>
+    readonly actif: FieldRef<"ReferentEmploi", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ReferentEmploi findUnique
+   */
+  export type ReferentEmploiFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    /**
+     * Filter, which ReferentEmploi to fetch.
+     */
+    where: ReferentEmploiWhereUniqueInput
+  }
+
+  /**
+   * ReferentEmploi findUniqueOrThrow
+   */
+  export type ReferentEmploiFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    /**
+     * Filter, which ReferentEmploi to fetch.
+     */
+    where: ReferentEmploiWhereUniqueInput
+  }
+
+  /**
+   * ReferentEmploi findFirst
+   */
+  export type ReferentEmploiFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    /**
+     * Filter, which ReferentEmploi to fetch.
+     */
+    where?: ReferentEmploiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReferentEmplois to fetch.
+     */
+    orderBy?: ReferentEmploiOrderByWithRelationInput | ReferentEmploiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReferentEmplois.
+     */
+    cursor?: ReferentEmploiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReferentEmplois from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReferentEmplois.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReferentEmplois.
+     */
+    distinct?: ReferentEmploiScalarFieldEnum | ReferentEmploiScalarFieldEnum[]
+  }
+
+  /**
+   * ReferentEmploi findFirstOrThrow
+   */
+  export type ReferentEmploiFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    /**
+     * Filter, which ReferentEmploi to fetch.
+     */
+    where?: ReferentEmploiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReferentEmplois to fetch.
+     */
+    orderBy?: ReferentEmploiOrderByWithRelationInput | ReferentEmploiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReferentEmplois.
+     */
+    cursor?: ReferentEmploiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReferentEmplois from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReferentEmplois.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReferentEmplois.
+     */
+    distinct?: ReferentEmploiScalarFieldEnum | ReferentEmploiScalarFieldEnum[]
+  }
+
+  /**
+   * ReferentEmploi findMany
+   */
+  export type ReferentEmploiFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    /**
+     * Filter, which ReferentEmplois to fetch.
+     */
+    where?: ReferentEmploiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReferentEmplois to fetch.
+     */
+    orderBy?: ReferentEmploiOrderByWithRelationInput | ReferentEmploiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ReferentEmplois.
+     */
+    cursor?: ReferentEmploiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReferentEmplois from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReferentEmplois.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReferentEmplois.
+     */
+    distinct?: ReferentEmploiScalarFieldEnum | ReferentEmploiScalarFieldEnum[]
+  }
+
+  /**
+   * ReferentEmploi create
+   */
+  export type ReferentEmploiCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ReferentEmploi.
+     */
+    data: XOR<ReferentEmploiCreateInput, ReferentEmploiUncheckedCreateInput>
+  }
+
+  /**
+   * ReferentEmploi createMany
+   */
+  export type ReferentEmploiCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ReferentEmplois.
+     */
+    data: ReferentEmploiCreateManyInput | ReferentEmploiCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReferentEmploi createManyAndReturn
+   */
+  export type ReferentEmploiCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * The data used to create many ReferentEmplois.
+     */
+    data: ReferentEmploiCreateManyInput | ReferentEmploiCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReferentEmploi update
+   */
+  export type ReferentEmploiUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ReferentEmploi.
+     */
+    data: XOR<ReferentEmploiUpdateInput, ReferentEmploiUncheckedUpdateInput>
+    /**
+     * Choose, which ReferentEmploi to update.
+     */
+    where: ReferentEmploiWhereUniqueInput
+  }
+
+  /**
+   * ReferentEmploi updateMany
+   */
+  export type ReferentEmploiUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ReferentEmplois.
+     */
+    data: XOR<ReferentEmploiUpdateManyMutationInput, ReferentEmploiUncheckedUpdateManyInput>
+    /**
+     * Filter which ReferentEmplois to update
+     */
+    where?: ReferentEmploiWhereInput
+    /**
+     * Limit how many ReferentEmplois to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReferentEmploi updateManyAndReturn
+   */
+  export type ReferentEmploiUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * The data used to update ReferentEmplois.
+     */
+    data: XOR<ReferentEmploiUpdateManyMutationInput, ReferentEmploiUncheckedUpdateManyInput>
+    /**
+     * Filter which ReferentEmplois to update
+     */
+    where?: ReferentEmploiWhereInput
+    /**
+     * Limit how many ReferentEmplois to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReferentEmploi upsert
+   */
+  export type ReferentEmploiUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ReferentEmploi to update in case it exists.
+     */
+    where: ReferentEmploiWhereUniqueInput
+    /**
+     * In case the ReferentEmploi found by the `where` argument doesn't exist, create a new ReferentEmploi with this data.
+     */
+    create: XOR<ReferentEmploiCreateInput, ReferentEmploiUncheckedCreateInput>
+    /**
+     * In case the ReferentEmploi was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReferentEmploiUpdateInput, ReferentEmploiUncheckedUpdateInput>
+  }
+
+  /**
+   * ReferentEmploi delete
+   */
+  export type ReferentEmploiDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+    /**
+     * Filter which ReferentEmploi to delete.
+     */
+    where: ReferentEmploiWhereUniqueInput
+  }
+
+  /**
+   * ReferentEmploi deleteMany
+   */
+  export type ReferentEmploiDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReferentEmplois to delete
+     */
+    where?: ReferentEmploiWhereInput
+    /**
+     * Limit how many ReferentEmplois to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReferentEmploi without action
+   */
+  export type ReferentEmploiDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReferentEmploi
+     */
+    select?: ReferentEmploiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReferentEmploi
+     */
+    omit?: ReferentEmploiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferentEmploiInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PratiqueEmploiCard
+   */
+
+  export type AggregatePratiqueEmploiCard = {
+    _count: PratiqueEmploiCardCountAggregateOutputType | null
+    _avg: PratiqueEmploiCardAvgAggregateOutputType | null
+    _sum: PratiqueEmploiCardSumAggregateOutputType | null
+    _min: PratiqueEmploiCardMinAggregateOutputType | null
+    _max: PratiqueEmploiCardMaxAggregateOutputType | null
+  }
+
+  export type PratiqueEmploiCardAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type PratiqueEmploiCardSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type PratiqueEmploiCardMinAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    description: string | null
+    icone: $Enums.IconePratique | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type PratiqueEmploiCardMaxAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    description: string | null
+    icone: $Enums.IconePratique | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type PratiqueEmploiCardCountAggregateOutputType = {
+    id: number
+    titre: number
+    description: number
+    icone: number
+    ordre: number
+    actif: number
+    _all: number
+  }
+
+
+  export type PratiqueEmploiCardAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type PratiqueEmploiCardSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type PratiqueEmploiCardMinAggregateInputType = {
+    id?: true
+    titre?: true
+    description?: true
+    icone?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type PratiqueEmploiCardMaxAggregateInputType = {
+    id?: true
+    titre?: true
+    description?: true
+    icone?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type PratiqueEmploiCardCountAggregateInputType = {
+    id?: true
+    titre?: true
+    description?: true
+    icone?: true
+    ordre?: true
+    actif?: true
+    _all?: true
+  }
+
+  export type PratiqueEmploiCardAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PratiqueEmploiCard to aggregate.
+     */
+    where?: PratiqueEmploiCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PratiqueEmploiCards to fetch.
+     */
+    orderBy?: PratiqueEmploiCardOrderByWithRelationInput | PratiqueEmploiCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PratiqueEmploiCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PratiqueEmploiCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PratiqueEmploiCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PratiqueEmploiCards
+    **/
+    _count?: true | PratiqueEmploiCardCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PratiqueEmploiCardAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PratiqueEmploiCardSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PratiqueEmploiCardMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PratiqueEmploiCardMaxAggregateInputType
+  }
+
+  export type GetPratiqueEmploiCardAggregateType<T extends PratiqueEmploiCardAggregateArgs> = {
+        [P in keyof T & keyof AggregatePratiqueEmploiCard]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePratiqueEmploiCard[P]>
+      : GetScalarType<T[P], AggregatePratiqueEmploiCard[P]>
+  }
+
+
+
+
+  export type PratiqueEmploiCardGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PratiqueEmploiCardWhereInput
+    orderBy?: PratiqueEmploiCardOrderByWithAggregationInput | PratiqueEmploiCardOrderByWithAggregationInput[]
+    by: PratiqueEmploiCardScalarFieldEnum[] | PratiqueEmploiCardScalarFieldEnum
+    having?: PratiqueEmploiCardScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PratiqueEmploiCardCountAggregateInputType | true
+    _avg?: PratiqueEmploiCardAvgAggregateInputType
+    _sum?: PratiqueEmploiCardSumAggregateInputType
+    _min?: PratiqueEmploiCardMinAggregateInputType
+    _max?: PratiqueEmploiCardMaxAggregateInputType
+  }
+
+  export type PratiqueEmploiCardGroupByOutputType = {
+    id: string
+    titre: string
+    description: string | null
+    icone: $Enums.IconePratique
+    ordre: number
+    actif: boolean
+    _count: PratiqueEmploiCardCountAggregateOutputType | null
+    _avg: PratiqueEmploiCardAvgAggregateOutputType | null
+    _sum: PratiqueEmploiCardSumAggregateOutputType | null
+    _min: PratiqueEmploiCardMinAggregateOutputType | null
+    _max: PratiqueEmploiCardMaxAggregateOutputType | null
+  }
+
+  type GetPratiqueEmploiCardGroupByPayload<T extends PratiqueEmploiCardGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PratiqueEmploiCardGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PratiqueEmploiCardGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PratiqueEmploiCardGroupByOutputType[P]>
+            : GetScalarType<T[P], PratiqueEmploiCardGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PratiqueEmploiCardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    description?: boolean
+    icone?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }, ExtArgs["result"]["pratiqueEmploiCard"]>
+
+  export type PratiqueEmploiCardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    description?: boolean
+    icone?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }, ExtArgs["result"]["pratiqueEmploiCard"]>
+
+  export type PratiqueEmploiCardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    description?: boolean
+    icone?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }, ExtArgs["result"]["pratiqueEmploiCard"]>
+
+  export type PratiqueEmploiCardSelectScalar = {
+    id?: boolean
+    titre?: boolean
+    description?: boolean
+    icone?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }
+
+  export type PratiqueEmploiCardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "description" | "icone" | "ordre" | "actif", ExtArgs["result"]["pratiqueEmploiCard"]>
+
+  export type $PratiqueEmploiCardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PratiqueEmploiCard"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      titre: string
+      description: string | null
+      icone: $Enums.IconePratique
+      ordre: number
+      actif: boolean
+    }, ExtArgs["result"]["pratiqueEmploiCard"]>
+    composites: {}
+  }
+
+  type PratiqueEmploiCardGetPayload<S extends boolean | null | undefined | PratiqueEmploiCardDefaultArgs> = $Result.GetResult<Prisma.$PratiqueEmploiCardPayload, S>
+
+  type PratiqueEmploiCardCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PratiqueEmploiCardFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PratiqueEmploiCardCountAggregateInputType | true
+    }
+
+  export interface PratiqueEmploiCardDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PratiqueEmploiCard'], meta: { name: 'PratiqueEmploiCard' } }
+    /**
+     * Find zero or one PratiqueEmploiCard that matches the filter.
+     * @param {PratiqueEmploiCardFindUniqueArgs} args - Arguments to find a PratiqueEmploiCard
+     * @example
+     * // Get one PratiqueEmploiCard
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PratiqueEmploiCardFindUniqueArgs>(args: SelectSubset<T, PratiqueEmploiCardFindUniqueArgs<ExtArgs>>): Prisma__PratiqueEmploiCardClient<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PratiqueEmploiCard that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PratiqueEmploiCardFindUniqueOrThrowArgs} args - Arguments to find a PratiqueEmploiCard
+     * @example
+     * // Get one PratiqueEmploiCard
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PratiqueEmploiCardFindUniqueOrThrowArgs>(args: SelectSubset<T, PratiqueEmploiCardFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PratiqueEmploiCardClient<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PratiqueEmploiCard that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PratiqueEmploiCardFindFirstArgs} args - Arguments to find a PratiqueEmploiCard
+     * @example
+     * // Get one PratiqueEmploiCard
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PratiqueEmploiCardFindFirstArgs>(args?: SelectSubset<T, PratiqueEmploiCardFindFirstArgs<ExtArgs>>): Prisma__PratiqueEmploiCardClient<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PratiqueEmploiCard that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PratiqueEmploiCardFindFirstOrThrowArgs} args - Arguments to find a PratiqueEmploiCard
+     * @example
+     * // Get one PratiqueEmploiCard
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PratiqueEmploiCardFindFirstOrThrowArgs>(args?: SelectSubset<T, PratiqueEmploiCardFindFirstOrThrowArgs<ExtArgs>>): Prisma__PratiqueEmploiCardClient<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PratiqueEmploiCards that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PratiqueEmploiCardFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PratiqueEmploiCards
+     * const pratiqueEmploiCards = await prisma.pratiqueEmploiCard.findMany()
+     * 
+     * // Get first 10 PratiqueEmploiCards
+     * const pratiqueEmploiCards = await prisma.pratiqueEmploiCard.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pratiqueEmploiCardWithIdOnly = await prisma.pratiqueEmploiCard.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PratiqueEmploiCardFindManyArgs>(args?: SelectSubset<T, PratiqueEmploiCardFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PratiqueEmploiCard.
+     * @param {PratiqueEmploiCardCreateArgs} args - Arguments to create a PratiqueEmploiCard.
+     * @example
+     * // Create one PratiqueEmploiCard
+     * const PratiqueEmploiCard = await prisma.pratiqueEmploiCard.create({
+     *   data: {
+     *     // ... data to create a PratiqueEmploiCard
+     *   }
+     * })
+     * 
+     */
+    create<T extends PratiqueEmploiCardCreateArgs>(args: SelectSubset<T, PratiqueEmploiCardCreateArgs<ExtArgs>>): Prisma__PratiqueEmploiCardClient<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PratiqueEmploiCards.
+     * @param {PratiqueEmploiCardCreateManyArgs} args - Arguments to create many PratiqueEmploiCards.
+     * @example
+     * // Create many PratiqueEmploiCards
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PratiqueEmploiCardCreateManyArgs>(args?: SelectSubset<T, PratiqueEmploiCardCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PratiqueEmploiCards and returns the data saved in the database.
+     * @param {PratiqueEmploiCardCreateManyAndReturnArgs} args - Arguments to create many PratiqueEmploiCards.
+     * @example
+     * // Create many PratiqueEmploiCards
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PratiqueEmploiCards and only return the `id`
+     * const pratiqueEmploiCardWithIdOnly = await prisma.pratiqueEmploiCard.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PratiqueEmploiCardCreateManyAndReturnArgs>(args?: SelectSubset<T, PratiqueEmploiCardCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PratiqueEmploiCard.
+     * @param {PratiqueEmploiCardDeleteArgs} args - Arguments to delete one PratiqueEmploiCard.
+     * @example
+     * // Delete one PratiqueEmploiCard
+     * const PratiqueEmploiCard = await prisma.pratiqueEmploiCard.delete({
+     *   where: {
+     *     // ... filter to delete one PratiqueEmploiCard
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PratiqueEmploiCardDeleteArgs>(args: SelectSubset<T, PratiqueEmploiCardDeleteArgs<ExtArgs>>): Prisma__PratiqueEmploiCardClient<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PratiqueEmploiCard.
+     * @param {PratiqueEmploiCardUpdateArgs} args - Arguments to update one PratiqueEmploiCard.
+     * @example
+     * // Update one PratiqueEmploiCard
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PratiqueEmploiCardUpdateArgs>(args: SelectSubset<T, PratiqueEmploiCardUpdateArgs<ExtArgs>>): Prisma__PratiqueEmploiCardClient<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PratiqueEmploiCards.
+     * @param {PratiqueEmploiCardDeleteManyArgs} args - Arguments to filter PratiqueEmploiCards to delete.
+     * @example
+     * // Delete a few PratiqueEmploiCards
+     * const { count } = await prisma.pratiqueEmploiCard.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PratiqueEmploiCardDeleteManyArgs>(args?: SelectSubset<T, PratiqueEmploiCardDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PratiqueEmploiCards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PratiqueEmploiCardUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PratiqueEmploiCards
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PratiqueEmploiCardUpdateManyArgs>(args: SelectSubset<T, PratiqueEmploiCardUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PratiqueEmploiCards and returns the data updated in the database.
+     * @param {PratiqueEmploiCardUpdateManyAndReturnArgs} args - Arguments to update many PratiqueEmploiCards.
+     * @example
+     * // Update many PratiqueEmploiCards
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PratiqueEmploiCards and only return the `id`
+     * const pratiqueEmploiCardWithIdOnly = await prisma.pratiqueEmploiCard.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PratiqueEmploiCardUpdateManyAndReturnArgs>(args: SelectSubset<T, PratiqueEmploiCardUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PratiqueEmploiCard.
+     * @param {PratiqueEmploiCardUpsertArgs} args - Arguments to update or create a PratiqueEmploiCard.
+     * @example
+     * // Update or create a PratiqueEmploiCard
+     * const pratiqueEmploiCard = await prisma.pratiqueEmploiCard.upsert({
+     *   create: {
+     *     // ... data to create a PratiqueEmploiCard
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PratiqueEmploiCard we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PratiqueEmploiCardUpsertArgs>(args: SelectSubset<T, PratiqueEmploiCardUpsertArgs<ExtArgs>>): Prisma__PratiqueEmploiCardClient<$Result.GetResult<Prisma.$PratiqueEmploiCardPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PratiqueEmploiCards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PratiqueEmploiCardCountArgs} args - Arguments to filter PratiqueEmploiCards to count.
+     * @example
+     * // Count the number of PratiqueEmploiCards
+     * const count = await prisma.pratiqueEmploiCard.count({
+     *   where: {
+     *     // ... the filter for the PratiqueEmploiCards we want to count
+     *   }
+     * })
+    **/
+    count<T extends PratiqueEmploiCardCountArgs>(
+      args?: Subset<T, PratiqueEmploiCardCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PratiqueEmploiCardCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PratiqueEmploiCard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PratiqueEmploiCardAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PratiqueEmploiCardAggregateArgs>(args: Subset<T, PratiqueEmploiCardAggregateArgs>): Prisma.PrismaPromise<GetPratiqueEmploiCardAggregateType<T>>
+
+    /**
+     * Group by PratiqueEmploiCard.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PratiqueEmploiCardGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PratiqueEmploiCardGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PratiqueEmploiCardGroupByArgs['orderBy'] }
+        : { orderBy?: PratiqueEmploiCardGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PratiqueEmploiCardGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPratiqueEmploiCardGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PratiqueEmploiCard model
+   */
+  readonly fields: PratiqueEmploiCardFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PratiqueEmploiCard.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PratiqueEmploiCardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PratiqueEmploiCard model
+   */
+  interface PratiqueEmploiCardFieldRefs {
+    readonly id: FieldRef<"PratiqueEmploiCard", 'String'>
+    readonly titre: FieldRef<"PratiqueEmploiCard", 'String'>
+    readonly description: FieldRef<"PratiqueEmploiCard", 'String'>
+    readonly icone: FieldRef<"PratiqueEmploiCard", 'IconePratique'>
+    readonly ordre: FieldRef<"PratiqueEmploiCard", 'Int'>
+    readonly actif: FieldRef<"PratiqueEmploiCard", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PratiqueEmploiCard findUnique
+   */
+  export type PratiqueEmploiCardFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * Filter, which PratiqueEmploiCard to fetch.
+     */
+    where: PratiqueEmploiCardWhereUniqueInput
+  }
+
+  /**
+   * PratiqueEmploiCard findUniqueOrThrow
+   */
+  export type PratiqueEmploiCardFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * Filter, which PratiqueEmploiCard to fetch.
+     */
+    where: PratiqueEmploiCardWhereUniqueInput
+  }
+
+  /**
+   * PratiqueEmploiCard findFirst
+   */
+  export type PratiqueEmploiCardFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * Filter, which PratiqueEmploiCard to fetch.
+     */
+    where?: PratiqueEmploiCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PratiqueEmploiCards to fetch.
+     */
+    orderBy?: PratiqueEmploiCardOrderByWithRelationInput | PratiqueEmploiCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PratiqueEmploiCards.
+     */
+    cursor?: PratiqueEmploiCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PratiqueEmploiCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PratiqueEmploiCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PratiqueEmploiCards.
+     */
+    distinct?: PratiqueEmploiCardScalarFieldEnum | PratiqueEmploiCardScalarFieldEnum[]
+  }
+
+  /**
+   * PratiqueEmploiCard findFirstOrThrow
+   */
+  export type PratiqueEmploiCardFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * Filter, which PratiqueEmploiCard to fetch.
+     */
+    where?: PratiqueEmploiCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PratiqueEmploiCards to fetch.
+     */
+    orderBy?: PratiqueEmploiCardOrderByWithRelationInput | PratiqueEmploiCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PratiqueEmploiCards.
+     */
+    cursor?: PratiqueEmploiCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PratiqueEmploiCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PratiqueEmploiCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PratiqueEmploiCards.
+     */
+    distinct?: PratiqueEmploiCardScalarFieldEnum | PratiqueEmploiCardScalarFieldEnum[]
+  }
+
+  /**
+   * PratiqueEmploiCard findMany
+   */
+  export type PratiqueEmploiCardFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * Filter, which PratiqueEmploiCards to fetch.
+     */
+    where?: PratiqueEmploiCardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PratiqueEmploiCards to fetch.
+     */
+    orderBy?: PratiqueEmploiCardOrderByWithRelationInput | PratiqueEmploiCardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PratiqueEmploiCards.
+     */
+    cursor?: PratiqueEmploiCardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PratiqueEmploiCards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PratiqueEmploiCards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PratiqueEmploiCards.
+     */
+    distinct?: PratiqueEmploiCardScalarFieldEnum | PratiqueEmploiCardScalarFieldEnum[]
+  }
+
+  /**
+   * PratiqueEmploiCard create
+   */
+  export type PratiqueEmploiCardCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PratiqueEmploiCard.
+     */
+    data: XOR<PratiqueEmploiCardCreateInput, PratiqueEmploiCardUncheckedCreateInput>
+  }
+
+  /**
+   * PratiqueEmploiCard createMany
+   */
+  export type PratiqueEmploiCardCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PratiqueEmploiCards.
+     */
+    data: PratiqueEmploiCardCreateManyInput | PratiqueEmploiCardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PratiqueEmploiCard createManyAndReturn
+   */
+  export type PratiqueEmploiCardCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * The data used to create many PratiqueEmploiCards.
+     */
+    data: PratiqueEmploiCardCreateManyInput | PratiqueEmploiCardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PratiqueEmploiCard update
+   */
+  export type PratiqueEmploiCardUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PratiqueEmploiCard.
+     */
+    data: XOR<PratiqueEmploiCardUpdateInput, PratiqueEmploiCardUncheckedUpdateInput>
+    /**
+     * Choose, which PratiqueEmploiCard to update.
+     */
+    where: PratiqueEmploiCardWhereUniqueInput
+  }
+
+  /**
+   * PratiqueEmploiCard updateMany
+   */
+  export type PratiqueEmploiCardUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PratiqueEmploiCards.
+     */
+    data: XOR<PratiqueEmploiCardUpdateManyMutationInput, PratiqueEmploiCardUncheckedUpdateManyInput>
+    /**
+     * Filter which PratiqueEmploiCards to update
+     */
+    where?: PratiqueEmploiCardWhereInput
+    /**
+     * Limit how many PratiqueEmploiCards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PratiqueEmploiCard updateManyAndReturn
+   */
+  export type PratiqueEmploiCardUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * The data used to update PratiqueEmploiCards.
+     */
+    data: XOR<PratiqueEmploiCardUpdateManyMutationInput, PratiqueEmploiCardUncheckedUpdateManyInput>
+    /**
+     * Filter which PratiqueEmploiCards to update
+     */
+    where?: PratiqueEmploiCardWhereInput
+    /**
+     * Limit how many PratiqueEmploiCards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PratiqueEmploiCard upsert
+   */
+  export type PratiqueEmploiCardUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PratiqueEmploiCard to update in case it exists.
+     */
+    where: PratiqueEmploiCardWhereUniqueInput
+    /**
+     * In case the PratiqueEmploiCard found by the `where` argument doesn't exist, create a new PratiqueEmploiCard with this data.
+     */
+    create: XOR<PratiqueEmploiCardCreateInput, PratiqueEmploiCardUncheckedCreateInput>
+    /**
+     * In case the PratiqueEmploiCard was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PratiqueEmploiCardUpdateInput, PratiqueEmploiCardUncheckedUpdateInput>
+  }
+
+  /**
+   * PratiqueEmploiCard delete
+   */
+  export type PratiqueEmploiCardDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+    /**
+     * Filter which PratiqueEmploiCard to delete.
+     */
+    where: PratiqueEmploiCardWhereUniqueInput
+  }
+
+  /**
+   * PratiqueEmploiCard deleteMany
+   */
+  export type PratiqueEmploiCardDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PratiqueEmploiCards to delete
+     */
+    where?: PratiqueEmploiCardWhereInput
+    /**
+     * Limit how many PratiqueEmploiCards to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PratiqueEmploiCard without action
+   */
+  export type PratiqueEmploiCardDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PratiqueEmploiCard
+     */
+    select?: PratiqueEmploiCardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PratiqueEmploiCard
+     */
+    omit?: PratiqueEmploiCardOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmploiPageContenu
+   */
+
+  export type AggregateEmploiPageContenu = {
+    _count: EmploiPageContenuCountAggregateOutputType | null
+    _min: EmploiPageContenuMinAggregateOutputType | null
+    _max: EmploiPageContenuMaxAggregateOutputType | null
+  }
+
+  export type EmploiPageContenuMinAggregateOutputType = {
+    id: string | null
+    introTexte: string | null
+    introListe: string | null
+    videoCommunauteUrl: string | null
+    updatedAt: Date | null
+  }
+
+  export type EmploiPageContenuMaxAggregateOutputType = {
+    id: string | null
+    introTexte: string | null
+    introListe: string | null
+    videoCommunauteUrl: string | null
+    updatedAt: Date | null
+  }
+
+  export type EmploiPageContenuCountAggregateOutputType = {
+    id: number
+    introTexte: number
+    introListe: number
+    videoCommunauteUrl: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmploiPageContenuMinAggregateInputType = {
+    id?: true
+    introTexte?: true
+    introListe?: true
+    videoCommunauteUrl?: true
+    updatedAt?: true
+  }
+
+  export type EmploiPageContenuMaxAggregateInputType = {
+    id?: true
+    introTexte?: true
+    introListe?: true
+    videoCommunauteUrl?: true
+    updatedAt?: true
+  }
+
+  export type EmploiPageContenuCountAggregateInputType = {
+    id?: true
+    introTexte?: true
+    introListe?: true
+    videoCommunauteUrl?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmploiPageContenuAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmploiPageContenu to aggregate.
+     */
+    where?: EmploiPageContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploiPageContenus to fetch.
+     */
+    orderBy?: EmploiPageContenuOrderByWithRelationInput | EmploiPageContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmploiPageContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploiPageContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploiPageContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmploiPageContenus
+    **/
+    _count?: true | EmploiPageContenuCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmploiPageContenuMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmploiPageContenuMaxAggregateInputType
+  }
+
+  export type GetEmploiPageContenuAggregateType<T extends EmploiPageContenuAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmploiPageContenu]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmploiPageContenu[P]>
+      : GetScalarType<T[P], AggregateEmploiPageContenu[P]>
+  }
+
+
+
+
+  export type EmploiPageContenuGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmploiPageContenuWhereInput
+    orderBy?: EmploiPageContenuOrderByWithAggregationInput | EmploiPageContenuOrderByWithAggregationInput[]
+    by: EmploiPageContenuScalarFieldEnum[] | EmploiPageContenuScalarFieldEnum
+    having?: EmploiPageContenuScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmploiPageContenuCountAggregateInputType | true
+    _min?: EmploiPageContenuMinAggregateInputType
+    _max?: EmploiPageContenuMaxAggregateInputType
+  }
+
+  export type EmploiPageContenuGroupByOutputType = {
+    id: string
+    introTexte: string
+    introListe: string
+    videoCommunauteUrl: string | null
+    updatedAt: Date
+    _count: EmploiPageContenuCountAggregateOutputType | null
+    _min: EmploiPageContenuMinAggregateOutputType | null
+    _max: EmploiPageContenuMaxAggregateOutputType | null
+  }
+
+  type GetEmploiPageContenuGroupByPayload<T extends EmploiPageContenuGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmploiPageContenuGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmploiPageContenuGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmploiPageContenuGroupByOutputType[P]>
+            : GetScalarType<T[P], EmploiPageContenuGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmploiPageContenuSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    introTexte?: boolean
+    introListe?: boolean
+    videoCommunauteUrl?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["emploiPageContenu"]>
+
+  export type EmploiPageContenuSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    introTexte?: boolean
+    introListe?: boolean
+    videoCommunauteUrl?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["emploiPageContenu"]>
+
+  export type EmploiPageContenuSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    introTexte?: boolean
+    introListe?: boolean
+    videoCommunauteUrl?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["emploiPageContenu"]>
+
+  export type EmploiPageContenuSelectScalar = {
+    id?: boolean
+    introTexte?: boolean
+    introListe?: boolean
+    videoCommunauteUrl?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmploiPageContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "introTexte" | "introListe" | "videoCommunauteUrl" | "updatedAt", ExtArgs["result"]["emploiPageContenu"]>
+
+  export type $EmploiPageContenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmploiPageContenu"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      introTexte: string
+      introListe: string
+      videoCommunauteUrl: string | null
+      updatedAt: Date
+    }, ExtArgs["result"]["emploiPageContenu"]>
+    composites: {}
+  }
+
+  type EmploiPageContenuGetPayload<S extends boolean | null | undefined | EmploiPageContenuDefaultArgs> = $Result.GetResult<Prisma.$EmploiPageContenuPayload, S>
+
+  type EmploiPageContenuCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmploiPageContenuFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmploiPageContenuCountAggregateInputType | true
+    }
+
+  export interface EmploiPageContenuDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmploiPageContenu'], meta: { name: 'EmploiPageContenu' } }
+    /**
+     * Find zero or one EmploiPageContenu that matches the filter.
+     * @param {EmploiPageContenuFindUniqueArgs} args - Arguments to find a EmploiPageContenu
+     * @example
+     * // Get one EmploiPageContenu
+     * const emploiPageContenu = await prisma.emploiPageContenu.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmploiPageContenuFindUniqueArgs>(args: SelectSubset<T, EmploiPageContenuFindUniqueArgs<ExtArgs>>): Prisma__EmploiPageContenuClient<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmploiPageContenu that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmploiPageContenuFindUniqueOrThrowArgs} args - Arguments to find a EmploiPageContenu
+     * @example
+     * // Get one EmploiPageContenu
+     * const emploiPageContenu = await prisma.emploiPageContenu.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmploiPageContenuFindUniqueOrThrowArgs>(args: SelectSubset<T, EmploiPageContenuFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmploiPageContenuClient<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmploiPageContenu that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploiPageContenuFindFirstArgs} args - Arguments to find a EmploiPageContenu
+     * @example
+     * // Get one EmploiPageContenu
+     * const emploiPageContenu = await prisma.emploiPageContenu.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmploiPageContenuFindFirstArgs>(args?: SelectSubset<T, EmploiPageContenuFindFirstArgs<ExtArgs>>): Prisma__EmploiPageContenuClient<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmploiPageContenu that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploiPageContenuFindFirstOrThrowArgs} args - Arguments to find a EmploiPageContenu
+     * @example
+     * // Get one EmploiPageContenu
+     * const emploiPageContenu = await prisma.emploiPageContenu.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmploiPageContenuFindFirstOrThrowArgs>(args?: SelectSubset<T, EmploiPageContenuFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmploiPageContenuClient<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmploiPageContenus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploiPageContenuFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmploiPageContenus
+     * const emploiPageContenus = await prisma.emploiPageContenu.findMany()
+     * 
+     * // Get first 10 EmploiPageContenus
+     * const emploiPageContenus = await prisma.emploiPageContenu.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const emploiPageContenuWithIdOnly = await prisma.emploiPageContenu.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmploiPageContenuFindManyArgs>(args?: SelectSubset<T, EmploiPageContenuFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmploiPageContenu.
+     * @param {EmploiPageContenuCreateArgs} args - Arguments to create a EmploiPageContenu.
+     * @example
+     * // Create one EmploiPageContenu
+     * const EmploiPageContenu = await prisma.emploiPageContenu.create({
+     *   data: {
+     *     // ... data to create a EmploiPageContenu
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmploiPageContenuCreateArgs>(args: SelectSubset<T, EmploiPageContenuCreateArgs<ExtArgs>>): Prisma__EmploiPageContenuClient<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmploiPageContenus.
+     * @param {EmploiPageContenuCreateManyArgs} args - Arguments to create many EmploiPageContenus.
+     * @example
+     * // Create many EmploiPageContenus
+     * const emploiPageContenu = await prisma.emploiPageContenu.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmploiPageContenuCreateManyArgs>(args?: SelectSubset<T, EmploiPageContenuCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmploiPageContenus and returns the data saved in the database.
+     * @param {EmploiPageContenuCreateManyAndReturnArgs} args - Arguments to create many EmploiPageContenus.
+     * @example
+     * // Create many EmploiPageContenus
+     * const emploiPageContenu = await prisma.emploiPageContenu.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmploiPageContenus and only return the `id`
+     * const emploiPageContenuWithIdOnly = await prisma.emploiPageContenu.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmploiPageContenuCreateManyAndReturnArgs>(args?: SelectSubset<T, EmploiPageContenuCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmploiPageContenu.
+     * @param {EmploiPageContenuDeleteArgs} args - Arguments to delete one EmploiPageContenu.
+     * @example
+     * // Delete one EmploiPageContenu
+     * const EmploiPageContenu = await prisma.emploiPageContenu.delete({
+     *   where: {
+     *     // ... filter to delete one EmploiPageContenu
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmploiPageContenuDeleteArgs>(args: SelectSubset<T, EmploiPageContenuDeleteArgs<ExtArgs>>): Prisma__EmploiPageContenuClient<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmploiPageContenu.
+     * @param {EmploiPageContenuUpdateArgs} args - Arguments to update one EmploiPageContenu.
+     * @example
+     * // Update one EmploiPageContenu
+     * const emploiPageContenu = await prisma.emploiPageContenu.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmploiPageContenuUpdateArgs>(args: SelectSubset<T, EmploiPageContenuUpdateArgs<ExtArgs>>): Prisma__EmploiPageContenuClient<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmploiPageContenus.
+     * @param {EmploiPageContenuDeleteManyArgs} args - Arguments to filter EmploiPageContenus to delete.
+     * @example
+     * // Delete a few EmploiPageContenus
+     * const { count } = await prisma.emploiPageContenu.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmploiPageContenuDeleteManyArgs>(args?: SelectSubset<T, EmploiPageContenuDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmploiPageContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploiPageContenuUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmploiPageContenus
+     * const emploiPageContenu = await prisma.emploiPageContenu.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmploiPageContenuUpdateManyArgs>(args: SelectSubset<T, EmploiPageContenuUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmploiPageContenus and returns the data updated in the database.
+     * @param {EmploiPageContenuUpdateManyAndReturnArgs} args - Arguments to update many EmploiPageContenus.
+     * @example
+     * // Update many EmploiPageContenus
+     * const emploiPageContenu = await prisma.emploiPageContenu.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmploiPageContenus and only return the `id`
+     * const emploiPageContenuWithIdOnly = await prisma.emploiPageContenu.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmploiPageContenuUpdateManyAndReturnArgs>(args: SelectSubset<T, EmploiPageContenuUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmploiPageContenu.
+     * @param {EmploiPageContenuUpsertArgs} args - Arguments to update or create a EmploiPageContenu.
+     * @example
+     * // Update or create a EmploiPageContenu
+     * const emploiPageContenu = await prisma.emploiPageContenu.upsert({
+     *   create: {
+     *     // ... data to create a EmploiPageContenu
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmploiPageContenu we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmploiPageContenuUpsertArgs>(args: SelectSubset<T, EmploiPageContenuUpsertArgs<ExtArgs>>): Prisma__EmploiPageContenuClient<$Result.GetResult<Prisma.$EmploiPageContenuPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmploiPageContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploiPageContenuCountArgs} args - Arguments to filter EmploiPageContenus to count.
+     * @example
+     * // Count the number of EmploiPageContenus
+     * const count = await prisma.emploiPageContenu.count({
+     *   where: {
+     *     // ... the filter for the EmploiPageContenus we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmploiPageContenuCountArgs>(
+      args?: Subset<T, EmploiPageContenuCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmploiPageContenuCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmploiPageContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploiPageContenuAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmploiPageContenuAggregateArgs>(args: Subset<T, EmploiPageContenuAggregateArgs>): Prisma.PrismaPromise<GetEmploiPageContenuAggregateType<T>>
+
+    /**
+     * Group by EmploiPageContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploiPageContenuGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmploiPageContenuGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmploiPageContenuGroupByArgs['orderBy'] }
+        : { orderBy?: EmploiPageContenuGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmploiPageContenuGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmploiPageContenuGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmploiPageContenu model
+   */
+  readonly fields: EmploiPageContenuFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmploiPageContenu.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmploiPageContenuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmploiPageContenu model
+   */
+  interface EmploiPageContenuFieldRefs {
+    readonly id: FieldRef<"EmploiPageContenu", 'String'>
+    readonly introTexte: FieldRef<"EmploiPageContenu", 'String'>
+    readonly introListe: FieldRef<"EmploiPageContenu", 'String'>
+    readonly videoCommunauteUrl: FieldRef<"EmploiPageContenu", 'String'>
+    readonly updatedAt: FieldRef<"EmploiPageContenu", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmploiPageContenu findUnique
+   */
+  export type EmploiPageContenuFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploiPageContenu to fetch.
+     */
+    where: EmploiPageContenuWhereUniqueInput
+  }
+
+  /**
+   * EmploiPageContenu findUniqueOrThrow
+   */
+  export type EmploiPageContenuFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploiPageContenu to fetch.
+     */
+    where: EmploiPageContenuWhereUniqueInput
+  }
+
+  /**
+   * EmploiPageContenu findFirst
+   */
+  export type EmploiPageContenuFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploiPageContenu to fetch.
+     */
+    where?: EmploiPageContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploiPageContenus to fetch.
+     */
+    orderBy?: EmploiPageContenuOrderByWithRelationInput | EmploiPageContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmploiPageContenus.
+     */
+    cursor?: EmploiPageContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploiPageContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploiPageContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmploiPageContenus.
+     */
+    distinct?: EmploiPageContenuScalarFieldEnum | EmploiPageContenuScalarFieldEnum[]
+  }
+
+  /**
+   * EmploiPageContenu findFirstOrThrow
+   */
+  export type EmploiPageContenuFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploiPageContenu to fetch.
+     */
+    where?: EmploiPageContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploiPageContenus to fetch.
+     */
+    orderBy?: EmploiPageContenuOrderByWithRelationInput | EmploiPageContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmploiPageContenus.
+     */
+    cursor?: EmploiPageContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploiPageContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploiPageContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmploiPageContenus.
+     */
+    distinct?: EmploiPageContenuScalarFieldEnum | EmploiPageContenuScalarFieldEnum[]
+  }
+
+  /**
+   * EmploiPageContenu findMany
+   */
+  export type EmploiPageContenuFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploiPageContenus to fetch.
+     */
+    where?: EmploiPageContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploiPageContenus to fetch.
+     */
+    orderBy?: EmploiPageContenuOrderByWithRelationInput | EmploiPageContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmploiPageContenus.
+     */
+    cursor?: EmploiPageContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploiPageContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploiPageContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmploiPageContenus.
+     */
+    distinct?: EmploiPageContenuScalarFieldEnum | EmploiPageContenuScalarFieldEnum[]
+  }
+
+  /**
+   * EmploiPageContenu create
+   */
+  export type EmploiPageContenuCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to create a EmploiPageContenu.
+     */
+    data: XOR<EmploiPageContenuCreateInput, EmploiPageContenuUncheckedCreateInput>
+  }
+
+  /**
+   * EmploiPageContenu createMany
+   */
+  export type EmploiPageContenuCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmploiPageContenus.
+     */
+    data: EmploiPageContenuCreateManyInput | EmploiPageContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmploiPageContenu createManyAndReturn
+   */
+  export type EmploiPageContenuCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmploiPageContenus.
+     */
+    data: EmploiPageContenuCreateManyInput | EmploiPageContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EmploiPageContenu update
+   */
+  export type EmploiPageContenuUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to update a EmploiPageContenu.
+     */
+    data: XOR<EmploiPageContenuUpdateInput, EmploiPageContenuUncheckedUpdateInput>
+    /**
+     * Choose, which EmploiPageContenu to update.
+     */
+    where: EmploiPageContenuWhereUniqueInput
+  }
+
+  /**
+   * EmploiPageContenu updateMany
+   */
+  export type EmploiPageContenuUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmploiPageContenus.
+     */
+    data: XOR<EmploiPageContenuUpdateManyMutationInput, EmploiPageContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which EmploiPageContenus to update
+     */
+    where?: EmploiPageContenuWhereInput
+    /**
+     * Limit how many EmploiPageContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmploiPageContenu updateManyAndReturn
+   */
+  export type EmploiPageContenuUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * The data used to update EmploiPageContenus.
+     */
+    data: XOR<EmploiPageContenuUpdateManyMutationInput, EmploiPageContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which EmploiPageContenus to update
+     */
+    where?: EmploiPageContenuWhereInput
+    /**
+     * Limit how many EmploiPageContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmploiPageContenu upsert
+   */
+  export type EmploiPageContenuUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * The filter to search for the EmploiPageContenu to update in case it exists.
+     */
+    where: EmploiPageContenuWhereUniqueInput
+    /**
+     * In case the EmploiPageContenu found by the `where` argument doesn't exist, create a new EmploiPageContenu with this data.
+     */
+    create: XOR<EmploiPageContenuCreateInput, EmploiPageContenuUncheckedCreateInput>
+    /**
+     * In case the EmploiPageContenu was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmploiPageContenuUpdateInput, EmploiPageContenuUncheckedUpdateInput>
+  }
+
+  /**
+   * EmploiPageContenu delete
+   */
+  export type EmploiPageContenuDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+    /**
+     * Filter which EmploiPageContenu to delete.
+     */
+    where: EmploiPageContenuWhereUniqueInput
+  }
+
+  /**
+   * EmploiPageContenu deleteMany
+   */
+  export type EmploiPageContenuDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmploiPageContenus to delete
+     */
+    where?: EmploiPageContenuWhereInput
+    /**
+     * Limit how many EmploiPageContenus to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmploiPageContenu without action
+   */
+  export type EmploiPageContenuDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploiPageContenu
+     */
+    select?: EmploiPageContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploiPageContenu
+     */
+    omit?: EmploiPageContenuOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GestionEmploiContenu
+   */
+
+  export type AggregateGestionEmploiContenu = {
+    _count: GestionEmploiContenuCountAggregateOutputType | null
+    _min: GestionEmploiContenuMinAggregateOutputType | null
+    _max: GestionEmploiContenuMaxAggregateOutputType | null
+  }
+
+  export type GestionEmploiContenuMinAggregateOutputType = {
+    id: string | null
+    eLearningTitre: string | null
+    eLearningTexte: string | null
+    eLearningLienLabel: string | null
+    eLearningLienUrl: string | null
+    creerEmploiTexte: string | null
+    creerEmploiLienLabel: string | null
+    creerEmploiLienUrl: string | null
+    communauteTitre: string | null
+    communauteTexte: string | null
+    communauteVideoUrl: string | null
+    communauteLienEnSavoirPlusUrl: string | null
+    communauteLienRejoindreUrl: string | null
+    updatedAt: Date | null
+  }
+
+  export type GestionEmploiContenuMaxAggregateOutputType = {
+    id: string | null
+    eLearningTitre: string | null
+    eLearningTexte: string | null
+    eLearningLienLabel: string | null
+    eLearningLienUrl: string | null
+    creerEmploiTexte: string | null
+    creerEmploiLienLabel: string | null
+    creerEmploiLienUrl: string | null
+    communauteTitre: string | null
+    communauteTexte: string | null
+    communauteVideoUrl: string | null
+    communauteLienEnSavoirPlusUrl: string | null
+    communauteLienRejoindreUrl: string | null
+    updatedAt: Date | null
+  }
+
+  export type GestionEmploiContenuCountAggregateOutputType = {
+    id: number
+    eLearningTitre: number
+    eLearningTexte: number
+    eLearningLienLabel: number
+    eLearningLienUrl: number
+    creerEmploiTexte: number
+    creerEmploiLienLabel: number
+    creerEmploiLienUrl: number
+    communauteTitre: number
+    communauteTexte: number
+    communauteVideoUrl: number
+    communauteLienEnSavoirPlusUrl: number
+    communauteLienRejoindreUrl: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GestionEmploiContenuMinAggregateInputType = {
+    id?: true
+    eLearningTitre?: true
+    eLearningTexte?: true
+    eLearningLienLabel?: true
+    eLearningLienUrl?: true
+    creerEmploiTexte?: true
+    creerEmploiLienLabel?: true
+    creerEmploiLienUrl?: true
+    communauteTitre?: true
+    communauteTexte?: true
+    communauteVideoUrl?: true
+    communauteLienEnSavoirPlusUrl?: true
+    communauteLienRejoindreUrl?: true
+    updatedAt?: true
+  }
+
+  export type GestionEmploiContenuMaxAggregateInputType = {
+    id?: true
+    eLearningTitre?: true
+    eLearningTexte?: true
+    eLearningLienLabel?: true
+    eLearningLienUrl?: true
+    creerEmploiTexte?: true
+    creerEmploiLienLabel?: true
+    creerEmploiLienUrl?: true
+    communauteTitre?: true
+    communauteTexte?: true
+    communauteVideoUrl?: true
+    communauteLienEnSavoirPlusUrl?: true
+    communauteLienRejoindreUrl?: true
+    updatedAt?: true
+  }
+
+  export type GestionEmploiContenuCountAggregateInputType = {
+    id?: true
+    eLearningTitre?: true
+    eLearningTexte?: true
+    eLearningLienLabel?: true
+    eLearningLienUrl?: true
+    creerEmploiTexte?: true
+    creerEmploiLienLabel?: true
+    creerEmploiLienUrl?: true
+    communauteTitre?: true
+    communauteTexte?: true
+    communauteVideoUrl?: true
+    communauteLienEnSavoirPlusUrl?: true
+    communauteLienRejoindreUrl?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GestionEmploiContenuAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GestionEmploiContenu to aggregate.
+     */
+    where?: GestionEmploiContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GestionEmploiContenus to fetch.
+     */
+    orderBy?: GestionEmploiContenuOrderByWithRelationInput | GestionEmploiContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GestionEmploiContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GestionEmploiContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GestionEmploiContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GestionEmploiContenus
+    **/
+    _count?: true | GestionEmploiContenuCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GestionEmploiContenuMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GestionEmploiContenuMaxAggregateInputType
+  }
+
+  export type GetGestionEmploiContenuAggregateType<T extends GestionEmploiContenuAggregateArgs> = {
+        [P in keyof T & keyof AggregateGestionEmploiContenu]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGestionEmploiContenu[P]>
+      : GetScalarType<T[P], AggregateGestionEmploiContenu[P]>
+  }
+
+
+
+
+  export type GestionEmploiContenuGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GestionEmploiContenuWhereInput
+    orderBy?: GestionEmploiContenuOrderByWithAggregationInput | GestionEmploiContenuOrderByWithAggregationInput[]
+    by: GestionEmploiContenuScalarFieldEnum[] | GestionEmploiContenuScalarFieldEnum
+    having?: GestionEmploiContenuScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GestionEmploiContenuCountAggregateInputType | true
+    _min?: GestionEmploiContenuMinAggregateInputType
+    _max?: GestionEmploiContenuMaxAggregateInputType
+  }
+
+  export type GestionEmploiContenuGroupByOutputType = {
+    id: string
+    eLearningTitre: string | null
+    eLearningTexte: string | null
+    eLearningLienLabel: string | null
+    eLearningLienUrl: string | null
+    creerEmploiTexte: string
+    creerEmploiLienLabel: string | null
+    creerEmploiLienUrl: string | null
+    communauteTitre: string | null
+    communauteTexte: string | null
+    communauteVideoUrl: string | null
+    communauteLienEnSavoirPlusUrl: string | null
+    communauteLienRejoindreUrl: string | null
+    updatedAt: Date
+    _count: GestionEmploiContenuCountAggregateOutputType | null
+    _min: GestionEmploiContenuMinAggregateOutputType | null
+    _max: GestionEmploiContenuMaxAggregateOutputType | null
+  }
+
+  type GetGestionEmploiContenuGroupByPayload<T extends GestionEmploiContenuGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GestionEmploiContenuGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GestionEmploiContenuGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GestionEmploiContenuGroupByOutputType[P]>
+            : GetScalarType<T[P], GestionEmploiContenuGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GestionEmploiContenuSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    eLearningTitre?: boolean
+    eLearningTexte?: boolean
+    eLearningLienLabel?: boolean
+    eLearningLienUrl?: boolean
+    creerEmploiTexte?: boolean
+    creerEmploiLienLabel?: boolean
+    creerEmploiLienUrl?: boolean
+    communauteTitre?: boolean
+    communauteTexte?: boolean
+    communauteVideoUrl?: boolean
+    communauteLienEnSavoirPlusUrl?: boolean
+    communauteLienRejoindreUrl?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["gestionEmploiContenu"]>
+
+  export type GestionEmploiContenuSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    eLearningTitre?: boolean
+    eLearningTexte?: boolean
+    eLearningLienLabel?: boolean
+    eLearningLienUrl?: boolean
+    creerEmploiTexte?: boolean
+    creerEmploiLienLabel?: boolean
+    creerEmploiLienUrl?: boolean
+    communauteTitre?: boolean
+    communauteTexte?: boolean
+    communauteVideoUrl?: boolean
+    communauteLienEnSavoirPlusUrl?: boolean
+    communauteLienRejoindreUrl?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["gestionEmploiContenu"]>
+
+  export type GestionEmploiContenuSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    eLearningTitre?: boolean
+    eLearningTexte?: boolean
+    eLearningLienLabel?: boolean
+    eLearningLienUrl?: boolean
+    creerEmploiTexte?: boolean
+    creerEmploiLienLabel?: boolean
+    creerEmploiLienUrl?: boolean
+    communauteTitre?: boolean
+    communauteTexte?: boolean
+    communauteVideoUrl?: boolean
+    communauteLienEnSavoirPlusUrl?: boolean
+    communauteLienRejoindreUrl?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["gestionEmploiContenu"]>
+
+  export type GestionEmploiContenuSelectScalar = {
+    id?: boolean
+    eLearningTitre?: boolean
+    eLearningTexte?: boolean
+    eLearningLienLabel?: boolean
+    eLearningLienUrl?: boolean
+    creerEmploiTexte?: boolean
+    creerEmploiLienLabel?: boolean
+    creerEmploiLienUrl?: boolean
+    communauteTitre?: boolean
+    communauteTexte?: boolean
+    communauteVideoUrl?: boolean
+    communauteLienEnSavoirPlusUrl?: boolean
+    communauteLienRejoindreUrl?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GestionEmploiContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eLearningTitre" | "eLearningTexte" | "eLearningLienLabel" | "eLearningLienUrl" | "creerEmploiTexte" | "creerEmploiLienLabel" | "creerEmploiLienUrl" | "communauteTitre" | "communauteTexte" | "communauteVideoUrl" | "communauteLienEnSavoirPlusUrl" | "communauteLienRejoindreUrl" | "updatedAt", ExtArgs["result"]["gestionEmploiContenu"]>
+
+  export type $GestionEmploiContenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GestionEmploiContenu"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      eLearningTitre: string | null
+      eLearningTexte: string | null
+      eLearningLienLabel: string | null
+      eLearningLienUrl: string | null
+      creerEmploiTexte: string
+      creerEmploiLienLabel: string | null
+      creerEmploiLienUrl: string | null
+      communauteTitre: string | null
+      communauteTexte: string | null
+      communauteVideoUrl: string | null
+      communauteLienEnSavoirPlusUrl: string | null
+      communauteLienRejoindreUrl: string | null
+      updatedAt: Date
+    }, ExtArgs["result"]["gestionEmploiContenu"]>
+    composites: {}
+  }
+
+  type GestionEmploiContenuGetPayload<S extends boolean | null | undefined | GestionEmploiContenuDefaultArgs> = $Result.GetResult<Prisma.$GestionEmploiContenuPayload, S>
+
+  type GestionEmploiContenuCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GestionEmploiContenuFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GestionEmploiContenuCountAggregateInputType | true
+    }
+
+  export interface GestionEmploiContenuDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GestionEmploiContenu'], meta: { name: 'GestionEmploiContenu' } }
+    /**
+     * Find zero or one GestionEmploiContenu that matches the filter.
+     * @param {GestionEmploiContenuFindUniqueArgs} args - Arguments to find a GestionEmploiContenu
+     * @example
+     * // Get one GestionEmploiContenu
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GestionEmploiContenuFindUniqueArgs>(args: SelectSubset<T, GestionEmploiContenuFindUniqueArgs<ExtArgs>>): Prisma__GestionEmploiContenuClient<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GestionEmploiContenu that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GestionEmploiContenuFindUniqueOrThrowArgs} args - Arguments to find a GestionEmploiContenu
+     * @example
+     * // Get one GestionEmploiContenu
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GestionEmploiContenuFindUniqueOrThrowArgs>(args: SelectSubset<T, GestionEmploiContenuFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GestionEmploiContenuClient<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GestionEmploiContenu that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GestionEmploiContenuFindFirstArgs} args - Arguments to find a GestionEmploiContenu
+     * @example
+     * // Get one GestionEmploiContenu
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GestionEmploiContenuFindFirstArgs>(args?: SelectSubset<T, GestionEmploiContenuFindFirstArgs<ExtArgs>>): Prisma__GestionEmploiContenuClient<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GestionEmploiContenu that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GestionEmploiContenuFindFirstOrThrowArgs} args - Arguments to find a GestionEmploiContenu
+     * @example
+     * // Get one GestionEmploiContenu
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GestionEmploiContenuFindFirstOrThrowArgs>(args?: SelectSubset<T, GestionEmploiContenuFindFirstOrThrowArgs<ExtArgs>>): Prisma__GestionEmploiContenuClient<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GestionEmploiContenus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GestionEmploiContenuFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GestionEmploiContenus
+     * const gestionEmploiContenus = await prisma.gestionEmploiContenu.findMany()
+     * 
+     * // Get first 10 GestionEmploiContenus
+     * const gestionEmploiContenus = await prisma.gestionEmploiContenu.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const gestionEmploiContenuWithIdOnly = await prisma.gestionEmploiContenu.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GestionEmploiContenuFindManyArgs>(args?: SelectSubset<T, GestionEmploiContenuFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GestionEmploiContenu.
+     * @param {GestionEmploiContenuCreateArgs} args - Arguments to create a GestionEmploiContenu.
+     * @example
+     * // Create one GestionEmploiContenu
+     * const GestionEmploiContenu = await prisma.gestionEmploiContenu.create({
+     *   data: {
+     *     // ... data to create a GestionEmploiContenu
+     *   }
+     * })
+     * 
+     */
+    create<T extends GestionEmploiContenuCreateArgs>(args: SelectSubset<T, GestionEmploiContenuCreateArgs<ExtArgs>>): Prisma__GestionEmploiContenuClient<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GestionEmploiContenus.
+     * @param {GestionEmploiContenuCreateManyArgs} args - Arguments to create many GestionEmploiContenus.
+     * @example
+     * // Create many GestionEmploiContenus
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GestionEmploiContenuCreateManyArgs>(args?: SelectSubset<T, GestionEmploiContenuCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GestionEmploiContenus and returns the data saved in the database.
+     * @param {GestionEmploiContenuCreateManyAndReturnArgs} args - Arguments to create many GestionEmploiContenus.
+     * @example
+     * // Create many GestionEmploiContenus
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GestionEmploiContenus and only return the `id`
+     * const gestionEmploiContenuWithIdOnly = await prisma.gestionEmploiContenu.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GestionEmploiContenuCreateManyAndReturnArgs>(args?: SelectSubset<T, GestionEmploiContenuCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GestionEmploiContenu.
+     * @param {GestionEmploiContenuDeleteArgs} args - Arguments to delete one GestionEmploiContenu.
+     * @example
+     * // Delete one GestionEmploiContenu
+     * const GestionEmploiContenu = await prisma.gestionEmploiContenu.delete({
+     *   where: {
+     *     // ... filter to delete one GestionEmploiContenu
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GestionEmploiContenuDeleteArgs>(args: SelectSubset<T, GestionEmploiContenuDeleteArgs<ExtArgs>>): Prisma__GestionEmploiContenuClient<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GestionEmploiContenu.
+     * @param {GestionEmploiContenuUpdateArgs} args - Arguments to update one GestionEmploiContenu.
+     * @example
+     * // Update one GestionEmploiContenu
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GestionEmploiContenuUpdateArgs>(args: SelectSubset<T, GestionEmploiContenuUpdateArgs<ExtArgs>>): Prisma__GestionEmploiContenuClient<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GestionEmploiContenus.
+     * @param {GestionEmploiContenuDeleteManyArgs} args - Arguments to filter GestionEmploiContenus to delete.
+     * @example
+     * // Delete a few GestionEmploiContenus
+     * const { count } = await prisma.gestionEmploiContenu.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GestionEmploiContenuDeleteManyArgs>(args?: SelectSubset<T, GestionEmploiContenuDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GestionEmploiContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GestionEmploiContenuUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GestionEmploiContenus
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GestionEmploiContenuUpdateManyArgs>(args: SelectSubset<T, GestionEmploiContenuUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GestionEmploiContenus and returns the data updated in the database.
+     * @param {GestionEmploiContenuUpdateManyAndReturnArgs} args - Arguments to update many GestionEmploiContenus.
+     * @example
+     * // Update many GestionEmploiContenus
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GestionEmploiContenus and only return the `id`
+     * const gestionEmploiContenuWithIdOnly = await prisma.gestionEmploiContenu.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GestionEmploiContenuUpdateManyAndReturnArgs>(args: SelectSubset<T, GestionEmploiContenuUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GestionEmploiContenu.
+     * @param {GestionEmploiContenuUpsertArgs} args - Arguments to update or create a GestionEmploiContenu.
+     * @example
+     * // Update or create a GestionEmploiContenu
+     * const gestionEmploiContenu = await prisma.gestionEmploiContenu.upsert({
+     *   create: {
+     *     // ... data to create a GestionEmploiContenu
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GestionEmploiContenu we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GestionEmploiContenuUpsertArgs>(args: SelectSubset<T, GestionEmploiContenuUpsertArgs<ExtArgs>>): Prisma__GestionEmploiContenuClient<$Result.GetResult<Prisma.$GestionEmploiContenuPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GestionEmploiContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GestionEmploiContenuCountArgs} args - Arguments to filter GestionEmploiContenus to count.
+     * @example
+     * // Count the number of GestionEmploiContenus
+     * const count = await prisma.gestionEmploiContenu.count({
+     *   where: {
+     *     // ... the filter for the GestionEmploiContenus we want to count
+     *   }
+     * })
+    **/
+    count<T extends GestionEmploiContenuCountArgs>(
+      args?: Subset<T, GestionEmploiContenuCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GestionEmploiContenuCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GestionEmploiContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GestionEmploiContenuAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GestionEmploiContenuAggregateArgs>(args: Subset<T, GestionEmploiContenuAggregateArgs>): Prisma.PrismaPromise<GetGestionEmploiContenuAggregateType<T>>
+
+    /**
+     * Group by GestionEmploiContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GestionEmploiContenuGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GestionEmploiContenuGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GestionEmploiContenuGroupByArgs['orderBy'] }
+        : { orderBy?: GestionEmploiContenuGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GestionEmploiContenuGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGestionEmploiContenuGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GestionEmploiContenu model
+   */
+  readonly fields: GestionEmploiContenuFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GestionEmploiContenu.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GestionEmploiContenuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GestionEmploiContenu model
+   */
+  interface GestionEmploiContenuFieldRefs {
+    readonly id: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly eLearningTitre: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly eLearningTexte: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly eLearningLienLabel: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly eLearningLienUrl: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly creerEmploiTexte: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly creerEmploiLienLabel: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly creerEmploiLienUrl: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly communauteTitre: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly communauteTexte: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly communauteVideoUrl: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly communauteLienEnSavoirPlusUrl: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly communauteLienRejoindreUrl: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly updatedAt: FieldRef<"GestionEmploiContenu", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GestionEmploiContenu findUnique
+   */
+  export type GestionEmploiContenuFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which GestionEmploiContenu to fetch.
+     */
+    where: GestionEmploiContenuWhereUniqueInput
+  }
+
+  /**
+   * GestionEmploiContenu findUniqueOrThrow
+   */
+  export type GestionEmploiContenuFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which GestionEmploiContenu to fetch.
+     */
+    where: GestionEmploiContenuWhereUniqueInput
+  }
+
+  /**
+   * GestionEmploiContenu findFirst
+   */
+  export type GestionEmploiContenuFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which GestionEmploiContenu to fetch.
+     */
+    where?: GestionEmploiContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GestionEmploiContenus to fetch.
+     */
+    orderBy?: GestionEmploiContenuOrderByWithRelationInput | GestionEmploiContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GestionEmploiContenus.
+     */
+    cursor?: GestionEmploiContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GestionEmploiContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GestionEmploiContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GestionEmploiContenus.
+     */
+    distinct?: GestionEmploiContenuScalarFieldEnum | GestionEmploiContenuScalarFieldEnum[]
+  }
+
+  /**
+   * GestionEmploiContenu findFirstOrThrow
+   */
+  export type GestionEmploiContenuFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which GestionEmploiContenu to fetch.
+     */
+    where?: GestionEmploiContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GestionEmploiContenus to fetch.
+     */
+    orderBy?: GestionEmploiContenuOrderByWithRelationInput | GestionEmploiContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GestionEmploiContenus.
+     */
+    cursor?: GestionEmploiContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GestionEmploiContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GestionEmploiContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GestionEmploiContenus.
+     */
+    distinct?: GestionEmploiContenuScalarFieldEnum | GestionEmploiContenuScalarFieldEnum[]
+  }
+
+  /**
+   * GestionEmploiContenu findMany
+   */
+  export type GestionEmploiContenuFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which GestionEmploiContenus to fetch.
+     */
+    where?: GestionEmploiContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GestionEmploiContenus to fetch.
+     */
+    orderBy?: GestionEmploiContenuOrderByWithRelationInput | GestionEmploiContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GestionEmploiContenus.
+     */
+    cursor?: GestionEmploiContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GestionEmploiContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GestionEmploiContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GestionEmploiContenus.
+     */
+    distinct?: GestionEmploiContenuScalarFieldEnum | GestionEmploiContenuScalarFieldEnum[]
+  }
+
+  /**
+   * GestionEmploiContenu create
+   */
+  export type GestionEmploiContenuCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to create a GestionEmploiContenu.
+     */
+    data: XOR<GestionEmploiContenuCreateInput, GestionEmploiContenuUncheckedCreateInput>
+  }
+
+  /**
+   * GestionEmploiContenu createMany
+   */
+  export type GestionEmploiContenuCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GestionEmploiContenus.
+     */
+    data: GestionEmploiContenuCreateManyInput | GestionEmploiContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GestionEmploiContenu createManyAndReturn
+   */
+  export type GestionEmploiContenuCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * The data used to create many GestionEmploiContenus.
+     */
+    data: GestionEmploiContenuCreateManyInput | GestionEmploiContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GestionEmploiContenu update
+   */
+  export type GestionEmploiContenuUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to update a GestionEmploiContenu.
+     */
+    data: XOR<GestionEmploiContenuUpdateInput, GestionEmploiContenuUncheckedUpdateInput>
+    /**
+     * Choose, which GestionEmploiContenu to update.
+     */
+    where: GestionEmploiContenuWhereUniqueInput
+  }
+
+  /**
+   * GestionEmploiContenu updateMany
+   */
+  export type GestionEmploiContenuUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GestionEmploiContenus.
+     */
+    data: XOR<GestionEmploiContenuUpdateManyMutationInput, GestionEmploiContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which GestionEmploiContenus to update
+     */
+    where?: GestionEmploiContenuWhereInput
+    /**
+     * Limit how many GestionEmploiContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GestionEmploiContenu updateManyAndReturn
+   */
+  export type GestionEmploiContenuUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * The data used to update GestionEmploiContenus.
+     */
+    data: XOR<GestionEmploiContenuUpdateManyMutationInput, GestionEmploiContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which GestionEmploiContenus to update
+     */
+    where?: GestionEmploiContenuWhereInput
+    /**
+     * Limit how many GestionEmploiContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GestionEmploiContenu upsert
+   */
+  export type GestionEmploiContenuUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * The filter to search for the GestionEmploiContenu to update in case it exists.
+     */
+    where: GestionEmploiContenuWhereUniqueInput
+    /**
+     * In case the GestionEmploiContenu found by the `where` argument doesn't exist, create a new GestionEmploiContenu with this data.
+     */
+    create: XOR<GestionEmploiContenuCreateInput, GestionEmploiContenuUncheckedCreateInput>
+    /**
+     * In case the GestionEmploiContenu was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GestionEmploiContenuUpdateInput, GestionEmploiContenuUncheckedUpdateInput>
+  }
+
+  /**
+   * GestionEmploiContenu delete
+   */
+  export type GestionEmploiContenuDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+    /**
+     * Filter which GestionEmploiContenu to delete.
+     */
+    where: GestionEmploiContenuWhereUniqueInput
+  }
+
+  /**
+   * GestionEmploiContenu deleteMany
+   */
+  export type GestionEmploiContenuDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GestionEmploiContenus to delete
+     */
+    where?: GestionEmploiContenuWhereInput
+    /**
+     * Limit how many GestionEmploiContenus to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GestionEmploiContenu without action
+   */
+  export type GestionEmploiContenuDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GestionEmploiContenu
+     */
+    select?: GestionEmploiContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GestionEmploiContenu
+     */
+    omit?: GestionEmploiContenuOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FormationEmployabiliteContenu
+   */
+
+  export type AggregateFormationEmployabiliteContenu = {
+    _count: FormationEmployabiliteContenuCountAggregateOutputType | null
+    _min: FormationEmployabiliteContenuMinAggregateOutputType | null
+    _max: FormationEmployabiliteContenuMaxAggregateOutputType | null
+  }
+
+  export type FormationEmployabiliteContenuMinAggregateOutputType = {
+    id: string | null
+    introTexte: string | null
+    indicateursNote: string | null
+    updatedAt: Date | null
+  }
+
+  export type FormationEmployabiliteContenuMaxAggregateOutputType = {
+    id: string | null
+    introTexte: string | null
+    indicateursNote: string | null
+    updatedAt: Date | null
+  }
+
+  export type FormationEmployabiliteContenuCountAggregateOutputType = {
+    id: number
+    introTexte: number
+    indicateursNote: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FormationEmployabiliteContenuMinAggregateInputType = {
+    id?: true
+    introTexte?: true
+    indicateursNote?: true
+    updatedAt?: true
+  }
+
+  export type FormationEmployabiliteContenuMaxAggregateInputType = {
+    id?: true
+    introTexte?: true
+    indicateursNote?: true
+    updatedAt?: true
+  }
+
+  export type FormationEmployabiliteContenuCountAggregateInputType = {
+    id?: true
+    introTexte?: true
+    indicateursNote?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FormationEmployabiliteContenuAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormationEmployabiliteContenu to aggregate.
+     */
+    where?: FormationEmployabiliteContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationEmployabiliteContenus to fetch.
+     */
+    orderBy?: FormationEmployabiliteContenuOrderByWithRelationInput | FormationEmployabiliteContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FormationEmployabiliteContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationEmployabiliteContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationEmployabiliteContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FormationEmployabiliteContenus
+    **/
+    _count?: true | FormationEmployabiliteContenuCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FormationEmployabiliteContenuMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FormationEmployabiliteContenuMaxAggregateInputType
+  }
+
+  export type GetFormationEmployabiliteContenuAggregateType<T extends FormationEmployabiliteContenuAggregateArgs> = {
+        [P in keyof T & keyof AggregateFormationEmployabiliteContenu]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFormationEmployabiliteContenu[P]>
+      : GetScalarType<T[P], AggregateFormationEmployabiliteContenu[P]>
+  }
+
+
+
+
+  export type FormationEmployabiliteContenuGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormationEmployabiliteContenuWhereInput
+    orderBy?: FormationEmployabiliteContenuOrderByWithAggregationInput | FormationEmployabiliteContenuOrderByWithAggregationInput[]
+    by: FormationEmployabiliteContenuScalarFieldEnum[] | FormationEmployabiliteContenuScalarFieldEnum
+    having?: FormationEmployabiliteContenuScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FormationEmployabiliteContenuCountAggregateInputType | true
+    _min?: FormationEmployabiliteContenuMinAggregateInputType
+    _max?: FormationEmployabiliteContenuMaxAggregateInputType
+  }
+
+  export type FormationEmployabiliteContenuGroupByOutputType = {
+    id: string
+    introTexte: string | null
+    indicateursNote: string | null
+    updatedAt: Date
+    _count: FormationEmployabiliteContenuCountAggregateOutputType | null
+    _min: FormationEmployabiliteContenuMinAggregateOutputType | null
+    _max: FormationEmployabiliteContenuMaxAggregateOutputType | null
+  }
+
+  type GetFormationEmployabiliteContenuGroupByPayload<T extends FormationEmployabiliteContenuGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FormationEmployabiliteContenuGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FormationEmployabiliteContenuGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FormationEmployabiliteContenuGroupByOutputType[P]>
+            : GetScalarType<T[P], FormationEmployabiliteContenuGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FormationEmployabiliteContenuSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    introTexte?: boolean
+    indicateursNote?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["formationEmployabiliteContenu"]>
+
+  export type FormationEmployabiliteContenuSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    introTexte?: boolean
+    indicateursNote?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["formationEmployabiliteContenu"]>
+
+  export type FormationEmployabiliteContenuSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    introTexte?: boolean
+    indicateursNote?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["formationEmployabiliteContenu"]>
+
+  export type FormationEmployabiliteContenuSelectScalar = {
+    id?: boolean
+    introTexte?: boolean
+    indicateursNote?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FormationEmployabiliteContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "introTexte" | "indicateursNote" | "updatedAt", ExtArgs["result"]["formationEmployabiliteContenu"]>
+
+  export type $FormationEmployabiliteContenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FormationEmployabiliteContenu"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      introTexte: string | null
+      indicateursNote: string | null
+      updatedAt: Date
+    }, ExtArgs["result"]["formationEmployabiliteContenu"]>
+    composites: {}
+  }
+
+  type FormationEmployabiliteContenuGetPayload<S extends boolean | null | undefined | FormationEmployabiliteContenuDefaultArgs> = $Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload, S>
+
+  type FormationEmployabiliteContenuCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FormationEmployabiliteContenuFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FormationEmployabiliteContenuCountAggregateInputType | true
+    }
+
+  export interface FormationEmployabiliteContenuDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FormationEmployabiliteContenu'], meta: { name: 'FormationEmployabiliteContenu' } }
+    /**
+     * Find zero or one FormationEmployabiliteContenu that matches the filter.
+     * @param {FormationEmployabiliteContenuFindUniqueArgs} args - Arguments to find a FormationEmployabiliteContenu
+     * @example
+     * // Get one FormationEmployabiliteContenu
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FormationEmployabiliteContenuFindUniqueArgs>(args: SelectSubset<T, FormationEmployabiliteContenuFindUniqueArgs<ExtArgs>>): Prisma__FormationEmployabiliteContenuClient<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FormationEmployabiliteContenu that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FormationEmployabiliteContenuFindUniqueOrThrowArgs} args - Arguments to find a FormationEmployabiliteContenu
+     * @example
+     * // Get one FormationEmployabiliteContenu
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FormationEmployabiliteContenuFindUniqueOrThrowArgs>(args: SelectSubset<T, FormationEmployabiliteContenuFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FormationEmployabiliteContenuClient<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormationEmployabiliteContenu that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationEmployabiliteContenuFindFirstArgs} args - Arguments to find a FormationEmployabiliteContenu
+     * @example
+     * // Get one FormationEmployabiliteContenu
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FormationEmployabiliteContenuFindFirstArgs>(args?: SelectSubset<T, FormationEmployabiliteContenuFindFirstArgs<ExtArgs>>): Prisma__FormationEmployabiliteContenuClient<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormationEmployabiliteContenu that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationEmployabiliteContenuFindFirstOrThrowArgs} args - Arguments to find a FormationEmployabiliteContenu
+     * @example
+     * // Get one FormationEmployabiliteContenu
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FormationEmployabiliteContenuFindFirstOrThrowArgs>(args?: SelectSubset<T, FormationEmployabiliteContenuFindFirstOrThrowArgs<ExtArgs>>): Prisma__FormationEmployabiliteContenuClient<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FormationEmployabiliteContenus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationEmployabiliteContenuFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FormationEmployabiliteContenus
+     * const formationEmployabiliteContenus = await prisma.formationEmployabiliteContenu.findMany()
+     * 
+     * // Get first 10 FormationEmployabiliteContenus
+     * const formationEmployabiliteContenus = await prisma.formationEmployabiliteContenu.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const formationEmployabiliteContenuWithIdOnly = await prisma.formationEmployabiliteContenu.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FormationEmployabiliteContenuFindManyArgs>(args?: SelectSubset<T, FormationEmployabiliteContenuFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FormationEmployabiliteContenu.
+     * @param {FormationEmployabiliteContenuCreateArgs} args - Arguments to create a FormationEmployabiliteContenu.
+     * @example
+     * // Create one FormationEmployabiliteContenu
+     * const FormationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.create({
+     *   data: {
+     *     // ... data to create a FormationEmployabiliteContenu
+     *   }
+     * })
+     * 
+     */
+    create<T extends FormationEmployabiliteContenuCreateArgs>(args: SelectSubset<T, FormationEmployabiliteContenuCreateArgs<ExtArgs>>): Prisma__FormationEmployabiliteContenuClient<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FormationEmployabiliteContenus.
+     * @param {FormationEmployabiliteContenuCreateManyArgs} args - Arguments to create many FormationEmployabiliteContenus.
+     * @example
+     * // Create many FormationEmployabiliteContenus
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FormationEmployabiliteContenuCreateManyArgs>(args?: SelectSubset<T, FormationEmployabiliteContenuCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FormationEmployabiliteContenus and returns the data saved in the database.
+     * @param {FormationEmployabiliteContenuCreateManyAndReturnArgs} args - Arguments to create many FormationEmployabiliteContenus.
+     * @example
+     * // Create many FormationEmployabiliteContenus
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FormationEmployabiliteContenus and only return the `id`
+     * const formationEmployabiliteContenuWithIdOnly = await prisma.formationEmployabiliteContenu.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FormationEmployabiliteContenuCreateManyAndReturnArgs>(args?: SelectSubset<T, FormationEmployabiliteContenuCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FormationEmployabiliteContenu.
+     * @param {FormationEmployabiliteContenuDeleteArgs} args - Arguments to delete one FormationEmployabiliteContenu.
+     * @example
+     * // Delete one FormationEmployabiliteContenu
+     * const FormationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.delete({
+     *   where: {
+     *     // ... filter to delete one FormationEmployabiliteContenu
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FormationEmployabiliteContenuDeleteArgs>(args: SelectSubset<T, FormationEmployabiliteContenuDeleteArgs<ExtArgs>>): Prisma__FormationEmployabiliteContenuClient<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FormationEmployabiliteContenu.
+     * @param {FormationEmployabiliteContenuUpdateArgs} args - Arguments to update one FormationEmployabiliteContenu.
+     * @example
+     * // Update one FormationEmployabiliteContenu
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FormationEmployabiliteContenuUpdateArgs>(args: SelectSubset<T, FormationEmployabiliteContenuUpdateArgs<ExtArgs>>): Prisma__FormationEmployabiliteContenuClient<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FormationEmployabiliteContenus.
+     * @param {FormationEmployabiliteContenuDeleteManyArgs} args - Arguments to filter FormationEmployabiliteContenus to delete.
+     * @example
+     * // Delete a few FormationEmployabiliteContenus
+     * const { count } = await prisma.formationEmployabiliteContenu.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FormationEmployabiliteContenuDeleteManyArgs>(args?: SelectSubset<T, FormationEmployabiliteContenuDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormationEmployabiliteContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationEmployabiliteContenuUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FormationEmployabiliteContenus
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FormationEmployabiliteContenuUpdateManyArgs>(args: SelectSubset<T, FormationEmployabiliteContenuUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormationEmployabiliteContenus and returns the data updated in the database.
+     * @param {FormationEmployabiliteContenuUpdateManyAndReturnArgs} args - Arguments to update many FormationEmployabiliteContenus.
+     * @example
+     * // Update many FormationEmployabiliteContenus
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FormationEmployabiliteContenus and only return the `id`
+     * const formationEmployabiliteContenuWithIdOnly = await prisma.formationEmployabiliteContenu.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FormationEmployabiliteContenuUpdateManyAndReturnArgs>(args: SelectSubset<T, FormationEmployabiliteContenuUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FormationEmployabiliteContenu.
+     * @param {FormationEmployabiliteContenuUpsertArgs} args - Arguments to update or create a FormationEmployabiliteContenu.
+     * @example
+     * // Update or create a FormationEmployabiliteContenu
+     * const formationEmployabiliteContenu = await prisma.formationEmployabiliteContenu.upsert({
+     *   create: {
+     *     // ... data to create a FormationEmployabiliteContenu
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FormationEmployabiliteContenu we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FormationEmployabiliteContenuUpsertArgs>(args: SelectSubset<T, FormationEmployabiliteContenuUpsertArgs<ExtArgs>>): Prisma__FormationEmployabiliteContenuClient<$Result.GetResult<Prisma.$FormationEmployabiliteContenuPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FormationEmployabiliteContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationEmployabiliteContenuCountArgs} args - Arguments to filter FormationEmployabiliteContenus to count.
+     * @example
+     * // Count the number of FormationEmployabiliteContenus
+     * const count = await prisma.formationEmployabiliteContenu.count({
+     *   where: {
+     *     // ... the filter for the FormationEmployabiliteContenus we want to count
+     *   }
+     * })
+    **/
+    count<T extends FormationEmployabiliteContenuCountArgs>(
+      args?: Subset<T, FormationEmployabiliteContenuCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FormationEmployabiliteContenuCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FormationEmployabiliteContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationEmployabiliteContenuAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FormationEmployabiliteContenuAggregateArgs>(args: Subset<T, FormationEmployabiliteContenuAggregateArgs>): Prisma.PrismaPromise<GetFormationEmployabiliteContenuAggregateType<T>>
+
+    /**
+     * Group by FormationEmployabiliteContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationEmployabiliteContenuGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FormationEmployabiliteContenuGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FormationEmployabiliteContenuGroupByArgs['orderBy'] }
+        : { orderBy?: FormationEmployabiliteContenuGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FormationEmployabiliteContenuGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFormationEmployabiliteContenuGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FormationEmployabiliteContenu model
+   */
+  readonly fields: FormationEmployabiliteContenuFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FormationEmployabiliteContenu.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FormationEmployabiliteContenuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FormationEmployabiliteContenu model
+   */
+  interface FormationEmployabiliteContenuFieldRefs {
+    readonly id: FieldRef<"FormationEmployabiliteContenu", 'String'>
+    readonly introTexte: FieldRef<"FormationEmployabiliteContenu", 'String'>
+    readonly indicateursNote: FieldRef<"FormationEmployabiliteContenu", 'String'>
+    readonly updatedAt: FieldRef<"FormationEmployabiliteContenu", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FormationEmployabiliteContenu findUnique
+   */
+  export type FormationEmployabiliteContenuFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationEmployabiliteContenu to fetch.
+     */
+    where: FormationEmployabiliteContenuWhereUniqueInput
+  }
+
+  /**
+   * FormationEmployabiliteContenu findUniqueOrThrow
+   */
+  export type FormationEmployabiliteContenuFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationEmployabiliteContenu to fetch.
+     */
+    where: FormationEmployabiliteContenuWhereUniqueInput
+  }
+
+  /**
+   * FormationEmployabiliteContenu findFirst
+   */
+  export type FormationEmployabiliteContenuFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationEmployabiliteContenu to fetch.
+     */
+    where?: FormationEmployabiliteContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationEmployabiliteContenus to fetch.
+     */
+    orderBy?: FormationEmployabiliteContenuOrderByWithRelationInput | FormationEmployabiliteContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormationEmployabiliteContenus.
+     */
+    cursor?: FormationEmployabiliteContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationEmployabiliteContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationEmployabiliteContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationEmployabiliteContenus.
+     */
+    distinct?: FormationEmployabiliteContenuScalarFieldEnum | FormationEmployabiliteContenuScalarFieldEnum[]
+  }
+
+  /**
+   * FormationEmployabiliteContenu findFirstOrThrow
+   */
+  export type FormationEmployabiliteContenuFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationEmployabiliteContenu to fetch.
+     */
+    where?: FormationEmployabiliteContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationEmployabiliteContenus to fetch.
+     */
+    orderBy?: FormationEmployabiliteContenuOrderByWithRelationInput | FormationEmployabiliteContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormationEmployabiliteContenus.
+     */
+    cursor?: FormationEmployabiliteContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationEmployabiliteContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationEmployabiliteContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationEmployabiliteContenus.
+     */
+    distinct?: FormationEmployabiliteContenuScalarFieldEnum | FormationEmployabiliteContenuScalarFieldEnum[]
+  }
+
+  /**
+   * FormationEmployabiliteContenu findMany
+   */
+  export type FormationEmployabiliteContenuFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationEmployabiliteContenus to fetch.
+     */
+    where?: FormationEmployabiliteContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationEmployabiliteContenus to fetch.
+     */
+    orderBy?: FormationEmployabiliteContenuOrderByWithRelationInput | FormationEmployabiliteContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FormationEmployabiliteContenus.
+     */
+    cursor?: FormationEmployabiliteContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationEmployabiliteContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationEmployabiliteContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationEmployabiliteContenus.
+     */
+    distinct?: FormationEmployabiliteContenuScalarFieldEnum | FormationEmployabiliteContenuScalarFieldEnum[]
+  }
+
+  /**
+   * FormationEmployabiliteContenu create
+   */
+  export type FormationEmployabiliteContenuCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FormationEmployabiliteContenu.
+     */
+    data: XOR<FormationEmployabiliteContenuCreateInput, FormationEmployabiliteContenuUncheckedCreateInput>
+  }
+
+  /**
+   * FormationEmployabiliteContenu createMany
+   */
+  export type FormationEmployabiliteContenuCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FormationEmployabiliteContenus.
+     */
+    data: FormationEmployabiliteContenuCreateManyInput | FormationEmployabiliteContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormationEmployabiliteContenu createManyAndReturn
+   */
+  export type FormationEmployabiliteContenuCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * The data used to create many FormationEmployabiliteContenus.
+     */
+    data: FormationEmployabiliteContenuCreateManyInput | FormationEmployabiliteContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormationEmployabiliteContenu update
+   */
+  export type FormationEmployabiliteContenuUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FormationEmployabiliteContenu.
+     */
+    data: XOR<FormationEmployabiliteContenuUpdateInput, FormationEmployabiliteContenuUncheckedUpdateInput>
+    /**
+     * Choose, which FormationEmployabiliteContenu to update.
+     */
+    where: FormationEmployabiliteContenuWhereUniqueInput
+  }
+
+  /**
+   * FormationEmployabiliteContenu updateMany
+   */
+  export type FormationEmployabiliteContenuUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FormationEmployabiliteContenus.
+     */
+    data: XOR<FormationEmployabiliteContenuUpdateManyMutationInput, FormationEmployabiliteContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which FormationEmployabiliteContenus to update
+     */
+    where?: FormationEmployabiliteContenuWhereInput
+    /**
+     * Limit how many FormationEmployabiliteContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationEmployabiliteContenu updateManyAndReturn
+   */
+  export type FormationEmployabiliteContenuUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * The data used to update FormationEmployabiliteContenus.
+     */
+    data: XOR<FormationEmployabiliteContenuUpdateManyMutationInput, FormationEmployabiliteContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which FormationEmployabiliteContenus to update
+     */
+    where?: FormationEmployabiliteContenuWhereInput
+    /**
+     * Limit how many FormationEmployabiliteContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationEmployabiliteContenu upsert
+   */
+  export type FormationEmployabiliteContenuUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FormationEmployabiliteContenu to update in case it exists.
+     */
+    where: FormationEmployabiliteContenuWhereUniqueInput
+    /**
+     * In case the FormationEmployabiliteContenu found by the `where` argument doesn't exist, create a new FormationEmployabiliteContenu with this data.
+     */
+    create: XOR<FormationEmployabiliteContenuCreateInput, FormationEmployabiliteContenuUncheckedCreateInput>
+    /**
+     * In case the FormationEmployabiliteContenu was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FormationEmployabiliteContenuUpdateInput, FormationEmployabiliteContenuUncheckedUpdateInput>
+  }
+
+  /**
+   * FormationEmployabiliteContenu delete
+   */
+  export type FormationEmployabiliteContenuDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+    /**
+     * Filter which FormationEmployabiliteContenu to delete.
+     */
+    where: FormationEmployabiliteContenuWhereUniqueInput
+  }
+
+  /**
+   * FormationEmployabiliteContenu deleteMany
+   */
+  export type FormationEmployabiliteContenuDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormationEmployabiliteContenus to delete
+     */
+    where?: FormationEmployabiliteContenuWhereInput
+    /**
+     * Limit how many FormationEmployabiliteContenus to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationEmployabiliteContenu without action
+   */
+  export type FormationEmployabiliteContenuDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationEmployabiliteContenu
+     */
+    select?: FormationEmployabiliteContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationEmployabiliteContenu
+     */
+    omit?: FormationEmployabiliteContenuOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -38311,6 +45640,7 @@ export namespace Prisma {
     url: 'url',
     type: 'type',
     section: 'section',
+    dispositifId: 'dispositifId',
     ordre: 'ordre',
     actif: 'actif',
     createdAt: 'createdAt',
@@ -38355,6 +45685,7 @@ export namespace Prisma {
     url: 'url',
     description: 'description',
     section: 'section',
+    dispositifId: 'dispositifId',
     ordre: 'ordre',
     actif: 'actif',
     createdAt: 'createdAt'
@@ -38375,6 +45706,90 @@ export namespace Prisma {
   };
 
   export type WebinaireScalarFieldEnum = (typeof WebinaireScalarFieldEnum)[keyof typeof WebinaireScalarFieldEnum]
+
+
+  export const DispositifFinancementScalarFieldEnum: {
+    id: 'id',
+    titre: 'titre',
+    resume: 'resume',
+    contenu: 'contenu',
+    montantMisEnAvant: 'montantMisEnAvant',
+    image: 'image',
+    videoUrl: 'videoUrl',
+    ordre: 'ordre',
+    actif: 'actif',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DispositifFinancementScalarFieldEnum = (typeof DispositifFinancementScalarFieldEnum)[keyof typeof DispositifFinancementScalarFieldEnum]
+
+
+  export const ReferentEmploiScalarFieldEnum: {
+    id: 'id',
+    dispositifId: 'dispositifId',
+    departement: 'departement',
+    referent: 'referent',
+    email: 'email',
+    codeFiche: 'codeFiche',
+    ordre: 'ordre',
+    actif: 'actif'
+  };
+
+  export type ReferentEmploiScalarFieldEnum = (typeof ReferentEmploiScalarFieldEnum)[keyof typeof ReferentEmploiScalarFieldEnum]
+
+
+  export const PratiqueEmploiCardScalarFieldEnum: {
+    id: 'id',
+    titre: 'titre',
+    description: 'description',
+    icone: 'icone',
+    ordre: 'ordre',
+    actif: 'actif'
+  };
+
+  export type PratiqueEmploiCardScalarFieldEnum = (typeof PratiqueEmploiCardScalarFieldEnum)[keyof typeof PratiqueEmploiCardScalarFieldEnum]
+
+
+  export const EmploiPageContenuScalarFieldEnum: {
+    id: 'id',
+    introTexte: 'introTexte',
+    introListe: 'introListe',
+    videoCommunauteUrl: 'videoCommunauteUrl',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmploiPageContenuScalarFieldEnum = (typeof EmploiPageContenuScalarFieldEnum)[keyof typeof EmploiPageContenuScalarFieldEnum]
+
+
+  export const GestionEmploiContenuScalarFieldEnum: {
+    id: 'id',
+    eLearningTitre: 'eLearningTitre',
+    eLearningTexte: 'eLearningTexte',
+    eLearningLienLabel: 'eLearningLienLabel',
+    eLearningLienUrl: 'eLearningLienUrl',
+    creerEmploiTexte: 'creerEmploiTexte',
+    creerEmploiLienLabel: 'creerEmploiLienLabel',
+    creerEmploiLienUrl: 'creerEmploiLienUrl',
+    communauteTitre: 'communauteTitre',
+    communauteTexte: 'communauteTexte',
+    communauteVideoUrl: 'communauteVideoUrl',
+    communauteLienEnSavoirPlusUrl: 'communauteLienEnSavoirPlusUrl',
+    communauteLienRejoindreUrl: 'communauteLienRejoindreUrl',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GestionEmploiContenuScalarFieldEnum = (typeof GestionEmploiContenuScalarFieldEnum)[keyof typeof GestionEmploiContenuScalarFieldEnum]
+
+
+  export const FormationEmployabiliteContenuScalarFieldEnum: {
+    id: 'id',
+    introTexte: 'introTexte',
+    indicateursNote: 'indicateursNote',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FormationEmployabiliteContenuScalarFieldEnum = (typeof FormationEmployabiliteContenuScalarFieldEnum)[keyof typeof FormationEmployabiliteContenuScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -38833,6 +46248,20 @@ export namespace Prisma {
    * Reference to a field of type 'SectionEmploi[]'
    */
   export type ListEnumSectionEmploiFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SectionEmploi[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'IconePratique'
+   */
+  export type EnumIconePratiqueFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IconePratique'>
+    
+
+
+  /**
+   * Reference to a field of type 'IconePratique[]'
+   */
+  export type ListEnumIconePratiqueFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IconePratique[]'>
     
   /**
    * Deep Input Types
@@ -41064,10 +48493,12 @@ export namespace Prisma {
     url?: StringFilter<"DocumentPasserelle"> | string
     type?: EnumTypeDocumentFilter<"DocumentPasserelle"> | $Enums.TypeDocument
     section?: EnumSectionEmploiFilter<"DocumentPasserelle"> | $Enums.SectionEmploi
+    dispositifId?: StringNullableFilter<"DocumentPasserelle"> | string | null
     ordre?: IntFilter<"DocumentPasserelle"> | number
     actif?: BoolFilter<"DocumentPasserelle"> | boolean
     createdAt?: DateTimeFilter<"DocumentPasserelle"> | Date | string
     updatedAt?: DateTimeFilter<"DocumentPasserelle"> | Date | string
+    dispositif?: XOR<DispositifFinancementNullableScalarRelationFilter, DispositifFinancementWhereInput> | null
   }
 
   export type DocumentPasserelleOrderByWithRelationInput = {
@@ -41076,10 +48507,12 @@ export namespace Prisma {
     url?: SortOrder
     type?: SortOrder
     section?: SortOrder
+    dispositifId?: SortOrderInput | SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    dispositif?: DispositifFinancementOrderByWithRelationInput
   }
 
   export type DocumentPasserelleWhereUniqueInput = Prisma.AtLeast<{
@@ -41091,10 +48524,12 @@ export namespace Prisma {
     url?: StringFilter<"DocumentPasserelle"> | string
     type?: EnumTypeDocumentFilter<"DocumentPasserelle"> | $Enums.TypeDocument
     section?: EnumSectionEmploiFilter<"DocumentPasserelle"> | $Enums.SectionEmploi
+    dispositifId?: StringNullableFilter<"DocumentPasserelle"> | string | null
     ordre?: IntFilter<"DocumentPasserelle"> | number
     actif?: BoolFilter<"DocumentPasserelle"> | boolean
     createdAt?: DateTimeFilter<"DocumentPasserelle"> | Date | string
     updatedAt?: DateTimeFilter<"DocumentPasserelle"> | Date | string
+    dispositif?: XOR<DispositifFinancementNullableScalarRelationFilter, DispositifFinancementWhereInput> | null
   }, "id">
 
   export type DocumentPasserelleOrderByWithAggregationInput = {
@@ -41103,6 +48538,7 @@ export namespace Prisma {
     url?: SortOrder
     type?: SortOrder
     section?: SortOrder
+    dispositifId?: SortOrderInput | SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -41123,6 +48559,7 @@ export namespace Prisma {
     url?: StringWithAggregatesFilter<"DocumentPasserelle"> | string
     type?: EnumTypeDocumentWithAggregatesFilter<"DocumentPasserelle"> | $Enums.TypeDocument
     section?: EnumSectionEmploiWithAggregatesFilter<"DocumentPasserelle"> | $Enums.SectionEmploi
+    dispositifId?: StringNullableWithAggregatesFilter<"DocumentPasserelle"> | string | null
     ordre?: IntWithAggregatesFilter<"DocumentPasserelle"> | number
     actif?: BoolWithAggregatesFilter<"DocumentPasserelle"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"DocumentPasserelle"> | Date | string
@@ -41281,9 +48718,11 @@ export namespace Prisma {
     url?: StringFilter<"Video"> | string
     description?: StringNullableFilter<"Video"> | string | null
     section?: EnumSectionEmploiNullableFilter<"Video"> | $Enums.SectionEmploi | null
+    dispositifId?: StringNullableFilter<"Video"> | string | null
     ordre?: IntFilter<"Video"> | number
     actif?: BoolFilter<"Video"> | boolean
     createdAt?: DateTimeFilter<"Video"> | Date | string
+    dispositif?: XOR<DispositifFinancementNullableScalarRelationFilter, DispositifFinancementWhereInput> | null
   }
 
   export type VideoOrderByWithRelationInput = {
@@ -41292,9 +48731,11 @@ export namespace Prisma {
     url?: SortOrder
     description?: SortOrderInput | SortOrder
     section?: SortOrderInput | SortOrder
+    dispositifId?: SortOrderInput | SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
+    dispositif?: DispositifFinancementOrderByWithRelationInput
   }
 
   export type VideoWhereUniqueInput = Prisma.AtLeast<{
@@ -41306,9 +48747,11 @@ export namespace Prisma {
     url?: StringFilter<"Video"> | string
     description?: StringNullableFilter<"Video"> | string | null
     section?: EnumSectionEmploiNullableFilter<"Video"> | $Enums.SectionEmploi | null
+    dispositifId?: StringNullableFilter<"Video"> | string | null
     ordre?: IntFilter<"Video"> | number
     actif?: BoolFilter<"Video"> | boolean
     createdAt?: DateTimeFilter<"Video"> | Date | string
+    dispositif?: XOR<DispositifFinancementNullableScalarRelationFilter, DispositifFinancementWhereInput> | null
   }, "id">
 
   export type VideoOrderByWithAggregationInput = {
@@ -41317,6 +48760,7 @@ export namespace Prisma {
     url?: SortOrder
     description?: SortOrderInput | SortOrder
     section?: SortOrderInput | SortOrder
+    dispositifId?: SortOrderInput | SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -41336,6 +48780,7 @@ export namespace Prisma {
     url?: StringWithAggregatesFilter<"Video"> | string
     description?: StringNullableWithAggregatesFilter<"Video"> | string | null
     section?: EnumSectionEmploiNullableWithAggregatesFilter<"Video"> | $Enums.SectionEmploi | null
+    dispositifId?: StringNullableWithAggregatesFilter<"Video"> | string | null
     ordre?: IntWithAggregatesFilter<"Video"> | number
     actif?: BoolWithAggregatesFilter<"Video"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Video"> | Date | string
@@ -41406,6 +48851,426 @@ export namespace Prisma {
     actif?: BoolWithAggregatesFilter<"Webinaire"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Webinaire"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Webinaire"> | Date | string
+  }
+
+  export type DispositifFinancementWhereInput = {
+    AND?: DispositifFinancementWhereInput | DispositifFinancementWhereInput[]
+    OR?: DispositifFinancementWhereInput[]
+    NOT?: DispositifFinancementWhereInput | DispositifFinancementWhereInput[]
+    id?: StringFilter<"DispositifFinancement"> | string
+    titre?: StringFilter<"DispositifFinancement"> | string
+    resume?: StringNullableFilter<"DispositifFinancement"> | string | null
+    contenu?: StringFilter<"DispositifFinancement"> | string
+    montantMisEnAvant?: StringNullableFilter<"DispositifFinancement"> | string | null
+    image?: StringNullableFilter<"DispositifFinancement"> | string | null
+    videoUrl?: StringNullableFilter<"DispositifFinancement"> | string | null
+    ordre?: IntFilter<"DispositifFinancement"> | number
+    actif?: BoolFilter<"DispositifFinancement"> | boolean
+    createdAt?: DateTimeFilter<"DispositifFinancement"> | Date | string
+    updatedAt?: DateTimeFilter<"DispositifFinancement"> | Date | string
+    documents?: DocumentPasserelleListRelationFilter
+    videos?: VideoListRelationFilter
+    referents?: ReferentEmploiListRelationFilter
+  }
+
+  export type DispositifFinancementOrderByWithRelationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrderInput | SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    documents?: DocumentPasserelleOrderByRelationAggregateInput
+    videos?: VideoOrderByRelationAggregateInput
+    referents?: ReferentEmploiOrderByRelationAggregateInput
+  }
+
+  export type DispositifFinancementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DispositifFinancementWhereInput | DispositifFinancementWhereInput[]
+    OR?: DispositifFinancementWhereInput[]
+    NOT?: DispositifFinancementWhereInput | DispositifFinancementWhereInput[]
+    titre?: StringFilter<"DispositifFinancement"> | string
+    resume?: StringNullableFilter<"DispositifFinancement"> | string | null
+    contenu?: StringFilter<"DispositifFinancement"> | string
+    montantMisEnAvant?: StringNullableFilter<"DispositifFinancement"> | string | null
+    image?: StringNullableFilter<"DispositifFinancement"> | string | null
+    videoUrl?: StringNullableFilter<"DispositifFinancement"> | string | null
+    ordre?: IntFilter<"DispositifFinancement"> | number
+    actif?: BoolFilter<"DispositifFinancement"> | boolean
+    createdAt?: DateTimeFilter<"DispositifFinancement"> | Date | string
+    updatedAt?: DateTimeFilter<"DispositifFinancement"> | Date | string
+    documents?: DocumentPasserelleListRelationFilter
+    videos?: VideoListRelationFilter
+    referents?: ReferentEmploiListRelationFilter
+  }, "id">
+
+  export type DispositifFinancementOrderByWithAggregationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrderInput | SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrderInput | SortOrder
+    image?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DispositifFinancementCountOrderByAggregateInput
+    _avg?: DispositifFinancementAvgOrderByAggregateInput
+    _max?: DispositifFinancementMaxOrderByAggregateInput
+    _min?: DispositifFinancementMinOrderByAggregateInput
+    _sum?: DispositifFinancementSumOrderByAggregateInput
+  }
+
+  export type DispositifFinancementScalarWhereWithAggregatesInput = {
+    AND?: DispositifFinancementScalarWhereWithAggregatesInput | DispositifFinancementScalarWhereWithAggregatesInput[]
+    OR?: DispositifFinancementScalarWhereWithAggregatesInput[]
+    NOT?: DispositifFinancementScalarWhereWithAggregatesInput | DispositifFinancementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DispositifFinancement"> | string
+    titre?: StringWithAggregatesFilter<"DispositifFinancement"> | string
+    resume?: StringNullableWithAggregatesFilter<"DispositifFinancement"> | string | null
+    contenu?: StringWithAggregatesFilter<"DispositifFinancement"> | string
+    montantMisEnAvant?: StringNullableWithAggregatesFilter<"DispositifFinancement"> | string | null
+    image?: StringNullableWithAggregatesFilter<"DispositifFinancement"> | string | null
+    videoUrl?: StringNullableWithAggregatesFilter<"DispositifFinancement"> | string | null
+    ordre?: IntWithAggregatesFilter<"DispositifFinancement"> | number
+    actif?: BoolWithAggregatesFilter<"DispositifFinancement"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"DispositifFinancement"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DispositifFinancement"> | Date | string
+  }
+
+  export type ReferentEmploiWhereInput = {
+    AND?: ReferentEmploiWhereInput | ReferentEmploiWhereInput[]
+    OR?: ReferentEmploiWhereInput[]
+    NOT?: ReferentEmploiWhereInput | ReferentEmploiWhereInput[]
+    id?: StringFilter<"ReferentEmploi"> | string
+    dispositifId?: StringFilter<"ReferentEmploi"> | string
+    departement?: StringFilter<"ReferentEmploi"> | string
+    referent?: StringFilter<"ReferentEmploi"> | string
+    email?: StringNullableFilter<"ReferentEmploi"> | string | null
+    codeFiche?: StringNullableFilter<"ReferentEmploi"> | string | null
+    ordre?: IntFilter<"ReferentEmploi"> | number
+    actif?: BoolFilter<"ReferentEmploi"> | boolean
+    dispositif?: XOR<DispositifFinancementScalarRelationFilter, DispositifFinancementWhereInput>
+  }
+
+  export type ReferentEmploiOrderByWithRelationInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    departement?: SortOrder
+    referent?: SortOrder
+    email?: SortOrderInput | SortOrder
+    codeFiche?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    dispositif?: DispositifFinancementOrderByWithRelationInput
+  }
+
+  export type ReferentEmploiWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ReferentEmploiWhereInput | ReferentEmploiWhereInput[]
+    OR?: ReferentEmploiWhereInput[]
+    NOT?: ReferentEmploiWhereInput | ReferentEmploiWhereInput[]
+    dispositifId?: StringFilter<"ReferentEmploi"> | string
+    departement?: StringFilter<"ReferentEmploi"> | string
+    referent?: StringFilter<"ReferentEmploi"> | string
+    email?: StringNullableFilter<"ReferentEmploi"> | string | null
+    codeFiche?: StringNullableFilter<"ReferentEmploi"> | string | null
+    ordre?: IntFilter<"ReferentEmploi"> | number
+    actif?: BoolFilter<"ReferentEmploi"> | boolean
+    dispositif?: XOR<DispositifFinancementScalarRelationFilter, DispositifFinancementWhereInput>
+  }, "id">
+
+  export type ReferentEmploiOrderByWithAggregationInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    departement?: SortOrder
+    referent?: SortOrder
+    email?: SortOrderInput | SortOrder
+    codeFiche?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    _count?: ReferentEmploiCountOrderByAggregateInput
+    _avg?: ReferentEmploiAvgOrderByAggregateInput
+    _max?: ReferentEmploiMaxOrderByAggregateInput
+    _min?: ReferentEmploiMinOrderByAggregateInput
+    _sum?: ReferentEmploiSumOrderByAggregateInput
+  }
+
+  export type ReferentEmploiScalarWhereWithAggregatesInput = {
+    AND?: ReferentEmploiScalarWhereWithAggregatesInput | ReferentEmploiScalarWhereWithAggregatesInput[]
+    OR?: ReferentEmploiScalarWhereWithAggregatesInput[]
+    NOT?: ReferentEmploiScalarWhereWithAggregatesInput | ReferentEmploiScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ReferentEmploi"> | string
+    dispositifId?: StringWithAggregatesFilter<"ReferentEmploi"> | string
+    departement?: StringWithAggregatesFilter<"ReferentEmploi"> | string
+    referent?: StringWithAggregatesFilter<"ReferentEmploi"> | string
+    email?: StringNullableWithAggregatesFilter<"ReferentEmploi"> | string | null
+    codeFiche?: StringNullableWithAggregatesFilter<"ReferentEmploi"> | string | null
+    ordre?: IntWithAggregatesFilter<"ReferentEmploi"> | number
+    actif?: BoolWithAggregatesFilter<"ReferentEmploi"> | boolean
+  }
+
+  export type PratiqueEmploiCardWhereInput = {
+    AND?: PratiqueEmploiCardWhereInput | PratiqueEmploiCardWhereInput[]
+    OR?: PratiqueEmploiCardWhereInput[]
+    NOT?: PratiqueEmploiCardWhereInput | PratiqueEmploiCardWhereInput[]
+    id?: StringFilter<"PratiqueEmploiCard"> | string
+    titre?: StringFilter<"PratiqueEmploiCard"> | string
+    description?: StringNullableFilter<"PratiqueEmploiCard"> | string | null
+    icone?: EnumIconePratiqueFilter<"PratiqueEmploiCard"> | $Enums.IconePratique
+    ordre?: IntFilter<"PratiqueEmploiCard"> | number
+    actif?: BoolFilter<"PratiqueEmploiCard"> | boolean
+  }
+
+  export type PratiqueEmploiCardOrderByWithRelationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrderInput | SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type PratiqueEmploiCardWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PratiqueEmploiCardWhereInput | PratiqueEmploiCardWhereInput[]
+    OR?: PratiqueEmploiCardWhereInput[]
+    NOT?: PratiqueEmploiCardWhereInput | PratiqueEmploiCardWhereInput[]
+    titre?: StringFilter<"PratiqueEmploiCard"> | string
+    description?: StringNullableFilter<"PratiqueEmploiCard"> | string | null
+    icone?: EnumIconePratiqueFilter<"PratiqueEmploiCard"> | $Enums.IconePratique
+    ordre?: IntFilter<"PratiqueEmploiCard"> | number
+    actif?: BoolFilter<"PratiqueEmploiCard"> | boolean
+  }, "id">
+
+  export type PratiqueEmploiCardOrderByWithAggregationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrderInput | SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    _count?: PratiqueEmploiCardCountOrderByAggregateInput
+    _avg?: PratiqueEmploiCardAvgOrderByAggregateInput
+    _max?: PratiqueEmploiCardMaxOrderByAggregateInput
+    _min?: PratiqueEmploiCardMinOrderByAggregateInput
+    _sum?: PratiqueEmploiCardSumOrderByAggregateInput
+  }
+
+  export type PratiqueEmploiCardScalarWhereWithAggregatesInput = {
+    AND?: PratiqueEmploiCardScalarWhereWithAggregatesInput | PratiqueEmploiCardScalarWhereWithAggregatesInput[]
+    OR?: PratiqueEmploiCardScalarWhereWithAggregatesInput[]
+    NOT?: PratiqueEmploiCardScalarWhereWithAggregatesInput | PratiqueEmploiCardScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PratiqueEmploiCard"> | string
+    titre?: StringWithAggregatesFilter<"PratiqueEmploiCard"> | string
+    description?: StringNullableWithAggregatesFilter<"PratiqueEmploiCard"> | string | null
+    icone?: EnumIconePratiqueWithAggregatesFilter<"PratiqueEmploiCard"> | $Enums.IconePratique
+    ordre?: IntWithAggregatesFilter<"PratiqueEmploiCard"> | number
+    actif?: BoolWithAggregatesFilter<"PratiqueEmploiCard"> | boolean
+  }
+
+  export type EmploiPageContenuWhereInput = {
+    AND?: EmploiPageContenuWhereInput | EmploiPageContenuWhereInput[]
+    OR?: EmploiPageContenuWhereInput[]
+    NOT?: EmploiPageContenuWhereInput | EmploiPageContenuWhereInput[]
+    id?: StringFilter<"EmploiPageContenu"> | string
+    introTexte?: StringFilter<"EmploiPageContenu"> | string
+    introListe?: StringFilter<"EmploiPageContenu"> | string
+    videoCommunauteUrl?: StringNullableFilter<"EmploiPageContenu"> | string | null
+    updatedAt?: DateTimeFilter<"EmploiPageContenu"> | Date | string
+  }
+
+  export type EmploiPageContenuOrderByWithRelationInput = {
+    id?: SortOrder
+    introTexte?: SortOrder
+    introListe?: SortOrder
+    videoCommunauteUrl?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploiPageContenuWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmploiPageContenuWhereInput | EmploiPageContenuWhereInput[]
+    OR?: EmploiPageContenuWhereInput[]
+    NOT?: EmploiPageContenuWhereInput | EmploiPageContenuWhereInput[]
+    introTexte?: StringFilter<"EmploiPageContenu"> | string
+    introListe?: StringFilter<"EmploiPageContenu"> | string
+    videoCommunauteUrl?: StringNullableFilter<"EmploiPageContenu"> | string | null
+    updatedAt?: DateTimeFilter<"EmploiPageContenu"> | Date | string
+  }, "id">
+
+  export type EmploiPageContenuOrderByWithAggregationInput = {
+    id?: SortOrder
+    introTexte?: SortOrder
+    introListe?: SortOrder
+    videoCommunauteUrl?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: EmploiPageContenuCountOrderByAggregateInput
+    _max?: EmploiPageContenuMaxOrderByAggregateInput
+    _min?: EmploiPageContenuMinOrderByAggregateInput
+  }
+
+  export type EmploiPageContenuScalarWhereWithAggregatesInput = {
+    AND?: EmploiPageContenuScalarWhereWithAggregatesInput | EmploiPageContenuScalarWhereWithAggregatesInput[]
+    OR?: EmploiPageContenuScalarWhereWithAggregatesInput[]
+    NOT?: EmploiPageContenuScalarWhereWithAggregatesInput | EmploiPageContenuScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmploiPageContenu"> | string
+    introTexte?: StringWithAggregatesFilter<"EmploiPageContenu"> | string
+    introListe?: StringWithAggregatesFilter<"EmploiPageContenu"> | string
+    videoCommunauteUrl?: StringNullableWithAggregatesFilter<"EmploiPageContenu"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"EmploiPageContenu"> | Date | string
+  }
+
+  export type GestionEmploiContenuWhereInput = {
+    AND?: GestionEmploiContenuWhereInput | GestionEmploiContenuWhereInput[]
+    OR?: GestionEmploiContenuWhereInput[]
+    NOT?: GestionEmploiContenuWhereInput | GestionEmploiContenuWhereInput[]
+    id?: StringFilter<"GestionEmploiContenu"> | string
+    eLearningTitre?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    eLearningTexte?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    eLearningLienLabel?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    eLearningLienUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    creerEmploiTexte?: StringFilter<"GestionEmploiContenu"> | string
+    creerEmploiLienLabel?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    creerEmploiLienUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteTitre?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteTexte?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteVideoUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteLienEnSavoirPlusUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteLienRejoindreUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    updatedAt?: DateTimeFilter<"GestionEmploiContenu"> | Date | string
+  }
+
+  export type GestionEmploiContenuOrderByWithRelationInput = {
+    id?: SortOrder
+    eLearningTitre?: SortOrderInput | SortOrder
+    eLearningTexte?: SortOrderInput | SortOrder
+    eLearningLienLabel?: SortOrderInput | SortOrder
+    eLearningLienUrl?: SortOrderInput | SortOrder
+    creerEmploiTexte?: SortOrder
+    creerEmploiLienLabel?: SortOrderInput | SortOrder
+    creerEmploiLienUrl?: SortOrderInput | SortOrder
+    communauteTitre?: SortOrderInput | SortOrder
+    communauteTexte?: SortOrderInput | SortOrder
+    communauteVideoUrl?: SortOrderInput | SortOrder
+    communauteLienEnSavoirPlusUrl?: SortOrderInput | SortOrder
+    communauteLienRejoindreUrl?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GestionEmploiContenuWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GestionEmploiContenuWhereInput | GestionEmploiContenuWhereInput[]
+    OR?: GestionEmploiContenuWhereInput[]
+    NOT?: GestionEmploiContenuWhereInput | GestionEmploiContenuWhereInput[]
+    eLearningTitre?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    eLearningTexte?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    eLearningLienLabel?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    eLearningLienUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    creerEmploiTexte?: StringFilter<"GestionEmploiContenu"> | string
+    creerEmploiLienLabel?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    creerEmploiLienUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteTitre?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteTexte?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteVideoUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteLienEnSavoirPlusUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteLienRejoindreUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    updatedAt?: DateTimeFilter<"GestionEmploiContenu"> | Date | string
+  }, "id">
+
+  export type GestionEmploiContenuOrderByWithAggregationInput = {
+    id?: SortOrder
+    eLearningTitre?: SortOrderInput | SortOrder
+    eLearningTexte?: SortOrderInput | SortOrder
+    eLearningLienLabel?: SortOrderInput | SortOrder
+    eLearningLienUrl?: SortOrderInput | SortOrder
+    creerEmploiTexte?: SortOrder
+    creerEmploiLienLabel?: SortOrderInput | SortOrder
+    creerEmploiLienUrl?: SortOrderInput | SortOrder
+    communauteTitre?: SortOrderInput | SortOrder
+    communauteTexte?: SortOrderInput | SortOrder
+    communauteVideoUrl?: SortOrderInput | SortOrder
+    communauteLienEnSavoirPlusUrl?: SortOrderInput | SortOrder
+    communauteLienRejoindreUrl?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: GestionEmploiContenuCountOrderByAggregateInput
+    _max?: GestionEmploiContenuMaxOrderByAggregateInput
+    _min?: GestionEmploiContenuMinOrderByAggregateInput
+  }
+
+  export type GestionEmploiContenuScalarWhereWithAggregatesInput = {
+    AND?: GestionEmploiContenuScalarWhereWithAggregatesInput | GestionEmploiContenuScalarWhereWithAggregatesInput[]
+    OR?: GestionEmploiContenuScalarWhereWithAggregatesInput[]
+    NOT?: GestionEmploiContenuScalarWhereWithAggregatesInput | GestionEmploiContenuScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GestionEmploiContenu"> | string
+    eLearningTitre?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    eLearningTexte?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    eLearningLienLabel?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    eLearningLienUrl?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    creerEmploiTexte?: StringWithAggregatesFilter<"GestionEmploiContenu"> | string
+    creerEmploiLienLabel?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    creerEmploiLienUrl?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    communauteTitre?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    communauteTexte?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    communauteVideoUrl?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    communauteLienEnSavoirPlusUrl?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    communauteLienRejoindreUrl?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"GestionEmploiContenu"> | Date | string
+  }
+
+  export type FormationEmployabiliteContenuWhereInput = {
+    AND?: FormationEmployabiliteContenuWhereInput | FormationEmployabiliteContenuWhereInput[]
+    OR?: FormationEmployabiliteContenuWhereInput[]
+    NOT?: FormationEmployabiliteContenuWhereInput | FormationEmployabiliteContenuWhereInput[]
+    id?: StringFilter<"FormationEmployabiliteContenu"> | string
+    introTexte?: StringNullableFilter<"FormationEmployabiliteContenu"> | string | null
+    indicateursNote?: StringNullableFilter<"FormationEmployabiliteContenu"> | string | null
+    updatedAt?: DateTimeFilter<"FormationEmployabiliteContenu"> | Date | string
+  }
+
+  export type FormationEmployabiliteContenuOrderByWithRelationInput = {
+    id?: SortOrder
+    introTexte?: SortOrderInput | SortOrder
+    indicateursNote?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormationEmployabiliteContenuWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FormationEmployabiliteContenuWhereInput | FormationEmployabiliteContenuWhereInput[]
+    OR?: FormationEmployabiliteContenuWhereInput[]
+    NOT?: FormationEmployabiliteContenuWhereInput | FormationEmployabiliteContenuWhereInput[]
+    introTexte?: StringNullableFilter<"FormationEmployabiliteContenu"> | string | null
+    indicateursNote?: StringNullableFilter<"FormationEmployabiliteContenu"> | string | null
+    updatedAt?: DateTimeFilter<"FormationEmployabiliteContenu"> | Date | string
+  }, "id">
+
+  export type FormationEmployabiliteContenuOrderByWithAggregationInput = {
+    id?: SortOrder
+    introTexte?: SortOrderInput | SortOrder
+    indicateursNote?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: FormationEmployabiliteContenuCountOrderByAggregateInput
+    _max?: FormationEmployabiliteContenuMaxOrderByAggregateInput
+    _min?: FormationEmployabiliteContenuMinOrderByAggregateInput
+  }
+
+  export type FormationEmployabiliteContenuScalarWhereWithAggregatesInput = {
+    AND?: FormationEmployabiliteContenuScalarWhereWithAggregatesInput | FormationEmployabiliteContenuScalarWhereWithAggregatesInput[]
+    OR?: FormationEmployabiliteContenuScalarWhereWithAggregatesInput[]
+    NOT?: FormationEmployabiliteContenuScalarWhereWithAggregatesInput | FormationEmployabiliteContenuScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FormationEmployabiliteContenu"> | string
+    introTexte?: StringNullableWithAggregatesFilter<"FormationEmployabiliteContenu"> | string | null
+    indicateursNote?: StringNullableWithAggregatesFilter<"FormationEmployabiliteContenu"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"FormationEmployabiliteContenu"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -43943,6 +51808,7 @@ export namespace Prisma {
     actif?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    dispositif?: DispositifFinancementCreateNestedOneWithoutDocumentsInput
   }
 
   export type DocumentPasserelleUncheckedCreateInput = {
@@ -43951,6 +51817,7 @@ export namespace Prisma {
     url: string
     type?: $Enums.TypeDocument
     section: $Enums.SectionEmploi
+    dispositifId?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -43967,6 +51834,7 @@ export namespace Prisma {
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispositif?: DispositifFinancementUpdateOneWithoutDocumentsNestedInput
   }
 
   export type DocumentPasserelleUncheckedUpdateInput = {
@@ -43975,6 +51843,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     type?: EnumTypeDocumentFieldUpdateOperationsInput | $Enums.TypeDocument
     section?: EnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi
+    dispositifId?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43987,6 +51856,7 @@ export namespace Prisma {
     url: string
     type?: $Enums.TypeDocument
     section: $Enums.SectionEmploi
+    dispositifId?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -44011,6 +51881,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     type?: EnumTypeDocumentFieldUpdateOperationsInput | $Enums.TypeDocument
     section?: EnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi
+    dispositifId?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44187,6 +52058,7 @@ export namespace Prisma {
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
+    dispositif?: DispositifFinancementCreateNestedOneWithoutVideosInput
   }
 
   export type VideoUncheckedCreateInput = {
@@ -44195,6 +52067,7 @@ export namespace Prisma {
     url: string
     description?: string | null
     section?: $Enums.SectionEmploi | null
+    dispositifId?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -44209,6 +52082,7 @@ export namespace Prisma {
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispositif?: DispositifFinancementUpdateOneWithoutVideosNestedInput
   }
 
   export type VideoUncheckedUpdateInput = {
@@ -44217,6 +52091,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
+    dispositifId?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44228,6 +52103,7 @@ export namespace Prisma {
     url: string
     description?: string | null
     section?: $Enums.SectionEmploi | null
+    dispositifId?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -44250,6 +52126,7 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
+    dispositifId?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44329,6 +52206,479 @@ export namespace Prisma {
     lien?: NullableStringFieldUpdateOperationsInput | string | null
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DispositifFinancementCreateInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DocumentPasserelleCreateNestedManyWithoutDispositifInput
+    videos?: VideoCreateNestedManyWithoutDispositifInput
+    referents?: ReferentEmploiCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFinancementUncheckedCreateInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DocumentPasserelleUncheckedCreateNestedManyWithoutDispositifInput
+    videos?: VideoUncheckedCreateNestedManyWithoutDispositifInput
+    referents?: ReferentEmploiUncheckedCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFinancementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DocumentPasserelleUpdateManyWithoutDispositifNestedInput
+    videos?: VideoUpdateManyWithoutDispositifNestedInput
+    referents?: ReferentEmploiUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFinancementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DocumentPasserelleUncheckedUpdateManyWithoutDispositifNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutDispositifNestedInput
+    referents?: ReferentEmploiUncheckedUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFinancementCreateManyInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DispositifFinancementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DispositifFinancementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferentEmploiCreateInput = {
+    id?: string
+    departement: string
+    referent: string
+    email?: string | null
+    codeFiche?: string | null
+    ordre?: number
+    actif?: boolean
+    dispositif: DispositifFinancementCreateNestedOneWithoutReferentsInput
+  }
+
+  export type ReferentEmploiUncheckedCreateInput = {
+    id?: string
+    dispositifId: string
+    departement: string
+    referent: string
+    email?: string | null
+    codeFiche?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type ReferentEmploiUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    departement?: StringFieldUpdateOperationsInput | string
+    referent?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    codeFiche?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    dispositif?: DispositifFinancementUpdateOneRequiredWithoutReferentsNestedInput
+  }
+
+  export type ReferentEmploiUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dispositifId?: StringFieldUpdateOperationsInput | string
+    departement?: StringFieldUpdateOperationsInput | string
+    referent?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    codeFiche?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ReferentEmploiCreateManyInput = {
+    id?: string
+    dispositifId: string
+    departement: string
+    referent: string
+    email?: string | null
+    codeFiche?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type ReferentEmploiUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    departement?: StringFieldUpdateOperationsInput | string
+    referent?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    codeFiche?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ReferentEmploiUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dispositifId?: StringFieldUpdateOperationsInput | string
+    departement?: StringFieldUpdateOperationsInput | string
+    referent?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    codeFiche?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PratiqueEmploiCardCreateInput = {
+    id?: string
+    titre: string
+    description?: string | null
+    icone?: $Enums.IconePratique
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type PratiqueEmploiCardUncheckedCreateInput = {
+    id?: string
+    titre: string
+    description?: string | null
+    icone?: $Enums.IconePratique
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type PratiqueEmploiCardUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icone?: EnumIconePratiqueFieldUpdateOperationsInput | $Enums.IconePratique
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PratiqueEmploiCardUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icone?: EnumIconePratiqueFieldUpdateOperationsInput | $Enums.IconePratique
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PratiqueEmploiCardCreateManyInput = {
+    id?: string
+    titre: string
+    description?: string | null
+    icone?: $Enums.IconePratique
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type PratiqueEmploiCardUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icone?: EnumIconePratiqueFieldUpdateOperationsInput | $Enums.IconePratique
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PratiqueEmploiCardUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    icone?: EnumIconePratiqueFieldUpdateOperationsInput | $Enums.IconePratique
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type EmploiPageContenuCreateInput = {
+    id?: string
+    introTexte?: string
+    introListe?: string
+    videoCommunauteUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type EmploiPageContenuUncheckedCreateInput = {
+    id?: string
+    introTexte?: string
+    introListe?: string
+    videoCommunauteUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type EmploiPageContenuUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    introTexte?: StringFieldUpdateOperationsInput | string
+    introListe?: StringFieldUpdateOperationsInput | string
+    videoCommunauteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploiPageContenuUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    introTexte?: StringFieldUpdateOperationsInput | string
+    introListe?: StringFieldUpdateOperationsInput | string
+    videoCommunauteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploiPageContenuCreateManyInput = {
+    id?: string
+    introTexte?: string
+    introListe?: string
+    videoCommunauteUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type EmploiPageContenuUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    introTexte?: StringFieldUpdateOperationsInput | string
+    introListe?: StringFieldUpdateOperationsInput | string
+    videoCommunauteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploiPageContenuUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    introTexte?: StringFieldUpdateOperationsInput | string
+    introListe?: StringFieldUpdateOperationsInput | string
+    videoCommunauteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GestionEmploiContenuCreateInput = {
+    id?: string
+    eLearningTitre?: string | null
+    eLearningTexte?: string | null
+    eLearningLienLabel?: string | null
+    eLearningLienUrl?: string | null
+    creerEmploiTexte?: string
+    creerEmploiLienLabel?: string | null
+    creerEmploiLienUrl?: string | null
+    communauteTitre?: string | null
+    communauteTexte?: string | null
+    communauteVideoUrl?: string | null
+    communauteLienEnSavoirPlusUrl?: string | null
+    communauteLienRejoindreUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type GestionEmploiContenuUncheckedCreateInput = {
+    id?: string
+    eLearningTitre?: string | null
+    eLearningTexte?: string | null
+    eLearningLienLabel?: string | null
+    eLearningLienUrl?: string | null
+    creerEmploiTexte?: string
+    creerEmploiLienLabel?: string | null
+    creerEmploiLienUrl?: string | null
+    communauteTitre?: string | null
+    communauteTexte?: string | null
+    communauteVideoUrl?: string | null
+    communauteLienEnSavoirPlusUrl?: string | null
+    communauteLienRejoindreUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type GestionEmploiContenuUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eLearningTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningLienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningLienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    creerEmploiTexte?: StringFieldUpdateOperationsInput | string
+    creerEmploiLienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    creerEmploiLienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteLienEnSavoirPlusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteLienRejoindreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GestionEmploiContenuUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eLearningTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningLienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningLienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    creerEmploiTexte?: StringFieldUpdateOperationsInput | string
+    creerEmploiLienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    creerEmploiLienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteLienEnSavoirPlusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteLienRejoindreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GestionEmploiContenuCreateManyInput = {
+    id?: string
+    eLearningTitre?: string | null
+    eLearningTexte?: string | null
+    eLearningLienLabel?: string | null
+    eLearningLienUrl?: string | null
+    creerEmploiTexte?: string
+    creerEmploiLienLabel?: string | null
+    creerEmploiLienUrl?: string | null
+    communauteTitre?: string | null
+    communauteTexte?: string | null
+    communauteVideoUrl?: string | null
+    communauteLienEnSavoirPlusUrl?: string | null
+    communauteLienRejoindreUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type GestionEmploiContenuUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eLearningTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningLienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningLienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    creerEmploiTexte?: StringFieldUpdateOperationsInput | string
+    creerEmploiLienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    creerEmploiLienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteLienEnSavoirPlusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteLienRejoindreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GestionEmploiContenuUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eLearningTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningLienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    eLearningLienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    creerEmploiTexte?: StringFieldUpdateOperationsInput | string
+    creerEmploiLienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    creerEmploiLienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteLienEnSavoirPlusUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteLienRejoindreUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationEmployabiliteContenuCreateInput = {
+    id?: string
+    introTexte?: string | null
+    indicateursNote?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type FormationEmployabiliteContenuUncheckedCreateInput = {
+    id?: string
+    introTexte?: string | null
+    indicateursNote?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type FormationEmployabiliteContenuUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    introTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    indicateursNote?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationEmployabiliteContenuUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    introTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    indicateursNote?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationEmployabiliteContenuCreateManyInput = {
+    id?: string
+    introTexte?: string | null
+    indicateursNote?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type FormationEmployabiliteContenuUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    introTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    indicateursNote?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationEmployabiliteContenuUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    introTexte?: NullableStringFieldUpdateOperationsInput | string | null
+    indicateursNote?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -46404,12 +54754,18 @@ export namespace Prisma {
     not?: NestedEnumSectionEmploiFilter<$PrismaModel> | $Enums.SectionEmploi
   }
 
+  export type DispositifFinancementNullableScalarRelationFilter = {
+    is?: DispositifFinancementWhereInput | null
+    isNot?: DispositifFinancementWhereInput | null
+  }
+
   export type DocumentPasserelleCountOrderByAggregateInput = {
     id?: SortOrder
     titre?: SortOrder
     url?: SortOrder
     type?: SortOrder
     section?: SortOrder
+    dispositifId?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -46426,6 +54782,7 @@ export namespace Prisma {
     url?: SortOrder
     type?: SortOrder
     section?: SortOrder
+    dispositifId?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -46438,6 +54795,7 @@ export namespace Prisma {
     url?: SortOrder
     type?: SortOrder
     section?: SortOrder
+    dispositifId?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -46576,6 +54934,7 @@ export namespace Prisma {
     url?: SortOrder
     description?: SortOrder
     section?: SortOrder
+    dispositifId?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -46591,6 +54950,7 @@ export namespace Prisma {
     url?: SortOrder
     description?: SortOrder
     section?: SortOrder
+    dispositifId?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -46602,6 +54962,7 @@ export namespace Prisma {
     url?: SortOrder
     description?: SortOrder
     section?: SortOrder
+    dispositifId?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -46641,6 +55002,280 @@ export namespace Prisma {
     lien?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DocumentPasserelleListRelationFilter = {
+    every?: DocumentPasserelleWhereInput
+    some?: DocumentPasserelleWhereInput
+    none?: DocumentPasserelleWhereInput
+  }
+
+  export type VideoListRelationFilter = {
+    every?: VideoWhereInput
+    some?: VideoWhereInput
+    none?: VideoWhereInput
+  }
+
+  export type ReferentEmploiListRelationFilter = {
+    every?: ReferentEmploiWhereInput
+    some?: ReferentEmploiWhereInput
+    none?: ReferentEmploiWhereInput
+  }
+
+  export type DocumentPasserelleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VideoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReferentEmploiOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DispositifFinancementCountOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrder
+    image?: SortOrder
+    videoUrl?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DispositifFinancementAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type DispositifFinancementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrder
+    image?: SortOrder
+    videoUrl?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DispositifFinancementMinOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    resume?: SortOrder
+    contenu?: SortOrder
+    montantMisEnAvant?: SortOrder
+    image?: SortOrder
+    videoUrl?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DispositifFinancementSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type DispositifFinancementScalarRelationFilter = {
+    is?: DispositifFinancementWhereInput
+    isNot?: DispositifFinancementWhereInput
+  }
+
+  export type ReferentEmploiCountOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    departement?: SortOrder
+    referent?: SortOrder
+    email?: SortOrder
+    codeFiche?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type ReferentEmploiAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type ReferentEmploiMaxOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    departement?: SortOrder
+    referent?: SortOrder
+    email?: SortOrder
+    codeFiche?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type ReferentEmploiMinOrderByAggregateInput = {
+    id?: SortOrder
+    dispositifId?: SortOrder
+    departement?: SortOrder
+    referent?: SortOrder
+    email?: SortOrder
+    codeFiche?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type ReferentEmploiSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type EnumIconePratiqueFilter<$PrismaModel = never> = {
+    equals?: $Enums.IconePratique | EnumIconePratiqueFieldRefInput<$PrismaModel>
+    in?: $Enums.IconePratique[] | ListEnumIconePratiqueFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IconePratique[] | ListEnumIconePratiqueFieldRefInput<$PrismaModel>
+    not?: NestedEnumIconePratiqueFilter<$PrismaModel> | $Enums.IconePratique
+  }
+
+  export type PratiqueEmploiCardCountOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type PratiqueEmploiCardAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type PratiqueEmploiCardMaxOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type PratiqueEmploiCardMinOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    icone?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type PratiqueEmploiCardSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type EnumIconePratiqueWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IconePratique | EnumIconePratiqueFieldRefInput<$PrismaModel>
+    in?: $Enums.IconePratique[] | ListEnumIconePratiqueFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IconePratique[] | ListEnumIconePratiqueFieldRefInput<$PrismaModel>
+    not?: NestedEnumIconePratiqueWithAggregatesFilter<$PrismaModel> | $Enums.IconePratique
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIconePratiqueFilter<$PrismaModel>
+    _max?: NestedEnumIconePratiqueFilter<$PrismaModel>
+  }
+
+  export type EmploiPageContenuCountOrderByAggregateInput = {
+    id?: SortOrder
+    introTexte?: SortOrder
+    introListe?: SortOrder
+    videoCommunauteUrl?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploiPageContenuMaxOrderByAggregateInput = {
+    id?: SortOrder
+    introTexte?: SortOrder
+    introListe?: SortOrder
+    videoCommunauteUrl?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploiPageContenuMinOrderByAggregateInput = {
+    id?: SortOrder
+    introTexte?: SortOrder
+    introListe?: SortOrder
+    videoCommunauteUrl?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GestionEmploiContenuCountOrderByAggregateInput = {
+    id?: SortOrder
+    eLearningTitre?: SortOrder
+    eLearningTexte?: SortOrder
+    eLearningLienLabel?: SortOrder
+    eLearningLienUrl?: SortOrder
+    creerEmploiTexte?: SortOrder
+    creerEmploiLienLabel?: SortOrder
+    creerEmploiLienUrl?: SortOrder
+    communauteTitre?: SortOrder
+    communauteTexte?: SortOrder
+    communauteVideoUrl?: SortOrder
+    communauteLienEnSavoirPlusUrl?: SortOrder
+    communauteLienRejoindreUrl?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GestionEmploiContenuMaxOrderByAggregateInput = {
+    id?: SortOrder
+    eLearningTitre?: SortOrder
+    eLearningTexte?: SortOrder
+    eLearningLienLabel?: SortOrder
+    eLearningLienUrl?: SortOrder
+    creerEmploiTexte?: SortOrder
+    creerEmploiLienLabel?: SortOrder
+    creerEmploiLienUrl?: SortOrder
+    communauteTitre?: SortOrder
+    communauteTexte?: SortOrder
+    communauteVideoUrl?: SortOrder
+    communauteLienEnSavoirPlusUrl?: SortOrder
+    communauteLienRejoindreUrl?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GestionEmploiContenuMinOrderByAggregateInput = {
+    id?: SortOrder
+    eLearningTitre?: SortOrder
+    eLearningTexte?: SortOrder
+    eLearningLienLabel?: SortOrder
+    eLearningLienUrl?: SortOrder
+    creerEmploiTexte?: SortOrder
+    creerEmploiLienLabel?: SortOrder
+    creerEmploiLienUrl?: SortOrder
+    communauteTitre?: SortOrder
+    communauteTexte?: SortOrder
+    communauteVideoUrl?: SortOrder
+    communauteLienEnSavoirPlusUrl?: SortOrder
+    communauteLienRejoindreUrl?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormationEmployabiliteContenuCountOrderByAggregateInput = {
+    id?: SortOrder
+    introTexte?: SortOrder
+    indicateursNote?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormationEmployabiliteContenuMaxOrderByAggregateInput = {
+    id?: SortOrder
+    introTexte?: SortOrder
+    indicateursNote?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FormationEmployabiliteContenuMinOrderByAggregateInput = {
+    id?: SortOrder
+    introTexte?: SortOrder
+    indicateursNote?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -48218,6 +56853,12 @@ export namespace Prisma {
     set?: $Enums.PageCle
   }
 
+  export type DispositifFinancementCreateNestedOneWithoutDocumentsInput = {
+    create?: XOR<DispositifFinancementCreateWithoutDocumentsInput, DispositifFinancementUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: DispositifFinancementCreateOrConnectWithoutDocumentsInput
+    connect?: DispositifFinancementWhereUniqueInput
+  }
+
   export type EnumTypeDocumentFieldUpdateOperationsInput = {
     set?: $Enums.TypeDocument
   }
@@ -48226,8 +56867,178 @@ export namespace Prisma {
     set?: $Enums.SectionEmploi
   }
 
+  export type DispositifFinancementUpdateOneWithoutDocumentsNestedInput = {
+    create?: XOR<DispositifFinancementCreateWithoutDocumentsInput, DispositifFinancementUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: DispositifFinancementCreateOrConnectWithoutDocumentsInput
+    upsert?: DispositifFinancementUpsertWithoutDocumentsInput
+    disconnect?: DispositifFinancementWhereInput | boolean
+    delete?: DispositifFinancementWhereInput | boolean
+    connect?: DispositifFinancementWhereUniqueInput
+    update?: XOR<XOR<DispositifFinancementUpdateToOneWithWhereWithoutDocumentsInput, DispositifFinancementUpdateWithoutDocumentsInput>, DispositifFinancementUncheckedUpdateWithoutDocumentsInput>
+  }
+
   export type NullableEnumSectionEmploiFieldUpdateOperationsInput = {
     set?: $Enums.SectionEmploi | null
+  }
+
+  export type DispositifFinancementCreateNestedOneWithoutVideosInput = {
+    create?: XOR<DispositifFinancementCreateWithoutVideosInput, DispositifFinancementUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: DispositifFinancementCreateOrConnectWithoutVideosInput
+    connect?: DispositifFinancementWhereUniqueInput
+  }
+
+  export type DispositifFinancementUpdateOneWithoutVideosNestedInput = {
+    create?: XOR<DispositifFinancementCreateWithoutVideosInput, DispositifFinancementUncheckedCreateWithoutVideosInput>
+    connectOrCreate?: DispositifFinancementCreateOrConnectWithoutVideosInput
+    upsert?: DispositifFinancementUpsertWithoutVideosInput
+    disconnect?: DispositifFinancementWhereInput | boolean
+    delete?: DispositifFinancementWhereInput | boolean
+    connect?: DispositifFinancementWhereUniqueInput
+    update?: XOR<XOR<DispositifFinancementUpdateToOneWithWhereWithoutVideosInput, DispositifFinancementUpdateWithoutVideosInput>, DispositifFinancementUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type DocumentPasserelleCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<DocumentPasserelleCreateWithoutDispositifInput, DocumentPasserelleUncheckedCreateWithoutDispositifInput> | DocumentPasserelleCreateWithoutDispositifInput[] | DocumentPasserelleUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: DocumentPasserelleCreateOrConnectWithoutDispositifInput | DocumentPasserelleCreateOrConnectWithoutDispositifInput[]
+    createMany?: DocumentPasserelleCreateManyDispositifInputEnvelope
+    connect?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+  }
+
+  export type VideoCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<VideoCreateWithoutDispositifInput, VideoUncheckedCreateWithoutDispositifInput> | VideoCreateWithoutDispositifInput[] | VideoUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: VideoCreateOrConnectWithoutDispositifInput | VideoCreateOrConnectWithoutDispositifInput[]
+    createMany?: VideoCreateManyDispositifInputEnvelope
+    connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+  }
+
+  export type ReferentEmploiCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<ReferentEmploiCreateWithoutDispositifInput, ReferentEmploiUncheckedCreateWithoutDispositifInput> | ReferentEmploiCreateWithoutDispositifInput[] | ReferentEmploiUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: ReferentEmploiCreateOrConnectWithoutDispositifInput | ReferentEmploiCreateOrConnectWithoutDispositifInput[]
+    createMany?: ReferentEmploiCreateManyDispositifInputEnvelope
+    connect?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+  }
+
+  export type DocumentPasserelleUncheckedCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<DocumentPasserelleCreateWithoutDispositifInput, DocumentPasserelleUncheckedCreateWithoutDispositifInput> | DocumentPasserelleCreateWithoutDispositifInput[] | DocumentPasserelleUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: DocumentPasserelleCreateOrConnectWithoutDispositifInput | DocumentPasserelleCreateOrConnectWithoutDispositifInput[]
+    createMany?: DocumentPasserelleCreateManyDispositifInputEnvelope
+    connect?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+  }
+
+  export type VideoUncheckedCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<VideoCreateWithoutDispositifInput, VideoUncheckedCreateWithoutDispositifInput> | VideoCreateWithoutDispositifInput[] | VideoUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: VideoCreateOrConnectWithoutDispositifInput | VideoCreateOrConnectWithoutDispositifInput[]
+    createMany?: VideoCreateManyDispositifInputEnvelope
+    connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+  }
+
+  export type ReferentEmploiUncheckedCreateNestedManyWithoutDispositifInput = {
+    create?: XOR<ReferentEmploiCreateWithoutDispositifInput, ReferentEmploiUncheckedCreateWithoutDispositifInput> | ReferentEmploiCreateWithoutDispositifInput[] | ReferentEmploiUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: ReferentEmploiCreateOrConnectWithoutDispositifInput | ReferentEmploiCreateOrConnectWithoutDispositifInput[]
+    createMany?: ReferentEmploiCreateManyDispositifInputEnvelope
+    connect?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+  }
+
+  export type DocumentPasserelleUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<DocumentPasserelleCreateWithoutDispositifInput, DocumentPasserelleUncheckedCreateWithoutDispositifInput> | DocumentPasserelleCreateWithoutDispositifInput[] | DocumentPasserelleUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: DocumentPasserelleCreateOrConnectWithoutDispositifInput | DocumentPasserelleCreateOrConnectWithoutDispositifInput[]
+    upsert?: DocumentPasserelleUpsertWithWhereUniqueWithoutDispositifInput | DocumentPasserelleUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: DocumentPasserelleCreateManyDispositifInputEnvelope
+    set?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+    disconnect?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+    delete?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+    connect?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+    update?: DocumentPasserelleUpdateWithWhereUniqueWithoutDispositifInput | DocumentPasserelleUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: DocumentPasserelleUpdateManyWithWhereWithoutDispositifInput | DocumentPasserelleUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: DocumentPasserelleScalarWhereInput | DocumentPasserelleScalarWhereInput[]
+  }
+
+  export type VideoUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<VideoCreateWithoutDispositifInput, VideoUncheckedCreateWithoutDispositifInput> | VideoCreateWithoutDispositifInput[] | VideoUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: VideoCreateOrConnectWithoutDispositifInput | VideoCreateOrConnectWithoutDispositifInput[]
+    upsert?: VideoUpsertWithWhereUniqueWithoutDispositifInput | VideoUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: VideoCreateManyDispositifInputEnvelope
+    set?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    disconnect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    delete?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    update?: VideoUpdateWithWhereUniqueWithoutDispositifInput | VideoUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: VideoUpdateManyWithWhereWithoutDispositifInput | VideoUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: VideoScalarWhereInput | VideoScalarWhereInput[]
+  }
+
+  export type ReferentEmploiUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<ReferentEmploiCreateWithoutDispositifInput, ReferentEmploiUncheckedCreateWithoutDispositifInput> | ReferentEmploiCreateWithoutDispositifInput[] | ReferentEmploiUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: ReferentEmploiCreateOrConnectWithoutDispositifInput | ReferentEmploiCreateOrConnectWithoutDispositifInput[]
+    upsert?: ReferentEmploiUpsertWithWhereUniqueWithoutDispositifInput | ReferentEmploiUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: ReferentEmploiCreateManyDispositifInputEnvelope
+    set?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+    disconnect?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+    delete?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+    connect?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+    update?: ReferentEmploiUpdateWithWhereUniqueWithoutDispositifInput | ReferentEmploiUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: ReferentEmploiUpdateManyWithWhereWithoutDispositifInput | ReferentEmploiUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: ReferentEmploiScalarWhereInput | ReferentEmploiScalarWhereInput[]
+  }
+
+  export type DocumentPasserelleUncheckedUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<DocumentPasserelleCreateWithoutDispositifInput, DocumentPasserelleUncheckedCreateWithoutDispositifInput> | DocumentPasserelleCreateWithoutDispositifInput[] | DocumentPasserelleUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: DocumentPasserelleCreateOrConnectWithoutDispositifInput | DocumentPasserelleCreateOrConnectWithoutDispositifInput[]
+    upsert?: DocumentPasserelleUpsertWithWhereUniqueWithoutDispositifInput | DocumentPasserelleUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: DocumentPasserelleCreateManyDispositifInputEnvelope
+    set?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+    disconnect?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+    delete?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+    connect?: DocumentPasserelleWhereUniqueInput | DocumentPasserelleWhereUniqueInput[]
+    update?: DocumentPasserelleUpdateWithWhereUniqueWithoutDispositifInput | DocumentPasserelleUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: DocumentPasserelleUpdateManyWithWhereWithoutDispositifInput | DocumentPasserelleUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: DocumentPasserelleScalarWhereInput | DocumentPasserelleScalarWhereInput[]
+  }
+
+  export type VideoUncheckedUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<VideoCreateWithoutDispositifInput, VideoUncheckedCreateWithoutDispositifInput> | VideoCreateWithoutDispositifInput[] | VideoUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: VideoCreateOrConnectWithoutDispositifInput | VideoCreateOrConnectWithoutDispositifInput[]
+    upsert?: VideoUpsertWithWhereUniqueWithoutDispositifInput | VideoUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: VideoCreateManyDispositifInputEnvelope
+    set?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    disconnect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    delete?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
+    update?: VideoUpdateWithWhereUniqueWithoutDispositifInput | VideoUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: VideoUpdateManyWithWhereWithoutDispositifInput | VideoUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: VideoScalarWhereInput | VideoScalarWhereInput[]
+  }
+
+  export type ReferentEmploiUncheckedUpdateManyWithoutDispositifNestedInput = {
+    create?: XOR<ReferentEmploiCreateWithoutDispositifInput, ReferentEmploiUncheckedCreateWithoutDispositifInput> | ReferentEmploiCreateWithoutDispositifInput[] | ReferentEmploiUncheckedCreateWithoutDispositifInput[]
+    connectOrCreate?: ReferentEmploiCreateOrConnectWithoutDispositifInput | ReferentEmploiCreateOrConnectWithoutDispositifInput[]
+    upsert?: ReferentEmploiUpsertWithWhereUniqueWithoutDispositifInput | ReferentEmploiUpsertWithWhereUniqueWithoutDispositifInput[]
+    createMany?: ReferentEmploiCreateManyDispositifInputEnvelope
+    set?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+    disconnect?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+    delete?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+    connect?: ReferentEmploiWhereUniqueInput | ReferentEmploiWhereUniqueInput[]
+    update?: ReferentEmploiUpdateWithWhereUniqueWithoutDispositifInput | ReferentEmploiUpdateWithWhereUniqueWithoutDispositifInput[]
+    updateMany?: ReferentEmploiUpdateManyWithWhereWithoutDispositifInput | ReferentEmploiUpdateManyWithWhereWithoutDispositifInput[]
+    deleteMany?: ReferentEmploiScalarWhereInput | ReferentEmploiScalarWhereInput[]
+  }
+
+  export type DispositifFinancementCreateNestedOneWithoutReferentsInput = {
+    create?: XOR<DispositifFinancementCreateWithoutReferentsInput, DispositifFinancementUncheckedCreateWithoutReferentsInput>
+    connectOrCreate?: DispositifFinancementCreateOrConnectWithoutReferentsInput
+    connect?: DispositifFinancementWhereUniqueInput
+  }
+
+  export type DispositifFinancementUpdateOneRequiredWithoutReferentsNestedInput = {
+    create?: XOR<DispositifFinancementCreateWithoutReferentsInput, DispositifFinancementUncheckedCreateWithoutReferentsInput>
+    connectOrCreate?: DispositifFinancementCreateOrConnectWithoutReferentsInput
+    upsert?: DispositifFinancementUpsertWithoutReferentsInput
+    connect?: DispositifFinancementWhereUniqueInput
+    update?: XOR<XOR<DispositifFinancementUpdateToOneWithWhereWithoutReferentsInput, DispositifFinancementUpdateWithoutReferentsInput>, DispositifFinancementUncheckedUpdateWithoutReferentsInput>
+  }
+
+  export type EnumIconePratiqueFieldUpdateOperationsInput = {
+    set?: $Enums.IconePratique
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -48923,6 +57734,23 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumSectionEmploiNullableFilter<$PrismaModel>
     _max?: NestedEnumSectionEmploiNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumIconePratiqueFilter<$PrismaModel = never> = {
+    equals?: $Enums.IconePratique | EnumIconePratiqueFieldRefInput<$PrismaModel>
+    in?: $Enums.IconePratique[] | ListEnumIconePratiqueFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IconePratique[] | ListEnumIconePratiqueFieldRefInput<$PrismaModel>
+    not?: NestedEnumIconePratiqueFilter<$PrismaModel> | $Enums.IconePratique
+  }
+
+  export type NestedEnumIconePratiqueWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IconePratique | EnumIconePratiqueFieldRefInput<$PrismaModel>
+    in?: $Enums.IconePratique[] | ListEnumIconePratiqueFieldRefInput<$PrismaModel>
+    notIn?: $Enums.IconePratique[] | ListEnumIconePratiqueFieldRefInput<$PrismaModel>
+    not?: NestedEnumIconePratiqueWithAggregatesFilter<$PrismaModel> | $Enums.IconePratique
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIconePratiqueFilter<$PrismaModel>
+    _max?: NestedEnumIconePratiqueFilter<$PrismaModel>
   }
 
   export type InscriptionCreateWithoutUserInput = {
@@ -54091,6 +62919,435 @@ export namespace Prisma {
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
+  export type DispositifFinancementCreateWithoutDocumentsInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    videos?: VideoCreateNestedManyWithoutDispositifInput
+    referents?: ReferentEmploiCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFinancementUncheckedCreateWithoutDocumentsInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    videos?: VideoUncheckedCreateNestedManyWithoutDispositifInput
+    referents?: ReferentEmploiUncheckedCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFinancementCreateOrConnectWithoutDocumentsInput = {
+    where: DispositifFinancementWhereUniqueInput
+    create: XOR<DispositifFinancementCreateWithoutDocumentsInput, DispositifFinancementUncheckedCreateWithoutDocumentsInput>
+  }
+
+  export type DispositifFinancementUpsertWithoutDocumentsInput = {
+    update: XOR<DispositifFinancementUpdateWithoutDocumentsInput, DispositifFinancementUncheckedUpdateWithoutDocumentsInput>
+    create: XOR<DispositifFinancementCreateWithoutDocumentsInput, DispositifFinancementUncheckedCreateWithoutDocumentsInput>
+    where?: DispositifFinancementWhereInput
+  }
+
+  export type DispositifFinancementUpdateToOneWithWhereWithoutDocumentsInput = {
+    where?: DispositifFinancementWhereInput
+    data: XOR<DispositifFinancementUpdateWithoutDocumentsInput, DispositifFinancementUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type DispositifFinancementUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos?: VideoUpdateManyWithoutDispositifNestedInput
+    referents?: ReferentEmploiUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFinancementUncheckedUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos?: VideoUncheckedUpdateManyWithoutDispositifNestedInput
+    referents?: ReferentEmploiUncheckedUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFinancementCreateWithoutVideosInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DocumentPasserelleCreateNestedManyWithoutDispositifInput
+    referents?: ReferentEmploiCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFinancementUncheckedCreateWithoutVideosInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DocumentPasserelleUncheckedCreateNestedManyWithoutDispositifInput
+    referents?: ReferentEmploiUncheckedCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFinancementCreateOrConnectWithoutVideosInput = {
+    where: DispositifFinancementWhereUniqueInput
+    create: XOR<DispositifFinancementCreateWithoutVideosInput, DispositifFinancementUncheckedCreateWithoutVideosInput>
+  }
+
+  export type DispositifFinancementUpsertWithoutVideosInput = {
+    update: XOR<DispositifFinancementUpdateWithoutVideosInput, DispositifFinancementUncheckedUpdateWithoutVideosInput>
+    create: XOR<DispositifFinancementCreateWithoutVideosInput, DispositifFinancementUncheckedCreateWithoutVideosInput>
+    where?: DispositifFinancementWhereInput
+  }
+
+  export type DispositifFinancementUpdateToOneWithWhereWithoutVideosInput = {
+    where?: DispositifFinancementWhereInput
+    data: XOR<DispositifFinancementUpdateWithoutVideosInput, DispositifFinancementUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type DispositifFinancementUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DocumentPasserelleUpdateManyWithoutDispositifNestedInput
+    referents?: ReferentEmploiUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFinancementUncheckedUpdateWithoutVideosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DocumentPasserelleUncheckedUpdateManyWithoutDispositifNestedInput
+    referents?: ReferentEmploiUncheckedUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DocumentPasserelleCreateWithoutDispositifInput = {
+    id?: string
+    titre: string
+    url: string
+    type?: $Enums.TypeDocument
+    section: $Enums.SectionEmploi
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DocumentPasserelleUncheckedCreateWithoutDispositifInput = {
+    id?: string
+    titre: string
+    url: string
+    type?: $Enums.TypeDocument
+    section: $Enums.SectionEmploi
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DocumentPasserelleCreateOrConnectWithoutDispositifInput = {
+    where: DocumentPasserelleWhereUniqueInput
+    create: XOR<DocumentPasserelleCreateWithoutDispositifInput, DocumentPasserelleUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type DocumentPasserelleCreateManyDispositifInputEnvelope = {
+    data: DocumentPasserelleCreateManyDispositifInput | DocumentPasserelleCreateManyDispositifInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VideoCreateWithoutDispositifInput = {
+    id?: string
+    titre: string
+    url: string
+    description?: string | null
+    section?: $Enums.SectionEmploi | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+  }
+
+  export type VideoUncheckedCreateWithoutDispositifInput = {
+    id?: string
+    titre: string
+    url: string
+    description?: string | null
+    section?: $Enums.SectionEmploi | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+  }
+
+  export type VideoCreateOrConnectWithoutDispositifInput = {
+    where: VideoWhereUniqueInput
+    create: XOR<VideoCreateWithoutDispositifInput, VideoUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type VideoCreateManyDispositifInputEnvelope = {
+    data: VideoCreateManyDispositifInput | VideoCreateManyDispositifInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReferentEmploiCreateWithoutDispositifInput = {
+    id?: string
+    departement: string
+    referent: string
+    email?: string | null
+    codeFiche?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type ReferentEmploiUncheckedCreateWithoutDispositifInput = {
+    id?: string
+    departement: string
+    referent: string
+    email?: string | null
+    codeFiche?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type ReferentEmploiCreateOrConnectWithoutDispositifInput = {
+    where: ReferentEmploiWhereUniqueInput
+    create: XOR<ReferentEmploiCreateWithoutDispositifInput, ReferentEmploiUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type ReferentEmploiCreateManyDispositifInputEnvelope = {
+    data: ReferentEmploiCreateManyDispositifInput | ReferentEmploiCreateManyDispositifInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DocumentPasserelleUpsertWithWhereUniqueWithoutDispositifInput = {
+    where: DocumentPasserelleWhereUniqueInput
+    update: XOR<DocumentPasserelleUpdateWithoutDispositifInput, DocumentPasserelleUncheckedUpdateWithoutDispositifInput>
+    create: XOR<DocumentPasserelleCreateWithoutDispositifInput, DocumentPasserelleUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type DocumentPasserelleUpdateWithWhereUniqueWithoutDispositifInput = {
+    where: DocumentPasserelleWhereUniqueInput
+    data: XOR<DocumentPasserelleUpdateWithoutDispositifInput, DocumentPasserelleUncheckedUpdateWithoutDispositifInput>
+  }
+
+  export type DocumentPasserelleUpdateManyWithWhereWithoutDispositifInput = {
+    where: DocumentPasserelleScalarWhereInput
+    data: XOR<DocumentPasserelleUpdateManyMutationInput, DocumentPasserelleUncheckedUpdateManyWithoutDispositifInput>
+  }
+
+  export type DocumentPasserelleScalarWhereInput = {
+    AND?: DocumentPasserelleScalarWhereInput | DocumentPasserelleScalarWhereInput[]
+    OR?: DocumentPasserelleScalarWhereInput[]
+    NOT?: DocumentPasserelleScalarWhereInput | DocumentPasserelleScalarWhereInput[]
+    id?: StringFilter<"DocumentPasserelle"> | string
+    titre?: StringFilter<"DocumentPasserelle"> | string
+    url?: StringFilter<"DocumentPasserelle"> | string
+    type?: EnumTypeDocumentFilter<"DocumentPasserelle"> | $Enums.TypeDocument
+    section?: EnumSectionEmploiFilter<"DocumentPasserelle"> | $Enums.SectionEmploi
+    dispositifId?: StringNullableFilter<"DocumentPasserelle"> | string | null
+    ordre?: IntFilter<"DocumentPasserelle"> | number
+    actif?: BoolFilter<"DocumentPasserelle"> | boolean
+    createdAt?: DateTimeFilter<"DocumentPasserelle"> | Date | string
+    updatedAt?: DateTimeFilter<"DocumentPasserelle"> | Date | string
+  }
+
+  export type VideoUpsertWithWhereUniqueWithoutDispositifInput = {
+    where: VideoWhereUniqueInput
+    update: XOR<VideoUpdateWithoutDispositifInput, VideoUncheckedUpdateWithoutDispositifInput>
+    create: XOR<VideoCreateWithoutDispositifInput, VideoUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type VideoUpdateWithWhereUniqueWithoutDispositifInput = {
+    where: VideoWhereUniqueInput
+    data: XOR<VideoUpdateWithoutDispositifInput, VideoUncheckedUpdateWithoutDispositifInput>
+  }
+
+  export type VideoUpdateManyWithWhereWithoutDispositifInput = {
+    where: VideoScalarWhereInput
+    data: XOR<VideoUpdateManyMutationInput, VideoUncheckedUpdateManyWithoutDispositifInput>
+  }
+
+  export type VideoScalarWhereInput = {
+    AND?: VideoScalarWhereInput | VideoScalarWhereInput[]
+    OR?: VideoScalarWhereInput[]
+    NOT?: VideoScalarWhereInput | VideoScalarWhereInput[]
+    id?: StringFilter<"Video"> | string
+    titre?: StringFilter<"Video"> | string
+    url?: StringFilter<"Video"> | string
+    description?: StringNullableFilter<"Video"> | string | null
+    section?: EnumSectionEmploiNullableFilter<"Video"> | $Enums.SectionEmploi | null
+    dispositifId?: StringNullableFilter<"Video"> | string | null
+    ordre?: IntFilter<"Video"> | number
+    actif?: BoolFilter<"Video"> | boolean
+    createdAt?: DateTimeFilter<"Video"> | Date | string
+  }
+
+  export type ReferentEmploiUpsertWithWhereUniqueWithoutDispositifInput = {
+    where: ReferentEmploiWhereUniqueInput
+    update: XOR<ReferentEmploiUpdateWithoutDispositifInput, ReferentEmploiUncheckedUpdateWithoutDispositifInput>
+    create: XOR<ReferentEmploiCreateWithoutDispositifInput, ReferentEmploiUncheckedCreateWithoutDispositifInput>
+  }
+
+  export type ReferentEmploiUpdateWithWhereUniqueWithoutDispositifInput = {
+    where: ReferentEmploiWhereUniqueInput
+    data: XOR<ReferentEmploiUpdateWithoutDispositifInput, ReferentEmploiUncheckedUpdateWithoutDispositifInput>
+  }
+
+  export type ReferentEmploiUpdateManyWithWhereWithoutDispositifInput = {
+    where: ReferentEmploiScalarWhereInput
+    data: XOR<ReferentEmploiUpdateManyMutationInput, ReferentEmploiUncheckedUpdateManyWithoutDispositifInput>
+  }
+
+  export type ReferentEmploiScalarWhereInput = {
+    AND?: ReferentEmploiScalarWhereInput | ReferentEmploiScalarWhereInput[]
+    OR?: ReferentEmploiScalarWhereInput[]
+    NOT?: ReferentEmploiScalarWhereInput | ReferentEmploiScalarWhereInput[]
+    id?: StringFilter<"ReferentEmploi"> | string
+    dispositifId?: StringFilter<"ReferentEmploi"> | string
+    departement?: StringFilter<"ReferentEmploi"> | string
+    referent?: StringFilter<"ReferentEmploi"> | string
+    email?: StringNullableFilter<"ReferentEmploi"> | string | null
+    codeFiche?: StringNullableFilter<"ReferentEmploi"> | string | null
+    ordre?: IntFilter<"ReferentEmploi"> | number
+    actif?: BoolFilter<"ReferentEmploi"> | boolean
+  }
+
+  export type DispositifFinancementCreateWithoutReferentsInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DocumentPasserelleCreateNestedManyWithoutDispositifInput
+    videos?: VideoCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFinancementUncheckedCreateWithoutReferentsInput = {
+    id?: string
+    titre: string
+    resume?: string | null
+    contenu: string
+    montantMisEnAvant?: string | null
+    image?: string | null
+    videoUrl?: string | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: DocumentPasserelleUncheckedCreateNestedManyWithoutDispositifInput
+    videos?: VideoUncheckedCreateNestedManyWithoutDispositifInput
+  }
+
+  export type DispositifFinancementCreateOrConnectWithoutReferentsInput = {
+    where: DispositifFinancementWhereUniqueInput
+    create: XOR<DispositifFinancementCreateWithoutReferentsInput, DispositifFinancementUncheckedCreateWithoutReferentsInput>
+  }
+
+  export type DispositifFinancementUpsertWithoutReferentsInput = {
+    update: XOR<DispositifFinancementUpdateWithoutReferentsInput, DispositifFinancementUncheckedUpdateWithoutReferentsInput>
+    create: XOR<DispositifFinancementCreateWithoutReferentsInput, DispositifFinancementUncheckedCreateWithoutReferentsInput>
+    where?: DispositifFinancementWhereInput
+  }
+
+  export type DispositifFinancementUpdateToOneWithWhereWithoutReferentsInput = {
+    where?: DispositifFinancementWhereInput
+    data: XOR<DispositifFinancementUpdateWithoutReferentsInput, DispositifFinancementUncheckedUpdateWithoutReferentsInput>
+  }
+
+  export type DispositifFinancementUpdateWithoutReferentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DocumentPasserelleUpdateManyWithoutDispositifNestedInput
+    videos?: VideoUpdateManyWithoutDispositifNestedInput
+  }
+
+  export type DispositifFinancementUncheckedUpdateWithoutReferentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    resume?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: StringFieldUpdateOperationsInput | string
+    montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: DocumentPasserelleUncheckedUpdateManyWithoutDispositifNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutDispositifNestedInput
+  }
+
   export type InscriptionCreateManyUserInput = {
     id?: string
     formationId: string
@@ -55439,6 +64696,138 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DocumentPasserelleCreateManyDispositifInput = {
+    id?: string
+    titre: string
+    url: string
+    type?: $Enums.TypeDocument
+    section: $Enums.SectionEmploi
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VideoCreateManyDispositifInput = {
+    id?: string
+    titre: string
+    url: string
+    description?: string | null
+    section?: $Enums.SectionEmploi | null
+    ordre?: number
+    actif?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ReferentEmploiCreateManyDispositifInput = {
+    id?: string
+    departement: string
+    referent: string
+    email?: string | null
+    codeFiche?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type DocumentPasserelleUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeDocumentFieldUpdateOperationsInput | $Enums.TypeDocument
+    section?: EnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DocumentPasserelleUncheckedUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeDocumentFieldUpdateOperationsInput | $Enums.TypeDocument
+    section?: EnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DocumentPasserelleUncheckedUpdateManyWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeDocumentFieldUpdateOperationsInput | $Enums.TypeDocument
+    section?: EnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoUncheckedUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoUncheckedUpdateManyWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferentEmploiUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    departement?: StringFieldUpdateOperationsInput | string
+    referent?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    codeFiche?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ReferentEmploiUncheckedUpdateWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    departement?: StringFieldUpdateOperationsInput | string
+    referent?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    codeFiche?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ReferentEmploiUncheckedUpdateManyWithoutDispositifInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    departement?: StringFieldUpdateOperationsInput | string
+    referent?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    codeFiche?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

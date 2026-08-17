@@ -20,3 +20,28 @@ export async function getAllVideos() {
 export async function getAllWebinaires() {
   return prisma.webinaire.findMany({ orderBy: { date: "desc" } })
 }
+
+export async function getAllDispositifsFinancement() {
+  return prisma.dispositifFinancement.findMany({
+    orderBy: { ordre: "asc" },
+    include: {
+      referents: { orderBy: { ordre: "asc" } },
+    },
+  })
+}
+
+export async function getAllPratiqueCards() {
+  return prisma.pratiqueEmploiCard.findMany({ orderBy: { ordre: "asc" } })
+}
+
+export async function getEmploiPageContenu() {
+  return prisma.emploiPageContenu.findUnique({ where: { id: "emploi" } })
+}
+
+export async function getGestionEmploiContenu() {
+  return prisma.gestionEmploiContenu.findUnique({ where: { id: "gestion-emploi" } })
+}
+
+export async function getFormationEmployabiliteContenu() {
+  return prisma.formationEmployabiliteContenu.findUnique({ where: { id: "formation-employabilite" } })
+}

@@ -476,6 +476,7 @@ exports.Prisma.DocumentPasserelleScalarFieldEnum = {
   url: 'url',
   type: 'type',
   section: 'section',
+  dispositifId: 'dispositifId',
   ordre: 'ordre',
   actif: 'actif',
   createdAt: 'createdAt',
@@ -511,6 +512,7 @@ exports.Prisma.VideoScalarFieldEnum = {
   url: 'url',
   description: 'description',
   section: 'section',
+  dispositifId: 'dispositifId',
   ordre: 'ordre',
   actif: 'actif',
   createdAt: 'createdAt'
@@ -524,6 +526,72 @@ exports.Prisma.WebinaireScalarFieldEnum = {
   lien: 'lien',
   actif: 'actif',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DispositifFinancementScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  resume: 'resume',
+  contenu: 'contenu',
+  montantMisEnAvant: 'montantMisEnAvant',
+  image: 'image',
+  videoUrl: 'videoUrl',
+  ordre: 'ordre',
+  actif: 'actif',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReferentEmploiScalarFieldEnum = {
+  id: 'id',
+  dispositifId: 'dispositifId',
+  departement: 'departement',
+  referent: 'referent',
+  email: 'email',
+  codeFiche: 'codeFiche',
+  ordre: 'ordre',
+  actif: 'actif'
+};
+
+exports.Prisma.PratiqueEmploiCardScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  description: 'description',
+  icone: 'icone',
+  ordre: 'ordre',
+  actif: 'actif'
+};
+
+exports.Prisma.EmploiPageContenuScalarFieldEnum = {
+  id: 'id',
+  introTexte: 'introTexte',
+  introListe: 'introListe',
+  videoCommunauteUrl: 'videoCommunauteUrl',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GestionEmploiContenuScalarFieldEnum = {
+  id: 'id',
+  eLearningTitre: 'eLearningTitre',
+  eLearningTexte: 'eLearningTexte',
+  eLearningLienLabel: 'eLearningLienLabel',
+  eLearningLienUrl: 'eLearningLienUrl',
+  creerEmploiTexte: 'creerEmploiTexte',
+  creerEmploiLienLabel: 'creerEmploiLienLabel',
+  creerEmploiLienUrl: 'creerEmploiLienUrl',
+  communauteTitre: 'communauteTitre',
+  communauteTexte: 'communauteTexte',
+  communauteVideoUrl: 'communauteVideoUrl',
+  communauteLienEnSavoirPlusUrl: 'communauteLienEnSavoirPlusUrl',
+  communauteLienRejoindreUrl: 'communauteLienRejoindreUrl',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FormationEmployabiliteContenuScalarFieldEnum = {
+  id: 'id',
+  introTexte: 'introTexte',
+  indicateursNote: 'indicateursNote',
   updatedAt: 'updatedAt'
 };
 
@@ -716,6 +784,13 @@ exports.SectionEmploi = exports.$Enums.SectionEmploi = {
   FORMATION_EMPLOYABILITE: 'FORMATION_EMPLOYABILITE'
 };
 
+exports.IconePratique = exports.$Enums.IconePratique = {
+  SOCIETAL: 'SOCIETAL',
+  COTISATION: 'COTISATION',
+  PARTENARIAT: 'PARTENARIAT',
+  AUTRE: 'AUTRE'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Formation: 'Formation',
@@ -745,7 +820,13 @@ exports.Prisma.ModelName = {
   Partenaire: 'Partenaire',
   Contact: 'Contact',
   Video: 'Video',
-  Webinaire: 'Webinaire'
+  Webinaire: 'Webinaire',
+  DispositifFinancement: 'DispositifFinancement',
+  ReferentEmploi: 'ReferentEmploi',
+  PratiqueEmploiCard: 'PratiqueEmploiCard',
+  EmploiPageContenu: 'EmploiPageContenu',
+  GestionEmploiContenu: 'GestionEmploiContenu',
+  FormationEmployabiliteContenu: 'FormationEmployabiliteContenu'
 };
 
 /**
