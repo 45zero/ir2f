@@ -738,7 +738,13 @@ exports.GroupeEquivalence = exports.$Enums.GroupeEquivalence = {
   PRO_TOP: 'PRO_TOP',
   PRO_MID: 'PRO_MID',
   PRO_BEF: 'PRO_BEF',
+  PRO_BEF_TRAD: 'PRO_BEF_TRAD',
+  PRO_BEF_APP: 'PRO_BEF_APP',
+  PRO_BEF_VAE: 'PRO_BEF_VAE',
   PRO_BMF: 'PRO_BMF',
+  PRO_BMF_TRAD: 'PRO_BMF_TRAD',
+  PRO_BMF_APP: 'PRO_BMF_APP',
+  PRO_BMF_VAE: 'PRO_BMF_VAE',
   PRO_MID2: 'PRO_MID2',
   PRO_BOTTOM: 'PRO_BOTTOM'
 };

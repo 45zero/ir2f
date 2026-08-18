@@ -104,6 +104,118 @@ function NodeBadge({ f }: { f: CatalogueFormation }) {
   )
 }
 
+// Badges UEFA/FFF du parcours professionnel (public/images/cygle) — associés
+// par slug aux nœuds du diagramme "équivalences et passerelles".
+const PRO_BADGE_SRC: Record<string, string> = {
+  "pro-bepf": "/images/cygle/uefa-pro.png",
+  "pro-beff": "/images/cygle/uefa-youth.png",
+  "pro-bef": "/images/cygle/abef.png",
+  "pro-bmf": "/images/cygle/abmf.png",
+}
+
+function UpArrow({ height = 26, dashed = false }: { height?: number; dashed?: boolean }) {
+  const stroke = dashed ? colors.textLight : colors.navy
+  return (
+    <svg width="18" height={height} viewBox={`0 0 18 ${height}`} style={{ display: "block", margin: "0 auto" }}>
+      <line x1="9" y1={height} x2="9" y2="7" stroke={stroke} strokeWidth="2.5" strokeDasharray={dashed ? "4 4" : undefined} />
+      <polyline points="3,13 9,3 15,13" fill="none" stroke={stroke} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+// Deux traits divergents (DESJEPS → BEPF / BEFF) ; pas de pointe de flèche ici
+// (elle serait déformée par l'étirement non uniforme du SVG) — le UpArrow placé
+// juste en dessous porte la pointe vers DESJEPS.
+function SplitArrows() {
+  return (
+    <svg width="100%" height="22" viewBox="0 0 100 22" preserveAspectRatio="none" style={{ display: "block" }}>
+      <line x1="50" y1="22" x2="20" y2="2" stroke={colors.navy} strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <line x1="50" y1="22" x2="80" y2="2" stroke={colors.navy} strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+    </svg>
+  )
+}
+
+// Case cliquable "Traditionnel / En apprentissage / VAE" d'un brevet — chaque
+// modalité redirige vers sa propre fiche formation (ou reste vide si non renseignée).
+function ModaliteCell({ formations }: { formations: CatalogueFormation[] }) {
+  const f = formations[0]
+  if (!f) {
+    return <div style={{ padding: "13px 8px", textAlign: "center", fontSize: 11, color: "rgba(255,255,255,0.35)" }}>—</div>
+  }
+  return (
+    <Hoverable
+      as={Link}
+      href={`/formations/${f.slug}`}
+      aria-label={f.titre}
+      title={f.titre}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "13px 8px",
+        cursor: "pointer",
+        textDecoration: "none",
+        transition: "background 0.15s",
+      }}
+      hoverStyle={{ background: "rgba(255,255,255,0.16)" }}
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
+        <polyline points="9 6 15 12 9 18" />
+      </svg>
+    </Hoverable>
+  )
+}
+
+// Bloc "BEF" / "BMF" du parcours professionnel : bandeau titre + badge UEFA en
+// médaillon, puis les 3 modalités d'accès cliquables (Traditionnel / Apprentissage / VAE).
+function BrevetBlock({
+  headerFormations,
+  badgeSrc,
+  headerBackground,
+  cells,
+}: {
+  headerFormations: CatalogueFormation[]
+  badgeSrc: string
+  headerBackground: string
+  cells: { label: string; formations: CatalogueFormation[] }[]
+}) {
+  const header = headerFormations[0]
+  return (
+    <div style={{ position: "relative" }}>
+      <img
+        src={badgeSrc}
+        alt=""
+        style={{ position: "absolute", top: -16, right: 14, height: 54, width: "auto", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.25))" }}
+      />
+      <div style={{ borderRadius: 8, overflow: "hidden", boxShadow: "0 2px 10px rgba(20,33,61,0.12)" }}>
+        <div
+          style={{
+            background: headerBackground,
+            color: "#fff",
+            fontFamily: fontHeading,
+            fontSize: 14,
+            fontWeight: 800,
+            letterSpacing: 0.3,
+            padding: "12px 66px 12px 16px",
+          }}
+        >
+          {header?.titre}
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", background: colors.navyDark }}>
+          {cells.map((c, i) => (
+            <div key={c.label} style={{ borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.18)" : undefined }}>
+              <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 0.4, color: "rgba(255,255,255,0.65)", textAlign: "center", padding: "6px 4px 0" }}>
+                {c.label.toUpperCase()}
+              </div>
+              <ModaliteCell formations={c.formations} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function FormationGridCard({ f }: { f: CatalogueFormation }) {
   return (
     <Hoverable
@@ -578,20 +690,22 @@ export function FormationsCatalogue({
                     )}
                     {proData.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{proData.contenu}</p>}
 
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                       {(equivalenceByGroup.get("PRO_TOP") ?? []).map((f) => (
                         <Hoverable
                           as={Link}
                           key={f.id}
                           href={`/formations/${f.slug}`}
-                          style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
-                          hoverStyle={{ opacity: 0.85 }}
+                          style={{ display: "flex", justifyContent: "center", textDecoration: "none" }}
+                          hoverStyle={{ opacity: 0.8 }}
                         >
-                          <NodeBadge f={f} />
-                          <span>{f.shortNode}</span>
+                          <img src={PRO_BADGE_SRC[f.slug]} alt={f.titre} title={f.titre} style={{ height: 88, width: "auto" }} />
                         </Hoverable>
                       ))}
                     </div>
+
+                    <SplitArrows />
+                    <UpArrow height={16} />
 
                     <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
                       {(equivalenceByGroup.get("PRO_MID") ?? []).map((f) => (
@@ -607,42 +721,44 @@ export function FormationsCatalogue({
                       ))}
                     </div>
 
-                    {(equivalenceByGroup.get("PRO_BEF") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        <NodeBadge f={f} />
-                        <span>{f.shortNode} — {f.titre}</span>
-                      </Hoverable>
-                    ))}
+                    <UpArrow />
 
-                    {(equivalenceByGroup.get("PRO_BMF") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13 }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        <NodeBadge f={f} />
-                        <span>{f.shortNode} — {f.titre}</span>
-                      </Hoverable>
-                    ))}
+                    <BrevetBlock
+                      headerFormations={equivalenceByGroup.get("PRO_BEF") ?? []}
+                      badgeSrc={PRO_BADGE_SRC["pro-bef"]}
+                      headerBackground={colors.navy}
+                      cells={[
+                        { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BEF_TRAD") ?? [] },
+                        { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BEF_APP") ?? [] },
+                        { label: "VAE", formations: equivalenceByGroup.get("PRO_BEF_VAE") ?? [] },
+                      ]}
+                    />
+
+                    <UpArrow height={22} />
+
+                    <BrevetBlock
+                      headerFormations={equivalenceByGroup.get("PRO_BMF") ?? []}
+                      badgeSrc={PRO_BADGE_SRC["pro-bmf"]}
+                      headerBackground={`linear-gradient(90deg, ${colors.navy}, #4d7fbd)`}
+                      cells={[
+                        { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BMF_TRAD") ?? [] },
+                        { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BMF_APP") ?? [] },
+                        { label: "VAE", formations: equivalenceByGroup.get("PRO_BMF_VAE") ?? [] },
+                      ]}
+                    />
 
                     {(equivalenceByGroup.get("PRO_MID2") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        {f.titre}
-                      </Hoverable>
+                      <div key={f.id} style={{ display: "flex", flexDirection: "column", alignItems: "stretch", gap: 2, marginTop: 4 }}>
+                        <UpArrow height={20} dashed />
+                        <Hoverable
+                          as={Link}
+                          href={`/formations/${f.slug}`}
+                          style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
+                          hoverStyle={{ opacity: 0.85 }}
+                        >
+                          {f.titre}
+                        </Hoverable>
+                      </div>
                     ))}
 
                     {(equivalenceByGroup.get("PRO_BOTTOM") ?? []).map((f) => (

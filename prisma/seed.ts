@@ -72,6 +72,10 @@ const FORMATIONS: FormationSeed[] = [
       { dateDebut: new Date("2026-11-09"), lieu: "Reims", places: 9 },
     ],
     ordre: 0,
+    groupeEquivalence: "PRO_BEF_TRAD",
+    varianteNode: "NAVY",
+    badgeNode: "A",
+    shortNode: "BEF",
   },
   {
     slug: "cff3",
@@ -281,7 +285,22 @@ const FORMATIONS: FormationSeed[] = [
 
 type EquivalenceNode = {
   id: string
-  group: "af" | "cfi" | "df" | "certif" | "pro-top" | "pro-mid" | "pro-bef" | "pro-bmf" | "pro-mid2" | "pro-bottom"
+  group:
+    | "af"
+    | "cfi"
+    | "df"
+    | "certif"
+    | "pro-top"
+    | "pro-mid"
+    | "pro-bef"
+    | "pro-bef-app"
+    | "pro-bef-vae"
+    | "pro-bmf"
+    | "pro-bmf-trad"
+    | "pro-bmf-app"
+    | "pro-bmf-vae"
+    | "pro-mid2"
+    | "pro-bottom"
   label: string
   variant: "NAVY" | "LIGHT" | "RED" | "OUTLINE"
   badge?: string
@@ -329,7 +348,12 @@ const EQUIVALENCE_NODES: EquivalenceNode[] = [
   { id: "pro-desjeps", group: "pro-mid", label: "DESJEPS", variant: "NAVY", desc: "Diplôme d'État permettant d'accéder aux diplômes professionnels supérieurs (BEPF, BEFF)." },
   { id: "pro-specialite", group: "pro-mid", label: "Certificats de spécialité", variant: "OUTLINE", desc: "Certificats permettant de se spécialiser (préparation physique, gardien de but...) au sein du parcours professionnel." },
   { id: "pro-bef", group: "pro-bef", label: "Brevet d'Entraîneur de Football", short: "BEF", variant: "NAVY", badge: "A", desc: "Diplôme professionnel de niveau supérieur pour entraîner un groupe senior de haut niveau régional. Équivalent Licence UEFA A. Accessible en traditionnel, en apprentissage ou par VAE." },
+  { id: "pro-bef-app", group: "pro-bef-app", label: "BEF — En apprentissage", short: "BEF", variant: "NAVY", desc: "Prépare le BEF via un contrat d'apprentissage : formation rémunérée en alternance entre l'organisme de formation et un club." },
+  { id: "pro-bef-vae", group: "pro-bef-vae", label: "BEF — VAE", short: "BEF", variant: "NAVY", desc: "Valide les compétences acquises par l'expérience professionnelle sur le terrain pour obtenir le BEF sans repasser par la formation complète." },
   { id: "pro-bmf", group: "pro-bmf", label: "Brevet de Moniteur de Football", short: "BMF", variant: "NAVY", badge: "B", desc: "Premier diplôme professionnel, accessible en traditionnel, en apprentissage ou par VAE. Équivalent Licence UEFA B." },
+  { id: "pro-bmf-trad", group: "pro-bmf-trad", label: "BMF — Traditionnel", short: "BMF", variant: "NAVY", desc: "Parcours de formation initiale classique menant au Brevet de Moniteur de Football, premier diplôme de la filière professionnelle." },
+  { id: "pro-bmf-app", group: "pro-bmf-app", label: "BMF — En apprentissage", short: "BMF", variant: "NAVY", desc: "Prépare le BMF via un contrat d'apprentissage : formation rémunérée en alternance entre l'organisme de formation et un club." },
+  { id: "pro-bmf-vae", group: "pro-bmf-vae", label: "BMF — VAE", short: "BMF", variant: "NAVY", desc: "Valide les compétences acquises par l'expérience professionnelle sur le terrain pour obtenir le BMF sans repasser par la formation complète." },
   { id: "pro-continue", group: "pro-mid2", label: "Formation Professionnelle Continue (recyclage)", variant: "OUTLINE", desc: "Formation de recyclage permettant aux titulaires du BMF et du BEF de maintenir leur diplôme à jour." },
   { id: "pro-cdssa", group: "pro-bottom", label: "Chargé de Développement de Structure Sportive Associative", short: "CDSSA", variant: "NAVY", desc: "Formation transversale, accessible en traditionnel ou en apprentissage, pour piloter le développement d'un club ou d'un district." },
 ]
@@ -350,7 +374,12 @@ const EQUIV_GROUP_ENUM: Record<EquivalenceNode["group"], GroupeEquivalence> = {
   "pro-top": "PRO_TOP",
   "pro-mid": "PRO_MID",
   "pro-bef": "PRO_BEF",
+  "pro-bef-app": "PRO_BEF_APP",
+  "pro-bef-vae": "PRO_BEF_VAE",
   "pro-bmf": "PRO_BMF",
+  "pro-bmf-trad": "PRO_BMF_TRAD",
+  "pro-bmf-app": "PRO_BMF_APP",
+  "pro-bmf-vae": "PRO_BMF_VAE",
   "pro-mid2": "PRO_MID2",
   "pro-bottom": "PRO_BOTTOM",
 }
