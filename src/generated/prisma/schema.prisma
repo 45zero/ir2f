@@ -83,6 +83,11 @@ enum GroupeEquivalence {
   PRO_BMF_VAE
   PRO_MID2
   PRO_BOTTOM
+  PRO_BOTTOM_TRAD
+  PRO_BOTTOM_APP
+  CLUB_VIVRE
+  CLUB_GERER
+  CLUB_DEV
 
   @@schema("ir2f")
 }

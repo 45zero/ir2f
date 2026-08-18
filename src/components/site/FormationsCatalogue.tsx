@@ -8,7 +8,7 @@ import { CATEGORIE_LABELS, type CatalogueFormation } from "@/lib/formations-shar
 import { ONGLET_LABEL, ongletKeyId } from "@/lib/formations-page-shared"
 import { effetVisuelStyle, effetVisuelHoverStyle } from "@/lib/effet-visuel"
 import type { FormationOngletData, FormationTuileData } from "@/lib/formations"
-import type { CategorieFormation, FormationOngletCle, GroupeEquivalence, VarianteNode } from "@/generated/prisma"
+import type { CategorieFormation, FormationOngletCle, GroupeEquivalence, TypeFormation, VarianteNode } from "@/generated/prisma"
 
 type ExpandedTab = "info" | "parcours" | "club" | "eduPresentation" | "eduPro" | "eduBenevole" | "eduEquivalences"
 
@@ -23,6 +23,27 @@ const BENEVOLE_COLUMNS: { groupe: GroupeEquivalence; label: string }[] = [
   { groupe: "AF", label: "ATTESTATIONS FÉDÉRALES (AF)" },
   { groupe: "CFI", label: "CERTIFICATS FÉDÉRAUX INITIATEURS (CFI)" },
   { groupe: "DF", label: "DIPLÔMES FÉDÉRAUX (DF)" },
+]
+
+// Code couleur par format (catalogue "Tout Terrain" de l'onglet Club) — un
+// diplôme MIXTE (plusieurs formats) retombe sur une couleur neutre.
+const FORMAT_COLOR: Record<TypeFormation, string> = {
+  ELEARNING: colors.red,
+  VISIO: colors.gold,
+  PRESENTIEL: colors.navy,
+  MIXTE: colors.textLight,
+}
+
+const FORMAT_LEGEND: { type: TypeFormation; label: string; duree: string }[] = [
+  { type: "ELEARNING", label: "Elearning (autoformation en ligne)", duree: "15 à 30’" },
+  { type: "VISIO", label: "Classe virtuelle (visioconférence)", duree: "2 h" },
+  { type: "PRESENTIEL", label: "Classe présentiel (atelier)", duree: "3 à 4 h" },
+]
+
+const CLUB_COLUMNS: { groupe: GroupeEquivalence; label: string; background: string; color: string }[] = [
+  { groupe: "CLUB_VIVRE", label: "Vivre ensemble dans son club", background: colors.navy, color: "#fff" },
+  { groupe: "CLUB_GERER", label: "Gérer son club", background: colors.red, color: "#fff" },
+  { groupe: "CLUB_DEV", label: "Développer son club", background: colors.gold, color: colors.navy },
 ]
 
 const tabBase: CSSProperties = {
@@ -137,10 +158,10 @@ function SplitArrows() {
 
 // Case cliquable "Traditionnel / En apprentissage / VAE" d'un brevet — chaque
 // modalité redirige vers sa propre fiche formation (ou reste vide si non renseignée).
-function ModaliteCell({ formations }: { formations: CatalogueFormation[] }) {
+function ModaliteCell({ formations, iconColor, hoverBackground }: { formations: CatalogueFormation[]; iconColor: string; hoverBackground: string }) {
   const f = formations[0]
   if (!f) {
-    return <div style={{ padding: "13px 8px", textAlign: "center", fontSize: 11, color: "rgba(255,255,255,0.35)" }}>—</div>
+    return <div style={{ padding: "13px 8px", textAlign: "center", fontSize: 11, color: "rgba(128,128,128,0.5)" }}>—</div>
   }
   return (
     <Hoverable
@@ -157,36 +178,48 @@ function ModaliteCell({ formations }: { formations: CatalogueFormation[] }) {
         textDecoration: "none",
         transition: "background 0.15s",
       }}
-      hoverStyle={{ background: "rgba(255,255,255,0.16)" }}
+      hoverStyle={{ background: hoverBackground }}
     >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={iconColor} strokeWidth="2.5">
         <polyline points="9 6 15 12 9 18" />
       </svg>
     </Hoverable>
   )
 }
 
-// Bloc "BEF" / "BMF" du parcours professionnel : bandeau titre + badge UEFA en
-// médaillon, puis les 3 modalités d'accès cliquables (Traditionnel / Apprentissage / VAE).
+// Bloc "BEF" / "BMF" / "CDSSA" du parcours professionnel : bandeau titre (+ badge
+// UEFA en médaillon si fourni), puis les modalités d'accès cliquables
+// (Traditionnel / Apprentissage / VAE — ou seulement les 2 premières pour le CDSSA).
 function BrevetBlock({
   headerFormations,
   badgeSrc,
   headerBackground,
+  subtitle,
+  cellBackground = colors.navyDark,
+  cellColor = "#fff",
   cells,
 }: {
   headerFormations: CatalogueFormation[]
-  badgeSrc: string
+  badgeSrc?: string
   headerBackground: string
+  subtitle?: string
+  cellBackground?: string
+  cellColor?: string
   cells: { label: string; formations: CatalogueFormation[] }[]
 }) {
   const header = headerFormations[0]
+  const dividerColor = cellColor === "#fff" ? "rgba(255,255,255,0.18)" : "rgba(20,33,61,0.15)"
+  const labelColor = cellColor === "#fff" ? "rgba(255,255,255,0.65)" : "rgba(20,33,61,0.55)"
+  const hoverBackground = cellColor === "#fff" ? "rgba(255,255,255,0.16)" : "rgba(20,33,61,0.08)"
   return (
     <div style={{ position: "relative" }}>
-      <img
-        src={badgeSrc}
-        alt=""
-        style={{ position: "absolute", top: -16, right: 14, height: 54, width: "auto", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.25))" }}
-      />
+      {badgeSrc && (
+        <img
+          src={badgeSrc}
+          alt=""
+          style={{ position: "absolute", top: -16, right: 14, height: 54, width: "auto", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.25))" }}
+        />
+      )}
       <div style={{ borderRadius: 8, overflow: "hidden", boxShadow: "0 2px 10px rgba(20,33,61,0.12)" }}>
         <div
           style={{
@@ -196,23 +229,52 @@ function BrevetBlock({
             fontSize: 14,
             fontWeight: 800,
             letterSpacing: 0.3,
-            padding: "12px 66px 12px 16px",
+            padding: badgeSrc ? "12px 66px 12px 16px" : "12px 16px",
+            lineHeight: 1.3,
           }}
         >
           {header?.titre}
+          {subtitle && <div style={{ fontSize: 11, fontWeight: 700, opacity: 0.75, marginTop: 2 }}>{subtitle}</div>}
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", background: colors.navyDark }}>
+        <div style={{ display: "grid", gridTemplateColumns: `repeat(${cells.length},1fr)`, background: cellBackground }}>
           {cells.map((c, i) => (
-            <div key={c.label} style={{ borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.18)" : undefined }}>
-              <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 0.4, color: "rgba(255,255,255,0.65)", textAlign: "center", padding: "6px 4px 0" }}>
+            <div key={c.label} style={{ borderLeft: i > 0 ? `1px solid ${dividerColor}` : undefined }}>
+              <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: 0.4, color: labelColor, textAlign: "center", padding: "6px 4px 0" }}>
                 {c.label.toUpperCase()}
               </div>
-              <ModaliteCell formations={c.formations} />
+              <ModaliteCell formations={c.formations} iconColor={cellColor} hoverBackground={hoverBackground} />
             </div>
           ))}
         </div>
       </div>
     </div>
+  )
+}
+
+// Ligne cliquable du catalogue "Tout Terrain" (onglet Club) — la couleur de la
+// bordure gauche indique le format (voir FORMAT_COLOR / légende "Les formats").
+function ClubFormationRow({ f }: { f: CatalogueFormation }) {
+  return (
+    <Hoverable
+      as={Link}
+      href={`/formations/${f.slug}`}
+      style={{
+        display: "block",
+        padding: "10px 14px",
+        borderLeft: `4px solid ${FORMAT_COLOR[f.type]}`,
+        borderBottom: "1px solid #eef0f3",
+        background: "#fff",
+        color: colors.navy,
+        fontSize: 12.5,
+        fontWeight: 600,
+        lineHeight: 1.35,
+        textDecoration: "none",
+        transition: "background 0.15s",
+      }}
+      hoverStyle={{ background: "#f5f7fb" }}
+    >
+      {f.titre}
+    </Hoverable>
   )
 }
 
@@ -624,32 +686,86 @@ export function FormationsCatalogue({
             {expandedTab === "club" && sidebarCategory === "TERRAIN" && (() => {
               const data = getOnglet("TERRAIN", "CLUB")
               return (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
-                  <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
-                    {data.titre && <h3 style={{ ...tabTitleStyle, maxWidth: 820 }}>{data.titre}</h3>}
-                    {data.contenu && <p style={{ ...tabTextStyle, maxWidth: 820 }}>{data.contenu}</p>}
-                    <Hoverable
-                      as={Link}
-                      href="/contact"
-                      style={{
-                        alignSelf: "flex-start",
-                        background: colors.red,
-                        color: "#fff",
-                        border: "none",
-                        padding: "13px 26px",
-                        borderRadius: 4,
-                        fontSize: 14,
-                        fontWeight: 700,
-                        fontFamily: fontBody,
-                        cursor: "pointer",
-                        textDecoration: "none",
-                      }}
-                      hoverStyle={{ background: colors.redDark }}
-                    >
-                      Remplir le formulaire de contact
-                    </Hoverable>
+                <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
+                    <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
+                      {data.titre && <h3 style={{ ...tabTitleStyle, maxWidth: 820 }}>{data.titre}</h3>}
+                      {data.contenu && <p style={{ ...tabTextStyle, maxWidth: 820 }}>{data.contenu}</p>}
+                      <Hoverable
+                        as={Link}
+                        href="/contact"
+                        style={{
+                          alignSelf: "flex-start",
+                          background: colors.red,
+                          color: "#fff",
+                          border: "none",
+                          padding: "13px 26px",
+                          borderRadius: 4,
+                          fontSize: 14,
+                          fontWeight: 700,
+                          fontFamily: fontBody,
+                          cursor: "pointer",
+                          textDecoration: "none",
+                        }}
+                        hoverStyle={{ background: colors.redDark }}
+                      >
+                        Remplir le formulaire de contact
+                      </Hoverable>
+                    </div>
+                    <OngletMedia data={data} />
                   </div>
-                  <OngletMedia data={data} />
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    <h3 style={tabTitleStyle}>Le catalogue Tout Terrain</h3>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 20, alignItems: "start" }}>
+                      {CLUB_COLUMNS.map((col) => (
+                        <div key={col.groupe} style={{ borderRadius: 8, overflow: "hidden", boxShadow: "0 2px 10px rgba(20,33,61,0.08)" }}>
+                          <div
+                            style={{
+                              background: col.background,
+                              color: col.color,
+                              fontFamily: fontHeading,
+                              fontSize: 14,
+                              fontWeight: 800,
+                              letterSpacing: 0.2,
+                              textAlign: "center",
+                              padding: "12px 14px",
+                            }}
+                          >
+                            {col.label}
+                          </div>
+                          <div>
+                            {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
+                              <ClubFormationRow key={f.id} f={f} />
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div
+                      style={{
+                        border: `1.5px solid ${colors.border}`,
+                        borderRadius: 8,
+                        padding: "16px 20px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 8,
+                        maxWidth: 520,
+                      }}
+                    >
+                      <span style={{ fontFamily: fontHeading, fontSize: 13, fontWeight: 800, color: colors.navy, letterSpacing: 0.5, textTransform: "uppercase" }}>
+                        « Les formats »
+                      </span>
+                      {FORMAT_LEGEND.map((fmt) => (
+                        <div key={fmt.type} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 12.5, color: colors.textMuted }}>
+                          <span style={{ width: 10, height: 10, borderRadius: "50%", background: FORMAT_COLOR[fmt.type], flexShrink: 0 }} />
+                          <span>{fmt.label} : </span>
+                          <span style={{ fontWeight: 800, color: colors.navy }}>{fmt.duree}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )
             })()}
@@ -658,14 +774,21 @@ export function FormationsCatalogue({
               const data = getOnglet("EDUCATEUR", "EDU_PRESENTATION")
               const proData = getOnglet("EDUCATEUR", "EDU_PRO")
               const benevoleData = getOnglet("EDUCATEUR", "EDU_BENEVOLE")
+              const hasMedia = Boolean(data.videoUrl || data.image)
               return (
                 <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
-                    <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 12, maxWidth: 820 }}>
-                      {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 820 }}>
+                    {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
+                    {/* flow-root : contexte de mise en forme de bloc pour que ce conteneur
+                        englobe correctement la vidéo/image flottée (clearfix moderne) */}
+                    <div style={{ display: "flow-root" }}>
+                      {hasMedia && (
+                        <div style={{ float: "right", width: "min(360px,42%)", marginLeft: 24, marginBottom: 16 }}>
+                          <OngletMedia data={data} />
+                        </div>
+                      )}
                       {data.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{data.contenu}</p>}
                     </div>
-                    <OngletMedia data={data} />
                   </div>
 
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(340px,1fr))", gap: 24, alignItems: "start" }}>
@@ -761,17 +884,19 @@ export function FormationsCatalogue({
                       </div>
                     ))}
 
-                    {(equivalenceByGroup.get("PRO_BOTTOM") ?? []).map((f) => (
-                      <Hoverable
-                        as={Link}
-                        key={f.id}
-                        href={`/formations/${f.slug}`}
-                        style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center", fontSize: 13, marginTop: 4 }}
-                        hoverStyle={{ opacity: 0.85 }}
-                      >
-                        {f.shortNode} — {f.titre}
-                      </Hoverable>
-                    ))}
+                    <div style={{ marginTop: 4 }}>
+                      <BrevetBlock
+                        headerFormations={equivalenceByGroup.get("PRO_BOTTOM") ?? []}
+                        headerBackground={`linear-gradient(135deg, ${colors.navy}, ${colors.navyDark})`}
+                        subtitle="(CDSSA)"
+                        cellBackground="#d7e6f5"
+                        cellColor={colors.navy}
+                        cells={[
+                          { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BOTTOM_TRAD") ?? [] },
+                          { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BOTTOM_APP") ?? [] },
+                        ]}
+                      />
+                    </div>
                   </div>
 
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>

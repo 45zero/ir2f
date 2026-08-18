@@ -746,7 +746,12 @@ exports.GroupeEquivalence = exports.$Enums.GroupeEquivalence = {
   PRO_BMF_APP: 'PRO_BMF_APP',
   PRO_BMF_VAE: 'PRO_BMF_VAE',
   PRO_MID2: 'PRO_MID2',
-  PRO_BOTTOM: 'PRO_BOTTOM'
+  PRO_BOTTOM: 'PRO_BOTTOM',
+  PRO_BOTTOM_TRAD: 'PRO_BOTTOM_TRAD',
+  PRO_BOTTOM_APP: 'PRO_BOTTOM_APP',
+  CLUB_VIVRE: 'CLUB_VIVRE',
+  CLUB_GERER: 'CLUB_GERER',
+  CLUB_DEV: 'CLUB_DEV'
 };
 
 exports.VarianteNode = exports.$Enums.VarianteNode = {

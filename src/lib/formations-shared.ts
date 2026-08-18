@@ -51,7 +51,12 @@ export const GROUPE_EQUIVALENCE_LABELS: Record<GroupeEquivalence, string> = {
   PRO_BMF_APP: "Parcours pro — BMF apprentissage",
   PRO_BMF_VAE: "Parcours pro — BMF VAE",
   PRO_MID2: "Parcours pro — recyclage",
-  PRO_BOTTOM: "Parcours pro — bas",
+  PRO_BOTTOM: "Parcours pro — CDSSA (titre)",
+  PRO_BOTTOM_TRAD: "Parcours pro — CDSSA traditionnel",
+  PRO_BOTTOM_APP: "Parcours pro — CDSSA apprentissage",
+  CLUB_VIVRE: "Tout Terrain — Vivre ensemble dans son club",
+  CLUB_GERER: "Tout Terrain — Gérer son club",
+  CLUB_DEV: "Tout Terrain — Développer son club",
 }
 
 export const VARIANTE_NODE_LABELS: Record<VarianteNode, string> = {
@@ -82,6 +87,7 @@ export type FormationCard = {
   cpfEligible: boolean
   modeLabel: string
   footerLabel: string
+  type: TypeFormation
 }
 
 export type CatalogueFormation = FormationCard & {
@@ -129,5 +135,6 @@ export function toCard(f: RawFormation): FormationCard {
     cpfEligible: f.cpfEligible,
     modeLabel,
     footerLabel: f.cpfEligible ? "Éligible CPF" : modeLabel,
+    type: f.type,
   }
 }

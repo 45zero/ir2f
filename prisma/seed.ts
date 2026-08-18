@@ -301,6 +301,8 @@ type EquivalenceNode = {
     | "pro-bmf-vae"
     | "pro-mid2"
     | "pro-bottom"
+    | "pro-bottom-trad"
+    | "pro-bottom-app"
   label: string
   variant: "NAVY" | "LIGHT" | "RED" | "OUTLINE"
   badge?: string
@@ -356,6 +358,8 @@ const EQUIVALENCE_NODES: EquivalenceNode[] = [
   { id: "pro-bmf-vae", group: "pro-bmf-vae", label: "BMF — VAE", short: "BMF", variant: "NAVY", desc: "Valide les compétences acquises par l'expérience professionnelle sur le terrain pour obtenir le BMF sans repasser par la formation complète." },
   { id: "pro-continue", group: "pro-mid2", label: "Formation Professionnelle Continue (recyclage)", variant: "OUTLINE", desc: "Formation de recyclage permettant aux titulaires du BMF et du BEF de maintenir leur diplôme à jour." },
   { id: "pro-cdssa", group: "pro-bottom", label: "Chargé de Développement de Structure Sportive Associative", short: "CDSSA", variant: "NAVY", desc: "Formation transversale, accessible en traditionnel ou en apprentissage, pour piloter le développement d'un club ou d'un district." },
+  { id: "pro-cdssa-trad", group: "pro-bottom-trad", label: "CDSSA — Traditionnel", short: "CDSSA", variant: "NAVY", desc: "Parcours de formation initiale classique pour devenir Chargé de Développement de Structure Sportive Associative." },
+  { id: "pro-cdssa-app", group: "pro-bottom-app", label: "CDSSA — En apprentissage", short: "CDSSA", variant: "NAVY", desc: "Prépare le CDSSA via un contrat d'apprentissage : formation rémunérée en alternance entre l'organisme de formation et une structure sportive." },
 ]
 
 function equivGroupDefaults(g: EquivalenceNode["group"]) {
@@ -382,6 +386,8 @@ const EQUIV_GROUP_ENUM: Record<EquivalenceNode["group"], GroupeEquivalence> = {
   "pro-bmf-vae": "PRO_BMF_VAE",
   "pro-mid2": "PRO_MID2",
   "pro-bottom": "PRO_BOTTOM",
+  "pro-bottom-trad": "PRO_BOTTOM_TRAD",
+  "pro-bottom-app": "PRO_BOTTOM_APP",
 }
 
 const EQUIV_IMAGE =
@@ -413,7 +419,81 @@ const EQUIVALENCE_FORMATIONS: FormationSeed[] = EQUIVALENCE_NODES.map((n, i) => 
   }
 })
 
-const ALL_FORMATIONS = [...FORMATIONS, ...EQUIVALENCE_FORMATIONS]
+// Catalogue "Tout Terrain" affiché en 3 colonnes dans l'onglet Club (page
+// /formations) — placeholders repris du modèle fourni, à affiner ensuite
+// dans l'admin (titre, format, contenu).
+type ClubNode = {
+  id: string
+  group: "club-vivre" | "club-gerer" | "club-dev"
+  label: string
+  type: "PRESENTIEL" | "VISIO" | "ELEARNING"
+}
+
+const CLUB_NODES: ClubNode[] = [
+  { id: "club-environnement-football", group: "club-vivre", label: "Découvrir l'environnement du football", type: "ELEARNING" },
+  { id: "club-proteger-licencies", group: "club-vivre", label: "Protéger nos licenciées et licenciés", type: "ELEARNING" },
+  { id: "club-diversite-discriminations", group: "club-vivre", label: "Promouvoir la diversité et lutter contre toutes les discriminations", type: "ELEARNING" },
+  { id: "club-parents", group: "club-vivre", label: "Parents à vous de jouer !", type: "ELEARNING" },
+  { id: "club-delegue-terrain-rencontres", group: "club-vivre", label: "Faciliter les rencontres avec le délégué de terrain du club", type: "ELEARNING" },
+  { id: "club-enjeux-environnementaux", group: "club-vivre", label: "Comprendre les enjeux environnementaux de la pratique du football amateur", type: "ELEARNING" },
+  { id: "club-conflit-1", group: "club-vivre", label: "Réagir face à un conflit — Niveau 1", type: "VISIO" },
+  { id: "club-conflit-2", group: "club-vivre", label: "Réagir face à un conflit — Niveau 2", type: "VISIO" },
+  { id: "club-responsabilite-societale", group: "club-vivre", label: "Développer la responsabilité sociétale de son club", type: "VISIO" },
+  { id: "club-delegue-terrain-devenir", group: "club-vivre", label: "Devenir délégué de terrain de club", type: "PRESENTIEL" },
+  { id: "club-accompagner-u6-u11", group: "club-vivre", label: "Accompagner une équipe de football U6 à U11", type: "PRESENTIEL" },
+  { id: "club-accompagner-u12-seniors", group: "club-vivre", label: "Accompagner une équipe de football U12 à Séniors", type: "PRESENTIEL" },
+
+  { id: "club-cadre-associatif", group: "club-gerer", label: "Découvrir et maîtriser le cadre associatif du football", type: "ELEARNING" },
+  { id: "club-licences-dematerialisees", group: "club-gerer", label: "Gérer les licences dématérialisées", type: "ELEARNING" },
+  { id: "club-responsabilites-dirigeant", group: "club-gerer", label: "Appréhender les responsabilités de l'association et de son dirigeant", type: "VISIO" },
+  { id: "club-gestion-financiere", group: "club-gerer", label: "S'approprier les clés de la gestion financière", type: "PRESENTIEL" },
+  { id: "club-cfi-projet-club", group: "club-gerer", label: "CFI Projet Club", type: "PRESENTIEL" },
+
+  { id: "club-nouvelles-pratiques", group: "club-dev", label: "Découvrir les nouvelles pratiques", type: "ELEARNING" },
+  { id: "club-recruter-apprenti", group: "club-dev", label: "Recruter et accompagner un apprenti", type: "VISIO" },
+  { id: "club-emploi-fondamentaux", group: "club-dev", label: "Gérer l'emploi de son club — Les Fondamentaux", type: "VISIO" },
+  { id: "club-ressources-privees", group: "club-dev", label: "Optimiser les ressources financières privées de son club", type: "VISIO" },
+  { id: "club-reseaux-sociaux", group: "club-dev", label: "Communiquer à l'aide des réseaux sociaux", type: "ELEARNING" },
+  { id: "club-emploi-boite-outils", group: "club-dev", label: "Gérer l'emploi de son club — La boîte à outils", type: "PRESENTIEL" },
+  { id: "club-prise-de-parole", group: "club-dev", label: "Réussir sa prise de parole en public", type: "PRESENTIEL" },
+  { id: "club-methodologie-projet", group: "club-dev", label: "La méthodologie de projet", type: "PRESENTIEL" },
+]
+
+const CLUB_GROUP_ENUM: Record<ClubNode["group"], GroupeEquivalence> = {
+  "club-vivre": "CLUB_VIVRE",
+  "club-gerer": "CLUB_GERER",
+  "club-dev": "CLUB_DEV",
+}
+
+const CLUB_TYPE_DEFAULTS: Record<ClubNode["type"], { dureeLabel: string; modeLabel: string }> = {
+  ELEARNING: { dureeLabel: "15 à 30 min", modeLabel: "E-learning" },
+  VISIO: { dureeLabel: "2h", modeLabel: "Classe virtuelle (visioconférence)" },
+  PRESENTIEL: { dureeLabel: "3 à 4h", modeLabel: "Présentiel (atelier)" },
+}
+
+const CLUB_FORMATIONS: FormationSeed[] = CLUB_NODES.map((n, i) => {
+  const d = CLUB_TYPE_DEFAULTS[n.type]
+  return {
+    slug: n.id,
+    titre: n.label,
+    categorie: "TERRAIN",
+    dureeLabel: d.dureeLabel,
+    modeLabel: d.modeLabel,
+    lieu: "Ludres",
+    type: n.type,
+    cpfEligible: false,
+    image: EQUIV_IMAGE,
+    description: n.label,
+    programme: [{ n: "01", title: "Contenu de la formation", desc: n.label }],
+    formateurNom: "Équipe pédagogique IR2F",
+    formateurRole: "Formateurs certifiés FFF",
+    sessions: [{ dateDebut: daysFromNow(30), lieu: "Ludres", places: null }],
+    ordre: 400 + i,
+    groupeEquivalence: CLUB_GROUP_ENUM[n.group],
+  }
+})
+
+const ALL_FORMATIONS = [...FORMATIONS, ...EQUIVALENCE_FORMATIONS, ...CLUB_FORMATIONS]
 
 const STATS = [
   { valeur: "1 200+", label: "Stagiaires formés / an", ordre: 0 },
