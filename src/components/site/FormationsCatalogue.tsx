@@ -34,6 +34,13 @@ const FORMAT_COLOR: Record<TypeFormation, string> = {
   MIXTE: colors.textLight,
 }
 
+const FORMAT_BACKGROUND: Record<TypeFormation, string> = {
+  ELEARNING: "rgba(227,6,19,0.07)",
+  VISIO: "rgba(201,168,76,0.14)",
+  PRESENTIEL: "rgba(26,58,107,0.06)",
+  MIXTE: "rgba(107,114,128,0.08)",
+}
+
 const FORMAT_LEGEND: { type: TypeFormation; label: string; duree: string }[] = [
   { type: "ELEARNING", label: "Elearning (autoformation en ligne)", duree: "15 à 30’" },
   { type: "VISIO", label: "Classe virtuelle (visioconférence)", duree: "2 h" },
@@ -251,8 +258,9 @@ function BrevetBlock({
   )
 }
 
-// Ligne cliquable du catalogue "Tout Terrain" (onglet Club) — la couleur de la
-// bordure gauche indique le format (voir FORMAT_COLOR / légende "Les formats").
+// Ligne cliquable du catalogue "Tout Terrain" (onglet Les différents
+// parcours, catégorie TERRAIN) — la case est teintée dans la couleur du
+// format (voir FORMAT_COLOR / légende "Les formats"), titre en gris neutre.
 function ClubFormationRow({ f }: { f: CatalogueFormation }) {
   return (
     <Hoverable
@@ -260,18 +268,18 @@ function ClubFormationRow({ f }: { f: CatalogueFormation }) {
       href={`/formations/${f.slug}`}
       style={{
         display: "block",
-        padding: "10px 14px",
+        padding: "11px 14px",
         borderLeft: `4px solid ${FORMAT_COLOR[f.type]}`,
-        borderBottom: "1px solid #eef0f3",
-        background: "#fff",
-        color: colors.navy,
+        borderRadius: 4,
+        background: FORMAT_BACKGROUND[f.type],
+        color: colors.textMuted,
         fontSize: 12.5,
         fontWeight: 600,
         lineHeight: 1.35,
         textDecoration: "none",
-        transition: "background 0.15s",
+        transition: "filter 0.15s",
       }}
-      hoverStyle={{ background: "#f5f7fb" }}
+      hoverStyle={{ filter: "brightness(0.96)" }}
     >
       {f.titre}
     </Hoverable>
@@ -478,7 +486,7 @@ export function FormationsCatalogue({
 
   return (
     <main style={{ animation: "ir2fFadeIn 0.4s ease" }}>
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "36px 20px 80px" }}>
+      <section style={{ maxWidth: 1400, margin: "0 auto", padding: "36px 20px 80px" }}>
         <div style={{ display: "flex", gap: 24, alignItems: "flex-start", flexWrap: "wrap" }}>
           <div style={{ flex: "0 0 240px", minWidth: 220, display: "flex", flexDirection: "column", gap: 12 }}>
             {tuiles.map((tile) => (
@@ -642,7 +650,7 @@ export function FormationsCatalogue({
               )
             })()}
 
-            {expandedTab === "parcours" && sidebarCategory !== "EDUCATEUR" && (() => {
+            {expandedTab === "parcours" && sidebarCategory !== "EDUCATEUR" && sidebarCategory !== "TERRAIN" && (() => {
               const data = getOnglet(sidebarCategory, "PARCOURS")
               return (
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -683,89 +691,86 @@ export function FormationsCatalogue({
               )
             })()}
 
+            {expandedTab === "parcours" && sidebarCategory === "TERRAIN" && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
+                {CLUB_COLUMNS.map((col) => (
+                  <div key={col.groupe} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    <div
+                      style={{
+                        background: col.background,
+                        color: col.color,
+                        fontFamily: fontHeading,
+                        fontSize: 14,
+                        fontWeight: 800,
+                        letterSpacing: 0.2,
+                        padding: "12px 16px",
+                        borderRadius: 6,
+                      }}
+                    >
+                      {col.label}
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))", gap: 10 }}>
+                      {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
+                        <ClubFormationRow key={f.id} f={f} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+
+                <div
+                  style={{
+                    border: `1.5px solid ${colors.border}`,
+                    borderRadius: 8,
+                    padding: "16px 20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 8,
+                    maxWidth: 520,
+                  }}
+                >
+                  <span style={{ fontFamily: fontHeading, fontSize: 13, fontWeight: 800, color: colors.navy, letterSpacing: 0.5, textTransform: "uppercase" }}>
+                    « Les formats »
+                  </span>
+                  {FORMAT_LEGEND.map((fmt) => (
+                    <div key={fmt.type} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 12.5, color: colors.textMuted }}>
+                      <span style={{ width: 10, height: 10, borderRadius: "50%", background: FORMAT_COLOR[fmt.type], flexShrink: 0 }} />
+                      <span>{fmt.label} : </span>
+                      <span style={{ fontWeight: 800, color: colors.navy }}>{fmt.duree}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {expandedTab === "club" && sidebarCategory === "TERRAIN" && (() => {
               const data = getOnglet("TERRAIN", "CLUB")
               return (
-                <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
-                    <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
-                      {data.titre && <h3 style={{ ...tabTitleStyle, maxWidth: 820 }}>{data.titre}</h3>}
-                      {data.contenu && <p style={{ ...tabTextStyle, maxWidth: 820 }}>{data.contenu}</p>}
-                      <Hoverable
-                        as={Link}
-                        href="/contact"
-                        style={{
-                          alignSelf: "flex-start",
-                          background: colors.red,
-                          color: "#fff",
-                          border: "none",
-                          padding: "13px 26px",
-                          borderRadius: 4,
-                          fontSize: 14,
-                          fontWeight: 700,
-                          fontFamily: fontBody,
-                          cursor: "pointer",
-                          textDecoration: "none",
-                        }}
-                        hoverStyle={{ background: colors.redDark }}
-                      >
-                        Remplir le formulaire de contact
-                      </Hoverable>
-                    </div>
-                    <OngletMedia data={data} />
-                  </div>
-
-                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                    <h3 style={tabTitleStyle}>Le catalogue Tout Terrain</h3>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 20, alignItems: "start" }}>
-                      {CLUB_COLUMNS.map((col) => (
-                        <div key={col.groupe} style={{ borderRadius: 8, overflow: "hidden", boxShadow: "0 2px 10px rgba(20,33,61,0.08)" }}>
-                          <div
-                            style={{
-                              background: col.background,
-                              color: col.color,
-                              fontFamily: fontHeading,
-                              fontSize: 14,
-                              fontWeight: 800,
-                              letterSpacing: 0.2,
-                              textAlign: "center",
-                              padding: "12px 14px",
-                            }}
-                          >
-                            {col.label}
-                          </div>
-                          <div>
-                            {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
-                              <ClubFormationRow key={f.id} f={f} />
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
+                  <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
+                    {data.titre && <h3 style={{ ...tabTitleStyle, maxWidth: 820 }}>{data.titre}</h3>}
+                    {data.contenu && <p style={{ ...tabTextStyle, maxWidth: 820 }}>{data.contenu}</p>}
+                    <Hoverable
+                      as={Link}
+                      href="/contact"
                       style={{
-                        border: `1.5px solid ${colors.border}`,
-                        borderRadius: 8,
-                        padding: "16px 20px",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 8,
-                        maxWidth: 520,
+                        alignSelf: "flex-start",
+                        background: colors.red,
+                        color: "#fff",
+                        border: "none",
+                        padding: "13px 26px",
+                        borderRadius: 4,
+                        fontSize: 14,
+                        fontWeight: 700,
+                        fontFamily: fontBody,
+                        cursor: "pointer",
+                        textDecoration: "none",
                       }}
+                      hoverStyle={{ background: colors.redDark }}
                     >
-                      <span style={{ fontFamily: fontHeading, fontSize: 13, fontWeight: 800, color: colors.navy, letterSpacing: 0.5, textTransform: "uppercase" }}>
-                        « Les formats »
-                      </span>
-                      {FORMAT_LEGEND.map((fmt) => (
-                        <div key={fmt.type} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 12.5, color: colors.textMuted }}>
-                          <span style={{ width: 10, height: 10, borderRadius: "50%", background: FORMAT_COLOR[fmt.type], flexShrink: 0 }} />
-                          <span>{fmt.label} : </span>
-                          <span style={{ fontWeight: 800, color: colors.navy }}>{fmt.duree}</span>
-                        </div>
-                      ))}
-                    </div>
+                      Remplir le formulaire de contact
+                    </Hoverable>
                   </div>
+                  <OngletMedia data={data} />
                 </div>
               )
             })()}
