@@ -155,6 +155,7 @@ export default async function FormationDetailPage({ params }: { params: Promise<
                   formationId={formation.id}
                   lienFffStagiaire={formation.lienFffStagiaire}
                   lienFffClub={formation.lienFffClub}
+                  captureActif={formation.fffCaptureActif}
                   prefill={currentUser ?? undefined}
                 />
               ) : (
@@ -338,13 +339,11 @@ export default async function FormationDetailPage({ params }: { params: Promise<
             </div>
           )}
 
+          {formation.sessions.length > 0 && (
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             <h2 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 22, fontWeight: 800, margin: 0 }}>
               Sessions disponibles
             </h2>
-            {formation.sessions.length === 0 && (
-              <p style={{ color: colors.textLight, fontSize: 13, margin: 0 }}>Aucune session programmée pour le moment.</p>
-            )}
             {formation.sessions.map((sess) => (
               <div
                 key={sess.id}
@@ -386,6 +385,7 @@ export default async function FormationDetailPage({ params }: { params: Promise<
               </div>
             ))}
           </div>
+          )}
 
           {formation.documentsUtiles.length > 0 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>

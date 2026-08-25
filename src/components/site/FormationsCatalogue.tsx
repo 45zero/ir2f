@@ -47,10 +47,10 @@ const FORMAT_LEGEND: { type: TypeFormation; label: string; duree: string }[] = [
   { type: "PRESENTIEL", label: "Classe présentiel (atelier)", duree: "3 à 4 h" },
 ]
 
-const CLUB_COLUMNS: { groupe: GroupeEquivalence; label: string; background: string; color: string }[] = [
-  { groupe: "CLUB_VIVRE", label: "Vivre ensemble dans son club", background: colors.navy, color: "#fff" },
-  { groupe: "CLUB_GERER", label: "Gérer son club", background: colors.red, color: "#fff" },
-  { groupe: "CLUB_DEV", label: "Développer son club", background: colors.gold, color: colors.navy },
+const CLUB_COLUMNS: { groupe: GroupeEquivalence; label: string }[] = [
+  { groupe: "CLUB_VIVRE", label: "Vivre ensemble dans son club" },
+  { groupe: "CLUB_GERER", label: "Gérer son club" },
+  { groupe: "CLUB_DEV", label: "Développer son club" },
 ]
 
 const tabBase: CSSProperties = {
@@ -159,6 +159,52 @@ function SplitArrows() {
     <svg width="100%" height="22" viewBox="0 0 100 22" preserveAspectRatio="none" style={{ display: "block" }}>
       <line x1="50" y1="22" x2="20" y2="2" stroke={colors.navy} strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
       <line x1="50" y1="22" x2="80" y2="2" stroke={colors.navy} strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+    </svg>
+  )
+}
+
+// Double flèche pointillée (BEF + BMF ← Formation Continue), en surplomb à
+// gauche du bloc BEF/BMF/Continue. Positions en pourcentage (étirées via
+// preserveAspectRatio="none") car la hauteur réelle du bloc varie.
+// Les deux courbes se terminent chacune par une tangente horizontale vers la
+// droite (contrôle et point final à la même hauteur) : le marker "orient=auto"
+// se cale donc naturellement sur cette direction, pointe toujours collée au
+// bout du trait — plus de flèche flottante déconnectée de la ligne.
+// BEF et BMF → Formation Continue (le recyclage se fait après le diplôme).
+// Coin arrondi de rayon constant (r) aux deux angles de chaque tracé — seule
+// la longueur du tronc vertical change entre l'arc court (BMF) et long (BEF),
+// pour un rendu harmonieux entre les deux flèches.
+function RecyclageBracket() {
+  const r = 6
+  return (
+    <svg
+      viewBox="0 0 40 100"
+      preserveAspectRatio="none"
+      style={{ position: "absolute", left: -40, top: 0, width: 40, height: "100%", overflow: "visible" }}
+    >
+      <defs>
+        <marker id="recyclage-arrowhead" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill={colors.textLight} />
+        </marker>
+      </defs>
+      {/* BMF → Continue : tronc court (x=14) */}
+      <path
+        d={`M 36 58 L ${14 + r} 58 Q 14 58 14 ${58 + r} L 14 ${92 - r} Q 14 92 ${14 + r} 92 L 36 92`}
+        fill="none"
+        stroke={colors.textLight}
+        strokeWidth="1.5"
+        strokeDasharray="4 5"
+        markerEnd="url(#recyclage-arrowhead)"
+      />
+      {/* BEF → Continue : tronc long (x=6), même rayon d'arrondi */}
+      <path
+        d={`M 36 20 L ${6 + r} 20 Q 6 20 6 ${20 + r} L 6 ${92 - r} Q 6 92 ${6 + r} 92 L 36 92`}
+        fill="none"
+        stroke={colors.textLight}
+        strokeWidth="1.5"
+        strokeDasharray="4 5"
+        markerEnd="url(#recyclage-arrowhead)"
+      />
     </svg>
   )
 }
@@ -693,29 +739,31 @@ export function FormationsCatalogue({
 
             {expandedTab === "parcours" && sidebarCategory === "TERRAIN" && (
               <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
-                {CLUB_COLUMNS.map((col) => (
-                  <div key={col.groupe} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                    <div
-                      style={{
-                        background: col.background,
-                        color: col.color,
-                        fontFamily: fontHeading,
-                        fontSize: 14,
-                        fontWeight: 800,
-                        letterSpacing: 0.2,
-                        padding: "12px 16px",
-                        borderRadius: 6,
-                      }}
-                    >
-                      {col.label}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20, alignItems: "start" }}>
+                  {CLUB_COLUMNS.map((col) => (
+                    <div key={col.groupe} style={{ display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
+                      <div
+                        style={{
+                          background: "#e4e8ee",
+                          color: colors.navy,
+                          fontFamily: fontHeading,
+                          fontSize: 14,
+                          fontWeight: 800,
+                          letterSpacing: 0.2,
+                          padding: "12px 16px",
+                          borderRadius: 6,
+                        }}
+                      >
+                        {col.label}
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                        {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
+                          <ClubFormationRow key={f.id} f={f} />
+                        ))}
+                      </div>
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))", gap: 10 }}>
-                      {(equivalenceByGroup.get(col.groupe) ?? []).map((f) => (
-                        <ClubFormationRow key={f.id} f={f} />
-                      ))}
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
 
                 <div
                   style={{
@@ -824,10 +872,27 @@ export function FormationsCatalogue({
                           as={Link}
                           key={f.id}
                           href={`/formations/${f.slug}`}
-                          style={{ display: "flex", justifyContent: "center", textDecoration: "none" }}
-                          hoverStyle={{ opacity: 0.8 }}
+                          style={{ display: "flex", alignItems: "center", textDecoration: "none" }}
+                          hoverStyle={{ opacity: 0.85 }}
                         >
-                          <img src={PRO_BADGE_SRC[f.slug]} alt={f.titre} title={f.titre} style={{ height: 88, width: "auto" }} />
+                          <img src={PRO_BADGE_SRC[f.slug]} alt="" style={{ height: 66, width: "auto", flexShrink: 0, position: "relative", zIndex: 1 }} />
+                          <div
+                            style={{
+                              flex: 1,
+                              background: colors.navy,
+                              color: "#fff",
+                              fontFamily: fontHeading,
+                              fontSize: 12.5,
+                              fontWeight: 800,
+                              lineHeight: 1.25,
+                              textAlign: "center",
+                              padding: "10px 12px",
+                              borderRadius: 6,
+                              marginLeft: -12,
+                            }}
+                          >
+                            {f.titre}
+                          </div>
                         </Hoverable>
                       ))}
                     </div>
@@ -851,56 +916,44 @@ export function FormationsCatalogue({
 
                     <UpArrow />
 
-                    <BrevetBlock
-                      headerFormations={equivalenceByGroup.get("PRO_BEF") ?? []}
-                      badgeSrc={PRO_BADGE_SRC["pro-bef"]}
-                      headerBackground={colors.navy}
-                      cells={[
-                        { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BEF_TRAD") ?? [] },
-                        { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BEF_APP") ?? [] },
-                        { label: "VAE", formations: equivalenceByGroup.get("PRO_BEF_VAE") ?? [] },
-                      ]}
-                    />
+                    <div style={{ position: "relative", marginLeft: 40, display: "flex", flexDirection: "column", gap: 10 }}>
+                      <RecyclageBracket />
 
-                    <UpArrow height={22} />
+                      <BrevetBlock
+                        headerFormations={equivalenceByGroup.get("PRO_BEF") ?? []}
+                        badgeSrc={PRO_BADGE_SRC["pro-bef"]}
+                        headerBackground={colors.navy}
+                        cells={[
+                          { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BEF_TRAD") ?? [] },
+                          { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BEF_APP") ?? [] },
+                          { label: "VAE", formations: equivalenceByGroup.get("PRO_BEF_VAE") ?? [] },
+                        ]}
+                      />
 
-                    <BrevetBlock
-                      headerFormations={equivalenceByGroup.get("PRO_BMF") ?? []}
-                      badgeSrc={PRO_BADGE_SRC["pro-bmf"]}
-                      headerBackground={`linear-gradient(90deg, ${colors.navy}, #4d7fbd)`}
-                      cells={[
-                        { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BMF_TRAD") ?? [] },
-                        { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BMF_APP") ?? [] },
-                        { label: "VAE", formations: equivalenceByGroup.get("PRO_BMF_VAE") ?? [] },
-                      ]}
-                    />
+                      <UpArrow height={22} />
 
-                    {(equivalenceByGroup.get("PRO_MID2") ?? []).map((f) => (
-                      <div key={f.id} style={{ display: "flex", flexDirection: "column", alignItems: "stretch", gap: 2, marginTop: 4 }}>
-                        <UpArrow height={20} dashed />
+                      <BrevetBlock
+                        headerFormations={equivalenceByGroup.get("PRO_BMF") ?? []}
+                        badgeSrc={PRO_BADGE_SRC["pro-bmf"]}
+                        headerBackground={`linear-gradient(90deg, ${colors.navy}, #4d7fbd)`}
+                        cells={[
+                          { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BMF_TRAD") ?? [] },
+                          { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BMF_APP") ?? [] },
+                          { label: "VAE", formations: equivalenceByGroup.get("PRO_BMF_VAE") ?? [] },
+                        ]}
+                      />
+
+                      {(equivalenceByGroup.get("PRO_MID2") ?? []).map((f) => (
                         <Hoverable
                           as={Link}
+                          key={f.id}
                           href={`/formations/${f.slug}`}
                           style={{ ...nodeChipStyle(f), justifyContent: "center", textAlign: "center" }}
                           hoverStyle={{ opacity: 0.85 }}
                         >
                           {f.titre}
                         </Hoverable>
-                      </div>
-                    ))}
-
-                    <div style={{ marginTop: 4 }}>
-                      <BrevetBlock
-                        headerFormations={equivalenceByGroup.get("PRO_BOTTOM") ?? []}
-                        headerBackground={`linear-gradient(135deg, ${colors.navy}, ${colors.navyDark})`}
-                        subtitle="(CDSSA)"
-                        cellBackground="#d7e6f5"
-                        cellColor={colors.navy}
-                        cells={[
-                          { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BOTTOM_TRAD") ?? [] },
-                          { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BOTTOM_APP") ?? [] },
-                        ]}
-                      />
+                      ))}
                     </div>
                   </div>
 

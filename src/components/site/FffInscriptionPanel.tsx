@@ -39,24 +39,48 @@ const secondaryButtonStyle = {
 }
 
 const CIBLE_LABEL: Record<FffInscriptionCible, string> = {
-  STAGIAIRE: "S'inscrire moi-même",
-  CLUB: "Inscription par mon club",
+  STAGIAIRE: "Je m'inscris",
+  CLUB: "Le club m'inscrit !",
 }
 
 export function FffInscriptionPanel({
   formationId,
   lienFffStagiaire,
   lienFffClub,
+  captureActif,
   prefill,
 }: {
   formationId: string
   lienFffStagiaire: string | null
   lienFffClub: string | null
+  captureActif: boolean
   prefill?: { nom: string; prenom: string; email: string; telephone: string | null }
 }) {
   const [cible, setCible] = useState<FffInscriptionCible | null>(null)
 
   if (!lienFffStagiaire && !lienFffClub) return null
+
+  if (!captureActif) {
+    return (
+      <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+        {lienFffStagiaire && (
+          <Hoverable as="a" href={lienFffStagiaire} style={{ ...buttonStyle, textDecoration: "none", display: "inline-block" }} hoverStyle={{ background: colors.redDark }}>
+            {CIBLE_LABEL.STAGIAIRE}
+          </Hoverable>
+        )}
+        {lienFffClub && (
+          <Hoverable
+            as="a"
+            href={lienFffClub}
+            style={{ ...secondaryButtonStyle, textDecoration: "none", display: "inline-block" }}
+            hoverStyle={{ background: colors.navy, color: "#fff" }}
+          >
+            {CIBLE_LABEL.CLUB}
+          </Hoverable>
+        )}
+      </div>
+    )
+  }
 
   if (!cible) {
     return (

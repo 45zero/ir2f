@@ -6833,6 +6833,7 @@ export namespace Prisma {
     modeInscription: $Enums.ModeInscription | null
     lienFffStagiaire: string | null
     lienFffClub: string | null
+    fffCaptureActif: boolean | null
     conventionTemplateId: string | null
     responsablePedagogiqueNom: string | null
     responsablePedagogiquePrenom: string | null
@@ -6874,6 +6875,7 @@ export namespace Prisma {
     modeInscription: $Enums.ModeInscription | null
     lienFffStagiaire: string | null
     lienFffClub: string | null
+    fffCaptureActif: boolean | null
     conventionTemplateId: string | null
     responsablePedagogiqueNom: string | null
     responsablePedagogiquePrenom: string | null
@@ -6916,6 +6918,7 @@ export namespace Prisma {
     modeInscription: number
     lienFffStagiaire: number
     lienFffClub: number
+    fffCaptureActif: number
     conventionTemplateId: number
     responsablePedagogiqueNom: number
     responsablePedagogiquePrenom: number
@@ -6974,6 +6977,7 @@ export namespace Prisma {
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
+    fffCaptureActif?: true
     conventionTemplateId?: true
     responsablePedagogiqueNom?: true
     responsablePedagogiquePrenom?: true
@@ -7015,6 +7019,7 @@ export namespace Prisma {
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
+    fffCaptureActif?: true
     conventionTemplateId?: true
     responsablePedagogiqueNom?: true
     responsablePedagogiquePrenom?: true
@@ -7057,6 +7062,7 @@ export namespace Prisma {
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
+    fffCaptureActif?: true
     conventionTemplateId?: true
     responsablePedagogiqueNom?: true
     responsablePedagogiquePrenom?: true
@@ -7187,6 +7193,7 @@ export namespace Prisma {
     modeInscription: $Enums.ModeInscription
     lienFffStagiaire: string | null
     lienFffClub: string | null
+    fffCaptureActif: boolean
     conventionTemplateId: string | null
     responsablePedagogiqueNom: string | null
     responsablePedagogiquePrenom: string | null
@@ -7249,6 +7256,7 @@ export namespace Prisma {
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
+    fffCaptureActif?: boolean
     conventionTemplateId?: boolean
     responsablePedagogiqueNom?: boolean
     responsablePedagogiquePrenom?: boolean
@@ -7303,6 +7311,7 @@ export namespace Prisma {
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
+    fffCaptureActif?: boolean
     conventionTemplateId?: boolean
     responsablePedagogiqueNom?: boolean
     responsablePedagogiquePrenom?: boolean
@@ -7347,6 +7356,7 @@ export namespace Prisma {
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
+    fffCaptureActif?: boolean
     conventionTemplateId?: boolean
     responsablePedagogiqueNom?: boolean
     responsablePedagogiquePrenom?: boolean
@@ -7391,6 +7401,7 @@ export namespace Prisma {
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
+    fffCaptureActif?: boolean
     conventionTemplateId?: boolean
     responsablePedagogiqueNom?: boolean
     responsablePedagogiquePrenom?: boolean
@@ -7409,7 +7420,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
@@ -7469,6 +7480,7 @@ export namespace Prisma {
       modeInscription: $Enums.ModeInscription
       lienFffStagiaire: string | null
       lienFffClub: string | null
+      fffCaptureActif: boolean
       conventionTemplateId: string | null
       responsablePedagogiqueNom: string | null
       responsablePedagogiquePrenom: string | null
@@ -7942,6 +7954,7 @@ export namespace Prisma {
     readonly modeInscription: FieldRef<"Formation", 'ModeInscription'>
     readonly lienFffStagiaire: FieldRef<"Formation", 'String'>
     readonly lienFffClub: FieldRef<"Formation", 'String'>
+    readonly fffCaptureActif: FieldRef<"Formation", 'Boolean'>
     readonly conventionTemplateId: FieldRef<"Formation", 'String'>
     readonly responsablePedagogiqueNom: FieldRef<"Formation", 'String'>
     readonly responsablePedagogiquePrenom: FieldRef<"Formation", 'String'>
@@ -52713,6 +52726,7 @@ export namespace Prisma {
     modeInscription: 'modeInscription',
     lienFffStagiaire: 'lienFffStagiaire',
     lienFffClub: 'lienFffClub',
+    fffCaptureActif: 'fffCaptureActif',
     conventionTemplateId: 'conventionTemplateId',
     responsablePedagogiqueNom: 'responsablePedagogiqueNom',
     responsablePedagogiquePrenom: 'responsablePedagogiquePrenom',
@@ -53959,6 +53973,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
+    fffCaptureActif?: BoolFilter<"Formation"> | boolean
     conventionTemplateId?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueNom?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
@@ -54012,6 +54027,7 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrderInput | SortOrder
     lienFffClub?: SortOrderInput | SortOrder
+    fffCaptureActif?: SortOrder
     conventionTemplateId?: SortOrderInput | SortOrder
     responsablePedagogiqueNom?: SortOrderInput | SortOrder
     responsablePedagogiquePrenom?: SortOrderInput | SortOrder
@@ -54068,6 +54084,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
+    fffCaptureActif?: BoolFilter<"Formation"> | boolean
     conventionTemplateId?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueNom?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
@@ -54121,6 +54138,7 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrderInput | SortOrder
     lienFffClub?: SortOrderInput | SortOrder
+    fffCaptureActif?: SortOrder
     conventionTemplateId?: SortOrderInput | SortOrder
     responsablePedagogiqueNom?: SortOrderInput | SortOrder
     responsablePedagogiquePrenom?: SortOrderInput | SortOrder
@@ -54172,6 +54190,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionWithAggregatesFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     lienFffClub?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    fffCaptureActif?: BoolWithAggregatesFilter<"Formation"> | boolean
     conventionTemplateId?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     responsablePedagogiqueNom?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     responsablePedagogiquePrenom?: StringNullableWithAggregatesFilter<"Formation"> | string | null
@@ -57437,6 +57456,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -57489,6 +57509,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -57541,6 +57562,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57593,6 +57615,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57645,6 +57668,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -57688,6 +57712,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57730,6 +57755,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61628,6 +61654,7 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
+    fffCaptureActif?: SortOrder
     conventionTemplateId?: SortOrder
     responsablePedagogiqueNom?: SortOrder
     responsablePedagogiquePrenom?: SortOrder
@@ -61677,6 +61704,7 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
+    fffCaptureActif?: SortOrder
     conventionTemplateId?: SortOrder
     responsablePedagogiqueNom?: SortOrder
     responsablePedagogiquePrenom?: SortOrder
@@ -61718,6 +61746,7 @@ export namespace Prisma {
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
+    fffCaptureActif?: SortOrder
     conventionTemplateId?: SortOrder
     responsablePedagogiqueNom?: SortOrder
     responsablePedagogiquePrenom?: SortOrder
@@ -68270,6 +68299,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -68321,6 +68351,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -68445,6 +68476,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -68496,6 +68528,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -68547,6 +68580,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -68598,6 +68632,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -68665,6 +68700,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -68716,6 +68752,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -68818,6 +68855,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -68869,6 +68907,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -68993,6 +69032,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69044,6 +69084,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69095,6 +69136,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -69146,6 +69188,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -69264,6 +69307,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69315,6 +69359,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69474,6 +69519,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -69525,6 +69571,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -69731,6 +69778,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69782,6 +69830,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -70289,6 +70338,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -70340,6 +70390,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -70420,6 +70471,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
+    fffCaptureActif?: BoolFilter<"Formation"> | boolean
     conventionTemplateId?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueNom?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
@@ -70463,6 +70515,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -70514,6 +70567,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -70633,6 +70687,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -70684,6 +70739,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71035,6 +71091,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -71086,6 +71143,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -71271,6 +71329,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71322,6 +71381,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71661,6 +71721,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -71712,6 +71773,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -71852,6 +71914,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71903,6 +71966,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72238,6 +72302,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -72289,6 +72354,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     conventionTemplateId?: string | null
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
@@ -72356,6 +72422,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72407,6 +72474,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74398,6 +74466,7 @@ export namespace Prisma {
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
+    fffCaptureActif?: boolean
     responsablePedagogiqueNom?: string | null
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
@@ -74440,6 +74509,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74491,6 +74561,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74542,6 +74613,7 @@ export namespace Prisma {
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
     responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null

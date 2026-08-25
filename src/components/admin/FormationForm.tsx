@@ -46,6 +46,7 @@ export type FormationFormInitial = {
   modeInscription: ModeInscription
   lienFffStagiaire: string
   lienFffClub: string
+  fffCaptureActif: boolean
   formateurNom: string
   formateurRole: string
   ordre: string
@@ -87,6 +88,7 @@ const EMPTY: FormationFormInitial = {
   modeInscription: "INTERNE",
   lienFffStagiaire: "",
   lienFffClub: "",
+  fffCaptureActif: true,
   formateurNom: "",
   formateurRole: "",
   ordre: "0",
@@ -324,8 +326,30 @@ export function FormationForm({
               />
             </Field>
             <p style={{ gridColumn: "1 / -1", color: colors.textLight, fontSize: 12, margin: 0 }}>
-              Renseignez au moins un des deux liens. Avant la redirection, le nom, prénom, email et téléphone du
-              stagiaire sont capturés et ajoutés à la liste des stagiaires de cette formation.
+              Renseignez au moins un des deux liens.
+            </p>
+            <label
+              style={{
+                gridColumn: "1 / -1",
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                fontSize: 13,
+                color: colors.text,
+              }}
+            >
+              <input
+                type="checkbox"
+                name="fffCaptureActif"
+                defaultChecked={data.fffCaptureActif}
+                style={{ width: 15, height: 15 }}
+              />
+              Capturer les informations du stagiaire avant la redirection
+            </label>
+            <p style={{ gridColumn: "1 / -1", color: colors.textLight, fontSize: 12, margin: 0 }}>
+              Activé : le nom, prénom, email et téléphone sont demandés et ajoutés à la liste des stagiaires de
+              cette formation avant la redirection vers la FFF. Désactivé : le clic redirige directement vers le
+              lien FFF, sans rien capturer.
             </p>
           </div>
         )}

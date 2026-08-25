@@ -229,10 +229,13 @@ model Formation {
   cpfEligible Boolean            @default(false)
 
   // Inscription via le portail FFF (externe à IR2F) — lien distinct selon
-  // que ce soit le stagiaire ou le club qui réalise l'inscription
+  // que ce soit le stagiaire ou le club qui réalise l'inscription.
+  // fffCaptureActif : si activé, on capture nom/prénom/email/téléphone avant
+  // de rediriger vers la FFF ; sinon, redirection directe vers le lien FFF.
   modeInscription  ModeInscription @default(INTERNE)
   lienFffStagiaire String?
   lienFffClub      String?
+  fffCaptureActif  Boolean         @default(true)
 
   // Convention de stage : modèle PDF associé + responsable pédagogique (fixe pour toute la
   // formation — le tuteur et le maître de stage, eux, sont saisis par stagiaire, voir

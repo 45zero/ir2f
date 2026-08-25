@@ -58,6 +58,7 @@ async function buildFormationData(formData: FormData) {
     modeInscription: str(formData, "modeInscription") as ModeInscription,
     lienFffStagiaire: optionalStr(formData, "lienFffStagiaire"),
     lienFffClub: optionalStr(formData, "lienFffClub"),
+    fffCaptureActif: formData.get("fffCaptureActif") === "on",
     conventionTemplateId: optionalStr(formData, "conventionTemplateId"),
     responsablePedagogiqueNom: optionalStr(formData, "responsablePedagogiqueNom"),
     responsablePedagogiquePrenom: optionalStr(formData, "responsablePedagogiquePrenom"),

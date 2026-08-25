@@ -38,6 +38,7 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
     modeInscription: formation.modeInscription,
     lienFffStagiaire: formation.lienFffStagiaire ?? "",
     lienFffClub: formation.lienFffClub ?? "",
+    fffCaptureActif: formation.fffCaptureActif,
     formateurNom: formation.formateurNom ?? "",
     formateurRole: formation.formateurRole ?? "",
     ordre: formation.ordre.toString(),

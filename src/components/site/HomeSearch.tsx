@@ -11,7 +11,6 @@ const FILTERS = [
   { value: "EDUCATEUR", label: "Éducateur" },
   { value: "ARBITRAGE", label: "Arbitrage" },
   { value: "TERRAIN", label: "Tout Terrain" },
-  { value: "CLUB", label: "Club" },
   { value: "DEV", label: "Chargé de développement" },
 ]
 

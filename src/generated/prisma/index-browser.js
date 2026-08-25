@@ -158,6 +158,7 @@ exports.Prisma.FormationScalarFieldEnum = {
   modeInscription: 'modeInscription',
   lienFffStagiaire: 'lienFffStagiaire',
   lienFffClub: 'lienFffClub',
+  fffCaptureActif: 'fffCaptureActif',
   conventionTemplateId: 'conventionTemplateId',
   responsablePedagogiqueNom: 'responsablePedagogiqueNom',
   responsablePedagogiquePrenom: 'responsablePedagogiquePrenom',
