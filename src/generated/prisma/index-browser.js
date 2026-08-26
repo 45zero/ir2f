@@ -155,6 +155,7 @@ exports.Prisma.FormationScalarFieldEnum = {
   categorie: 'categorie',
   filiere: 'filiere',
   cpfEligible: 'cpfEligible',
+  fafaEligible: 'fafaEligible',
   modeInscription: 'modeInscription',
   lienFffStagiaire: 'lienFffStagiaire',
   lienFffClub: 'lienFffClub',

@@ -6830,6 +6830,7 @@ export namespace Prisma {
     categorie: $Enums.CategorieFormation | null
     filiere: $Enums.Filiere | null
     cpfEligible: boolean | null
+    fafaEligible: boolean | null
     modeInscription: $Enums.ModeInscription | null
     lienFffStagiaire: string | null
     lienFffClub: string | null
@@ -6872,6 +6873,7 @@ export namespace Prisma {
     categorie: $Enums.CategorieFormation | null
     filiere: $Enums.Filiere | null
     cpfEligible: boolean | null
+    fafaEligible: boolean | null
     modeInscription: $Enums.ModeInscription | null
     lienFffStagiaire: string | null
     lienFffClub: string | null
@@ -6915,6 +6917,7 @@ export namespace Prisma {
     categorie: number
     filiere: number
     cpfEligible: number
+    fafaEligible: number
     modeInscription: number
     lienFffStagiaire: number
     lienFffClub: number
@@ -6974,6 +6977,7 @@ export namespace Prisma {
     categorie?: true
     filiere?: true
     cpfEligible?: true
+    fafaEligible?: true
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
@@ -7016,6 +7020,7 @@ export namespace Prisma {
     categorie?: true
     filiere?: true
     cpfEligible?: true
+    fafaEligible?: true
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
@@ -7059,6 +7064,7 @@ export namespace Prisma {
     categorie?: true
     filiere?: true
     cpfEligible?: true
+    fafaEligible?: true
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
@@ -7190,6 +7196,7 @@ export namespace Prisma {
     categorie: $Enums.CategorieFormation
     filiere: $Enums.Filiere | null
     cpfEligible: boolean
+    fafaEligible: boolean
     modeInscription: $Enums.ModeInscription
     lienFffStagiaire: string | null
     lienFffClub: string | null
@@ -7253,6 +7260,7 @@ export namespace Prisma {
     categorie?: boolean
     filiere?: boolean
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
@@ -7308,6 +7316,7 @@ export namespace Prisma {
     categorie?: boolean
     filiere?: boolean
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
@@ -7353,6 +7362,7 @@ export namespace Prisma {
     categorie?: boolean
     filiere?: boolean
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
@@ -7398,6 +7408,7 @@ export namespace Prisma {
     categorie?: boolean
     filiere?: boolean
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
@@ -7420,7 +7431,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "fafaEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
@@ -7477,6 +7488,7 @@ export namespace Prisma {
       categorie: $Enums.CategorieFormation
       filiere: $Enums.Filiere | null
       cpfEligible: boolean
+      fafaEligible: boolean
       modeInscription: $Enums.ModeInscription
       lienFffStagiaire: string | null
       lienFffClub: string | null
@@ -7951,6 +7963,7 @@ export namespace Prisma {
     readonly categorie: FieldRef<"Formation", 'CategorieFormation'>
     readonly filiere: FieldRef<"Formation", 'Filiere'>
     readonly cpfEligible: FieldRef<"Formation", 'Boolean'>
+    readonly fafaEligible: FieldRef<"Formation", 'Boolean'>
     readonly modeInscription: FieldRef<"Formation", 'ModeInscription'>
     readonly lienFffStagiaire: FieldRef<"Formation", 'String'>
     readonly lienFffClub: FieldRef<"Formation", 'String'>
@@ -52723,6 +52736,7 @@ export namespace Prisma {
     categorie: 'categorie',
     filiere: 'filiere',
     cpfEligible: 'cpfEligible',
+    fafaEligible: 'fafaEligible',
     modeInscription: 'modeInscription',
     lienFffStagiaire: 'lienFffStagiaire',
     lienFffClub: 'lienFffClub',
@@ -53970,6 +53984,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFilter<"Formation"> | $Enums.CategorieFormation
     filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolFilter<"Formation"> | boolean
+    fafaEligible?: BoolFilter<"Formation"> | boolean
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
@@ -54024,6 +54039,7 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrderInput | SortOrder
     cpfEligible?: SortOrder
+    fafaEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrderInput | SortOrder
     lienFffClub?: SortOrderInput | SortOrder
@@ -54081,6 +54097,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFilter<"Formation"> | $Enums.CategorieFormation
     filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolFilter<"Formation"> | boolean
+    fafaEligible?: BoolFilter<"Formation"> | boolean
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
@@ -54135,6 +54152,7 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrderInput | SortOrder
     cpfEligible?: SortOrder
+    fafaEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrderInput | SortOrder
     lienFffClub?: SortOrderInput | SortOrder
@@ -54187,6 +54205,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationWithAggregatesFilter<"Formation"> | $Enums.CategorieFormation
     filiere?: EnumFiliereNullableWithAggregatesFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolWithAggregatesFilter<"Formation"> | boolean
+    fafaEligible?: BoolWithAggregatesFilter<"Formation"> | boolean
     modeInscription?: EnumModeInscriptionWithAggregatesFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     lienFffClub?: StringNullableWithAggregatesFilter<"Formation"> | string | null
@@ -57453,6 +57472,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -57506,6 +57526,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -57559,6 +57580,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57612,6 +57634,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57665,6 +57688,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -57709,6 +57733,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57752,6 +57777,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -61651,6 +61677,7 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrder
     cpfEligible?: SortOrder
+    fafaEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
@@ -61701,6 +61728,7 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrder
     cpfEligible?: SortOrder
+    fafaEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
@@ -61743,6 +61771,7 @@ export namespace Prisma {
     categorie?: SortOrder
     filiere?: SortOrder
     cpfEligible?: SortOrder
+    fafaEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
@@ -68296,6 +68325,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -68348,6 +68378,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -68473,6 +68504,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -68525,6 +68557,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -68577,6 +68610,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -68629,6 +68663,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -68697,6 +68732,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -68749,6 +68785,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -68852,6 +68889,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -68904,6 +68942,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -69029,6 +69068,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69081,6 +69121,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69133,6 +69174,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -69185,6 +69227,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -69304,6 +69347,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69356,6 +69400,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69516,6 +69561,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -69568,6 +69614,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -69775,6 +69822,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69827,6 +69875,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -70335,6 +70384,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -70387,6 +70437,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -70468,6 +70519,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFilter<"Formation"> | $Enums.CategorieFormation
     filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolFilter<"Formation"> | boolean
+    fafaEligible?: BoolFilter<"Formation"> | boolean
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
@@ -70512,6 +70564,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -70564,6 +70617,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -70684,6 +70738,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -70736,6 +70791,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71088,6 +71144,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71140,6 +71197,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71326,6 +71384,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71378,6 +71437,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71718,6 +71778,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71770,6 +71831,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71911,6 +71973,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71963,6 +72026,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72299,6 +72363,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -72351,6 +72416,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -72419,6 +72485,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72471,6 +72538,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74463,6 +74531,7 @@ export namespace Prisma {
     categorie?: $Enums.CategorieFormation
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
+    fafaEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -74506,6 +74575,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74558,6 +74628,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74610,6 +74681,7 @@ export namespace Prisma {
     categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null

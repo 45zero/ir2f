@@ -28,28 +28,21 @@ export function Footer() {
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 40 }}>
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 28 }}>
             <img
-              src="/images/logo-ir2f.png"
-              alt="IR2F"
-              style={{ height: 56, width: "auto", filter: "brightness(0) invert(1)" }}
+              src="/images/logofff.png"
+              alt="FFF"
+              style={{ height: 84, width: "auto" }}
             />
             <img src="/images/logo-lgef.png" alt="Ligue Grand Est de Football" style={{ height: 64, width: "auto" }} />
             <div
               style={{
-                border: `1px solid ${colors.gold}`,
+                background: "#ffffff",
                 borderRadius: 6,
-                padding: "10px 16px",
+                padding: "6px 12px",
                 display: "flex",
-                flexDirection: "column",
                 alignItems: "center",
-                gap: 2,
               }}
             >
-              <span style={{ color: colors.gold, fontSize: 13, fontWeight: 800, letterSpacing: 1 }}>
-                QUALIOPI
-              </span>
-              <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 9, letterSpacing: 0.5 }}>
-                CERTIFICATION QUALITÉ
-              </span>
+              <img src="/images/qualiopi.png" alt="Certification Qualiopi" style={{ height: 40, width: "auto" }} />
             </div>
           </div>
 

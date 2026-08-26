@@ -647,11 +647,13 @@ export function FormationsCatalogue({
             ) : (
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingRight: 40 }}>
                 <button style={expandedTab === "info" ? tabActive : tabBase} onClick={() => setExpandedTab("info")}>
-                  {ONGLET_LABEL.INFO}
+                  {sidebarCategory === "ARBITRAGE" ? "Présentation et les différents parcours" : ONGLET_LABEL.INFO}
                 </button>
-                <button style={expandedTab === "parcours" ? tabActive : tabBase} onClick={() => setExpandedTab("parcours")}>
-                  {ONGLET_LABEL.PARCOURS}
-                </button>
+                {sidebarCategory !== "ARBITRAGE" && (
+                  <button style={expandedTab === "parcours" ? tabActive : tabBase} onClick={() => setExpandedTab("parcours")}>
+                    {ONGLET_LABEL.PARCOURS}
+                  </button>
+                )}
                 {sidebarCategory === "TERRAIN" && (
                   <button style={expandedTab === "club" ? tabActive : tabBase} onClick={() => setExpandedTab("club")}>
                     {ONGLET_LABEL.CLUB}
@@ -660,7 +662,77 @@ export function FormationsCatalogue({
               </div>
             )}
 
-            {expandedTab === "info" && sidebarCategory !== "EDUCATEUR" && (() => {
+            {expandedTab === "info" && sidebarCategory === "ARBITRAGE" && (() => {
+              const data = getOnglet("ARBITRAGE", "INFO")
+              return (
+                <div style={{ display: "flow-root", maxWidth: 820 }}>
+                  <div style={{ float: "right", width: "min(360px,42%)", marginLeft: 24, marginBottom: 16 }}>
+                    <OngletMedia data={data} />
+                  </div>
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      background: "#f5f5f5",
+                      color: colors.navy,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: 1,
+                      textTransform: "uppercase",
+                      padding: "6px 12px",
+                      borderRadius: 3,
+                      borderLeft: `3px solid ${colors.gold}`,
+                      width: "fit-content",
+                      marginBottom: 12,
+                    }}
+                  >
+                    Arbitrage
+                  </span>
+                  <h3 style={{ ...tabTitleStyle, margin: "0 0 12px" }}>Formation Initiale d&rsquo;Arbitres (FIA)</h3>
+                  <p style={{ ...tabTextStyle, maxWidth: "none", margin: "0 0 16px" }}>
+                    Vous souhaitez devenir arbitre ? Découvrez la Formation Initiale d&rsquo;Arbitre et les informations
+                    importantes concernant cette formation. Dans l&rsquo;offre proposée par l&rsquo;Institut Régional de
+                    Formation du Football (IR2F) tout au long de la saison, on y retrouve également les formations
+                    initiales à l&rsquo;arbitrage (FIA) orchestrées par les commissions départementales d&rsquo;arbitrage
+                    du Grand Est. Une formation de 31h (27h en présentiel et 4h en ligne), où l&rsquo;on apprend les
+                    bases pour débuter sereinement : les lois du jeu, la préparation d&rsquo;un match, la gestion des
+                    conflits…
+                  </p>
+                  <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 16 }}>
+                    <span style={{ fontSize: 12, color: colors.textLight }}>
+                      <strong style={{ color: colors.text }}>Durée :</strong> 31h
+                    </span>
+                    <span style={{ fontSize: 12, color: colors.textLight }}>
+                      <strong style={{ color: colors.text }}>Format :</strong> Présentiel et FOAD
+                    </span>
+                    <span style={{ fontSize: 12, color: colors.textLight }}>
+                      <strong style={{ color: colors.text }}>CPF :</strong> Non éligible
+                    </span>
+                  </div>
+                  <Hoverable
+                    as="a"
+                    href="https://ir2f.vercel.app/formations/arb-regional"
+                    style={{
+                      background: colors.red,
+                      color: "#fff",
+                      border: "none",
+                      padding: "12px 24px",
+                      borderRadius: 4,
+                      fontSize: 13,
+                      fontWeight: 700,
+                      fontFamily: fontBody,
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      display: "inline-block",
+                    }}
+                    hoverStyle={{ background: colors.redDark }}
+                  >
+                    Voir la fiche complète
+                  </Hoverable>
+                </div>
+              )
+            })()}
+
+            {expandedTab === "info" && sidebarCategory !== "EDUCATEUR" && sidebarCategory !== "ARBITRAGE" && (() => {
               const data = getOnglet(sidebarCategory, "INFO")
               return (
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
@@ -1178,6 +1250,9 @@ export function FormationsCatalogue({
               </span>
               <span style={{ fontSize: 12, color: colors.textLight }}>
                 <strong style={{ color: colors.text }}>CPF :</strong> {popupFormation.cpfEligible ? "Éligible" : "Non éligible"}
+              </span>
+              <span style={{ fontSize: 12, color: colors.textLight }}>
+                <strong style={{ color: colors.text }}>FAFA :</strong> {popupFormation.fafaEligible ? "Éligible" : "Non éligible"}
               </span>
             </div>
             <Hoverable

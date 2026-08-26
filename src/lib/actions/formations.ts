@@ -55,6 +55,7 @@ async function buildFormationData(formData: FormData) {
     lienVisio: optionalStr(formData, "lienVisio"),
     image,
     cpfEligible: formData.get("cpfEligible") === "on",
+    fafaEligible: formData.get("fafaEligible") === "on",
     modeInscription: str(formData, "modeInscription") as ModeInscription,
     lienFffStagiaire: optionalStr(formData, "lienFffStagiaire"),
     lienFffClub: optionalStr(formData, "lienFffClub"),

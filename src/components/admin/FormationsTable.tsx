@@ -14,6 +14,7 @@ export type AdminFormationRow = {
   categorie: CategorieFormation
   statut: StatutFormation
   cpfEligible: boolean
+  fafaEligible: boolean
   ordre: number
   dureeLabel: string | null
 }
@@ -77,7 +78,7 @@ export function FormationsTable({ formations }: { formations: AdminFormationRow[
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "2.2fr 1fr 1fr 0.6fr 1.6fr",
+            gridTemplateColumns: "2.2fr 1fr 1fr 0.6fr 0.6fr 1.6fr",
             gap: 12,
             padding: "12px 18px",
             background: "#f5f7fb",
@@ -92,6 +93,7 @@ export function FormationsTable({ formations }: { formations: AdminFormationRow[
           <span>Catégorie</span>
           <span>Statut</span>
           <span>CPF</span>
+          <span>FAFA</span>
           <span>Actions</span>
         </div>
 
@@ -120,7 +122,7 @@ function FormationRow({ formation }: { formation: AdminFormationRow }) {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "2.2fr 1fr 1fr 0.6fr 1.6fr",
+        gridTemplateColumns: "2.2fr 1fr 1fr 0.6fr 0.6fr 1.6fr",
         gap: 12,
         padding: "14px 18px",
         borderTop: "1px solid #eef0f3",
@@ -148,6 +150,7 @@ function FormationRow({ formation }: { formation: AdminFormationRow }) {
         {STATUT_LABELS[formation.statut]}
       </span>
       <span>{formation.cpfEligible ? "Oui" : "Non"}</span>
+      <span>{formation.fafaEligible ? "Oui" : "Non"}</span>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
         <Link
           href={`/admin/formations/${formation.id}`}

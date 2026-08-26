@@ -35,6 +35,7 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
     lienVisio: formation.lienVisio ?? "",
     image: formation.image ?? "",
     cpfEligible: formation.cpfEligible,
+    fafaEligible: formation.fafaEligible,
     modeInscription: formation.modeInscription,
     lienFffStagiaire: formation.lienFffStagiaire ?? "",
     lienFffClub: formation.lienFffClub ?? "",

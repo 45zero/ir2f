@@ -224,9 +224,10 @@ model Formation {
   formateurRole String?
   ordre         Int             @default(0)
 
-  categorie   CategorieFormation @default(EDUCATEUR)
-  filiere     Filiere?
-  cpfEligible Boolean            @default(false)
+  categorie    CategorieFormation @default(EDUCATEUR)
+  filiere      Filiere?
+  cpfEligible  Boolean            @default(false)
+  fafaEligible Boolean            @default(false)
 
   // Inscription via le portail FFF (externe à IR2F) — lien distinct selon
   // que ce soit le stagiaire ou le club qui réalise l'inscription.

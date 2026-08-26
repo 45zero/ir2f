@@ -85,6 +85,7 @@ export type FormationCard = {
   dureeLabel: string | null
   image: string | null
   cpfEligible: boolean
+  fafaEligible: boolean
   modeLabel: string
   footerLabel: string
   type: TypeFormation
@@ -118,6 +119,7 @@ type RawFormation = {
   dureeLabel: string | null
   image: string | null
   cpfEligible: boolean
+  fafaEligible: boolean
   modeLabel: string | null
   type: TypeFormation
 }
@@ -133,6 +135,7 @@ export function toCard(f: RawFormation): FormationCard {
     dureeLabel: f.dureeLabel,
     image: f.image,
     cpfEligible: f.cpfEligible,
+    fafaEligible: f.fafaEligible,
     modeLabel,
     footerLabel: f.cpfEligible ? "Éligible CPF" : modeLabel,
     type: f.type,

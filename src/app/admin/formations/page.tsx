@@ -13,6 +13,7 @@ export default async function AdminFormationsPage() {
     categorie: f.categorie,
     statut: f.statut,
     cpfEligible: f.cpfEligible,
+    fafaEligible: f.fafaEligible,
     ordre: f.ordre,
     dureeLabel: f.dureeLabel,
   }))

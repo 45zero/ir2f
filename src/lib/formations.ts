@@ -23,6 +23,7 @@ const CARD_SELECT = {
   dureeLabel: true,
   image: true,
   cpfEligible: true,
+  fafaEligible: true,
   modeLabel: true,
   type: true,
 } as const

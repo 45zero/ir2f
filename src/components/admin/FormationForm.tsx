@@ -43,6 +43,7 @@ export type FormationFormInitial = {
   lienVisio: string
   image: string
   cpfEligible: boolean
+  fafaEligible: boolean
   modeInscription: ModeInscription
   lienFffStagiaire: string
   lienFffClub: string
@@ -85,6 +86,7 @@ const EMPTY: FormationFormInitial = {
   lienVisio: "",
   image: "",
   cpfEligible: false,
+  fafaEligible: false,
   modeInscription: "INTERNE",
   lienFffStagiaire: "",
   lienFffClub: "",
@@ -186,6 +188,28 @@ export function FormationForm({
       <input type="hidden" name="programme" value={programmeJson} />
       <input type="hidden" name="sessions" value={sessionsJson} />
       <input type="hidden" name="resultats" value={resultatsJson} />
+
+      <button
+        type="submit"
+        style={{
+          alignSelf: "flex-start",
+          position: "sticky",
+          top: 12,
+          zIndex: 10,
+          background: colors.red,
+          color: "#fff",
+          border: "none",
+          padding: "13px 28px",
+          borderRadius: 4,
+          fontSize: 14,
+          fontWeight: 700,
+          fontFamily: fontBody,
+          cursor: "pointer",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+        }}
+      >
+        {submitLabel}
+      </button>
 
       <SectionCard title="Informations générales">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 14 }}>
@@ -289,6 +313,10 @@ export function FormationForm({
           <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text, marginTop: 20 }}>
             <input type="checkbox" name="cpfEligible" defaultChecked={data.cpfEligible} style={{ width: 15, height: 15 }} />
             Éligible CPF
+          </label>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text, marginTop: 20 }}>
+            <input type="checkbox" name="fafaEligible" defaultChecked={data.fafaEligible} style={{ width: 15, height: 15 }} />
+            Éligible FAFA
           </label>
         </div>
       </SectionCard>
