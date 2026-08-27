@@ -31529,6 +31529,7 @@ export namespace Prisma {
     ctaLabel: string | null
     formationId: string | null
     youtubeUrl: string | null
+    videoFichierUrl: string | null
     alignement: $Enums.AlignementHero | null
     overlayColor: string | null
     overlayOpacity: number | null
@@ -31550,6 +31551,7 @@ export namespace Prisma {
     ctaLabel: string | null
     formationId: string | null
     youtubeUrl: string | null
+    videoFichierUrl: string | null
     alignement: $Enums.AlignementHero | null
     overlayColor: string | null
     overlayOpacity: number | null
@@ -31571,6 +31573,7 @@ export namespace Prisma {
     ctaLabel: number
     formationId: number
     youtubeUrl: number
+    videoFichierUrl: number
     alignement: number
     overlayColor: number
     overlayOpacity: number
@@ -31606,6 +31609,7 @@ export namespace Prisma {
     ctaLabel?: true
     formationId?: true
     youtubeUrl?: true
+    videoFichierUrl?: true
     alignement?: true
     overlayColor?: true
     overlayOpacity?: true
@@ -31627,6 +31631,7 @@ export namespace Prisma {
     ctaLabel?: true
     formationId?: true
     youtubeUrl?: true
+    videoFichierUrl?: true
     alignement?: true
     overlayColor?: true
     overlayOpacity?: true
@@ -31648,6 +31653,7 @@ export namespace Prisma {
     ctaLabel?: true
     formationId?: true
     youtubeUrl?: true
+    videoFichierUrl?: true
     alignement?: true
     overlayColor?: true
     overlayOpacity?: true
@@ -31756,6 +31762,7 @@ export namespace Prisma {
     ctaLabel: string | null
     formationId: string | null
     youtubeUrl: string | null
+    videoFichierUrl: string | null
     alignement: $Enums.AlignementHero
     overlayColor: string
     overlayOpacity: number
@@ -31796,6 +31803,7 @@ export namespace Prisma {
     ctaLabel?: boolean
     formationId?: boolean
     youtubeUrl?: boolean
+    videoFichierUrl?: boolean
     alignement?: boolean
     overlayColor?: boolean
     overlayOpacity?: boolean
@@ -31818,6 +31826,7 @@ export namespace Prisma {
     ctaLabel?: boolean
     formationId?: boolean
     youtubeUrl?: boolean
+    videoFichierUrl?: boolean
     alignement?: boolean
     overlayColor?: boolean
     overlayOpacity?: boolean
@@ -31840,6 +31849,7 @@ export namespace Prisma {
     ctaLabel?: boolean
     formationId?: boolean
     youtubeUrl?: boolean
+    videoFichierUrl?: boolean
     alignement?: boolean
     overlayColor?: boolean
     overlayOpacity?: boolean
@@ -31862,6 +31872,7 @@ export namespace Prisma {
     ctaLabel?: boolean
     formationId?: boolean
     youtubeUrl?: boolean
+    videoFichierUrl?: boolean
     alignement?: boolean
     overlayColor?: boolean
     overlayOpacity?: boolean
@@ -31873,7 +31884,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type HeroSlideOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "badge" | "titre" | "sousTitre" | "logoUrl" | "image" | "ctaLabel" | "formationId" | "youtubeUrl" | "alignement" | "overlayColor" | "overlayOpacity" | "transition" | "dureeAffichage" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["heroSlide"]>
+  export type HeroSlideOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "badge" | "titre" | "sousTitre" | "logoUrl" | "image" | "ctaLabel" | "formationId" | "youtubeUrl" | "videoFichierUrl" | "alignement" | "overlayColor" | "overlayOpacity" | "transition" | "dureeAffichage" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["heroSlide"]>
   export type HeroSlideInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     formation?: boolean | HeroSlide$formationArgs<ExtArgs>
   }
@@ -31899,6 +31910,7 @@ export namespace Prisma {
       ctaLabel: string | null
       formationId: string | null
       youtubeUrl: string | null
+      videoFichierUrl: string | null
       alignement: $Enums.AlignementHero
       overlayColor: string
       overlayOpacity: number
@@ -32341,6 +32353,7 @@ export namespace Prisma {
     readonly ctaLabel: FieldRef<"HeroSlide", 'String'>
     readonly formationId: FieldRef<"HeroSlide", 'String'>
     readonly youtubeUrl: FieldRef<"HeroSlide", 'String'>
+    readonly videoFichierUrl: FieldRef<"HeroSlide", 'String'>
     readonly alignement: FieldRef<"HeroSlide", 'AlignementHero'>
     readonly overlayColor: FieldRef<"HeroSlide", 'String'>
     readonly overlayOpacity: FieldRef<"HeroSlide", 'Int'>
@@ -33890,6 +33903,7 @@ export namespace Prisma {
     titre: string | null
     contenu: string | null
     videoUrl: string | null
+    videoFichierUrl: string | null
     image: string | null
     imageTaille: number | null
     backgroundColor: string | null
@@ -33905,6 +33919,7 @@ export namespace Prisma {
     titre: string | null
     contenu: string | null
     videoUrl: string | null
+    videoFichierUrl: string | null
     image: string | null
     imageTaille: number | null
     backgroundColor: string | null
@@ -33920,6 +33935,7 @@ export namespace Prisma {
     titre: number
     contenu: number
     videoUrl: number
+    videoFichierUrl: number
     image: number
     imageTaille: number
     backgroundColor: number
@@ -33947,6 +33963,7 @@ export namespace Prisma {
     titre?: true
     contenu?: true
     videoUrl?: true
+    videoFichierUrl?: true
     image?: true
     imageTaille?: true
     backgroundColor?: true
@@ -33962,6 +33979,7 @@ export namespace Prisma {
     titre?: true
     contenu?: true
     videoUrl?: true
+    videoFichierUrl?: true
     image?: true
     imageTaille?: true
     backgroundColor?: true
@@ -33977,6 +33995,7 @@ export namespace Prisma {
     titre?: true
     contenu?: true
     videoUrl?: true
+    videoFichierUrl?: true
     image?: true
     imageTaille?: true
     backgroundColor?: true
@@ -34079,6 +34098,7 @@ export namespace Prisma {
     titre: string | null
     contenu: string | null
     videoUrl: string | null
+    videoFichierUrl: string | null
     image: string | null
     imageTaille: number
     backgroundColor: string
@@ -34113,6 +34133,7 @@ export namespace Prisma {
     titre?: boolean
     contenu?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     image?: boolean
     imageTaille?: boolean
     backgroundColor?: boolean
@@ -34128,6 +34149,7 @@ export namespace Prisma {
     titre?: boolean
     contenu?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     image?: boolean
     imageTaille?: boolean
     backgroundColor?: boolean
@@ -34143,6 +34165,7 @@ export namespace Prisma {
     titre?: boolean
     contenu?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     image?: boolean
     imageTaille?: boolean
     backgroundColor?: boolean
@@ -34158,6 +34181,7 @@ export namespace Prisma {
     titre?: boolean
     contenu?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     image?: boolean
     imageTaille?: boolean
     backgroundColor?: boolean
@@ -34166,7 +34190,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormationOngletOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "onglet" | "titre" | "contenu" | "videoUrl" | "image" | "imageTaille" | "backgroundColor" | "opacity" | "effetVisuel" | "updatedAt", ExtArgs["result"]["formationOnglet"]>
+  export type FormationOngletOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "onglet" | "titre" | "contenu" | "videoUrl" | "videoFichierUrl" | "image" | "imageTaille" | "backgroundColor" | "opacity" | "effetVisuel" | "updatedAt", ExtArgs["result"]["formationOnglet"]>
 
   export type $FormationOngletPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FormationOnglet"
@@ -34178,6 +34202,7 @@ export namespace Prisma {
       titre: string | null
       contenu: string | null
       videoUrl: string | null
+      videoFichierUrl: string | null
       image: string | null
       imageTaille: number
       backgroundColor: string
@@ -34613,6 +34638,7 @@ export namespace Prisma {
     readonly titre: FieldRef<"FormationOnglet", 'String'>
     readonly contenu: FieldRef<"FormationOnglet", 'String'>
     readonly videoUrl: FieldRef<"FormationOnglet", 'String'>
+    readonly videoFichierUrl: FieldRef<"FormationOnglet", 'String'>
     readonly image: FieldRef<"FormationOnglet", 'String'>
     readonly imageTaille: FieldRef<"FormationOnglet", 'Int'>
     readonly backgroundColor: FieldRef<"FormationOnglet", 'String'>
@@ -39367,6 +39393,7 @@ export namespace Prisma {
     id: string | null
     titre: string | null
     url: string | null
+    videoFichierUrl: string | null
     description: string | null
     section: $Enums.SectionEmploi | null
     dispositifId: string | null
@@ -39379,6 +39406,7 @@ export namespace Prisma {
     id: string | null
     titre: string | null
     url: string | null
+    videoFichierUrl: string | null
     description: string | null
     section: $Enums.SectionEmploi | null
     dispositifId: string | null
@@ -39391,6 +39419,7 @@ export namespace Prisma {
     id: number
     titre: number
     url: number
+    videoFichierUrl: number
     description: number
     section: number
     dispositifId: number
@@ -39413,6 +39442,7 @@ export namespace Prisma {
     id?: true
     titre?: true
     url?: true
+    videoFichierUrl?: true
     description?: true
     section?: true
     dispositifId?: true
@@ -39425,6 +39455,7 @@ export namespace Prisma {
     id?: true
     titre?: true
     url?: true
+    videoFichierUrl?: true
     description?: true
     section?: true
     dispositifId?: true
@@ -39437,6 +39468,7 @@ export namespace Prisma {
     id?: true
     titre?: true
     url?: true
+    videoFichierUrl?: true
     description?: true
     section?: true
     dispositifId?: true
@@ -39536,6 +39568,7 @@ export namespace Prisma {
     id: string
     titre: string
     url: string
+    videoFichierUrl: string | null
     description: string | null
     section: $Enums.SectionEmploi | null
     dispositifId: string | null
@@ -39567,6 +39600,7 @@ export namespace Prisma {
     id?: boolean
     titre?: boolean
     url?: boolean
+    videoFichierUrl?: boolean
     description?: boolean
     section?: boolean
     dispositifId?: boolean
@@ -39580,6 +39614,7 @@ export namespace Prisma {
     id?: boolean
     titre?: boolean
     url?: boolean
+    videoFichierUrl?: boolean
     description?: boolean
     section?: boolean
     dispositifId?: boolean
@@ -39593,6 +39628,7 @@ export namespace Prisma {
     id?: boolean
     titre?: boolean
     url?: boolean
+    videoFichierUrl?: boolean
     description?: boolean
     section?: boolean
     dispositifId?: boolean
@@ -39606,6 +39642,7 @@ export namespace Prisma {
     id?: boolean
     titre?: boolean
     url?: boolean
+    videoFichierUrl?: boolean
     description?: boolean
     section?: boolean
     dispositifId?: boolean
@@ -39614,7 +39651,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "url" | "description" | "section" | "dispositifId" | "ordre" | "actif" | "createdAt", ExtArgs["result"]["video"]>
+  export type VideoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "url" | "videoFichierUrl" | "description" | "section" | "dispositifId" | "ordre" | "actif" | "createdAt", ExtArgs["result"]["video"]>
   export type VideoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     dispositif?: boolean | Video$dispositifArgs<ExtArgs>
   }
@@ -39634,6 +39671,7 @@ export namespace Prisma {
       id: string
       titre: string
       url: string
+      videoFichierUrl: string | null
       description: string | null
       section: $Enums.SectionEmploi | null
       dispositifId: string | null
@@ -40067,6 +40105,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Video", 'String'>
     readonly titre: FieldRef<"Video", 'String'>
     readonly url: FieldRef<"Video", 'String'>
+    readonly videoFichierUrl: FieldRef<"Video", 'String'>
     readonly description: FieldRef<"Video", 'String'>
     readonly section: FieldRef<"Video", 'SectionEmploi'>
     readonly dispositifId: FieldRef<"Video", 'String'>
@@ -41578,6 +41617,7 @@ export namespace Prisma {
     montantMisEnAvant: string | null
     image: string | null
     videoUrl: string | null
+    videoFichierUrl: string | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -41592,6 +41632,7 @@ export namespace Prisma {
     montantMisEnAvant: string | null
     image: string | null
     videoUrl: string | null
+    videoFichierUrl: string | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -41606,6 +41647,7 @@ export namespace Prisma {
     montantMisEnAvant: number
     image: number
     videoUrl: number
+    videoFichierUrl: number
     ordre: number
     actif: number
     createdAt: number
@@ -41630,6 +41672,7 @@ export namespace Prisma {
     montantMisEnAvant?: true
     image?: true
     videoUrl?: true
+    videoFichierUrl?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -41644,6 +41687,7 @@ export namespace Prisma {
     montantMisEnAvant?: true
     image?: true
     videoUrl?: true
+    videoFichierUrl?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -41658,6 +41702,7 @@ export namespace Prisma {
     montantMisEnAvant?: true
     image?: true
     videoUrl?: true
+    videoFichierUrl?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -41759,6 +41804,7 @@ export namespace Prisma {
     montantMisEnAvant: string | null
     image: string | null
     videoUrl: string | null
+    videoFichierUrl: string | null
     ordre: number
     actif: boolean
     createdAt: Date
@@ -41792,6 +41838,7 @@ export namespace Prisma {
     montantMisEnAvant?: boolean
     image?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -41810,6 +41857,7 @@ export namespace Prisma {
     montantMisEnAvant?: boolean
     image?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -41824,6 +41872,7 @@ export namespace Prisma {
     montantMisEnAvant?: boolean
     image?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -41838,13 +41887,14 @@ export namespace Prisma {
     montantMisEnAvant?: boolean
     image?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DispositifFinancementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "resume" | "contenu" | "montantMisEnAvant" | "image" | "videoUrl" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["dispositifFinancement"]>
+  export type DispositifFinancementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "resume" | "contenu" | "montantMisEnAvant" | "image" | "videoUrl" | "videoFichierUrl" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["dispositifFinancement"]>
   export type DispositifFinancementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     documents?: boolean | DispositifFinancement$documentsArgs<ExtArgs>
     videos?: boolean | DispositifFinancement$videosArgs<ExtArgs>
@@ -41869,6 +41919,7 @@ export namespace Prisma {
       montantMisEnAvant: string | null
       image: string | null
       videoUrl: string | null
+      videoFichierUrl: string | null
       ordre: number
       actif: boolean
       createdAt: Date
@@ -42306,6 +42357,7 @@ export namespace Prisma {
     readonly montantMisEnAvant: FieldRef<"DispositifFinancement", 'String'>
     readonly image: FieldRef<"DispositifFinancement", 'String'>
     readonly videoUrl: FieldRef<"DispositifFinancement", 'String'>
+    readonly videoFichierUrl: FieldRef<"DispositifFinancement", 'String'>
     readonly ordre: FieldRef<"DispositifFinancement", 'Int'>
     readonly actif: FieldRef<"DispositifFinancement", 'Boolean'>
     readonly createdAt: FieldRef<"DispositifFinancement", 'DateTime'>
@@ -44991,6 +45043,7 @@ export namespace Prisma {
     introTexte: string | null
     introListe: string | null
     videoCommunauteUrl: string | null
+    videoCommunauteFichierUrl: string | null
     updatedAt: Date | null
   }
 
@@ -44999,6 +45052,7 @@ export namespace Prisma {
     introTexte: string | null
     introListe: string | null
     videoCommunauteUrl: string | null
+    videoCommunauteFichierUrl: string | null
     updatedAt: Date | null
   }
 
@@ -45007,6 +45061,7 @@ export namespace Prisma {
     introTexte: number
     introListe: number
     videoCommunauteUrl: number
+    videoCommunauteFichierUrl: number
     updatedAt: number
     _all: number
   }
@@ -45017,6 +45072,7 @@ export namespace Prisma {
     introTexte?: true
     introListe?: true
     videoCommunauteUrl?: true
+    videoCommunauteFichierUrl?: true
     updatedAt?: true
   }
 
@@ -45025,6 +45081,7 @@ export namespace Prisma {
     introTexte?: true
     introListe?: true
     videoCommunauteUrl?: true
+    videoCommunauteFichierUrl?: true
     updatedAt?: true
   }
 
@@ -45033,6 +45090,7 @@ export namespace Prisma {
     introTexte?: true
     introListe?: true
     videoCommunauteUrl?: true
+    videoCommunauteFichierUrl?: true
     updatedAt?: true
     _all?: true
   }
@@ -45114,6 +45172,7 @@ export namespace Prisma {
     introTexte: string
     introListe: string
     videoCommunauteUrl: string | null
+    videoCommunauteFichierUrl: string | null
     updatedAt: Date
     _count: EmploiPageContenuCountAggregateOutputType | null
     _min: EmploiPageContenuMinAggregateOutputType | null
@@ -45139,6 +45198,7 @@ export namespace Prisma {
     introTexte?: boolean
     introListe?: boolean
     videoCommunauteUrl?: boolean
+    videoCommunauteFichierUrl?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["emploiPageContenu"]>
 
@@ -45147,6 +45207,7 @@ export namespace Prisma {
     introTexte?: boolean
     introListe?: boolean
     videoCommunauteUrl?: boolean
+    videoCommunauteFichierUrl?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["emploiPageContenu"]>
 
@@ -45155,6 +45216,7 @@ export namespace Prisma {
     introTexte?: boolean
     introListe?: boolean
     videoCommunauteUrl?: boolean
+    videoCommunauteFichierUrl?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["emploiPageContenu"]>
 
@@ -45163,10 +45225,11 @@ export namespace Prisma {
     introTexte?: boolean
     introListe?: boolean
     videoCommunauteUrl?: boolean
+    videoCommunauteFichierUrl?: boolean
     updatedAt?: boolean
   }
 
-  export type EmploiPageContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "introTexte" | "introListe" | "videoCommunauteUrl" | "updatedAt", ExtArgs["result"]["emploiPageContenu"]>
+  export type EmploiPageContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "introTexte" | "introListe" | "videoCommunauteUrl" | "videoCommunauteFichierUrl" | "updatedAt", ExtArgs["result"]["emploiPageContenu"]>
 
   export type $EmploiPageContenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EmploiPageContenu"
@@ -45176,6 +45239,7 @@ export namespace Prisma {
       introTexte: string
       introListe: string
       videoCommunauteUrl: string | null
+      videoCommunauteFichierUrl: string | null
       updatedAt: Date
     }, ExtArgs["result"]["emploiPageContenu"]>
     composites: {}
@@ -45604,6 +45668,7 @@ export namespace Prisma {
     readonly introTexte: FieldRef<"EmploiPageContenu", 'String'>
     readonly introListe: FieldRef<"EmploiPageContenu", 'String'>
     readonly videoCommunauteUrl: FieldRef<"EmploiPageContenu", 'String'>
+    readonly videoCommunauteFichierUrl: FieldRef<"EmploiPageContenu", 'String'>
     readonly updatedAt: FieldRef<"EmploiPageContenu", 'DateTime'>
   }
     
@@ -45998,6 +46063,7 @@ export namespace Prisma {
     communauteTitre: string | null
     communauteTexte: string | null
     communauteVideoUrl: string | null
+    communauteVideoFichierUrl: string | null
     communauteLienEnSavoirPlusUrl: string | null
     communauteLienRejoindreUrl: string | null
     updatedAt: Date | null
@@ -46015,6 +46081,7 @@ export namespace Prisma {
     communauteTitre: string | null
     communauteTexte: string | null
     communauteVideoUrl: string | null
+    communauteVideoFichierUrl: string | null
     communauteLienEnSavoirPlusUrl: string | null
     communauteLienRejoindreUrl: string | null
     updatedAt: Date | null
@@ -46032,6 +46099,7 @@ export namespace Prisma {
     communauteTitre: number
     communauteTexte: number
     communauteVideoUrl: number
+    communauteVideoFichierUrl: number
     communauteLienEnSavoirPlusUrl: number
     communauteLienRejoindreUrl: number
     updatedAt: number
@@ -46051,6 +46119,7 @@ export namespace Prisma {
     communauteTitre?: true
     communauteTexte?: true
     communauteVideoUrl?: true
+    communauteVideoFichierUrl?: true
     communauteLienEnSavoirPlusUrl?: true
     communauteLienRejoindreUrl?: true
     updatedAt?: true
@@ -46068,6 +46137,7 @@ export namespace Prisma {
     communauteTitre?: true
     communauteTexte?: true
     communauteVideoUrl?: true
+    communauteVideoFichierUrl?: true
     communauteLienEnSavoirPlusUrl?: true
     communauteLienRejoindreUrl?: true
     updatedAt?: true
@@ -46085,6 +46155,7 @@ export namespace Prisma {
     communauteTitre?: true
     communauteTexte?: true
     communauteVideoUrl?: true
+    communauteVideoFichierUrl?: true
     communauteLienEnSavoirPlusUrl?: true
     communauteLienRejoindreUrl?: true
     updatedAt?: true
@@ -46175,6 +46246,7 @@ export namespace Prisma {
     communauteTitre: string | null
     communauteTexte: string | null
     communauteVideoUrl: string | null
+    communauteVideoFichierUrl: string | null
     communauteLienEnSavoirPlusUrl: string | null
     communauteLienRejoindreUrl: string | null
     updatedAt: Date
@@ -46209,6 +46281,7 @@ export namespace Prisma {
     communauteTitre?: boolean
     communauteTexte?: boolean
     communauteVideoUrl?: boolean
+    communauteVideoFichierUrl?: boolean
     communauteLienEnSavoirPlusUrl?: boolean
     communauteLienRejoindreUrl?: boolean
     updatedAt?: boolean
@@ -46226,6 +46299,7 @@ export namespace Prisma {
     communauteTitre?: boolean
     communauteTexte?: boolean
     communauteVideoUrl?: boolean
+    communauteVideoFichierUrl?: boolean
     communauteLienEnSavoirPlusUrl?: boolean
     communauteLienRejoindreUrl?: boolean
     updatedAt?: boolean
@@ -46243,6 +46317,7 @@ export namespace Prisma {
     communauteTitre?: boolean
     communauteTexte?: boolean
     communauteVideoUrl?: boolean
+    communauteVideoFichierUrl?: boolean
     communauteLienEnSavoirPlusUrl?: boolean
     communauteLienRejoindreUrl?: boolean
     updatedAt?: boolean
@@ -46260,12 +46335,13 @@ export namespace Prisma {
     communauteTitre?: boolean
     communauteTexte?: boolean
     communauteVideoUrl?: boolean
+    communauteVideoFichierUrl?: boolean
     communauteLienEnSavoirPlusUrl?: boolean
     communauteLienRejoindreUrl?: boolean
     updatedAt?: boolean
   }
 
-  export type GestionEmploiContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eLearningTitre" | "eLearningTexte" | "eLearningLienLabel" | "eLearningLienUrl" | "creerEmploiTexte" | "creerEmploiLienLabel" | "creerEmploiLienUrl" | "communauteTitre" | "communauteTexte" | "communauteVideoUrl" | "communauteLienEnSavoirPlusUrl" | "communauteLienRejoindreUrl" | "updatedAt", ExtArgs["result"]["gestionEmploiContenu"]>
+  export type GestionEmploiContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eLearningTitre" | "eLearningTexte" | "eLearningLienLabel" | "eLearningLienUrl" | "creerEmploiTexte" | "creerEmploiLienLabel" | "creerEmploiLienUrl" | "communauteTitre" | "communauteTexte" | "communauteVideoUrl" | "communauteVideoFichierUrl" | "communauteLienEnSavoirPlusUrl" | "communauteLienRejoindreUrl" | "updatedAt", ExtArgs["result"]["gestionEmploiContenu"]>
 
   export type $GestionEmploiContenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "GestionEmploiContenu"
@@ -46282,6 +46358,7 @@ export namespace Prisma {
       communauteTitre: string | null
       communauteTexte: string | null
       communauteVideoUrl: string | null
+      communauteVideoFichierUrl: string | null
       communauteLienEnSavoirPlusUrl: string | null
       communauteLienRejoindreUrl: string | null
       updatedAt: Date
@@ -46719,6 +46796,7 @@ export namespace Prisma {
     readonly communauteTitre: FieldRef<"GestionEmploiContenu", 'String'>
     readonly communauteTexte: FieldRef<"GestionEmploiContenu", 'String'>
     readonly communauteVideoUrl: FieldRef<"GestionEmploiContenu", 'String'>
+    readonly communauteVideoFichierUrl: FieldRef<"GestionEmploiContenu", 'String'>
     readonly communauteLienEnSavoirPlusUrl: FieldRef<"GestionEmploiContenu", 'String'>
     readonly communauteLienRejoindreUrl: FieldRef<"GestionEmploiContenu", 'String'>
     readonly updatedAt: FieldRef<"GestionEmploiContenu", 'DateTime'>
@@ -48108,6 +48186,7 @@ export namespace Prisma {
     montantMisEnAvant: string | null
     image: string | null
     videoUrl: string | null
+    videoFichierUrl: string | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -48122,6 +48201,7 @@ export namespace Prisma {
     montantMisEnAvant: string | null
     image: string | null
     videoUrl: string | null
+    videoFichierUrl: string | null
     ordre: number | null
     actif: boolean | null
     createdAt: Date | null
@@ -48136,6 +48216,7 @@ export namespace Prisma {
     montantMisEnAvant: number
     image: number
     videoUrl: number
+    videoFichierUrl: number
     ordre: number
     actif: number
     createdAt: number
@@ -48160,6 +48241,7 @@ export namespace Prisma {
     montantMisEnAvant?: true
     image?: true
     videoUrl?: true
+    videoFichierUrl?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -48174,6 +48256,7 @@ export namespace Prisma {
     montantMisEnAvant?: true
     image?: true
     videoUrl?: true
+    videoFichierUrl?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -48188,6 +48271,7 @@ export namespace Prisma {
     montantMisEnAvant?: true
     image?: true
     videoUrl?: true
+    videoFichierUrl?: true
     ordre?: true
     actif?: true
     createdAt?: true
@@ -48289,6 +48373,7 @@ export namespace Prisma {
     montantMisEnAvant: string | null
     image: string | null
     videoUrl: string | null
+    videoFichierUrl: string | null
     ordre: number
     actif: boolean
     createdAt: Date
@@ -48322,6 +48407,7 @@ export namespace Prisma {
     montantMisEnAvant?: boolean
     image?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -48340,6 +48426,7 @@ export namespace Prisma {
     montantMisEnAvant?: boolean
     image?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -48354,6 +48441,7 @@ export namespace Prisma {
     montantMisEnAvant?: boolean
     image?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
@@ -48368,13 +48456,14 @@ export namespace Prisma {
     montantMisEnAvant?: boolean
     image?: boolean
     videoUrl?: boolean
+    videoFichierUrl?: boolean
     ordre?: boolean
     actif?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DispositifFormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "resume" | "contenu" | "montantMisEnAvant" | "image" | "videoUrl" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["dispositifFormation"]>
+  export type DispositifFormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "resume" | "contenu" | "montantMisEnAvant" | "image" | "videoUrl" | "videoFichierUrl" | "ordre" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["dispositifFormation"]>
   export type DispositifFormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     liens?: boolean | DispositifFormation$liensArgs<ExtArgs>
     contacts?: boolean | DispositifFormation$contactsArgs<ExtArgs>
@@ -48399,6 +48488,7 @@ export namespace Prisma {
       montantMisEnAvant: string | null
       image: string | null
       videoUrl: string | null
+      videoFichierUrl: string | null
       ordre: number
       actif: boolean
       createdAt: Date
@@ -48836,6 +48926,7 @@ export namespace Prisma {
     readonly montantMisEnAvant: FieldRef<"DispositifFormation", 'String'>
     readonly image: FieldRef<"DispositifFormation", 'String'>
     readonly videoUrl: FieldRef<"DispositifFormation", 'String'>
+    readonly videoFichierUrl: FieldRef<"DispositifFormation", 'String'>
     readonly ordre: FieldRef<"DispositifFormation", 'Int'>
     readonly actif: FieldRef<"DispositifFormation", 'Boolean'>
     readonly createdAt: FieldRef<"DispositifFormation", 'DateTime'>
@@ -53094,6 +53185,7 @@ export namespace Prisma {
     ctaLabel: 'ctaLabel',
     formationId: 'formationId',
     youtubeUrl: 'youtubeUrl',
+    videoFichierUrl: 'videoFichierUrl',
     alignement: 'alignement',
     overlayColor: 'overlayColor',
     overlayOpacity: 'overlayOpacity',
@@ -53129,6 +53221,7 @@ export namespace Prisma {
     titre: 'titre',
     contenu: 'contenu',
     videoUrl: 'videoUrl',
+    videoFichierUrl: 'videoFichierUrl',
     image: 'image',
     imageTaille: 'imageTaille',
     backgroundColor: 'backgroundColor',
@@ -53201,6 +53294,7 @@ export namespace Prisma {
     id: 'id',
     titre: 'titre',
     url: 'url',
+    videoFichierUrl: 'videoFichierUrl',
     description: 'description',
     section: 'section',
     dispositifId: 'dispositifId',
@@ -53234,6 +53328,7 @@ export namespace Prisma {
     montantMisEnAvant: 'montantMisEnAvant',
     image: 'image',
     videoUrl: 'videoUrl',
+    videoFichierUrl: 'videoFichierUrl',
     ordre: 'ordre',
     actif: 'actif',
     createdAt: 'createdAt',
@@ -53274,6 +53369,7 @@ export namespace Prisma {
     introTexte: 'introTexte',
     introListe: 'introListe',
     videoCommunauteUrl: 'videoCommunauteUrl',
+    videoCommunauteFichierUrl: 'videoCommunauteFichierUrl',
     updatedAt: 'updatedAt'
   };
 
@@ -53292,6 +53388,7 @@ export namespace Prisma {
     communauteTitre: 'communauteTitre',
     communauteTexte: 'communauteTexte',
     communauteVideoUrl: 'communauteVideoUrl',
+    communauteVideoFichierUrl: 'communauteVideoFichierUrl',
     communauteLienEnSavoirPlusUrl: 'communauteLienEnSavoirPlusUrl',
     communauteLienRejoindreUrl: 'communauteLienRejoindreUrl',
     updatedAt: 'updatedAt'
@@ -53318,6 +53415,7 @@ export namespace Prisma {
     montantMisEnAvant: 'montantMisEnAvant',
     image: 'image',
     videoUrl: 'videoUrl',
+    videoFichierUrl: 'videoFichierUrl',
     ordre: 'ordre',
     actif: 'actif',
     createdAt: 'createdAt',
@@ -55907,6 +56005,7 @@ export namespace Prisma {
     ctaLabel?: StringNullableFilter<"HeroSlide"> | string | null
     formationId?: StringNullableFilter<"HeroSlide"> | string | null
     youtubeUrl?: StringNullableFilter<"HeroSlide"> | string | null
+    videoFichierUrl?: StringNullableFilter<"HeroSlide"> | string | null
     alignement?: EnumAlignementHeroFilter<"HeroSlide"> | $Enums.AlignementHero
     overlayColor?: StringFilter<"HeroSlide"> | string
     overlayOpacity?: IntFilter<"HeroSlide"> | number
@@ -55929,6 +56028,7 @@ export namespace Prisma {
     ctaLabel?: SortOrderInput | SortOrder
     formationId?: SortOrderInput | SortOrder
     youtubeUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
@@ -55954,6 +56054,7 @@ export namespace Prisma {
     ctaLabel?: StringNullableFilter<"HeroSlide"> | string | null
     formationId?: StringNullableFilter<"HeroSlide"> | string | null
     youtubeUrl?: StringNullableFilter<"HeroSlide"> | string | null
+    videoFichierUrl?: StringNullableFilter<"HeroSlide"> | string | null
     alignement?: EnumAlignementHeroFilter<"HeroSlide"> | $Enums.AlignementHero
     overlayColor?: StringFilter<"HeroSlide"> | string
     overlayOpacity?: IntFilter<"HeroSlide"> | number
@@ -55976,6 +56077,7 @@ export namespace Prisma {
     ctaLabel?: SortOrderInput | SortOrder
     formationId?: SortOrderInput | SortOrder
     youtubeUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
@@ -56005,6 +56107,7 @@ export namespace Prisma {
     ctaLabel?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
     formationId?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
     youtubeUrl?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
+    videoFichierUrl?: StringNullableWithAggregatesFilter<"HeroSlide"> | string | null
     alignement?: EnumAlignementHeroWithAggregatesFilter<"HeroSlide"> | $Enums.AlignementHero
     overlayColor?: StringWithAggregatesFilter<"HeroSlide"> | string
     overlayOpacity?: IntWithAggregatesFilter<"HeroSlide"> | number
@@ -56095,6 +56198,7 @@ export namespace Prisma {
     titre?: StringNullableFilter<"FormationOnglet"> | string | null
     contenu?: StringNullableFilter<"FormationOnglet"> | string | null
     videoUrl?: StringNullableFilter<"FormationOnglet"> | string | null
+    videoFichierUrl?: StringNullableFilter<"FormationOnglet"> | string | null
     image?: StringNullableFilter<"FormationOnglet"> | string | null
     imageTaille?: IntFilter<"FormationOnglet"> | number
     backgroundColor?: StringFilter<"FormationOnglet"> | string
@@ -56110,6 +56214,7 @@ export namespace Prisma {
     titre?: SortOrderInput | SortOrder
     contenu?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     imageTaille?: SortOrder
     backgroundColor?: SortOrder
@@ -56129,6 +56234,7 @@ export namespace Prisma {
     titre?: StringNullableFilter<"FormationOnglet"> | string | null
     contenu?: StringNullableFilter<"FormationOnglet"> | string | null
     videoUrl?: StringNullableFilter<"FormationOnglet"> | string | null
+    videoFichierUrl?: StringNullableFilter<"FormationOnglet"> | string | null
     image?: StringNullableFilter<"FormationOnglet"> | string | null
     imageTaille?: IntFilter<"FormationOnglet"> | number
     backgroundColor?: StringFilter<"FormationOnglet"> | string
@@ -56144,6 +56250,7 @@ export namespace Prisma {
     titre?: SortOrderInput | SortOrder
     contenu?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     imageTaille?: SortOrder
     backgroundColor?: SortOrder
@@ -56167,6 +56274,7 @@ export namespace Prisma {
     titre?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
     contenu?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
     videoUrl?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
+    videoFichierUrl?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
     image?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
     imageTaille?: IntWithAggregatesFilter<"FormationOnglet"> | number
     backgroundColor?: StringWithAggregatesFilter<"FormationOnglet"> | string
@@ -56464,6 +56572,7 @@ export namespace Prisma {
     id?: StringFilter<"Video"> | string
     titre?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
+    videoFichierUrl?: StringNullableFilter<"Video"> | string | null
     description?: StringNullableFilter<"Video"> | string | null
     section?: EnumSectionEmploiNullableFilter<"Video"> | $Enums.SectionEmploi | null
     dispositifId?: StringNullableFilter<"Video"> | string | null
@@ -56477,6 +56586,7 @@ export namespace Prisma {
     id?: SortOrder
     titre?: SortOrder
     url?: SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     section?: SortOrderInput | SortOrder
     dispositifId?: SortOrderInput | SortOrder
@@ -56493,6 +56603,7 @@ export namespace Prisma {
     NOT?: VideoWhereInput | VideoWhereInput[]
     titre?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
+    videoFichierUrl?: StringNullableFilter<"Video"> | string | null
     description?: StringNullableFilter<"Video"> | string | null
     section?: EnumSectionEmploiNullableFilter<"Video"> | $Enums.SectionEmploi | null
     dispositifId?: StringNullableFilter<"Video"> | string | null
@@ -56506,6 +56617,7 @@ export namespace Prisma {
     id?: SortOrder
     titre?: SortOrder
     url?: SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     section?: SortOrderInput | SortOrder
     dispositifId?: SortOrderInput | SortOrder
@@ -56526,6 +56638,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Video"> | string
     titre?: StringWithAggregatesFilter<"Video"> | string
     url?: StringWithAggregatesFilter<"Video"> | string
+    videoFichierUrl?: StringNullableWithAggregatesFilter<"Video"> | string | null
     description?: StringNullableWithAggregatesFilter<"Video"> | string | null
     section?: EnumSectionEmploiNullableWithAggregatesFilter<"Video"> | $Enums.SectionEmploi | null
     dispositifId?: StringNullableWithAggregatesFilter<"Video"> | string | null
@@ -56612,6 +56725,7 @@ export namespace Prisma {
     montantMisEnAvant?: StringNullableFilter<"DispositifFinancement"> | string | null
     image?: StringNullableFilter<"DispositifFinancement"> | string | null
     videoUrl?: StringNullableFilter<"DispositifFinancement"> | string | null
+    videoFichierUrl?: StringNullableFilter<"DispositifFinancement"> | string | null
     ordre?: IntFilter<"DispositifFinancement"> | number
     actif?: BoolFilter<"DispositifFinancement"> | boolean
     createdAt?: DateTimeFilter<"DispositifFinancement"> | Date | string
@@ -56629,6 +56743,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -56649,6 +56764,7 @@ export namespace Prisma {
     montantMisEnAvant?: StringNullableFilter<"DispositifFinancement"> | string | null
     image?: StringNullableFilter<"DispositifFinancement"> | string | null
     videoUrl?: StringNullableFilter<"DispositifFinancement"> | string | null
+    videoFichierUrl?: StringNullableFilter<"DispositifFinancement"> | string | null
     ordre?: IntFilter<"DispositifFinancement"> | number
     actif?: BoolFilter<"DispositifFinancement"> | boolean
     createdAt?: DateTimeFilter<"DispositifFinancement"> | Date | string
@@ -56666,6 +56782,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -56688,6 +56805,7 @@ export namespace Prisma {
     montantMisEnAvant?: StringNullableWithAggregatesFilter<"DispositifFinancement"> | string | null
     image?: StringNullableWithAggregatesFilter<"DispositifFinancement"> | string | null
     videoUrl?: StringNullableWithAggregatesFilter<"DispositifFinancement"> | string | null
+    videoFichierUrl?: StringNullableWithAggregatesFilter<"DispositifFinancement"> | string | null
     ordre?: IntWithAggregatesFilter<"DispositifFinancement"> | number
     actif?: BoolWithAggregatesFilter<"DispositifFinancement"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"DispositifFinancement"> | Date | string
@@ -56833,6 +56951,7 @@ export namespace Prisma {
     introTexte?: StringFilter<"EmploiPageContenu"> | string
     introListe?: StringFilter<"EmploiPageContenu"> | string
     videoCommunauteUrl?: StringNullableFilter<"EmploiPageContenu"> | string | null
+    videoCommunauteFichierUrl?: StringNullableFilter<"EmploiPageContenu"> | string | null
     updatedAt?: DateTimeFilter<"EmploiPageContenu"> | Date | string
   }
 
@@ -56841,6 +56960,7 @@ export namespace Prisma {
     introTexte?: SortOrder
     introListe?: SortOrder
     videoCommunauteUrl?: SortOrderInput | SortOrder
+    videoCommunauteFichierUrl?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
   }
 
@@ -56852,6 +56972,7 @@ export namespace Prisma {
     introTexte?: StringFilter<"EmploiPageContenu"> | string
     introListe?: StringFilter<"EmploiPageContenu"> | string
     videoCommunauteUrl?: StringNullableFilter<"EmploiPageContenu"> | string | null
+    videoCommunauteFichierUrl?: StringNullableFilter<"EmploiPageContenu"> | string | null
     updatedAt?: DateTimeFilter<"EmploiPageContenu"> | Date | string
   }, "id">
 
@@ -56860,6 +56981,7 @@ export namespace Prisma {
     introTexte?: SortOrder
     introListe?: SortOrder
     videoCommunauteUrl?: SortOrderInput | SortOrder
+    videoCommunauteFichierUrl?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
     _count?: EmploiPageContenuCountOrderByAggregateInput
     _max?: EmploiPageContenuMaxOrderByAggregateInput
@@ -56874,6 +56996,7 @@ export namespace Prisma {
     introTexte?: StringWithAggregatesFilter<"EmploiPageContenu"> | string
     introListe?: StringWithAggregatesFilter<"EmploiPageContenu"> | string
     videoCommunauteUrl?: StringNullableWithAggregatesFilter<"EmploiPageContenu"> | string | null
+    videoCommunauteFichierUrl?: StringNullableWithAggregatesFilter<"EmploiPageContenu"> | string | null
     updatedAt?: DateTimeWithAggregatesFilter<"EmploiPageContenu"> | Date | string
   }
 
@@ -56892,6 +57015,7 @@ export namespace Prisma {
     communauteTitre?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     communauteTexte?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     communauteVideoUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteVideoFichierUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     communauteLienEnSavoirPlusUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     communauteLienRejoindreUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     updatedAt?: DateTimeFilter<"GestionEmploiContenu"> | Date | string
@@ -56909,6 +57033,7 @@ export namespace Prisma {
     communauteTitre?: SortOrderInput | SortOrder
     communauteTexte?: SortOrderInput | SortOrder
     communauteVideoUrl?: SortOrderInput | SortOrder
+    communauteVideoFichierUrl?: SortOrderInput | SortOrder
     communauteLienEnSavoirPlusUrl?: SortOrderInput | SortOrder
     communauteLienRejoindreUrl?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
@@ -56929,6 +57054,7 @@ export namespace Prisma {
     communauteTitre?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     communauteTexte?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     communauteVideoUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
+    communauteVideoFichierUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     communauteLienEnSavoirPlusUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     communauteLienRejoindreUrl?: StringNullableFilter<"GestionEmploiContenu"> | string | null
     updatedAt?: DateTimeFilter<"GestionEmploiContenu"> | Date | string
@@ -56946,6 +57072,7 @@ export namespace Prisma {
     communauteTitre?: SortOrderInput | SortOrder
     communauteTexte?: SortOrderInput | SortOrder
     communauteVideoUrl?: SortOrderInput | SortOrder
+    communauteVideoFichierUrl?: SortOrderInput | SortOrder
     communauteLienEnSavoirPlusUrl?: SortOrderInput | SortOrder
     communauteLienRejoindreUrl?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
@@ -56969,6 +57096,7 @@ export namespace Prisma {
     communauteTitre?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
     communauteTexte?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
     communauteVideoUrl?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
+    communauteVideoFichierUrl?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
     communauteLienEnSavoirPlusUrl?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
     communauteLienRejoindreUrl?: StringNullableWithAggregatesFilter<"GestionEmploiContenu"> | string | null
     updatedAt?: DateTimeWithAggregatesFilter<"GestionEmploiContenu"> | Date | string
@@ -57032,6 +57160,7 @@ export namespace Prisma {
     montantMisEnAvant?: StringNullableFilter<"DispositifFormation"> | string | null
     image?: StringNullableFilter<"DispositifFormation"> | string | null
     videoUrl?: StringNullableFilter<"DispositifFormation"> | string | null
+    videoFichierUrl?: StringNullableFilter<"DispositifFormation"> | string | null
     ordre?: IntFilter<"DispositifFormation"> | number
     actif?: BoolFilter<"DispositifFormation"> | boolean
     createdAt?: DateTimeFilter<"DispositifFormation"> | Date | string
@@ -57049,6 +57178,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -57069,6 +57199,7 @@ export namespace Prisma {
     montantMisEnAvant?: StringNullableFilter<"DispositifFormation"> | string | null
     image?: StringNullableFilter<"DispositifFormation"> | string | null
     videoUrl?: StringNullableFilter<"DispositifFormation"> | string | null
+    videoFichierUrl?: StringNullableFilter<"DispositifFormation"> | string | null
     ordre?: IntFilter<"DispositifFormation"> | number
     actif?: BoolFilter<"DispositifFormation"> | boolean
     createdAt?: DateTimeFilter<"DispositifFormation"> | Date | string
@@ -57086,6 +57217,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -57108,6 +57240,7 @@ export namespace Prisma {
     montantMisEnAvant?: StringNullableWithAggregatesFilter<"DispositifFormation"> | string | null
     image?: StringNullableWithAggregatesFilter<"DispositifFormation"> | string | null
     videoUrl?: StringNullableWithAggregatesFilter<"DispositifFormation"> | string | null
+    videoFichierUrl?: StringNullableWithAggregatesFilter<"DispositifFormation"> | string | null
     ordre?: IntWithAggregatesFilter<"DispositifFormation"> | number
     actif?: BoolWithAggregatesFilter<"DispositifFormation"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"DispositifFormation"> | Date | string
@@ -59646,6 +59779,7 @@ export namespace Prisma {
     image: string
     ctaLabel?: string | null
     youtubeUrl?: string | null
+    videoFichierUrl?: string | null
     alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
@@ -59668,6 +59802,7 @@ export namespace Prisma {
     ctaLabel?: string | null
     formationId?: string | null
     youtubeUrl?: string | null
+    videoFichierUrl?: string | null
     alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
@@ -59688,6 +59823,7 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
@@ -59710,6 +59846,7 @@ export namespace Prisma {
     ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
@@ -59731,6 +59868,7 @@ export namespace Prisma {
     ctaLabel?: string | null
     formationId?: string | null
     youtubeUrl?: string | null
+    videoFichierUrl?: string | null
     alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
@@ -59751,6 +59889,7 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
@@ -59772,6 +59911,7 @@ export namespace Prisma {
     ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
     formationId?: NullableStringFieldUpdateOperationsInput | string | null
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
@@ -59867,6 +60007,7 @@ export namespace Prisma {
     titre?: string | null
     contenu?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     image?: string | null
     imageTaille?: number
     backgroundColor?: string
@@ -59882,6 +60023,7 @@ export namespace Prisma {
     titre?: string | null
     contenu?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     image?: string | null
     imageTaille?: number
     backgroundColor?: string
@@ -59897,6 +60039,7 @@ export namespace Prisma {
     titre?: NullableStringFieldUpdateOperationsInput | string | null
     contenu?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     imageTaille?: IntFieldUpdateOperationsInput | number
     backgroundColor?: StringFieldUpdateOperationsInput | string
@@ -59912,6 +60055,7 @@ export namespace Prisma {
     titre?: NullableStringFieldUpdateOperationsInput | string | null
     contenu?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     imageTaille?: IntFieldUpdateOperationsInput | number
     backgroundColor?: StringFieldUpdateOperationsInput | string
@@ -59927,6 +60071,7 @@ export namespace Prisma {
     titre?: string | null
     contenu?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     image?: string | null
     imageTaille?: number
     backgroundColor?: string
@@ -59942,6 +60087,7 @@ export namespace Prisma {
     titre?: NullableStringFieldUpdateOperationsInput | string | null
     contenu?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     imageTaille?: IntFieldUpdateOperationsInput | number
     backgroundColor?: StringFieldUpdateOperationsInput | string
@@ -59957,6 +60103,7 @@ export namespace Prisma {
     titre?: NullableStringFieldUpdateOperationsInput | string | null
     contenu?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     imageTaille?: IntFieldUpdateOperationsInput | number
     backgroundColor?: StringFieldUpdateOperationsInput | string
@@ -60283,6 +60430,7 @@ export namespace Prisma {
     id?: string
     titre: string
     url: string
+    videoFichierUrl?: string | null
     description?: string | null
     section?: $Enums.SectionEmploi | null
     ordre?: number
@@ -60295,6 +60443,7 @@ export namespace Prisma {
     id?: string
     titre: string
     url: string
+    videoFichierUrl?: string | null
     description?: string | null
     section?: $Enums.SectionEmploi | null
     dispositifId?: string | null
@@ -60307,6 +60456,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
     ordre?: IntFieldUpdateOperationsInput | number
@@ -60319,6 +60469,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
     dispositifId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60331,6 +60482,7 @@ export namespace Prisma {
     id?: string
     titre: string
     url: string
+    videoFichierUrl?: string | null
     description?: string | null
     section?: $Enums.SectionEmploi | null
     dispositifId?: string | null
@@ -60343,6 +60495,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
     ordre?: IntFieldUpdateOperationsInput | number
@@ -60354,6 +60507,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
     dispositifId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60447,6 +60601,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -60464,6 +60619,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -60481,6 +60637,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60498,6 +60655,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60515,6 +60673,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -60529,6 +60688,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60543,6 +60703,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60693,6 +60854,7 @@ export namespace Prisma {
     introTexte?: string
     introListe?: string
     videoCommunauteUrl?: string | null
+    videoCommunauteFichierUrl?: string | null
     updatedAt?: Date | string
   }
 
@@ -60701,6 +60863,7 @@ export namespace Prisma {
     introTexte?: string
     introListe?: string
     videoCommunauteUrl?: string | null
+    videoCommunauteFichierUrl?: string | null
     updatedAt?: Date | string
   }
 
@@ -60709,6 +60872,7 @@ export namespace Prisma {
     introTexte?: StringFieldUpdateOperationsInput | string
     introListe?: StringFieldUpdateOperationsInput | string
     videoCommunauteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoCommunauteFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -60717,6 +60881,7 @@ export namespace Prisma {
     introTexte?: StringFieldUpdateOperationsInput | string
     introListe?: StringFieldUpdateOperationsInput | string
     videoCommunauteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoCommunauteFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -60725,6 +60890,7 @@ export namespace Prisma {
     introTexte?: string
     introListe?: string
     videoCommunauteUrl?: string | null
+    videoCommunauteFichierUrl?: string | null
     updatedAt?: Date | string
   }
 
@@ -60733,6 +60899,7 @@ export namespace Prisma {
     introTexte?: StringFieldUpdateOperationsInput | string
     introListe?: StringFieldUpdateOperationsInput | string
     videoCommunauteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoCommunauteFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -60741,6 +60908,7 @@ export namespace Prisma {
     introTexte?: StringFieldUpdateOperationsInput | string
     introListe?: StringFieldUpdateOperationsInput | string
     videoCommunauteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoCommunauteFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -60756,6 +60924,7 @@ export namespace Prisma {
     communauteTitre?: string | null
     communauteTexte?: string | null
     communauteVideoUrl?: string | null
+    communauteVideoFichierUrl?: string | null
     communauteLienEnSavoirPlusUrl?: string | null
     communauteLienRejoindreUrl?: string | null
     updatedAt?: Date | string
@@ -60773,6 +60942,7 @@ export namespace Prisma {
     communauteTitre?: string | null
     communauteTexte?: string | null
     communauteVideoUrl?: string | null
+    communauteVideoFichierUrl?: string | null
     communauteLienEnSavoirPlusUrl?: string | null
     communauteLienRejoindreUrl?: string | null
     updatedAt?: Date | string
@@ -60790,6 +60960,7 @@ export namespace Prisma {
     communauteTitre?: NullableStringFieldUpdateOperationsInput | string | null
     communauteTexte?: NullableStringFieldUpdateOperationsInput | string | null
     communauteVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteVideoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     communauteLienEnSavoirPlusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     communauteLienRejoindreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60807,6 +60978,7 @@ export namespace Prisma {
     communauteTitre?: NullableStringFieldUpdateOperationsInput | string | null
     communauteTexte?: NullableStringFieldUpdateOperationsInput | string | null
     communauteVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteVideoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     communauteLienEnSavoirPlusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     communauteLienRejoindreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60824,6 +60996,7 @@ export namespace Prisma {
     communauteTitre?: string | null
     communauteTexte?: string | null
     communauteVideoUrl?: string | null
+    communauteVideoFichierUrl?: string | null
     communauteLienEnSavoirPlusUrl?: string | null
     communauteLienRejoindreUrl?: string | null
     updatedAt?: Date | string
@@ -60841,6 +61014,7 @@ export namespace Prisma {
     communauteTitre?: NullableStringFieldUpdateOperationsInput | string | null
     communauteTexte?: NullableStringFieldUpdateOperationsInput | string | null
     communauteVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteVideoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     communauteLienEnSavoirPlusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     communauteLienRejoindreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60858,6 +61032,7 @@ export namespace Prisma {
     communauteTitre?: NullableStringFieldUpdateOperationsInput | string | null
     communauteTexte?: NullableStringFieldUpdateOperationsInput | string | null
     communauteVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    communauteVideoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     communauteLienEnSavoirPlusUrl?: NullableStringFieldUpdateOperationsInput | string | null
     communauteLienRejoindreUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60920,6 +61095,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -60937,6 +61113,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -60954,6 +61131,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60971,6 +61149,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60988,6 +61167,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -61002,6 +61182,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -61016,6 +61197,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -63116,6 +63298,7 @@ export namespace Prisma {
     ctaLabel?: SortOrder
     formationId?: SortOrder
     youtubeUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
@@ -63143,6 +63326,7 @@ export namespace Prisma {
     ctaLabel?: SortOrder
     formationId?: SortOrder
     youtubeUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
@@ -63164,6 +63348,7 @@ export namespace Prisma {
     ctaLabel?: SortOrder
     formationId?: SortOrder
     youtubeUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     alignement?: SortOrder
     overlayColor?: SortOrder
     overlayOpacity?: SortOrder
@@ -63278,6 +63463,7 @@ export namespace Prisma {
     titre?: SortOrder
     contenu?: SortOrder
     videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     image?: SortOrder
     imageTaille?: SortOrder
     backgroundColor?: SortOrder
@@ -63298,6 +63484,7 @@ export namespace Prisma {
     titre?: SortOrder
     contenu?: SortOrder
     videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     image?: SortOrder
     imageTaille?: SortOrder
     backgroundColor?: SortOrder
@@ -63313,6 +63500,7 @@ export namespace Prisma {
     titre?: SortOrder
     contenu?: SortOrder
     videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     image?: SortOrder
     imageTaille?: SortOrder
     backgroundColor?: SortOrder
@@ -63572,6 +63760,7 @@ export namespace Prisma {
     id?: SortOrder
     titre?: SortOrder
     url?: SortOrder
+    videoFichierUrl?: SortOrder
     description?: SortOrder
     section?: SortOrder
     dispositifId?: SortOrder
@@ -63588,6 +63777,7 @@ export namespace Prisma {
     id?: SortOrder
     titre?: SortOrder
     url?: SortOrder
+    videoFichierUrl?: SortOrder
     description?: SortOrder
     section?: SortOrder
     dispositifId?: SortOrder
@@ -63600,6 +63790,7 @@ export namespace Prisma {
     id?: SortOrder
     titre?: SortOrder
     url?: SortOrder
+    videoFichierUrl?: SortOrder
     description?: SortOrder
     section?: SortOrder
     dispositifId?: SortOrder
@@ -63683,6 +63874,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrder
     image?: SortOrder
     videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -63701,6 +63893,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrder
     image?: SortOrder
     videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -63715,6 +63908,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrder
     image?: SortOrder
     videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -63828,6 +64022,7 @@ export namespace Prisma {
     introTexte?: SortOrder
     introListe?: SortOrder
     videoCommunauteUrl?: SortOrder
+    videoCommunauteFichierUrl?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -63836,6 +64031,7 @@ export namespace Prisma {
     introTexte?: SortOrder
     introListe?: SortOrder
     videoCommunauteUrl?: SortOrder
+    videoCommunauteFichierUrl?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -63844,6 +64040,7 @@ export namespace Prisma {
     introTexte?: SortOrder
     introListe?: SortOrder
     videoCommunauteUrl?: SortOrder
+    videoCommunauteFichierUrl?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -63859,6 +64056,7 @@ export namespace Prisma {
     communauteTitre?: SortOrder
     communauteTexte?: SortOrder
     communauteVideoUrl?: SortOrder
+    communauteVideoFichierUrl?: SortOrder
     communauteLienEnSavoirPlusUrl?: SortOrder
     communauteLienRejoindreUrl?: SortOrder
     updatedAt?: SortOrder
@@ -63876,6 +64074,7 @@ export namespace Prisma {
     communauteTitre?: SortOrder
     communauteTexte?: SortOrder
     communauteVideoUrl?: SortOrder
+    communauteVideoFichierUrl?: SortOrder
     communauteLienEnSavoirPlusUrl?: SortOrder
     communauteLienRejoindreUrl?: SortOrder
     updatedAt?: SortOrder
@@ -63893,6 +64092,7 @@ export namespace Prisma {
     communauteTitre?: SortOrder
     communauteTexte?: SortOrder
     communauteVideoUrl?: SortOrder
+    communauteVideoFichierUrl?: SortOrder
     communauteLienEnSavoirPlusUrl?: SortOrder
     communauteLienRejoindreUrl?: SortOrder
     updatedAt?: SortOrder
@@ -63957,6 +64157,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrder
     image?: SortOrder
     videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -63975,6 +64176,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrder
     image?: SortOrder
     videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -63989,6 +64191,7 @@ export namespace Prisma {
     montantMisEnAvant?: SortOrder
     image?: SortOrder
     videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
     ordre?: SortOrder
     actif?: SortOrder
     createdAt?: SortOrder
@@ -67754,6 +67957,7 @@ export namespace Prisma {
     image: string
     ctaLabel?: string | null
     youtubeUrl?: string | null
+    videoFichierUrl?: string | null
     alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
@@ -67774,6 +67978,7 @@ export namespace Prisma {
     image: string
     ctaLabel?: string | null
     youtubeUrl?: string | null
+    videoFichierUrl?: string | null
     alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
@@ -68105,6 +68310,7 @@ export namespace Prisma {
     ctaLabel?: StringNullableFilter<"HeroSlide"> | string | null
     formationId?: StringNullableFilter<"HeroSlide"> | string | null
     youtubeUrl?: StringNullableFilter<"HeroSlide"> | string | null
+    videoFichierUrl?: StringNullableFilter<"HeroSlide"> | string | null
     alignement?: EnumAlignementHeroFilter<"HeroSlide"> | $Enums.AlignementHero
     overlayColor?: StringFilter<"HeroSlide"> | string
     overlayOpacity?: IntFilter<"HeroSlide"> | number
@@ -72577,6 +72783,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -72593,6 +72800,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -72625,6 +72833,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -72641,6 +72850,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -72657,6 +72867,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -72673,6 +72884,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -72705,6 +72917,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -72721,6 +72934,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -72767,6 +72981,7 @@ export namespace Prisma {
     id?: string
     titre: string
     url: string
+    videoFichierUrl?: string | null
     description?: string | null
     section?: $Enums.SectionEmploi | null
     ordre?: number
@@ -72778,6 +72993,7 @@ export namespace Prisma {
     id?: string
     titre: string
     url: string
+    videoFichierUrl?: string | null
     description?: string | null
     section?: $Enums.SectionEmploi | null
     ordre?: number
@@ -72880,6 +73096,7 @@ export namespace Prisma {
     id?: StringFilter<"Video"> | string
     titre?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
+    videoFichierUrl?: StringNullableFilter<"Video"> | string | null
     description?: StringNullableFilter<"Video"> | string | null
     section?: EnumSectionEmploiNullableFilter<"Video"> | $Enums.SectionEmploi | null
     dispositifId?: StringNullableFilter<"Video"> | string | null
@@ -72926,6 +73143,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -72942,6 +73160,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -72974,6 +73193,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -72990,6 +73210,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73177,6 +73398,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -73193,6 +73415,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -73225,6 +73448,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73241,6 +73465,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73257,6 +73482,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -73273,6 +73499,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -73305,6 +73532,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73321,6 +73549,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73337,6 +73566,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -73353,6 +73583,7 @@ export namespace Prisma {
     montantMisEnAvant?: string | null
     image?: string | null
     videoUrl?: string | null
+    videoFichierUrl?: string | null
     ordre?: number
     actif?: boolean
     createdAt?: Date | string
@@ -73385,6 +73616,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73401,6 +73633,7 @@ export namespace Prisma {
     montantMisEnAvant?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73905,6 +74138,7 @@ export namespace Prisma {
     image: string
     ctaLabel?: string | null
     youtubeUrl?: string | null
+    videoFichierUrl?: string | null
     alignement?: $Enums.AlignementHero
     overlayColor?: string
     overlayOpacity?: number
@@ -74146,6 +74380,7 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
@@ -74166,6 +74401,7 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
@@ -74186,6 +74422,7 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     ctaLabel?: NullableStringFieldUpdateOperationsInput | string | null
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     alignement?: EnumAlignementHeroFieldUpdateOperationsInput | $Enums.AlignementHero
     overlayColor?: StringFieldUpdateOperationsInput | string
     overlayOpacity?: IntFieldUpdateOperationsInput | number
@@ -74855,6 +75092,7 @@ export namespace Prisma {
     id?: string
     titre: string
     url: string
+    videoFichierUrl?: string | null
     description?: string | null
     section?: $Enums.SectionEmploi | null
     ordre?: number
@@ -74912,6 +75150,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
     ordre?: IntFieldUpdateOperationsInput | number
@@ -74923,6 +75162,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
     ordre?: IntFieldUpdateOperationsInput | number
@@ -74934,6 +75174,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     section?: NullableEnumSectionEmploiFieldUpdateOperationsInput | $Enums.SectionEmploi | null
     ordre?: IntFieldUpdateOperationsInput | number

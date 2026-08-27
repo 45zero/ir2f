@@ -5,6 +5,7 @@ import { saveFormationTuile, saveFormationOnglet, type FormationsPageActionState
 import { EFFET_VISUEL_LABELS, ONGLET_LABEL } from "@/lib/formations-page-shared"
 import { CATEGORIE_LABELS } from "@/lib/formations-shared"
 import { ImageField } from "@/components/admin/ImageField"
+import { VideoField } from "@/components/admin/VideoField"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import type { AdminFormationOnglet, AdminFormationTuile } from "@/lib/admin/formations-page"
 
@@ -168,9 +169,11 @@ function OngletForm({ onglet }: { onglet: AdminFormationOnglet }) {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        {fieldLabel("Vidéo (optionnel)")}
+        {fieldLabel("Vidéo — lien YouTube (optionnel)")}
         <input name="videoUrl" placeholder="Lien YouTube" defaultValue={onglet.videoUrl ?? ""} style={fieldStyle} />
       </div>
+
+      <VideoField name="videoFichier" label="Vidéo — ou fichier vidéo direct (optionnel)" defaultUrl={onglet.videoFichierUrl} />
 
       <ImageField name="image" label="Image (optionnel, affichée si pas de vidéo)" defaultUrl={onglet.image} />
 

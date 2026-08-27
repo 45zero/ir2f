@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Hoverable } from "@/components/ui/Hoverable"
+import { getYoutubeEmbedUrl } from "@/lib/youtube"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import type { HeroSlideData } from "@/lib/home"
 
@@ -20,29 +21,25 @@ function hexToRgba(hex: string, alpha: number) {
   return `rgba(${r},${g},${b},${alpha})`
 }
 
-function getYoutubeEmbedUrl(url: string): string | null {
-  const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
-  return match ? `https://www.youtube-nocookie.com/embed/${match[1]}?autoplay=1` : null
-}
-
 export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
-  const [videoUrl, setVideoUrl] = useState<string | null>(null)
+  const [video, setVideo] = useState<{ kind: "file" | "youtube"; src: string } | null>(null)
 
   useEffect(() => {
-    if (slides.length < 2 || paused || videoUrl) return
+    if (slides.length < 2 || paused || video) return
     const dureeMs = (slides[index]?.dureeAffichage ?? 7) * 1000
     const timer = setTimeout(() => {
       setIndex((i) => (i + 1) % slides.length)
     }, dureeMs)
     return () => clearTimeout(timer)
-  }, [index, paused, videoUrl, slides])
+  }, [index, paused, video, slides])
 
   if (slides.length === 0) return null
 
   const slide = slides[index]
   const embedUrl = slide.youtubeUrl ? getYoutubeEmbedUrl(slide.youtubeUrl) : null
+  const hasVideo = Boolean(slide.videoFichierUrl || embedUrl)
 
   const isCentre = slide.alignement === "CENTRE"
   const isDroite = slide.alignement === "DROITE"
@@ -170,10 +167,16 @@ export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
         )}
       </div>
 
-      {embedUrl && (
+      {hasVideo && (
         <Hoverable
           as="button"
-          onClick={() => setVideoUrl(embedUrl)}
+          onClick={() =>
+            setVideo(
+              slide.videoFichierUrl
+                ? { kind: "file", src: slide.videoFichierUrl }
+                : { kind: "youtube", src: `${embedUrl}?autoplay=1` }
+            )
+          }
           aria-label="Lire la vidéo"
           style={{
             position: "absolute",
@@ -312,9 +315,9 @@ export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
         </>
       )}
 
-      {videoUrl && (
+      {video && (
         <div
-          onClick={() => setVideoUrl(null)}
+          onClick={() => setVideo(null)}
           style={{
             position: "fixed",
             inset: 0,
@@ -327,7 +330,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
           }}
         >
           <button
-            onClick={() => setVideoUrl(null)}
+            onClick={() => setVideo(null)}
             aria-label="Fermer"
             style={{
               position: "absolute",
@@ -354,13 +357,19 @@ export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
             onClick={(e) => e.stopPropagation()}
             style={{ width: "100%", maxWidth: 960, aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}
           >
-            <iframe
-              src={videoUrl}
-              title="Vidéo"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{ width: "100%", height: "100%", border: "none" }}
-            />
+            {video.kind === "file" ? (
+              <video controls autoPlay preload="metadata" style={{ width: "100%", height: "100%", background: "#000" }}>
+                <source src={video.src} />
+              </video>
+            ) : (
+              <iframe
+                src={video.src}
+                title="Vidéo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ width: "100%", height: "100%", border: "none" }}
+              />
+            )}
           </div>
         </div>
       )}

@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber } from "@/lib/actions/form-utils"
-import { resolveImageUrl } from "@/lib/storage"
+import { resolveImageUrl, resolveVideoFileUrl } from "@/lib/storage"
 import type { SectionEmploi, TypeDocument, IconePratique } from "@/generated/prisma"
 
 export type EmploiActionState = { error: string | null }
@@ -142,6 +142,7 @@ export async function saveVideo(
   const id = optionalStr(formData, "id")
   const titre = str(formData, "titre")
   const url = str(formData, "url")
+  const videoFichierUrl = await resolveVideoFileUrl(formData, "videoFichier", "emploi/videos")
   const description = optionalStr(formData, "description")
   const section = optionalStr(formData, "section") as SectionEmploi | null
   const dispositifId = optionalStr(formData, "dispositifId")
@@ -149,7 +150,7 @@ export async function saveVideo(
 
   if (!titre || !url) return { error: "Titre et URL sont obligatoires." }
 
-  const data = { titre, url, description, section, dispositifId, ordre }
+  const data = { titre, url, videoFichierUrl, description, section, dispositifId, ordre }
   if (id) {
     await prisma.video.update({ where: { id }, data })
   } else {
@@ -221,6 +222,7 @@ export async function saveDispositifFinancement(
   const contenu = str(formData, "contenu")
   const montantMisEnAvant = optionalStr(formData, "montantMisEnAvant")
   const videoUrl = optionalStr(formData, "videoUrl")
+  const videoFichierUrl = await resolveVideoFileUrl(formData, "videoFichier", "emploi/dispositifs-videos")
   const ordre = optionalNumber(formData, "ordre") ?? 0
   const image = await resolveImageUrl(formData, "image", "emploi/dispositifs")
 
@@ -228,7 +230,7 @@ export async function saveDispositifFinancement(
     return { error: "Le titre et le contenu sont obligatoires." }
   }
 
-  const data = { titre, resume, contenu, montantMisEnAvant, videoUrl, image, ordre }
+  const data = { titre, resume, contenu, montantMisEnAvant, videoUrl, videoFichierUrl, image, ordre }
   if (id) {
     await prisma.dispositifFinancement.update({ where: { id }, data })
   } else {
@@ -338,8 +340,9 @@ export async function saveEmploiPageContenu(
   const introTexte = str(formData, "introTexte")
   const introListe = str(formData, "introListe")
   const videoCommunauteUrl = optionalStr(formData, "videoCommunauteUrl")
+  const videoCommunauteFichierUrl = await resolveVideoFileUrl(formData, "videoCommunauteFichier", "emploi/page-contenu-videos")
 
-  const data = { introTexte, introListe, videoCommunauteUrl }
+  const data = { introTexte, introListe, videoCommunauteUrl, videoCommunauteFichierUrl }
   await prisma.emploiPageContenu.upsert({
     where: { id: "emploi" },
     create: { id: "emploi", ...data },
@@ -365,6 +368,7 @@ export async function saveGestionEmploiContenu(
     communauteTitre: optionalStr(formData, "communauteTitre"),
     communauteTexte: optionalStr(formData, "communauteTexte"),
     communauteVideoUrl: optionalStr(formData, "communauteVideoUrl"),
+    communauteVideoFichierUrl: await resolveVideoFileUrl(formData, "communauteVideoFichier", "emploi/gestion-videos"),
     communauteLienEnSavoirPlusUrl: optionalStr(formData, "communauteLienEnSavoirPlusUrl"),
     communauteLienRejoindreUrl: optionalStr(formData, "communauteLienRejoindreUrl"),
   }

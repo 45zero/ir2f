@@ -11,6 +11,7 @@ import {
   type EmploiActionState,
 } from "@/lib/actions/emploi"
 import { ICONE_PRATIQUE_LABELS } from "@/lib/emploi-shared"
+import { VideoField } from "@/components/admin/VideoField"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import type {
   AdminEmploiPageContenu,
@@ -178,9 +179,10 @@ function PageContenuForm({ contenu }: { contenu: AdminEmploiPageContenu }) {
         />
       </label>
       <label style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-        <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Vidéo « Communauté Employeur IEFF » (optionnel)</span>
+        <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Vidéo « Communauté Employeur IEFF » — lien YouTube (optionnel)</span>
         <input name="videoCommunauteUrl" placeholder="Lien YouTube" defaultValue={contenu.videoCommunauteUrl ?? ""} style={fieldStyle} />
       </label>
+      <VideoField name="videoCommunauteFichier" label="Ou fichier vidéo direct (optionnel)" defaultUrl={contenu.videoCommunauteFichierUrl} />
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         <button type="submit" disabled={pending} style={submitButtonStyle}>
@@ -244,6 +246,9 @@ function GestionEmploiContenuForm({ contenu }: { contenu: AdminGestionEmploiCont
             defaultValue={contenu.communauteTexte ?? ""}
             style={{ ...fieldStyle, gridColumn: "1/-1", resize: "vertical" }}
           />
+          <div style={{ gridColumn: "1/-1" }}>
+            <VideoField name="communauteVideoFichier" label="Ou fichier vidéo direct (optionnel)" defaultUrl={contenu.communauteVideoFichierUrl} />
+          </div>
           <input name="communauteLienEnSavoirPlusUrl" placeholder="Lien « En savoir plus »" defaultValue={contenu.communauteLienEnSavoirPlusUrl ?? ""} style={fieldStyle} />
           <input name="communauteLienRejoindreUrl" placeholder="Lien « Rejoignez la communauté »" defaultValue={contenu.communauteLienRejoindreUrl ?? ""} style={fieldStyle} />
         </div>

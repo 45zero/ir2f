@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber } from "@/lib/actions/form-utils"
-import { resolveImageUrl } from "@/lib/storage"
+import { resolveImageUrl, resolveVideoFileUrl } from "@/lib/storage"
 import type { CategorieFormation, EffetVisuel, FormationOngletCle } from "@/generated/prisma"
 
 export type FormationsPageActionState = { error: string | null }
@@ -50,13 +50,14 @@ export async function saveFormationOnglet(
   const titre = optionalStr(formData, "titre")
   const contenu = optionalStr(formData, "contenu")
   const videoUrl = optionalStr(formData, "videoUrl")
+  const videoFichierUrl = await resolveVideoFileUrl(formData, "videoFichier", `formations-onglets-videos/${categorie.toLowerCase()}-${onglet.toLowerCase()}`)
   const image = await resolveImageUrl(formData, "image", `formations-onglets/${categorie.toLowerCase()}-${onglet.toLowerCase()}`)
   const imageTaille = optionalNumber(formData, "imageTaille") ?? 100
   const backgroundColor = str(formData, "backgroundColor") || "#f5f7fb"
   const opacity = optionalNumber(formData, "opacity") ?? 100
   const effetVisuel = (str(formData, "effetVisuel") || "AUCUN") as EffetVisuel
 
-  const data = { titre, contenu, videoUrl, image, imageTaille, backgroundColor, opacity, effetVisuel }
+  const data = { titre, contenu, videoUrl, videoFichierUrl, image, imageTaille, backgroundColor, opacity, effetVisuel }
 
   await prisma.formationOnglet.upsert({
     where: { categorie_onglet: { categorie, onglet } },

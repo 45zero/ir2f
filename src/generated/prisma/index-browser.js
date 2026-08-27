@@ -450,6 +450,7 @@ exports.Prisma.HeroSlideScalarFieldEnum = {
   ctaLabel: 'ctaLabel',
   formationId: 'formationId',
   youtubeUrl: 'youtubeUrl',
+  videoFichierUrl: 'videoFichierUrl',
   alignement: 'alignement',
   overlayColor: 'overlayColor',
   overlayOpacity: 'overlayOpacity',
@@ -479,6 +480,7 @@ exports.Prisma.FormationOngletScalarFieldEnum = {
   titre: 'titre',
   contenu: 'contenu',
   videoUrl: 'videoUrl',
+  videoFichierUrl: 'videoFichierUrl',
   image: 'image',
   imageTaille: 'imageTaille',
   backgroundColor: 'backgroundColor',
@@ -536,6 +538,7 @@ exports.Prisma.VideoScalarFieldEnum = {
   id: 'id',
   titre: 'titre',
   url: 'url',
+  videoFichierUrl: 'videoFichierUrl',
   description: 'description',
   section: 'section',
   dispositifId: 'dispositifId',
@@ -563,6 +566,7 @@ exports.Prisma.DispositifFinancementScalarFieldEnum = {
   montantMisEnAvant: 'montantMisEnAvant',
   image: 'image',
   videoUrl: 'videoUrl',
+  videoFichierUrl: 'videoFichierUrl',
   ordre: 'ordre',
   actif: 'actif',
   createdAt: 'createdAt',
@@ -594,6 +598,7 @@ exports.Prisma.EmploiPageContenuScalarFieldEnum = {
   introTexte: 'introTexte',
   introListe: 'introListe',
   videoCommunauteUrl: 'videoCommunauteUrl',
+  videoCommunauteFichierUrl: 'videoCommunauteFichierUrl',
   updatedAt: 'updatedAt'
 };
 
@@ -609,6 +614,7 @@ exports.Prisma.GestionEmploiContenuScalarFieldEnum = {
   communauteTitre: 'communauteTitre',
   communauteTexte: 'communauteTexte',
   communauteVideoUrl: 'communauteVideoUrl',
+  communauteVideoFichierUrl: 'communauteVideoFichierUrl',
   communauteLienEnSavoirPlusUrl: 'communauteLienEnSavoirPlusUrl',
   communauteLienRejoindreUrl: 'communauteLienRejoindreUrl',
   updatedAt: 'updatedAt'
@@ -629,6 +635,7 @@ exports.Prisma.DispositifFormationScalarFieldEnum = {
   montantMisEnAvant: 'montantMisEnAvant',
   image: 'image',
   videoUrl: 'videoUrl',
+  videoFichierUrl: 'videoFichierUrl',
   ordre: 'ordre',
   actif: 'actif',
   createdAt: 'createdAt',

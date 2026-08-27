@@ -12,6 +12,7 @@ export type HeroSlideData = {
   ctaLabel: string | null
   formationSlug: string | null
   youtubeUrl: string | null
+  videoFichierUrl: string | null
   alignement: "GAUCHE" | "CENTRE" | "DROITE"
   overlayColor: string
   overlayOpacity: number
@@ -35,6 +36,7 @@ export async function getHeroSlides(): Promise<HeroSlideData[]> {
     ctaLabel: s.ctaLabel,
     formationSlug: s.formation?.slug ?? null,
     youtubeUrl: s.youtubeUrl,
+    videoFichierUrl: s.videoFichierUrl,
     alignement: s.alignement,
     overlayColor: s.overlayColor,
     overlayOpacity: s.overlayOpacity,

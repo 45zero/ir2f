@@ -7,6 +7,7 @@ import { colors, fontHeading, fontBody } from "@/lib/theme"
 import { CATEGORIE_LABELS, type CatalogueFormation } from "@/lib/formations-shared"
 import { ONGLET_LABEL, ongletKeyId } from "@/lib/formations-page-shared"
 import { effetVisuelStyle, effetVisuelHoverStyle } from "@/lib/effet-visuel"
+import { getYoutubeEmbedUrl } from "@/lib/youtube"
 import type { FormationOngletData, FormationTuileData } from "@/lib/formations"
 import type { CategorieFormation, FormationOngletCle, GroupeEquivalence, TypeFormation, VarianteNode } from "@/generated/prisma"
 
@@ -409,14 +410,9 @@ function FormationGridCard({ f }: { f: CatalogueFormation }) {
   )
 }
 
-function getYoutubeEmbedUrl(url: string): string | null {
-  const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
-  return match ? `https://www.youtube-nocookie.com/embed/${match[1]}` : null
-}
-
-// Bloc vidéo/image d'un onglet : vidéo YouTube si renseignée, sinon l'image
-// (taille, couleur de fond, opacité, effet visuel administrables), sinon le
-// contenu de repli fourni (utilisé pour l'onglet "Présentation").
+// Bloc vidéo/image d'un onglet : fichier vidéo direct ou vidéo YouTube si renseignée, sinon
+// l'image (taille, couleur de fond, opacité, effet visuel administrables), sinon le contenu de
+// repli fourni (utilisé pour l'onglet "Présentation").
 function OngletMedia({ data, fallback }: { data: FormationOngletData; fallback?: ReactNode }) {
   const embedUrl = data.videoUrl ? getYoutubeEmbedUrl(data.videoUrl) : null
 
@@ -428,6 +424,16 @@ function OngletMedia({ data, fallback }: { data: FormationOngletData; fallback?:
     overflow: "hidden",
     position: "relative",
     background: data.backgroundColor,
+  }
+
+  if (data.videoFichierUrl) {
+    return (
+      <div style={containerStyle}>
+        <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+          <source src={data.videoFichierUrl} />
+        </video>
+      </div>
+    )
   }
 
   if (embedUrl) {

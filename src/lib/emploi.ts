@@ -11,7 +11,7 @@ export type EmploiContact = {
   telephone: string | null
   poste: string | null
 }
-export type EmploiVideo = { id: string; titre: string; url: string; description: string | null }
+export type EmploiVideo = { id: string; titre: string; url: string; videoFichierUrl: string | null; description: string | null }
 
 export type EmploiSectionData = {
   section: SectionEmploi
@@ -46,6 +46,7 @@ export type EmploiDispositif = {
   montantMisEnAvant: string | null
   image: string | null
   videoUrl: string | null
+  videoFichierUrl: string | null
   documents: EmploiDocument[]
   videos: EmploiVideo[]
   referents: EmploiReferent[]
@@ -62,6 +63,7 @@ export type EmploiPageContenuData = {
   introTexte: string
   introListe: string
   videoCommunauteUrl: string | null
+  videoCommunauteFichierUrl: string | null
 }
 
 export type GestionEmploiContenuData = {
@@ -75,6 +77,7 @@ export type GestionEmploiContenuData = {
   communauteTitre: string | null
   communauteTexte: string | null
   communauteVideoUrl: string | null
+  communauteVideoFichierUrl: string | null
   communauteLienEnSavoirPlusUrl: string | null
   communauteLienRejoindreUrl: string | null
 }
@@ -90,6 +93,7 @@ const EMPLOI_PAGE_CONTENU_DEFAUT: EmploiPageContenuData = {
   introTexte: "",
   introListe: "",
   videoCommunauteUrl: null,
+  videoCommunauteFichierUrl: null,
 }
 
 const GESTION_EMPLOI_CONTENU_DEFAUT: GestionEmploiContenuData = {
@@ -103,6 +107,7 @@ const GESTION_EMPLOI_CONTENU_DEFAUT: GestionEmploiContenuData = {
   communauteTitre: null,
   communauteTexte: null,
   communauteVideoUrl: null,
+  communauteVideoFichierUrl: null,
   communauteLienEnSavoirPlusUrl: null,
   communauteLienRejoindreUrl: null,
 }
@@ -162,6 +167,7 @@ export async function getEmploiPageData(): Promise<{
     montantMisEnAvant: d.montantMisEnAvant,
     image: d.image,
     videoUrl: d.videoUrl,
+    videoFichierUrl: d.videoFichierUrl,
     documents: d.documents,
     videos: d.videos,
     referents: d.referents,

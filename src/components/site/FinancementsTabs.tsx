@@ -28,7 +28,8 @@ export function FinancementsTabs({ dispositifs }: { dispositifs: EmploiDispositi
   if (!active) return null
 
   const embedUrl = active.videoUrl ? getYoutubeEmbedUrl(active.videoUrl) : null
-  const videoIsFile = active.videoUrl ? isVideoFileUrl(active.videoUrl) : false
+  const videoIsFile = active.videoFichierUrl ? true : active.videoUrl ? isVideoFileUrl(active.videoUrl) : false
+  const activeVideoFileSrc = active.videoFichierUrl ?? active.videoUrl
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -67,20 +68,20 @@ export function FinancementsTabs({ dispositifs }: { dispositifs: EmploiDispositi
           <p style={{ fontSize: 15, fontWeight: 700, color: colors.navy, margin: 0, lineHeight: 1.5 }}>{active.resume}</p>
         )}
 
-        {(embedUrl || videoIsFile) && (
+        {(videoIsFile || embedUrl) && (
           <div style={{ aspectRatio: "16/9", maxWidth: 640, borderRadius: 8, overflow: "hidden" }}>
-            {embedUrl ? (
+            {videoIsFile ? (
+              <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+                <source src={activeVideoFileSrc!} />
+              </video>
+            ) : (
               <iframe
-                src={embedUrl}
+                src={embedUrl!}
                 title={active.titre}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 style={{ width: "100%", height: "100%", border: "none" }}
               />
-            ) : (
-              <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
-                <source src={active.videoUrl!} />
-              </video>
             )}
           </div>
         )}
@@ -136,7 +137,13 @@ export function FinancementsTabs({ dispositifs }: { dispositifs: EmploiDispositi
               const videoEmbed = getYoutubeEmbedUrl(v.url)
               return (
                 <div key={v.id} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  {videoEmbed ? (
+                  {v.videoFichierUrl ? (
+                    <div style={{ aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}>
+                      <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+                        <source src={v.videoFichierUrl} />
+                      </video>
+                    </div>
+                  ) : videoEmbed ? (
                     <div style={{ aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}>
                       <iframe
                         src={videoEmbed}

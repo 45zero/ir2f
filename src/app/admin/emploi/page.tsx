@@ -40,7 +40,7 @@ export default async function AdminEmploiPage() {
 
   const webinaires = webinairesRaw.map((w) => ({ ...w, date: w.date.toISOString() }))
 
-  const pageContenu = pageContenuRow ?? { introTexte: "", introListe: "", videoCommunauteUrl: null }
+  const pageContenu = pageContenuRow ?? { introTexte: "", introListe: "", videoCommunauteUrl: null, videoCommunauteFichierUrl: null }
   const gestionEmploiContenu = gestionEmploiContenuRow ?? {
     eLearningTitre: null,
     eLearningTexte: null,
@@ -52,6 +52,7 @@ export default async function AdminEmploiPage() {
     communauteTitre: null,
     communauteTexte: null,
     communauteVideoUrl: null,
+    communauteVideoFichierUrl: null,
     communauteLienEnSavoirPlusUrl: null,
     communauteLienRejoindreUrl: null,
   }

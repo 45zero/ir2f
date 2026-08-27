@@ -28,7 +28,8 @@ export function FormationDispositifsTabs({ dispositifs }: { dispositifs: Disposi
   if (!active) return null
 
   const embedUrl = active.videoUrl ? getYoutubeEmbedUrl(active.videoUrl) : null
-  const videoIsFile = active.videoUrl ? isVideoFileUrl(active.videoUrl) : false
+  const videoIsFile = active.videoFichierUrl ? true : active.videoUrl ? isVideoFileUrl(active.videoUrl) : false
+  const activeVideoFileSrc = active.videoFichierUrl ?? active.videoUrl
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -67,20 +68,20 @@ export function FormationDispositifsTabs({ dispositifs }: { dispositifs: Disposi
           <p style={{ fontSize: 15, fontWeight: 700, color: colors.navy, margin: 0, lineHeight: 1.5 }}>{active.resume}</p>
         )}
 
-        {(embedUrl || videoIsFile) && (
+        {(videoIsFile || embedUrl) && (
           <div style={{ aspectRatio: "16/9", maxWidth: 640, borderRadius: 8, overflow: "hidden" }}>
-            {embedUrl ? (
+            {videoIsFile ? (
+              <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+                <source src={activeVideoFileSrc!} />
+              </video>
+            ) : (
               <iframe
-                src={embedUrl}
+                src={embedUrl!}
                 title={active.titre}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 style={{ width: "100%", height: "100%", border: "none" }}
               />
-            ) : (
-              <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
-                <source src={active.videoUrl!} />
-              </video>
             )}
           </div>
         )}

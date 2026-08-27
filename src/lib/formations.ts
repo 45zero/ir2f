@@ -103,6 +103,7 @@ export type FormationOngletData = {
   titre: string | null
   contenu: string | null
   videoUrl: string | null
+  videoFichierUrl: string | null
   image: string | null
   imageTaille: number
   backgroundColor: string
@@ -121,6 +122,7 @@ export async function getFormationOnglets(): Promise<Record<string, FormationOng
       titre: row?.titre ?? ongletDefaultTitre(categorie, onglet),
       contenu: row?.contenu ?? ongletDefaultContenu(categorie, onglet),
       videoUrl: row?.videoUrl ?? null,
+      videoFichierUrl: row?.videoFichierUrl ?? null,
       image: row?.image ?? null,
       imageTaille: row?.imageTaille ?? 100,
       backgroundColor: row?.backgroundColor ?? "#f5f7fb",

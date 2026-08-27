@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber } from "@/lib/actions/form-utils"
-import { resolveImageUrl } from "@/lib/storage"
+import { resolveImageUrl, resolveVideoFileUrl } from "@/lib/storage"
 import type { IconeAccompagnement, TransitionHero, AlignementHero, TypeLien } from "@/generated/prisma"
 
 export type AccueilActionState = { error: string | null }
@@ -30,6 +30,7 @@ export async function saveHeroSlide(
   const ctaLabel = optionalStr(formData, "ctaLabel")
   const formationId = optionalStr(formData, "formationId")
   const youtubeUrl = optionalStr(formData, "youtubeUrl")
+  const videoFichierUrl = await resolveVideoFileUrl(formData, "videoFichier", "hero-slides-videos")
   const alignement = (str(formData, "alignement") || "GAUCHE") as AlignementHero
   const ordre = optionalNumber(formData, "ordre") ?? 0
   const overlayColor = str(formData, "overlayColor") || "#0a162e"
@@ -50,6 +51,7 @@ export async function saveHeroSlide(
     ctaLabel,
     formationId,
     youtubeUrl,
+    videoFichierUrl,
     alignement,
     ordre,
     overlayColor,

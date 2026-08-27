@@ -119,6 +119,46 @@ export async function resolveImageUrl(formData: FormData, fieldName: string, key
 }
 
 /** Télécharge les octets d'un fichier déjà présent dans le bucket documents (ex. modèle de convention, PDF généré). */
+const VIDEOS_BUCKET = "ir2f-videos"
+let videosBucketEnsured = false
+
+async function ensureVideosBucket(client: SupabaseClient) {
+  if (videosBucketEnsured) return
+  const { data } = await client.storage.getBucket(VIDEOS_BUCKET)
+  if (!data) {
+    await client.storage.createBucket(VIDEOS_BUCKET, { public: true, fileSizeLimit: "200MB" })
+  }
+  videosBucketEnsured = true
+}
+
+export async function uploadPublicVideo(file: File, keyHint: string): Promise<string> {
+  const client = getStorageClient()
+  await ensureVideosBucket(client)
+
+  const ext = file.name.includes(".") ? file.name.split(".").pop() : "mp4"
+  const storagePath = `${keyHint}/${randomUUID()}.${ext}`
+  const bytes = await file.arrayBuffer()
+
+  const { error } = await client.storage.from(VIDEOS_BUCKET).upload(storagePath, bytes, {
+    contentType: file.type || "video/mp4",
+    upsert: false,
+  })
+  if (error) throw new Error(`Échec de l'upload de la vidéo : ${error.message}`)
+
+  const { data } = client.storage.from(VIDEOS_BUCKET).getPublicUrl(storagePath)
+  return data.publicUrl
+}
+
+/** Récupère l'URL d'une vidéo envoyée en fichier (champ `${fieldName}File`), ou reprend l'URL déjà enregistrée (champ `fieldName`). */
+export async function resolveVideoFileUrl(formData: FormData, fieldName: string, keyHint: string): Promise<string | null> {
+  const file = formData.get(`${fieldName}File`)
+  if (file instanceof File && file.size > 0) {
+    return uploadPublicVideo(file, keyHint)
+  }
+  const existing = (formData.get(fieldName) as string | null)?.trim()
+  return existing || null
+}
+
 export async function downloadStorageFile(storagePath: string): Promise<Buffer> {
   const client = getStorageClient()
   const { data, error } = await client.storage.from(BUCKET).download(storagePath)

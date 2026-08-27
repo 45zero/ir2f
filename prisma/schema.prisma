@@ -191,9 +191,9 @@ model User {
   documentsUpload      Document[]
   documentsRecus       DocumentDestinataire[]
   signatures           Signature[]
-  messagesEnvoyes      Message[]             @relation("Expediteur")
+  messagesEnvoyes      Message[]              @relation("Expediteur")
   messagesRecus        MessageDestinataire[]
-  covoituragesConduit  Covoiturage[]         @relation("Conducteur")
+  covoituragesConduit  Covoiturage[]          @relation("Conducteur")
   covoituragesPassager CovoituragePassager[]
   articles             Article[]
   demandesInscription  DemandeInscription[]
@@ -365,25 +365,25 @@ model DemandeContact {
 // ─── DOCUMENTS ───────────────────────────────────────
 
 model Document {
-  id            String            @id @default(uuid())
-  nom           String
-  url           String?
-  storagePath   String?
-  taille        Int?
-  mimeType      String?
-  uploaderId    String
-  formationId   String?
-  public        Boolean           @default(false)
+  id                String            @id @default(uuid())
+  nom               String
+  url               String?
+  storagePath       String?
+  taille            Int?
+  mimeType          String?
+  uploaderId        String
+  formationId       String?
+  public            Boolean           @default(false)
   // Distinct de `public` (partage avec les stagiaires connectés) : affiche ce document
   // dans le bloc "Documents utiles" de la fiche formation publique (site vitrine).
-  visiblePublic Boolean           @default(false)
-  ordre         Int               @default(0)
-  rolesRequis   Role[]            @default([STAGIAIRE])
-  categorie     DocumentCategorie @default(ADMINISTRATIF)
+  visiblePublic     Boolean           @default(false)
+  ordre             Int               @default(0)
+  rolesRequis       Role[]            @default([STAGIAIRE])
+  categorie         DocumentCategorie @default(ADMINISTRATIF)
   // Si vrai, le document n'est visible que par les destinataires listés ci-dessous
   // (au lieu de l'ensemble des stagiaires validés de la formation).
-  partageIndividuel Boolean       @default(false)
-  createdAt     DateTime          @default(now())
+  partageIndividuel Boolean           @default(false)
+  createdAt         DateTime          @default(now())
 
   uploader      User                   @relation(fields: [uploaderId], references: [id])
   formation     Formation?             @relation(fields: [formationId], references: [id])
@@ -720,24 +720,25 @@ enum AlignementHero {
 }
 
 model HeroSlide {
-  id             String         @id @default(uuid())
-  badge          String?
-  titre          String
-  sousTitre      String?
-  logoUrl        String?
-  image          String
-  ctaLabel       String?        @default("En savoir plus")
-  formationId    String?
-  youtubeUrl     String?
-  alignement     AlignementHero @default(GAUCHE)
-  overlayColor   String         @default("#0a162e")
-  overlayOpacity Int            @default(60)
-  transition     TransitionHero @default(FADE)
-  dureeAffichage Int            @default(7)
-  ordre          Int            @default(0)
-  actif          Boolean        @default(true)
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
+  id              String         @id @default(uuid())
+  badge           String?
+  titre           String
+  sousTitre       String?
+  logoUrl         String?
+  image           String
+  ctaLabel        String?        @default("En savoir plus")
+  formationId     String?
+  youtubeUrl      String?
+  videoFichierUrl String?
+  alignement      AlignementHero @default(GAUCHE)
+  overlayColor    String         @default("#0a162e")
+  overlayOpacity  Int            @default(60)
+  transition      TransitionHero @default(FADE)
+  dureeAffichage  Int            @default(7)
+  ordre           Int            @default(0)
+  actif           Boolean        @default(true)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
   formation Formation? @relation(fields: [formationId], references: [id])
 
@@ -794,6 +795,7 @@ model FormationOnglet {
   titre           String?
   contenu         String?
   videoUrl        String?
+  videoFichierUrl String?
   image           String?
   imageTaille     Int                @default(100)
   backgroundColor String             @default("#f5f7fb")
@@ -894,15 +896,16 @@ model Contact {
 }
 
 model Video {
-  id           String         @id @default(uuid())
-  titre        String
-  url          String
-  description  String?
-  section      SectionEmploi?
-  dispositifId String?
-  ordre        Int            @default(0)
-  actif        Boolean        @default(true)
-  createdAt    DateTime       @default(now())
+  id              String         @id @default(uuid())
+  titre           String
+  url             String
+  videoFichierUrl String?
+  description     String?
+  section         SectionEmploi?
+  dispositifId    String?
+  ordre           Int            @default(0)
+  actif           Boolean        @default(true)
+  createdAt       DateTime       @default(now())
 
   dispositif DispositifFinancement? @relation(fields: [dispositifId], references: [id], onDelete: SetNull)
 
@@ -930,6 +933,7 @@ model DispositifFinancement {
   montantMisEnAvant String?
   image             String?
   videoUrl          String?
+  videoFichierUrl   String?
   ordre             Int      @default(0)
   actif             Boolean  @default(true)
   createdAt         DateTime @default(now())
@@ -978,11 +982,12 @@ model PratiqueEmploiCard {
 }
 
 model EmploiPageContenu {
-  id                 String   @id @default("emploi")
-  introTexte         String   @default("")
-  introListe         String   @default("")
-  videoCommunauteUrl String?
-  updatedAt          DateTime @updatedAt
+  id                        String   @id @default("emploi")
+  introTexte                String   @default("")
+  introListe                String   @default("")
+  videoCommunauteUrl        String?
+  videoCommunauteFichierUrl String?
+  updatedAt                 DateTime @updatedAt
 
   @@schema("ir2f")
 }
@@ -999,6 +1004,7 @@ model GestionEmploiContenu {
   communauteTitre               String?
   communauteTexte               String?
   communauteVideoUrl            String?
+  communauteVideoFichierUrl     String?
   communauteLienEnSavoirPlusUrl String?
   communauteLienRejoindreUrl    String?
   updatedAt                     DateTime @updatedAt
@@ -1025,6 +1031,7 @@ model DispositifFormation {
   montantMisEnAvant String?
   image             String?
   videoUrl          String?
+  videoFichierUrl   String?
   ordre             Int      @default(0)
   actif             Boolean  @default(true)
   createdAt         DateTime @default(now())

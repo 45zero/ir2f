@@ -64,12 +64,17 @@ const PRATIQUE_ICON: Record<IconePratique, React.ReactNode> = {
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short" })
 
-function VideoBlock({ url, title }: { url: string | null; title: string }) {
+function VideoBlock({ url, fichierUrl, title }: { url: string | null; fichierUrl?: string | null; title: string }) {
   const embedUrl = url ? getYoutubeEmbedUrl(url) : null
-  const isFile = url ? isVideoFileUrl(url) : false
+  const isFile = fichierUrl ? true : url ? isVideoFileUrl(url) : false
+  const fileSrc = fichierUrl ?? url
   return (
     <div style={{ flex: "1 1 300px", maxWidth: 380, aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}>
-      {embedUrl ? (
+      {isFile && fileSrc ? (
+        <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+          <source src={fileSrc} />
+        </video>
+      ) : embedUrl ? (
         <iframe
           src={embedUrl}
           title={title}
@@ -77,10 +82,6 @@ function VideoBlock({ url, title }: { url: string | null; title: string }) {
           allowFullScreen
           style={{ width: "100%", height: "100%", border: "none" }}
         />
-      ) : isFile && url ? (
-        <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
-          <source src={url} />
-        </video>
       ) : (
         <div
           style={{
@@ -161,7 +162,13 @@ function VideosGrid({ videos }: { videos: EmploiVideo[] }) {
         const embedUrl = getYoutubeEmbedUrl(v.url)
         return (
           <div key={v.id} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {embedUrl ? (
+            {v.videoFichierUrl ? (
+              <div style={{ aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}>
+                <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+                  <source src={v.videoFichierUrl} />
+                </video>
+              </div>
+            ) : embedUrl ? (
               <div style={{ aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}>
                 <iframe
                   src={embedUrl}
@@ -265,8 +272,10 @@ export default async function EmploiPage() {
 
   const creerEmploiParagraphes = gestionEmploiContenu.creerEmploiTexte.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean)
   const communauteVideoUrl = gestionEmploiContenu.communauteVideoUrl
+  const communauteVideoFichierUrl = gestionEmploiContenu.communauteVideoFichierUrl
   const communauteVideoEmbed = communauteVideoUrl ? getYoutubeEmbedUrl(communauteVideoUrl) : null
-  const communauteVideoIsFile = communauteVideoUrl ? isVideoFileUrl(communauteVideoUrl) : false
+  const communauteVideoIsFile = communauteVideoFichierUrl ? true : communauteVideoUrl ? isVideoFileUrl(communauteVideoUrl) : false
+  const communauteVideoFileSrc = communauteVideoFichierUrl ?? communauteVideoUrl
 
   const financementsContent = (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -445,20 +454,20 @@ export default async function EmploiPage() {
                 )}
               </div>
             </div>
-            {(communauteVideoEmbed || communauteVideoIsFile) && (
+            {(communauteVideoIsFile || communauteVideoEmbed) && (
               <div style={{ flex: "1 1 300px", maxWidth: 380, aspectRatio: "16/9", borderRadius: 8, overflow: "hidden" }}>
-                {communauteVideoEmbed ? (
+                {communauteVideoIsFile ? (
+                  <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+                    <source src={communauteVideoFileSrc!} />
+                  </video>
+                ) : (
                   <iframe
-                    src={communauteVideoEmbed}
+                    src={communauteVideoEmbed!}
                     title="Communauté employeur"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     style={{ width: "100%", height: "100%", border: "none" }}
                   />
-                ) : (
-                  <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
-                    <source src={communauteVideoUrl!} />
-                  </video>
                 )}
               </div>
             )}
@@ -555,7 +564,7 @@ export default async function EmploiPage() {
               </ul>
             )}
           </div>
-          <VideoBlock url={pageContenu.videoCommunauteUrl} title="Communauté Employeur IEFF" />
+          <VideoBlock url={pageContenu.videoCommunauteUrl} fichierUrl={pageContenu.videoCommunauteFichierUrl} title="Communauté Employeur IEFF" />
         </div>
       </section>
 

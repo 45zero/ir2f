@@ -16,6 +16,7 @@ import {
 } from "@/lib/actions/accueil"
 import { ICONE_LABELS, TRANSITION_LABELS, ALIGNEMENT_LABELS } from "@/lib/accueil-shared"
 import { ImageField } from "@/components/admin/ImageField"
+import { VideoField } from "@/components/admin/VideoField"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import type { IconeAccompagnement, TransitionHero, AlignementHero, TypeLien } from "@/generated/prisma"
 
@@ -141,6 +142,7 @@ export type AdminHeroSlide = {
   ctaLabel: string | null
   formationId: string | null
   youtubeUrl: string | null
+  videoFichierUrl: string | null
   alignement: AlignementHero
   overlayColor: string
   overlayOpacity: number
@@ -265,7 +267,7 @@ function HeroSlideForm({
           </select>
         </label>
         <label style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Vidéo (optionnel)</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Vidéo — lien YouTube (optionnel)</span>
           <input
             name="youtubeUrl"
             placeholder="Lien YouTube (affiche un bouton lecture)"
@@ -274,6 +276,9 @@ function HeroSlideForm({
           />
         </label>
         <input name="ordre" type="number" placeholder="Ordre" defaultValue={item?.ordre ?? 0} style={fieldStyle} />
+        <div style={{ gridColumn: "1/-1" }}>
+          <VideoField name="videoFichier" label="Vidéo — ou fichier vidéo direct (optionnel)" defaultUrl={item?.videoFichierUrl} />
+        </div>
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 8, borderTop: "1px solid #eef0f3", paddingTop: 12 }}>

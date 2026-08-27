@@ -13,6 +13,7 @@ export type DispositifFormationData = {
   montantMisEnAvant: string | null
   image: string | null
   videoUrl: string | null
+  videoFichierUrl: string | null
   liens: FinancementLien[]
   contacts: FinancementContact[]
   tableaux: FinancementTableau[]
@@ -37,6 +38,7 @@ export async function getFinancementPageData(): Promise<{ dispositifs: Dispositi
     montantMisEnAvant: d.montantMisEnAvant,
     image: d.image,
     videoUrl: d.videoUrl,
+    videoFichierUrl: d.videoFichierUrl,
     liens: d.liens,
     contacts: d.contacts,
     tableaux: d.tableaux.map((t) => ({

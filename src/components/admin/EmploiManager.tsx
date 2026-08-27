@@ -22,6 +22,7 @@ import {
 import { SECTION_EMPLOI_LABELS, TYPE_DOCUMENT_LABELS } from "@/lib/emploi-shared"
 import { EmploiDispositifsSection } from "@/components/admin/EmploiDispositifsSection"
 import { EmploiContenusSection } from "@/components/admin/EmploiContenusSection"
+import { VideoField } from "@/components/admin/VideoField"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import type { SectionEmploi, TypeDocument, IconePratique } from "@/generated/prisma"
 
@@ -135,6 +136,7 @@ export type AdminVideo = {
   id: string
   titre: string
   url: string
+  videoFichierUrl: string | null
   description: string | null
   section: SectionEmploi | null
   dispositifId: string | null
@@ -161,6 +163,7 @@ export type AdminDispositifFinancement = {
   montantMisEnAvant: string | null
   image: string | null
   videoUrl: string | null
+  videoFichierUrl: string | null
   ordre: number
   actif: boolean
   referents: AdminReferentEmploi[]
@@ -173,7 +176,12 @@ export type AdminPratiqueCard = {
   ordre: number
   actif: boolean
 }
-export type AdminEmploiPageContenu = { introTexte: string; introListe: string; videoCommunauteUrl: string | null }
+export type AdminEmploiPageContenu = {
+  introTexte: string
+  introListe: string
+  videoCommunauteUrl: string | null
+  videoCommunauteFichierUrl: string | null
+}
 export type AdminGestionEmploiContenu = {
   eLearningTitre: string | null
   eLearningTexte: string | null
@@ -185,6 +193,7 @@ export type AdminGestionEmploiContenu = {
   communauteTitre: string | null
   communauteTexte: string | null
   communauteVideoUrl: string | null
+  communauteVideoFichierUrl: string | null
   communauteLienEnSavoirPlusUrl: string | null
   communauteLienRejoindreUrl: string | null
 }
@@ -625,7 +634,7 @@ function VideoForm({
       {item && <input type="hidden" name="id" value={item.id} />}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10 }}>
         <input name="titre" placeholder="Titre" required defaultValue={item?.titre} style={fieldStyle} />
-        <input name="url" placeholder="URL (YouTube pour intégration, sinon lien externe)" required defaultValue={item?.url} style={fieldStyle} />
+        <input name="url" placeholder="URL — lien YouTube ou lien externe" required defaultValue={item?.url} style={fieldStyle} />
         <select name="section" defaultValue={item?.section ?? ""} onChange={(e) => setSection(e.target.value as SectionEmploi)} style={fieldStyle}>
           <option value="">— Section (optionnel) —</option>
           {Object.entries(SECTION_EMPLOI_LABELS).map(([v, l]) => (
@@ -653,6 +662,7 @@ function VideoForm({
           style={{ ...fieldStyle, gridColumn: "1/-1", resize: "vertical" }}
         />
       </div>
+      <VideoField name="videoFichier" label="Ou fichier vidéo direct (optionnel)" defaultUrl={item?.videoFichierUrl} />
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
       <div style={{ display: "flex", gap: 8 }}>
         <button type="submit" disabled={pending} style={submitButtonStyle}>

@@ -11,6 +11,7 @@ import {
   type EmploiActionState,
 } from "@/lib/actions/emploi"
 import { ImageField } from "@/components/admin/ImageField"
+import { VideoField } from "@/components/admin/VideoField"
 import { colors, fontBody } from "@/lib/theme"
 import type { AdminDispositifFinancement, AdminReferentEmploi } from "@/components/admin/EmploiManager"
 
@@ -182,9 +183,12 @@ function DispositifForm({ item, onDone }: { item?: AdminDispositifFinancement; o
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10, borderTop: "1px solid #eef0f3", paddingTop: 12 }}>
         <ImageField name="image" label="Logo du dispositif (optionnel)" defaultUrl={item?.image} />
         <label style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Vidéo (optionnel)</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Vidéo — lien YouTube (optionnel)</span>
           <input name="videoUrl" placeholder="Lien YouTube" defaultValue={item?.videoUrl ?? ""} style={fieldStyle} />
         </label>
+        <div style={{ gridColumn: "1/-1" }}>
+          <VideoField name="videoFichier" label="Vidéo — ou fichier vidéo direct (optionnel)" defaultUrl={item?.videoFichierUrl} />
+        </div>
       </div>
 
       <label style={{ display: "flex", flexDirection: "column", gap: 5, borderTop: "1px solid #eef0f3", paddingTop: 12 }}>
