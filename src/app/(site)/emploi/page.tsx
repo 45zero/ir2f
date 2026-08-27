@@ -518,16 +518,22 @@ export default async function EmploiPage() {
       <VideosGrid videos={formation.videos} />
       <ContactsGrid contacts={formation.contacts} />
 
-      {formationEmployabiliteContenu.indicateursNote && (
-        <div style={{ background: colors.bg, borderRadius: 8, padding: 18, display: "flex", flexDirection: "column", gap: 6 }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.4 }}>
-            Indicateurs employabilité
-          </span>
+      <div style={{ background: colors.bg, borderRadius: 8, padding: 18, display: "flex", flexDirection: "column", gap: 14 }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.4 }}>
+          Indicateurs employabilité et suivi de cohorte
+        </span>
+        {formationEmployabiliteContenu.indicateursNote && (
           <p style={{ margin: 0, fontSize: 13, lineHeight: 1.6, color: colors.text, whiteSpace: "pre-line" }}>
             {formationEmployabiliteContenu.indicateursNote}
           </p>
+        )}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 16 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/indic1.png" alt="Indicateurs employabilité" style={{ width: "100%", height: "auto", borderRadius: 8 }} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/Indic2.png" alt="Suivi de cohorte" style={{ width: "100%", height: "auto", borderRadius: 8 }} />
         </div>
-      )}
+      </div>
     </div>
   )
 
