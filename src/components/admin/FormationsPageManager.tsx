@@ -173,7 +173,12 @@ function OngletForm({ onglet }: { onglet: AdminFormationOnglet }) {
         <input name="videoUrl" placeholder="Lien YouTube" defaultValue={onglet.videoUrl ?? ""} style={fieldStyle} />
       </div>
 
-      <VideoField name="videoFichier" label="Vidéo — ou fichier vidéo direct (optionnel)" defaultUrl={onglet.videoFichierUrl} />
+      <VideoField
+        name="videoFichier"
+        label="Vidéo — ou fichier vidéo direct (optionnel)"
+        defaultUrl={onglet.videoFichierUrl}
+        keyHint={`formations-onglets-videos/${onglet.categorie.toLowerCase()}-${onglet.onglet.toLowerCase()}`}
+      />
 
       <ImageField name="image" label="Image (optionnel, affichée si pas de vidéo)" defaultUrl={onglet.image} />
 

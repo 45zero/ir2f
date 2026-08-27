@@ -2,25 +2,44 @@
 
 import { useRef, useState, type ChangeEvent } from "react"
 import { colors, fontBody } from "@/lib/theme"
+import { getVideoUploadTarget } from "@/lib/actions/video-upload"
+import { getBrowserSupabase } from "@/lib/supabase-browser"
+import { VIDEOS_BUCKET } from "@/lib/storage-shared"
 
 export function VideoField({
   name,
   label,
   defaultUrl,
+  keyHint,
 }: {
   name: string
   label: string
   defaultUrl?: string | null
+  keyHint: string
 }) {
   const [preview, setPreview] = useState(defaultUrl ?? "")
   const [fileName, setFileName] = useState<string | null>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [status, setStatus] = useState<"idle" | "uploading" | "error">("idle")
+  const hiddenRef = useRef<HTMLInputElement>(null)
 
-  function onChange(e: ChangeEvent<HTMLInputElement>) {
+  async function onChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
+
     setPreview(URL.createObjectURL(file))
     setFileName(file.name)
+    setStatus("uploading")
+    if (hiddenRef.current) hiddenRef.current.value = ""
+
+    try {
+      const { storagePath, token, publicUrl } = await getVideoUploadTarget(keyHint, file.name)
+      const { error } = await getBrowserSupabase().storage.from(VIDEOS_BUCKET).uploadToSignedUrl(storagePath, token, file)
+      if (error) throw error
+      if (hiddenRef.current) hiddenRef.current.value = publicUrl
+      setStatus("idle")
+    } catch {
+      setStatus("error")
+    }
   }
 
   return (
@@ -66,18 +85,13 @@ export function VideoField({
           }}
         >
           {fileName ? "Changer la vidéo" : "Choisir un fichier vidéo"}
-          <input
-            ref={inputRef}
-            type="file"
-            name={`${name}File`}
-            accept="video/*"
-            onChange={onChange}
-            style={{ display: "none" }}
-          />
+          <input type="file" accept="video/*" onChange={onChange} style={{ display: "none" }} />
         </label>
-        {fileName && <span style={{ fontSize: 12, color: colors.textLight }}>{fileName}</span>}
+        {status === "uploading" && <span style={{ fontSize: 12, color: colors.textLight }}>Envoi en cours…</span>}
+        {status === "error" && <span style={{ fontSize: 12, color: colors.red }}>Échec de l&apos;envoi, réessayez.</span>}
+        {status === "idle" && fileName && <span style={{ fontSize: 12, color: colors.textLight }}>{fileName}</span>}
       </div>
-      <input type="hidden" name={name} defaultValue={defaultUrl ?? ""} />
+      <input ref={hiddenRef} type="hidden" name={name} defaultValue={defaultUrl ?? ""} />
     </div>
   )
 }

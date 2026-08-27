@@ -2,6 +2,7 @@ import "server-only"
 import { randomUUID } from "crypto"
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
 import sharp from "sharp"
+import { VIDEOS_BUCKET } from "@/lib/storage-shared"
 
 const BUCKET = "ir2f-documents"
 
@@ -118,8 +119,6 @@ export async function resolveImageUrl(formData: FormData, fieldName: string, key
   return existing || null
 }
 
-/** Télécharge les octets d'un fichier déjà présent dans le bucket documents (ex. modèle de convention, PDF généré). */
-const VIDEOS_BUCKET = "ir2f-videos"
 let videosBucketEnsured = false
 
 async function ensureVideosBucket(client: SupabaseClient) {
@@ -131,32 +130,27 @@ async function ensureVideosBucket(client: SupabaseClient) {
   videosBucketEnsured = true
 }
 
-export async function uploadPublicVideo(file: File, keyHint: string): Promise<string> {
+/**
+ * Les vidéos sont trop volumineuses pour transiter par une Server Action (Vercel plafonne le
+ * corps des requêtes à ~4,5 Mo) : on génère ici une URL d'upload signée, que le navigateur
+ * utilise ensuite pour envoyer le fichier directement à Supabase Storage, sans passer par notre
+ * serveur. Voir VideoField.tsx (upload) et video-upload.ts (action qui appelle cette fonction).
+ */
+export async function createVideoUploadTarget(
+  keyHint: string,
+  fileName: string
+): Promise<{ storagePath: string; token: string; publicUrl: string }> {
   const client = getStorageClient()
   await ensureVideosBucket(client)
 
-  const ext = file.name.includes(".") ? file.name.split(".").pop() : "mp4"
+  const ext = fileName.includes(".") ? fileName.split(".").pop() : "mp4"
   const storagePath = `${keyHint}/${randomUUID()}.${ext}`
-  const bytes = await file.arrayBuffer()
 
-  const { error } = await client.storage.from(VIDEOS_BUCKET).upload(storagePath, bytes, {
-    contentType: file.type || "video/mp4",
-    upsert: false,
-  })
-  if (error) throw new Error(`Échec de l'upload de la vidéo : ${error.message}`)
+  const { data, error } = await client.storage.from(VIDEOS_BUCKET).createSignedUploadUrl(storagePath)
+  if (error || !data) throw new Error(`Échec de la préparation de l'upload vidéo : ${error?.message ?? "erreur inconnue"}`)
 
-  const { data } = client.storage.from(VIDEOS_BUCKET).getPublicUrl(storagePath)
-  return data.publicUrl
-}
-
-/** Récupère l'URL d'une vidéo envoyée en fichier (champ `${fieldName}File`), ou reprend l'URL déjà enregistrée (champ `fieldName`). */
-export async function resolveVideoFileUrl(formData: FormData, fieldName: string, keyHint: string): Promise<string | null> {
-  const file = formData.get(`${fieldName}File`)
-  if (file instanceof File && file.size > 0) {
-    return uploadPublicVideo(file, keyHint)
-  }
-  const existing = (formData.get(fieldName) as string | null)?.trim()
-  return existing || null
+  const { data: publicData } = client.storage.from(VIDEOS_BUCKET).getPublicUrl(storagePath)
+  return { storagePath, token: data.token, publicUrl: publicData.publicUrl }
 }
 
 export async function downloadStorageFile(storagePath: string): Promise<Buffer> {

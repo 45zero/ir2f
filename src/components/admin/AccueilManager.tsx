@@ -278,7 +278,12 @@ function HeroSlideForm({
         </label>
         <input name="ordre" type="number" placeholder="Ordre" defaultValue={item?.ordre ?? 0} style={fieldStyle} />
         <div style={{ gridColumn: "1/-1" }}>
-          <VideoField name="videoFichier" label="Vidéo — ou fichier vidéo direct (optionnel)" defaultUrl={item?.videoFichierUrl} />
+          <VideoField
+            name="videoFichier"
+            label="Vidéo — ou fichier vidéo direct (optionnel)"
+            defaultUrl={item?.videoFichierUrl}
+            keyHint="hero-slides-videos"
+          />
         </div>
       </div>
 

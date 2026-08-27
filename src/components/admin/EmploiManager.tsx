@@ -662,7 +662,7 @@ function VideoForm({
           style={{ ...fieldStyle, gridColumn: "1/-1", resize: "vertical" }}
         />
       </div>
-      <VideoField name="videoFichier" label="Ou fichier vidéo direct (optionnel)" defaultUrl={item?.videoFichierUrl} />
+      <VideoField name="videoFichier" label="Ou fichier vidéo direct (optionnel)" defaultUrl={item?.videoFichierUrl} keyHint="emploi/videos" />
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
       <div style={{ display: "flex", gap: 8 }}>
         <button type="submit" disabled={pending} style={submitButtonStyle}>

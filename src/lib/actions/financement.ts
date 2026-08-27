@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber, parseJsonArray } from "@/lib/actions/form-utils"
-import { resolveImageUrl, resolveVideoFileUrl } from "@/lib/storage"
+import { resolveImageUrl } from "@/lib/storage"
 
 export type FinancementActionState = { error: string | null }
 
@@ -26,7 +26,7 @@ export async function saveDispositifFormation(
   const contenu = str(formData, "contenu")
   const montantMisEnAvant = optionalStr(formData, "montantMisEnAvant")
   const videoUrl = optionalStr(formData, "videoUrl")
-  const videoFichierUrl = await resolveVideoFileUrl(formData, "videoFichier", "financement/dispositifs-videos")
+  const videoFichierUrl = optionalStr(formData, "videoFichier")
   const ordre = optionalNumber(formData, "ordre") ?? 0
   const image = await resolveImageUrl(formData, "image", "financement/dispositifs")
 

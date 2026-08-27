@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber } from "@/lib/actions/form-utils"
-import { resolveImageUrl, resolveVideoFileUrl } from "@/lib/storage"
+import { resolveImageUrl } from "@/lib/storage"
 import type { SectionEmploi, TypeDocument, IconePratique } from "@/generated/prisma"
 
 export type EmploiActionState = { error: string | null }
@@ -142,7 +142,7 @@ export async function saveVideo(
   const id = optionalStr(formData, "id")
   const titre = str(formData, "titre")
   const url = str(formData, "url")
-  const videoFichierUrl = await resolveVideoFileUrl(formData, "videoFichier", "emploi/videos")
+  const videoFichierUrl = optionalStr(formData, "videoFichier")
   const description = optionalStr(formData, "description")
   const section = optionalStr(formData, "section") as SectionEmploi | null
   const dispositifId = optionalStr(formData, "dispositifId")
@@ -222,7 +222,7 @@ export async function saveDispositifFinancement(
   const contenu = str(formData, "contenu")
   const montantMisEnAvant = optionalStr(formData, "montantMisEnAvant")
   const videoUrl = optionalStr(formData, "videoUrl")
-  const videoFichierUrl = await resolveVideoFileUrl(formData, "videoFichier", "emploi/dispositifs-videos")
+  const videoFichierUrl = optionalStr(formData, "videoFichier")
   const ordre = optionalNumber(formData, "ordre") ?? 0
   const image = await resolveImageUrl(formData, "image", "emploi/dispositifs")
 
@@ -340,7 +340,7 @@ export async function saveEmploiPageContenu(
   const introTexte = str(formData, "introTexte")
   const introListe = str(formData, "introListe")
   const videoCommunauteUrl = optionalStr(formData, "videoCommunauteUrl")
-  const videoCommunauteFichierUrl = await resolveVideoFileUrl(formData, "videoCommunauteFichier", "emploi/page-contenu-videos")
+  const videoCommunauteFichierUrl = optionalStr(formData, "videoCommunauteFichier")
 
   const data = { introTexte, introListe, videoCommunauteUrl, videoCommunauteFichierUrl }
   await prisma.emploiPageContenu.upsert({
@@ -368,7 +368,7 @@ export async function saveGestionEmploiContenu(
     communauteTitre: optionalStr(formData, "communauteTitre"),
     communauteTexte: optionalStr(formData, "communauteTexte"),
     communauteVideoUrl: optionalStr(formData, "communauteVideoUrl"),
-    communauteVideoFichierUrl: await resolveVideoFileUrl(formData, "communauteVideoFichier", "emploi/gestion-videos"),
+    communauteVideoFichierUrl: optionalStr(formData, "communauteVideoFichier"),
     communauteLienEnSavoirPlusUrl: optionalStr(formData, "communauteLienEnSavoirPlusUrl"),
     communauteLienRejoindreUrl: optionalStr(formData, "communauteLienRejoindreUrl"),
   }

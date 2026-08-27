@@ -182,7 +182,12 @@ function PageContenuForm({ contenu }: { contenu: AdminEmploiPageContenu }) {
         <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Vidéo « Communauté Employeur IEFF » — lien YouTube (optionnel)</span>
         <input name="videoCommunauteUrl" placeholder="Lien YouTube" defaultValue={contenu.videoCommunauteUrl ?? ""} style={fieldStyle} />
       </label>
-      <VideoField name="videoCommunauteFichier" label="Ou fichier vidéo direct (optionnel)" defaultUrl={contenu.videoCommunauteFichierUrl} />
+      <VideoField
+        name="videoCommunauteFichier"
+        label="Ou fichier vidéo direct (optionnel)"
+        defaultUrl={contenu.videoCommunauteFichierUrl}
+        keyHint="emploi/page-contenu-videos"
+      />
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         <button type="submit" disabled={pending} style={submitButtonStyle}>
@@ -247,7 +252,12 @@ function GestionEmploiContenuForm({ contenu }: { contenu: AdminGestionEmploiCont
             style={{ ...fieldStyle, gridColumn: "1/-1", resize: "vertical" }}
           />
           <div style={{ gridColumn: "1/-1" }}>
-            <VideoField name="communauteVideoFichier" label="Ou fichier vidéo direct (optionnel)" defaultUrl={contenu.communauteVideoFichierUrl} />
+            <VideoField
+              name="communauteVideoFichier"
+              label="Ou fichier vidéo direct (optionnel)"
+              defaultUrl={contenu.communauteVideoFichierUrl}
+              keyHint="emploi/gestion-videos"
+            />
           </div>
           <input name="communauteLienEnSavoirPlusUrl" placeholder="Lien « En savoir plus »" defaultValue={contenu.communauteLienEnSavoirPlusUrl ?? ""} style={fieldStyle} />
           <input name="communauteLienRejoindreUrl" placeholder="Lien « Rejoignez la communauté »" defaultValue={contenu.communauteLienRejoindreUrl ?? ""} style={fieldStyle} />

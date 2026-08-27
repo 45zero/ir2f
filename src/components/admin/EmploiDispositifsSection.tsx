@@ -187,7 +187,12 @@ function DispositifForm({ item, onDone }: { item?: AdminDispositifFinancement; o
           <input name="videoUrl" placeholder="Lien YouTube" defaultValue={item?.videoUrl ?? ""} style={fieldStyle} />
         </label>
         <div style={{ gridColumn: "1/-1" }}>
-          <VideoField name="videoFichier" label="Vidéo — ou fichier vidéo direct (optionnel)" defaultUrl={item?.videoFichierUrl} />
+          <VideoField
+            name="videoFichier"
+            label="Vidéo — ou fichier vidéo direct (optionnel)"
+            defaultUrl={item?.videoFichierUrl}
+            keyHint="emploi/dispositifs-videos"
+          />
         </div>
       </div>
 
