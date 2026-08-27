@@ -16,7 +16,7 @@ export default async function AdminOrganigrammePage() {
         </p>
       </div>
 
-      <OrganigrammeManager current={organigramme ? { nom: organigramme.nom, url: organigramme.url } : null} />
+      <OrganigrammeManager current={organigramme ? { nom: organigramme.nom, url: organigramme.downloadUrl } : null} />
     </div>
   )
 }
