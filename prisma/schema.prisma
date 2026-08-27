@@ -441,6 +441,17 @@ model ConventionTemplate {
   @@schema("ir2f")
 }
 
+// Organigramme IR2F affiché en pièce jointe sur la page /contact — une seule ligne
+// (id fixe "singleton"), remplacée à chaque nouvel upload depuis l'admin.
+model Organigramme {
+  id          String   @id @default(uuid())
+  nom         String
+  storagePath String
+  updatedAt   DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
 // Annuaire des clubs FFF (import périodique depuis l'export LGEF, voir
 // src/lib/actions/clubs.ts) — sert uniquement à pré-remplir l'adresse du club d'accueil à
 // l'import des stagiaires (ConventionStagiaire.club* est une copie figée à l'import, pas une

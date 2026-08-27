@@ -69,6 +69,11 @@ export type Signature = $Result.DefaultSelection<Prisma.$SignaturePayload>
  */
 export type ConventionTemplate = $Result.DefaultSelection<Prisma.$ConventionTemplatePayload>
 /**
+ * Model Organigramme
+ * 
+ */
+export type Organigramme = $Result.DefaultSelection<Prisma.$OrganigrammePayload>
+/**
  * Model Club
  * 
  */
@@ -817,6 +822,16 @@ export class PrismaClient<
     * ```
     */
   get conventionTemplate(): Prisma.ConventionTemplateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.organigramme`: Exposes CRUD operations for the **Organigramme** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Organigrammes
+    * const organigrammes = await prisma.organigramme.findMany()
+    * ```
+    */
+  get organigramme(): Prisma.OrganigrammeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.club`: Exposes CRUD operations for the **Club** model.
@@ -1572,6 +1587,7 @@ export namespace Prisma {
     DocumentDestinataire: 'DocumentDestinataire',
     Signature: 'Signature',
     ConventionTemplate: 'ConventionTemplate',
+    Organigramme: 'Organigramme',
     Club: 'Club',
     ConventionStagiaire: 'ConventionStagiaire',
     ConventionSignataire: 'ConventionSignataire',
@@ -1618,7 +1634,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "footerContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "organigramme" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "footerContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2433,6 +2449,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ConventionTemplateCountArgs<ExtArgs>
             result: $Utils.Optional<ConventionTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
+      Organigramme: {
+        payload: Prisma.$OrganigrammePayload<ExtArgs>
+        fields: Prisma.OrganigrammeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OrganigrammeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OrganigrammeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload>
+          }
+          findFirst: {
+            args: Prisma.OrganigrammeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OrganigrammeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload>
+          }
+          findMany: {
+            args: Prisma.OrganigrammeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload>[]
+          }
+          create: {
+            args: Prisma.OrganigrammeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload>
+          }
+          createMany: {
+            args: Prisma.OrganigrammeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OrganigrammeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload>[]
+          }
+          delete: {
+            args: Prisma.OrganigrammeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload>
+          }
+          update: {
+            args: Prisma.OrganigrammeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload>
+          }
+          deleteMany: {
+            args: Prisma.OrganigrammeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OrganigrammeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OrganigrammeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload>[]
+          }
+          upsert: {
+            args: Prisma.OrganigrammeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrganigrammePayload>
+          }
+          aggregate: {
+            args: Prisma.OrganigrammeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOrganigramme>
+          }
+          groupBy: {
+            args: Prisma.OrganigrammeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OrganigrammeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OrganigrammeCountArgs<ExtArgs>
+            result: $Utils.Optional<OrganigrammeCountAggregateOutputType> | number
           }
         }
       }
@@ -4849,6 +4939,7 @@ export namespace Prisma {
     documentDestinataire?: DocumentDestinataireOmit
     signature?: SignatureOmit
     conventionTemplate?: ConventionTemplateOmit
+    organigramme?: OrganigrammeOmit
     club?: ClubOmit
     conventionStagiaire?: ConventionStagiaireOmit
     conventionSignataire?: ConventionSignataireOmit
@@ -18826,6 +18917,993 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ConventionTemplateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Organigramme
+   */
+
+  export type AggregateOrganigramme = {
+    _count: OrganigrammeCountAggregateOutputType | null
+    _min: OrganigrammeMinAggregateOutputType | null
+    _max: OrganigrammeMaxAggregateOutputType | null
+  }
+
+  export type OrganigrammeMinAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    storagePath: string | null
+    updatedAt: Date | null
+  }
+
+  export type OrganigrammeMaxAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    storagePath: string | null
+    updatedAt: Date | null
+  }
+
+  export type OrganigrammeCountAggregateOutputType = {
+    id: number
+    nom: number
+    storagePath: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type OrganigrammeMinAggregateInputType = {
+    id?: true
+    nom?: true
+    storagePath?: true
+    updatedAt?: true
+  }
+
+  export type OrganigrammeMaxAggregateInputType = {
+    id?: true
+    nom?: true
+    storagePath?: true
+    updatedAt?: true
+  }
+
+  export type OrganigrammeCountAggregateInputType = {
+    id?: true
+    nom?: true
+    storagePath?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type OrganigrammeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Organigramme to aggregate.
+     */
+    where?: OrganigrammeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Organigrammes to fetch.
+     */
+    orderBy?: OrganigrammeOrderByWithRelationInput | OrganigrammeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OrganigrammeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Organigrammes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Organigrammes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Organigrammes
+    **/
+    _count?: true | OrganigrammeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OrganigrammeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OrganigrammeMaxAggregateInputType
+  }
+
+  export type GetOrganigrammeAggregateType<T extends OrganigrammeAggregateArgs> = {
+        [P in keyof T & keyof AggregateOrganigramme]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOrganigramme[P]>
+      : GetScalarType<T[P], AggregateOrganigramme[P]>
+  }
+
+
+
+
+  export type OrganigrammeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrganigrammeWhereInput
+    orderBy?: OrganigrammeOrderByWithAggregationInput | OrganigrammeOrderByWithAggregationInput[]
+    by: OrganigrammeScalarFieldEnum[] | OrganigrammeScalarFieldEnum
+    having?: OrganigrammeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OrganigrammeCountAggregateInputType | true
+    _min?: OrganigrammeMinAggregateInputType
+    _max?: OrganigrammeMaxAggregateInputType
+  }
+
+  export type OrganigrammeGroupByOutputType = {
+    id: string
+    nom: string
+    storagePath: string
+    updatedAt: Date
+    _count: OrganigrammeCountAggregateOutputType | null
+    _min: OrganigrammeMinAggregateOutputType | null
+    _max: OrganigrammeMaxAggregateOutputType | null
+  }
+
+  type GetOrganigrammeGroupByPayload<T extends OrganigrammeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrganigrammeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OrganigrammeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OrganigrammeGroupByOutputType[P]>
+            : GetScalarType<T[P], OrganigrammeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OrganigrammeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    storagePath?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["organigramme"]>
+
+  export type OrganigrammeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    storagePath?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["organigramme"]>
+
+  export type OrganigrammeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    storagePath?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["organigramme"]>
+
+  export type OrganigrammeSelectScalar = {
+    id?: boolean
+    nom?: boolean
+    storagePath?: boolean
+    updatedAt?: boolean
+  }
+
+  export type OrganigrammeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "storagePath" | "updatedAt", ExtArgs["result"]["organigramme"]>
+
+  export type $OrganigrammePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Organigramme"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nom: string
+      storagePath: string
+      updatedAt: Date
+    }, ExtArgs["result"]["organigramme"]>
+    composites: {}
+  }
+
+  type OrganigrammeGetPayload<S extends boolean | null | undefined | OrganigrammeDefaultArgs> = $Result.GetResult<Prisma.$OrganigrammePayload, S>
+
+  type OrganigrammeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OrganigrammeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OrganigrammeCountAggregateInputType | true
+    }
+
+  export interface OrganigrammeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Organigramme'], meta: { name: 'Organigramme' } }
+    /**
+     * Find zero or one Organigramme that matches the filter.
+     * @param {OrganigrammeFindUniqueArgs} args - Arguments to find a Organigramme
+     * @example
+     * // Get one Organigramme
+     * const organigramme = await prisma.organigramme.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OrganigrammeFindUniqueArgs>(args: SelectSubset<T, OrganigrammeFindUniqueArgs<ExtArgs>>): Prisma__OrganigrammeClient<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Organigramme that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OrganigrammeFindUniqueOrThrowArgs} args - Arguments to find a Organigramme
+     * @example
+     * // Get one Organigramme
+     * const organigramme = await prisma.organigramme.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OrganigrammeFindUniqueOrThrowArgs>(args: SelectSubset<T, OrganigrammeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OrganigrammeClient<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Organigramme that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganigrammeFindFirstArgs} args - Arguments to find a Organigramme
+     * @example
+     * // Get one Organigramme
+     * const organigramme = await prisma.organigramme.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OrganigrammeFindFirstArgs>(args?: SelectSubset<T, OrganigrammeFindFirstArgs<ExtArgs>>): Prisma__OrganigrammeClient<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Organigramme that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganigrammeFindFirstOrThrowArgs} args - Arguments to find a Organigramme
+     * @example
+     * // Get one Organigramme
+     * const organigramme = await prisma.organigramme.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OrganigrammeFindFirstOrThrowArgs>(args?: SelectSubset<T, OrganigrammeFindFirstOrThrowArgs<ExtArgs>>): Prisma__OrganigrammeClient<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Organigrammes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganigrammeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Organigrammes
+     * const organigrammes = await prisma.organigramme.findMany()
+     * 
+     * // Get first 10 Organigrammes
+     * const organigrammes = await prisma.organigramme.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const organigrammeWithIdOnly = await prisma.organigramme.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OrganigrammeFindManyArgs>(args?: SelectSubset<T, OrganigrammeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Organigramme.
+     * @param {OrganigrammeCreateArgs} args - Arguments to create a Organigramme.
+     * @example
+     * // Create one Organigramme
+     * const Organigramme = await prisma.organigramme.create({
+     *   data: {
+     *     // ... data to create a Organigramme
+     *   }
+     * })
+     * 
+     */
+    create<T extends OrganigrammeCreateArgs>(args: SelectSubset<T, OrganigrammeCreateArgs<ExtArgs>>): Prisma__OrganigrammeClient<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Organigrammes.
+     * @param {OrganigrammeCreateManyArgs} args - Arguments to create many Organigrammes.
+     * @example
+     * // Create many Organigrammes
+     * const organigramme = await prisma.organigramme.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OrganigrammeCreateManyArgs>(args?: SelectSubset<T, OrganigrammeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Organigrammes and returns the data saved in the database.
+     * @param {OrganigrammeCreateManyAndReturnArgs} args - Arguments to create many Organigrammes.
+     * @example
+     * // Create many Organigrammes
+     * const organigramme = await prisma.organigramme.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Organigrammes and only return the `id`
+     * const organigrammeWithIdOnly = await prisma.organigramme.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OrganigrammeCreateManyAndReturnArgs>(args?: SelectSubset<T, OrganigrammeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Organigramme.
+     * @param {OrganigrammeDeleteArgs} args - Arguments to delete one Organigramme.
+     * @example
+     * // Delete one Organigramme
+     * const Organigramme = await prisma.organigramme.delete({
+     *   where: {
+     *     // ... filter to delete one Organigramme
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OrganigrammeDeleteArgs>(args: SelectSubset<T, OrganigrammeDeleteArgs<ExtArgs>>): Prisma__OrganigrammeClient<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Organigramme.
+     * @param {OrganigrammeUpdateArgs} args - Arguments to update one Organigramme.
+     * @example
+     * // Update one Organigramme
+     * const organigramme = await prisma.organigramme.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OrganigrammeUpdateArgs>(args: SelectSubset<T, OrganigrammeUpdateArgs<ExtArgs>>): Prisma__OrganigrammeClient<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Organigrammes.
+     * @param {OrganigrammeDeleteManyArgs} args - Arguments to filter Organigrammes to delete.
+     * @example
+     * // Delete a few Organigrammes
+     * const { count } = await prisma.organigramme.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OrganigrammeDeleteManyArgs>(args?: SelectSubset<T, OrganigrammeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Organigrammes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganigrammeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Organigrammes
+     * const organigramme = await prisma.organigramme.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OrganigrammeUpdateManyArgs>(args: SelectSubset<T, OrganigrammeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Organigrammes and returns the data updated in the database.
+     * @param {OrganigrammeUpdateManyAndReturnArgs} args - Arguments to update many Organigrammes.
+     * @example
+     * // Update many Organigrammes
+     * const organigramme = await prisma.organigramme.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Organigrammes and only return the `id`
+     * const organigrammeWithIdOnly = await prisma.organigramme.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OrganigrammeUpdateManyAndReturnArgs>(args: SelectSubset<T, OrganigrammeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Organigramme.
+     * @param {OrganigrammeUpsertArgs} args - Arguments to update or create a Organigramme.
+     * @example
+     * // Update or create a Organigramme
+     * const organigramme = await prisma.organigramme.upsert({
+     *   create: {
+     *     // ... data to create a Organigramme
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Organigramme we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OrganigrammeUpsertArgs>(args: SelectSubset<T, OrganigrammeUpsertArgs<ExtArgs>>): Prisma__OrganigrammeClient<$Result.GetResult<Prisma.$OrganigrammePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Organigrammes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganigrammeCountArgs} args - Arguments to filter Organigrammes to count.
+     * @example
+     * // Count the number of Organigrammes
+     * const count = await prisma.organigramme.count({
+     *   where: {
+     *     // ... the filter for the Organigrammes we want to count
+     *   }
+     * })
+    **/
+    count<T extends OrganigrammeCountArgs>(
+      args?: Subset<T, OrganigrammeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OrganigrammeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Organigramme.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganigrammeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OrganigrammeAggregateArgs>(args: Subset<T, OrganigrammeAggregateArgs>): Prisma.PrismaPromise<GetOrganigrammeAggregateType<T>>
+
+    /**
+     * Group by Organigramme.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrganigrammeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OrganigrammeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OrganigrammeGroupByArgs['orderBy'] }
+        : { orderBy?: OrganigrammeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OrganigrammeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOrganigrammeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Organigramme model
+   */
+  readonly fields: OrganigrammeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Organigramme.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OrganigrammeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Organigramme model
+   */
+  interface OrganigrammeFieldRefs {
+    readonly id: FieldRef<"Organigramme", 'String'>
+    readonly nom: FieldRef<"Organigramme", 'String'>
+    readonly storagePath: FieldRef<"Organigramme", 'String'>
+    readonly updatedAt: FieldRef<"Organigramme", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Organigramme findUnique
+   */
+  export type OrganigrammeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * Filter, which Organigramme to fetch.
+     */
+    where: OrganigrammeWhereUniqueInput
+  }
+
+  /**
+   * Organigramme findUniqueOrThrow
+   */
+  export type OrganigrammeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * Filter, which Organigramme to fetch.
+     */
+    where: OrganigrammeWhereUniqueInput
+  }
+
+  /**
+   * Organigramme findFirst
+   */
+  export type OrganigrammeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * Filter, which Organigramme to fetch.
+     */
+    where?: OrganigrammeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Organigrammes to fetch.
+     */
+    orderBy?: OrganigrammeOrderByWithRelationInput | OrganigrammeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Organigrammes.
+     */
+    cursor?: OrganigrammeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Organigrammes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Organigrammes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Organigrammes.
+     */
+    distinct?: OrganigrammeScalarFieldEnum | OrganigrammeScalarFieldEnum[]
+  }
+
+  /**
+   * Organigramme findFirstOrThrow
+   */
+  export type OrganigrammeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * Filter, which Organigramme to fetch.
+     */
+    where?: OrganigrammeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Organigrammes to fetch.
+     */
+    orderBy?: OrganigrammeOrderByWithRelationInput | OrganigrammeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Organigrammes.
+     */
+    cursor?: OrganigrammeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Organigrammes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Organigrammes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Organigrammes.
+     */
+    distinct?: OrganigrammeScalarFieldEnum | OrganigrammeScalarFieldEnum[]
+  }
+
+  /**
+   * Organigramme findMany
+   */
+  export type OrganigrammeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * Filter, which Organigrammes to fetch.
+     */
+    where?: OrganigrammeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Organigrammes to fetch.
+     */
+    orderBy?: OrganigrammeOrderByWithRelationInput | OrganigrammeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Organigrammes.
+     */
+    cursor?: OrganigrammeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Organigrammes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Organigrammes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Organigrammes.
+     */
+    distinct?: OrganigrammeScalarFieldEnum | OrganigrammeScalarFieldEnum[]
+  }
+
+  /**
+   * Organigramme create
+   */
+  export type OrganigrammeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Organigramme.
+     */
+    data: XOR<OrganigrammeCreateInput, OrganigrammeUncheckedCreateInput>
+  }
+
+  /**
+   * Organigramme createMany
+   */
+  export type OrganigrammeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Organigrammes.
+     */
+    data: OrganigrammeCreateManyInput | OrganigrammeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Organigramme createManyAndReturn
+   */
+  export type OrganigrammeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Organigrammes.
+     */
+    data: OrganigrammeCreateManyInput | OrganigrammeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Organigramme update
+   */
+  export type OrganigrammeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Organigramme.
+     */
+    data: XOR<OrganigrammeUpdateInput, OrganigrammeUncheckedUpdateInput>
+    /**
+     * Choose, which Organigramme to update.
+     */
+    where: OrganigrammeWhereUniqueInput
+  }
+
+  /**
+   * Organigramme updateMany
+   */
+  export type OrganigrammeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Organigrammes.
+     */
+    data: XOR<OrganigrammeUpdateManyMutationInput, OrganigrammeUncheckedUpdateManyInput>
+    /**
+     * Filter which Organigrammes to update
+     */
+    where?: OrganigrammeWhereInput
+    /**
+     * Limit how many Organigrammes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Organigramme updateManyAndReturn
+   */
+  export type OrganigrammeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * The data used to update Organigrammes.
+     */
+    data: XOR<OrganigrammeUpdateManyMutationInput, OrganigrammeUncheckedUpdateManyInput>
+    /**
+     * Filter which Organigrammes to update
+     */
+    where?: OrganigrammeWhereInput
+    /**
+     * Limit how many Organigrammes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Organigramme upsert
+   */
+  export type OrganigrammeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Organigramme to update in case it exists.
+     */
+    where: OrganigrammeWhereUniqueInput
+    /**
+     * In case the Organigramme found by the `where` argument doesn't exist, create a new Organigramme with this data.
+     */
+    create: XOR<OrganigrammeCreateInput, OrganigrammeUncheckedCreateInput>
+    /**
+     * In case the Organigramme was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OrganigrammeUpdateInput, OrganigrammeUncheckedUpdateInput>
+  }
+
+  /**
+   * Organigramme delete
+   */
+  export type OrganigrammeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
+    /**
+     * Filter which Organigramme to delete.
+     */
+    where: OrganigrammeWhereUniqueInput
+  }
+
+  /**
+   * Organigramme deleteMany
+   */
+  export type OrganigrammeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Organigrammes to delete
+     */
+    where?: OrganigrammeWhereInput
+    /**
+     * Limit how many Organigrammes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Organigramme without action
+   */
+  export type OrganigrammeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Organigramme
+     */
+    select?: OrganigrammeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Organigramme
+     */
+    omit?: OrganigrammeOmit<ExtArgs> | null
   }
 
 
@@ -54068,6 +55146,16 @@ export namespace Prisma {
   export type ConventionTemplateScalarFieldEnum = (typeof ConventionTemplateScalarFieldEnum)[keyof typeof ConventionTemplateScalarFieldEnum]
 
 
+  export const OrganigrammeScalarFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    storagePath: 'storagePath',
+    updatedAt: 'updatedAt'
+  };
+
+  export type OrganigrammeScalarFieldEnum = (typeof OrganigrammeScalarFieldEnum)[keyof typeof OrganigrammeScalarFieldEnum]
+
+
   export const ClubScalarFieldEnum: {
     id: 'id',
     nom: 'nom',
@@ -56078,6 +57166,53 @@ export namespace Prisma {
     storagePath?: StringWithAggregatesFilter<"ConventionTemplate"> | string
     createdAt?: DateTimeWithAggregatesFilter<"ConventionTemplate"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ConventionTemplate"> | Date | string
+  }
+
+  export type OrganigrammeWhereInput = {
+    AND?: OrganigrammeWhereInput | OrganigrammeWhereInput[]
+    OR?: OrganigrammeWhereInput[]
+    NOT?: OrganigrammeWhereInput | OrganigrammeWhereInput[]
+    id?: StringFilter<"Organigramme"> | string
+    nom?: StringFilter<"Organigramme"> | string
+    storagePath?: StringFilter<"Organigramme"> | string
+    updatedAt?: DateTimeFilter<"Organigramme"> | Date | string
+  }
+
+  export type OrganigrammeOrderByWithRelationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrganigrammeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: OrganigrammeWhereInput | OrganigrammeWhereInput[]
+    OR?: OrganigrammeWhereInput[]
+    NOT?: OrganigrammeWhereInput | OrganigrammeWhereInput[]
+    nom?: StringFilter<"Organigramme"> | string
+    storagePath?: StringFilter<"Organigramme"> | string
+    updatedAt?: DateTimeFilter<"Organigramme"> | Date | string
+  }, "id">
+
+  export type OrganigrammeOrderByWithAggregationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
+    updatedAt?: SortOrder
+    _count?: OrganigrammeCountOrderByAggregateInput
+    _max?: OrganigrammeMaxOrderByAggregateInput
+    _min?: OrganigrammeMinOrderByAggregateInput
+  }
+
+  export type OrganigrammeScalarWhereWithAggregatesInput = {
+    AND?: OrganigrammeScalarWhereWithAggregatesInput | OrganigrammeScalarWhereWithAggregatesInput[]
+    OR?: OrganigrammeScalarWhereWithAggregatesInput[]
+    NOT?: OrganigrammeScalarWhereWithAggregatesInput | OrganigrammeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Organigramme"> | string
+    nom?: StringWithAggregatesFilter<"Organigramme"> | string
+    storagePath?: StringWithAggregatesFilter<"Organigramme"> | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Organigramme"> | Date | string
   }
 
   export type ClubWhereInput = {
@@ -59766,6 +60901,55 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     storagePath?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrganigrammeCreateInput = {
+    id?: string
+    nom: string
+    storagePath: string
+    updatedAt?: Date | string
+  }
+
+  export type OrganigrammeUncheckedCreateInput = {
+    id?: string
+    nom: string
+    storagePath: string
+    updatedAt?: Date | string
+  }
+
+  export type OrganigrammeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrganigrammeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrganigrammeCreateManyInput = {
+    id?: string
+    nom: string
+    storagePath: string
+    updatedAt?: Date | string
+  }
+
+  export type OrganigrammeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrganigrammeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    storagePath?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -63768,6 +64952,27 @@ export namespace Prisma {
     nom?: SortOrder
     storagePath?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrganigrammeCountOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrganigrammeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrganigrammeMinOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    storagePath?: SortOrder
     updatedAt?: SortOrder
   }
 

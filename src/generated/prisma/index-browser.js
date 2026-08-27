@@ -275,6 +275,13 @@ exports.Prisma.ConventionTemplateScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.OrganigrammeScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  storagePath: 'storagePath',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ClubScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
@@ -904,6 +911,7 @@ exports.Prisma.ModelName = {
   DocumentDestinataire: 'DocumentDestinataire',
   Signature: 'Signature',
   ConventionTemplate: 'ConventionTemplate',
+  Organigramme: 'Organigramme',
   Club: 'Club',
   ConventionStagiaire: 'ConventionStagiaire',
   ConventionSignataire: 'ConventionSignataire',
