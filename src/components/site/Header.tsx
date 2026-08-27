@@ -16,11 +16,11 @@ const NAV_LINKS = [
   { href: "/formations", label: "Formations" },
   { href: "/emploi", label: "Emploi" },
   { href: "/financement", label: "Financement" },
-  { href: "/emploi", label: "Documentation" },
+  { href: "/documentation", label: "Documentation" },
   { href: "/contact", label: "Contact" },
 ]
 
-const HERO_PATHS = new Set(["/", "/formations", "/contact", "/emploi", "/actualites", "/financement"])
+const HERO_PATHS = new Set(["/", "/formations", "/contact", "/emploi", "/actualites", "/financement", "/documentation"])
 
 const ROLE_LABELS: Record<string, string> = {
   STAGIAIRE: "Stagiaire",
@@ -94,7 +94,7 @@ export function Header({ user }: { user: HeaderUser }) {
             style={{
               fontSize: 14,
               fontWeight: 600,
-              color: pathname.startsWith(link.href) && link.href !== "/emploi" ? colors.red : "#ffffff",
+              color: pathname.startsWith(link.href) ? colors.red : "#ffffff",
               cursor: "pointer",
               textDecoration: "none",
               letterSpacing: 0.2,
@@ -297,7 +297,7 @@ export function Header({ user }: { user: HeaderUser }) {
 
         <Hoverable
           as={Link}
-          href="/formations"
+          href="/actualites"
           style={{
             background: colors.red,
             color: "#ffffff",
