@@ -3,6 +3,7 @@ import {
   getAllStatsCles,
   getAllAccompagnementCards,
   getAccueilContenuAdmin,
+  getFooterContenuAdmin,
 } from "@/lib/admin/accueil"
 import { getFormationOptions } from "@/lib/formations"
 import { AccueilManager } from "@/components/admin/AccueilManager"
@@ -25,12 +26,13 @@ const CONTENU_DEFAUT = {
 }
 
 export default async function AdminAccueilPage() {
-  const [heroSlides, statsCles, accompagnementCards, contenu, formationOptions] = await Promise.all([
+  const [heroSlides, statsCles, accompagnementCards, contenu, formationOptions, footerContenu] = await Promise.all([
     getAllHeroSlides(),
     getAllStatsCles(),
     getAllAccompagnementCards(),
     getAccueilContenuAdmin(),
     getFormationOptions(),
+    getFooterContenuAdmin(),
   ])
 
   return (
@@ -71,6 +73,11 @@ export default async function AdminAccueilPage() {
         contenu={contenu ?? CONTENU_DEFAUT}
         accompagnementCards={accompagnementCards}
         statsCles={statsCles}
+        footerContenu={{
+          logoFffUrl: footerContenu?.logoFffUrl || "/images/logofff.png",
+          logoLgefUrl: footerContenu?.logoLgefUrl || "/images/logo-lgef.png",
+          logoQualiopiUrl: footerContenu?.logoQualiopiUrl || "/images/qualiopi.png",
+        }}
       />
     </div>
   )

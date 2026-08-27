@@ -691,6 +691,16 @@ model AccueilContenu {
   @@schema("ir2f")
 }
 
+model FooterContenu {
+  id              String   @id @default("footer")
+  logoFffUrl      String?
+  logoLgefUrl     String?
+  logoQualiopiUrl String?
+  updatedAt       DateTime @updatedAt
+
+  @@schema("ir2f")
+}
+
 model StatCle {
   id        String   @id @default(uuid())
   valeur    String

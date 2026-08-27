@@ -196,3 +196,27 @@ export async function saveAccueilContenu(
   revalidateAccueil()
   return { error: null }
 }
+
+// ─── Logos du pied de page (toutes les pages) ──────────
+
+export async function saveFooterContenu(
+  _prev: AccueilActionState | undefined,
+  formData: FormData
+): Promise<AccueilActionState> {
+  await requireAdmin()
+
+  const logoFffUrl = await resolveImageUrl(formData, "logoFff", "footer-logos")
+  const logoLgefUrl = await resolveImageUrl(formData, "logoLgef", "footer-logos")
+  const logoQualiopiUrl = await resolveImageUrl(formData, "logoQualiopi", "footer-logos")
+
+  const data = { logoFffUrl, logoLgefUrl, logoQualiopiUrl }
+
+  await prisma.footerContenu.upsert({
+    where: { id: "footer" },
+    create: { id: "footer", ...data },
+    update: data,
+  })
+  revalidatePath("/admin/accueil")
+  revalidatePath("/", "layout")
+  return { error: null }
+}

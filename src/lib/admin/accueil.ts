@@ -16,3 +16,7 @@ export async function getAllAccompagnementCards() {
 export async function getAccueilContenuAdmin() {
   return prisma.accueilContenu.findUnique({ where: { id: "accueil" } })
 }
+
+export async function getFooterContenuAdmin() {
+  return prisma.footerContenu.findUnique({ where: { id: "footer" } })
+}

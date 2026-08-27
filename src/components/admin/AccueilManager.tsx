@@ -12,6 +12,7 @@ import {
   deleteAccompagnementCard,
   setAccompagnementCardActif,
   saveAccueilContenu,
+  saveFooterContenu,
   type AccueilActionState,
 } from "@/lib/actions/accueil"
 import { ICONE_LABELS, TRANSITION_LABELS, ALIGNEMENT_LABELS } from "@/lib/accueil-shared"
@@ -461,6 +462,39 @@ function TextesSection({ contenu }: { contenu: AdminAccueilContenu }) {
   )
 }
 
+// ─── Logos du pied de page (toutes les pages) ──────────
+
+export type AdminFooterContenu = {
+  logoFffUrl: string | null
+  logoLgefUrl: string | null
+  logoQualiopiUrl: string | null
+}
+
+function FooterSection({ contenu }: { contenu: AdminFooterContenu }) {
+  const [state, formAction, pending] = useActionState(saveFooterContenu, undefined)
+
+  return (
+    <form action={formAction} style={sectionCardStyle}>
+      <SectionTitle
+        title="Logos du pied de page"
+        subtitle="Affichés dans le pied de page, sur toutes les pages du site."
+      />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 16 }}>
+        <ImageField name="logoFff" label="Logo FFF" defaultUrl={contenu.logoFffUrl} />
+        <ImageField name="logoLgef" label="Logo Ligue Grand Est" defaultUrl={contenu.logoLgefUrl} />
+        <ImageField name="logoQualiopi" label="Logo Qualiopi" defaultUrl={contenu.logoQualiopiUrl} />
+      </div>
+      {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
+      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <button type="submit" disabled={pending} style={submitButtonStyle}>
+          {pending ? "Enregistrement..." : "Enregistrer les logos"}
+        </button>
+        {state && !state.error && <span style={{ color: "#3f9142", fontSize: 12.5, fontWeight: 600 }}>Enregistré.</span>}
+      </div>
+    </form>
+  )
+}
+
 // ─── Cartes "Accompagnement Emploi" ────────────────────
 
 export type AdminAccompagnementCard = {
@@ -647,12 +681,14 @@ export function AccueilManager({
   contenu,
   accompagnementCards,
   statsCles,
+  footerContenu,
 }: {
   heroSlides: AdminHeroSlide[]
   formationOptions: { id: string; titre: string }[]
   contenu: AdminAccueilContenu
   accompagnementCards: AdminAccompagnementCard[]
   statsCles: AdminStatCle[]
+  footerContenu: AdminFooterContenu
 }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -660,6 +696,7 @@ export function AccueilManager({
       <TextesSection contenu={contenu} />
       <AccompagnementSection items={accompagnementCards} />
       <StatsSection items={statsCles} />
+      <FooterSection contenu={footerContenu} />
     </div>
   )
 }

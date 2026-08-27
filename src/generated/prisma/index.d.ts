@@ -119,6 +119,11 @@ export type AccompagnementCard = $Result.DefaultSelection<Prisma.$Accompagnement
  */
 export type AccueilContenu = $Result.DefaultSelection<Prisma.$AccueilContenuPayload>
 /**
+ * Model FooterContenu
+ * 
+ */
+export type FooterContenu = $Result.DefaultSelection<Prisma.$FooterContenuPayload>
+/**
  * Model StatCle
  * 
  */
@@ -914,6 +919,16 @@ export class PrismaClient<
   get accueilContenu(): Prisma.AccueilContenuDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.footerContenu`: Exposes CRUD operations for the **FooterContenu** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FooterContenus
+    * const footerContenus = await prisma.footerContenu.findMany()
+    * ```
+    */
+  get footerContenu(): Prisma.FooterContenuDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.statCle`: Exposes CRUD operations for the **StatCle** model.
     * Example usage:
     * ```ts
@@ -1567,6 +1582,7 @@ export namespace Prisma {
     Article: 'Article',
     AccompagnementCard: 'AccompagnementCard',
     AccueilContenu: 'AccueilContenu',
+    FooterContenu: 'FooterContenu',
     StatCle: 'StatCle',
     HeroSlide: 'HeroSlide',
     FormationTuile: 'FormationTuile',
@@ -1602,7 +1618,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "footerContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3157,6 +3173,80 @@ export namespace Prisma {
           count: {
             args: Prisma.AccueilContenuCountArgs<ExtArgs>
             result: $Utils.Optional<AccueilContenuCountAggregateOutputType> | number
+          }
+        }
+      }
+      FooterContenu: {
+        payload: Prisma.$FooterContenuPayload<ExtArgs>
+        fields: Prisma.FooterContenuFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FooterContenuFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FooterContenuFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload>
+          }
+          findFirst: {
+            args: Prisma.FooterContenuFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FooterContenuFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload>
+          }
+          findMany: {
+            args: Prisma.FooterContenuFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload>[]
+          }
+          create: {
+            args: Prisma.FooterContenuCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload>
+          }
+          createMany: {
+            args: Prisma.FooterContenuCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FooterContenuCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload>[]
+          }
+          delete: {
+            args: Prisma.FooterContenuDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload>
+          }
+          update: {
+            args: Prisma.FooterContenuUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload>
+          }
+          deleteMany: {
+            args: Prisma.FooterContenuDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FooterContenuUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FooterContenuUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload>[]
+          }
+          upsert: {
+            args: Prisma.FooterContenuUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FooterContenuPayload>
+          }
+          aggregate: {
+            args: Prisma.FooterContenuAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFooterContenu>
+          }
+          groupBy: {
+            args: Prisma.FooterContenuGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FooterContenuGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FooterContenuCountArgs<ExtArgs>
+            result: $Utils.Optional<FooterContenuCountAggregateOutputType> | number
           }
         }
       }
@@ -4769,6 +4859,7 @@ export namespace Prisma {
     article?: ArticleOmit
     accompagnementCard?: AccompagnementCardOmit
     accueilContenu?: AccueilContenuOmit
+    footerContenu?: FooterContenuOmit
     statCle?: StatCleOmit
     heroSlide?: HeroSlideOmit
     formationTuile?: FormationTuileOmit
@@ -30436,6 +30527,1006 @@ export namespace Prisma {
 
 
   /**
+   * Model FooterContenu
+   */
+
+  export type AggregateFooterContenu = {
+    _count: FooterContenuCountAggregateOutputType | null
+    _min: FooterContenuMinAggregateOutputType | null
+    _max: FooterContenuMaxAggregateOutputType | null
+  }
+
+  export type FooterContenuMinAggregateOutputType = {
+    id: string | null
+    logoFffUrl: string | null
+    logoLgefUrl: string | null
+    logoQualiopiUrl: string | null
+    updatedAt: Date | null
+  }
+
+  export type FooterContenuMaxAggregateOutputType = {
+    id: string | null
+    logoFffUrl: string | null
+    logoLgefUrl: string | null
+    logoQualiopiUrl: string | null
+    updatedAt: Date | null
+  }
+
+  export type FooterContenuCountAggregateOutputType = {
+    id: number
+    logoFffUrl: number
+    logoLgefUrl: number
+    logoQualiopiUrl: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FooterContenuMinAggregateInputType = {
+    id?: true
+    logoFffUrl?: true
+    logoLgefUrl?: true
+    logoQualiopiUrl?: true
+    updatedAt?: true
+  }
+
+  export type FooterContenuMaxAggregateInputType = {
+    id?: true
+    logoFffUrl?: true
+    logoLgefUrl?: true
+    logoQualiopiUrl?: true
+    updatedAt?: true
+  }
+
+  export type FooterContenuCountAggregateInputType = {
+    id?: true
+    logoFffUrl?: true
+    logoLgefUrl?: true
+    logoQualiopiUrl?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FooterContenuAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FooterContenu to aggregate.
+     */
+    where?: FooterContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FooterContenus to fetch.
+     */
+    orderBy?: FooterContenuOrderByWithRelationInput | FooterContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FooterContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FooterContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FooterContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FooterContenus
+    **/
+    _count?: true | FooterContenuCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FooterContenuMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FooterContenuMaxAggregateInputType
+  }
+
+  export type GetFooterContenuAggregateType<T extends FooterContenuAggregateArgs> = {
+        [P in keyof T & keyof AggregateFooterContenu]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFooterContenu[P]>
+      : GetScalarType<T[P], AggregateFooterContenu[P]>
+  }
+
+
+
+
+  export type FooterContenuGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FooterContenuWhereInput
+    orderBy?: FooterContenuOrderByWithAggregationInput | FooterContenuOrderByWithAggregationInput[]
+    by: FooterContenuScalarFieldEnum[] | FooterContenuScalarFieldEnum
+    having?: FooterContenuScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FooterContenuCountAggregateInputType | true
+    _min?: FooterContenuMinAggregateInputType
+    _max?: FooterContenuMaxAggregateInputType
+  }
+
+  export type FooterContenuGroupByOutputType = {
+    id: string
+    logoFffUrl: string | null
+    logoLgefUrl: string | null
+    logoQualiopiUrl: string | null
+    updatedAt: Date
+    _count: FooterContenuCountAggregateOutputType | null
+    _min: FooterContenuMinAggregateOutputType | null
+    _max: FooterContenuMaxAggregateOutputType | null
+  }
+
+  type GetFooterContenuGroupByPayload<T extends FooterContenuGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FooterContenuGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FooterContenuGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FooterContenuGroupByOutputType[P]>
+            : GetScalarType<T[P], FooterContenuGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FooterContenuSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    logoFffUrl?: boolean
+    logoLgefUrl?: boolean
+    logoQualiopiUrl?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["footerContenu"]>
+
+  export type FooterContenuSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    logoFffUrl?: boolean
+    logoLgefUrl?: boolean
+    logoQualiopiUrl?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["footerContenu"]>
+
+  export type FooterContenuSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    logoFffUrl?: boolean
+    logoLgefUrl?: boolean
+    logoQualiopiUrl?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["footerContenu"]>
+
+  export type FooterContenuSelectScalar = {
+    id?: boolean
+    logoFffUrl?: boolean
+    logoLgefUrl?: boolean
+    logoQualiopiUrl?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FooterContenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "logoFffUrl" | "logoLgefUrl" | "logoQualiopiUrl" | "updatedAt", ExtArgs["result"]["footerContenu"]>
+
+  export type $FooterContenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FooterContenu"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      logoFffUrl: string | null
+      logoLgefUrl: string | null
+      logoQualiopiUrl: string | null
+      updatedAt: Date
+    }, ExtArgs["result"]["footerContenu"]>
+    composites: {}
+  }
+
+  type FooterContenuGetPayload<S extends boolean | null | undefined | FooterContenuDefaultArgs> = $Result.GetResult<Prisma.$FooterContenuPayload, S>
+
+  type FooterContenuCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FooterContenuFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FooterContenuCountAggregateInputType | true
+    }
+
+  export interface FooterContenuDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FooterContenu'], meta: { name: 'FooterContenu' } }
+    /**
+     * Find zero or one FooterContenu that matches the filter.
+     * @param {FooterContenuFindUniqueArgs} args - Arguments to find a FooterContenu
+     * @example
+     * // Get one FooterContenu
+     * const footerContenu = await prisma.footerContenu.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FooterContenuFindUniqueArgs>(args: SelectSubset<T, FooterContenuFindUniqueArgs<ExtArgs>>): Prisma__FooterContenuClient<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FooterContenu that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FooterContenuFindUniqueOrThrowArgs} args - Arguments to find a FooterContenu
+     * @example
+     * // Get one FooterContenu
+     * const footerContenu = await prisma.footerContenu.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FooterContenuFindUniqueOrThrowArgs>(args: SelectSubset<T, FooterContenuFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FooterContenuClient<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FooterContenu that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FooterContenuFindFirstArgs} args - Arguments to find a FooterContenu
+     * @example
+     * // Get one FooterContenu
+     * const footerContenu = await prisma.footerContenu.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FooterContenuFindFirstArgs>(args?: SelectSubset<T, FooterContenuFindFirstArgs<ExtArgs>>): Prisma__FooterContenuClient<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FooterContenu that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FooterContenuFindFirstOrThrowArgs} args - Arguments to find a FooterContenu
+     * @example
+     * // Get one FooterContenu
+     * const footerContenu = await prisma.footerContenu.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FooterContenuFindFirstOrThrowArgs>(args?: SelectSubset<T, FooterContenuFindFirstOrThrowArgs<ExtArgs>>): Prisma__FooterContenuClient<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FooterContenus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FooterContenuFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FooterContenus
+     * const footerContenus = await prisma.footerContenu.findMany()
+     * 
+     * // Get first 10 FooterContenus
+     * const footerContenus = await prisma.footerContenu.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const footerContenuWithIdOnly = await prisma.footerContenu.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FooterContenuFindManyArgs>(args?: SelectSubset<T, FooterContenuFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FooterContenu.
+     * @param {FooterContenuCreateArgs} args - Arguments to create a FooterContenu.
+     * @example
+     * // Create one FooterContenu
+     * const FooterContenu = await prisma.footerContenu.create({
+     *   data: {
+     *     // ... data to create a FooterContenu
+     *   }
+     * })
+     * 
+     */
+    create<T extends FooterContenuCreateArgs>(args: SelectSubset<T, FooterContenuCreateArgs<ExtArgs>>): Prisma__FooterContenuClient<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FooterContenus.
+     * @param {FooterContenuCreateManyArgs} args - Arguments to create many FooterContenus.
+     * @example
+     * // Create many FooterContenus
+     * const footerContenu = await prisma.footerContenu.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FooterContenuCreateManyArgs>(args?: SelectSubset<T, FooterContenuCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FooterContenus and returns the data saved in the database.
+     * @param {FooterContenuCreateManyAndReturnArgs} args - Arguments to create many FooterContenus.
+     * @example
+     * // Create many FooterContenus
+     * const footerContenu = await prisma.footerContenu.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FooterContenus and only return the `id`
+     * const footerContenuWithIdOnly = await prisma.footerContenu.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FooterContenuCreateManyAndReturnArgs>(args?: SelectSubset<T, FooterContenuCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FooterContenu.
+     * @param {FooterContenuDeleteArgs} args - Arguments to delete one FooterContenu.
+     * @example
+     * // Delete one FooterContenu
+     * const FooterContenu = await prisma.footerContenu.delete({
+     *   where: {
+     *     // ... filter to delete one FooterContenu
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FooterContenuDeleteArgs>(args: SelectSubset<T, FooterContenuDeleteArgs<ExtArgs>>): Prisma__FooterContenuClient<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FooterContenu.
+     * @param {FooterContenuUpdateArgs} args - Arguments to update one FooterContenu.
+     * @example
+     * // Update one FooterContenu
+     * const footerContenu = await prisma.footerContenu.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FooterContenuUpdateArgs>(args: SelectSubset<T, FooterContenuUpdateArgs<ExtArgs>>): Prisma__FooterContenuClient<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FooterContenus.
+     * @param {FooterContenuDeleteManyArgs} args - Arguments to filter FooterContenus to delete.
+     * @example
+     * // Delete a few FooterContenus
+     * const { count } = await prisma.footerContenu.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FooterContenuDeleteManyArgs>(args?: SelectSubset<T, FooterContenuDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FooterContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FooterContenuUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FooterContenus
+     * const footerContenu = await prisma.footerContenu.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FooterContenuUpdateManyArgs>(args: SelectSubset<T, FooterContenuUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FooterContenus and returns the data updated in the database.
+     * @param {FooterContenuUpdateManyAndReturnArgs} args - Arguments to update many FooterContenus.
+     * @example
+     * // Update many FooterContenus
+     * const footerContenu = await prisma.footerContenu.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FooterContenus and only return the `id`
+     * const footerContenuWithIdOnly = await prisma.footerContenu.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FooterContenuUpdateManyAndReturnArgs>(args: SelectSubset<T, FooterContenuUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FooterContenu.
+     * @param {FooterContenuUpsertArgs} args - Arguments to update or create a FooterContenu.
+     * @example
+     * // Update or create a FooterContenu
+     * const footerContenu = await prisma.footerContenu.upsert({
+     *   create: {
+     *     // ... data to create a FooterContenu
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FooterContenu we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FooterContenuUpsertArgs>(args: SelectSubset<T, FooterContenuUpsertArgs<ExtArgs>>): Prisma__FooterContenuClient<$Result.GetResult<Prisma.$FooterContenuPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FooterContenus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FooterContenuCountArgs} args - Arguments to filter FooterContenus to count.
+     * @example
+     * // Count the number of FooterContenus
+     * const count = await prisma.footerContenu.count({
+     *   where: {
+     *     // ... the filter for the FooterContenus we want to count
+     *   }
+     * })
+    **/
+    count<T extends FooterContenuCountArgs>(
+      args?: Subset<T, FooterContenuCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FooterContenuCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FooterContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FooterContenuAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FooterContenuAggregateArgs>(args: Subset<T, FooterContenuAggregateArgs>): Prisma.PrismaPromise<GetFooterContenuAggregateType<T>>
+
+    /**
+     * Group by FooterContenu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FooterContenuGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FooterContenuGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FooterContenuGroupByArgs['orderBy'] }
+        : { orderBy?: FooterContenuGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FooterContenuGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFooterContenuGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FooterContenu model
+   */
+  readonly fields: FooterContenuFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FooterContenu.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FooterContenuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FooterContenu model
+   */
+  interface FooterContenuFieldRefs {
+    readonly id: FieldRef<"FooterContenu", 'String'>
+    readonly logoFffUrl: FieldRef<"FooterContenu", 'String'>
+    readonly logoLgefUrl: FieldRef<"FooterContenu", 'String'>
+    readonly logoQualiopiUrl: FieldRef<"FooterContenu", 'String'>
+    readonly updatedAt: FieldRef<"FooterContenu", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FooterContenu findUnique
+   */
+  export type FooterContenuFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FooterContenu to fetch.
+     */
+    where: FooterContenuWhereUniqueInput
+  }
+
+  /**
+   * FooterContenu findUniqueOrThrow
+   */
+  export type FooterContenuFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FooterContenu to fetch.
+     */
+    where: FooterContenuWhereUniqueInput
+  }
+
+  /**
+   * FooterContenu findFirst
+   */
+  export type FooterContenuFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FooterContenu to fetch.
+     */
+    where?: FooterContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FooterContenus to fetch.
+     */
+    orderBy?: FooterContenuOrderByWithRelationInput | FooterContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FooterContenus.
+     */
+    cursor?: FooterContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FooterContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FooterContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FooterContenus.
+     */
+    distinct?: FooterContenuScalarFieldEnum | FooterContenuScalarFieldEnum[]
+  }
+
+  /**
+   * FooterContenu findFirstOrThrow
+   */
+  export type FooterContenuFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FooterContenu to fetch.
+     */
+    where?: FooterContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FooterContenus to fetch.
+     */
+    orderBy?: FooterContenuOrderByWithRelationInput | FooterContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FooterContenus.
+     */
+    cursor?: FooterContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FooterContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FooterContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FooterContenus.
+     */
+    distinct?: FooterContenuScalarFieldEnum | FooterContenuScalarFieldEnum[]
+  }
+
+  /**
+   * FooterContenu findMany
+   */
+  export type FooterContenuFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * Filter, which FooterContenus to fetch.
+     */
+    where?: FooterContenuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FooterContenus to fetch.
+     */
+    orderBy?: FooterContenuOrderByWithRelationInput | FooterContenuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FooterContenus.
+     */
+    cursor?: FooterContenuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FooterContenus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FooterContenus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FooterContenus.
+     */
+    distinct?: FooterContenuScalarFieldEnum | FooterContenuScalarFieldEnum[]
+  }
+
+  /**
+   * FooterContenu create
+   */
+  export type FooterContenuCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FooterContenu.
+     */
+    data: XOR<FooterContenuCreateInput, FooterContenuUncheckedCreateInput>
+  }
+
+  /**
+   * FooterContenu createMany
+   */
+  export type FooterContenuCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FooterContenus.
+     */
+    data: FooterContenuCreateManyInput | FooterContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FooterContenu createManyAndReturn
+   */
+  export type FooterContenuCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * The data used to create many FooterContenus.
+     */
+    data: FooterContenuCreateManyInput | FooterContenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FooterContenu update
+   */
+  export type FooterContenuUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FooterContenu.
+     */
+    data: XOR<FooterContenuUpdateInput, FooterContenuUncheckedUpdateInput>
+    /**
+     * Choose, which FooterContenu to update.
+     */
+    where: FooterContenuWhereUniqueInput
+  }
+
+  /**
+   * FooterContenu updateMany
+   */
+  export type FooterContenuUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FooterContenus.
+     */
+    data: XOR<FooterContenuUpdateManyMutationInput, FooterContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which FooterContenus to update
+     */
+    where?: FooterContenuWhereInput
+    /**
+     * Limit how many FooterContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FooterContenu updateManyAndReturn
+   */
+  export type FooterContenuUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * The data used to update FooterContenus.
+     */
+    data: XOR<FooterContenuUpdateManyMutationInput, FooterContenuUncheckedUpdateManyInput>
+    /**
+     * Filter which FooterContenus to update
+     */
+    where?: FooterContenuWhereInput
+    /**
+     * Limit how many FooterContenus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FooterContenu upsert
+   */
+  export type FooterContenuUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FooterContenu to update in case it exists.
+     */
+    where: FooterContenuWhereUniqueInput
+    /**
+     * In case the FooterContenu found by the `where` argument doesn't exist, create a new FooterContenu with this data.
+     */
+    create: XOR<FooterContenuCreateInput, FooterContenuUncheckedCreateInput>
+    /**
+     * In case the FooterContenu was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FooterContenuUpdateInput, FooterContenuUncheckedUpdateInput>
+  }
+
+  /**
+   * FooterContenu delete
+   */
+  export type FooterContenuDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+    /**
+     * Filter which FooterContenu to delete.
+     */
+    where: FooterContenuWhereUniqueInput
+  }
+
+  /**
+   * FooterContenu deleteMany
+   */
+  export type FooterContenuDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FooterContenus to delete
+     */
+    where?: FooterContenuWhereInput
+    /**
+     * Limit how many FooterContenus to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FooterContenu without action
+   */
+  export type FooterContenuDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FooterContenu
+     */
+    select?: FooterContenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FooterContenu
+     */
+    omit?: FooterContenuOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model StatCle
    */
 
@@ -53162,6 +54253,17 @@ export namespace Prisma {
   export type AccueilContenuScalarFieldEnum = (typeof AccueilContenuScalarFieldEnum)[keyof typeof AccueilContenuScalarFieldEnum]
 
 
+  export const FooterContenuScalarFieldEnum: {
+    id: 'id',
+    logoFffUrl: 'logoFffUrl',
+    logoLgefUrl: 'logoLgefUrl',
+    logoQualiopiUrl: 'logoQualiopiUrl',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FooterContenuScalarFieldEnum = (typeof FooterContenuScalarFieldEnum)[keyof typeof FooterContenuScalarFieldEnum]
+
+
   export const StatCleScalarFieldEnum: {
     id: 'id',
     valeur: 'valeur',
@@ -55926,6 +57028,58 @@ export namespace Prisma {
     contactTitre?: StringWithAggregatesFilter<"AccueilContenu"> | string
     contactSousTitre?: StringWithAggregatesFilter<"AccueilContenu"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"AccueilContenu"> | Date | string
+  }
+
+  export type FooterContenuWhereInput = {
+    AND?: FooterContenuWhereInput | FooterContenuWhereInput[]
+    OR?: FooterContenuWhereInput[]
+    NOT?: FooterContenuWhereInput | FooterContenuWhereInput[]
+    id?: StringFilter<"FooterContenu"> | string
+    logoFffUrl?: StringNullableFilter<"FooterContenu"> | string | null
+    logoLgefUrl?: StringNullableFilter<"FooterContenu"> | string | null
+    logoQualiopiUrl?: StringNullableFilter<"FooterContenu"> | string | null
+    updatedAt?: DateTimeFilter<"FooterContenu"> | Date | string
+  }
+
+  export type FooterContenuOrderByWithRelationInput = {
+    id?: SortOrder
+    logoFffUrl?: SortOrderInput | SortOrder
+    logoLgefUrl?: SortOrderInput | SortOrder
+    logoQualiopiUrl?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FooterContenuWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FooterContenuWhereInput | FooterContenuWhereInput[]
+    OR?: FooterContenuWhereInput[]
+    NOT?: FooterContenuWhereInput | FooterContenuWhereInput[]
+    logoFffUrl?: StringNullableFilter<"FooterContenu"> | string | null
+    logoLgefUrl?: StringNullableFilter<"FooterContenu"> | string | null
+    logoQualiopiUrl?: StringNullableFilter<"FooterContenu"> | string | null
+    updatedAt?: DateTimeFilter<"FooterContenu"> | Date | string
+  }, "id">
+
+  export type FooterContenuOrderByWithAggregationInput = {
+    id?: SortOrder
+    logoFffUrl?: SortOrderInput | SortOrder
+    logoLgefUrl?: SortOrderInput | SortOrder
+    logoQualiopiUrl?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: FooterContenuCountOrderByAggregateInput
+    _max?: FooterContenuMaxOrderByAggregateInput
+    _min?: FooterContenuMinOrderByAggregateInput
+  }
+
+  export type FooterContenuScalarWhereWithAggregatesInput = {
+    AND?: FooterContenuScalarWhereWithAggregatesInput | FooterContenuScalarWhereWithAggregatesInput[]
+    OR?: FooterContenuScalarWhereWithAggregatesInput[]
+    NOT?: FooterContenuScalarWhereWithAggregatesInput | FooterContenuScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FooterContenu"> | string
+    logoFffUrl?: StringNullableWithAggregatesFilter<"FooterContenu"> | string | null
+    logoLgefUrl?: StringNullableWithAggregatesFilter<"FooterContenu"> | string | null
+    logoQualiopiUrl?: StringNullableWithAggregatesFilter<"FooterContenu"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"FooterContenu"> | Date | string
   }
 
   export type StatCleWhereInput = {
@@ -59700,6 +60854,62 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FooterContenuCreateInput = {
+    id?: string
+    logoFffUrl?: string | null
+    logoLgefUrl?: string | null
+    logoQualiopiUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type FooterContenuUncheckedCreateInput = {
+    id?: string
+    logoFffUrl?: string | null
+    logoLgefUrl?: string | null
+    logoQualiopiUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type FooterContenuUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logoFffUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoLgefUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoQualiopiUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FooterContenuUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logoFffUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoLgefUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoQualiopiUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FooterContenuCreateManyInput = {
+    id?: string
+    logoFffUrl?: string | null
+    logoLgefUrl?: string | null
+    logoQualiopiUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type FooterContenuUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logoFffUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoLgefUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoQualiopiUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FooterContenuUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logoFffUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoLgefUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    logoQualiopiUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StatCleCreateInput = {
     id?: string
     valeur: string
@@ -63234,6 +64444,30 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTypeLienFilter<$PrismaModel>
     _max?: NestedEnumTypeLienFilter<$PrismaModel>
+  }
+
+  export type FooterContenuCountOrderByAggregateInput = {
+    id?: SortOrder
+    logoFffUrl?: SortOrder
+    logoLgefUrl?: SortOrder
+    logoQualiopiUrl?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FooterContenuMaxOrderByAggregateInput = {
+    id?: SortOrder
+    logoFffUrl?: SortOrder
+    logoLgefUrl?: SortOrder
+    logoQualiopiUrl?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FooterContenuMinOrderByAggregateInput = {
+    id?: SortOrder
+    logoFffUrl?: SortOrder
+    logoLgefUrl?: SortOrder
+    logoQualiopiUrl?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StatCleCountOrderByAggregateInput = {

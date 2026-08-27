@@ -21,18 +21,24 @@ const footerLinkStyle = {
   textDecoration: "none" as const,
 }
 
-export function Footer() {
+export type FooterLogos = {
+  logoFffUrl: string
+  logoLgefUrl: string
+  logoQualiopiUrl: string
+}
+
+export function Footer({ logos }: { logos: FooterLogos }) {
   return (
     <footer style={{ background: "#14213d", padding: "56px clamp(20px,5vw,60px) 28px" }}>
       <div style={{ maxWidth: 1160, margin: "0 auto", display: "flex", flexDirection: "column", gap: 40 }}>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 40 }}>
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 28 }}>
             <img
-              src="/images/logofff.png"
+              src={logos.logoFffUrl}
               alt="FFF"
               style={{ height: 84, width: "auto" }}
             />
-            <img src="/images/logo-lgef.png" alt="Ligue Grand Est de Football" style={{ height: 64, width: "auto" }} />
+            <img src={logos.logoLgefUrl} alt="Ligue Grand Est de Football" style={{ height: 64, width: "auto" }} />
             <div
               style={{
                 background: "#ffffff",
@@ -42,7 +48,7 @@ export function Footer() {
                 alignItems: "center",
               }}
             >
-              <img src="/images/qualiopi.png" alt="Certification Qualiopi" style={{ height: 40, width: "auto" }} />
+              <img src={logos.logoQualiopiUrl} alt="Certification Qualiopi" style={{ height: 40, width: "auto" }} />
             </div>
           </div>
 

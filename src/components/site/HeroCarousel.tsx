@@ -70,16 +70,16 @@ export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
       <div
         style={{
           position: "absolute",
-          inset: isCentre ? 0 : undefined,
-          left: !isCentre && !isDroite ? "clamp(20px,5vw,60px)" : undefined,
-          right: !isCentre && isDroite ? "clamp(20px,5vw,60px)" : undefined,
-          bottom: isCentre ? undefined : 60,
-          maxWidth: isCentre ? undefined : 600,
-          padding: isCentre ? "96px clamp(20px,5vw,60px) 70px" : undefined,
+          top: 0,
+          left: isCentre ? 0 : isDroite ? "auto" : "clamp(20px,5vw,60px)",
+          right: isCentre ? 0 : isDroite ? "clamp(20px,5vw,60px)" : "auto",
+          bottom: isCentre ? 0 : 60,
+          maxWidth: isCentre ? "none" : 600,
+          padding: isCentre ? "96px clamp(20px,5vw,60px) 70px" : 0,
           display: "flex",
           flexDirection: "column",
           alignItems: isCentre ? "center" : isDroite ? "flex-end" : "flex-start",
-          justifyContent: isCentre ? "center" : undefined,
+          justifyContent: isCentre ? "center" : "flex-start",
           textAlign: isCentre ? "center" : isDroite ? "right" : "left",
           gap: 14,
         }}

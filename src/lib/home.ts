@@ -113,3 +113,24 @@ export async function getAccueilContenu(): Promise<AccueilContenuData> {
   const contenu = await prisma.accueilContenu.findUnique({ where: { id: "accueil" } })
   return contenu ?? CONTENU_DEFAUT
 }
+
+export type FooterLogosData = {
+  logoFffUrl: string
+  logoLgefUrl: string
+  logoQualiopiUrl: string
+}
+
+const FOOTER_LOGOS_DEFAUT: FooterLogosData = {
+  logoFffUrl: "/images/logofff.png",
+  logoLgefUrl: "/images/logo-lgef.png",
+  logoQualiopiUrl: "/images/qualiopi.png",
+}
+
+export async function getFooterLogos(): Promise<FooterLogosData> {
+  const contenu = await prisma.footerContenu.findUnique({ where: { id: "footer" } })
+  return {
+    logoFffUrl: contenu?.logoFffUrl || FOOTER_LOGOS_DEFAUT.logoFffUrl,
+    logoLgefUrl: contenu?.logoLgefUrl || FOOTER_LOGOS_DEFAUT.logoLgefUrl,
+    logoQualiopiUrl: contenu?.logoQualiopiUrl || FOOTER_LOGOS_DEFAUT.logoQualiopiUrl,
+  }
+}

@@ -1,9 +1,10 @@
 import { auth } from "@/auth"
 import { Header, type HeaderUser } from "@/components/site/Header"
 import { Footer } from "@/components/site/Footer"
+import { getFooterLogos } from "@/lib/home"
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth()
+  const [session, footerLogos] = await Promise.all([auth(), getFooterLogos()])
   const user: HeaderUser = session?.user
     ? { name: session.user.name, role: session.user.role }
     : null
@@ -22,7 +23,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <Header user={user} />
       <div style={{ height: 68 }} />
       {children}
-      <Footer />
+      <Footer logos={footerLogos} />
     </div>
   )
 }

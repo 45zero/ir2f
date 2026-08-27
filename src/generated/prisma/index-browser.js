@@ -430,6 +430,14 @@ exports.Prisma.AccueilContenuScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.FooterContenuScalarFieldEnum = {
+  id: 'id',
+  logoFffUrl: 'logoFffUrl',
+  logoLgefUrl: 'logoLgefUrl',
+  logoQualiopiUrl: 'logoQualiopiUrl',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.StatCleScalarFieldEnum = {
   id: 'id',
   valeur: 'valeur',
@@ -906,6 +914,7 @@ exports.Prisma.ModelName = {
   Article: 'Article',
   AccompagnementCard: 'AccompagnementCard',
   AccueilContenu: 'AccueilContenu',
+  FooterContenu: 'FooterContenu',
   StatCle: 'StatCle',
   HeroSlide: 'HeroSlide',
   FormationTuile: 'FormationTuile',
