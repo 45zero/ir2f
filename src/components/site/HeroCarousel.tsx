@@ -70,7 +70,7 @@ export function HeroCarousel({ slides }: { slides: HeroSlideData[] }) {
       <div
         style={{
           position: "absolute",
-          top: 0,
+          top: isCentre ? 0 : "auto",
           left: isCentre ? 0 : isDroite ? "auto" : "clamp(20px,5vw,60px)",
           right: isCentre ? 0 : isDroite ? "clamp(20px,5vw,60px)" : "auto",
           bottom: isCentre ? 0 : 60,
