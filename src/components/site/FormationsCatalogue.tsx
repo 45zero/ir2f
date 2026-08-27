@@ -905,7 +905,7 @@ export function FormationsCatalogue({
               const data = getOnglet("EDUCATEUR", "EDU_PRESENTATION")
               const proData = getOnglet("EDUCATEUR", "EDU_PRO")
               const benevoleData = getOnglet("EDUCATEUR", "EDU_BENEVOLE")
-              const hasMedia = Boolean(data.videoUrl || data.image)
+              const hasMedia = Boolean(data.videoFichierUrl || data.videoUrl || data.image)
               return (
                 <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
                   <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 820 }}>
@@ -1128,7 +1128,7 @@ export function FormationsCatalogue({
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
                   {data.contenu && <p style={tabTextStyle}>{data.contenu}</p>}
-                  {(data.videoUrl || data.image) && <OngletMedia data={data} />}
+                  {(data.videoFichierUrl || data.videoUrl || data.image) && <OngletMedia data={data} />}
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
                     {list.map((f) => (
                       <FormationGridCard key={f.id} f={f} />
@@ -1145,7 +1145,7 @@ export function FormationsCatalogue({
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
                   {data.contenu && <p style={tabTextStyle}>{data.contenu}</p>}
-                  {(data.videoUrl || data.image) && <OngletMedia data={data} />}
+                  {(data.videoFichierUrl || data.videoUrl || data.image) && <OngletMedia data={data} />}
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
                     {list.map((f) => (
                       <FormationGridCard key={f.id} f={f} />
