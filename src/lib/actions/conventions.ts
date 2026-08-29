@@ -4,10 +4,14 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { downloadStorageFile, uploadBytes } from "@/lib/storage"
-import { fillConventionTemplate } from "@/lib/conventions/pdf"
-import { buildConventionVariables, resolveSignataireContact, SIGNATAIRE_ORDER } from "@/lib/conventions/variables"
+import { fillConventionTemplate, stampSignature } from "@/lib/conventions/pdf"
+import { buildConventionVariables, resolveSignataireContact, SIGNATAIRE_ORDER, SIGNATURE_FIELD_NAMES } from "@/lib/conventions/variables"
 import { notifySignataireASigner, ROLE_SIGNATAIRE_LABELS } from "@/lib/emails/convention-notifications"
 import type { ConventionStagiaire, Formation } from "@/generated/prisma"
+
+type FormationAvecResponsable = Formation & {
+  responsablePedagogiqueUser: { nom: string; prenom: string; email: string; telephone: string | null } | null
+}
 
 export type EnvoyerConventionsState = { error: string | null; sent: number; skipped: string[] }
 export type ConventionActionState = { error: string | null }
@@ -51,40 +55,61 @@ async function avancerConvention(conventionStagiaireId: string, apresOrdre: numb
   return { ok: true }
 }
 
+/** Le tuteur n'est pas toujours connu (souvent absent du fichier stagiaires) — son étape de
+ * signature est simplement omise du circuit quand son email manque, plutôt que de tout bloquer.
+ * Club et maître de stage restent obligatoires : ce sont des parties prenantes de la convention
+ * elle-même (article 1), pas un simple contact informatif. */
 function missingContactsFor(stagiaire: ConventionStagiaire): string[] {
   return [
     !stagiaire.emailClub && "email du club",
-    !stagiaire.tuteurEmail && "email du tuteur",
     !stagiaire.maitreDeStageEmail && "email du maître de stage",
   ].filter((v): v is string => Boolean(v))
 }
 
 /**
- * Génère le PDF personnalisé d'un stagiaire, crée ses 5 signataires et active le premier. Suppose
+ * Génère le PDF personnalisé d'un stagiaire, crée ses signataires et active le premier. Suppose
  * que le stagiaire n'a pas encore de convention générée (pdfStoragePath null) et que les appelants
- * ont déjà vérifié via missingContactsFor() que les emails club/tuteur/maître de stage sont
- * renseignés — resolveSignataireContact ne devrait donc jamais renvoyer null ici ; si ça arrive
+ * ont déjà vérifié via missingContactsFor() que les emails club/maître de stage sont renseignés —
+ * resolveSignataireContact ne devrait donc jamais renvoyer null pour ces rôles-là ; si ça arrive
  * quand même (bug appelant, garde contournée), on l'arrête net plutôt que de créer un signataire
- * avec un email vide qui bloquerait le circuit plus tard sans explication.
+ * avec un email vide qui bloquerait le circuit plus tard sans explication. Le tuteur, lui, est
+ * retiré du circuit (pas bloquant) si son email manque — voir missingContactsFor. `ordre` est
+ * réattribué séquentiellement sur les signataires effectivement créés (0..n-1, sans trou) pour que
+ * avancerConvention et la finalisation du PDF (voir convention-signature.ts) restent cohérents
+ * que le tuteur soit présent ou non.
+ *
+ * Le responsable pédagogique ne fait plus partie de ce circuit par-stagiaire (voir SIGNATAIRE_ORDER)
+ * : sa signature, capturée une seule fois pour toute la formation (responsablePedagogiqueSignature*
+ * — voir enverSignatureResponsablePedagogique), est directement incrustée dans le PDF fraîchement
+ * généré via `signatureFormationPngBytes`, fourni par l'appelant pour éviter de la retélécharger à
+ * chaque stagiaire d'un envoi groupé.
  */
 async function genererEtActiverConvention(
   stagiaire: ConventionStagiaire,
-  formation: Formation,
+  formation: FormationAvecResponsable,
   templateBytes: Uint8Array,
-  dateLabel: string | null
+  dateLabel: string | null,
+  signatureFormationPngBytes: Uint8Array
 ): Promise<{ ok: boolean; error?: string }> {
   const variables = buildConventionVariables({ formation, formationDateLabel: dateLabel, stagiaire })
-  const filled = await fillConventionTemplate(templateBytes, variables)
+  let filled = await fillConventionTemplate(templateBytes, variables)
+  filled = await stampSignature(
+    filled,
+    SIGNATURE_FIELD_NAMES.RESPONSABLE_PEDAGOGIQUE,
+    signatureFormationPngBytes,
+    formation.responsablePedagogiqueSignatureSignedAt!
+  )
   const storagePath = `conventions/generated/${stagiaire.id}.pdf`
   await uploadBytes(filled, storagePath, "application/pdf")
 
-  const signataireRows = SIGNATAIRE_ORDER.map((role, ordre) => {
-    const contact = resolveSignataireContact(role, stagiaire, formation)
+  const signataireRows = SIGNATAIRE_ORDER.flatMap((role) => {
+    const contact = resolveSignataireContact(role, stagiaire)
     if (!contact) {
+      if (role === "TUTEUR") return []
       throw new Error(`Informations manquantes pour l'étape "${ROLE_SIGNATAIRE_LABELS[role]}".`)
     }
-    return { role, ordre, nom: contact.nom, email: contact.email }
-  })
+    return [{ role, nom: contact.nom, email: contact.email }]
+  }).map((row, ordre) => ({ ...row, ordre }))
 
   await prisma.$transaction([
     prisma.conventionStagiaire.update({
@@ -99,6 +124,17 @@ async function genererEtActiverConvention(
   return avancerConvention(stagiaire.id, -1)
 }
 
+/** Vérifie que le responsable pédagogique a bien signé une première fois pour cette formation —
+ * condition préalable à toute génération de convention, puisque sa signature est incrustée
+ * directement dans chaque PDF (voir genererEtActiverConvention). */
+function requireResponsablePedagogiqueSignature(formation: Formation): string | null {
+  if (!formation.responsablePedagogiqueUserId) return "Aucun responsable pédagogique désigné pour cette formation."
+  if (!formation.responsablePedagogiqueSignatureSignedAt || !formation.responsablePedagogiqueSignatureStoragePath) {
+    return "Le responsable pédagogique n'a pas encore signé — envoyez-lui d'abord la demande de signature ci-dessus."
+  }
+  return null
+}
+
 export async function envoyerConventions(formationId: string): Promise<EnvoyerConventionsState> {
   await requireAdmin()
 
@@ -107,20 +143,21 @@ export async function envoyerConventions(formationId: string): Promise<EnvoyerCo
     include: {
       conventionTemplate: true,
       conventionStagiaires: { where: { pdfStoragePath: null } },
+      responsablePedagogiqueUser: { select: { nom: true, prenom: true, email: true, telephone: true } },
     },
   })
   if (!formation) return { error: "Formation introuvable.", sent: 0, skipped: [] }
   if (!formation.conventionTemplate) {
     return { error: "Aucun modèle de convention associé à cette formation.", sent: 0, skipped: [] }
   }
-  if (!formation.responsablePedagogiqueEmail) {
-    return { error: "Responsable pédagogique non renseigné pour cette formation.", sent: 0, skipped: [] }
-  }
+  const responsableError = requireResponsablePedagogiqueSignature(formation)
+  if (responsableError) return { error: responsableError, sent: 0, skipped: [] }
   if (formation.conventionStagiaires.length === 0) {
     return { error: "Aucun nouveau stagiaire à traiter.", sent: 0, skipped: [] }
   }
 
   const templateBytes = await downloadStorageFile(formation.conventionTemplate.storagePath)
+  const signatureFormationPngBytes = await downloadStorageFile(formation.responsablePedagogiqueSignatureStoragePath!)
   const dateLabel = await computeFormationDateLabel(formationId)
 
   let sent = 0
@@ -134,7 +171,7 @@ export async function envoyerConventions(formationId: string): Promise<EnvoyerCo
     }
 
     try {
-      const result = await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel)
+      const result = await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel, signatureFormationPngBytes)
       if (result.ok) sent++
       else skipped.push(`${stagiaire.prenom} ${stagiaire.nom} (${result.error})`)
     } catch (e) {
@@ -151,24 +188,30 @@ export async function envoyerConventionStagiaire(stagiaireId: string): Promise<C
 
   const stagiaire = await prisma.conventionStagiaire.findUnique({
     where: { id: stagiaireId },
-    include: { formation: { include: { conventionTemplate: true } } },
+    include: {
+      formation: {
+        include: { conventionTemplate: true, responsablePedagogiqueUser: { select: { nom: true, prenom: true, email: true, telephone: true } } },
+      },
+    },
   })
   if (!stagiaire) return { error: "Stagiaire introuvable." }
   if (stagiaire.pdfStoragePath) return { error: "La convention a déjà été envoyée pour ce stagiaire." }
 
   const { formation } = stagiaire
   if (!formation.conventionTemplate) return { error: "Aucun modèle de convention associé à cette formation." }
-  if (!formation.responsablePedagogiqueEmail) return { error: "Responsable pédagogique non renseigné pour cette formation." }
+  const responsableError = requireResponsablePedagogiqueSignature(formation)
+  if (responsableError) return { error: responsableError }
 
   const missing = missingContactsFor(stagiaire)
   if (missing.length > 0) return { error: `Informations manquantes : ${missing.join(", ")}.` }
 
   const templateBytes = await downloadStorageFile(formation.conventionTemplate.storagePath)
+  const signatureFormationPngBytes = await downloadStorageFile(formation.responsablePedagogiqueSignatureStoragePath!)
   const dateLabel = await computeFormationDateLabel(formation.id)
 
   let result: { ok: boolean; error?: string }
   try {
-    result = await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel)
+    result = await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel, signatureFormationPngBytes)
   } catch (e) {
     result = { ok: false, error: e instanceof Error ? e.message : "Erreur inattendue lors de la génération de la convention." }
   }

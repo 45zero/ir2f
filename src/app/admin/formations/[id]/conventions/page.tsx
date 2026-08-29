@@ -3,6 +3,7 @@ import Link from "next/link"
 import { getFormationConventionSuivi } from "@/lib/admin/conventions"
 import { ImportStagiairesForm } from "@/components/admin/ImportStagiairesForm"
 import { EnvoyerConventionsButton } from "@/components/admin/EnvoyerConventionsButton"
+import { EnvoyerSignatureResponsablePedagogiqueButton } from "@/components/admin/EnvoyerSignatureResponsablePedagogiqueButton"
 import { ConventionSuiviTable, type ConventionSuiviRow } from "@/components/admin/ConventionSuiviTable"
 import { colors, fontHeading } from "@/lib/theme"
 
@@ -31,7 +32,7 @@ export default async function FormationConventionsPage({ params }: { params: Pro
     })),
   }))
 
-  const missingResponsablePedagogique = !formation.responsablePedagogiqueEmail
+  const missingResponsablePedagogique = !formation.responsablePedagogiqueUserId
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -53,14 +54,21 @@ export default async function FormationConventionsPage({ params }: { params: Pro
           .
         </div>
       )}
-      {missingResponsablePedagogique && (
+      {missingResponsablePedagogique ? (
         <div style={{ background: "#faf4e6", border: "1px solid #e9d9a8", borderRadius: 8, padding: "12px 16px", fontSize: 13, color: "#7a6423" }}>
-          Responsable pédagogique non renseigné pour cette formation.{" "}
+          Responsable pédagogique non désigné pour cette formation.{" "}
           <Link href={`/admin/formations/${id}`} style={{ color: "#7a6423", fontWeight: 700 }}>
             Compléter
           </Link>
           .
         </div>
+      ) : (
+        <EnvoyerSignatureResponsablePedagogiqueButton
+          formationId={id}
+          responsablePedagogiqueNom={formation.responsablePedagogiqueUser ? `${formation.responsablePedagogiqueUser.prenom} ${formation.responsablePedagogiqueUser.nom}` : null}
+          envoyeAt={formation.responsablePedagogiqueSignatureEnvoyeAt?.toISOString() ?? null}
+          signedAt={formation.responsablePedagogiqueSignatureSignedAt?.toISOString() ?? null}
+        />
       )}
 
       <details style={{ background: "#f5f7fb", border: "1px solid #e4e9f2", borderRadius: 10, padding: "12px 18px" }}>

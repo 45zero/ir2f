@@ -18,3 +18,13 @@ export async function getFormateurUsers() {
     select: { id: true, nom: true, prenom: true },
   })
 }
+
+/** Utilisateurs pouvant être désignés responsable pédagogique d'une formation — l'équipe IR2F
+ * (admin/formateur/direction), pas les stagiaires. */
+export async function getResponsablePedagogiqueUsers() {
+  return prisma.user.findMany({
+    where: { role: { in: ["ADMIN", "FORMATEUR", "DIRECTION"] }, actif: true },
+    orderBy: [{ nom: "asc" }],
+    select: { id: true, nom: true, prenom: true, email: true, telephone: true },
+  })
+}

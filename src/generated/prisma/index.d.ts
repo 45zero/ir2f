@@ -5256,6 +5256,7 @@ export namespace Prisma {
     articles: number
     demandesInscription: number
     formationsEnCharge: number
+    formationsResponsablePedagogique: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5270,6 +5271,7 @@ export namespace Prisma {
     articles?: boolean | UserCountOutputTypeCountArticlesArgs
     demandesInscription?: boolean | UserCountOutputTypeCountDemandesInscriptionArgs
     formationsEnCharge?: boolean | UserCountOutputTypeCountFormationsEnChargeArgs
+    formationsResponsablePedagogique?: boolean | UserCountOutputTypeCountFormationsResponsablePedagogiqueArgs
   }
 
   // Custom InputTypes
@@ -5358,6 +5360,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountFormationsEnChargeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FormationFormateurWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFormationsResponsablePedagogiqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormationWhereInput
   }
 
 
@@ -5963,6 +5972,7 @@ export namespace Prisma {
     articles?: boolean | User$articlesArgs<ExtArgs>
     demandesInscription?: boolean | User$demandesInscriptionArgs<ExtArgs>
     formationsEnCharge?: boolean | User$formationsEnChargeArgs<ExtArgs>
+    formationsResponsablePedagogique?: boolean | User$formationsResponsablePedagogiqueArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -6018,6 +6028,7 @@ export namespace Prisma {
     articles?: boolean | User$articlesArgs<ExtArgs>
     demandesInscription?: boolean | User$demandesInscriptionArgs<ExtArgs>
     formationsEnCharge?: boolean | User$formationsEnChargeArgs<ExtArgs>
+    formationsResponsablePedagogique?: boolean | User$formationsResponsablePedagogiqueArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6037,6 +6048,7 @@ export namespace Prisma {
       articles: Prisma.$ArticlePayload<ExtArgs>[]
       demandesInscription: Prisma.$DemandeInscriptionPayload<ExtArgs>[]
       formationsEnCharge: Prisma.$FormationFormateurPayload<ExtArgs>[]
+      formationsResponsablePedagogique: Prisma.$FormationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6454,6 +6466,7 @@ export namespace Prisma {
     articles<T extends User$articlesArgs<ExtArgs> = {}>(args?: Subset<T, User$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     demandesInscription<T extends User$demandesInscriptionArgs<ExtArgs> = {}>(args?: Subset<T, User$demandesInscriptionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DemandeInscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     formationsEnCharge<T extends User$formationsEnChargeArgs<ExtArgs> = {}>(args?: Subset<T, User$formationsEnChargeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationFormateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    formationsResponsablePedagogique<T extends User$formationsResponsablePedagogiqueArgs<ExtArgs> = {}>(args?: Subset<T, User$formationsResponsablePedagogiqueArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7150,6 +7163,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.formationsResponsablePedagogique
+   */
+  export type User$formationsResponsablePedagogiqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Formation
+     */
+    select?: FormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Formation
+     */
+    omit?: FormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationInclude<ExtArgs> | null
+    where?: FormationWhereInput
+    orderBy?: FormationOrderByWithRelationInput | FormationOrderByWithRelationInput[]
+    cursor?: FormationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FormationScalarFieldEnum | FormationScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7226,6 +7263,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom: string | null
     responsablePedagogiqueEmail: string | null
     responsablePedagogiqueTelephone: string | null
+    responsablePedagogiqueUserId: string | null
+    responsablePedagogiqueSignatureToken: string | null
+    responsablePedagogiqueSignatureEnvoyeAt: Date | null
+    responsablePedagogiqueSignatureSignedAt: Date | null
+    responsablePedagogiqueSignatureStoragePath: string | null
+    responsablePedagogiqueSignatureIpAddress: string | null
+    responsablePedagogiqueSignatureUserAgent: string | null
     dateDebut: Date | null
     dateFin: Date | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
@@ -7270,6 +7314,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom: string | null
     responsablePedagogiqueEmail: string | null
     responsablePedagogiqueTelephone: string | null
+    responsablePedagogiqueUserId: string | null
+    responsablePedagogiqueSignatureToken: string | null
+    responsablePedagogiqueSignatureEnvoyeAt: Date | null
+    responsablePedagogiqueSignatureSignedAt: Date | null
+    responsablePedagogiqueSignatureStoragePath: string | null
+    responsablePedagogiqueSignatureIpAddress: string | null
+    responsablePedagogiqueSignatureUserAgent: string | null
     dateDebut: Date | null
     dateFin: Date | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
@@ -7315,6 +7366,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom: number
     responsablePedagogiqueEmail: number
     responsablePedagogiqueTelephone: number
+    responsablePedagogiqueUserId: number
+    responsablePedagogiqueSignatureToken: number
+    responsablePedagogiqueSignatureEnvoyeAt: number
+    responsablePedagogiqueSignatureSignedAt: number
+    responsablePedagogiqueSignatureStoragePath: number
+    responsablePedagogiqueSignatureIpAddress: number
+    responsablePedagogiqueSignatureUserAgent: number
     dateDebut: number
     dateFin: number
     groupeEquivalence: number
@@ -7376,6 +7434,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: true
     responsablePedagogiqueEmail?: true
     responsablePedagogiqueTelephone?: true
+    responsablePedagogiqueUserId?: true
+    responsablePedagogiqueSignatureToken?: true
+    responsablePedagogiqueSignatureEnvoyeAt?: true
+    responsablePedagogiqueSignatureSignedAt?: true
+    responsablePedagogiqueSignatureStoragePath?: true
+    responsablePedagogiqueSignatureIpAddress?: true
+    responsablePedagogiqueSignatureUserAgent?: true
     dateDebut?: true
     dateFin?: true
     groupeEquivalence?: true
@@ -7420,6 +7485,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: true
     responsablePedagogiqueEmail?: true
     responsablePedagogiqueTelephone?: true
+    responsablePedagogiqueUserId?: true
+    responsablePedagogiqueSignatureToken?: true
+    responsablePedagogiqueSignatureEnvoyeAt?: true
+    responsablePedagogiqueSignatureSignedAt?: true
+    responsablePedagogiqueSignatureStoragePath?: true
+    responsablePedagogiqueSignatureIpAddress?: true
+    responsablePedagogiqueSignatureUserAgent?: true
     dateDebut?: true
     dateFin?: true
     groupeEquivalence?: true
@@ -7465,6 +7537,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: true
     responsablePedagogiqueEmail?: true
     responsablePedagogiqueTelephone?: true
+    responsablePedagogiqueUserId?: true
+    responsablePedagogiqueSignatureToken?: true
+    responsablePedagogiqueSignatureEnvoyeAt?: true
+    responsablePedagogiqueSignatureSignedAt?: true
+    responsablePedagogiqueSignatureStoragePath?: true
+    responsablePedagogiqueSignatureIpAddress?: true
+    responsablePedagogiqueSignatureUserAgent?: true
     dateDebut?: true
     dateFin?: true
     groupeEquivalence?: true
@@ -7598,6 +7677,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom: string | null
     responsablePedagogiqueEmail: string | null
     responsablePedagogiqueTelephone: string | null
+    responsablePedagogiqueUserId: string | null
+    responsablePedagogiqueSignatureToken: string | null
+    responsablePedagogiqueSignatureEnvoyeAt: Date | null
+    responsablePedagogiqueSignatureSignedAt: Date | null
+    responsablePedagogiqueSignatureStoragePath: string | null
+    responsablePedagogiqueSignatureIpAddress: string | null
+    responsablePedagogiqueSignatureUserAgent: string | null
     dateDebut: Date | null
     dateFin: Date | null
     groupeEquivalence: $Enums.GroupeEquivalence | null
@@ -7663,6 +7749,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: boolean
     responsablePedagogiqueEmail?: boolean
     responsablePedagogiqueTelephone?: boolean
+    responsablePedagogiqueUserId?: boolean
+    responsablePedagogiqueSignatureToken?: boolean
+    responsablePedagogiqueSignatureEnvoyeAt?: boolean
+    responsablePedagogiqueSignatureSignedAt?: boolean
+    responsablePedagogiqueSignatureStoragePath?: boolean
+    responsablePedagogiqueSignatureIpAddress?: boolean
+    responsablePedagogiqueSignatureUserAgent?: boolean
     dateDebut?: boolean
     dateFin?: boolean
     groupeEquivalence?: boolean
@@ -7674,6 +7767,7 @@ export namespace Prisma {
     resultats?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    responsablePedagogiqueUser?: boolean | Formation$responsablePedagogiqueUserArgs<ExtArgs>
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
     demandes?: boolean | Formation$demandesArgs<ExtArgs>
@@ -7721,6 +7815,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: boolean
     responsablePedagogiqueEmail?: boolean
     responsablePedagogiqueTelephone?: boolean
+    responsablePedagogiqueUserId?: boolean
+    responsablePedagogiqueSignatureToken?: boolean
+    responsablePedagogiqueSignatureEnvoyeAt?: boolean
+    responsablePedagogiqueSignatureSignedAt?: boolean
+    responsablePedagogiqueSignatureStoragePath?: boolean
+    responsablePedagogiqueSignatureIpAddress?: boolean
+    responsablePedagogiqueSignatureUserAgent?: boolean
     dateDebut?: boolean
     dateFin?: boolean
     groupeEquivalence?: boolean
@@ -7732,6 +7833,7 @@ export namespace Prisma {
     resultats?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    responsablePedagogiqueUser?: boolean | Formation$responsablePedagogiqueUserArgs<ExtArgs>
     conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
   }, ExtArgs["result"]["formation"]>
 
@@ -7768,6 +7870,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: boolean
     responsablePedagogiqueEmail?: boolean
     responsablePedagogiqueTelephone?: boolean
+    responsablePedagogiqueUserId?: boolean
+    responsablePedagogiqueSignatureToken?: boolean
+    responsablePedagogiqueSignatureEnvoyeAt?: boolean
+    responsablePedagogiqueSignatureSignedAt?: boolean
+    responsablePedagogiqueSignatureStoragePath?: boolean
+    responsablePedagogiqueSignatureIpAddress?: boolean
+    responsablePedagogiqueSignatureUserAgent?: boolean
     dateDebut?: boolean
     dateFin?: boolean
     groupeEquivalence?: boolean
@@ -7779,6 +7888,7 @@ export namespace Prisma {
     resultats?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    responsablePedagogiqueUser?: boolean | Formation$responsablePedagogiqueUserArgs<ExtArgs>
     conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
   }, ExtArgs["result"]["formation"]>
 
@@ -7815,6 +7925,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: boolean
     responsablePedagogiqueEmail?: boolean
     responsablePedagogiqueTelephone?: boolean
+    responsablePedagogiqueUserId?: boolean
+    responsablePedagogiqueSignatureToken?: boolean
+    responsablePedagogiqueSignatureEnvoyeAt?: boolean
+    responsablePedagogiqueSignatureSignedAt?: boolean
+    responsablePedagogiqueSignatureStoragePath?: boolean
+    responsablePedagogiqueSignatureIpAddress?: boolean
+    responsablePedagogiqueSignatureUserAgent?: boolean
     dateDebut?: boolean
     dateFin?: boolean
     groupeEquivalence?: boolean
@@ -7828,8 +7945,9 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "fafaEligible" | "bonFormationEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "fafaEligible" | "bonFormationEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "responsablePedagogiqueUserId" | "responsablePedagogiqueSignatureToken" | "responsablePedagogiqueSignatureEnvoyeAt" | "responsablePedagogiqueSignatureSignedAt" | "responsablePedagogiqueSignatureStoragePath" | "responsablePedagogiqueSignatureIpAddress" | "responsablePedagogiqueSignatureUserAgent" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    responsablePedagogiqueUser?: boolean | Formation$responsablePedagogiqueUserArgs<ExtArgs>
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
     demandes?: boolean | Formation$demandesArgs<ExtArgs>
@@ -7844,15 +7962,18 @@ export namespace Prisma {
     _count?: boolean | FormationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FormationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    responsablePedagogiqueUser?: boolean | Formation$responsablePedagogiqueUserArgs<ExtArgs>
     conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
   }
   export type FormationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    responsablePedagogiqueUser?: boolean | Formation$responsablePedagogiqueUserArgs<ExtArgs>
     conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
   }
 
   export type $FormationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Formation"
     objects: {
+      responsablePedagogiqueUser: Prisma.$UserPayload<ExtArgs> | null
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       inscriptions: Prisma.$InscriptionPayload<ExtArgs>[]
       demandes: Prisma.$DemandeInscriptionPayload<ExtArgs>[]
@@ -7898,6 +8019,13 @@ export namespace Prisma {
       responsablePedagogiquePrenom: string | null
       responsablePedagogiqueEmail: string | null
       responsablePedagogiqueTelephone: string | null
+      responsablePedagogiqueUserId: string | null
+      responsablePedagogiqueSignatureToken: string | null
+      responsablePedagogiqueSignatureEnvoyeAt: Date | null
+      responsablePedagogiqueSignatureSignedAt: Date | null
+      responsablePedagogiqueSignatureStoragePath: string | null
+      responsablePedagogiqueSignatureIpAddress: string | null
+      responsablePedagogiqueSignatureUserAgent: string | null
       dateDebut: Date | null
       dateFin: Date | null
       groupeEquivalence: $Enums.GroupeEquivalence | null
@@ -8303,6 +8431,7 @@ export namespace Prisma {
    */
   export interface Prisma__FormationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    responsablePedagogiqueUser<T extends Formation$responsablePedagogiqueUserArgs<ExtArgs> = {}>(args?: Subset<T, Formation$responsablePedagogiqueUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     sessions<T extends Formation$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, Formation$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     inscriptions<T extends Formation$inscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, Formation$inscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     demandes<T extends Formation$demandesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$demandesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DemandeInscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8375,6 +8504,13 @@ export namespace Prisma {
     readonly responsablePedagogiquePrenom: FieldRef<"Formation", 'String'>
     readonly responsablePedagogiqueEmail: FieldRef<"Formation", 'String'>
     readonly responsablePedagogiqueTelephone: FieldRef<"Formation", 'String'>
+    readonly responsablePedagogiqueUserId: FieldRef<"Formation", 'String'>
+    readonly responsablePedagogiqueSignatureToken: FieldRef<"Formation", 'String'>
+    readonly responsablePedagogiqueSignatureEnvoyeAt: FieldRef<"Formation", 'DateTime'>
+    readonly responsablePedagogiqueSignatureSignedAt: FieldRef<"Formation", 'DateTime'>
+    readonly responsablePedagogiqueSignatureStoragePath: FieldRef<"Formation", 'String'>
+    readonly responsablePedagogiqueSignatureIpAddress: FieldRef<"Formation", 'String'>
+    readonly responsablePedagogiqueSignatureUserAgent: FieldRef<"Formation", 'String'>
     readonly dateDebut: FieldRef<"Formation", 'DateTime'>
     readonly dateFin: FieldRef<"Formation", 'DateTime'>
     readonly groupeEquivalence: FieldRef<"Formation", 'GroupeEquivalence'>
@@ -8784,6 +8920,25 @@ export namespace Prisma {
      * Limit how many Formations to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Formation.responsablePedagogiqueUser
+   */
+  export type Formation$responsablePedagogiqueUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -57602,6 +57757,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom: 'responsablePedagogiquePrenom',
     responsablePedagogiqueEmail: 'responsablePedagogiqueEmail',
     responsablePedagogiqueTelephone: 'responsablePedagogiqueTelephone',
+    responsablePedagogiqueUserId: 'responsablePedagogiqueUserId',
+    responsablePedagogiqueSignatureToken: 'responsablePedagogiqueSignatureToken',
+    responsablePedagogiqueSignatureEnvoyeAt: 'responsablePedagogiqueSignatureEnvoyeAt',
+    responsablePedagogiqueSignatureSignedAt: 'responsablePedagogiqueSignatureSignedAt',
+    responsablePedagogiqueSignatureStoragePath: 'responsablePedagogiqueSignatureStoragePath',
+    responsablePedagogiqueSignatureIpAddress: 'responsablePedagogiqueSignatureIpAddress',
+    responsablePedagogiqueSignatureUserAgent: 'responsablePedagogiqueSignatureUserAgent',
     dateDebut: 'dateDebut',
     dateFin: 'dateFin',
     groupeEquivalence: 'groupeEquivalence',
@@ -58811,6 +58973,7 @@ export namespace Prisma {
     articles?: ArticleListRelationFilter
     demandesInscription?: DemandeInscriptionListRelationFilter
     formationsEnCharge?: FormationFormateurListRelationFilter
+    formationsResponsablePedagogique?: FormationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -58835,6 +58998,7 @@ export namespace Prisma {
     articles?: ArticleOrderByRelationAggregateInput
     demandesInscription?: DemandeInscriptionOrderByRelationAggregateInput
     formationsEnCharge?: FormationFormateurOrderByRelationAggregateInput
+    formationsResponsablePedagogique?: FormationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -58862,6 +59026,7 @@ export namespace Prisma {
     articles?: ArticleListRelationFilter
     demandesInscription?: DemandeInscriptionListRelationFilter
     formationsEnCharge?: FormationFormateurListRelationFilter
+    formationsResponsablePedagogique?: FormationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -58932,6 +59097,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueUserId?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureToken?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureIpAddress?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureUserAgent?: StringNullableFilter<"Formation"> | string | null
     dateDebut?: DateTimeNullableFilter<"Formation"> | Date | string | null
     dateFin?: DateTimeNullableFilter<"Formation"> | Date | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
@@ -58943,6 +59115,7 @@ export namespace Prisma {
     resultats?: JsonNullableFilter<"Formation">
     createdAt?: DateTimeFilter<"Formation"> | Date | string
     updatedAt?: DateTimeFilter<"Formation"> | Date | string
+    responsablePedagogiqueUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     sessions?: SessionListRelationFilter
     inscriptions?: InscriptionListRelationFilter
     demandes?: DemandeInscriptionListRelationFilter
@@ -58989,6 +59162,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrderInput | SortOrder
     responsablePedagogiqueEmail?: SortOrderInput | SortOrder
     responsablePedagogiqueTelephone?: SortOrderInput | SortOrder
+    responsablePedagogiqueUserId?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureToken?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureEnvoyeAt?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureSignedAt?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureStoragePath?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureIpAddress?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureUserAgent?: SortOrderInput | SortOrder
     dateDebut?: SortOrderInput | SortOrder
     dateFin?: SortOrderInput | SortOrder
     groupeEquivalence?: SortOrderInput | SortOrder
@@ -59000,6 +59180,7 @@ export namespace Prisma {
     resultats?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    responsablePedagogiqueUser?: UserOrderByWithRelationInput
     sessions?: SessionOrderByRelationAggregateInput
     inscriptions?: InscriptionOrderByRelationAggregateInput
     demandes?: DemandeInscriptionOrderByRelationAggregateInput
@@ -59016,6 +59197,7 @@ export namespace Prisma {
   export type FormationWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     slug?: string
+    responsablePedagogiqueSignatureToken?: string
     AND?: FormationWhereInput | FormationWhereInput[]
     OR?: FormationWhereInput[]
     NOT?: FormationWhereInput | FormationWhereInput[]
@@ -59049,6 +59231,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
     responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueUserId?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureIpAddress?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureUserAgent?: StringNullableFilter<"Formation"> | string | null
     dateDebut?: DateTimeNullableFilter<"Formation"> | Date | string | null
     dateFin?: DateTimeNullableFilter<"Formation"> | Date | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
@@ -59060,6 +59248,7 @@ export namespace Prisma {
     resultats?: JsonNullableFilter<"Formation">
     createdAt?: DateTimeFilter<"Formation"> | Date | string
     updatedAt?: DateTimeFilter<"Formation"> | Date | string
+    responsablePedagogiqueUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     sessions?: SessionListRelationFilter
     inscriptions?: InscriptionListRelationFilter
     demandes?: DemandeInscriptionListRelationFilter
@@ -59071,7 +59260,7 @@ export namespace Prisma {
     ongletsVedette?: FormationOngletListRelationFilter
     conventionTemplate?: XOR<ConventionTemplateNullableScalarRelationFilter, ConventionTemplateWhereInput> | null
     conventionStagiaires?: ConventionStagiaireListRelationFilter
-  }, "id" | "slug">
+  }, "id" | "slug" | "responsablePedagogiqueSignatureToken">
 
   export type FormationOrderByWithAggregationInput = {
     id?: SortOrder
@@ -59106,6 +59295,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrderInput | SortOrder
     responsablePedagogiqueEmail?: SortOrderInput | SortOrder
     responsablePedagogiqueTelephone?: SortOrderInput | SortOrder
+    responsablePedagogiqueUserId?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureToken?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureEnvoyeAt?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureSignedAt?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureStoragePath?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureIpAddress?: SortOrderInput | SortOrder
+    responsablePedagogiqueSignatureUserAgent?: SortOrderInput | SortOrder
     dateDebut?: SortOrderInput | SortOrder
     dateFin?: SortOrderInput | SortOrder
     groupeEquivalence?: SortOrderInput | SortOrder
@@ -59160,6 +59356,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     responsablePedagogiqueEmail?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     responsablePedagogiqueTelephone?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    responsablePedagogiqueUserId?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureToken?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: DateTimeNullableWithAggregatesFilter<"Formation"> | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: DateTimeNullableWithAggregatesFilter<"Formation"> | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureIpAddress?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureUserAgent?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     dateDebut?: DateTimeNullableWithAggregatesFilter<"Formation"> | Date | string | null
     dateFin?: DateTimeNullableWithAggregatesFilter<"Formation"> | Date | string | null
     groupeEquivalence?: EnumGroupeEquivalenceNullableWithAggregatesFilter<"Formation"> | $Enums.GroupeEquivalence | null
@@ -62612,6 +62815,7 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -62636,6 +62840,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUpdateInput = {
@@ -62660,6 +62865,7 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -62684,6 +62890,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -62757,6 +62964,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -62768,6 +62981,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
@@ -62814,6 +63028,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -62869,6 +63090,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -62880,6 +63107,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
@@ -62926,6 +63154,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -62982,6 +63217,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -63027,6 +63269,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -63073,6 +63321,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -67018,6 +67273,12 @@ export namespace Prisma {
     none?: FormationFormateurWhereInput
   }
 
+  export type FormationListRelationFilter = {
+    every?: FormationWhereInput
+    some?: FormationWhereInput
+    none?: FormationWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -67064,6 +67325,10 @@ export namespace Prisma {
   }
 
   export type FormationFormateurOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FormationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -67290,6 +67555,11 @@ export namespace Prisma {
     not?: NestedEnumVarianteNodeNullableFilter<$PrismaModel> | $Enums.VarianteNode | null
   }
 
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
   export type SessionListRelationFilter = {
     every?: SessionWhereInput
     some?: SessionWhereInput
@@ -67368,6 +67638,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrder
     responsablePedagogiqueEmail?: SortOrder
     responsablePedagogiqueTelephone?: SortOrder
+    responsablePedagogiqueUserId?: SortOrder
+    responsablePedagogiqueSignatureToken?: SortOrder
+    responsablePedagogiqueSignatureEnvoyeAt?: SortOrder
+    responsablePedagogiqueSignatureSignedAt?: SortOrder
+    responsablePedagogiqueSignatureStoragePath?: SortOrder
+    responsablePedagogiqueSignatureIpAddress?: SortOrder
+    responsablePedagogiqueSignatureUserAgent?: SortOrder
     dateDebut?: SortOrder
     dateFin?: SortOrder
     groupeEquivalence?: SortOrder
@@ -67420,6 +67697,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrder
     responsablePedagogiqueEmail?: SortOrder
     responsablePedagogiqueTelephone?: SortOrder
+    responsablePedagogiqueUserId?: SortOrder
+    responsablePedagogiqueSignatureToken?: SortOrder
+    responsablePedagogiqueSignatureEnvoyeAt?: SortOrder
+    responsablePedagogiqueSignatureSignedAt?: SortOrder
+    responsablePedagogiqueSignatureStoragePath?: SortOrder
+    responsablePedagogiqueSignatureIpAddress?: SortOrder
+    responsablePedagogiqueSignatureUserAgent?: SortOrder
     dateDebut?: SortOrder
     dateFin?: SortOrder
     groupeEquivalence?: SortOrder
@@ -67464,6 +67748,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: SortOrder
     responsablePedagogiqueEmail?: SortOrder
     responsablePedagogiqueTelephone?: SortOrder
+    responsablePedagogiqueUserId?: SortOrder
+    responsablePedagogiqueSignatureToken?: SortOrder
+    responsablePedagogiqueSignatureEnvoyeAt?: SortOrder
+    responsablePedagogiqueSignatureSignedAt?: SortOrder
+    responsablePedagogiqueSignatureStoragePath?: SortOrder
+    responsablePedagogiqueSignatureIpAddress?: SortOrder
+    responsablePedagogiqueSignatureUserAgent?: SortOrder
     dateDebut?: SortOrder
     dateFin?: SortOrder
     groupeEquivalence?: SortOrder
@@ -67792,11 +68083,6 @@ export namespace Prisma {
     isNot?: FormationWhereInput | null
   }
 
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
   export type DemandeInscriptionCountOrderByAggregateInput = {
     id?: SortOrder
     nom?: SortOrder
@@ -68026,16 +68312,6 @@ export namespace Prisma {
     ipAddress?: SortOrder
     userAgent?: SortOrder
     documentHash?: SortOrder
-  }
-
-  export type FormationListRelationFilter = {
-    every?: FormationWhereInput
-    some?: FormationWhereInput
-    none?: FormationWhereInput
-  }
-
-  export type FormationOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type ConventionTemplateCountOrderByAggregateInput = {
@@ -70111,6 +70387,13 @@ export namespace Prisma {
     connect?: FormationFormateurWhereUniqueInput | FormationFormateurWhereUniqueInput[]
   }
 
+  export type FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput = {
+    create?: XOR<FormationCreateWithoutResponsablePedagogiqueUserInput, FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput> | FormationCreateWithoutResponsablePedagogiqueUserInput[] | FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput[]
+    connectOrCreate?: FormationCreateOrConnectWithoutResponsablePedagogiqueUserInput | FormationCreateOrConnectWithoutResponsablePedagogiqueUserInput[]
+    createMany?: FormationCreateManyResponsablePedagogiqueUserInputEnvelope
+    connect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+  }
+
   export type InscriptionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<InscriptionCreateWithoutUserInput, InscriptionUncheckedCreateWithoutUserInput> | InscriptionCreateWithoutUserInput[] | InscriptionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: InscriptionCreateOrConnectWithoutUserInput | InscriptionCreateOrConnectWithoutUserInput[]
@@ -70186,6 +70469,13 @@ export namespace Prisma {
     connectOrCreate?: FormationFormateurCreateOrConnectWithoutUserInput | FormationFormateurCreateOrConnectWithoutUserInput[]
     createMany?: FormationFormateurCreateManyUserInputEnvelope
     connect?: FormationFormateurWhereUniqueInput | FormationFormateurWhereUniqueInput[]
+  }
+
+  export type FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput = {
+    create?: XOR<FormationCreateWithoutResponsablePedagogiqueUserInput, FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput> | FormationCreateWithoutResponsablePedagogiqueUserInput[] | FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput[]
+    connectOrCreate?: FormationCreateOrConnectWithoutResponsablePedagogiqueUserInput | FormationCreateOrConnectWithoutResponsablePedagogiqueUserInput[]
+    createMany?: FormationCreateManyResponsablePedagogiqueUserInputEnvelope
+    connect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -70362,6 +70652,20 @@ export namespace Prisma {
     deleteMany?: FormationFormateurScalarWhereInput | FormationFormateurScalarWhereInput[]
   }
 
+  export type FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput = {
+    create?: XOR<FormationCreateWithoutResponsablePedagogiqueUserInput, FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput> | FormationCreateWithoutResponsablePedagogiqueUserInput[] | FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput[]
+    connectOrCreate?: FormationCreateOrConnectWithoutResponsablePedagogiqueUserInput | FormationCreateOrConnectWithoutResponsablePedagogiqueUserInput[]
+    upsert?: FormationUpsertWithWhereUniqueWithoutResponsablePedagogiqueUserInput | FormationUpsertWithWhereUniqueWithoutResponsablePedagogiqueUserInput[]
+    createMany?: FormationCreateManyResponsablePedagogiqueUserInputEnvelope
+    set?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    disconnect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    delete?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    connect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    update?: FormationUpdateWithWhereUniqueWithoutResponsablePedagogiqueUserInput | FormationUpdateWithWhereUniqueWithoutResponsablePedagogiqueUserInput[]
+    updateMany?: FormationUpdateManyWithWhereWithoutResponsablePedagogiqueUserInput | FormationUpdateManyWithWhereWithoutResponsablePedagogiqueUserInput[]
+    deleteMany?: FormationScalarWhereInput | FormationScalarWhereInput[]
+  }
+
   export type InscriptionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<InscriptionCreateWithoutUserInput, InscriptionUncheckedCreateWithoutUserInput> | InscriptionCreateWithoutUserInput[] | InscriptionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: InscriptionCreateOrConnectWithoutUserInput | InscriptionCreateOrConnectWithoutUserInput[]
@@ -70514,6 +70818,26 @@ export namespace Prisma {
     update?: FormationFormateurUpdateWithWhereUniqueWithoutUserInput | FormationFormateurUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: FormationFormateurUpdateManyWithWhereWithoutUserInput | FormationFormateurUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: FormationFormateurScalarWhereInput | FormationFormateurScalarWhereInput[]
+  }
+
+  export type FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput = {
+    create?: XOR<FormationCreateWithoutResponsablePedagogiqueUserInput, FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput> | FormationCreateWithoutResponsablePedagogiqueUserInput[] | FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput[]
+    connectOrCreate?: FormationCreateOrConnectWithoutResponsablePedagogiqueUserInput | FormationCreateOrConnectWithoutResponsablePedagogiqueUserInput[]
+    upsert?: FormationUpsertWithWhereUniqueWithoutResponsablePedagogiqueUserInput | FormationUpsertWithWhereUniqueWithoutResponsablePedagogiqueUserInput[]
+    createMany?: FormationCreateManyResponsablePedagogiqueUserInputEnvelope
+    set?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    disconnect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    delete?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    connect?: FormationWhereUniqueInput | FormationWhereUniqueInput[]
+    update?: FormationUpdateWithWhereUniqueWithoutResponsablePedagogiqueUserInput | FormationUpdateWithWhereUniqueWithoutResponsablePedagogiqueUserInput[]
+    updateMany?: FormationUpdateManyWithWhereWithoutResponsablePedagogiqueUserInput | FormationUpdateManyWithWhereWithoutResponsablePedagogiqueUserInput[]
+    deleteMany?: FormationScalarWhereInput | FormationScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput = {
+    create?: XOR<UserCreateWithoutFormationsResponsablePedagogiqueInput, UserUncheckedCreateWithoutFormationsResponsablePedagogiqueInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFormationsResponsablePedagogiqueInput
+    connect?: UserWhereUniqueInput
   }
 
   export type SessionCreateNestedManyWithoutFormationInput = {
@@ -70716,6 +71040,16 @@ export namespace Prisma {
 
   export type NullableEnumVarianteNodeFieldUpdateOperationsInput = {
     set?: $Enums.VarianteNode | null
+  }
+
+  export type UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput = {
+    create?: XOR<UserCreateWithoutFormationsResponsablePedagogiqueInput, UserUncheckedCreateWithoutFormationsResponsablePedagogiqueInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFormationsResponsablePedagogiqueInput
+    upsert?: UserUpsertWithoutFormationsResponsablePedagogiqueInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFormationsResponsablePedagogiqueInput, UserUpdateWithoutFormationsResponsablePedagogiqueInput>, UserUncheckedUpdateWithoutFormationsResponsablePedagogiqueInput>
   }
 
   export type SessionUpdateManyWithoutFormationNestedInput = {
@@ -73224,6 +73558,140 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FormationCreateWithoutResponsablePedagogiqueUserInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    fafaEligible?: boolean
+    bonFormationEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    fffCaptureActif?: boolean
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
+    documents?: DocumentCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
+    messages?: MessageCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
+  }
+
+  export type FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    fafaEligible?: boolean
+    bonFormationEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    fffCaptureActif?: boolean
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionUncheckedCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionUncheckedCreateNestedManyWithoutFormationInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
+  }
+
+  export type FormationCreateOrConnectWithoutResponsablePedagogiqueUserInput = {
+    where: FormationWhereUniqueInput
+    create: XOR<FormationCreateWithoutResponsablePedagogiqueUserInput, FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput>
+  }
+
+  export type FormationCreateManyResponsablePedagogiqueUserInputEnvelope = {
+    data: FormationCreateManyResponsablePedagogiqueUserInput | FormationCreateManyResponsablePedagogiqueUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type InscriptionUpsertWithWhereUniqueWithoutUserInput = {
     where: InscriptionWhereUniqueInput
     update: XOR<InscriptionUpdateWithoutUserInput, InscriptionUncheckedUpdateWithoutUserInput>
@@ -73549,6 +74017,131 @@ export namespace Prisma {
     userId?: StringFilter<"FormationFormateur"> | string
     formationId?: StringFilter<"FormationFormateur"> | string
     createdAt?: DateTimeFilter<"FormationFormateur"> | Date | string
+  }
+
+  export type FormationUpsertWithWhereUniqueWithoutResponsablePedagogiqueUserInput = {
+    where: FormationWhereUniqueInput
+    update: XOR<FormationUpdateWithoutResponsablePedagogiqueUserInput, FormationUncheckedUpdateWithoutResponsablePedagogiqueUserInput>
+    create: XOR<FormationCreateWithoutResponsablePedagogiqueUserInput, FormationUncheckedCreateWithoutResponsablePedagogiqueUserInput>
+  }
+
+  export type FormationUpdateWithWhereUniqueWithoutResponsablePedagogiqueUserInput = {
+    where: FormationWhereUniqueInput
+    data: XOR<FormationUpdateWithoutResponsablePedagogiqueUserInput, FormationUncheckedUpdateWithoutResponsablePedagogiqueUserInput>
+  }
+
+  export type FormationUpdateManyWithWhereWithoutResponsablePedagogiqueUserInput = {
+    where: FormationScalarWhereInput
+    data: XOR<FormationUpdateManyMutationInput, FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserInput>
+  }
+
+  export type FormationScalarWhereInput = {
+    AND?: FormationScalarWhereInput | FormationScalarWhereInput[]
+    OR?: FormationScalarWhereInput[]
+    NOT?: FormationScalarWhereInput | FormationScalarWhereInput[]
+    id?: StringFilter<"Formation"> | string
+    slug?: StringFilter<"Formation"> | string
+    titre?: StringFilter<"Formation"> | string
+    description?: StringNullableFilter<"Formation"> | string | null
+    type?: EnumTypeFormationFilter<"Formation"> | $Enums.TypeFormation
+    statut?: EnumStatutFormationFilter<"Formation"> | $Enums.StatutFormation
+    dureeHeures?: IntNullableFilter<"Formation"> | number | null
+    dureeLabel?: StringNullableFilter<"Formation"> | string | null
+    modeLabel?: StringNullableFilter<"Formation"> | string | null
+    lieu?: StringNullableFilter<"Formation"> | string | null
+    prix?: FloatNullableFilter<"Formation"> | number | null
+    places?: IntNullableFilter<"Formation"> | number | null
+    lienVisio?: StringNullableFilter<"Formation"> | string | null
+    image?: StringNullableFilter<"Formation"> | string | null
+    programme?: JsonNullableFilter<"Formation">
+    formateurNom?: StringNullableFilter<"Formation"> | string | null
+    formateurRole?: StringNullableFilter<"Formation"> | string | null
+    ordre?: IntFilter<"Formation"> | number
+    categorie?: EnumCategorieFormationFilter<"Formation"> | $Enums.CategorieFormation
+    filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
+    cpfEligible?: BoolFilter<"Formation"> | boolean
+    fafaEligible?: BoolFilter<"Formation"> | boolean
+    bonFormationEligible?: BoolFilter<"Formation"> | boolean
+    modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
+    lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
+    lienFffClub?: StringNullableFilter<"Formation"> | string | null
+    fffCaptureActif?: BoolFilter<"Formation"> | boolean
+    conventionTemplateId?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueNom?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueUserId?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureToken?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureIpAddress?: StringNullableFilter<"Formation"> | string | null
+    responsablePedagogiqueSignatureUserAgent?: StringNullableFilter<"Formation"> | string | null
+    dateDebut?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    dateFin?: DateTimeNullableFilter<"Formation"> | Date | string | null
+    groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
+    varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
+    badgeNode?: StringNullableFilter<"Formation"> | string | null
+    shortNode?: StringNullableFilter<"Formation"> | string | null
+    tauxReussite?: StringNullableFilter<"Formation"> | string | null
+    tauxSatisfaction?: StringNullableFilter<"Formation"> | string | null
+    resultats?: JsonNullableFilter<"Formation">
+    createdAt?: DateTimeFilter<"Formation"> | Date | string
+    updatedAt?: DateTimeFilter<"Formation"> | Date | string
+  }
+
+  export type UserCreateWithoutFormationsResponsablePedagogiqueInput = {
+    id?: string
+    email: string
+    nom: string
+    prenom: string
+    telephone?: string | null
+    password?: string | null
+    role?: $Enums.Role
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inscriptions?: InscriptionCreateNestedManyWithoutUserInput
+    documentsUpload?: DocumentCreateNestedManyWithoutUploaderInput
+    documentsRecus?: DocumentDestinataireCreateNestedManyWithoutUserInput
+    signatures?: SignatureCreateNestedManyWithoutUserInput
+    messagesEnvoyes?: MessageCreateNestedManyWithoutExpediteurInput
+    messagesRecus?: MessageDestinataireCreateNestedManyWithoutUserInput
+    covoituragesConduit?: CovoiturageCreateNestedManyWithoutConducteurInput
+    covoituragesPassager?: CovoituragePassagerCreateNestedManyWithoutUserInput
+    articles?: ArticleCreateNestedManyWithoutAuteurInput
+    demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
+    formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFormationsResponsablePedagogiqueInput = {
+    id?: string
+    email: string
+    nom: string
+    prenom: string
+    telephone?: string | null
+    password?: string | null
+    role?: $Enums.Role
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    inscriptions?: InscriptionUncheckedCreateNestedManyWithoutUserInput
+    documentsUpload?: DocumentUncheckedCreateNestedManyWithoutUploaderInput
+    documentsRecus?: DocumentDestinataireUncheckedCreateNestedManyWithoutUserInput
+    signatures?: SignatureUncheckedCreateNestedManyWithoutUserInput
+    messagesEnvoyes?: MessageUncheckedCreateNestedManyWithoutExpediteurInput
+    messagesRecus?: MessageDestinataireUncheckedCreateNestedManyWithoutUserInput
+    covoituragesConduit?: CovoiturageUncheckedCreateNestedManyWithoutConducteurInput
+    covoituragesPassager?: CovoituragePassagerUncheckedCreateNestedManyWithoutUserInput
+    articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
+    demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
+    formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFormationsResponsablePedagogiqueInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFormationsResponsablePedagogiqueInput, UserUncheckedCreateWithoutFormationsResponsablePedagogiqueInput>
   }
 
   export type SessionCreateWithoutFormationInput = {
@@ -73992,6 +74585,65 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserUpsertWithoutFormationsResponsablePedagogiqueInput = {
+    update: XOR<UserUpdateWithoutFormationsResponsablePedagogiqueInput, UserUncheckedUpdateWithoutFormationsResponsablePedagogiqueInput>
+    create: XOR<UserCreateWithoutFormationsResponsablePedagogiqueInput, UserUncheckedCreateWithoutFormationsResponsablePedagogiqueInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFormationsResponsablePedagogiqueInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFormationsResponsablePedagogiqueInput, UserUncheckedUpdateWithoutFormationsResponsablePedagogiqueInput>
+  }
+
+  export type UserUpdateWithoutFormationsResponsablePedagogiqueInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inscriptions?: InscriptionUpdateManyWithoutUserNestedInput
+    documentsUpload?: DocumentUpdateManyWithoutUploaderNestedInput
+    documentsRecus?: DocumentDestinataireUpdateManyWithoutUserNestedInput
+    signatures?: SignatureUpdateManyWithoutUserNestedInput
+    messagesEnvoyes?: MessageUpdateManyWithoutExpediteurNestedInput
+    messagesRecus?: MessageDestinataireUpdateManyWithoutUserNestedInput
+    covoituragesConduit?: CovoiturageUpdateManyWithoutConducteurNestedInput
+    covoituragesPassager?: CovoituragePassagerUpdateManyWithoutUserNestedInput
+    articles?: ArticleUpdateManyWithoutAuteurNestedInput
+    demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
+    formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFormationsResponsablePedagogiqueInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    prenom?: StringFieldUpdateOperationsInput | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inscriptions?: InscriptionUncheckedUpdateManyWithoutUserNestedInput
+    documentsUpload?: DocumentUncheckedUpdateManyWithoutUploaderNestedInput
+    documentsRecus?: DocumentDestinataireUncheckedUpdateManyWithoutUserNestedInput
+    signatures?: SignatureUncheckedUpdateManyWithoutUserNestedInput
+    messagesEnvoyes?: MessageUncheckedUpdateManyWithoutExpediteurNestedInput
+    messagesRecus?: MessageDestinataireUncheckedUpdateManyWithoutUserNestedInput
+    covoituragesConduit?: CovoiturageUncheckedUpdateManyWithoutConducteurNestedInput
+    covoituragesPassager?: CovoituragePassagerUncheckedUpdateManyWithoutUserNestedInput
+    articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
+    demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
+    formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutFormationInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutFormationInput, SessionUncheckedUpdateWithoutFormationInput>
@@ -74304,6 +74956,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutFormationsEnChargeInput = {
@@ -74327,6 +74980,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutFormationsEnChargeInput = {
@@ -74366,6 +75020,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -74377,6 +75037,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
@@ -74422,6 +75083,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -74481,6 +75149,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFormationsEnChargeInput = {
@@ -74504,6 +75173,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type FormationUpsertWithoutFormateursInput = {
@@ -74549,6 +75219,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -74560,6 +75236,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
@@ -74605,6 +75282,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -74659,6 +75343,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -74670,6 +75360,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
     documents?: DocumentCreateNestedManyWithoutFormationInput
@@ -74715,6 +75406,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -74785,6 +75483,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -74796,6 +75500,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
     documents?: DocumentUpdateManyWithoutFormationNestedInput
@@ -74841,6 +75546,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -74884,6 +75596,7 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutInscriptionsInput = {
@@ -74907,6 +75620,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutInscriptionsInput = {
@@ -74946,6 +75660,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -74957,6 +75677,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
     documents?: DocumentCreateNestedManyWithoutFormationInput
@@ -75002,6 +75723,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -75061,6 +75789,7 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInscriptionsInput = {
@@ -75084,6 +75813,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type FormationUpsertWithoutInscriptionsInput = {
@@ -75129,6 +75859,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -75140,6 +75876,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
     documents?: DocumentUpdateManyWithoutFormationNestedInput
@@ -75185,6 +75922,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -75239,6 +75983,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -75250,6 +76000,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     documents?: DocumentCreateNestedManyWithoutFormationInput
@@ -75295,6 +76046,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -75343,6 +76101,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerCreateNestedManyWithoutUserInput
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutDemandesInscriptionInput = {
@@ -75366,6 +76125,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerUncheckedCreateNestedManyWithoutUserInput
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutDemandesInscriptionInput = {
@@ -75416,6 +76176,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -75427,6 +76193,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     documents?: DocumentUpdateManyWithoutFormationNestedInput
@@ -75472,6 +76239,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -75526,6 +76300,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerUpdateManyWithoutUserNestedInput
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDemandesInscriptionInput = {
@@ -75549,6 +76324,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerUncheckedUpdateManyWithoutUserNestedInput
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserCreateWithoutDocumentsUploadInput = {
@@ -75572,6 +76348,7 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutDocumentsUploadInput = {
@@ -75595,6 +76372,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutDocumentsUploadInput = {
@@ -75634,6 +76412,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -75645,6 +76429,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
@@ -75690,6 +76475,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -75831,6 +76623,7 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDocumentsUploadInput = {
@@ -75854,6 +76647,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type FormationUpsertWithoutDocumentsInput = {
@@ -75899,6 +76693,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -75910,6 +76710,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
@@ -75955,6 +76756,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -76091,6 +76899,7 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutDocumentsRecusInput = {
@@ -76114,6 +76923,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutDocumentsRecusInput = {
@@ -76204,6 +77014,7 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDocumentsRecusInput = {
@@ -76227,6 +77038,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type DocumentCreateWithoutSignaturesInput = {
@@ -76295,6 +77107,7 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutSignaturesInput = {
@@ -76318,6 +77131,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutSignaturesInput = {
@@ -76408,6 +77222,7 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSignaturesInput = {
@@ -76431,6 +77246,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type FormationCreateWithoutConventionTemplateInput = {
@@ -76465,6 +77281,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -76476,6 +77298,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
@@ -76520,6 +77343,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -76569,55 +77399,6 @@ export namespace Prisma {
     data: XOR<FormationUpdateManyMutationInput, FormationUncheckedUpdateManyWithoutConventionTemplateInput>
   }
 
-  export type FormationScalarWhereInput = {
-    AND?: FormationScalarWhereInput | FormationScalarWhereInput[]
-    OR?: FormationScalarWhereInput[]
-    NOT?: FormationScalarWhereInput | FormationScalarWhereInput[]
-    id?: StringFilter<"Formation"> | string
-    slug?: StringFilter<"Formation"> | string
-    titre?: StringFilter<"Formation"> | string
-    description?: StringNullableFilter<"Formation"> | string | null
-    type?: EnumTypeFormationFilter<"Formation"> | $Enums.TypeFormation
-    statut?: EnumStatutFormationFilter<"Formation"> | $Enums.StatutFormation
-    dureeHeures?: IntNullableFilter<"Formation"> | number | null
-    dureeLabel?: StringNullableFilter<"Formation"> | string | null
-    modeLabel?: StringNullableFilter<"Formation"> | string | null
-    lieu?: StringNullableFilter<"Formation"> | string | null
-    prix?: FloatNullableFilter<"Formation"> | number | null
-    places?: IntNullableFilter<"Formation"> | number | null
-    lienVisio?: StringNullableFilter<"Formation"> | string | null
-    image?: StringNullableFilter<"Formation"> | string | null
-    programme?: JsonNullableFilter<"Formation">
-    formateurNom?: StringNullableFilter<"Formation"> | string | null
-    formateurRole?: StringNullableFilter<"Formation"> | string | null
-    ordre?: IntFilter<"Formation"> | number
-    categorie?: EnumCategorieFormationFilter<"Formation"> | $Enums.CategorieFormation
-    filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
-    cpfEligible?: BoolFilter<"Formation"> | boolean
-    fafaEligible?: BoolFilter<"Formation"> | boolean
-    bonFormationEligible?: BoolFilter<"Formation"> | boolean
-    modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
-    lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
-    lienFffClub?: StringNullableFilter<"Formation"> | string | null
-    fffCaptureActif?: BoolFilter<"Formation"> | boolean
-    conventionTemplateId?: StringNullableFilter<"Formation"> | string | null
-    responsablePedagogiqueNom?: StringNullableFilter<"Formation"> | string | null
-    responsablePedagogiquePrenom?: StringNullableFilter<"Formation"> | string | null
-    responsablePedagogiqueEmail?: StringNullableFilter<"Formation"> | string | null
-    responsablePedagogiqueTelephone?: StringNullableFilter<"Formation"> | string | null
-    dateDebut?: DateTimeNullableFilter<"Formation"> | Date | string | null
-    dateFin?: DateTimeNullableFilter<"Formation"> | Date | string | null
-    groupeEquivalence?: EnumGroupeEquivalenceNullableFilter<"Formation"> | $Enums.GroupeEquivalence | null
-    varianteNode?: EnumVarianteNodeNullableFilter<"Formation"> | $Enums.VarianteNode | null
-    badgeNode?: StringNullableFilter<"Formation"> | string | null
-    shortNode?: StringNullableFilter<"Formation"> | string | null
-    tauxReussite?: StringNullableFilter<"Formation"> | string | null
-    tauxSatisfaction?: StringNullableFilter<"Formation"> | string | null
-    resultats?: JsonNullableFilter<"Formation">
-    createdAt?: DateTimeFilter<"Formation"> | Date | string
-    updatedAt?: DateTimeFilter<"Formation"> | Date | string
-  }
-
   export type FormationCreateWithoutConventionStagiairesInput = {
     id?: string
     slug: string
@@ -76650,6 +77431,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -76661,6 +77448,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
@@ -76706,6 +77494,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -76828,6 +77623,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -76839,6 +77640,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
@@ -76884,6 +77686,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -77152,6 +77961,7 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesEnvoyesInput = {
@@ -77175,6 +77985,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesEnvoyesInput = {
@@ -77238,6 +78049,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -77249,6 +78066,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
@@ -77294,6 +78112,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -77398,6 +78223,7 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesEnvoyesInput = {
@@ -77421,6 +78247,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type MessageDestinataireUpsertWithWhereUniqueWithoutMessageInput = {
@@ -77482,6 +78309,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -77493,6 +78326,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
@@ -77538,6 +78372,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -77657,6 +78498,7 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesRecusInput = {
@@ -77680,6 +78522,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesRecusInput = {
@@ -77750,6 +78593,7 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesRecusInput = {
@@ -77773,6 +78617,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserCreateWithoutCovoituragesConduitInput = {
@@ -77796,6 +78641,7 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutCovoituragesConduitInput = {
@@ -77819,6 +78665,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutCovoituragesConduitInput = {
@@ -77880,6 +78727,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -77891,6 +78744,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
@@ -77936,6 +78790,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -77995,6 +78856,7 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCovoituragesConduitInput = {
@@ -78018,6 +78880,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type CovoituragePassagerUpsertWithWhereUniqueWithoutCovoiturageInput = {
@@ -78079,6 +78942,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -78090,6 +78959,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
@@ -78135,6 +79005,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -78209,6 +79086,7 @@ export namespace Prisma {
     articles?: ArticleCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutCovoituragesPassagerInput = {
@@ -78232,6 +79110,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedCreateNestedManyWithoutAuteurInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutCovoituragesPassagerInput = {
@@ -78308,6 +79187,7 @@ export namespace Prisma {
     articles?: ArticleUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCovoituragesPassagerInput = {
@@ -78331,6 +79211,7 @@ export namespace Prisma {
     articles?: ArticleUncheckedUpdateManyWithoutAuteurNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserCreateWithoutArticlesInput = {
@@ -78354,6 +79235,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerCreateNestedManyWithoutUserInput
     demandesInscription?: DemandeInscriptionCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserUncheckedCreateWithoutArticlesInput = {
@@ -78377,6 +79259,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerUncheckedCreateNestedManyWithoutUserInput
     demandesInscription?: DemandeInscriptionUncheckedCreateNestedManyWithoutUserInput
     formationsEnCharge?: FormationFormateurUncheckedCreateNestedManyWithoutUserInput
+    formationsResponsablePedagogique?: FormationUncheckedCreateNestedManyWithoutResponsablePedagogiqueUserInput
   }
 
   export type UserCreateOrConnectWithoutArticlesInput = {
@@ -78416,6 +79299,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerUpdateManyWithoutUserNestedInput
     demandesInscription?: DemandeInscriptionUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutArticlesInput = {
@@ -78439,6 +79323,7 @@ export namespace Prisma {
     covoituragesPassager?: CovoituragePassagerUncheckedUpdateManyWithoutUserNestedInput
     demandesInscription?: DemandeInscriptionUncheckedUpdateManyWithoutUserNestedInput
     formationsEnCharge?: FormationFormateurUncheckedUpdateManyWithoutUserNestedInput
+    formationsResponsablePedagogique?: FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserNestedInput
   }
 
   export type FormationCreateWithoutHeroSlidesInput = {
@@ -78473,6 +79358,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -78484,6 +79375,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
@@ -78529,6 +79421,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -78599,6 +79498,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -78610,6 +79515,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
@@ -78655,6 +79561,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -78709,6 +79622,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -78720,6 +79639,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    responsablePedagogiqueUser?: UserCreateNestedOneWithoutFormationsResponsablePedagogiqueInput
     sessions?: SessionCreateNestedManyWithoutFormationInput
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
     demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
@@ -78765,6 +79685,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -78835,6 +79762,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -78846,6 +79779,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
@@ -78891,6 +79825,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -79887,6 +80828,58 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type FormationCreateManyResponsablePedagogiqueUserInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    fafaEligible?: boolean
+    bonFormationEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    fffCaptureActif?: boolean
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type InscriptionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     statut?: EnumStatutInscriptionFieldUpdateOperationsInput | $Enums.StatutInscription
@@ -80216,6 +81209,182 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     formationId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationUpdateWithoutResponsablePedagogiqueUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
+    messages?: MessageUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
+  }
+
+  export type FormationUncheckedUpdateWithoutResponsablePedagogiqueUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
+  }
+
+  export type FormationUncheckedUpdateManyWithoutResponsablePedagogiqueUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionCreateManyFormationInput = {
@@ -80980,6 +82149,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: string | null
     responsablePedagogiqueEmail?: string | null
     responsablePedagogiqueTelephone?: string | null
+    responsablePedagogiqueUserId?: string | null
+    responsablePedagogiqueSignatureToken?: string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: string | null
+    responsablePedagogiqueSignatureIpAddress?: string | null
+    responsablePedagogiqueSignatureUserAgent?: string | null
     dateDebut?: Date | string | null
     dateFin?: Date | string | null
     groupeEquivalence?: $Enums.GroupeEquivalence | null
@@ -81025,6 +82201,12 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -81036,6 +82218,7 @@ export namespace Prisma {
     resultats?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    responsablePedagogiqueUser?: UserUpdateOneWithoutFormationsResponsablePedagogiqueNestedInput
     sessions?: SessionUpdateManyWithoutFormationNestedInput
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
@@ -81080,6 +82263,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
@@ -81135,6 +82325,13 @@ export namespace Prisma {
     responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
     responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureToken?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureEnvoyeAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureSignedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    responsablePedagogiqueSignatureStoragePath?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureIpAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueSignatureUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
     dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null

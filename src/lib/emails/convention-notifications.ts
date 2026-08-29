@@ -4,6 +4,7 @@ import { sendEmail } from "@/lib/emails/send"
 import { ConventionSignatureRequestEmail } from "@/lib/emails/ConventionSignatureRequestEmail"
 import { ConventionSignatureAdminEmail } from "@/lib/emails/ConventionSignatureAdminEmail"
 import { ConventionSignatureBlockedAdminEmail } from "@/lib/emails/ConventionSignatureBlockedAdminEmail"
+import { ConventionFormationSignatureRequestEmail } from "@/lib/emails/ConventionFormationSignatureRequestEmail"
 import { getAdminNotificationEmails } from "@/lib/emails/admin-recipients"
 import type { RoleSignataire } from "@/generated/prisma"
 
@@ -81,6 +82,45 @@ export async function notifySignataireASigner(signataireId: string): Promise<{ s
 
   if (!sent) {
     await alertAdminsSignatureBloquee({ ...contexte, raison: "échec technique de l'envoi (service de messagerie)" })
+  }
+
+  return { sent }
+}
+
+/**
+ * Envoie la demande de signature unique au responsable pédagogique d'une formation. Même contrat
+ * que notifySignataireASigner : jamais d'échec silencieux, l'appelant ne doit pas marquer la
+ * demande comme envoyée si `sent` est faux.
+ */
+export async function notifyResponsablePedagogiqueASigner(params: {
+  email: string
+  nom: string
+  formationTitre: string
+  token: string
+}): Promise<{ sent: boolean }> {
+  const { sent } = await sendEmail({
+    to: params.email,
+    subject: `Signature responsable pédagogique — ${params.formationTitre}`,
+    react: ConventionFormationSignatureRequestEmail({ nom: params.nom, formationTitre: params.formationTitre, token: params.token }),
+  })
+
+  if (!sent) {
+    const adminEmails = await getAdminNotificationEmails()
+    await Promise.all(
+      adminEmails.map((email) =>
+        sendEmail({
+          to: email,
+          subject: `Échec d'envoi — signature responsable pédagogique (${params.formationTitre})`,
+          react: ConventionSignatureBlockedAdminEmail({
+            formationTitre: params.formationTitre,
+            stagiairePrenom: "",
+            stagiaireNom: "",
+            roleLabel: "Le responsable pédagogique",
+            raison: "échec technique de l'envoi (service de messagerie)",
+          }),
+        })
+      )
+    )
   }
 
   return { sent }

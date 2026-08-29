@@ -10,8 +10,14 @@ export {
   ALL_TEMPLATE_FIELD_NAMES,
 } from "./variables-shared"
 
-/** Ordre strict du circuit de signature : chaque étape n'est notifiée qu'une fois la précédente signée. */
-export const SIGNATAIRE_ORDER: RoleSignataire[] = ["STAGIAIRE", "CLUB", "TUTEUR", "MAITRE_DE_STAGE", "RESPONSABLE_PEDAGOGIQUE"]
+/**
+ * Ordre strict du circuit de signature PAR STAGIAIRE : chaque étape n'est notifiée qu'une fois la
+ * précédente signée. Le responsable pédagogique n'en fait plus partie — il signe une seule fois
+ * pour toute la formation (voir Formation.responsablePedagogiqueSignature*), et cette signature
+ * est incrustée automatiquement dans le PDF de chaque stagiaire à sa génération, sans étape de
+ * circuit dédiée.
+ */
+export const SIGNATAIRE_ORDER: Exclude<RoleSignataire, "RESPONSABLE_PEDAGOGIQUE">[] = ["STAGIAIRE", "CLUB", "TUTEUR", "MAITRE_DE_STAGE"]
 
 type FormationVars = Pick<
   Formation,
@@ -23,7 +29,11 @@ type FormationVars = Pick<
   | "responsablePedagogiqueTelephone"
   | "dateDebut"
   | "dateFin"
->
+> & {
+  // Priorité sur les champs texte ci-dessus (repli pour les formations créées avant le passage à
+  // un utilisateur IR2F lié — voir schema.prisma).
+  responsablePedagogiqueUser: { nom: string; prenom: string; email: string; telephone: string | null } | null
+}
 
 type StagiaireVars = Pick<
   ConventionStagiaire,
@@ -115,16 +125,21 @@ export function buildConventionVariables(params: { formation: FormationVars; for
     maitre_de_stage_ville: stagiaire.maitreDeStageVille ?? "",
     maitre_de_stage_email: stagiaire.maitreDeStageEmail ?? "",
 
-    responsable_pedagogique_nom: formation.responsablePedagogiqueNom ?? "",
-    responsable_pedagogique_prenom: formation.responsablePedagogiquePrenom ?? "",
-    responsable_pedagogique_nom_prenom: [formation.responsablePedagogiquePrenom, formation.responsablePedagogiqueNom].filter(Boolean).join(" "),
-    responsable_pedagogique_email: formation.responsablePedagogiqueEmail ?? "",
-    responsable_pedagogique_telephone: formation.responsablePedagogiqueTelephone ?? "",
+    responsable_pedagogique_nom: formation.responsablePedagogiqueUser?.nom ?? formation.responsablePedagogiqueNom ?? "",
+    responsable_pedagogique_prenom: formation.responsablePedagogiqueUser?.prenom ?? formation.responsablePedagogiquePrenom ?? "",
+    responsable_pedagogique_nom_prenom: formation.responsablePedagogiqueUser
+      ? `${formation.responsablePedagogiqueUser.prenom} ${formation.responsablePedagogiqueUser.nom}`
+      : [formation.responsablePedagogiquePrenom, formation.responsablePedagogiqueNom].filter(Boolean).join(" "),
+    responsable_pedagogique_email: formation.responsablePedagogiqueUser?.email ?? formation.responsablePedagogiqueEmail ?? "",
+    responsable_pedagogique_telephone: formation.responsablePedagogiqueUser?.telephone ?? formation.responsablePedagogiqueTelephone ?? "",
   }
 }
 
-/** Résout le nom/email du signataire courant pour une étape donnée. Retourne `null` si l'étape ne peut pas être servie (ex. pas d'email de club/tuteur/maître de stage renseigné à l'import, ou responsable pédagogique manquant sur la formation). */
-export function resolveSignataireContact(role: RoleSignataire, stagiaire: StagiaireVars, formation: FormationVars): { nom: string; email: string } | null {
+/** Résout le nom/email du signataire courant pour une étape donnée. Retourne `null` si l'étape ne peut pas être servie (ex. pas d'email de club/tuteur/maître de stage renseigné à l'import). Le responsable pédagogique n'est plus résolu ici — voir SIGNATAIRE_ORDER. */
+export function resolveSignataireContact(
+  role: Exclude<RoleSignataire, "RESPONSABLE_PEDAGOGIQUE">,
+  stagiaire: StagiaireVars
+): { nom: string; email: string } | null {
   switch (role) {
     case "STAGIAIRE":
       return { nom: `${stagiaire.prenom} ${stagiaire.nom}`, email: stagiaire.email }
@@ -137,13 +152,6 @@ export function resolveSignataireContact(role: RoleSignataire, stagiaire: Stagia
     case "MAITRE_DE_STAGE":
       return stagiaire.maitreDeStageEmail
         ? { nom: [stagiaire.maitreDeStagePrenom, stagiaire.maitreDeStageNom].filter(Boolean).join(" ") || "Maître de stage", email: stagiaire.maitreDeStageEmail }
-        : null
-    case "RESPONSABLE_PEDAGOGIQUE":
-      return formation.responsablePedagogiqueEmail
-        ? {
-            nom: [formation.responsablePedagogiquePrenom, formation.responsablePedagogiqueNom].filter(Boolean).join(" ") || "Responsable pédagogique",
-            email: formation.responsablePedagogiqueEmail,
-          }
         : null
   }
 }

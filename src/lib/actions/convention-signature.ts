@@ -6,7 +6,7 @@ import crypto from "crypto"
 import { prisma } from "@/lib/prisma"
 import { downloadStorageFile, uploadBytes } from "@/lib/storage"
 import { fillConventionTemplate, stampSignature, stampCheckmark, finalizeConvention } from "@/lib/conventions/pdf"
-import { SIGNATURE_FIELD_NAMES, SIGNATAIRE_ORDER, NATURE_INTERVENTION_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS } from "@/lib/conventions/variables"
+import { SIGNATURE_FIELD_NAMES, NATURE_INTERVENTION_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS } from "@/lib/conventions/variables"
 import { notifyAdminSignatureProgress } from "@/lib/emails/convention-notifications"
 import { avancerConvention } from "@/lib/actions/conventions"
 import { str, optionalStr } from "@/lib/actions/form-utils"
@@ -121,7 +121,14 @@ export async function signerConvention(
   }
 
   updatedPdf = await stampSignature(updatedPdf, SIGNATURE_FIELD_NAMES[signataire.role], pngBytes, signedAt)
-  if (signataire.ordre === SIGNATAIRE_ORDER.length - 1) updatedPdf = await finalizeConvention(updatedPdf)
+  // Le tuteur peut être absent du circuit (email non renseigné, voir conventions.ts) : le nombre
+  // réel de signataires varie donc d'un stagiaire à l'autre, pas de longueur fixe à 5. On compare
+  // à la dernière étape effectivement créée pour CE stagiaire plutôt qu'à SIGNATAIRE_ORDER.length.
+  const derniereEtape = await prisma.conventionSignataire.aggregate({
+    where: { conventionStagiaireId: stagiaire.id },
+    _max: { ordre: true },
+  })
+  if (signataire.ordre === derniereEtape._max.ordre) updatedPdf = await finalizeConvention(updatedPdf)
   await uploadBytes(updatedPdf, stagiaire.pdfStoragePath, "application/pdf")
 
   const hdrs = await headers()

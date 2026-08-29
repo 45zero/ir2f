@@ -187,17 +187,18 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  inscriptions         Inscription[]
-  documentsUpload      Document[]
-  documentsRecus       DocumentDestinataire[]
-  signatures           Signature[]
-  messagesEnvoyes      Message[]              @relation("Expediteur")
-  messagesRecus        MessageDestinataire[]
-  covoituragesConduit  Covoiturage[]          @relation("Conducteur")
-  covoituragesPassager CovoituragePassager[]
-  articles             Article[]
-  demandesInscription  DemandeInscription[]
-  formationsEnCharge   FormationFormateur[]
+  inscriptions                     Inscription[]
+  documentsUpload                  Document[]
+  documentsRecus                   DocumentDestinataire[]
+  signatures                       Signature[]
+  messagesEnvoyes                  Message[]              @relation("Expediteur")
+  messagesRecus                    MessageDestinataire[]
+  covoituragesConduit              Covoiturage[]          @relation("Conducteur")
+  covoituragesPassager             CovoituragePassager[]
+  articles                         Article[]
+  demandesInscription              DemandeInscription[]
+  formationsEnCharge               FormationFormateur[]
+  formationsResponsablePedagogique Formation[]            @relation("FormationResponsablePedagogique")
 
   @@schema("ir2f")
 }
@@ -241,12 +242,30 @@ model Formation {
 
   // Convention de stage : modèle PDF associé + responsable pédagogique (fixe pour toute la
   // formation — le tuteur et le maître de stage, eux, sont saisis par stagiaire, voir
-  // ConventionStagiaire, car ils varient selon le club d'accueil de chacun)
+  // ConventionStagiaire, car ils varient selon le club d'accueil de chacun). Champs texte
+  // conservés en repli pour les formations créées avant le passage à un utilisateur IR2F lié
+  // (responsablePedagogiqueUser) — nouvelles formations : utiliser le lien.
   conventionTemplateId            String?
   responsablePedagogiqueNom       String?
   responsablePedagogiquePrenom    String?
   responsablePedagogiqueEmail     String?
   responsablePedagogiqueTelephone String?
+
+  // Le responsable pédagogique est un membre de l'équipe IR2F (compte User) qui signe UNE SEULE
+  // FOIS pour toute la formation — pas par stagiaire comme les 4 autres rôles du circuit (voir
+  // RoleSignataire) — via un lien à token envoyé par email, exactement comme pour les autres
+  // signataires (voir ConventionSignataire). Sa signature (image + horodatage) est ensuite
+  // incrustée automatiquement dans le PDF de chaque stagiaire au moment de sa génération (voir
+  // genererEtActiverConvention) : plus aucun signataire RESPONSABLE_PEDAGOGIQUE n'est créé par
+  // stagiaire pour les formations utilisant ce circuit.
+  responsablePedagogiqueUserId               String?
+  responsablePedagogiqueUser                 User?     @relation("FormationResponsablePedagogique", fields: [responsablePedagogiqueUserId], references: [id])
+  responsablePedagogiqueSignatureToken       String?   @unique
+  responsablePedagogiqueSignatureEnvoyeAt    DateTime?
+  responsablePedagogiqueSignatureSignedAt    DateTime?
+  responsablePedagogiqueSignatureStoragePath String?
+  responsablePedagogiqueSignatureIpAddress   String?
+  responsablePedagogiqueSignatureUserAgent   String?
 
   // Période globale de la formation (« du ... au ... »), affichée à côté de la durée et reportée
   // dans la convention de stage — indépendante des sessions (qui peuvent être plus fines).

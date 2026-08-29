@@ -13,20 +13,19 @@ export function ConventionSignatureBlockedAdminEmail({
   roleLabel: string
   raison: string
 }) {
+  const stagiaireLabel = stagiairePrenom || stagiaireNom ? ` de ${stagiairePrenom} ${stagiaireNom}` : ""
   return (
     <EmailLayout>
       <p>
-        <strong>Circuit de signature bloqué</strong> pour la convention de stage de{" "}
-        <strong>{stagiairePrenom} {stagiaireNom}</strong> ({formationTitre}).
+        <strong>Circuit de signature bloqué</strong> pour la convention de stage{stagiaireLabel} ({formationTitre}).
       </p>
       <p>
         Étape concernée : <strong>{roleLabel}</strong>.<br />
         Raison : {raison}.
       </p>
       <p>
-        Complétez l&apos;information manquante sur la fiche du stagiaire puis relancez l&apos;envoi
-        depuis l&apos;admin — aucun email n&apos;a été envoyé à ce signataire tant que ce n&apos;est
-        pas fait.
+        Complétez l&apos;information manquante puis relancez l&apos;envoi depuis l&apos;admin —
+        aucun email n&apos;a été envoyé à ce signataire tant que ce n&apos;est pas fait.
       </p>
     </EmailLayout>
   )

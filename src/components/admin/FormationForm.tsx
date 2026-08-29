@@ -61,10 +61,7 @@ export type FormationFormInitial = {
   sessions: SessionRow[]
   formateurIds: string[]
   conventionTemplateId: string
-  responsablePedagogiqueNom: string
-  responsablePedagogiquePrenom: string
-  responsablePedagogiqueEmail: string
-  responsablePedagogiqueTelephone: string
+  responsablePedagogiqueUserId: string
   tauxReussite: string
   tauxSatisfaction: string
   resultats: ResultatAnnee[]
@@ -105,10 +102,7 @@ const EMPTY: FormationFormInitial = {
   sessions: [],
   formateurIds: [],
   conventionTemplateId: "",
-  responsablePedagogiqueNom: "",
-  responsablePedagogiquePrenom: "",
-  responsablePedagogiqueEmail: "",
-  responsablePedagogiqueTelephone: "",
+  responsablePedagogiqueUserId: "",
   tauxReussite: "",
   tauxSatisfaction: "",
   resultats: [],
@@ -162,12 +156,14 @@ export function FormationForm({
   submitLabel,
   formateurUsers,
   conventionTemplates,
+  responsablePedagogiqueUsers,
 }: {
   action: (formData: FormData) => Promise<void>
   initial?: FormationFormInitial
   submitLabel: string
   formateurUsers: { id: string; nom: string; prenom: string }[]
   conventionTemplates: { id: string; nom: string }[]
+  responsablePedagogiqueUsers: { id: string; nom: string; prenom: string }[]
 }) {
   const data = initial ?? EMPTY
   const [titre, setTitre] = useState(data.titre)
@@ -452,23 +448,21 @@ export function FormationForm({
         </p>
         <p style={{ fontSize: 13, fontWeight: 700, color: colors.navy, margin: "6px 0 0" }}>Responsable pédagogique</p>
         <p style={{ color: colors.textLight, fontSize: 12, margin: 0 }}>
-          Ces coordonnées sont insérées automatiquement dans chaque convention générée pour cette formation. Le
-          tuteur et le maître de stage, eux, sont propres à chaque stagiaire et proviennent de l&apos;import Excel.
+          Un membre de l&apos;équipe IR2F. Il signe une seule fois pour toute la formation (bouton dans l&apos;onglet
+          Conventions) — cette signature est ensuite appliquée automatiquement à la convention de chaque
+          stagiaire. Le tuteur et le maître de stage, eux, sont propres à chaque stagiaire et proviennent de
+          l&apos;import Excel.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 12 }}>
-          <Field label="Prénom">
-            <input name="responsablePedagogiquePrenom" defaultValue={data.responsablePedagogiquePrenom} style={fieldStyle} />
-          </Field>
-          <Field label="Nom">
-            <input name="responsablePedagogiqueNom" defaultValue={data.responsablePedagogiqueNom} style={fieldStyle} />
-          </Field>
-          <Field label="Email">
-            <input name="responsablePedagogiqueEmail" type="email" defaultValue={data.responsablePedagogiqueEmail} style={fieldStyle} />
-          </Field>
-          <Field label="Téléphone">
-            <input name="responsablePedagogiqueTelephone" defaultValue={data.responsablePedagogiqueTelephone} style={fieldStyle} />
-          </Field>
-        </div>
+        <Field label="Responsable pédagogique">
+          <select name="responsablePedagogiqueUserId" defaultValue={data.responsablePedagogiqueUserId} style={fieldStyle}>
+            <option value="">— Aucun —</option>
+            {responsablePedagogiqueUsers.map((u) => (
+              <option key={u.id} value={u.id}>
+                {u.prenom} {u.nom}
+              </option>
+            ))}
+          </select>
+        </Field>
       </SectionCard>
 
       <SectionCard title="Programme détaillé">

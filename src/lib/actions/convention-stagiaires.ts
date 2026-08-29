@@ -117,11 +117,12 @@ export async function importStagiairesExcel(
     const emailClub = cell(row, COLUMN_INDEX.clubMail) || null
     const tuteurEmail = cell(row, COLUMN_INDEX.tuteurMail) || null
     const maitreDeStageEmail = cell(row, COLUMN_INDEX.maitreDeStageMail) || null
-    const manquants = [
-      !emailClub && "email du club",
-      !tuteurEmail && "email du tuteur",
-      !maitreDeStageEmail && "email du maître de stage",
-    ].filter((v): v is string => Boolean(v))
+    // Le tuteur n'est pas bloquant pour la génération de la convention (voir missingContactsFor
+    // dans conventions.ts — son étape est simplement omise du circuit s'il n'a pas d'email) : pas
+    // signalé ici pour ne pas alarmer sur quelque chose qui n'empêchera rien.
+    const manquants = [!emailClub && "email du club", !maitreDeStageEmail && "email du maître de stage"].filter(
+      (v): v is string => Boolean(v)
+    )
     if (manquants.length > 0) incomplets.push(`${prenom} ${nom} (${manquants.join(", ")})`)
 
     const data = {

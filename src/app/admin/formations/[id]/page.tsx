@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { getFormationForEdit } from "@/lib/admin/formations"
-import { getFormateurUsers } from "@/lib/admin/users"
+import { getFormateurUsers, getResponsablePedagogiqueUsers } from "@/lib/admin/users"
 import { getConventionTemplatesForSelect } from "@/lib/admin/conventions"
 import { updateFormation } from "@/lib/actions/formations"
 import { FormationForm, type FormationFormInitial } from "@/components/admin/FormationForm"
@@ -10,10 +10,11 @@ import { colors, fontHeading } from "@/lib/theme"
 
 export default async function EditFormationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const [formation, formateurUsers, conventionTemplates] = await Promise.all([
+  const [formation, formateurUsers, conventionTemplates, responsablePedagogiqueUsers] = await Promise.all([
     getFormationForEdit(id),
     getFormateurUsers(),
     getConventionTemplatesForSelect(),
+    getResponsablePedagogiqueUsers(),
   ])
   if (!formation) notFound()
 
@@ -56,10 +57,7 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
     })),
     formateurIds: formation.formateurs.map((f) => f.userId),
     conventionTemplateId: formation.conventionTemplateId ?? "",
-    responsablePedagogiqueNom: formation.responsablePedagogiqueNom ?? "",
-    responsablePedagogiquePrenom: formation.responsablePedagogiquePrenom ?? "",
-    responsablePedagogiqueEmail: formation.responsablePedagogiqueEmail ?? "",
-    responsablePedagogiqueTelephone: formation.responsablePedagogiqueTelephone ?? "",
+    responsablePedagogiqueUserId: formation.responsablePedagogiqueUserId ?? "",
     tauxReussite: formation.tauxReussite ?? "",
     tauxSatisfaction: formation.tauxSatisfaction ?? "",
     resultats: (formation.resultats as ResultatAnnee[] | null) ?? [],
@@ -94,6 +92,7 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
         submitLabel="Enregistrer les modifications"
         formateurUsers={formateurUsers}
         conventionTemplates={conventionTemplates}
+        responsablePedagogiqueUsers={responsablePedagogiqueUsers}
       />
     </div>
   )
