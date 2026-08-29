@@ -6,7 +6,7 @@ import { requireAdmin } from "@/lib/auth/guards"
 import { downloadStorageFile, uploadBytes } from "@/lib/storage"
 import { fillConventionTemplate } from "@/lib/conventions/pdf"
 import { buildConventionVariables, resolveSignataireContact, SIGNATAIRE_ORDER } from "@/lib/conventions/variables"
-import { notifySignataireASigner } from "@/lib/emails/convention-notifications"
+import { notifySignataireASigner, ROLE_SIGNATAIRE_LABELS } from "@/lib/emails/convention-notifications"
 import type { ConventionStagiaire, Formation } from "@/generated/prisma"
 
 export type EnvoyerConventionsState = { error: string | null; sent: number; skipped: string[] }
@@ -25,17 +25,30 @@ async function computeFormationDateLabel(formationId: string): Promise<string | 
   return `${dateFormatter.format(session.dateDebut)}${session.lieu ? ` — ${session.lieu}` : ""}`
 }
 
-/** Active l'étape suivant `apresOrdre` (ou la toute première si `apresOrdre` vaut -1) : passe le signataire à EN_ATTENTE et lui envoie le lien de signature. Marque la convention comme complète si le dernier signataire vient de signer. */
-async function avancerConvention(conventionStagiaireId: string, apresOrdre: number) {
+/**
+ * Active l'étape suivant `apresOrdre` (ou la toute première si `apresOrdre` vaut -1) : envoie le
+ * lien de signature au signataire, et ne le passe à EN_ATTENTE que si l'email est parti pour de
+ * vrai — jamais l'inverse. Un envoi raté (email manquant, service de messagerie indisponible)
+ * remonte une erreur au lieu de laisser croire que l'étape a été notifiée ; les admins reçoivent
+ * aussi une alerte (voir notifySignataireASigner). Marque la convention comme complète si le
+ * dernier signataire vient de signer.
+ */
+async function avancerConvention(conventionStagiaireId: string, apresOrdre: number): Promise<{ ok: boolean; error?: string }> {
   const next = await prisma.conventionSignataire.findFirst({
     where: { conventionStagiaireId, ordre: apresOrdre + 1 },
   })
   if (!next) {
     await prisma.conventionStagiaire.update({ where: { id: conventionStagiaireId }, data: { completedAt: new Date() } })
-    return
+    return { ok: true }
   }
+
+  const { sent } = await notifySignataireASigner(next.id)
+  if (!sent) {
+    return { ok: false, error: `Circuit bloqué à l'étape "${ROLE_SIGNATAIRE_LABELS[next.role]}" — email manquant ou envoi impossible.` }
+  }
+
   await prisma.conventionSignataire.update({ where: { id: next.id }, data: { statut: "EN_ATTENTE", envoyeAt: new Date() } })
-  await notifySignataireASigner(next.id)
+  return { ok: true }
 }
 
 function missingContactsFor(stagiaire: ConventionStagiaire): string[] {
@@ -46,13 +59,20 @@ function missingContactsFor(stagiaire: ConventionStagiaire): string[] {
   ].filter((v): v is string => Boolean(v))
 }
 
-/** Génère le PDF personnalisé d'un stagiaire, crée ses 5 signataires et active le premier. Suppose que le stagiaire n'a pas encore de convention générée (pdfStoragePath null). */
+/**
+ * Génère le PDF personnalisé d'un stagiaire, crée ses 5 signataires et active le premier. Suppose
+ * que le stagiaire n'a pas encore de convention générée (pdfStoragePath null) et que les appelants
+ * ont déjà vérifié via missingContactsFor() que les emails club/tuteur/maître de stage sont
+ * renseignés — resolveSignataireContact ne devrait donc jamais renvoyer null ici ; si ça arrive
+ * quand même (bug appelant, garde contournée), on l'arrête net plutôt que de créer un signataire
+ * avec un email vide qui bloquerait le circuit plus tard sans explication.
+ */
 async function genererEtActiverConvention(
   stagiaire: ConventionStagiaire,
   formation: Formation,
   templateBytes: Uint8Array,
   dateLabel: string | null
-) {
+): Promise<{ ok: boolean; error?: string }> {
   const variables = buildConventionVariables({ formation, formationDateLabel: dateLabel, stagiaire })
   const filled = await fillConventionTemplate(templateBytes, variables)
   const storagePath = `conventions/generated/${stagiaire.id}.pdf`
@@ -60,7 +80,10 @@ async function genererEtActiverConvention(
 
   const signataireRows = SIGNATAIRE_ORDER.map((role, ordre) => {
     const contact = resolveSignataireContact(role, stagiaire, formation)
-    return { role, ordre, nom: contact?.nom ?? "", email: contact?.email ?? "" }
+    if (!contact) {
+      throw new Error(`Informations manquantes pour l'étape "${ROLE_SIGNATAIRE_LABELS[role]}".`)
+    }
+    return { role, ordre, nom: contact.nom, email: contact.email }
   })
 
   await prisma.$transaction([
@@ -73,7 +96,7 @@ async function genererEtActiverConvention(
     }),
   ])
 
-  await avancerConvention(stagiaire.id, -1)
+  return avancerConvention(stagiaire.id, -1)
 }
 
 export async function envoyerConventions(formationId: string): Promise<EnvoyerConventionsState> {
@@ -110,8 +133,13 @@ export async function envoyerConventions(formationId: string): Promise<EnvoyerCo
       continue
     }
 
-    await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel)
-    sent++
+    try {
+      const result = await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel)
+      if (result.ok) sent++
+      else skipped.push(`${stagiaire.prenom} ${stagiaire.nom} (${result.error})`)
+    } catch (e) {
+      skipped.push(`${stagiaire.prenom} ${stagiaire.nom} (${e instanceof Error ? e.message : "erreur inattendue"})`)
+    }
   }
 
   revalidatePath(`/admin/formations/${formationId}/conventions`)
@@ -137,25 +165,34 @@ export async function envoyerConventionStagiaire(stagiaireId: string): Promise<C
 
   const templateBytes = await downloadStorageFile(formation.conventionTemplate.storagePath)
   const dateLabel = await computeFormationDateLabel(formation.id)
-  await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel)
+
+  let result: { ok: boolean; error?: string }
+  try {
+    result = await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel)
+  } catch (e) {
+    result = { ok: false, error: e instanceof Error ? e.message : "Erreur inattendue lors de la génération de la convention." }
+  }
 
   revalidatePath(`/admin/formations/${formation.id}/conventions`)
   revalidatePath("/dashboard/formations")
-  return { error: null }
+  return { error: result.ok ? null : (result.error ?? "Échec de l'envoi.") }
 }
 
-async function marquerRenvoi(signataireId: string, canal: "MAIL" | "WHATSAPP") {
-  const session = await requireAdmin()
-  const auteur = session?.user?.name?.split(" ")[0] || "Admin"
-
+async function findRenvoiTarget(signataireId: string) {
   const signataire = await prisma.conventionSignataire.findUnique({
     where: { id: signataireId },
-    select: { id: true, statut: true, conventionStagiaireId: true },
+    select: { id: true, statut: true, email: true, conventionStagiaireId: true },
   })
   if (!signataire) return { error: "Signataire introuvable." as const, signataire: null }
   if (signataire.statut === "SIGNE") return { error: "Cette étape est déjà signée." as const, signataire: null }
+  return { error: null, signataire }
+}
 
-  await prisma.conventionSignataire.update({
+async function marquerRenvoiEnvoye(signataireId: string, canal: "MAIL" | "WHATSAPP") {
+  const session = await requireAdmin()
+  const auteur = session?.user?.name?.split(" ")[0] || "Admin"
+
+  const target = await prisma.conventionSignataire.update({
     where: { id: signataireId },
     data: {
       statut: "EN_ATTENTE",
@@ -164,31 +201,46 @@ async function marquerRenvoi(signataireId: string, canal: "MAIL" | "WHATSAPP") {
       dernierRenvoiCanal: canal,
       dernierRenvoiAt: new Date(),
     },
+    select: { conventionStagiaireId: true },
   })
 
   const stagiaire = await prisma.conventionStagiaire.findUnique({
-    where: { id: signataire.conventionStagiaireId },
+    where: { id: target.conventionStagiaireId },
     select: { formationId: true },
   })
   if (stagiaire) {
     revalidatePath(`/admin/formations/${stagiaire.formationId}/conventions`)
     revalidatePath("/dashboard/formations")
   }
-  return { error: null, signataire }
 }
 
-/** Renvoie le lien de signature par email (Resend). */
+/**
+ * Renvoie le lien de signature par email (Resend). Comme avancerConvention : l'email part d'abord,
+ * l'étape n'est marquée "envoyée" qu'une fois l'envoi confirmé — jamais l'inverse. Un email
+ * manquant ou un échec d'envoi remonte une vraie erreur (et déclenche l'alerte admin, voir
+ * notifySignataireASigner) plutôt que de laisser croire que le signataire a été relancé.
+ */
 export async function renvoyerEtape(signataireId: string): Promise<ConventionActionState> {
-  const result = await marquerRenvoi(signataireId, "MAIL")
-  if (result.error) return { error: result.error }
-  await notifySignataireASigner(signataireId)
+  await requireAdmin()
+
+  const { error, signataire } = await findRenvoiTarget(signataireId)
+  if (error) return { error }
+  if (!signataire.email) return { error: "Aucun email renseigné pour ce signataire — complétez d'abord ses informations." }
+
+  const { sent } = await notifySignataireASigner(signataireId)
+  if (!sent) return { error: "Échec de l'envoi de l'email (service de messagerie indisponible) — réessayez dans quelques minutes." }
+
+  await marquerRenvoiEnvoye(signataireId, "MAIL")
   return { error: null }
 }
 
 /** Marque un renvoi par WhatsApp (le lien wa.me est ouvert côté client) — ne déclenche pas d'email. */
 export async function logRenvoiWhatsapp(signataireId: string): Promise<ConventionActionState> {
-  const result = await marquerRenvoi(signataireId, "WHATSAPP")
-  return { error: result.error }
+  await requireAdmin()
+  const { error } = await findRenvoiTarget(signataireId)
+  if (error) return { error }
+  await marquerRenvoiEnvoye(signataireId, "WHATSAPP")
+  return { error: null }
 }
 
 export { avancerConvention }

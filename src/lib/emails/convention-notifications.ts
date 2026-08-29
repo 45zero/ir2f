@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { sendEmail } from "@/lib/emails/send"
 import { ConventionSignatureRequestEmail } from "@/lib/emails/ConventionSignatureRequestEmail"
 import { ConventionSignatureAdminEmail } from "@/lib/emails/ConventionSignatureAdminEmail"
+import { ConventionSignatureBlockedAdminEmail } from "@/lib/emails/ConventionSignatureBlockedAdminEmail"
 import { getAdminNotificationEmails } from "@/lib/emails/admin-recipients"
 import type { RoleSignataire } from "@/generated/prisma"
 
@@ -14,15 +15,59 @@ export const ROLE_SIGNATAIRE_LABELS: Record<RoleSignataire, string> = {
   RESPONSABLE_PEDAGOGIQUE: "Le responsable pédagogique",
 }
 
-/** Envoie le lien de signature au signataire qui vient de passer à EN_ATTENTE. */
-export async function notifySignataireASigner(signataireId: string) {
+/** Alerte les admins par email quand une étape du circuit ne peut pas être notifiée — jamais
+ * d'échec silencieux : soit l'étape est envoyée, soit quelqu'un en est informé. */
+async function alertAdminsSignatureBloquee(params: {
+  formationTitre: string
+  stagiairePrenom: string
+  stagiaireNom: string
+  role: RoleSignataire
+  raison: string
+}) {
+  const adminEmails = await getAdminNotificationEmails()
+  await Promise.all(
+    adminEmails.map((email) =>
+      sendEmail({
+        to: email,
+        subject: `Convention bloquée — ${params.stagiairePrenom} ${params.stagiaireNom}`,
+        react: ConventionSignatureBlockedAdminEmail({
+          formationTitre: params.formationTitre,
+          stagiairePrenom: params.stagiairePrenom,
+          stagiaireNom: params.stagiaireNom,
+          roleLabel: ROLE_SIGNATAIRE_LABELS[params.role],
+          raison: params.raison,
+        }),
+      })
+    )
+  )
+}
+
+/**
+ * Envoie le lien de signature au signataire qui vient de passer à EN_ATTENTE. Retourne `sent:
+ * false` (jamais silencieusement) si l'email manque ou si l'envoi échoue (service de messagerie
+ * indisponible) — dans les deux cas les admins reçoivent une alerte pour agir, et l'appelant ne
+ * doit PAS marquer l'étape comme envoyée.
+ */
+export async function notifySignataireASigner(signataireId: string): Promise<{ sent: boolean }> {
   const signataire = await prisma.conventionSignataire.findUnique({
     where: { id: signataireId },
     include: { conventionStagiaire: { include: { formation: { select: { titre: true } } } } },
   })
-  if (!signataire || !signataire.email) return
+  if (!signataire) return { sent: false }
 
-  await sendEmail({
+  const contexte = {
+    formationTitre: signataire.conventionStagiaire.formation.titre,
+    stagiairePrenom: signataire.conventionStagiaire.prenom,
+    stagiaireNom: signataire.conventionStagiaire.nom,
+    role: signataire.role,
+  }
+
+  if (!signataire.email) {
+    await alertAdminsSignatureBloquee({ ...contexte, raison: "aucun email renseigné pour ce signataire" })
+    return { sent: false }
+  }
+
+  const { sent } = await sendEmail({
     to: signataire.email,
     subject: `Convention de stage à signer — ${signataire.conventionStagiaire.formation.titre}`,
     react: ConventionSignatureRequestEmail({
@@ -33,6 +78,12 @@ export async function notifySignataireASigner(signataireId: string) {
       token: signataire.token,
     }),
   })
+
+  if (!sent) {
+    await alertAdminsSignatureBloquee({ ...contexte, raison: "échec technique de l'envoi (service de messagerie)" })
+  }
+
+  return { sent }
 }
 
 /** Notifie les admins de l'avancement (signature ou refus) d'une étape. */

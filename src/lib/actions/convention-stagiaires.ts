@@ -97,6 +97,7 @@ export async function importStagiairesExcel(
 
   let imported = 0
   let reinitialises = 0
+  const incomplets: string[] = []
   for (const row of rows) {
     const nom = cell(row, COLUMN_INDEX.nom)
     const prenom = cell(row, COLUMN_INDEX.prenom)
@@ -113,10 +114,20 @@ export async function importStagiairesExcel(
     const clubNom = cell(row, COLUMN_INDEX.clubNom)
     const club = clubNom ? clubsByNormalizedNom.get(normalize(clubNom)) : undefined
 
+    const emailClub = cell(row, COLUMN_INDEX.clubMail) || null
+    const tuteurEmail = cell(row, COLUMN_INDEX.tuteurMail) || null
+    const maitreDeStageEmail = cell(row, COLUMN_INDEX.maitreDeStageMail) || null
+    const manquants = [
+      !emailClub && "email du club",
+      !tuteurEmail && "email du tuteur",
+      !maitreDeStageEmail && "email du maître de stage",
+    ].filter((v): v is string => Boolean(v))
+    if (manquants.length > 0) incomplets.push(`${prenom} ${nom} (${manquants.join(", ")})`)
+
     const data = {
       club: clubNom || null,
       numeroAffiliationClub: cell(row, COLUMN_INDEX.clubNumeroAffiliation) || null,
-      emailClub: cell(row, COLUMN_INDEX.clubMail) || null,
+      emailClub,
       clubAdresse: club?.adresse ?? null,
       clubCp: club?.cp ?? null,
       clubVille: club?.ville ?? null,
@@ -130,13 +141,13 @@ export async function importStagiairesExcel(
       telephone: cell(row, COLUMN_INDEX.telephone) || null,
       tuteurNom: cell(row, COLUMN_INDEX.tuteurNom) || null,
       tuteurPrenom: cell(row, COLUMN_INDEX.tuteurPrenom) || null,
-      tuteurEmail: cell(row, COLUMN_INDEX.tuteurMail) || null,
+      tuteurEmail,
       maitreDeStageNom: cell(row, COLUMN_INDEX.maitreDeStageNom) || null,
       maitreDeStagePrenom: cell(row, COLUMN_INDEX.maitreDeStagePrenom) || null,
       maitreDeStageAdresse: cell(row, COLUMN_INDEX.maitreDeStageAdresse) || null,
       maitreDeStageCp: cell(row, COLUMN_INDEX.maitreDeStageCp) || null,
       maitreDeStageVille: cell(row, COLUMN_INDEX.maitreDeStageVille) || null,
-      maitreDeStageEmail: cell(row, COLUMN_INDEX.maitreDeStageMail) || null,
+      maitreDeStageEmail,
       donneesSupplementaires: Object.keys(extra).length > 0 ? extra : undefined,
     }
 
@@ -169,12 +180,22 @@ export async function importStagiairesExcel(
   }
 
   revalidatePath(`/admin/formations/${formationId}/conventions`)
+
+  const warningParts: string[] = []
+  if (reinitialises > 0) {
+    warningParts.push(
+      `${reinitialises} stagiaire(s) avaient déjà une convention générée — elle a été réinitialisée suite à la modification de leurs informations, à renvoyer.`
+    )
+  }
+  if (incomplets.length > 0) {
+    warningParts.push(
+      `Email(s) manquant(s), la convention ne pourra pas être envoyée tant que ce n'est pas complété : ${incomplets.join(" · ")}.`
+    )
+  }
+
   return {
     error: imported === 0 ? "Aucune ligne valide importée — Nom, Prénom et Mail du stagiaire sont obligatoires (colonnes E, F, L)." : null,
     imported,
-    warning:
-      reinitialises > 0
-        ? `${reinitialises} stagiaire(s) avaient déjà une convention générée — elle a été réinitialisée suite à la modification de leurs informations, à renvoyer.`
-        : null,
+    warning: warningParts.length > 0 ? warningParts.join(" ") : null,
   }
 }
