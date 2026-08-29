@@ -14,6 +14,7 @@ export default async function AdminFormationsPage() {
     statut: f.statut,
     cpfEligible: f.cpfEligible,
     fafaEligible: f.fafaEligible,
+    bonFormationEligible: f.bonFormationEligible,
     ordre: f.ordre,
     dureeLabel: f.dureeLabel,
   }))

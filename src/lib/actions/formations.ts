@@ -24,10 +24,21 @@ function optionalDate(formData: FormData, key: string): Date | null {
   return raw ? new Date(raw) : null
 }
 
+async function resolveProgrammeStepMedia(formData: FormData, step: ProgrammeStep, i: number): Promise<ProgrammeStep> {
+  const imageCount = optionalNumber(formData, `programmeImageCount_${i}`) ?? 0
+  const images: string[] = []
+  for (let j = 0; j < imageCount; j++) {
+    const url = await resolveImageUrl(formData, `programmeImage_${i}_${j}`, `formations-programme/${i}-${j}`)
+    if (url) images.push(url)
+  }
+  const videoFichierUrl = optionalStr(formData, `programmeVideo_${i}`)
+  return { ...step, images, videoUrl: step.videoUrl || null, videoFichierUrl }
+}
+
 async function buildFormationData(formData: FormData) {
-  const programme = parseJsonArray<ProgrammeStep>(formData, "programme").filter(
-    (p) => p.title?.trim() || p.desc?.trim()
-  )
+  const programmeRaw = parseJsonArray<ProgrammeStep>(formData, "programme")
+  const programmeResolved = await Promise.all(programmeRaw.map((step, i) => resolveProgrammeStepMedia(formData, step, i)))
+  const programme = programmeResolved.filter((p) => p.title?.trim() || p.desc?.trim())
   const resultats = parseJsonArray<ResultatAnnee>(formData, "resultats").filter(
     (r) => r.annee?.trim() || r.tauxSelection?.trim() || r.tauxJuryFinal?.trim()
   )
@@ -56,6 +67,7 @@ async function buildFormationData(formData: FormData) {
     image,
     cpfEligible: formData.get("cpfEligible") === "on",
     fafaEligible: formData.get("fafaEligible") === "on",
+    bonFormationEligible: formData.get("bonFormationEligible") === "on",
     modeInscription: str(formData, "modeInscription") as ModeInscription,
     lienFffStagiaire: optionalStr(formData, "lienFffStagiaire"),
     lienFffClub: optionalStr(formData, "lienFffClub"),

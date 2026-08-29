@@ -54,6 +54,7 @@ const CLUB_COLUMNS: { groupe: GroupeEquivalence; label: string }[] = [
   { groupe: "CLUB_DEV", label: "Développer son club" },
 ]
 
+
 const tabBase: CSSProperties = {
   border: "1.5px solid #d8dde5",
   background: "#fff",
@@ -92,6 +93,25 @@ const tabTextStyle: CSSProperties = {
   maxWidth: 640,
 }
 
+const equivThStyle: CSSProperties = {
+  textAlign: "left",
+  color: "#fff",
+  fontWeight: 700,
+  fontSize: 11.5,
+  padding: "10px 14px",
+  fontFamily: fontHeading,
+  letterSpacing: 0.2,
+}
+
+const equivTdStyle: CSSProperties = {
+  padding: "10px 14px",
+  color: colors.text,
+  fontSize: 12.5,
+  lineHeight: 1.5,
+  borderTop: "1px solid #eef0f3",
+  whiteSpace: "pre-line",
+}
+
 function nodeChipStyle(f: CatalogueFormation): CSSProperties {
   return {
     ...VARIANT_STYLES[f.varianteNode ?? "NAVY"],
@@ -110,6 +130,10 @@ function nodeChipStyle(f: CatalogueFormation): CSSProperties {
 }
 
 function NodeBadge({ f }: { f: CatalogueFormation }) {
+  const dfBadgeSrc = DF_BADGE_SRC[f.slug]
+  if (dfBadgeSrc) {
+    return <img src={dfBadgeSrc} alt="" style={{ height: 22, width: "auto", flexShrink: 0 }} />
+  }
   if (!f.badgeNode) return null
   const isPro = (f.groupeEquivalence ?? "").startsWith("PRO")
   return (
@@ -140,6 +164,12 @@ const PRO_BADGE_SRC: Record<string, string> = {
   "pro-beff": "/images/cygle/uefa-youth.png",
   "pro-bef": "/images/cygle/abef.png",
   "pro-bmf": "/images/cygle/abmf.png",
+}
+
+// Badge UEFA C du nœud bénévole "Responsable École de Football" (équivalent
+// Licence UEFA C) — remplace le petit rond lettré générique de NodeBadge.
+const DF_BADGE_SRC: Record<string, string> = {
+  "df-refe": "/images/cygle/uefa-C.png",
 }
 
 function UpArrow({ height = 26, dashed = false }: { height?: number; dashed?: boolean }) {
@@ -477,6 +507,121 @@ function OngletMedia({ data, fallback }: { data: FormationOngletData; fallback?:
   return null
 }
 
+// Sections libres empilées sous le contenu principal d'un onglet (Arbitres,
+// Tout Terrain, Développement) : texte, images, vidéo, tableau, lien —
+// chacune facultative, administrables depuis /admin/formations-page.
+function OngletSections({ sections }: { sections: FormationOngletData["sections"] }) {
+  if (sections.length === 0) return null
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 28, marginTop: 8 }}>
+      {sections.map((s) => {
+        const embedUrl = s.videoUrl ? getYoutubeEmbedUrl(s.videoUrl) : null
+        return (
+          <div key={s.id} style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 820 }}>
+            {s.titre && <h4 style={{ ...tabTitleStyle, fontSize: "clamp(16px,1.8vw,20px)" }}>{s.titre}</h4>}
+            {s.contenu && <p style={{ ...tabTextStyle, maxWidth: "none" }}>{s.contenu}</p>}
+            {s.images.length > 0 && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                {s.images.map((img, i) => (
+                  <a
+                    key={i}
+                    href={img}
+                    download
+                    title="Télécharger l'image"
+                    style={{
+                      width: 96,
+                      height: 72,
+                      borderRadius: 6,
+                      backgroundImage: `url('${img}')`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      border: "1px solid #eef0f3",
+                      flexShrink: 0,
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+            {(s.videoFichierUrl || embedUrl) && (
+              <div style={{ aspectRatio: "16/9", maxWidth: 480, borderRadius: 8, overflow: "hidden" }}>
+                {s.videoFichierUrl ? (
+                  <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+                    <source src={s.videoFichierUrl} />
+                  </video>
+                ) : (
+                  <iframe
+                    src={embedUrl!}
+                    title={s.titre ?? "Vidéo"}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ width: "100%", height: "100%", border: "none" }}
+                  />
+                )}
+              </div>
+            )}
+            {s.tableauEntetes && s.tableauEntetes.length > 0 && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {s.tableauTitre && (
+                  <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.4 }}>
+                    {s.tableauTitre}
+                  </span>
+                )}
+                <div style={{ overflowX: "auto", border: "1px solid #eef0f3", borderRadius: 8 }}>
+                  <table style={{ borderCollapse: "collapse", width: "100%", fontFamily: fontBody }}>
+                    <thead>
+                      <tr style={{ background: colors.navy }}>
+                        {s.tableauEntetes.map((h, i) => (
+                          <th key={i} style={equivThStyle}>
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {(s.tableauLignes ?? []).map((row, i) => (
+                        <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#f7f9fc" }}>
+                          {row.map((cell, j) => (
+                            <td key={j} style={equivTdStyle}>
+                              {cell || "—"}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+            {s.lienUrl && (
+              <Hoverable
+                as="a"
+                href={s.lienUrl}
+                style={{
+                  alignSelf: "flex-start",
+                  background: colors.red,
+                  color: "#fff",
+                  border: "none",
+                  padding: "12px 24px",
+                  borderRadius: 4,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  fontFamily: fontBody,
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  display: "inline-block",
+                }}
+                hoverStyle={{ background: colors.redDark }}
+              >
+                {s.lienLabel || "En savoir plus"}
+              </Hoverable>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export function FormationsCatalogue({
   formations,
   tuiles,
@@ -503,6 +648,9 @@ export function FormationsCatalogue({
         backgroundColor: "#f5f7fb",
         opacity: 100,
         effetVisuel: "AUCUN",
+        tableaux: [],
+        formationVedetteId: null,
+        formationVedette: null,
       }
     )
   }
@@ -591,8 +739,8 @@ export function FormationsCatalogue({
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", gap: 8, position: "relative" }}>
                   <span
                     style={{
-                      color: colors.navy,
-                      fontFamily: fontHeading,
+                      color: tile.textColor,
+                      fontFamily: tile.textFont === "BODY" ? fontBody : fontHeading,
                       fontSize: tile.categorie === "DEV" ? 13 : 17,
                       fontWeight: 800,
                       lineHeight: 1.15,
@@ -600,7 +748,7 @@ export function FormationsCatalogue({
                   >
                     {tile.label}
                   </span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2.5" style={{ flexShrink: 0 }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={tile.arrowColor} strokeWidth="2.5" style={{ flexShrink: 0 }}>
                     <line x1="5" y1="12" x2="19" y2="12" />
                     <polyline points="12 5 19 12 12 19" />
                   </svg>
@@ -653,9 +801,13 @@ export function FormationsCatalogue({
             ) : (
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingRight: 40 }}>
                 <button style={expandedTab === "info" ? tabActive : tabBase} onClick={() => setExpandedTab("info")}>
-                  {sidebarCategory === "ARBITRAGE" ? "Présentation et les différents parcours" : ONGLET_LABEL.INFO}
+                  {sidebarCategory === "ARBITRAGE"
+                    ? "Présentation et les différents parcours"
+                    : sidebarCategory === "DEV"
+                      ? "Présentation et parcours"
+                      : ONGLET_LABEL.INFO}
                 </button>
-                {sidebarCategory !== "ARBITRAGE" && (
+                {sidebarCategory !== "ARBITRAGE" && sidebarCategory !== "DEV" && (
                   <button style={expandedTab === "parcours" ? tabActive : tabBase} onClick={() => setExpandedTab("parcours")}>
                     {ONGLET_LABEL.PARCOURS}
                   </button>
@@ -668,13 +820,17 @@ export function FormationsCatalogue({
               </div>
             )}
 
-            {expandedTab === "info" && sidebarCategory === "ARBITRAGE" && (() => {
-              const data = getOnglet("ARBITRAGE", "INFO")
+            {expandedTab === "info" && (sidebarCategory === "ARBITRAGE" || sidebarCategory === "DEV") && (() => {
+              const data = getOnglet(sidebarCategory, "INFO")
+              const vedette = data.formationVedette
               return (
+                <>
                 <div style={{ display: "flow-root", maxWidth: 820 }}>
-                  <div style={{ float: "right", width: "min(360px,42%)", marginLeft: 24, marginBottom: 16 }}>
-                    <OngletMedia data={data} />
-                  </div>
+                  {(data.videoFichierUrl || data.videoUrl || data.image) && (
+                    <div style={{ float: "right", width: "min(360px,42%)", marginLeft: 24, marginBottom: 16 }}>
+                      <OngletMedia data={data} />
+                    </div>
+                  )}
                   <span
                     style={{
                       display: "inline-flex",
@@ -691,56 +847,62 @@ export function FormationsCatalogue({
                       marginBottom: 12,
                     }}
                   >
-                    Arbitrage
+                    {CATEGORIE_LABELS[sidebarCategory]}
                   </span>
-                  <h3 style={{ ...tabTitleStyle, margin: "0 0 12px" }}>Formation Initiale d&rsquo;Arbitres (FIA)</h3>
-                  <p style={{ ...tabTextStyle, maxWidth: "none", margin: "0 0 16px" }}>
-                    Vous souhaitez devenir arbitre ? Découvrez la Formation Initiale d&rsquo;Arbitre et les informations
-                    importantes concernant cette formation. Dans l&rsquo;offre proposée par l&rsquo;Institut Régional de
-                    Formation du Football (IR2F) tout au long de la saison, on y retrouve également les formations
-                    initiales à l&rsquo;arbitrage (FIA) orchestrées par les commissions départementales d&rsquo;arbitrage
-                    du Grand Est. Une formation de 31h (27h en présentiel et 4h en ligne), où l&rsquo;on apprend les
-                    bases pour débuter sereinement : les lois du jeu, la préparation d&rsquo;un match, la gestion des
-                    conflits…
-                  </p>
-                  <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 16 }}>
-                    <span style={{ fontSize: 12, color: colors.textLight }}>
-                      <strong style={{ color: colors.text }}>Durée :</strong> 31h
-                    </span>
-                    <span style={{ fontSize: 12, color: colors.textLight }}>
-                      <strong style={{ color: colors.text }}>Format :</strong> Présentiel et FOAD
-                    </span>
-                    <span style={{ fontSize: 12, color: colors.textLight }}>
-                      <strong style={{ color: colors.text }}>CPF :</strong> Non éligible
-                    </span>
-                  </div>
-                  <Hoverable
-                    as="a"
-                    href="https://ir2f.vercel.app/formations/arb-regional"
-                    style={{
-                      background: colors.red,
-                      color: "#fff",
-                      border: "none",
-                      padding: "12px 24px",
-                      borderRadius: 4,
-                      fontSize: 13,
-                      fontWeight: 700,
-                      fontFamily: fontBody,
-                      cursor: "pointer",
-                      textDecoration: "none",
-                      display: "inline-block",
-                    }}
-                    hoverStyle={{ background: colors.redDark }}
-                  >
-                    Voir la fiche complète
-                  </Hoverable>
+                  {data.titre && <h3 style={{ ...tabTitleStyle, margin: "0 0 12px" }}>{data.titre}</h3>}
+                  {data.contenu && <p style={{ ...tabTextStyle, maxWidth: "none", margin: "0 0 16px" }}>{data.contenu}</p>}
+                  {vedette && (
+                    <>
+                      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 16 }}>
+                        <span style={{ fontSize: 12, color: colors.textLight }}>
+                          <strong style={{ color: colors.text }}>Durée :</strong> {vedette.dureeLabel ?? "—"}
+                        </span>
+                        <span style={{ fontSize: 12, color: colors.textLight }}>
+                          <strong style={{ color: colors.text }}>Format :</strong> {vedette.modeLabel}
+                        </span>
+                        <span style={{ fontSize: 12, color: colors.textLight }}>
+                          <strong style={{ color: colors.text }}>CPF :</strong> {vedette.cpfEligible ? "Éligible" : "Non éligible"}
+                        </span>
+                        <span style={{ fontSize: 12, color: colors.textLight }}>
+                          <strong style={{ color: colors.text }}>FAFA :</strong> {vedette.fafaEligible ? "Éligible" : "Non éligible"}
+                        </span>
+                        <span style={{ fontSize: 12, color: colors.textLight }}>
+                          <strong style={{ color: colors.text }}>Bon de Formation :</strong>{" "}
+                          {vedette.bonFormationEligible ? "Éligible" : "Non éligible"}
+                        </span>
+                      </div>
+                      <Hoverable
+                        as={Link}
+                        href={`/formations/${vedette.slug}`}
+                        style={{
+                          background: colors.red,
+                          color: "#fff",
+                          border: "none",
+                          padding: "12px 24px",
+                          borderRadius: 4,
+                          fontSize: 13,
+                          fontWeight: 700,
+                          fontFamily: fontBody,
+                          cursor: "pointer",
+                          textDecoration: "none",
+                          display: "inline-block",
+                        }}
+                        hoverStyle={{ background: colors.redDark }}
+                      >
+                        Voir la fiche complète
+                      </Hoverable>
+                    </>
+                  )}
                 </div>
+                <OngletSections sections={data.sections} />
+                </>
               )
             })()}
 
-            {expandedTab === "info" && sidebarCategory !== "EDUCATEUR" && sidebarCategory !== "ARBITRAGE" && (() => {
+            {expandedTab === "info" && sidebarCategory !== "EDUCATEUR" && sidebarCategory !== "ARBITRAGE" && sidebarCategory !== "DEV" && (() => {
               const data = getOnglet(sidebarCategory, "INFO")
               return (
+                <>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
                   <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 12 }}>
                     {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
@@ -771,6 +933,8 @@ export function FormationsCatalogue({
                     }
                   />
                 </div>
+                <OngletSections sections={data.sections} />
+                </>
               )
             })()}
 
@@ -815,7 +979,9 @@ export function FormationsCatalogue({
               )
             })()}
 
-            {expandedTab === "parcours" && sidebarCategory === "TERRAIN" && (
+            {expandedTab === "parcours" && sidebarCategory === "TERRAIN" && (() => {
+              const data = getOnglet("TERRAIN", "PARCOURS")
+              return (
               <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20, alignItems: "start" }}>
                   {CLUB_COLUMNS.map((col) => (
@@ -865,12 +1031,15 @@ export function FormationsCatalogue({
                     </div>
                   ))}
                 </div>
+                <OngletSections sections={data.sections} />
               </div>
-            )}
+              )
+            })()}
 
             {expandedTab === "club" && sidebarCategory === "TERRAIN" && (() => {
               const data = getOnglet("TERRAIN", "CLUB")
               return (
+                <>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
                   <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
                     {data.titre && <h3 style={{ ...tabTitleStyle, maxWidth: 820 }}>{data.titre}</h3>}
@@ -898,6 +1067,8 @@ export function FormationsCatalogue({
                   </div>
                   <OngletMedia data={data} />
                 </div>
+                <OngletSections sections={data.sections} />
+                </>
               )
             })()}
 
@@ -1158,12 +1329,48 @@ export function FormationsCatalogue({
             {expandedTab === "eduEquivalences" && sidebarCategory === "EDUCATEUR" && (() => {
               const data = getOnglet("EDUCATEUR", "EDU_EQUIVALENCES")
               return (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
-                  <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
-                    {data.titre && <h3 style={{ ...tabTitleStyle, maxWidth: 820 }}>{data.titre}</h3>}
-                    {data.contenu && <p style={{ ...tabTextStyle, maxWidth: 820 }}>{data.contenu}</p>}
+                <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
+                    <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 16 }}>
+                      {data.titre && <h3 style={{ ...tabTitleStyle, maxWidth: 820 }}>{data.titre}</h3>}
+                      {data.contenu && <p style={{ ...tabTextStyle, maxWidth: 820 }}>{data.contenu}</p>}
+                    </div>
+                    <OngletMedia data={data} />
                   </div>
-                  <OngletMedia data={data} />
+
+                  {data.tableaux.map((t) => (
+                    <div key={t.id} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                      {t.titre && (
+                        <span style={{ fontFamily: fontHeading, fontSize: 13, fontWeight: 800, color: colors.navy, letterSpacing: 0.4, textTransform: "uppercase" }}>
+                          {t.titre}
+                        </span>
+                      )}
+                      <div style={{ overflowX: "auto", border: "1px solid #eef0f3", borderRadius: 8 }}>
+                        <table style={{ borderCollapse: "collapse", width: "100%", minWidth: 480, fontFamily: fontBody }}>
+                          <thead>
+                            <tr style={{ background: colors.navy }}>
+                              {t.entetes.map((h, i) => (
+                                <th key={i} style={equivThStyle}>
+                                  {h}
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {t.lignes.map((row, i) => (
+                              <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#f7f9fc" }}>
+                                {row.map((cell, j) => (
+                                  <td key={j} style={j === 0 ? { ...equivTdStyle, fontWeight: 700, color: colors.navy } : equivTdStyle}>
+                                    {cell || "—"}
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )
             })()}
@@ -1259,6 +1466,10 @@ export function FormationsCatalogue({
               </span>
               <span style={{ fontSize: 12, color: colors.textLight }}>
                 <strong style={{ color: colors.text }}>FAFA :</strong> {popupFormation.fafaEligible ? "Éligible" : "Non éligible"}
+              </span>
+              <span style={{ fontSize: 12, color: colors.textLight }}>
+                <strong style={{ color: colors.text }}>Bon de Formation :</strong>{" "}
+                {popupFormation.bonFormationEligible ? "Éligible" : "Non éligible"}
               </span>
             </div>
             <Hoverable

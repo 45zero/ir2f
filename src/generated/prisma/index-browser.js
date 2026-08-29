@@ -156,6 +156,7 @@ exports.Prisma.FormationScalarFieldEnum = {
   filiere: 'filiere',
   cpfEligible: 'cpfEligible',
   fafaEligible: 'fafaEligible',
+  bonFormationEligible: 'bonFormationEligible',
   modeInscription: 'modeInscription',
   lienFffStagiaire: 'lienFffStagiaire',
   lienFffClub: 'lienFffClub',
@@ -485,6 +486,9 @@ exports.Prisma.FormationTuileScalarFieldEnum = {
   backgroundColor: 'backgroundColor',
   opacity: 'opacity',
   effetVisuel: 'effetVisuel',
+  textColor: 'textColor',
+  textFont: 'textFont',
+  arrowColor: 'arrowColor',
   updatedAt: 'updatedAt'
 };
 
@@ -501,7 +505,37 @@ exports.Prisma.FormationOngletScalarFieldEnum = {
   backgroundColor: 'backgroundColor',
   opacity: 'opacity',
   effetVisuel: 'effetVisuel',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  formationVedetteId: 'formationVedetteId'
+};
+
+exports.Prisma.FormationOngletTableauScalarFieldEnum = {
+  id: 'id',
+  categorie: 'categorie',
+  onglet: 'onglet',
+  titre: 'titre',
+  entetes: 'entetes',
+  lignes: 'lignes',
+  ordre: 'ordre',
+  actif: 'actif'
+};
+
+exports.Prisma.FormationOngletSectionScalarFieldEnum = {
+  id: 'id',
+  categorie: 'categorie',
+  onglet: 'onglet',
+  titre: 'titre',
+  contenu: 'contenu',
+  images: 'images',
+  videoUrl: 'videoUrl',
+  videoFichierUrl: 'videoFichierUrl',
+  tableauTitre: 'tableauTitre',
+  tableauEntetes: 'tableauEntetes',
+  tableauLignes: 'tableauLignes',
+  lienLabel: 'lienLabel',
+  lienUrl: 'lienUrl',
+  ordre: 'ordre',
+  actif: 'actif'
 };
 
 exports.Prisma.PageHeroScalarFieldEnum = {
@@ -863,6 +897,11 @@ exports.EffetVisuel = exports.$Enums.EffetVisuel = {
   FLOU: 'FLOU'
 };
 
+exports.TuileFont = exports.$Enums.TuileFont = {
+  HEADING: 'HEADING',
+  BODY: 'BODY'
+};
+
 exports.FormationOngletCle = exports.$Enums.FormationOngletCle = {
   INFO: 'INFO',
   PARCOURS: 'PARCOURS',
@@ -927,6 +966,8 @@ exports.Prisma.ModelName = {
   HeroSlide: 'HeroSlide',
   FormationTuile: 'FormationTuile',
   FormationOnglet: 'FormationOnglet',
+  FormationOngletTableau: 'FormationOngletTableau',
+  FormationOngletSection: 'FormationOngletSection',
   PageHero: 'PageHero',
   DocumentPasserelle: 'DocumentPasserelle',
   Partenaire: 'Partenaire',

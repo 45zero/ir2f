@@ -7,6 +7,8 @@ import { InscribeButton } from "@/components/site/InscribeButton"
 import { FffInscriptionPanel } from "@/components/site/FffInscriptionPanel"
 import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
 import { colors, fontHeading } from "@/lib/theme"
+import { getYoutubeEmbedUrl } from "@/lib/youtube"
+import { DocumentsUtiles } from "@/components/site/DocumentsUtiles"
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" })
 
@@ -157,6 +159,16 @@ export default async function FormationDetailPage({ params }: { params: Promise<
                   </svg>
                 }
               />
+              <InfoItem
+                label="Bon de Formation"
+                value={formation.bonFormationEligible ? "Éligible" : "Non éligible"}
+                icon={
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                }
+              />
             </div>
 
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 10, alignItems: "flex-start" }}>
@@ -246,6 +258,48 @@ export default async function FormationDetailPage({ params }: { params: Promise<
                     </table>
                   </div>
                 )}
+                {p.images && p.images.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                    {p.images.map((img, i) => (
+                      <a
+                        key={i}
+                        href={img}
+                        download
+                        title="Télécharger l'image"
+                        style={{
+                          width: 96,
+                          height: 72,
+                          borderRadius: 6,
+                          backgroundImage: `url('${img}')`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          border: "1px solid #eef0f3",
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+                {(p.videoFichierUrl || p.videoUrl) && (() => {
+                  const embedUrl = p.videoUrl ? getYoutubeEmbedUrl(p.videoUrl) : null
+                  return (
+                    <div style={{ aspectRatio: "16/9", maxWidth: 420, borderRadius: 8, overflow: "hidden" }}>
+                      {p.videoFichierUrl ? (
+                        <video controls preload="metadata" style={{ width: "100%", height: "100%", objectFit: "cover", background: "#000" }}>
+                          <source src={p.videoFichierUrl} />
+                        </video>
+                      ) : embedUrl ? (
+                        <iframe
+                          src={embedUrl}
+                          title={p.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          style={{ width: "100%", height: "100%", border: "none" }}
+                        />
+                      ) : null}
+                    </div>
+                  )
+                })()}
               </div>
             </div>
           ))}
@@ -397,47 +451,7 @@ export default async function FormationDetailPage({ params }: { params: Promise<
           </div>
           )}
 
-          {formation.documentsUtiles.length > 0 && (
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <h2 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 22, fontWeight: 800, margin: 0 }}>
-                Documents utiles
-              </h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {formation.documentsUtiles.map(
-                  (doc) =>
-                    doc.url && (
-                      <a
-                        key={doc.id}
-                        href={doc.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 10,
-                          background: "#fff",
-                          border: "1px solid #eef0f3",
-                          borderRadius: 8,
-                          padding: "12px 16px",
-                          fontSize: 13,
-                          fontWeight: 600,
-                          color: colors.navy,
-                          textDecoration: "none",
-                        }}
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2" style={{ flexShrink: 0 }}>
-                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                          <polyline points="14 2 14 8 20 8" />
-                          <line x1="12" y1="18" x2="12" y2="12" />
-                          <polyline points="9 15 12 18 15 15" />
-                        </svg>
-                        {doc.nom}
-                      </a>
-                    )
-                )}
-              </div>
-            </div>
-          )}
+          <DocumentsUtiles documents={formation.documentsUtiles} />
         </div>
       </section>
     </main>

@@ -86,6 +86,7 @@ export type FormationCard = {
   image: string | null
   cpfEligible: boolean
   fafaEligible: boolean
+  bonFormationEligible: boolean
   modeLabel: string
   footerLabel: string
   type: TypeFormation
@@ -107,6 +108,9 @@ export type ProgrammeStep = {
   title: string
   desc: string
   table?: { headers: string[]; rows: string[][] }
+  images?: string[]
+  videoUrl?: string | null
+  videoFichierUrl?: string | null
 }
 
 export type ResultatAnnee = { annee: string; tauxSelection: string; tauxJuryFinal: string }
@@ -120,6 +124,7 @@ type RawFormation = {
   image: string | null
   cpfEligible: boolean
   fafaEligible: boolean
+  bonFormationEligible: boolean
   modeLabel: string | null
   type: TypeFormation
 }
@@ -136,6 +141,7 @@ export function toCard(f: RawFormation): FormationCard {
     image: f.image,
     cpfEligible: f.cpfEligible,
     fafaEligible: f.fafaEligible,
+    bonFormationEligible: f.bonFormationEligible,
     modeLabel,
     footerLabel: f.cpfEligible ? "Éligible CPF" : modeLabel,
     type: f.type,

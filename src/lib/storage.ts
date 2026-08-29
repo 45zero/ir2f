@@ -176,6 +176,18 @@ export async function getSignedDocumentUrl(storagePath: string, expiresInSeconds
   return data.signedUrl
 }
 
+// Le nom affiché (saisi librement en admin, ex. "CALENDRIER FIA 26/27") sert de nom de fichier
+// au téléchargement : un "/" (ou tout autre caractère interdit dans un nom de fichier) le fait
+// interpréter comme un séparateur de dossier par certains navigateurs, ce qui donne un fichier
+// tronqué/inexploitable une fois enregistré. On neutralise ces caractères et on force l'extension
+// du fichier stocké (déduite de storagePath) si le nom saisi ne l'a pas déjà.
+function sanitizeDownloadFileName(fileName: string, storagePath: string): string {
+  const safeName = fileName.replace(/[\\/:*?"<>|]+/g, "-").trim()
+  const ext = storagePath.split(".").pop()
+  if (!ext) return safeName
+  return safeName.toLowerCase().endsWith(`.${ext.toLowerCase()}`) ? safeName : `${safeName}.${ext}`
+}
+
 export async function getSignedDocumentDownloadUrl(
   storagePath: string,
   fileName: string,
@@ -184,7 +196,7 @@ export async function getSignedDocumentDownloadUrl(
   const client = getStorageClient()
   const { data, error } = await client.storage
     .from(BUCKET)
-    .createSignedUrl(storagePath, expiresInSeconds, { download: fileName })
+    .createSignedUrl(storagePath, expiresInSeconds, { download: sanitizeDownloadFileName(fileName, storagePath) })
   if (error || !data) return null
   return data.signedUrl
 }

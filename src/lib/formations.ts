@@ -1,8 +1,8 @@
 import "server-only"
 import { prisma } from "@/lib/prisma"
-import type { CategorieFormation, EffetVisuel, Filiere, GroupeEquivalence, VarianteNode } from "@/generated/prisma"
-import { toCard, type FormationCard, type CatalogueFormation, type FormationOption } from "@/lib/formations-shared"
-import { getSignedDocumentDownloadUrl } from "@/lib/storage"
+import type { CategorieFormation, EffetVisuel, Filiere, GroupeEquivalence, TuileFont, VarianteNode } from "@/generated/prisma"
+import { toCard, TYPE_LABELS, type FormationCard, type CatalogueFormation, type FormationOption } from "@/lib/formations-shared"
+import { getSignedDocumentUrl, getSignedDocumentDownloadUrl } from "@/lib/storage"
 import {
   ONGLET_KEYS,
   TUILE_CATEGORIES,
@@ -24,6 +24,7 @@ const CARD_SELECT = {
   image: true,
   cpfEligible: true,
   fafaEligible: true,
+  bonFormationEligible: true,
   modeLabel: true,
   type: true,
 } as const
@@ -80,6 +81,9 @@ export type FormationTuileData = {
   backgroundColor: string
   opacity: number
   effetVisuel: EffetVisuel
+  textColor: string
+  textFont: TuileFont
+  arrowColor: string
 }
 
 export async function getFormationTuiles(): Promise<FormationTuileData[]> {
@@ -95,8 +99,42 @@ export async function getFormationTuiles(): Promise<FormationTuileData[]> {
       backgroundColor: row?.backgroundColor ?? fallback.backgroundColor,
       opacity: row?.opacity ?? 100,
       effetVisuel: row?.effetVisuel ?? "AUCUN",
+      textColor: row?.textColor ?? "#1a3a6b",
+      textFont: row?.textFont ?? "HEADING",
+      arrowColor: row?.arrowColor ?? "#1a3a6b",
     }
   })
+}
+
+export type FormationOngletTableauData = {
+  id: string
+  titre: string | null
+  entetes: string[]
+  lignes: string[][]
+}
+
+export type FormationOngletSectionData = {
+  id: string
+  titre: string | null
+  contenu: string | null
+  images: string[]
+  videoUrl: string | null
+  videoFichierUrl: string | null
+  tableauTitre: string | null
+  tableauEntetes: string[] | null
+  tableauLignes: string[][] | null
+  lienLabel: string | null
+  lienUrl: string | null
+}
+
+export type FormationVedetteData = {
+  slug: string
+  titre: string
+  dureeLabel: string | null
+  modeLabel: string
+  cpfEligible: boolean
+  fafaEligible: boolean
+  bonFormationEligible: boolean
 }
 
 export type FormationOngletData = {
@@ -109,11 +147,51 @@ export type FormationOngletData = {
   backgroundColor: string
   opacity: number
   effetVisuel: EffetVisuel
+  tableaux: FormationOngletTableauData[]
+  sections: FormationOngletSectionData[]
+  formationVedetteId: string | null
+  formationVedette: FormationVedetteData | null
 }
 
 export async function getFormationOnglets(): Promise<Record<string, FormationOngletData>> {
-  const rows = await prisma.formationOnglet.findMany()
+  const [rows, tableauRows, sectionRows] = await Promise.all([
+    prisma.formationOnglet.findMany({
+      include: {
+        formationVedette: {
+          select: { slug: true, titre: true, dureeLabel: true, modeLabel: true, type: true, cpfEligible: true, fafaEligible: true, bonFormationEligible: true },
+        },
+      },
+    }),
+    prisma.formationOngletTableau.findMany({ where: { actif: true }, orderBy: { ordre: "asc" } }),
+    prisma.formationOngletSection.findMany({ where: { actif: true }, orderBy: { ordre: "asc" } }),
+  ])
   const byKey = new Map(rows.map((r) => [ongletKeyId(r.categorie, r.onglet), r]))
+  const tableauxByKey = new Map<string, FormationOngletTableauData[]>()
+  for (const t of tableauRows) {
+    const key = ongletKeyId(t.categorie, t.onglet)
+    const list = tableauxByKey.get(key) ?? []
+    list.push({ id: t.id, titre: t.titre, entetes: t.entetes as string[], lignes: t.lignes as string[][] })
+    tableauxByKey.set(key, list)
+  }
+  const sectionsByKey = new Map<string, FormationOngletSectionData[]>()
+  for (const s of sectionRows) {
+    const key = ongletKeyId(s.categorie, s.onglet)
+    const list = sectionsByKey.get(key) ?? []
+    list.push({
+      id: s.id,
+      titre: s.titre,
+      contenu: s.contenu,
+      images: (s.images as string[] | null) ?? [],
+      videoUrl: s.videoUrl,
+      videoFichierUrl: s.videoFichierUrl,
+      tableauTitre: s.tableauTitre,
+      tableauEntetes: (s.tableauEntetes as string[] | null) ?? null,
+      tableauLignes: (s.tableauLignes as string[][] | null) ?? null,
+      lienLabel: s.lienLabel,
+      lienUrl: s.lienUrl,
+    })
+    sectionsByKey.set(key, list)
+  }
   const result: Record<string, FormationOngletData> = {}
   for (const { categorie, onglet } of ONGLET_KEYS) {
     const key = ongletKeyId(categorie, onglet)
@@ -128,6 +206,20 @@ export async function getFormationOnglets(): Promise<Record<string, FormationOng
       backgroundColor: row?.backgroundColor ?? "#f5f7fb",
       opacity: row?.opacity ?? 100,
       effetVisuel: row?.effetVisuel ?? "AUCUN",
+      formationVedetteId: row?.formationVedetteId ?? null,
+      formationVedette: row?.formationVedette
+        ? {
+            slug: row.formationVedette.slug,
+            titre: row.formationVedette.titre,
+            dureeLabel: row.formationVedette.dureeLabel,
+            modeLabel: row.formationVedette.modeLabel ?? TYPE_LABELS[row.formationVedette.type],
+            cpfEligible: row.formationVedette.cpfEligible,
+            fafaEligible: row.formationVedette.fafaEligible,
+            bonFormationEligible: row.formationVedette.bonFormationEligible,
+          }
+        : null,
+      tableaux: tableauxByKey.get(key) ?? [],
+      sections: sectionsByKey.get(key) ?? [],
     }
   }
   return result
@@ -153,11 +245,13 @@ export async function getFormationBySlug(slug: string) {
   if (!formation) return null
 
   const documentsUtiles = await Promise.all(
-    formation.documents.map(async (d) => ({
-      id: d.id,
-      nom: d.nom,
-      url: d.storagePath ? await getSignedDocumentDownloadUrl(d.storagePath, d.nom) : d.url,
-    }))
+    formation.documents.map(async (d) => {
+      // previewUrl : sans Content-Disposition: attachment, pour un rendu inline dans l'iframe
+      // d'aperçu — l'url "download" forcerait le navigateur à annuler la navigation de l'iframe.
+      const previewUrl = d.storagePath ? await getSignedDocumentUrl(d.storagePath) : d.url
+      const downloadUrl = d.storagePath ? await getSignedDocumentDownloadUrl(d.storagePath, d.nom) : d.url
+      return { id: d.id, nom: d.nom, url: downloadUrl, previewUrl, mimeType: d.mimeType }
+    })
   )
 
   return { ...formation, documentsUtiles }

@@ -224,10 +224,11 @@ model Formation {
   formateurRole String?
   ordre         Int             @default(0)
 
-  categorie    CategorieFormation @default(EDUCATEUR)
-  filiere      Filiere?
-  cpfEligible  Boolean            @default(false)
-  fafaEligible Boolean            @default(false)
+  categorie            CategorieFormation @default(EDUCATEUR)
+  filiere              Filiere?
+  cpfEligible          Boolean            @default(false)
+  fafaEligible         Boolean            @default(false)
+  bonFormationEligible Boolean            @default(false)
 
   // Inscription via le portail FFF (externe à IR2F) — lien distinct selon
   // que ce soit le stagiaire ou le club qui réalise l'inscription.
@@ -266,14 +267,15 @@ model Formation {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  sessions     Session[]
-  inscriptions Inscription[]
-  demandes     DemandeInscription[]
-  documents    Document[]
-  heroSlides   HeroSlide[]
-  formateurs   FormationFormateur[]
-  messages     Message[]
-  covoiturages Covoiturage[]
+  sessions       Session[]
+  inscriptions   Inscription[]
+  demandes       DemandeInscription[]
+  documents      Document[]
+  heroSlides     HeroSlide[]
+  formateurs     FormationFormateur[]
+  messages       Message[]
+  covoiturages   Covoiturage[]
+  ongletsVedette FormationOnglet[]
 
   conventionTemplate   ConventionTemplate?   @relation(fields: [conventionTemplateId], references: [id])
   conventionStagiaires ConventionStagiaire[]
@@ -779,6 +781,14 @@ enum EffetVisuel {
   @@schema("ir2f")
 }
 
+// Police du libellé d'une tuile catégorie — les deux polices du design system.
+enum TuileFont {
+  HEADING
+  BODY
+
+  @@schema("ir2f")
+}
+
 // Les 4 tuiles cliquables en haut de la page "Nos Formations" (Éducateurs,
 // Arbitres, Tout Terrain, DEV). Entièrement administrables : image, couleur
 // de fond, opacité et effet visuel.
@@ -790,6 +800,9 @@ model FormationTuile {
   backgroundColor String             @default("#c9a84c")
   opacity         Int                @default(100)
   effetVisuel     EffetVisuel        @default(AUCUN)
+  textColor       String             @default("#1a3a6b")
+  textFont        TuileFont          @default(HEADING)
+  arrowColor      String             @default("#1a3a6b")
   updatedAt       DateTime           @updatedAt
 
   @@schema("ir2f")
@@ -824,7 +837,56 @@ model FormationOnglet {
   effetVisuel     EffetVisuel        @default(AUCUN)
   updatedAt       DateTime           @updatedAt
 
+  // Formation "vedette" liée (ex. onglet INFO d'Arbitrage ou de Développement) :
+  // sa durée/format/CPF/FAFA/Bon de Formation et son lien "Voir la fiche
+  // complète" s'affichent automatiquement, sans dupliquer ces champs ici.
+  formationVedetteId String?
+  formationVedette   Formation? @relation(fields: [formationVedetteId], references: [id], onDelete: SetNull)
+
   @@unique([categorie, onglet])
+  @@schema("ir2f")
+}
+
+// Tableaux libres (lignes/colonnes éditables en admin) rattachés à un onglet
+// de la page "Nos Formations" — ex. les tableaux d'équivalences de l'onglet
+// EDU_EQUIVALENCES. Rattaché par (categorie, onglet), pas par relation vers
+// FormationOnglet.id, pour ne pas dépendre de l'existence préalable de la
+// ligne FormationOnglet (elle n'est créée qu'au premier enregistrement admin).
+model FormationOngletTableau {
+  id        String             @id @default(uuid())
+  categorie CategorieFormation
+  onglet    FormationOngletCle
+  titre     String?
+  entetes   Json
+  lignes    Json
+  ordre     Int                @default(0)
+  actif     Boolean            @default(true)
+
+  @@schema("ir2f")
+}
+
+// Sections libres empilées sous le contenu principal d'un onglet — pour
+// Arbitres, Tout Terrain et Développement (pas Éducateur, dont la structure
+// à onglets/diagramme est trop spécifique). Chaque section porte texte,
+// images, vidéo, tableau et lien, tous optionnels. Rattaché par
+// (categorie, onglet), même raison que FormationOngletTableau ci-dessus.
+model FormationOngletSection {
+  id              String             @id @default(uuid())
+  categorie       CategorieFormation
+  onglet          FormationOngletCle
+  titre           String?
+  contenu         String?
+  images          Json // string[]
+  videoUrl        String?
+  videoFichierUrl String?
+  tableauTitre    String?
+  tableauEntetes  Json? // string[] | null
+  tableauLignes   Json? // string[][] | null
+  lienLabel       String?
+  lienUrl         String?
+  ordre           Int                @default(0)
+  actif           Boolean            @default(true)
+
   @@schema("ir2f")
 }
 

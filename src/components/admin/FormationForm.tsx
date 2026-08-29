@@ -13,6 +13,7 @@ import {
 import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import { ImageField } from "@/components/admin/ImageField"
+import { VideoField } from "@/components/admin/VideoField"
 import type {
   CategorieFormation,
   Filiere,
@@ -44,6 +45,7 @@ export type FormationFormInitial = {
   image: string
   cpfEligible: boolean
   fafaEligible: boolean
+  bonFormationEligible: boolean
   modeInscription: ModeInscription
   lienFffStagiaire: string
   lienFffClub: string
@@ -87,6 +89,7 @@ const EMPTY: FormationFormInitial = {
   image: "",
   cpfEligible: false,
   fafaEligible: false,
+  bonFormationEligible: false,
   modeInscription: "INTERNE",
   lienFffStagiaire: "",
   lienFffClub: "",
@@ -317,6 +320,15 @@ export function FormationForm({
           <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text, marginTop: 20 }}>
             <input type="checkbox" name="fafaEligible" defaultChecked={data.fafaEligible} style={{ width: 15, height: 15 }} />
             Éligible FAFA
+          </label>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text, marginTop: 20 }}>
+            <input
+              type="checkbox"
+              name="bonFormationEligible"
+              defaultChecked={data.bonFormationEligible}
+              style={{ width: 15, height: 15 }}
+            />
+            Éligible Bon de Formation
           </label>
         </div>
       </SectionCard>
@@ -590,6 +602,48 @@ function ProgrammeEditor({
                 + Tableau
               </button>
             )}
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+              {(step.images ?? []).map((img, j) => (
+                <div key={j} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                  <ImageField
+                    name={`programmeImage_${i}_${j}`}
+                    label={`Image ${j + 1}`}
+                    defaultUrl={img}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => updateStep(i, { images: (step.images ?? []).filter((_, idx) => idx !== j) })}
+                    style={{ ...removeButtonStyle, alignSelf: "flex-start" }}
+                  >
+                    Retirer l&apos;image
+                  </button>
+                </div>
+              ))}
+              <input type="hidden" name={`programmeImageCount_${i}`} value={(step.images ?? []).length} />
+              <button
+                type="button"
+                onClick={() => updateStep(i, { images: [...(step.images ?? []), ""] })}
+                style={{ ...addButtonStyle, alignSelf: "flex-start" }}
+              >
+                + Image
+              </button>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <input
+                placeholder="Lien vidéo YouTube (optionnel)"
+                value={step.videoUrl ?? ""}
+                onChange={(e) => updateStep(i, { videoUrl: e.target.value })}
+                style={fieldStyle}
+              />
+              <VideoField
+                name={`programmeVideo_${i}`}
+                label="Vidéo — ou fichier vidéo direct (optionnel)"
+                defaultUrl={step.videoFichierUrl}
+                keyHint={`formations-programme-videos/${i}`}
+              />
+            </div>
           </div>
           <button
             type="button"

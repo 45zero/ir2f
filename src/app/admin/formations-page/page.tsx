@@ -1,9 +1,13 @@
-import { getAllFormationTuilesAdmin, getAllFormationOngletsAdmin } from "@/lib/admin/formations-page"
+import { getAllFormationTuilesAdmin, getAllFormationOngletsAdmin, getAllFormationOptionsAdmin } from "@/lib/admin/formations-page"
 import { FormationsPageManager } from "@/components/admin/FormationsPageManager"
 import { colors, fontHeading } from "@/lib/theme"
 
 export default async function AdminFormationsPagePage() {
-  const [tuiles, onglets] = await Promise.all([getAllFormationTuilesAdmin(), getAllFormationOngletsAdmin()])
+  const [tuiles, onglets, formationOptions] = await Promise.all([
+    getAllFormationTuilesAdmin(),
+    getAllFormationOngletsAdmin(),
+    getAllFormationOptionsAdmin(),
+  ])
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -16,7 +20,7 @@ export default async function AdminFormationsPagePage() {
         </p>
       </div>
 
-      <FormationsPageManager tuiles={tuiles} onglets={onglets} />
+      <FormationsPageManager tuiles={tuiles} onglets={onglets} formationOptions={formationOptions} />
     </div>
   )
 }

@@ -149,6 +149,16 @@ export type FormationTuile = $Result.DefaultSelection<Prisma.$FormationTuilePayl
  */
 export type FormationOnglet = $Result.DefaultSelection<Prisma.$FormationOngletPayload>
 /**
+ * Model FormationOngletTableau
+ * 
+ */
+export type FormationOngletTableau = $Result.DefaultSelection<Prisma.$FormationOngletTableauPayload>
+/**
+ * Model FormationOngletSection
+ * 
+ */
+export type FormationOngletSection = $Result.DefaultSelection<Prisma.$FormationOngletSectionPayload>
+/**
  * Model PageHero
  * 
  */
@@ -440,6 +450,14 @@ export const EffetVisuel: {
 export type EffetVisuel = (typeof EffetVisuel)[keyof typeof EffetVisuel]
 
 
+export const TuileFont: {
+  HEADING: 'HEADING',
+  BODY: 'BODY'
+};
+
+export type TuileFont = (typeof TuileFont)[keyof typeof TuileFont]
+
+
 export const FormationOngletCle: {
   INFO: 'INFO',
   PARCOURS: 'PARCOURS',
@@ -571,6 +589,10 @@ export const AlignementHero: typeof $Enums.AlignementHero
 export type EffetVisuel = $Enums.EffetVisuel
 
 export const EffetVisuel: typeof $Enums.EffetVisuel
+
+export type TuileFont = $Enums.TuileFont
+
+export const TuileFont: typeof $Enums.TuileFont
 
 export type FormationOngletCle = $Enums.FormationOngletCle
 
@@ -982,6 +1004,26 @@ export class PrismaClient<
     * ```
     */
   get formationOnglet(): Prisma.FormationOngletDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.formationOngletTableau`: Exposes CRUD operations for the **FormationOngletTableau** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FormationOngletTableaus
+    * const formationOngletTableaus = await prisma.formationOngletTableau.findMany()
+    * ```
+    */
+  get formationOngletTableau(): Prisma.FormationOngletTableauDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.formationOngletSection`: Exposes CRUD operations for the **FormationOngletSection** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FormationOngletSections
+    * const formationOngletSections = await prisma.formationOngletSection.findMany()
+    * ```
+    */
+  get formationOngletSection(): Prisma.FormationOngletSectionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.pageHero`: Exposes CRUD operations for the **PageHero** model.
@@ -1603,6 +1645,8 @@ export namespace Prisma {
     HeroSlide: 'HeroSlide',
     FormationTuile: 'FormationTuile',
     FormationOnglet: 'FormationOnglet',
+    FormationOngletTableau: 'FormationOngletTableau',
+    FormationOngletSection: 'FormationOngletSection',
     PageHero: 'PageHero',
     DocumentPasserelle: 'DocumentPasserelle',
     Partenaire: 'Partenaire',
@@ -1634,7 +1678,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "organigramme" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "footerContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "organigramme" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "footerContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "formationOngletTableau" | "formationOngletSection" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3636,6 +3680,154 @@ export namespace Prisma {
           }
         }
       }
+      FormationOngletTableau: {
+        payload: Prisma.$FormationOngletTableauPayload<ExtArgs>
+        fields: Prisma.FormationOngletTableauFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FormationOngletTableauFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FormationOngletTableauFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload>
+          }
+          findFirst: {
+            args: Prisma.FormationOngletTableauFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FormationOngletTableauFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload>
+          }
+          findMany: {
+            args: Prisma.FormationOngletTableauFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload>[]
+          }
+          create: {
+            args: Prisma.FormationOngletTableauCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload>
+          }
+          createMany: {
+            args: Prisma.FormationOngletTableauCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FormationOngletTableauCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload>[]
+          }
+          delete: {
+            args: Prisma.FormationOngletTableauDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload>
+          }
+          update: {
+            args: Prisma.FormationOngletTableauUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload>
+          }
+          deleteMany: {
+            args: Prisma.FormationOngletTableauDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FormationOngletTableauUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FormationOngletTableauUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload>[]
+          }
+          upsert: {
+            args: Prisma.FormationOngletTableauUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletTableauPayload>
+          }
+          aggregate: {
+            args: Prisma.FormationOngletTableauAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFormationOngletTableau>
+          }
+          groupBy: {
+            args: Prisma.FormationOngletTableauGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FormationOngletTableauGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FormationOngletTableauCountArgs<ExtArgs>
+            result: $Utils.Optional<FormationOngletTableauCountAggregateOutputType> | number
+          }
+        }
+      }
+      FormationOngletSection: {
+        payload: Prisma.$FormationOngletSectionPayload<ExtArgs>
+        fields: Prisma.FormationOngletSectionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FormationOngletSectionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FormationOngletSectionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload>
+          }
+          findFirst: {
+            args: Prisma.FormationOngletSectionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FormationOngletSectionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload>
+          }
+          findMany: {
+            args: Prisma.FormationOngletSectionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload>[]
+          }
+          create: {
+            args: Prisma.FormationOngletSectionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload>
+          }
+          createMany: {
+            args: Prisma.FormationOngletSectionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FormationOngletSectionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload>[]
+          }
+          delete: {
+            args: Prisma.FormationOngletSectionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload>
+          }
+          update: {
+            args: Prisma.FormationOngletSectionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload>
+          }
+          deleteMany: {
+            args: Prisma.FormationOngletSectionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FormationOngletSectionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FormationOngletSectionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload>[]
+          }
+          upsert: {
+            args: Prisma.FormationOngletSectionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FormationOngletSectionPayload>
+          }
+          aggregate: {
+            args: Prisma.FormationOngletSectionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFormationOngletSection>
+          }
+          groupBy: {
+            args: Prisma.FormationOngletSectionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FormationOngletSectionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FormationOngletSectionCountArgs<ExtArgs>
+            result: $Utils.Optional<FormationOngletSectionCountAggregateOutputType> | number
+          }
+        }
+      }
       PageHero: {
         payload: Prisma.$PageHeroPayload<ExtArgs>
         fields: Prisma.PageHeroFieldRefs
@@ -4955,6 +5147,8 @@ export namespace Prisma {
     heroSlide?: HeroSlideOmit
     formationTuile?: FormationTuileOmit
     formationOnglet?: FormationOngletOmit
+    formationOngletTableau?: FormationOngletTableauOmit
+    formationOngletSection?: FormationOngletSectionOmit
     pageHero?: PageHeroOmit
     documentPasserelle?: DocumentPasserelleOmit
     partenaire?: PartenaireOmit
@@ -5180,6 +5374,7 @@ export namespace Prisma {
     formateurs: number
     messages: number
     covoiturages: number
+    ongletsVedette: number
     conventionStagiaires: number
   }
 
@@ -5192,6 +5387,7 @@ export namespace Prisma {
     formateurs?: boolean | FormationCountOutputTypeCountFormateursArgs
     messages?: boolean | FormationCountOutputTypeCountMessagesArgs
     covoiturages?: boolean | FormationCountOutputTypeCountCovoituragesArgs
+    ongletsVedette?: boolean | FormationCountOutputTypeCountOngletsVedetteArgs
     conventionStagiaires?: boolean | FormationCountOutputTypeCountConventionStagiairesArgs
   }
 
@@ -5260,6 +5456,13 @@ export namespace Prisma {
    */
   export type FormationCountOutputTypeCountCovoituragesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CovoiturageWhereInput
+  }
+
+  /**
+   * FormationCountOutputType without action
+   */
+  export type FormationCountOutputTypeCountOngletsVedetteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormationOngletWhereInput
   }
 
   /**
@@ -7013,6 +7216,7 @@ export namespace Prisma {
     filiere: $Enums.Filiere | null
     cpfEligible: boolean | null
     fafaEligible: boolean | null
+    bonFormationEligible: boolean | null
     modeInscription: $Enums.ModeInscription | null
     lienFffStagiaire: string | null
     lienFffClub: string | null
@@ -7056,6 +7260,7 @@ export namespace Prisma {
     filiere: $Enums.Filiere | null
     cpfEligible: boolean | null
     fafaEligible: boolean | null
+    bonFormationEligible: boolean | null
     modeInscription: $Enums.ModeInscription | null
     lienFffStagiaire: string | null
     lienFffClub: string | null
@@ -7100,6 +7305,7 @@ export namespace Prisma {
     filiere: number
     cpfEligible: number
     fafaEligible: number
+    bonFormationEligible: number
     modeInscription: number
     lienFffStagiaire: number
     lienFffClub: number
@@ -7160,6 +7366,7 @@ export namespace Prisma {
     filiere?: true
     cpfEligible?: true
     fafaEligible?: true
+    bonFormationEligible?: true
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
@@ -7203,6 +7410,7 @@ export namespace Prisma {
     filiere?: true
     cpfEligible?: true
     fafaEligible?: true
+    bonFormationEligible?: true
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
@@ -7247,6 +7455,7 @@ export namespace Prisma {
     filiere?: true
     cpfEligible?: true
     fafaEligible?: true
+    bonFormationEligible?: true
     modeInscription?: true
     lienFffStagiaire?: true
     lienFffClub?: true
@@ -7379,6 +7588,7 @@ export namespace Prisma {
     filiere: $Enums.Filiere | null
     cpfEligible: boolean
     fafaEligible: boolean
+    bonFormationEligible: boolean
     modeInscription: $Enums.ModeInscription
     lienFffStagiaire: string | null
     lienFffClub: string | null
@@ -7443,6 +7653,7 @@ export namespace Prisma {
     filiere?: boolean
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
@@ -7471,6 +7682,7 @@ export namespace Prisma {
     formateurs?: boolean | Formation$formateursArgs<ExtArgs>
     messages?: boolean | Formation$messagesArgs<ExtArgs>
     covoiturages?: boolean | Formation$covoituragesArgs<ExtArgs>
+    ongletsVedette?: boolean | Formation$ongletsVedetteArgs<ExtArgs>
     conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
     conventionStagiaires?: boolean | Formation$conventionStagiairesArgs<ExtArgs>
     _count?: boolean | FormationCountOutputTypeDefaultArgs<ExtArgs>
@@ -7499,6 +7711,7 @@ export namespace Prisma {
     filiere?: boolean
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
@@ -7545,6 +7758,7 @@ export namespace Prisma {
     filiere?: boolean
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
@@ -7591,6 +7805,7 @@ export namespace Prisma {
     filiere?: boolean
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: boolean
     lienFffStagiaire?: boolean
     lienFffClub?: boolean
@@ -7613,7 +7828,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "fafaEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "fafaEligible" | "bonFormationEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
@@ -7623,6 +7838,7 @@ export namespace Prisma {
     formateurs?: boolean | Formation$formateursArgs<ExtArgs>
     messages?: boolean | Formation$messagesArgs<ExtArgs>
     covoiturages?: boolean | Formation$covoituragesArgs<ExtArgs>
+    ongletsVedette?: boolean | Formation$ongletsVedetteArgs<ExtArgs>
     conventionTemplate?: boolean | Formation$conventionTemplateArgs<ExtArgs>
     conventionStagiaires?: boolean | Formation$conventionStagiairesArgs<ExtArgs>
     _count?: boolean | FormationCountOutputTypeDefaultArgs<ExtArgs>
@@ -7645,6 +7861,7 @@ export namespace Prisma {
       formateurs: Prisma.$FormationFormateurPayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
       covoiturages: Prisma.$CovoituragePayload<ExtArgs>[]
+      ongletsVedette: Prisma.$FormationOngletPayload<ExtArgs>[]
       conventionTemplate: Prisma.$ConventionTemplatePayload<ExtArgs> | null
       conventionStagiaires: Prisma.$ConventionStagiairePayload<ExtArgs>[]
     }
@@ -7671,6 +7888,7 @@ export namespace Prisma {
       filiere: $Enums.Filiere | null
       cpfEligible: boolean
       fafaEligible: boolean
+      bonFormationEligible: boolean
       modeInscription: $Enums.ModeInscription
       lienFffStagiaire: string | null
       lienFffClub: string | null
@@ -8093,6 +8311,7 @@ export namespace Prisma {
     formateurs<T extends Formation$formateursArgs<ExtArgs> = {}>(args?: Subset<T, Formation$formateursArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationFormateurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends Formation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     covoiturages<T extends Formation$covoituragesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$covoituragesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CovoituragePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ongletsVedette<T extends Formation$ongletsVedetteArgs<ExtArgs> = {}>(args?: Subset<T, Formation$ongletsVedetteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     conventionTemplate<T extends Formation$conventionTemplateArgs<ExtArgs> = {}>(args?: Subset<T, Formation$conventionTemplateArgs<ExtArgs>>): Prisma__ConventionTemplateClient<$Result.GetResult<Prisma.$ConventionTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     conventionStagiaires<T extends Formation$conventionStagiairesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$conventionStagiairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -8146,6 +8365,7 @@ export namespace Prisma {
     readonly filiere: FieldRef<"Formation", 'Filiere'>
     readonly cpfEligible: FieldRef<"Formation", 'Boolean'>
     readonly fafaEligible: FieldRef<"Formation", 'Boolean'>
+    readonly bonFormationEligible: FieldRef<"Formation", 'Boolean'>
     readonly modeInscription: FieldRef<"Formation", 'ModeInscription'>
     readonly lienFffStagiaire: FieldRef<"Formation", 'String'>
     readonly lienFffClub: FieldRef<"Formation", 'String'>
@@ -8756,6 +8976,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CovoiturageScalarFieldEnum | CovoiturageScalarFieldEnum[]
+  }
+
+  /**
+   * Formation.ongletsVedette
+   */
+  export type Formation$ongletsVedetteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOnglet
+     */
+    select?: FormationOngletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOnglet
+     */
+    omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
+    where?: FormationOngletWhereInput
+    orderBy?: FormationOngletOrderByWithRelationInput | FormationOngletOrderByWithRelationInput[]
+    cursor?: FormationOngletWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FormationOngletScalarFieldEnum | FormationOngletScalarFieldEnum[]
   }
 
   /**
@@ -34998,6 +35242,9 @@ export namespace Prisma {
     backgroundColor: string | null
     opacity: number | null
     effetVisuel: $Enums.EffetVisuel | null
+    textColor: string | null
+    textFont: $Enums.TuileFont | null
+    arrowColor: string | null
     updatedAt: Date | null
   }
 
@@ -35009,6 +35256,9 @@ export namespace Prisma {
     backgroundColor: string | null
     opacity: number | null
     effetVisuel: $Enums.EffetVisuel | null
+    textColor: string | null
+    textFont: $Enums.TuileFont | null
+    arrowColor: string | null
     updatedAt: Date | null
   }
 
@@ -35020,6 +35270,9 @@ export namespace Prisma {
     backgroundColor: number
     opacity: number
     effetVisuel: number
+    textColor: number
+    textFont: number
+    arrowColor: number
     updatedAt: number
     _all: number
   }
@@ -35041,6 +35294,9 @@ export namespace Prisma {
     backgroundColor?: true
     opacity?: true
     effetVisuel?: true
+    textColor?: true
+    textFont?: true
+    arrowColor?: true
     updatedAt?: true
   }
 
@@ -35052,6 +35308,9 @@ export namespace Prisma {
     backgroundColor?: true
     opacity?: true
     effetVisuel?: true
+    textColor?: true
+    textFont?: true
+    arrowColor?: true
     updatedAt?: true
   }
 
@@ -35063,6 +35322,9 @@ export namespace Prisma {
     backgroundColor?: true
     opacity?: true
     effetVisuel?: true
+    textColor?: true
+    textFont?: true
+    arrowColor?: true
     updatedAt?: true
     _all?: true
   }
@@ -35161,6 +35423,9 @@ export namespace Prisma {
     backgroundColor: string
     opacity: number
     effetVisuel: $Enums.EffetVisuel
+    textColor: string
+    textFont: $Enums.TuileFont
+    arrowColor: string
     updatedAt: Date
     _count: FormationTuileCountAggregateOutputType | null
     _avg: FormationTuileAvgAggregateOutputType | null
@@ -35191,6 +35456,9 @@ export namespace Prisma {
     backgroundColor?: boolean
     opacity?: boolean
     effetVisuel?: boolean
+    textColor?: boolean
+    textFont?: boolean
+    arrowColor?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["formationTuile"]>
 
@@ -35202,6 +35470,9 @@ export namespace Prisma {
     backgroundColor?: boolean
     opacity?: boolean
     effetVisuel?: boolean
+    textColor?: boolean
+    textFont?: boolean
+    arrowColor?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["formationTuile"]>
 
@@ -35213,6 +35484,9 @@ export namespace Prisma {
     backgroundColor?: boolean
     opacity?: boolean
     effetVisuel?: boolean
+    textColor?: boolean
+    textFont?: boolean
+    arrowColor?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["formationTuile"]>
 
@@ -35224,10 +35498,13 @@ export namespace Prisma {
     backgroundColor?: boolean
     opacity?: boolean
     effetVisuel?: boolean
+    textColor?: boolean
+    textFont?: boolean
+    arrowColor?: boolean
     updatedAt?: boolean
   }
 
-  export type FormationTuileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "label" | "image" | "backgroundColor" | "opacity" | "effetVisuel" | "updatedAt", ExtArgs["result"]["formationTuile"]>
+  export type FormationTuileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "label" | "image" | "backgroundColor" | "opacity" | "effetVisuel" | "textColor" | "textFont" | "arrowColor" | "updatedAt", ExtArgs["result"]["formationTuile"]>
 
   export type $FormationTuilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FormationTuile"
@@ -35240,6 +35517,9 @@ export namespace Prisma {
       backgroundColor: string
       opacity: number
       effetVisuel: $Enums.EffetVisuel
+      textColor: string
+      textFont: $Enums.TuileFont
+      arrowColor: string
       updatedAt: Date
     }, ExtArgs["result"]["formationTuile"]>
     composites: {}
@@ -35671,6 +35951,9 @@ export namespace Prisma {
     readonly backgroundColor: FieldRef<"FormationTuile", 'String'>
     readonly opacity: FieldRef<"FormationTuile", 'Int'>
     readonly effetVisuel: FieldRef<"FormationTuile", 'EffetVisuel'>
+    readonly textColor: FieldRef<"FormationTuile", 'String'>
+    readonly textFont: FieldRef<"FormationTuile", 'TuileFont'>
+    readonly arrowColor: FieldRef<"FormationTuile", 'String'>
     readonly updatedAt: FieldRef<"FormationTuile", 'DateTime'>
   }
     
@@ -36079,6 +36362,7 @@ export namespace Prisma {
     opacity: number | null
     effetVisuel: $Enums.EffetVisuel | null
     updatedAt: Date | null
+    formationVedetteId: string | null
   }
 
   export type FormationOngletMaxAggregateOutputType = {
@@ -36095,6 +36379,7 @@ export namespace Prisma {
     opacity: number | null
     effetVisuel: $Enums.EffetVisuel | null
     updatedAt: Date | null
+    formationVedetteId: string | null
   }
 
   export type FormationOngletCountAggregateOutputType = {
@@ -36111,6 +36396,7 @@ export namespace Prisma {
     opacity: number
     effetVisuel: number
     updatedAt: number
+    formationVedetteId: number
     _all: number
   }
 
@@ -36139,6 +36425,7 @@ export namespace Prisma {
     opacity?: true
     effetVisuel?: true
     updatedAt?: true
+    formationVedetteId?: true
   }
 
   export type FormationOngletMaxAggregateInputType = {
@@ -36155,6 +36442,7 @@ export namespace Prisma {
     opacity?: true
     effetVisuel?: true
     updatedAt?: true
+    formationVedetteId?: true
   }
 
   export type FormationOngletCountAggregateInputType = {
@@ -36171,6 +36459,7 @@ export namespace Prisma {
     opacity?: true
     effetVisuel?: true
     updatedAt?: true
+    formationVedetteId?: true
     _all?: true
   }
 
@@ -36274,6 +36563,7 @@ export namespace Prisma {
     opacity: number
     effetVisuel: $Enums.EffetVisuel
     updatedAt: Date
+    formationVedetteId: string | null
     _count: FormationOngletCountAggregateOutputType | null
     _avg: FormationOngletAvgAggregateOutputType | null
     _sum: FormationOngletSumAggregateOutputType | null
@@ -36309,6 +36599,8 @@ export namespace Prisma {
     opacity?: boolean
     effetVisuel?: boolean
     updatedAt?: boolean
+    formationVedetteId?: boolean
+    formationVedette?: boolean | FormationOnglet$formationVedetteArgs<ExtArgs>
   }, ExtArgs["result"]["formationOnglet"]>
 
   export type FormationOngletSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -36325,6 +36617,8 @@ export namespace Prisma {
     opacity?: boolean
     effetVisuel?: boolean
     updatedAt?: boolean
+    formationVedetteId?: boolean
+    formationVedette?: boolean | FormationOnglet$formationVedetteArgs<ExtArgs>
   }, ExtArgs["result"]["formationOnglet"]>
 
   export type FormationOngletSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -36341,6 +36635,8 @@ export namespace Prisma {
     opacity?: boolean
     effetVisuel?: boolean
     updatedAt?: boolean
+    formationVedetteId?: boolean
+    formationVedette?: boolean | FormationOnglet$formationVedetteArgs<ExtArgs>
   }, ExtArgs["result"]["formationOnglet"]>
 
   export type FormationOngletSelectScalar = {
@@ -36357,13 +36653,25 @@ export namespace Prisma {
     opacity?: boolean
     effetVisuel?: boolean
     updatedAt?: boolean
+    formationVedetteId?: boolean
   }
 
-  export type FormationOngletOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "onglet" | "titre" | "contenu" | "videoUrl" | "videoFichierUrl" | "image" | "imageTaille" | "backgroundColor" | "opacity" | "effetVisuel" | "updatedAt", ExtArgs["result"]["formationOnglet"]>
+  export type FormationOngletOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "onglet" | "titre" | "contenu" | "videoUrl" | "videoFichierUrl" | "image" | "imageTaille" | "backgroundColor" | "opacity" | "effetVisuel" | "updatedAt" | "formationVedetteId", ExtArgs["result"]["formationOnglet"]>
+  export type FormationOngletInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formationVedette?: boolean | FormationOnglet$formationVedetteArgs<ExtArgs>
+  }
+  export type FormationOngletIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formationVedette?: boolean | FormationOnglet$formationVedetteArgs<ExtArgs>
+  }
+  export type FormationOngletIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formationVedette?: boolean | FormationOnglet$formationVedetteArgs<ExtArgs>
+  }
 
   export type $FormationOngletPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FormationOnglet"
-    objects: {}
+    objects: {
+      formationVedette: Prisma.$FormationPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       categorie: $Enums.CategorieFormation
@@ -36378,6 +36686,7 @@ export namespace Prisma {
       opacity: number
       effetVisuel: $Enums.EffetVisuel
       updatedAt: Date
+      formationVedetteId: string | null
     }, ExtArgs["result"]["formationOnglet"]>
     composites: {}
   }
@@ -36772,6 +37081,7 @@ export namespace Prisma {
    */
   export interface Prisma__FormationOngletClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    formationVedette<T extends FormationOnglet$formationVedetteArgs<ExtArgs> = {}>(args?: Subset<T, FormationOnglet$formationVedetteArgs<ExtArgs>>): Prisma__FormationClient<$Result.GetResult<Prisma.$FormationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -36814,6 +37124,7 @@ export namespace Prisma {
     readonly opacity: FieldRef<"FormationOnglet", 'Int'>
     readonly effetVisuel: FieldRef<"FormationOnglet", 'EffetVisuel'>
     readonly updatedAt: FieldRef<"FormationOnglet", 'DateTime'>
+    readonly formationVedetteId: FieldRef<"FormationOnglet", 'String'>
   }
     
 
@@ -36830,6 +37141,10 @@ export namespace Prisma {
      * Omit specific fields from the FormationOnglet
      */
     omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
     /**
      * Filter, which FormationOnglet to fetch.
      */
@@ -36849,6 +37164,10 @@ export namespace Prisma {
      */
     omit?: FormationOngletOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
+    /**
      * Filter, which FormationOnglet to fetch.
      */
     where: FormationOngletWhereUniqueInput
@@ -36866,6 +37185,10 @@ export namespace Prisma {
      * Omit specific fields from the FormationOnglet
      */
     omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
     /**
      * Filter, which FormationOnglet to fetch.
      */
@@ -36915,6 +37238,10 @@ export namespace Prisma {
      */
     omit?: FormationOngletOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
+    /**
      * Filter, which FormationOnglet to fetch.
      */
     where?: FormationOngletWhereInput
@@ -36962,6 +37289,10 @@ export namespace Prisma {
      * Omit specific fields from the FormationOnglet
      */
     omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
     /**
      * Filter, which FormationOnglets to fetch.
      */
@@ -37011,6 +37342,10 @@ export namespace Prisma {
      */
     omit?: FormationOngletOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
+    /**
      * The data needed to create a FormationOnglet.
      */
     data: XOR<FormationOngletCreateInput, FormationOngletUncheckedCreateInput>
@@ -37044,6 +37379,10 @@ export namespace Prisma {
      */
     data: FormationOngletCreateManyInput | FormationOngletCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -37058,6 +37397,10 @@ export namespace Prisma {
      * Omit specific fields from the FormationOnglet
      */
     omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
     /**
      * The data needed to update a FormationOnglet.
      */
@@ -37110,6 +37453,10 @@ export namespace Prisma {
      * Limit how many FormationOnglets to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -37124,6 +37471,10 @@ export namespace Prisma {
      * Omit specific fields from the FormationOnglet
      */
     omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
     /**
      * The filter to search for the FormationOnglet to update in case it exists.
      */
@@ -37151,6 +37502,10 @@ export namespace Prisma {
      */
     omit?: FormationOngletOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
+    /**
      * Filter which FormationOnglet to delete.
      */
     where: FormationOngletWhereUniqueInput
@@ -37171,6 +37526,25 @@ export namespace Prisma {
   }
 
   /**
+   * FormationOnglet.formationVedette
+   */
+  export type FormationOnglet$formationVedetteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Formation
+     */
+    select?: FormationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Formation
+     */
+    omit?: FormationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationInclude<ExtArgs> | null
+    where?: FormationWhereInput
+  }
+
+  /**
    * FormationOnglet without action
    */
   export type FormationOngletDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -37182,6 +37556,2227 @@ export namespace Prisma {
      * Omit specific fields from the FormationOnglet
      */
     omit?: FormationOngletOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FormationOngletInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FormationOngletTableau
+   */
+
+  export type AggregateFormationOngletTableau = {
+    _count: FormationOngletTableauCountAggregateOutputType | null
+    _avg: FormationOngletTableauAvgAggregateOutputType | null
+    _sum: FormationOngletTableauSumAggregateOutputType | null
+    _min: FormationOngletTableauMinAggregateOutputType | null
+    _max: FormationOngletTableauMaxAggregateOutputType | null
+  }
+
+  export type FormationOngletTableauAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type FormationOngletTableauSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type FormationOngletTableauMinAggregateOutputType = {
+    id: string | null
+    categorie: $Enums.CategorieFormation | null
+    onglet: $Enums.FormationOngletCle | null
+    titre: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type FormationOngletTableauMaxAggregateOutputType = {
+    id: string | null
+    categorie: $Enums.CategorieFormation | null
+    onglet: $Enums.FormationOngletCle | null
+    titre: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type FormationOngletTableauCountAggregateOutputType = {
+    id: number
+    categorie: number
+    onglet: number
+    titre: number
+    entetes: number
+    lignes: number
+    ordre: number
+    actif: number
+    _all: number
+  }
+
+
+  export type FormationOngletTableauAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type FormationOngletTableauSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type FormationOngletTableauMinAggregateInputType = {
+    id?: true
+    categorie?: true
+    onglet?: true
+    titre?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type FormationOngletTableauMaxAggregateInputType = {
+    id?: true
+    categorie?: true
+    onglet?: true
+    titre?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type FormationOngletTableauCountAggregateInputType = {
+    id?: true
+    categorie?: true
+    onglet?: true
+    titre?: true
+    entetes?: true
+    lignes?: true
+    ordre?: true
+    actif?: true
+    _all?: true
+  }
+
+  export type FormationOngletTableauAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormationOngletTableau to aggregate.
+     */
+    where?: FormationOngletTableauWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOngletTableaus to fetch.
+     */
+    orderBy?: FormationOngletTableauOrderByWithRelationInput | FormationOngletTableauOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FormationOngletTableauWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOngletTableaus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOngletTableaus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FormationOngletTableaus
+    **/
+    _count?: true | FormationOngletTableauCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FormationOngletTableauAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FormationOngletTableauSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FormationOngletTableauMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FormationOngletTableauMaxAggregateInputType
+  }
+
+  export type GetFormationOngletTableauAggregateType<T extends FormationOngletTableauAggregateArgs> = {
+        [P in keyof T & keyof AggregateFormationOngletTableau]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFormationOngletTableau[P]>
+      : GetScalarType<T[P], AggregateFormationOngletTableau[P]>
+  }
+
+
+
+
+  export type FormationOngletTableauGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormationOngletTableauWhereInput
+    orderBy?: FormationOngletTableauOrderByWithAggregationInput | FormationOngletTableauOrderByWithAggregationInput[]
+    by: FormationOngletTableauScalarFieldEnum[] | FormationOngletTableauScalarFieldEnum
+    having?: FormationOngletTableauScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FormationOngletTableauCountAggregateInputType | true
+    _avg?: FormationOngletTableauAvgAggregateInputType
+    _sum?: FormationOngletTableauSumAggregateInputType
+    _min?: FormationOngletTableauMinAggregateInputType
+    _max?: FormationOngletTableauMaxAggregateInputType
+  }
+
+  export type FormationOngletTableauGroupByOutputType = {
+    id: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre: string | null
+    entetes: JsonValue
+    lignes: JsonValue
+    ordre: number
+    actif: boolean
+    _count: FormationOngletTableauCountAggregateOutputType | null
+    _avg: FormationOngletTableauAvgAggregateOutputType | null
+    _sum: FormationOngletTableauSumAggregateOutputType | null
+    _min: FormationOngletTableauMinAggregateOutputType | null
+    _max: FormationOngletTableauMaxAggregateOutputType | null
+  }
+
+  type GetFormationOngletTableauGroupByPayload<T extends FormationOngletTableauGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FormationOngletTableauGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FormationOngletTableauGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FormationOngletTableauGroupByOutputType[P]>
+            : GetScalarType<T[P], FormationOngletTableauGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FormationOngletTableauSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    entetes?: boolean
+    lignes?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }, ExtArgs["result"]["formationOngletTableau"]>
+
+  export type FormationOngletTableauSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    entetes?: boolean
+    lignes?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }, ExtArgs["result"]["formationOngletTableau"]>
+
+  export type FormationOngletTableauSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    entetes?: boolean
+    lignes?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }, ExtArgs["result"]["formationOngletTableau"]>
+
+  export type FormationOngletTableauSelectScalar = {
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    entetes?: boolean
+    lignes?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }
+
+  export type FormationOngletTableauOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "onglet" | "titre" | "entetes" | "lignes" | "ordre" | "actif", ExtArgs["result"]["formationOngletTableau"]>
+
+  export type $FormationOngletTableauPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FormationOngletTableau"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      categorie: $Enums.CategorieFormation
+      onglet: $Enums.FormationOngletCle
+      titre: string | null
+      entetes: Prisma.JsonValue
+      lignes: Prisma.JsonValue
+      ordre: number
+      actif: boolean
+    }, ExtArgs["result"]["formationOngletTableau"]>
+    composites: {}
+  }
+
+  type FormationOngletTableauGetPayload<S extends boolean | null | undefined | FormationOngletTableauDefaultArgs> = $Result.GetResult<Prisma.$FormationOngletTableauPayload, S>
+
+  type FormationOngletTableauCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FormationOngletTableauFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FormationOngletTableauCountAggregateInputType | true
+    }
+
+  export interface FormationOngletTableauDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FormationOngletTableau'], meta: { name: 'FormationOngletTableau' } }
+    /**
+     * Find zero or one FormationOngletTableau that matches the filter.
+     * @param {FormationOngletTableauFindUniqueArgs} args - Arguments to find a FormationOngletTableau
+     * @example
+     * // Get one FormationOngletTableau
+     * const formationOngletTableau = await prisma.formationOngletTableau.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FormationOngletTableauFindUniqueArgs>(args: SelectSubset<T, FormationOngletTableauFindUniqueArgs<ExtArgs>>): Prisma__FormationOngletTableauClient<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FormationOngletTableau that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FormationOngletTableauFindUniqueOrThrowArgs} args - Arguments to find a FormationOngletTableau
+     * @example
+     * // Get one FormationOngletTableau
+     * const formationOngletTableau = await prisma.formationOngletTableau.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FormationOngletTableauFindUniqueOrThrowArgs>(args: SelectSubset<T, FormationOngletTableauFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FormationOngletTableauClient<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormationOngletTableau that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletTableauFindFirstArgs} args - Arguments to find a FormationOngletTableau
+     * @example
+     * // Get one FormationOngletTableau
+     * const formationOngletTableau = await prisma.formationOngletTableau.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FormationOngletTableauFindFirstArgs>(args?: SelectSubset<T, FormationOngletTableauFindFirstArgs<ExtArgs>>): Prisma__FormationOngletTableauClient<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormationOngletTableau that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletTableauFindFirstOrThrowArgs} args - Arguments to find a FormationOngletTableau
+     * @example
+     * // Get one FormationOngletTableau
+     * const formationOngletTableau = await prisma.formationOngletTableau.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FormationOngletTableauFindFirstOrThrowArgs>(args?: SelectSubset<T, FormationOngletTableauFindFirstOrThrowArgs<ExtArgs>>): Prisma__FormationOngletTableauClient<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FormationOngletTableaus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletTableauFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FormationOngletTableaus
+     * const formationOngletTableaus = await prisma.formationOngletTableau.findMany()
+     * 
+     * // Get first 10 FormationOngletTableaus
+     * const formationOngletTableaus = await prisma.formationOngletTableau.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const formationOngletTableauWithIdOnly = await prisma.formationOngletTableau.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FormationOngletTableauFindManyArgs>(args?: SelectSubset<T, FormationOngletTableauFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FormationOngletTableau.
+     * @param {FormationOngletTableauCreateArgs} args - Arguments to create a FormationOngletTableau.
+     * @example
+     * // Create one FormationOngletTableau
+     * const FormationOngletTableau = await prisma.formationOngletTableau.create({
+     *   data: {
+     *     // ... data to create a FormationOngletTableau
+     *   }
+     * })
+     * 
+     */
+    create<T extends FormationOngletTableauCreateArgs>(args: SelectSubset<T, FormationOngletTableauCreateArgs<ExtArgs>>): Prisma__FormationOngletTableauClient<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FormationOngletTableaus.
+     * @param {FormationOngletTableauCreateManyArgs} args - Arguments to create many FormationOngletTableaus.
+     * @example
+     * // Create many FormationOngletTableaus
+     * const formationOngletTableau = await prisma.formationOngletTableau.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FormationOngletTableauCreateManyArgs>(args?: SelectSubset<T, FormationOngletTableauCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FormationOngletTableaus and returns the data saved in the database.
+     * @param {FormationOngletTableauCreateManyAndReturnArgs} args - Arguments to create many FormationOngletTableaus.
+     * @example
+     * // Create many FormationOngletTableaus
+     * const formationOngletTableau = await prisma.formationOngletTableau.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FormationOngletTableaus and only return the `id`
+     * const formationOngletTableauWithIdOnly = await prisma.formationOngletTableau.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FormationOngletTableauCreateManyAndReturnArgs>(args?: SelectSubset<T, FormationOngletTableauCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FormationOngletTableau.
+     * @param {FormationOngletTableauDeleteArgs} args - Arguments to delete one FormationOngletTableau.
+     * @example
+     * // Delete one FormationOngletTableau
+     * const FormationOngletTableau = await prisma.formationOngletTableau.delete({
+     *   where: {
+     *     // ... filter to delete one FormationOngletTableau
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FormationOngletTableauDeleteArgs>(args: SelectSubset<T, FormationOngletTableauDeleteArgs<ExtArgs>>): Prisma__FormationOngletTableauClient<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FormationOngletTableau.
+     * @param {FormationOngletTableauUpdateArgs} args - Arguments to update one FormationOngletTableau.
+     * @example
+     * // Update one FormationOngletTableau
+     * const formationOngletTableau = await prisma.formationOngletTableau.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FormationOngletTableauUpdateArgs>(args: SelectSubset<T, FormationOngletTableauUpdateArgs<ExtArgs>>): Prisma__FormationOngletTableauClient<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FormationOngletTableaus.
+     * @param {FormationOngletTableauDeleteManyArgs} args - Arguments to filter FormationOngletTableaus to delete.
+     * @example
+     * // Delete a few FormationOngletTableaus
+     * const { count } = await prisma.formationOngletTableau.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FormationOngletTableauDeleteManyArgs>(args?: SelectSubset<T, FormationOngletTableauDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormationOngletTableaus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletTableauUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FormationOngletTableaus
+     * const formationOngletTableau = await prisma.formationOngletTableau.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FormationOngletTableauUpdateManyArgs>(args: SelectSubset<T, FormationOngletTableauUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormationOngletTableaus and returns the data updated in the database.
+     * @param {FormationOngletTableauUpdateManyAndReturnArgs} args - Arguments to update many FormationOngletTableaus.
+     * @example
+     * // Update many FormationOngletTableaus
+     * const formationOngletTableau = await prisma.formationOngletTableau.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FormationOngletTableaus and only return the `id`
+     * const formationOngletTableauWithIdOnly = await prisma.formationOngletTableau.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FormationOngletTableauUpdateManyAndReturnArgs>(args: SelectSubset<T, FormationOngletTableauUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FormationOngletTableau.
+     * @param {FormationOngletTableauUpsertArgs} args - Arguments to update or create a FormationOngletTableau.
+     * @example
+     * // Update or create a FormationOngletTableau
+     * const formationOngletTableau = await prisma.formationOngletTableau.upsert({
+     *   create: {
+     *     // ... data to create a FormationOngletTableau
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FormationOngletTableau we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FormationOngletTableauUpsertArgs>(args: SelectSubset<T, FormationOngletTableauUpsertArgs<ExtArgs>>): Prisma__FormationOngletTableauClient<$Result.GetResult<Prisma.$FormationOngletTableauPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FormationOngletTableaus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletTableauCountArgs} args - Arguments to filter FormationOngletTableaus to count.
+     * @example
+     * // Count the number of FormationOngletTableaus
+     * const count = await prisma.formationOngletTableau.count({
+     *   where: {
+     *     // ... the filter for the FormationOngletTableaus we want to count
+     *   }
+     * })
+    **/
+    count<T extends FormationOngletTableauCountArgs>(
+      args?: Subset<T, FormationOngletTableauCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FormationOngletTableauCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FormationOngletTableau.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletTableauAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FormationOngletTableauAggregateArgs>(args: Subset<T, FormationOngletTableauAggregateArgs>): Prisma.PrismaPromise<GetFormationOngletTableauAggregateType<T>>
+
+    /**
+     * Group by FormationOngletTableau.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletTableauGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FormationOngletTableauGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FormationOngletTableauGroupByArgs['orderBy'] }
+        : { orderBy?: FormationOngletTableauGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FormationOngletTableauGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFormationOngletTableauGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FormationOngletTableau model
+   */
+  readonly fields: FormationOngletTableauFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FormationOngletTableau.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FormationOngletTableauClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FormationOngletTableau model
+   */
+  interface FormationOngletTableauFieldRefs {
+    readonly id: FieldRef<"FormationOngletTableau", 'String'>
+    readonly categorie: FieldRef<"FormationOngletTableau", 'CategorieFormation'>
+    readonly onglet: FieldRef<"FormationOngletTableau", 'FormationOngletCle'>
+    readonly titre: FieldRef<"FormationOngletTableau", 'String'>
+    readonly entetes: FieldRef<"FormationOngletTableau", 'Json'>
+    readonly lignes: FieldRef<"FormationOngletTableau", 'Json'>
+    readonly ordre: FieldRef<"FormationOngletTableau", 'Int'>
+    readonly actif: FieldRef<"FormationOngletTableau", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FormationOngletTableau findUnique
+   */
+  export type FormationOngletTableauFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletTableau to fetch.
+     */
+    where: FormationOngletTableauWhereUniqueInput
+  }
+
+  /**
+   * FormationOngletTableau findUniqueOrThrow
+   */
+  export type FormationOngletTableauFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletTableau to fetch.
+     */
+    where: FormationOngletTableauWhereUniqueInput
+  }
+
+  /**
+   * FormationOngletTableau findFirst
+   */
+  export type FormationOngletTableauFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletTableau to fetch.
+     */
+    where?: FormationOngletTableauWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOngletTableaus to fetch.
+     */
+    orderBy?: FormationOngletTableauOrderByWithRelationInput | FormationOngletTableauOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormationOngletTableaus.
+     */
+    cursor?: FormationOngletTableauWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOngletTableaus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOngletTableaus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationOngletTableaus.
+     */
+    distinct?: FormationOngletTableauScalarFieldEnum | FormationOngletTableauScalarFieldEnum[]
+  }
+
+  /**
+   * FormationOngletTableau findFirstOrThrow
+   */
+  export type FormationOngletTableauFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletTableau to fetch.
+     */
+    where?: FormationOngletTableauWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOngletTableaus to fetch.
+     */
+    orderBy?: FormationOngletTableauOrderByWithRelationInput | FormationOngletTableauOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormationOngletTableaus.
+     */
+    cursor?: FormationOngletTableauWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOngletTableaus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOngletTableaus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationOngletTableaus.
+     */
+    distinct?: FormationOngletTableauScalarFieldEnum | FormationOngletTableauScalarFieldEnum[]
+  }
+
+  /**
+   * FormationOngletTableau findMany
+   */
+  export type FormationOngletTableauFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletTableaus to fetch.
+     */
+    where?: FormationOngletTableauWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOngletTableaus to fetch.
+     */
+    orderBy?: FormationOngletTableauOrderByWithRelationInput | FormationOngletTableauOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FormationOngletTableaus.
+     */
+    cursor?: FormationOngletTableauWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOngletTableaus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOngletTableaus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationOngletTableaus.
+     */
+    distinct?: FormationOngletTableauScalarFieldEnum | FormationOngletTableauScalarFieldEnum[]
+  }
+
+  /**
+   * FormationOngletTableau create
+   */
+  export type FormationOngletTableauCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FormationOngletTableau.
+     */
+    data: XOR<FormationOngletTableauCreateInput, FormationOngletTableauUncheckedCreateInput>
+  }
+
+  /**
+   * FormationOngletTableau createMany
+   */
+  export type FormationOngletTableauCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FormationOngletTableaus.
+     */
+    data: FormationOngletTableauCreateManyInput | FormationOngletTableauCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormationOngletTableau createManyAndReturn
+   */
+  export type FormationOngletTableauCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * The data used to create many FormationOngletTableaus.
+     */
+    data: FormationOngletTableauCreateManyInput | FormationOngletTableauCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormationOngletTableau update
+   */
+  export type FormationOngletTableauUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FormationOngletTableau.
+     */
+    data: XOR<FormationOngletTableauUpdateInput, FormationOngletTableauUncheckedUpdateInput>
+    /**
+     * Choose, which FormationOngletTableau to update.
+     */
+    where: FormationOngletTableauWhereUniqueInput
+  }
+
+  /**
+   * FormationOngletTableau updateMany
+   */
+  export type FormationOngletTableauUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FormationOngletTableaus.
+     */
+    data: XOR<FormationOngletTableauUpdateManyMutationInput, FormationOngletTableauUncheckedUpdateManyInput>
+    /**
+     * Filter which FormationOngletTableaus to update
+     */
+    where?: FormationOngletTableauWhereInput
+    /**
+     * Limit how many FormationOngletTableaus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationOngletTableau updateManyAndReturn
+   */
+  export type FormationOngletTableauUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * The data used to update FormationOngletTableaus.
+     */
+    data: XOR<FormationOngletTableauUpdateManyMutationInput, FormationOngletTableauUncheckedUpdateManyInput>
+    /**
+     * Filter which FormationOngletTableaus to update
+     */
+    where?: FormationOngletTableauWhereInput
+    /**
+     * Limit how many FormationOngletTableaus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationOngletTableau upsert
+   */
+  export type FormationOngletTableauUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FormationOngletTableau to update in case it exists.
+     */
+    where: FormationOngletTableauWhereUniqueInput
+    /**
+     * In case the FormationOngletTableau found by the `where` argument doesn't exist, create a new FormationOngletTableau with this data.
+     */
+    create: XOR<FormationOngletTableauCreateInput, FormationOngletTableauUncheckedCreateInput>
+    /**
+     * In case the FormationOngletTableau was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FormationOngletTableauUpdateInput, FormationOngletTableauUncheckedUpdateInput>
+  }
+
+  /**
+   * FormationOngletTableau delete
+   */
+  export type FormationOngletTableauDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+    /**
+     * Filter which FormationOngletTableau to delete.
+     */
+    where: FormationOngletTableauWhereUniqueInput
+  }
+
+  /**
+   * FormationOngletTableau deleteMany
+   */
+  export type FormationOngletTableauDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormationOngletTableaus to delete
+     */
+    where?: FormationOngletTableauWhereInput
+    /**
+     * Limit how many FormationOngletTableaus to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationOngletTableau without action
+   */
+  export type FormationOngletTableauDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletTableau
+     */
+    select?: FormationOngletTableauSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletTableau
+     */
+    omit?: FormationOngletTableauOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FormationOngletSection
+   */
+
+  export type AggregateFormationOngletSection = {
+    _count: FormationOngletSectionCountAggregateOutputType | null
+    _avg: FormationOngletSectionAvgAggregateOutputType | null
+    _sum: FormationOngletSectionSumAggregateOutputType | null
+    _min: FormationOngletSectionMinAggregateOutputType | null
+    _max: FormationOngletSectionMaxAggregateOutputType | null
+  }
+
+  export type FormationOngletSectionAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type FormationOngletSectionSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type FormationOngletSectionMinAggregateOutputType = {
+    id: string | null
+    categorie: $Enums.CategorieFormation | null
+    onglet: $Enums.FormationOngletCle | null
+    titre: string | null
+    contenu: string | null
+    videoUrl: string | null
+    videoFichierUrl: string | null
+    tableauTitre: string | null
+    lienLabel: string | null
+    lienUrl: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type FormationOngletSectionMaxAggregateOutputType = {
+    id: string | null
+    categorie: $Enums.CategorieFormation | null
+    onglet: $Enums.FormationOngletCle | null
+    titre: string | null
+    contenu: string | null
+    videoUrl: string | null
+    videoFichierUrl: string | null
+    tableauTitre: string | null
+    lienLabel: string | null
+    lienUrl: string | null
+    ordre: number | null
+    actif: boolean | null
+  }
+
+  export type FormationOngletSectionCountAggregateOutputType = {
+    id: number
+    categorie: number
+    onglet: number
+    titre: number
+    contenu: number
+    images: number
+    videoUrl: number
+    videoFichierUrl: number
+    tableauTitre: number
+    tableauEntetes: number
+    tableauLignes: number
+    lienLabel: number
+    lienUrl: number
+    ordre: number
+    actif: number
+    _all: number
+  }
+
+
+  export type FormationOngletSectionAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type FormationOngletSectionSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type FormationOngletSectionMinAggregateInputType = {
+    id?: true
+    categorie?: true
+    onglet?: true
+    titre?: true
+    contenu?: true
+    videoUrl?: true
+    videoFichierUrl?: true
+    tableauTitre?: true
+    lienLabel?: true
+    lienUrl?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type FormationOngletSectionMaxAggregateInputType = {
+    id?: true
+    categorie?: true
+    onglet?: true
+    titre?: true
+    contenu?: true
+    videoUrl?: true
+    videoFichierUrl?: true
+    tableauTitre?: true
+    lienLabel?: true
+    lienUrl?: true
+    ordre?: true
+    actif?: true
+  }
+
+  export type FormationOngletSectionCountAggregateInputType = {
+    id?: true
+    categorie?: true
+    onglet?: true
+    titre?: true
+    contenu?: true
+    images?: true
+    videoUrl?: true
+    videoFichierUrl?: true
+    tableauTitre?: true
+    tableauEntetes?: true
+    tableauLignes?: true
+    lienLabel?: true
+    lienUrl?: true
+    ordre?: true
+    actif?: true
+    _all?: true
+  }
+
+  export type FormationOngletSectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormationOngletSection to aggregate.
+     */
+    where?: FormationOngletSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOngletSections to fetch.
+     */
+    orderBy?: FormationOngletSectionOrderByWithRelationInput | FormationOngletSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FormationOngletSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOngletSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOngletSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FormationOngletSections
+    **/
+    _count?: true | FormationOngletSectionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FormationOngletSectionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FormationOngletSectionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FormationOngletSectionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FormationOngletSectionMaxAggregateInputType
+  }
+
+  export type GetFormationOngletSectionAggregateType<T extends FormationOngletSectionAggregateArgs> = {
+        [P in keyof T & keyof AggregateFormationOngletSection]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFormationOngletSection[P]>
+      : GetScalarType<T[P], AggregateFormationOngletSection[P]>
+  }
+
+
+
+
+  export type FormationOngletSectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FormationOngletSectionWhereInput
+    orderBy?: FormationOngletSectionOrderByWithAggregationInput | FormationOngletSectionOrderByWithAggregationInput[]
+    by: FormationOngletSectionScalarFieldEnum[] | FormationOngletSectionScalarFieldEnum
+    having?: FormationOngletSectionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FormationOngletSectionCountAggregateInputType | true
+    _avg?: FormationOngletSectionAvgAggregateInputType
+    _sum?: FormationOngletSectionSumAggregateInputType
+    _min?: FormationOngletSectionMinAggregateInputType
+    _max?: FormationOngletSectionMaxAggregateInputType
+  }
+
+  export type FormationOngletSectionGroupByOutputType = {
+    id: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre: string | null
+    contenu: string | null
+    images: JsonValue
+    videoUrl: string | null
+    videoFichierUrl: string | null
+    tableauTitre: string | null
+    tableauEntetes: JsonValue | null
+    tableauLignes: JsonValue | null
+    lienLabel: string | null
+    lienUrl: string | null
+    ordre: number
+    actif: boolean
+    _count: FormationOngletSectionCountAggregateOutputType | null
+    _avg: FormationOngletSectionAvgAggregateOutputType | null
+    _sum: FormationOngletSectionSumAggregateOutputType | null
+    _min: FormationOngletSectionMinAggregateOutputType | null
+    _max: FormationOngletSectionMaxAggregateOutputType | null
+  }
+
+  type GetFormationOngletSectionGroupByPayload<T extends FormationOngletSectionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FormationOngletSectionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FormationOngletSectionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FormationOngletSectionGroupByOutputType[P]>
+            : GetScalarType<T[P], FormationOngletSectionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FormationOngletSectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    contenu?: boolean
+    images?: boolean
+    videoUrl?: boolean
+    videoFichierUrl?: boolean
+    tableauTitre?: boolean
+    tableauEntetes?: boolean
+    tableauLignes?: boolean
+    lienLabel?: boolean
+    lienUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }, ExtArgs["result"]["formationOngletSection"]>
+
+  export type FormationOngletSectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    contenu?: boolean
+    images?: boolean
+    videoUrl?: boolean
+    videoFichierUrl?: boolean
+    tableauTitre?: boolean
+    tableauEntetes?: boolean
+    tableauLignes?: boolean
+    lienLabel?: boolean
+    lienUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }, ExtArgs["result"]["formationOngletSection"]>
+
+  export type FormationOngletSectionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    contenu?: boolean
+    images?: boolean
+    videoUrl?: boolean
+    videoFichierUrl?: boolean
+    tableauTitre?: boolean
+    tableauEntetes?: boolean
+    tableauLignes?: boolean
+    lienLabel?: boolean
+    lienUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }, ExtArgs["result"]["formationOngletSection"]>
+
+  export type FormationOngletSectionSelectScalar = {
+    id?: boolean
+    categorie?: boolean
+    onglet?: boolean
+    titre?: boolean
+    contenu?: boolean
+    images?: boolean
+    videoUrl?: boolean
+    videoFichierUrl?: boolean
+    tableauTitre?: boolean
+    tableauEntetes?: boolean
+    tableauLignes?: boolean
+    lienLabel?: boolean
+    lienUrl?: boolean
+    ordre?: boolean
+    actif?: boolean
+  }
+
+  export type FormationOngletSectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "onglet" | "titre" | "contenu" | "images" | "videoUrl" | "videoFichierUrl" | "tableauTitre" | "tableauEntetes" | "tableauLignes" | "lienLabel" | "lienUrl" | "ordre" | "actif", ExtArgs["result"]["formationOngletSection"]>
+
+  export type $FormationOngletSectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FormationOngletSection"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      categorie: $Enums.CategorieFormation
+      onglet: $Enums.FormationOngletCle
+      titre: string | null
+      contenu: string | null
+      images: Prisma.JsonValue
+      videoUrl: string | null
+      videoFichierUrl: string | null
+      tableauTitre: string | null
+      tableauEntetes: Prisma.JsonValue | null
+      tableauLignes: Prisma.JsonValue | null
+      lienLabel: string | null
+      lienUrl: string | null
+      ordre: number
+      actif: boolean
+    }, ExtArgs["result"]["formationOngletSection"]>
+    composites: {}
+  }
+
+  type FormationOngletSectionGetPayload<S extends boolean | null | undefined | FormationOngletSectionDefaultArgs> = $Result.GetResult<Prisma.$FormationOngletSectionPayload, S>
+
+  type FormationOngletSectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FormationOngletSectionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FormationOngletSectionCountAggregateInputType | true
+    }
+
+  export interface FormationOngletSectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FormationOngletSection'], meta: { name: 'FormationOngletSection' } }
+    /**
+     * Find zero or one FormationOngletSection that matches the filter.
+     * @param {FormationOngletSectionFindUniqueArgs} args - Arguments to find a FormationOngletSection
+     * @example
+     * // Get one FormationOngletSection
+     * const formationOngletSection = await prisma.formationOngletSection.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FormationOngletSectionFindUniqueArgs>(args: SelectSubset<T, FormationOngletSectionFindUniqueArgs<ExtArgs>>): Prisma__FormationOngletSectionClient<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FormationOngletSection that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FormationOngletSectionFindUniqueOrThrowArgs} args - Arguments to find a FormationOngletSection
+     * @example
+     * // Get one FormationOngletSection
+     * const formationOngletSection = await prisma.formationOngletSection.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FormationOngletSectionFindUniqueOrThrowArgs>(args: SelectSubset<T, FormationOngletSectionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FormationOngletSectionClient<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormationOngletSection that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletSectionFindFirstArgs} args - Arguments to find a FormationOngletSection
+     * @example
+     * // Get one FormationOngletSection
+     * const formationOngletSection = await prisma.formationOngletSection.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FormationOngletSectionFindFirstArgs>(args?: SelectSubset<T, FormationOngletSectionFindFirstArgs<ExtArgs>>): Prisma__FormationOngletSectionClient<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FormationOngletSection that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletSectionFindFirstOrThrowArgs} args - Arguments to find a FormationOngletSection
+     * @example
+     * // Get one FormationOngletSection
+     * const formationOngletSection = await prisma.formationOngletSection.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FormationOngletSectionFindFirstOrThrowArgs>(args?: SelectSubset<T, FormationOngletSectionFindFirstOrThrowArgs<ExtArgs>>): Prisma__FormationOngletSectionClient<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FormationOngletSections that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletSectionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FormationOngletSections
+     * const formationOngletSections = await prisma.formationOngletSection.findMany()
+     * 
+     * // Get first 10 FormationOngletSections
+     * const formationOngletSections = await prisma.formationOngletSection.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const formationOngletSectionWithIdOnly = await prisma.formationOngletSection.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FormationOngletSectionFindManyArgs>(args?: SelectSubset<T, FormationOngletSectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FormationOngletSection.
+     * @param {FormationOngletSectionCreateArgs} args - Arguments to create a FormationOngletSection.
+     * @example
+     * // Create one FormationOngletSection
+     * const FormationOngletSection = await prisma.formationOngletSection.create({
+     *   data: {
+     *     // ... data to create a FormationOngletSection
+     *   }
+     * })
+     * 
+     */
+    create<T extends FormationOngletSectionCreateArgs>(args: SelectSubset<T, FormationOngletSectionCreateArgs<ExtArgs>>): Prisma__FormationOngletSectionClient<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FormationOngletSections.
+     * @param {FormationOngletSectionCreateManyArgs} args - Arguments to create many FormationOngletSections.
+     * @example
+     * // Create many FormationOngletSections
+     * const formationOngletSection = await prisma.formationOngletSection.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FormationOngletSectionCreateManyArgs>(args?: SelectSubset<T, FormationOngletSectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FormationOngletSections and returns the data saved in the database.
+     * @param {FormationOngletSectionCreateManyAndReturnArgs} args - Arguments to create many FormationOngletSections.
+     * @example
+     * // Create many FormationOngletSections
+     * const formationOngletSection = await prisma.formationOngletSection.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FormationOngletSections and only return the `id`
+     * const formationOngletSectionWithIdOnly = await prisma.formationOngletSection.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FormationOngletSectionCreateManyAndReturnArgs>(args?: SelectSubset<T, FormationOngletSectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FormationOngletSection.
+     * @param {FormationOngletSectionDeleteArgs} args - Arguments to delete one FormationOngletSection.
+     * @example
+     * // Delete one FormationOngletSection
+     * const FormationOngletSection = await prisma.formationOngletSection.delete({
+     *   where: {
+     *     // ... filter to delete one FormationOngletSection
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FormationOngletSectionDeleteArgs>(args: SelectSubset<T, FormationOngletSectionDeleteArgs<ExtArgs>>): Prisma__FormationOngletSectionClient<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FormationOngletSection.
+     * @param {FormationOngletSectionUpdateArgs} args - Arguments to update one FormationOngletSection.
+     * @example
+     * // Update one FormationOngletSection
+     * const formationOngletSection = await prisma.formationOngletSection.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FormationOngletSectionUpdateArgs>(args: SelectSubset<T, FormationOngletSectionUpdateArgs<ExtArgs>>): Prisma__FormationOngletSectionClient<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FormationOngletSections.
+     * @param {FormationOngletSectionDeleteManyArgs} args - Arguments to filter FormationOngletSections to delete.
+     * @example
+     * // Delete a few FormationOngletSections
+     * const { count } = await prisma.formationOngletSection.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FormationOngletSectionDeleteManyArgs>(args?: SelectSubset<T, FormationOngletSectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormationOngletSections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletSectionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FormationOngletSections
+     * const formationOngletSection = await prisma.formationOngletSection.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FormationOngletSectionUpdateManyArgs>(args: SelectSubset<T, FormationOngletSectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FormationOngletSections and returns the data updated in the database.
+     * @param {FormationOngletSectionUpdateManyAndReturnArgs} args - Arguments to update many FormationOngletSections.
+     * @example
+     * // Update many FormationOngletSections
+     * const formationOngletSection = await prisma.formationOngletSection.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FormationOngletSections and only return the `id`
+     * const formationOngletSectionWithIdOnly = await prisma.formationOngletSection.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FormationOngletSectionUpdateManyAndReturnArgs>(args: SelectSubset<T, FormationOngletSectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FormationOngletSection.
+     * @param {FormationOngletSectionUpsertArgs} args - Arguments to update or create a FormationOngletSection.
+     * @example
+     * // Update or create a FormationOngletSection
+     * const formationOngletSection = await prisma.formationOngletSection.upsert({
+     *   create: {
+     *     // ... data to create a FormationOngletSection
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FormationOngletSection we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FormationOngletSectionUpsertArgs>(args: SelectSubset<T, FormationOngletSectionUpsertArgs<ExtArgs>>): Prisma__FormationOngletSectionClient<$Result.GetResult<Prisma.$FormationOngletSectionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FormationOngletSections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletSectionCountArgs} args - Arguments to filter FormationOngletSections to count.
+     * @example
+     * // Count the number of FormationOngletSections
+     * const count = await prisma.formationOngletSection.count({
+     *   where: {
+     *     // ... the filter for the FormationOngletSections we want to count
+     *   }
+     * })
+    **/
+    count<T extends FormationOngletSectionCountArgs>(
+      args?: Subset<T, FormationOngletSectionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FormationOngletSectionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FormationOngletSection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletSectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FormationOngletSectionAggregateArgs>(args: Subset<T, FormationOngletSectionAggregateArgs>): Prisma.PrismaPromise<GetFormationOngletSectionAggregateType<T>>
+
+    /**
+     * Group by FormationOngletSection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FormationOngletSectionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FormationOngletSectionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FormationOngletSectionGroupByArgs['orderBy'] }
+        : { orderBy?: FormationOngletSectionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FormationOngletSectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFormationOngletSectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FormationOngletSection model
+   */
+  readonly fields: FormationOngletSectionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FormationOngletSection.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FormationOngletSectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FormationOngletSection model
+   */
+  interface FormationOngletSectionFieldRefs {
+    readonly id: FieldRef<"FormationOngletSection", 'String'>
+    readonly categorie: FieldRef<"FormationOngletSection", 'CategorieFormation'>
+    readonly onglet: FieldRef<"FormationOngletSection", 'FormationOngletCle'>
+    readonly titre: FieldRef<"FormationOngletSection", 'String'>
+    readonly contenu: FieldRef<"FormationOngletSection", 'String'>
+    readonly images: FieldRef<"FormationOngletSection", 'Json'>
+    readonly videoUrl: FieldRef<"FormationOngletSection", 'String'>
+    readonly videoFichierUrl: FieldRef<"FormationOngletSection", 'String'>
+    readonly tableauTitre: FieldRef<"FormationOngletSection", 'String'>
+    readonly tableauEntetes: FieldRef<"FormationOngletSection", 'Json'>
+    readonly tableauLignes: FieldRef<"FormationOngletSection", 'Json'>
+    readonly lienLabel: FieldRef<"FormationOngletSection", 'String'>
+    readonly lienUrl: FieldRef<"FormationOngletSection", 'String'>
+    readonly ordre: FieldRef<"FormationOngletSection", 'Int'>
+    readonly actif: FieldRef<"FormationOngletSection", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FormationOngletSection findUnique
+   */
+  export type FormationOngletSectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletSection to fetch.
+     */
+    where: FormationOngletSectionWhereUniqueInput
+  }
+
+  /**
+   * FormationOngletSection findUniqueOrThrow
+   */
+  export type FormationOngletSectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletSection to fetch.
+     */
+    where: FormationOngletSectionWhereUniqueInput
+  }
+
+  /**
+   * FormationOngletSection findFirst
+   */
+  export type FormationOngletSectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletSection to fetch.
+     */
+    where?: FormationOngletSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOngletSections to fetch.
+     */
+    orderBy?: FormationOngletSectionOrderByWithRelationInput | FormationOngletSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormationOngletSections.
+     */
+    cursor?: FormationOngletSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOngletSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOngletSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationOngletSections.
+     */
+    distinct?: FormationOngletSectionScalarFieldEnum | FormationOngletSectionScalarFieldEnum[]
+  }
+
+  /**
+   * FormationOngletSection findFirstOrThrow
+   */
+  export type FormationOngletSectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletSection to fetch.
+     */
+    where?: FormationOngletSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOngletSections to fetch.
+     */
+    orderBy?: FormationOngletSectionOrderByWithRelationInput | FormationOngletSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FormationOngletSections.
+     */
+    cursor?: FormationOngletSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOngletSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOngletSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationOngletSections.
+     */
+    distinct?: FormationOngletSectionScalarFieldEnum | FormationOngletSectionScalarFieldEnum[]
+  }
+
+  /**
+   * FormationOngletSection findMany
+   */
+  export type FormationOngletSectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * Filter, which FormationOngletSections to fetch.
+     */
+    where?: FormationOngletSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FormationOngletSections to fetch.
+     */
+    orderBy?: FormationOngletSectionOrderByWithRelationInput | FormationOngletSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FormationOngletSections.
+     */
+    cursor?: FormationOngletSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FormationOngletSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FormationOngletSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FormationOngletSections.
+     */
+    distinct?: FormationOngletSectionScalarFieldEnum | FormationOngletSectionScalarFieldEnum[]
+  }
+
+  /**
+   * FormationOngletSection create
+   */
+  export type FormationOngletSectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FormationOngletSection.
+     */
+    data: XOR<FormationOngletSectionCreateInput, FormationOngletSectionUncheckedCreateInput>
+  }
+
+  /**
+   * FormationOngletSection createMany
+   */
+  export type FormationOngletSectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FormationOngletSections.
+     */
+    data: FormationOngletSectionCreateManyInput | FormationOngletSectionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormationOngletSection createManyAndReturn
+   */
+  export type FormationOngletSectionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * The data used to create many FormationOngletSections.
+     */
+    data: FormationOngletSectionCreateManyInput | FormationOngletSectionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FormationOngletSection update
+   */
+  export type FormationOngletSectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FormationOngletSection.
+     */
+    data: XOR<FormationOngletSectionUpdateInput, FormationOngletSectionUncheckedUpdateInput>
+    /**
+     * Choose, which FormationOngletSection to update.
+     */
+    where: FormationOngletSectionWhereUniqueInput
+  }
+
+  /**
+   * FormationOngletSection updateMany
+   */
+  export type FormationOngletSectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FormationOngletSections.
+     */
+    data: XOR<FormationOngletSectionUpdateManyMutationInput, FormationOngletSectionUncheckedUpdateManyInput>
+    /**
+     * Filter which FormationOngletSections to update
+     */
+    where?: FormationOngletSectionWhereInput
+    /**
+     * Limit how many FormationOngletSections to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationOngletSection updateManyAndReturn
+   */
+  export type FormationOngletSectionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * The data used to update FormationOngletSections.
+     */
+    data: XOR<FormationOngletSectionUpdateManyMutationInput, FormationOngletSectionUncheckedUpdateManyInput>
+    /**
+     * Filter which FormationOngletSections to update
+     */
+    where?: FormationOngletSectionWhereInput
+    /**
+     * Limit how many FormationOngletSections to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationOngletSection upsert
+   */
+  export type FormationOngletSectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FormationOngletSection to update in case it exists.
+     */
+    where: FormationOngletSectionWhereUniqueInput
+    /**
+     * In case the FormationOngletSection found by the `where` argument doesn't exist, create a new FormationOngletSection with this data.
+     */
+    create: XOR<FormationOngletSectionCreateInput, FormationOngletSectionUncheckedCreateInput>
+    /**
+     * In case the FormationOngletSection was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FormationOngletSectionUpdateInput, FormationOngletSectionUncheckedUpdateInput>
+  }
+
+  /**
+   * FormationOngletSection delete
+   */
+  export type FormationOngletSectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
+    /**
+     * Filter which FormationOngletSection to delete.
+     */
+    where: FormationOngletSectionWhereUniqueInput
+  }
+
+  /**
+   * FormationOngletSection deleteMany
+   */
+  export type FormationOngletSectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FormationOngletSections to delete
+     */
+    where?: FormationOngletSectionWhereInput
+    /**
+     * Limit how many FormationOngletSections to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FormationOngletSection without action
+   */
+  export type FormationOngletSectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FormationOngletSection
+     */
+    select?: FormationOngletSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FormationOngletSection
+     */
+    omit?: FormationOngletSectionOmit<ExtArgs> | null
   }
 
 
@@ -54997,6 +57592,7 @@ export namespace Prisma {
     filiere: 'filiere',
     cpfEligible: 'cpfEligible',
     fafaEligible: 'fafaEligible',
+    bonFormationEligible: 'bonFormationEligible',
     modeInscription: 'modeInscription',
     lienFffStagiaire: 'lienFffStagiaire',
     lienFffClub: 'lienFffClub',
@@ -55398,6 +57994,9 @@ export namespace Prisma {
     backgroundColor: 'backgroundColor',
     opacity: 'opacity',
     effetVisuel: 'effetVisuel',
+    textColor: 'textColor',
+    textFont: 'textFont',
+    arrowColor: 'arrowColor',
     updatedAt: 'updatedAt'
   };
 
@@ -55417,10 +58016,46 @@ export namespace Prisma {
     backgroundColor: 'backgroundColor',
     opacity: 'opacity',
     effetVisuel: 'effetVisuel',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    formationVedetteId: 'formationVedetteId'
   };
 
   export type FormationOngletScalarFieldEnum = (typeof FormationOngletScalarFieldEnum)[keyof typeof FormationOngletScalarFieldEnum]
+
+
+  export const FormationOngletTableauScalarFieldEnum: {
+    id: 'id',
+    categorie: 'categorie',
+    onglet: 'onglet',
+    titre: 'titre',
+    entetes: 'entetes',
+    lignes: 'lignes',
+    ordre: 'ordre',
+    actif: 'actif'
+  };
+
+  export type FormationOngletTableauScalarFieldEnum = (typeof FormationOngletTableauScalarFieldEnum)[keyof typeof FormationOngletTableauScalarFieldEnum]
+
+
+  export const FormationOngletSectionScalarFieldEnum: {
+    id: 'id',
+    categorie: 'categorie',
+    onglet: 'onglet',
+    titre: 'titre',
+    contenu: 'contenu',
+    images: 'images',
+    videoUrl: 'videoUrl',
+    videoFichierUrl: 'videoFichierUrl',
+    tableauTitre: 'tableauTitre',
+    tableauEntetes: 'tableauEntetes',
+    tableauLignes: 'tableauLignes',
+    lienLabel: 'lienLabel',
+    lienUrl: 'lienUrl',
+    ordre: 'ordre',
+    actif: 'actif'
+  };
+
+  export type FormationOngletSectionScalarFieldEnum = (typeof FormationOngletSectionScalarFieldEnum)[keyof typeof FormationOngletSectionScalarFieldEnum]
 
 
   export const PageHeroScalarFieldEnum: {
@@ -56065,6 +58700,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TuileFont'
+   */
+  export type EnumTuileFontFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TuileFont'>
+    
+
+
+  /**
+   * Reference to a field of type 'TuileFont[]'
+   */
+  export type ListEnumTuileFontFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TuileFont[]'>
+    
+
+
+  /**
    * Reference to a field of type 'FormationOngletCle'
    */
   export type EnumFormationOngletCleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FormationOngletCle'>
@@ -56273,6 +58922,7 @@ export namespace Prisma {
     filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolFilter<"Formation"> | boolean
     fafaEligible?: BoolFilter<"Formation"> | boolean
+    bonFormationEligible?: BoolFilter<"Formation"> | boolean
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
@@ -56301,6 +58951,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurListRelationFilter
     messages?: MessageListRelationFilter
     covoiturages?: CovoiturageListRelationFilter
+    ongletsVedette?: FormationOngletListRelationFilter
     conventionTemplate?: XOR<ConventionTemplateNullableScalarRelationFilter, ConventionTemplateWhereInput> | null
     conventionStagiaires?: ConventionStagiaireListRelationFilter
   }
@@ -56328,6 +58979,7 @@ export namespace Prisma {
     filiere?: SortOrderInput | SortOrder
     cpfEligible?: SortOrder
     fafaEligible?: SortOrder
+    bonFormationEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrderInput | SortOrder
     lienFffClub?: SortOrderInput | SortOrder
@@ -56356,6 +59008,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
     covoiturages?: CovoiturageOrderByRelationAggregateInput
+    ongletsVedette?: FormationOngletOrderByRelationAggregateInput
     conventionTemplate?: ConventionTemplateOrderByWithRelationInput
     conventionStagiaires?: ConventionStagiaireOrderByRelationAggregateInput
   }
@@ -56386,6 +59039,7 @@ export namespace Prisma {
     filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolFilter<"Formation"> | boolean
     fafaEligible?: BoolFilter<"Formation"> | boolean
+    bonFormationEligible?: BoolFilter<"Formation"> | boolean
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
@@ -56414,6 +59068,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurListRelationFilter
     messages?: MessageListRelationFilter
     covoiturages?: CovoiturageListRelationFilter
+    ongletsVedette?: FormationOngletListRelationFilter
     conventionTemplate?: XOR<ConventionTemplateNullableScalarRelationFilter, ConventionTemplateWhereInput> | null
     conventionStagiaires?: ConventionStagiaireListRelationFilter
   }, "id" | "slug">
@@ -56441,6 +59096,7 @@ export namespace Prisma {
     filiere?: SortOrderInput | SortOrder
     cpfEligible?: SortOrder
     fafaEligible?: SortOrder
+    bonFormationEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrderInput | SortOrder
     lienFffClub?: SortOrderInput | SortOrder
@@ -56494,6 +59150,7 @@ export namespace Prisma {
     filiere?: EnumFiliereNullableWithAggregatesFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolWithAggregatesFilter<"Formation"> | boolean
     fafaEligible?: BoolWithAggregatesFilter<"Formation"> | boolean
+    bonFormationEligible?: BoolWithAggregatesFilter<"Formation"> | boolean
     modeInscription?: EnumModeInscriptionWithAggregatesFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     lienFffClub?: StringNullableWithAggregatesFilter<"Formation"> | string | null
@@ -58419,6 +61076,9 @@ export namespace Prisma {
     backgroundColor?: StringFilter<"FormationTuile"> | string
     opacity?: IntFilter<"FormationTuile"> | number
     effetVisuel?: EnumEffetVisuelFilter<"FormationTuile"> | $Enums.EffetVisuel
+    textColor?: StringFilter<"FormationTuile"> | string
+    textFont?: EnumTuileFontFilter<"FormationTuile"> | $Enums.TuileFont
+    arrowColor?: StringFilter<"FormationTuile"> | string
     updatedAt?: DateTimeFilter<"FormationTuile"> | Date | string
   }
 
@@ -58430,6 +61090,9 @@ export namespace Prisma {
     backgroundColor?: SortOrder
     opacity?: SortOrder
     effetVisuel?: SortOrder
+    textColor?: SortOrder
+    textFont?: SortOrder
+    arrowColor?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -58444,6 +61107,9 @@ export namespace Prisma {
     backgroundColor?: StringFilter<"FormationTuile"> | string
     opacity?: IntFilter<"FormationTuile"> | number
     effetVisuel?: EnumEffetVisuelFilter<"FormationTuile"> | $Enums.EffetVisuel
+    textColor?: StringFilter<"FormationTuile"> | string
+    textFont?: EnumTuileFontFilter<"FormationTuile"> | $Enums.TuileFont
+    arrowColor?: StringFilter<"FormationTuile"> | string
     updatedAt?: DateTimeFilter<"FormationTuile"> | Date | string
   }, "id" | "categorie">
 
@@ -58455,6 +61121,9 @@ export namespace Prisma {
     backgroundColor?: SortOrder
     opacity?: SortOrder
     effetVisuel?: SortOrder
+    textColor?: SortOrder
+    textFont?: SortOrder
+    arrowColor?: SortOrder
     updatedAt?: SortOrder
     _count?: FormationTuileCountOrderByAggregateInput
     _avg?: FormationTuileAvgOrderByAggregateInput
@@ -58474,6 +61143,9 @@ export namespace Prisma {
     backgroundColor?: StringWithAggregatesFilter<"FormationTuile"> | string
     opacity?: IntWithAggregatesFilter<"FormationTuile"> | number
     effetVisuel?: EnumEffetVisuelWithAggregatesFilter<"FormationTuile"> | $Enums.EffetVisuel
+    textColor?: StringWithAggregatesFilter<"FormationTuile"> | string
+    textFont?: EnumTuileFontWithAggregatesFilter<"FormationTuile"> | $Enums.TuileFont
+    arrowColor?: StringWithAggregatesFilter<"FormationTuile"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"FormationTuile"> | Date | string
   }
 
@@ -58494,6 +61166,8 @@ export namespace Prisma {
     opacity?: IntFilter<"FormationOnglet"> | number
     effetVisuel?: EnumEffetVisuelFilter<"FormationOnglet"> | $Enums.EffetVisuel
     updatedAt?: DateTimeFilter<"FormationOnglet"> | Date | string
+    formationVedetteId?: StringNullableFilter<"FormationOnglet"> | string | null
+    formationVedette?: XOR<FormationNullableScalarRelationFilter, FormationWhereInput> | null
   }
 
   export type FormationOngletOrderByWithRelationInput = {
@@ -58510,6 +61184,8 @@ export namespace Prisma {
     opacity?: SortOrder
     effetVisuel?: SortOrder
     updatedAt?: SortOrder
+    formationVedetteId?: SortOrderInput | SortOrder
+    formationVedette?: FormationOrderByWithRelationInput
   }
 
   export type FormationOngletWhereUniqueInput = Prisma.AtLeast<{
@@ -58530,6 +61206,8 @@ export namespace Prisma {
     opacity?: IntFilter<"FormationOnglet"> | number
     effetVisuel?: EnumEffetVisuelFilter<"FormationOnglet"> | $Enums.EffetVisuel
     updatedAt?: DateTimeFilter<"FormationOnglet"> | Date | string
+    formationVedetteId?: StringNullableFilter<"FormationOnglet"> | string | null
+    formationVedette?: XOR<FormationNullableScalarRelationFilter, FormationWhereInput> | null
   }, "id" | "categorie_onglet">
 
   export type FormationOngletOrderByWithAggregationInput = {
@@ -58546,6 +61224,7 @@ export namespace Prisma {
     opacity?: SortOrder
     effetVisuel?: SortOrder
     updatedAt?: SortOrder
+    formationVedetteId?: SortOrderInput | SortOrder
     _count?: FormationOngletCountOrderByAggregateInput
     _avg?: FormationOngletAvgOrderByAggregateInput
     _max?: FormationOngletMaxOrderByAggregateInput
@@ -58570,6 +61249,180 @@ export namespace Prisma {
     opacity?: IntWithAggregatesFilter<"FormationOnglet"> | number
     effetVisuel?: EnumEffetVisuelWithAggregatesFilter<"FormationOnglet"> | $Enums.EffetVisuel
     updatedAt?: DateTimeWithAggregatesFilter<"FormationOnglet"> | Date | string
+    formationVedetteId?: StringNullableWithAggregatesFilter<"FormationOnglet"> | string | null
+  }
+
+  export type FormationOngletTableauWhereInput = {
+    AND?: FormationOngletTableauWhereInput | FormationOngletTableauWhereInput[]
+    OR?: FormationOngletTableauWhereInput[]
+    NOT?: FormationOngletTableauWhereInput | FormationOngletTableauWhereInput[]
+    id?: StringFilter<"FormationOngletTableau"> | string
+    categorie?: EnumCategorieFormationFilter<"FormationOngletTableau"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFilter<"FormationOngletTableau"> | $Enums.FormationOngletCle
+    titre?: StringNullableFilter<"FormationOngletTableau"> | string | null
+    entetes?: JsonFilter<"FormationOngletTableau">
+    lignes?: JsonFilter<"FormationOngletTableau">
+    ordre?: IntFilter<"FormationOngletTableau"> | number
+    actif?: BoolFilter<"FormationOngletTableau"> | boolean
+  }
+
+  export type FormationOngletTableauOrderByWithRelationInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrderInput | SortOrder
+    entetes?: SortOrder
+    lignes?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type FormationOngletTableauWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FormationOngletTableauWhereInput | FormationOngletTableauWhereInput[]
+    OR?: FormationOngletTableauWhereInput[]
+    NOT?: FormationOngletTableauWhereInput | FormationOngletTableauWhereInput[]
+    categorie?: EnumCategorieFormationFilter<"FormationOngletTableau"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFilter<"FormationOngletTableau"> | $Enums.FormationOngletCle
+    titre?: StringNullableFilter<"FormationOngletTableau"> | string | null
+    entetes?: JsonFilter<"FormationOngletTableau">
+    lignes?: JsonFilter<"FormationOngletTableau">
+    ordre?: IntFilter<"FormationOngletTableau"> | number
+    actif?: BoolFilter<"FormationOngletTableau"> | boolean
+  }, "id">
+
+  export type FormationOngletTableauOrderByWithAggregationInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrderInput | SortOrder
+    entetes?: SortOrder
+    lignes?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    _count?: FormationOngletTableauCountOrderByAggregateInput
+    _avg?: FormationOngletTableauAvgOrderByAggregateInput
+    _max?: FormationOngletTableauMaxOrderByAggregateInput
+    _min?: FormationOngletTableauMinOrderByAggregateInput
+    _sum?: FormationOngletTableauSumOrderByAggregateInput
+  }
+
+  export type FormationOngletTableauScalarWhereWithAggregatesInput = {
+    AND?: FormationOngletTableauScalarWhereWithAggregatesInput | FormationOngletTableauScalarWhereWithAggregatesInput[]
+    OR?: FormationOngletTableauScalarWhereWithAggregatesInput[]
+    NOT?: FormationOngletTableauScalarWhereWithAggregatesInput | FormationOngletTableauScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FormationOngletTableau"> | string
+    categorie?: EnumCategorieFormationWithAggregatesFilter<"FormationOngletTableau"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleWithAggregatesFilter<"FormationOngletTableau"> | $Enums.FormationOngletCle
+    titre?: StringNullableWithAggregatesFilter<"FormationOngletTableau"> | string | null
+    entetes?: JsonWithAggregatesFilter<"FormationOngletTableau">
+    lignes?: JsonWithAggregatesFilter<"FormationOngletTableau">
+    ordre?: IntWithAggregatesFilter<"FormationOngletTableau"> | number
+    actif?: BoolWithAggregatesFilter<"FormationOngletTableau"> | boolean
+  }
+
+  export type FormationOngletSectionWhereInput = {
+    AND?: FormationOngletSectionWhereInput | FormationOngletSectionWhereInput[]
+    OR?: FormationOngletSectionWhereInput[]
+    NOT?: FormationOngletSectionWhereInput | FormationOngletSectionWhereInput[]
+    id?: StringFilter<"FormationOngletSection"> | string
+    categorie?: EnumCategorieFormationFilter<"FormationOngletSection"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFilter<"FormationOngletSection"> | $Enums.FormationOngletCle
+    titre?: StringNullableFilter<"FormationOngletSection"> | string | null
+    contenu?: StringNullableFilter<"FormationOngletSection"> | string | null
+    images?: JsonFilter<"FormationOngletSection">
+    videoUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
+    videoFichierUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
+    tableauTitre?: StringNullableFilter<"FormationOngletSection"> | string | null
+    tableauEntetes?: JsonNullableFilter<"FormationOngletSection">
+    tableauLignes?: JsonNullableFilter<"FormationOngletSection">
+    lienLabel?: StringNullableFilter<"FormationOngletSection"> | string | null
+    lienUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
+    ordre?: IntFilter<"FormationOngletSection"> | number
+    actif?: BoolFilter<"FormationOngletSection"> | boolean
+  }
+
+  export type FormationOngletSectionOrderByWithRelationInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrderInput | SortOrder
+    contenu?: SortOrderInput | SortOrder
+    images?: SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
+    tableauTitre?: SortOrderInput | SortOrder
+    tableauEntetes?: SortOrderInput | SortOrder
+    tableauLignes?: SortOrderInput | SortOrder
+    lienLabel?: SortOrderInput | SortOrder
+    lienUrl?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type FormationOngletSectionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FormationOngletSectionWhereInput | FormationOngletSectionWhereInput[]
+    OR?: FormationOngletSectionWhereInput[]
+    NOT?: FormationOngletSectionWhereInput | FormationOngletSectionWhereInput[]
+    categorie?: EnumCategorieFormationFilter<"FormationOngletSection"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFilter<"FormationOngletSection"> | $Enums.FormationOngletCle
+    titre?: StringNullableFilter<"FormationOngletSection"> | string | null
+    contenu?: StringNullableFilter<"FormationOngletSection"> | string | null
+    images?: JsonFilter<"FormationOngletSection">
+    videoUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
+    videoFichierUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
+    tableauTitre?: StringNullableFilter<"FormationOngletSection"> | string | null
+    tableauEntetes?: JsonNullableFilter<"FormationOngletSection">
+    tableauLignes?: JsonNullableFilter<"FormationOngletSection">
+    lienLabel?: StringNullableFilter<"FormationOngletSection"> | string | null
+    lienUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
+    ordre?: IntFilter<"FormationOngletSection"> | number
+    actif?: BoolFilter<"FormationOngletSection"> | boolean
+  }, "id">
+
+  export type FormationOngletSectionOrderByWithAggregationInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrderInput | SortOrder
+    contenu?: SortOrderInput | SortOrder
+    images?: SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    videoFichierUrl?: SortOrderInput | SortOrder
+    tableauTitre?: SortOrderInput | SortOrder
+    tableauEntetes?: SortOrderInput | SortOrder
+    tableauLignes?: SortOrderInput | SortOrder
+    lienLabel?: SortOrderInput | SortOrder
+    lienUrl?: SortOrderInput | SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+    _count?: FormationOngletSectionCountOrderByAggregateInput
+    _avg?: FormationOngletSectionAvgOrderByAggregateInput
+    _max?: FormationOngletSectionMaxOrderByAggregateInput
+    _min?: FormationOngletSectionMinOrderByAggregateInput
+    _sum?: FormationOngletSectionSumOrderByAggregateInput
+  }
+
+  export type FormationOngletSectionScalarWhereWithAggregatesInput = {
+    AND?: FormationOngletSectionScalarWhereWithAggregatesInput | FormationOngletSectionScalarWhereWithAggregatesInput[]
+    OR?: FormationOngletSectionScalarWhereWithAggregatesInput[]
+    NOT?: FormationOngletSectionScalarWhereWithAggregatesInput | FormationOngletSectionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FormationOngletSection"> | string
+    categorie?: EnumCategorieFormationWithAggregatesFilter<"FormationOngletSection"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleWithAggregatesFilter<"FormationOngletSection"> | $Enums.FormationOngletCle
+    titre?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
+    contenu?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
+    images?: JsonWithAggregatesFilter<"FormationOngletSection">
+    videoUrl?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
+    videoFichierUrl?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
+    tableauTitre?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
+    tableauEntetes?: JsonNullableWithAggregatesFilter<"FormationOngletSection">
+    tableauLignes?: JsonNullableWithAggregatesFilter<"FormationOngletSection">
+    lienLabel?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
+    lienUrl?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
+    ordre?: IntWithAggregatesFilter<"FormationOngletSection"> | number
+    actif?: BoolWithAggregatesFilter<"FormationOngletSection"> | boolean
   }
 
   export type PageHeroWhereInput = {
@@ -59895,6 +62748,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -59922,6 +62776,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
@@ -59949,6 +62804,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -59977,6 +62833,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -60003,6 +62860,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60030,6 +62888,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
@@ -60057,6 +62916,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60085,6 +62945,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -60111,6 +62972,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -60156,6 +63018,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60200,6 +63063,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -62325,6 +65189,9 @@ export namespace Prisma {
     backgroundColor?: string
     opacity?: number
     effetVisuel?: $Enums.EffetVisuel
+    textColor?: string
+    textFont?: $Enums.TuileFont
+    arrowColor?: string
     updatedAt?: Date | string
   }
 
@@ -62336,6 +65203,9 @@ export namespace Prisma {
     backgroundColor?: string
     opacity?: number
     effetVisuel?: $Enums.EffetVisuel
+    textColor?: string
+    textFont?: $Enums.TuileFont
+    arrowColor?: string
     updatedAt?: Date | string
   }
 
@@ -62347,6 +65217,9 @@ export namespace Prisma {
     backgroundColor?: StringFieldUpdateOperationsInput | string
     opacity?: IntFieldUpdateOperationsInput | number
     effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    textColor?: StringFieldUpdateOperationsInput | string
+    textFont?: EnumTuileFontFieldUpdateOperationsInput | $Enums.TuileFont
+    arrowColor?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -62358,6 +65231,9 @@ export namespace Prisma {
     backgroundColor?: StringFieldUpdateOperationsInput | string
     opacity?: IntFieldUpdateOperationsInput | number
     effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    textColor?: StringFieldUpdateOperationsInput | string
+    textFont?: EnumTuileFontFieldUpdateOperationsInput | $Enums.TuileFont
+    arrowColor?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -62369,6 +65245,9 @@ export namespace Prisma {
     backgroundColor?: string
     opacity?: number
     effetVisuel?: $Enums.EffetVisuel
+    textColor?: string
+    textFont?: $Enums.TuileFont
+    arrowColor?: string
     updatedAt?: Date | string
   }
 
@@ -62380,6 +65259,9 @@ export namespace Prisma {
     backgroundColor?: StringFieldUpdateOperationsInput | string
     opacity?: IntFieldUpdateOperationsInput | number
     effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    textColor?: StringFieldUpdateOperationsInput | string
+    textFont?: EnumTuileFontFieldUpdateOperationsInput | $Enums.TuileFont
+    arrowColor?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -62391,6 +65273,9 @@ export namespace Prisma {
     backgroundColor?: StringFieldUpdateOperationsInput | string
     opacity?: IntFieldUpdateOperationsInput | number
     effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    textColor?: StringFieldUpdateOperationsInput | string
+    textFont?: EnumTuileFontFieldUpdateOperationsInput | $Enums.TuileFont
+    arrowColor?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -62408,6 +65293,7 @@ export namespace Prisma {
     opacity?: number
     effetVisuel?: $Enums.EffetVisuel
     updatedAt?: Date | string
+    formationVedette?: FormationCreateNestedOneWithoutOngletsVedetteInput
   }
 
   export type FormationOngletUncheckedCreateInput = {
@@ -62424,6 +65310,7 @@ export namespace Prisma {
     opacity?: number
     effetVisuel?: $Enums.EffetVisuel
     updatedAt?: Date | string
+    formationVedetteId?: string | null
   }
 
   export type FormationOngletUpdateInput = {
@@ -62440,6 +65327,7 @@ export namespace Prisma {
     opacity?: IntFieldUpdateOperationsInput | number
     effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    formationVedette?: FormationUpdateOneWithoutOngletsVedetteNestedInput
   }
 
   export type FormationOngletUncheckedUpdateInput = {
@@ -62456,6 +65344,7 @@ export namespace Prisma {
     opacity?: IntFieldUpdateOperationsInput | number
     effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    formationVedetteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type FormationOngletCreateManyInput = {
@@ -62472,6 +65361,7 @@ export namespace Prisma {
     opacity?: number
     effetVisuel?: $Enums.EffetVisuel
     updatedAt?: Date | string
+    formationVedetteId?: string | null
   }
 
   export type FormationOngletUpdateManyMutationInput = {
@@ -62504,6 +65394,210 @@ export namespace Prisma {
     opacity?: IntFieldUpdateOperationsInput | number
     effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    formationVedetteId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FormationOngletTableauCreateInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    entetes: JsonNullValueInput | InputJsonValue
+    lignes: JsonNullValueInput | InputJsonValue
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type FormationOngletTableauUncheckedCreateInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    entetes: JsonNullValueInput | InputJsonValue
+    lignes: JsonNullValueInput | InputJsonValue
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type FormationOngletTableauUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type FormationOngletTableauUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type FormationOngletTableauCreateManyInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    entetes: JsonNullValueInput | InputJsonValue
+    lignes: JsonNullValueInput | InputJsonValue
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type FormationOngletTableauUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type FormationOngletTableauUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    entetes?: JsonNullValueInput | InputJsonValue
+    lignes?: JsonNullValueInput | InputJsonValue
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type FormationOngletSectionCreateInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    contenu?: string | null
+    images: JsonNullValueInput | InputJsonValue
+    videoUrl?: string | null
+    videoFichierUrl?: string | null
+    tableauTitre?: string | null
+    tableauEntetes?: NullableJsonNullValueInput | InputJsonValue
+    tableauLignes?: NullableJsonNullValueInput | InputJsonValue
+    lienLabel?: string | null
+    lienUrl?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type FormationOngletSectionUncheckedCreateInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    contenu?: string | null
+    images: JsonNullValueInput | InputJsonValue
+    videoUrl?: string | null
+    videoFichierUrl?: string | null
+    tableauTitre?: string | null
+    tableauEntetes?: NullableJsonNullValueInput | InputJsonValue
+    tableauLignes?: NullableJsonNullValueInput | InputJsonValue
+    lienLabel?: string | null
+    lienUrl?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type FormationOngletSectionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: JsonNullValueInput | InputJsonValue
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauEntetes?: NullableJsonNullValueInput | InputJsonValue
+    tableauLignes?: NullableJsonNullValueInput | InputJsonValue
+    lienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type FormationOngletSectionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: JsonNullValueInput | InputJsonValue
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauEntetes?: NullableJsonNullValueInput | InputJsonValue
+    tableauLignes?: NullableJsonNullValueInput | InputJsonValue
+    lienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type FormationOngletSectionCreateManyInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    contenu?: string | null
+    images: JsonNullValueInput | InputJsonValue
+    videoUrl?: string | null
+    videoFichierUrl?: string | null
+    tableauTitre?: string | null
+    tableauEntetes?: NullableJsonNullValueInput | InputJsonValue
+    tableauLignes?: NullableJsonNullValueInput | InputJsonValue
+    lienLabel?: string | null
+    lienUrl?: string | null
+    ordre?: number
+    actif?: boolean
+  }
+
+  export type FormationOngletSectionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: JsonNullValueInput | InputJsonValue
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauEntetes?: NullableJsonNullValueInput | InputJsonValue
+    tableauLignes?: NullableJsonNullValueInput | InputJsonValue
+    lienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type FormationOngletSectionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    images?: JsonNullValueInput | InputJsonValue
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauTitre?: NullableStringFieldUpdateOperationsInput | string | null
+    tableauEntetes?: NullableJsonNullValueInput | InputJsonValue
+    tableauLignes?: NullableJsonNullValueInput | InputJsonValue
+    lienLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    actif?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PageHeroCreateInput = {
@@ -64208,6 +67302,12 @@ export namespace Prisma {
     none?: HeroSlideWhereInput
   }
 
+  export type FormationOngletListRelationFilter = {
+    every?: FormationOngletWhereInput
+    some?: FormationOngletWhereInput
+    none?: FormationOngletWhereInput
+  }
+
   export type ConventionTemplateNullableScalarRelationFilter = {
     is?: ConventionTemplateWhereInput | null
     isNot?: ConventionTemplateWhereInput | null
@@ -64224,6 +67324,10 @@ export namespace Prisma {
   }
 
   export type HeroSlideOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FormationOngletOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -64254,6 +67358,7 @@ export namespace Prisma {
     filiere?: SortOrder
     cpfEligible?: SortOrder
     fafaEligible?: SortOrder
+    bonFormationEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
@@ -64305,6 +67410,7 @@ export namespace Prisma {
     filiere?: SortOrder
     cpfEligible?: SortOrder
     fafaEligible?: SortOrder
+    bonFormationEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
@@ -64348,6 +67454,7 @@ export namespace Prisma {
     filiere?: SortOrder
     cpfEligible?: SortOrder
     fafaEligible?: SortOrder
+    bonFormationEligible?: SortOrder
     modeInscription?: SortOrder
     lienFffStagiaire?: SortOrder
     lienFffClub?: SortOrder
@@ -65832,6 +68939,13 @@ export namespace Prisma {
     not?: NestedEnumEffetVisuelFilter<$PrismaModel> | $Enums.EffetVisuel
   }
 
+  export type EnumTuileFontFilter<$PrismaModel = never> = {
+    equals?: $Enums.TuileFont | EnumTuileFontFieldRefInput<$PrismaModel>
+    in?: $Enums.TuileFont[] | ListEnumTuileFontFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TuileFont[] | ListEnumTuileFontFieldRefInput<$PrismaModel>
+    not?: NestedEnumTuileFontFilter<$PrismaModel> | $Enums.TuileFont
+  }
+
   export type FormationTuileCountOrderByAggregateInput = {
     id?: SortOrder
     categorie?: SortOrder
@@ -65840,6 +68954,9 @@ export namespace Prisma {
     backgroundColor?: SortOrder
     opacity?: SortOrder
     effetVisuel?: SortOrder
+    textColor?: SortOrder
+    textFont?: SortOrder
+    arrowColor?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -65855,6 +68972,9 @@ export namespace Prisma {
     backgroundColor?: SortOrder
     opacity?: SortOrder
     effetVisuel?: SortOrder
+    textColor?: SortOrder
+    textFont?: SortOrder
+    arrowColor?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -65866,6 +68986,9 @@ export namespace Prisma {
     backgroundColor?: SortOrder
     opacity?: SortOrder
     effetVisuel?: SortOrder
+    textColor?: SortOrder
+    textFont?: SortOrder
+    arrowColor?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -65881,6 +69004,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEffetVisuelFilter<$PrismaModel>
     _max?: NestedEnumEffetVisuelFilter<$PrismaModel>
+  }
+
+  export type EnumTuileFontWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TuileFont | EnumTuileFontFieldRefInput<$PrismaModel>
+    in?: $Enums.TuileFont[] | ListEnumTuileFontFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TuileFont[] | ListEnumTuileFontFieldRefInput<$PrismaModel>
+    not?: NestedEnumTuileFontWithAggregatesFilter<$PrismaModel> | $Enums.TuileFont
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTuileFontFilter<$PrismaModel>
+    _max?: NestedEnumTuileFontFilter<$PrismaModel>
   }
 
   export type EnumFormationOngletCleFilter<$PrismaModel = never> = {
@@ -65909,6 +69042,7 @@ export namespace Prisma {
     opacity?: SortOrder
     effetVisuel?: SortOrder
     updatedAt?: SortOrder
+    formationVedetteId?: SortOrder
   }
 
   export type FormationOngletAvgOrderByAggregateInput = {
@@ -65930,6 +69064,7 @@ export namespace Prisma {
     opacity?: SortOrder
     effetVisuel?: SortOrder
     updatedAt?: SortOrder
+    formationVedetteId?: SortOrder
   }
 
   export type FormationOngletMinOrderByAggregateInput = {
@@ -65946,6 +69081,7 @@ export namespace Prisma {
     opacity?: SortOrder
     effetVisuel?: SortOrder
     updatedAt?: SortOrder
+    formationVedetteId?: SortOrder
   }
 
   export type FormationOngletSumOrderByAggregateInput = {
@@ -65961,6 +69097,148 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumFormationOngletCleFilter<$PrismaModel>
     _max?: NestedEnumFormationOngletCleFilter<$PrismaModel>
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type FormationOngletTableauCountOrderByAggregateInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrder
+    entetes?: SortOrder
+    lignes?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type FormationOngletTableauAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type FormationOngletTableauMaxOrderByAggregateInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type FormationOngletTableauMinOrderByAggregateInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type FormationOngletTableauSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type FormationOngletSectionCountOrderByAggregateInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrder
+    contenu?: SortOrder
+    images?: SortOrder
+    videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
+    tableauTitre?: SortOrder
+    tableauEntetes?: SortOrder
+    tableauLignes?: SortOrder
+    lienLabel?: SortOrder
+    lienUrl?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type FormationOngletSectionAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type FormationOngletSectionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrder
+    contenu?: SortOrder
+    videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
+    tableauTitre?: SortOrder
+    lienLabel?: SortOrder
+    lienUrl?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type FormationOngletSectionMinOrderByAggregateInput = {
+    id?: SortOrder
+    categorie?: SortOrder
+    onglet?: SortOrder
+    titre?: SortOrder
+    contenu?: SortOrder
+    videoUrl?: SortOrder
+    videoFichierUrl?: SortOrder
+    tableauTitre?: SortOrder
+    lienLabel?: SortOrder
+    lienUrl?: SortOrder
+    ordre?: SortOrder
+    actif?: SortOrder
+  }
+
+  export type FormationOngletSectionSumOrderByAggregateInput = {
+    ordre?: SortOrder
   }
 
   export type EnumPageCleFilter<$PrismaModel = never> = {
@@ -66721,29 +69999,6 @@ export namespace Prisma {
   export type ContactFormationSumOrderByAggregateInput = {
     ordre?: SortOrder
   }
-  export type JsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
 
   export type DispositifFormationTableauCountOrderByAggregateInput = {
     id?: SortOrder
@@ -66777,32 +70032,6 @@ export namespace Prisma {
 
   export type DispositifFormationTableauSumOrderByAggregateInput = {
     ordre?: SortOrder
-  }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type InscriptionCreateNestedManyWithoutUserInput = {
@@ -67343,6 +70572,13 @@ export namespace Prisma {
     connect?: CovoiturageWhereUniqueInput | CovoiturageWhereUniqueInput[]
   }
 
+  export type FormationOngletCreateNestedManyWithoutFormationVedetteInput = {
+    create?: XOR<FormationOngletCreateWithoutFormationVedetteInput, FormationOngletUncheckedCreateWithoutFormationVedetteInput> | FormationOngletCreateWithoutFormationVedetteInput[] | FormationOngletUncheckedCreateWithoutFormationVedetteInput[]
+    connectOrCreate?: FormationOngletCreateOrConnectWithoutFormationVedetteInput | FormationOngletCreateOrConnectWithoutFormationVedetteInput[]
+    createMany?: FormationOngletCreateManyFormationVedetteInputEnvelope
+    connect?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+  }
+
   export type ConventionTemplateCreateNestedOneWithoutFormationsInput = {
     create?: XOR<ConventionTemplateCreateWithoutFormationsInput, ConventionTemplateUncheckedCreateWithoutFormationsInput>
     connectOrCreate?: ConventionTemplateCreateOrConnectWithoutFormationsInput
@@ -67410,6 +70646,13 @@ export namespace Prisma {
     connectOrCreate?: CovoiturageCreateOrConnectWithoutFormationInput | CovoiturageCreateOrConnectWithoutFormationInput[]
     createMany?: CovoiturageCreateManyFormationInputEnvelope
     connect?: CovoiturageWhereUniqueInput | CovoiturageWhereUniqueInput[]
+  }
+
+  export type FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput = {
+    create?: XOR<FormationOngletCreateWithoutFormationVedetteInput, FormationOngletUncheckedCreateWithoutFormationVedetteInput> | FormationOngletCreateWithoutFormationVedetteInput[] | FormationOngletUncheckedCreateWithoutFormationVedetteInput[]
+    connectOrCreate?: FormationOngletCreateOrConnectWithoutFormationVedetteInput | FormationOngletCreateOrConnectWithoutFormationVedetteInput[]
+    createMany?: FormationOngletCreateManyFormationVedetteInputEnvelope
+    connect?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
   }
 
   export type ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput = {
@@ -67587,6 +70830,20 @@ export namespace Prisma {
     deleteMany?: CovoiturageScalarWhereInput | CovoiturageScalarWhereInput[]
   }
 
+  export type FormationOngletUpdateManyWithoutFormationVedetteNestedInput = {
+    create?: XOR<FormationOngletCreateWithoutFormationVedetteInput, FormationOngletUncheckedCreateWithoutFormationVedetteInput> | FormationOngletCreateWithoutFormationVedetteInput[] | FormationOngletUncheckedCreateWithoutFormationVedetteInput[]
+    connectOrCreate?: FormationOngletCreateOrConnectWithoutFormationVedetteInput | FormationOngletCreateOrConnectWithoutFormationVedetteInput[]
+    upsert?: FormationOngletUpsertWithWhereUniqueWithoutFormationVedetteInput | FormationOngletUpsertWithWhereUniqueWithoutFormationVedetteInput[]
+    createMany?: FormationOngletCreateManyFormationVedetteInputEnvelope
+    set?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+    disconnect?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+    delete?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+    connect?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+    update?: FormationOngletUpdateWithWhereUniqueWithoutFormationVedetteInput | FormationOngletUpdateWithWhereUniqueWithoutFormationVedetteInput[]
+    updateMany?: FormationOngletUpdateManyWithWhereWithoutFormationVedetteInput | FormationOngletUpdateManyWithWhereWithoutFormationVedetteInput[]
+    deleteMany?: FormationOngletScalarWhereInput | FormationOngletScalarWhereInput[]
+  }
+
   export type ConventionTemplateUpdateOneWithoutFormationsNestedInput = {
     create?: XOR<ConventionTemplateCreateWithoutFormationsInput, ConventionTemplateUncheckedCreateWithoutFormationsInput>
     connectOrCreate?: ConventionTemplateCreateOrConnectWithoutFormationsInput
@@ -67721,6 +70978,20 @@ export namespace Prisma {
     update?: CovoiturageUpdateWithWhereUniqueWithoutFormationInput | CovoiturageUpdateWithWhereUniqueWithoutFormationInput[]
     updateMany?: CovoiturageUpdateManyWithWhereWithoutFormationInput | CovoiturageUpdateManyWithWhereWithoutFormationInput[]
     deleteMany?: CovoiturageScalarWhereInput | CovoiturageScalarWhereInput[]
+  }
+
+  export type FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput = {
+    create?: XOR<FormationOngletCreateWithoutFormationVedetteInput, FormationOngletUncheckedCreateWithoutFormationVedetteInput> | FormationOngletCreateWithoutFormationVedetteInput[] | FormationOngletUncheckedCreateWithoutFormationVedetteInput[]
+    connectOrCreate?: FormationOngletCreateOrConnectWithoutFormationVedetteInput | FormationOngletCreateOrConnectWithoutFormationVedetteInput[]
+    upsert?: FormationOngletUpsertWithWhereUniqueWithoutFormationVedetteInput | FormationOngletUpsertWithWhereUniqueWithoutFormationVedetteInput[]
+    createMany?: FormationOngletCreateManyFormationVedetteInputEnvelope
+    set?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+    disconnect?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+    delete?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+    connect?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+    update?: FormationOngletUpdateWithWhereUniqueWithoutFormationVedetteInput | FormationOngletUpdateWithWhereUniqueWithoutFormationVedetteInput[]
+    updateMany?: FormationOngletUpdateManyWithWhereWithoutFormationVedetteInput | FormationOngletUpdateManyWithWhereWithoutFormationVedetteInput[]
+    deleteMany?: FormationOngletScalarWhereInput | FormationOngletScalarWhereInput[]
   }
 
   export type ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput = {
@@ -68483,8 +71754,28 @@ export namespace Prisma {
     set?: $Enums.EffetVisuel
   }
 
+  export type EnumTuileFontFieldUpdateOperationsInput = {
+    set?: $Enums.TuileFont
+  }
+
+  export type FormationCreateNestedOneWithoutOngletsVedetteInput = {
+    create?: XOR<FormationCreateWithoutOngletsVedetteInput, FormationUncheckedCreateWithoutOngletsVedetteInput>
+    connectOrCreate?: FormationCreateOrConnectWithoutOngletsVedetteInput
+    connect?: FormationWhereUniqueInput
+  }
+
   export type EnumFormationOngletCleFieldUpdateOperationsInput = {
     set?: $Enums.FormationOngletCle
+  }
+
+  export type FormationUpdateOneWithoutOngletsVedetteNestedInput = {
+    create?: XOR<FormationCreateWithoutOngletsVedetteInput, FormationUncheckedCreateWithoutOngletsVedetteInput>
+    connectOrCreate?: FormationCreateOrConnectWithoutOngletsVedetteInput
+    upsert?: FormationUpsertWithoutOngletsVedetteInput
+    disconnect?: FormationWhereInput | boolean
+    delete?: FormationWhereInput | boolean
+    connect?: FormationWhereUniqueInput
+    update?: XOR<XOR<FormationUpdateToOneWithWhereWithoutOngletsVedetteInput, FormationUpdateWithoutOngletsVedetteInput>, FormationUncheckedUpdateWithoutOngletsVedetteInput>
   }
 
   export type EnumPageCleFieldUpdateOperationsInput = {
@@ -69447,6 +72738,13 @@ export namespace Prisma {
     not?: NestedEnumEffetVisuelFilter<$PrismaModel> | $Enums.EffetVisuel
   }
 
+  export type NestedEnumTuileFontFilter<$PrismaModel = never> = {
+    equals?: $Enums.TuileFont | EnumTuileFontFieldRefInput<$PrismaModel>
+    in?: $Enums.TuileFont[] | ListEnumTuileFontFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TuileFont[] | ListEnumTuileFontFieldRefInput<$PrismaModel>
+    not?: NestedEnumTuileFontFilter<$PrismaModel> | $Enums.TuileFont
+  }
+
   export type NestedEnumEffetVisuelWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.EffetVisuel | EnumEffetVisuelFieldRefInput<$PrismaModel>
     in?: $Enums.EffetVisuel[] | ListEnumEffetVisuelFieldRefInput<$PrismaModel>
@@ -69455,6 +72753,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEffetVisuelFilter<$PrismaModel>
     _max?: NestedEnumEffetVisuelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTuileFontWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TuileFont | EnumTuileFontFieldRefInput<$PrismaModel>
+    in?: $Enums.TuileFont[] | ListEnumTuileFontFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TuileFont[] | ListEnumTuileFontFieldRefInput<$PrismaModel>
+    not?: NestedEnumTuileFontWithAggregatesFilter<$PrismaModel> | $Enums.TuileFont
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTuileFontFilter<$PrismaModel>
+    _max?: NestedEnumTuileFontFilter<$PrismaModel>
   }
 
   export type NestedEnumFormationOngletCleFilter<$PrismaModel = never> = {
@@ -69472,6 +72780,29 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumFormationOngletCleFilter<$PrismaModel>
     _max?: NestedEnumFormationOngletCleFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type NestedEnumPageCleFilter<$PrismaModel = never> = {
@@ -69557,29 +72888,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumIconePratiqueFilter<$PrismaModel>
     _max?: NestedEnumIconePratiqueFilter<$PrismaModel>
-  }
-  export type NestedJsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type InscriptionCreateWithoutUserInput = {
@@ -70527,6 +73835,48 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FormationOngletCreateWithoutFormationVedetteInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    contenu?: string | null
+    videoUrl?: string | null
+    videoFichierUrl?: string | null
+    image?: string | null
+    imageTaille?: number
+    backgroundColor?: string
+    opacity?: number
+    effetVisuel?: $Enums.EffetVisuel
+    updatedAt?: Date | string
+  }
+
+  export type FormationOngletUncheckedCreateWithoutFormationVedetteInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    contenu?: string | null
+    videoUrl?: string | null
+    videoFichierUrl?: string | null
+    image?: string | null
+    imageTaille?: number
+    backgroundColor?: string
+    opacity?: number
+    effetVisuel?: $Enums.EffetVisuel
+    updatedAt?: Date | string
+  }
+
+  export type FormationOngletCreateOrConnectWithoutFormationVedetteInput = {
+    where: FormationOngletWhereUniqueInput
+    create: XOR<FormationOngletCreateWithoutFormationVedetteInput, FormationOngletUncheckedCreateWithoutFormationVedetteInput>
+  }
+
+  export type FormationOngletCreateManyFormationVedetteInputEnvelope = {
+    data: FormationOngletCreateManyFormationVedetteInput | FormationOngletCreateManyFormationVedetteInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ConventionTemplateCreateWithoutFormationsInput = {
     id?: string
     nom: string
@@ -70809,6 +74159,42 @@ export namespace Prisma {
     data: XOR<CovoiturageUpdateManyMutationInput, CovoiturageUncheckedUpdateManyWithoutFormationInput>
   }
 
+  export type FormationOngletUpsertWithWhereUniqueWithoutFormationVedetteInput = {
+    where: FormationOngletWhereUniqueInput
+    update: XOR<FormationOngletUpdateWithoutFormationVedetteInput, FormationOngletUncheckedUpdateWithoutFormationVedetteInput>
+    create: XOR<FormationOngletCreateWithoutFormationVedetteInput, FormationOngletUncheckedCreateWithoutFormationVedetteInput>
+  }
+
+  export type FormationOngletUpdateWithWhereUniqueWithoutFormationVedetteInput = {
+    where: FormationOngletWhereUniqueInput
+    data: XOR<FormationOngletUpdateWithoutFormationVedetteInput, FormationOngletUncheckedUpdateWithoutFormationVedetteInput>
+  }
+
+  export type FormationOngletUpdateManyWithWhereWithoutFormationVedetteInput = {
+    where: FormationOngletScalarWhereInput
+    data: XOR<FormationOngletUpdateManyMutationInput, FormationOngletUncheckedUpdateManyWithoutFormationVedetteInput>
+  }
+
+  export type FormationOngletScalarWhereInput = {
+    AND?: FormationOngletScalarWhereInput | FormationOngletScalarWhereInput[]
+    OR?: FormationOngletScalarWhereInput[]
+    NOT?: FormationOngletScalarWhereInput | FormationOngletScalarWhereInput[]
+    id?: StringFilter<"FormationOnglet"> | string
+    categorie?: EnumCategorieFormationFilter<"FormationOnglet"> | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFilter<"FormationOnglet"> | $Enums.FormationOngletCle
+    titre?: StringNullableFilter<"FormationOnglet"> | string | null
+    contenu?: StringNullableFilter<"FormationOnglet"> | string | null
+    videoUrl?: StringNullableFilter<"FormationOnglet"> | string | null
+    videoFichierUrl?: StringNullableFilter<"FormationOnglet"> | string | null
+    image?: StringNullableFilter<"FormationOnglet"> | string | null
+    imageTaille?: IntFilter<"FormationOnglet"> | number
+    backgroundColor?: StringFilter<"FormationOnglet"> | string
+    opacity?: IntFilter<"FormationOnglet"> | number
+    effetVisuel?: EnumEffetVisuelFilter<"FormationOnglet"> | $Enums.EffetVisuel
+    updatedAt?: DateTimeFilter<"FormationOnglet"> | Date | string
+    formationVedetteId?: StringNullableFilter<"FormationOnglet"> | string | null
+  }
+
   export type ConventionTemplateUpsertWithoutFormationsInput = {
     update: XOR<ConventionTemplateUpdateWithoutFormationsInput, ConventionTemplateUncheckedUpdateWithoutFormationsInput>
     create: XOR<ConventionTemplateCreateWithoutFormationsInput, ConventionTemplateUncheckedCreateWithoutFormationsInput>
@@ -70971,6 +74357,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -70997,6 +74384,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
@@ -71024,6 +74412,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71051,6 +74440,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -71150,6 +74540,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71176,6 +74567,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
@@ -71203,6 +74595,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71230,6 +74623,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -71256,6 +74650,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71282,6 +74677,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
@@ -71309,6 +74705,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71336,6 +74733,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -71378,6 +74776,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71404,6 +74803,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
@@ -71431,6 +74831,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71458,6 +74859,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -71535,6 +74937,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71561,6 +74964,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
@@ -71588,6 +74992,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71615,6 +75020,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -71714,6 +75120,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71740,6 +75147,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
@@ -71767,6 +75175,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71794,6 +75203,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -71820,6 +75230,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71846,6 +75257,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
@@ -71873,6 +75285,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -71900,6 +75313,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -71993,6 +75407,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72019,6 +75434,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
@@ -72046,6 +75462,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72073,6 +75490,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -72207,6 +75625,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -72233,6 +75652,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
@@ -72260,6 +75680,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -72287,6 +75708,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -72468,6 +75890,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72494,6 +75917,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
@@ -72521,6 +75945,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72548,6 +75973,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -73030,6 +76456,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -73057,6 +76484,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -73083,6 +76511,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -73110,6 +76539,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -73165,6 +76595,7 @@ export namespace Prisma {
     filiere?: EnumFiliereNullableFilter<"Formation"> | $Enums.Filiere | null
     cpfEligible?: BoolFilter<"Formation"> | boolean
     fafaEligible?: BoolFilter<"Formation"> | boolean
+    bonFormationEligible?: BoolFilter<"Formation"> | boolean
     modeInscription?: EnumModeInscriptionFilter<"Formation"> | $Enums.ModeInscription
     lienFffStagiaire?: StringNullableFilter<"Formation"> | string | null
     lienFffClub?: StringNullableFilter<"Formation"> | string | null
@@ -73210,6 +76641,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -73237,6 +76669,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
   }
 
@@ -73263,6 +76696,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -73291,6 +76725,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
   }
 
   export type FormationCreateOrConnectWithoutConventionStagiairesInput = {
@@ -73384,6 +76819,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73411,6 +76847,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
   }
 
@@ -73437,6 +76874,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73465,6 +76903,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
   }
 
   export type ConventionSignataireUpsertWithWhereUniqueWithoutConventionStagiaireInput = {
@@ -73790,6 +77229,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -73816,6 +77256,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
@@ -73843,6 +77284,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -73870,6 +77312,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -74030,6 +77473,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74056,6 +77500,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
@@ -74083,6 +77528,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74110,6 +77556,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -74424,6 +77871,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -74450,6 +77898,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
@@ -74477,6 +77926,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -74504,6 +77954,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -74619,6 +78070,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74645,6 +78097,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
@@ -74672,6 +78125,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -74699,6 +78153,7 @@ export namespace Prisma {
     heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -75009,6 +78464,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -75035,6 +78491,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
     conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
@@ -75062,6 +78519,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -75089,6 +78547,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -75131,6 +78590,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -75157,6 +78617,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
@@ -75184,6 +78645,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -75208,6 +78670,243 @@ export namespace Prisma {
     inscriptions?: InscriptionUncheckedUpdateManyWithoutFormationNestedInput
     demandes?: DemandeInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
+  }
+
+  export type FormationCreateWithoutOngletsVedetteInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    fafaEligible?: boolean
+    bonFormationEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    fffCaptureActif?: boolean
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
+    documents?: DocumentCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
+    messages?: MessageCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    conventionTemplate?: ConventionTemplateCreateNestedOneWithoutFormationsInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
+  }
+
+  export type FormationUncheckedCreateWithoutOngletsVedetteInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    fafaEligible?: boolean
+    bonFormationEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    fffCaptureActif?: boolean
+    conventionTemplateId?: string | null
+    responsablePedagogiqueNom?: string | null
+    responsablePedagogiquePrenom?: string | null
+    responsablePedagogiqueEmail?: string | null
+    responsablePedagogiqueTelephone?: string | null
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionUncheckedCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionUncheckedCreateNestedManyWithoutFormationInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
+  }
+
+  export type FormationCreateOrConnectWithoutOngletsVedetteInput = {
+    where: FormationWhereUniqueInput
+    create: XOR<FormationCreateWithoutOngletsVedetteInput, FormationUncheckedCreateWithoutOngletsVedetteInput>
+  }
+
+  export type FormationUpsertWithoutOngletsVedetteInput = {
+    update: XOR<FormationUpdateWithoutOngletsVedetteInput, FormationUncheckedUpdateWithoutOngletsVedetteInput>
+    create: XOR<FormationCreateWithoutOngletsVedetteInput, FormationUncheckedCreateWithoutOngletsVedetteInput>
+    where?: FormationWhereInput
+  }
+
+  export type FormationUpdateToOneWithWhereWithoutOngletsVedetteInput = {
+    where?: FormationWhereInput
+    data: XOR<FormationUpdateWithoutOngletsVedetteInput, FormationUncheckedUpdateWithoutOngletsVedetteInput>
+  }
+
+  export type FormationUpdateWithoutOngletsVedetteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
+    messages?: MessageUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    conventionTemplate?: ConventionTemplateUpdateOneWithoutFormationsNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
+  }
+
+  export type FormationUncheckedUpdateWithoutOngletsVedetteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
+    conventionTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueNom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiquePrenom?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    responsablePedagogiqueTelephone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
@@ -76616,6 +80315,22 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type FormationOngletCreateManyFormationVedetteInput = {
+    id?: string
+    categorie: $Enums.CategorieFormation
+    onglet: $Enums.FormationOngletCle
+    titre?: string | null
+    contenu?: string | null
+    videoUrl?: string | null
+    videoFichierUrl?: string | null
+    image?: string | null
+    imageTaille?: number
+    backgroundColor?: string
+    opacity?: number
+    effetVisuel?: $Enums.EffetVisuel
+    updatedAt?: Date | string
+  }
+
   export type ConventionStagiaireCreateManyFormationInput = {
     id?: string
     club?: string | null
@@ -76958,6 +80673,54 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FormationOngletUpdateWithoutFormationVedetteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageTaille?: IntFieldUpdateOperationsInput | number
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationOngletUncheckedUpdateWithoutFormationVedetteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageTaille?: IntFieldUpdateOperationsInput | number
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FormationOngletUncheckedUpdateManyWithoutFormationVedetteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    onglet?: EnumFormationOngletCleFieldUpdateOperationsInput | $Enums.FormationOngletCle
+    titre?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageTaille?: IntFieldUpdateOperationsInput | number
+    backgroundColor?: StringFieldUpdateOperationsInput | string
+    opacity?: IntFieldUpdateOperationsInput | number
+    effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ConventionStagiaireUpdateWithoutFormationInput = {
     id?: StringFieldUpdateOperationsInput | string
     club?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77208,6 +80971,7 @@ export namespace Prisma {
     filiere?: $Enums.Filiere | null
     cpfEligible?: boolean
     fafaEligible?: boolean
+    bonFormationEligible?: boolean
     modeInscription?: $Enums.ModeInscription
     lienFffStagiaire?: string | null
     lienFffClub?: string | null
@@ -77252,6 +81016,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77279,6 +81044,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -77305,6 +81071,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
@@ -77332,6 +81099,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -77358,6 +81126,7 @@ export namespace Prisma {
     filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
     cpfEligible?: BoolFieldUpdateOperationsInput | boolean
     fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
     modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
     lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
     lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
