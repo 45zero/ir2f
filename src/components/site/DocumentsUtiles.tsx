@@ -10,6 +10,35 @@ function isPreviewablePdf(doc: DocumentUtile): boolean {
   return Boolean(doc.url && doc.url.split("?")[0].toLowerCase().endsWith(".pdf"))
 }
 
+// Certains "documents utiles" sont en réalité de simples liens vers une page web (ex. une page
+// de résultats, ou une autre page du site) plutôt qu'un fichier téléchargeable — les forcer dans
+// le pop-up d'aperçu/téléchargement produit un "fichier" qui n'est en fait que du HTML. On les
+// distingue par extension de fichier reconnue dans l'URL (ou par la présence d'un mimeType pour
+// les fichiers uploadés, qui en ont toujours un).
+const FILE_EXTENSION = /\.(pdf|docx?|xlsx?|pptx?|csv|zip|rar|7z|png|jpe?g|gif|webp|txt|odt|ods)(?:[?#]|$)/i
+
+function isDownloadableFile(doc: DocumentUtile): boolean {
+  if (doc.mimeType) return true
+  return Boolean(doc.url && FILE_EXTENSION.test(doc.url))
+}
+
+const rowStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: 10,
+  background: "#fff",
+  border: "1px solid #eef0f3",
+  borderRadius: 8,
+  padding: "12px 16px",
+  fontSize: 13,
+  fontWeight: 600,
+  color: colors.navy,
+  fontFamily: fontBody,
+  textAlign: "left" as const,
+  cursor: "pointer",
+  width: "100%",
+}
+
 const downloadButtonStyle = {
   display: "inline-flex",
   alignItems: "center",
@@ -43,37 +72,33 @@ export function DocumentsUtiles({ documents }: { documents: DocumentUtile[] }) {
         Documents utiles
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {items.map((doc) => (
-          <button
-            key={doc.id}
-            type="button"
-            onClick={() => setOpenId(doc.id)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              background: "#fff",
-              border: "1px solid #eef0f3",
-              borderRadius: 8,
-              padding: "12px 16px",
-              fontSize: 13,
-              fontWeight: 600,
-              color: colors.navy,
-              fontFamily: fontBody,
-              textAlign: "left",
-              cursor: "pointer",
-              width: "100%",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2" style={{ flexShrink: 0 }}>
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="12" y1="18" x2="12" y2="12" />
-              <polyline points="9 15 12 18 15 15" />
-            </svg>
-            {doc.nom}
-          </button>
-        ))}
+        {items.map((doc) =>
+          isDownloadableFile(doc) ? (
+            <button
+              key={doc.id}
+              type="button"
+              onClick={() => setOpenId(doc.id)}
+              style={rowStyle}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2" style={{ flexShrink: 0 }}>
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="12" y1="18" x2="12" y2="12" />
+                <polyline points="9 15 12 18 15 15" />
+              </svg>
+              {doc.nom}
+            </button>
+          ) : (
+            <a key={doc.id} href={doc.url} target="_blank" rel="noreferrer" style={{ ...rowStyle, textDecoration: "none" }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={colors.navy} strokeWidth="2" style={{ flexShrink: 0 }}>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              {doc.nom}
+            </a>
+          )
+        )}
       </div>
 
       {openDoc && (
