@@ -636,6 +636,7 @@ export function FormationsCatalogue({
   const [sidebarCategory, setSidebarCategory] = useState<CategorieFormation>(initialCategory)
   const [expandedTab, setExpandedTab] = useState<ExpandedTab>(initialCategory === "EDUCATEUR" ? "eduPresentation" : "info")
   const [popupFormationId, setPopupFormationId] = useState<string | null>(null)
+  const [benevoleFilter, setBenevoleFilter] = useState<GroupeEquivalence | "TOUS">("TOUS")
 
   function getOnglet(categorie: CategorieFormation, onglet: FormationOngletCle): FormationOngletData {
     return (
@@ -1312,16 +1313,34 @@ export function FormationsCatalogue({
             {expandedTab === "eduBenevole" && sidebarCategory === "EDUCATEUR" && (() => {
               const data = getOnglet("EDUCATEUR", "EDU_BENEVOLE")
               const list = (byCategory.get("EDUCATEUR") ?? []).filter((f) => f.filiere === "BENEVOLE")
+              const filteredList = benevoleFilter === "TOUS" ? list : list.filter((f) => f.groupeEquivalence === benevoleFilter)
               return (
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
                   {data.contenu && <p style={tabTextStyle}>{data.contenu}</p>}
                   {(data.videoFichierUrl || data.videoUrl || data.image) && <OngletMedia data={data} />}
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    <button style={benevoleFilter === "TOUS" ? tabActive : tabBase} onClick={() => setBenevoleFilter("TOUS")}>
+                      Tous
+                    </button>
+                    {BENEVOLE_COLUMNS.map((col) => (
+                      <button
+                        key={col.groupe}
+                        style={benevoleFilter === col.groupe ? tabActive : tabBase}
+                        onClick={() => setBenevoleFilter(col.groupe)}
+                      >
+                        {col.groupe}
+                      </button>
+                    ))}
+                  </div>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
-                    {list.map((f) => (
+                    {filteredList.map((f) => (
                       <FormationGridCard key={f.id} f={f} />
                     ))}
                   </div>
+                  {filteredList.length === 0 && (
+                    <p style={{ ...tabTextStyle, color: colors.textLight }}>Aucune formation dans cette catégorie.</p>
+                  )}
                 </div>
               )
             })()}
