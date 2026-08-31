@@ -30,6 +30,7 @@ export type FormationFormInitial = {
   titre: string
   slug: string
   description: string
+  lienExterne: string
   categorie: CategorieFormation
   filiere: Filiere | ""
   statut: StatutFormation
@@ -71,6 +72,7 @@ const EMPTY: FormationFormInitial = {
   titre: "",
   slug: "",
   description: "",
+  lienExterne: "",
   categorie: "EDUCATEUR",
   filiere: "",
   statut: "BROUILLON",
@@ -209,6 +211,19 @@ export function FormationForm({
       >
         {submitLabel}
       </button>
+
+      <SectionCard title="Lien externe">
+        <p style={{ color: colors.textLight, fontSize: 12, margin: 0 }}>
+          Si renseigné, la fiche publique de cette formation redirige directement vers ce lien
+          (ex. inscription gérée entièrement sur le site de la FFF) — les visiteurs qui cliquent
+          sur la tuile de cette formation n&apos;atteignent jamais la fiche interne. Le reste du
+          contenu ci-dessous (programme, sessions...) peut rester renseigné sans effet, au cas où
+          vous retiriez ce lien plus tard.
+        </p>
+        <Field label="Lien externe (optionnel)">
+          <input name="lienExterne" placeholder="https://..." defaultValue={data.lienExterne} style={fieldStyle} />
+        </Field>
+      </SectionCard>
 
       <SectionCard title="Informations générales">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 14 }}>

@@ -52,6 +52,7 @@ async function buildFormationData(formData: FormData) {
     titre: str(formData, "titre"),
     slug: str(formData, "slug"),
     description: optionalStr(formData, "description"),
+    lienExterne: optionalStr(formData, "lienExterne"),
     categorie: str(formData, "categorie") as CategorieFormation,
     filiere,
     statut: str(formData, "statut") as StatutFormation,

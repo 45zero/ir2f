@@ -22,6 +22,7 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
     titre: formation.titre,
     slug: formation.slug,
     description: formation.description ?? "",
+    lienExterne: formation.lienExterne ?? "",
     categorie: formation.categorie,
     filiere: formation.filiere ?? "",
     statut: formation.statut,

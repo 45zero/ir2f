@@ -7236,6 +7236,7 @@ export namespace Prisma {
     slug: string | null
     titre: string | null
     description: string | null
+    lienExterne: string | null
     type: $Enums.TypeFormation | null
     statut: $Enums.StatutFormation | null
     dureeHeures: number | null
@@ -7287,6 +7288,7 @@ export namespace Prisma {
     slug: string | null
     titre: string | null
     description: string | null
+    lienExterne: string | null
     type: $Enums.TypeFormation | null
     statut: $Enums.StatutFormation | null
     dureeHeures: number | null
@@ -7338,6 +7340,7 @@ export namespace Prisma {
     slug: number
     titre: number
     description: number
+    lienExterne: number
     type: number
     statut: number
     dureeHeures: number
@@ -7407,6 +7410,7 @@ export namespace Prisma {
     slug?: true
     titre?: true
     description?: true
+    lienExterne?: true
     type?: true
     statut?: true
     dureeHeures?: true
@@ -7458,6 +7462,7 @@ export namespace Prisma {
     slug?: true
     titre?: true
     description?: true
+    lienExterne?: true
     type?: true
     statut?: true
     dureeHeures?: true
@@ -7509,6 +7514,7 @@ export namespace Prisma {
     slug?: true
     titre?: true
     description?: true
+    lienExterne?: true
     type?: true
     statut?: true
     dureeHeures?: true
@@ -7649,6 +7655,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description: string | null
+    lienExterne: string | null
     type: $Enums.TypeFormation
     statut: $Enums.StatutFormation
     dureeHeures: number | null
@@ -7721,6 +7728,7 @@ export namespace Prisma {
     slug?: boolean
     titre?: boolean
     description?: boolean
+    lienExterne?: boolean
     type?: boolean
     statut?: boolean
     dureeHeures?: boolean
@@ -7787,6 +7795,7 @@ export namespace Prisma {
     slug?: boolean
     titre?: boolean
     description?: boolean
+    lienExterne?: boolean
     type?: boolean
     statut?: boolean
     dureeHeures?: boolean
@@ -7842,6 +7851,7 @@ export namespace Prisma {
     slug?: boolean
     titre?: boolean
     description?: boolean
+    lienExterne?: boolean
     type?: boolean
     statut?: boolean
     dureeHeures?: boolean
@@ -7897,6 +7907,7 @@ export namespace Prisma {
     slug?: boolean
     titre?: boolean
     description?: boolean
+    lienExterne?: boolean
     type?: boolean
     statut?: boolean
     dureeHeures?: boolean
@@ -7945,7 +7956,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "fafaEligible" | "bonFormationEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "responsablePedagogiqueUserId" | "responsablePedagogiqueSignatureToken" | "responsablePedagogiqueSignatureEnvoyeAt" | "responsablePedagogiqueSignatureSignedAt" | "responsablePedagogiqueSignatureStoragePath" | "responsablePedagogiqueSignatureIpAddress" | "responsablePedagogiqueSignatureUserAgent" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "lienExterne" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "fafaEligible" | "bonFormationEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "conventionTemplateId" | "responsablePedagogiqueNom" | "responsablePedagogiquePrenom" | "responsablePedagogiqueEmail" | "responsablePedagogiqueTelephone" | "responsablePedagogiqueUserId" | "responsablePedagogiqueSignatureToken" | "responsablePedagogiqueSignatureEnvoyeAt" | "responsablePedagogiqueSignatureSignedAt" | "responsablePedagogiqueSignatureStoragePath" | "responsablePedagogiqueSignatureIpAddress" | "responsablePedagogiqueSignatureUserAgent" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     responsablePedagogiqueUser?: boolean | Formation$responsablePedagogiqueUserArgs<ExtArgs>
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
@@ -7991,6 +8002,7 @@ export namespace Prisma {
       slug: string
       titre: string
       description: string | null
+      lienExterne: string | null
       type: $Enums.TypeFormation
       statut: $Enums.StatutFormation
       dureeHeures: number | null
@@ -8476,6 +8488,7 @@ export namespace Prisma {
     readonly slug: FieldRef<"Formation", 'String'>
     readonly titre: FieldRef<"Formation", 'String'>
     readonly description: FieldRef<"Formation", 'String'>
+    readonly lienExterne: FieldRef<"Formation", 'String'>
     readonly type: FieldRef<"Formation", 'TypeFormation'>
     readonly statut: FieldRef<"Formation", 'StatutFormation'>
     readonly dureeHeures: FieldRef<"Formation", 'Int'>
@@ -57729,6 +57742,7 @@ export namespace Prisma {
     slug: 'slug',
     titre: 'titre',
     description: 'description',
+    lienExterne: 'lienExterne',
     type: 'type',
     statut: 'statut',
     dureeHeures: 'dureeHeures',
@@ -59069,6 +59083,7 @@ export namespace Prisma {
     slug?: StringFilter<"Formation"> | string
     titre?: StringFilter<"Formation"> | string
     description?: StringNullableFilter<"Formation"> | string | null
+    lienExterne?: StringNullableFilter<"Formation"> | string | null
     type?: EnumTypeFormationFilter<"Formation"> | $Enums.TypeFormation
     statut?: EnumStatutFormationFilter<"Formation"> | $Enums.StatutFormation
     dureeHeures?: IntNullableFilter<"Formation"> | number | null
@@ -59134,6 +59149,7 @@ export namespace Prisma {
     slug?: SortOrder
     titre?: SortOrder
     description?: SortOrderInput | SortOrder
+    lienExterne?: SortOrderInput | SortOrder
     type?: SortOrder
     statut?: SortOrder
     dureeHeures?: SortOrderInput | SortOrder
@@ -59203,6 +59219,7 @@ export namespace Prisma {
     NOT?: FormationWhereInput | FormationWhereInput[]
     titre?: StringFilter<"Formation"> | string
     description?: StringNullableFilter<"Formation"> | string | null
+    lienExterne?: StringNullableFilter<"Formation"> | string | null
     type?: EnumTypeFormationFilter<"Formation"> | $Enums.TypeFormation
     statut?: EnumStatutFormationFilter<"Formation"> | $Enums.StatutFormation
     dureeHeures?: IntNullableFilter<"Formation"> | number | null
@@ -59267,6 +59284,7 @@ export namespace Prisma {
     slug?: SortOrder
     titre?: SortOrder
     description?: SortOrderInput | SortOrder
+    lienExterne?: SortOrderInput | SortOrder
     type?: SortOrder
     statut?: SortOrder
     dureeHeures?: SortOrderInput | SortOrder
@@ -59328,6 +59346,7 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Formation"> | string
     titre?: StringWithAggregatesFilter<"Formation"> | string
     description?: StringNullableWithAggregatesFilter<"Formation"> | string | null
+    lienExterne?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     type?: EnumTypeFormationWithAggregatesFilter<"Formation"> | $Enums.TypeFormation
     statut?: EnumStatutFormationWithAggregatesFilter<"Formation"> | $Enums.StatutFormation
     dureeHeures?: IntNullableWithAggregatesFilter<"Formation"> | number | null
@@ -62937,6 +62956,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -63000,6 +63020,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -63063,6 +63084,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -63126,6 +63148,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -63189,6 +63212,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -63242,6 +63266,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -63293,6 +63318,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -67610,6 +67636,7 @@ export namespace Prisma {
     slug?: SortOrder
     titre?: SortOrder
     description?: SortOrder
+    lienExterne?: SortOrder
     type?: SortOrder
     statut?: SortOrder
     dureeHeures?: SortOrder
@@ -67670,6 +67697,7 @@ export namespace Prisma {
     slug?: SortOrder
     titre?: SortOrder
     description?: SortOrder
+    lienExterne?: SortOrder
     type?: SortOrder
     statut?: SortOrder
     dureeHeures?: SortOrder
@@ -67721,6 +67749,7 @@ export namespace Prisma {
     slug?: SortOrder
     titre?: SortOrder
     description?: SortOrder
+    lienExterne?: SortOrder
     type?: SortOrder
     statut?: SortOrder
     dureeHeures?: SortOrder
@@ -73563,6 +73592,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -73625,6 +73655,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -74043,6 +74074,7 @@ export namespace Prisma {
     slug?: StringFilter<"Formation"> | string
     titre?: StringFilter<"Formation"> | string
     description?: StringNullableFilter<"Formation"> | string | null
+    lienExterne?: StringNullableFilter<"Formation"> | string | null
     type?: EnumTypeFormationFilter<"Formation"> | $Enums.TypeFormation
     statut?: EnumStatutFormationFilter<"Formation"> | $Enums.StatutFormation
     dureeHeures?: IntNullableFilter<"Formation"> | number | null
@@ -74993,6 +75025,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -75055,6 +75088,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -75192,6 +75226,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -75254,6 +75289,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -75316,6 +75352,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -75378,6 +75415,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -75456,6 +75494,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -75518,6 +75557,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -75633,6 +75673,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -75695,6 +75736,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -75832,6 +75874,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -75894,6 +75937,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -75956,6 +76000,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -76018,6 +76063,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -76149,6 +76195,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -76211,6 +76258,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -76385,6 +76433,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -76447,6 +76496,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -76666,6 +76716,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -76728,6 +76779,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -77254,6 +77306,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -77316,6 +77369,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -77404,6 +77458,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -77466,6 +77521,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -77596,6 +77652,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -77658,6 +77715,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -78022,6 +78080,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -78084,6 +78143,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -78282,6 +78342,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -78344,6 +78405,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -78700,6 +78762,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -78762,6 +78825,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -78915,6 +78979,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -78977,6 +79042,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -79331,6 +79397,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -79393,6 +79460,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -79471,6 +79539,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -79533,6 +79602,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -79595,6 +79665,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -79657,6 +79728,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -79735,6 +79807,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -79797,6 +79870,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -80833,6 +80907,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -81216,6 +81291,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -81278,6 +81354,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -81340,6 +81417,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -82122,6 +82200,7 @@ export namespace Prisma {
     slug: string
     titre: string
     description?: string | null
+    lienExterne?: string | null
     type: $Enums.TypeFormation
     statut?: $Enums.StatutFormation
     dureeHeures?: number | null
@@ -82174,6 +82253,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -82236,6 +82316,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
@@ -82298,6 +82379,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
     statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
     dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null

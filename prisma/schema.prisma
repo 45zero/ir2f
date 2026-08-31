@@ -210,6 +210,13 @@ model Formation {
   slug          String          @unique
   titre         String
   description   String?
+
+  // Si renseigné, la fiche publique de cette formation (/formations/[slug]) redirige
+  // directement vers ce lien externe au lieu de s'afficher — pour les formations gérées
+  // entièrement ailleurs (ex. portail FFF) dont IR2F n'affiche qu'une tuile d'entrée. Le reste du
+  // contenu de la formation (programme, sessions...) peut rester renseigné sans effet, au cas où
+  // ce lien serait retiré plus tard.
+  lienExterne String?
   type          TypeFormation
   statut        StatutFormation @default(BROUILLON)
   dureeHeures   Int?

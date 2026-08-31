@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { getFormationBySlug, getInscriptionStatusMessage, CATEGORIE_LABELS, TYPE_LABELS } from "@/lib/formations"
@@ -16,6 +16,7 @@ export default async function FormationDetailPage({ params }: { params: Promise<
   const { slug } = await params
   const formation = await getFormationBySlug(slug)
   if (!formation) notFound()
+  if (formation.lienExterne) redirect(formation.lienExterne)
 
   const session = await auth()
   const isFff = formation.modeInscription === "PORTAIL_FFF"

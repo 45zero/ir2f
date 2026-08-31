@@ -138,6 +138,7 @@ exports.Prisma.FormationScalarFieldEnum = {
   slug: 'slug',
   titre: 'titre',
   description: 'description',
+  lienExterne: 'lienExterne',
   type: 'type',
   statut: 'statut',
   dureeHeures: 'dureeHeures',
