@@ -830,7 +830,7 @@ export function FormationsCatalogue({
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", paddingRight: 40 }}>
                 <button style={expandedTab === "info" ? tabActive : tabBase} onClick={() => setExpandedTab("info")}>
                   {sidebarCategory === "ARBITRAGE"
-                    ? "Présentation et les différents parcours"
+                    ? "Présentation et parcours"
                     : sidebarCategory === "DEV"
                       ? "Présentation et parcours"
                       : ONGLET_LABEL.INFO}
