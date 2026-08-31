@@ -1175,7 +1175,7 @@ export function FormationsCatalogue({
                         headerBackground={colors.navy}
                         cells={[
                           { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BEF_TRAD") ?? [] },
-                          { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BEF_APP") ?? [] },
+                          { label: "Apprentissage", formations: equivalenceByGroup.get("PRO_BEF_APP") ?? [] },
                           { label: "VAE", formations: equivalenceByGroup.get("PRO_BEF_VAE") ?? [] },
                         ]}
                       />
@@ -1188,7 +1188,7 @@ export function FormationsCatalogue({
                         headerBackground={`linear-gradient(90deg, ${colors.navy}, #4d7fbd)`}
                         cells={[
                           { label: "Traditionnel", formations: equivalenceByGroup.get("PRO_BMF_TRAD") ?? [] },
-                          { label: "En apprentissage", formations: equivalenceByGroup.get("PRO_BMF_APP") ?? [] },
+                          { label: "Apprentissage", formations: equivalenceByGroup.get("PRO_BMF_APP") ?? [] },
                           { label: "VAE", formations: equivalenceByGroup.get("PRO_BMF_VAE") ?? [] },
                         ]}
                       />
