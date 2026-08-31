@@ -286,12 +286,25 @@ export async function updateFormationDocument(
 
   const id = str(formData, "id")
   const formationId = str(formData, "formationId")
+  const nom = str(formData, "nom")
   const visiblePublic = formData.get("visiblePublic") === "on"
   const ordre = Number(str(formData, "ordre")) || 0
 
+  if (!nom) return { error: "Le nom du document est obligatoire." }
+
+  const file = formData.get("file")
+  const hasNewFile = file instanceof File && file.size > 0
+  const hasNewUrl = str(formData, "url").length > 0
+
+  let source: Awaited<ReturnType<typeof resolveUploadedFile>> | null = null
+  if (hasNewFile || hasNewUrl) {
+    source = await resolveUploadedFile(formData, `formations/${formationId}`, "ADMINISTRATIF")
+    if ("error" in source) return { error: source.error }
+  }
+
   const document = await prisma.document.update({
     where: { id },
-    data: { visiblePublic, ordre },
+    data: { nom, visiblePublic, ordre, ...(source ?? {}) },
     include: { formation: { select: { slug: true } } },
   })
 

@@ -70,11 +70,15 @@ export function FormationDocumentsManager({
 }
 
 function DocumentRow({ doc, formationId }: { doc: FormationDocumentRow; formationId: string }) {
-  const [updateState, updateAction, updatePending] = useActionState(updateFormationDocument, undefined)
+  const [editing, setEditing] = useState(false)
   const [deleteState, deleteAction, deletePending] = useActionState(
     async (_prev: { error: string | null } | undefined) => deleteDocument(doc.id),
     undefined
   )
+
+  if (editing) {
+    return <EditForm doc={doc} formationId={formationId} onDone={() => setEditing(false)} />
+  }
 
   return (
     <div
@@ -91,6 +95,9 @@ function DocumentRow({ doc, formationId }: { doc: FormationDocumentRow; formatio
     >
       <div style={{ flex: "1 1 200px", display: "flex", flexDirection: "column", gap: 2 }}>
         <span style={{ fontSize: 14, fontWeight: 700, color: colors.text }}>{doc.nom}</span>
+        <span style={{ fontSize: 11.5, color: colors.textLight }}>
+          {doc.visiblePublic ? "Visible sur la fiche publique" : "Masqué sur la fiche publique"} · ordre {doc.ordre}
+        </span>
         {doc.viewUrl && (
           <a href={doc.viewUrl} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: colors.navy }}>
             Voir le document
@@ -98,38 +105,23 @@ function DocumentRow({ doc, formationId }: { doc: FormationDocumentRow; formatio
         )}
       </div>
 
-      <form action={updateAction} style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-        <input type="hidden" name="id" value={doc.id} />
-        <input type="hidden" name="formationId" value={formationId} />
-        <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
-          <input type="checkbox" name="visiblePublic" defaultChecked={doc.visiblePublic} style={{ width: 15, height: 15 }} />
-          Visible sur la fiche publique
-        </label>
-        <input
-          name="ordre"
-          type="number"
-          defaultValue={doc.ordre}
-          title="Ordre d'affichage"
-          style={{ ...fieldStyle, width: 70 }}
-        />
-        <button
-          type="submit"
-          disabled={updatePending}
-          style={{
-            background: colors.navy,
-            color: "#fff",
-            border: "none",
-            padding: "8px 14px",
-            borderRadius: 4,
-            fontSize: 12,
-            fontWeight: 700,
-            fontFamily: fontBody,
-            cursor: updatePending ? "default" : "pointer",
-          }}
-        >
-          {updatePending ? "..." : "Enregistrer"}
-        </button>
-      </form>
+      <button
+        type="button"
+        onClick={() => setEditing(true)}
+        style={{
+          background: "transparent",
+          border: `1px solid ${colors.gold}`,
+          color: colors.navy,
+          fontSize: 12,
+          fontWeight: 700,
+          padding: "8px 14px",
+          borderRadius: 4,
+          cursor: "pointer",
+          fontFamily: fontBody,
+        }}
+      >
+        Modifier
+      </button>
 
       <form
         action={deleteAction}
@@ -155,9 +147,114 @@ function DocumentRow({ doc, formationId }: { doc: FormationDocumentRow; formatio
           Supprimer
         </button>
       </form>
-      {updateState?.error && <span style={{ color: colors.red, fontSize: 11, width: "100%" }}>{updateState.error}</span>}
       {deleteState?.error && <span style={{ color: colors.red, fontSize: 11, width: "100%" }}>{deleteState.error}</span>}
     </div>
+  )
+}
+
+function EditForm({
+  doc,
+  formationId,
+  onDone,
+}: {
+  doc: FormationDocumentRow
+  formationId: string
+  onDone: () => void
+}) {
+  const [mode, setMode] = useState<"file" | "url">("file")
+  const [state, formAction, pending] = useActionState(
+    async (prev: { error: string | null } | undefined, formData: FormData) => {
+      const result = await updateFormationDocument(prev, formData)
+      if (!result.error) onDone()
+      return result
+    },
+    undefined
+  )
+
+  return (
+    <form
+      action={formAction}
+      style={{ background: "#fff", border: `1px solid ${colors.gold}`, borderRadius: 8, padding: 16, display: "flex", flexDirection: "column", gap: 10 }}
+    >
+      <input type="hidden" name="id" value={doc.id} />
+      <input type="hidden" name="formationId" value={formationId} />
+
+      <input name="nom" placeholder="Nom du document" defaultValue={doc.nom} required style={fieldStyle} />
+
+      <div style={{ display: "flex", gap: 8 }}>
+        <button type="button" onClick={() => setMode("file")} style={mode === "file" ? modeActiveStyle : modeBaseStyle}>
+          Remplacer par un fichier
+        </button>
+        <button type="button" onClick={() => setMode("url")} style={mode === "url" ? modeActiveStyle : modeBaseStyle}>
+          Remplacer par un lien
+        </button>
+      </div>
+      <p style={{ margin: 0, fontSize: 11.5, color: colors.textLight }}>
+        Laissez vide pour conserver le document actuel.
+      </p>
+
+      {mode === "file" ? (
+        <input name="file" type="file" style={fieldStyle} />
+      ) : (
+        <input name="url" placeholder="Lien du document" style={fieldStyle} />
+      )}
+
+      <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+        <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text }}>
+          <input type="checkbox" name="visiblePublic" defaultChecked={doc.visiblePublic} style={{ width: 15, height: 15 }} />
+          Afficher sur la page publique de la formation
+        </label>
+        <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text }}>
+          Ordre
+          <input
+            name="ordre"
+            type="number"
+            defaultValue={doc.ordre}
+            title="Ordre d'affichage"
+            style={{ ...fieldStyle, width: 70 }}
+          />
+        </label>
+      </div>
+
+      {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
+      <div style={{ display: "flex", gap: 8 }}>
+        <button
+          type="submit"
+          disabled={pending}
+          style={{
+            alignSelf: "flex-start",
+            background: colors.navy,
+            color: "#fff",
+            border: "none",
+            padding: "9px 18px",
+            borderRadius: 4,
+            fontSize: 13,
+            fontWeight: 700,
+            fontFamily: fontBody,
+            cursor: pending ? "default" : "pointer",
+          }}
+        >
+          {pending ? "Enregistrement..." : "Enregistrer"}
+        </button>
+        <button
+          type="button"
+          onClick={onDone}
+          style={{
+            background: "transparent",
+            border: "1px solid #d8dde5",
+            color: colors.navy,
+            fontSize: 12,
+            fontWeight: 700,
+            padding: "9px 14px",
+            borderRadius: 4,
+            cursor: "pointer",
+            fontFamily: fontBody,
+          }}
+        >
+          Annuler
+        </button>
+      </div>
+    </form>
   )
 }
 
