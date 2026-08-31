@@ -535,6 +535,7 @@ exports.Prisma.FormationOngletSectionScalarFieldEnum = {
   titre: 'titre',
   contenu: 'contenu',
   images: 'images',
+  pdfs: 'pdfs',
   videoUrl: 'videoUrl',
   videoFichierUrl: 'videoFichierUrl',
   tableauTitre: 'tableauTitre',

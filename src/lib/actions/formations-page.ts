@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber, parseJsonArray } from "@/lib/actions/form-utils"
-import { resolveImageUrl } from "@/lib/storage"
+import { resolveImageUrl, resolvePdfUrl } from "@/lib/storage"
 import { Prisma } from "@/generated/prisma"
 import type { CategorieFormation, EffetVisuel, FormationOngletCle, TuileFont } from "@/generated/prisma"
 
@@ -139,6 +139,14 @@ export async function saveFormationOngletSection(
     if (url) images.push(url)
   }
 
+  const pdfCount = optionalNumber(formData, "pdfCount") ?? 0
+  const pdfs: { url: string; nom: string }[] = []
+  for (let j = 0; j < pdfCount; j++) {
+    const url = await resolvePdfUrl(formData, `pdf_${j}`, `formations-sections/${categorie.toLowerCase()}-${onglet.toLowerCase()}-${j}`)
+    const nom = optionalStr(formData, `pdf_${j}Nom`)
+    if (url) pdfs.push({ url, nom: nom || "Document" })
+  }
+
   const tableauEntetesRaw = parseJsonArray<string>(formData, "tableauEntetes")
   const tableauLignesRaw = parseJsonArray<string[]>(formData, "tableauLignes")
   const hasTableau = tableauEntetesRaw.length > 0
@@ -155,6 +163,7 @@ export async function saveFormationOngletSection(
     titre,
     contenu,
     images,
+    pdfs,
     videoUrl,
     videoFichierUrl,
     tableauTitre,

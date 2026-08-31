@@ -542,6 +542,33 @@ function OngletSections({ sections }: { sections: FormationOngletData["sections"
                 ))}
               </div>
             )}
+            {s.pdfs.length > 0 && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                {s.pdfs.map((pdf, i) => (
+                  <a
+                    key={i}
+                    href={pdf.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      background: "#f5f7fb",
+                      border: "1px solid #eef0f3",
+                      borderRadius: 6,
+                      padding: "8px 14px",
+                      fontSize: 12.5,
+                      fontWeight: 700,
+                      color: colors.navy,
+                      textDecoration: "none",
+                    }}
+                  >
+                    📄 {pdf.nom}
+                  </a>
+                ))}
+              </div>
+            )}
             {(s.videoFichierUrl || embedUrl) && (
               <div style={{ aspectRatio: "16/9", maxWidth: 480, borderRadius: 8, overflow: "hidden" }}>
                 {s.videoFichierUrl ? (

@@ -15,6 +15,7 @@ import {
 import { EFFET_VISUEL_LABELS, ONGLET_LABEL } from "@/lib/formations-page-shared"
 import { CATEGORIE_LABELS } from "@/lib/formations-shared"
 import { ImageField } from "@/components/admin/ImageField"
+import { PdfField } from "@/components/admin/PdfField"
 import { VideoField } from "@/components/admin/VideoField"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import type {
@@ -474,6 +475,7 @@ function SectionsSection({
                 <span style={{ fontWeight: 700, fontSize: 13 }}>{item.titre || "(sans titre)"}</span>
                 <div style={{ fontSize: 12, color: colors.textLight }}>
                   {item.images.length} image{item.images.length > 1 ? "s" : ""}
+                  {item.pdfs.length > 0 ? ` · ${item.pdfs.length} PDF${item.pdfs.length > 1 ? "s" : ""}` : ""}
                   {item.videoUrl || item.videoFichierUrl ? " · vidéo" : ""}
                   {item.tableauEntetes ? " · tableau" : ""}
                   {item.lienUrl ? " · lien" : ""}
@@ -507,6 +509,7 @@ function SectionForm({
   onDone: () => void
 }) {
   const [images, setImages] = useState<string[]>(item?.images ?? [])
+  const [pdfs, setPdfs] = useState<{ url: string; nom: string }[]>(item?.pdfs ?? [])
   const [hasTableau, setHasTableau] = useState(Boolean(item?.tableauEntetes))
   const [tableauEntetes, setTableauEntetes] = useState<string[]>(item?.tableauEntetes ?? ["Colonne 1"])
   const [tableauLignes, setTableauLignes] = useState<string[][]>(item?.tableauLignes ?? [[""]])
@@ -545,6 +548,7 @@ function SectionForm({
     <form action={formAction} style={{ ...cardStyle, background: "#fff", border: `1px solid ${colors.gold}` }}>
       {item && <input type="hidden" name="id" value={item.id} />}
       <input type="hidden" name="imageCount" value={images.length} />
+      <input type="hidden" name="pdfCount" value={pdfs.length} />
       <input type="hidden" name="tableauEntetes" value={tableauEntetesJson} />
       <input type="hidden" name="tableauLignes" value={tableauLignesJson} />
 
@@ -578,6 +582,27 @@ function SectionForm({
           ))}
           <button type="button" onClick={() => setImages((imgs) => [...imgs, ""])} style={addButtonStyle}>
             + Image
+          </button>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {fieldLabel("PDF")}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+          {pdfs.map((pdf, j) => (
+            <div key={j} style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 220 }}>
+              <PdfField name={`pdf_${j}`} label={`PDF ${j + 1}`} defaultUrl={pdf.url} defaultNom={pdf.nom} />
+              <button
+                type="button"
+                onClick={() => setPdfs((p) => p.filter((_, idx) => idx !== j))}
+                style={{ ...smallButton("danger"), alignSelf: "flex-start" }}
+              >
+                Retirer le PDF
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={() => setPdfs((p) => [...p, { url: "", nom: "" }])} style={addButtonStyle}>
+            + PDF
           </button>
         </div>
       </div>

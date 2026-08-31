@@ -33,6 +33,7 @@ export type AdminFormationOngletSection = {
   titre: string | null
   contenu: string | null
   images: string[]
+  pdfs: { url: string; nom: string }[]
   videoUrl: string | null
   videoFichierUrl: string | null
   tableauTitre: string | null
@@ -69,6 +70,7 @@ export async function getAllFormationOngletsAdmin(): Promise<AdminFormationOngle
       titre: s.titre,
       contenu: s.contenu,
       images: (s.images as string[] | null) ?? [],
+      pdfs: (s.pdfs as { url: string; nom: string }[] | null) ?? [],
       videoUrl: s.videoUrl,
       videoFichierUrl: s.videoFichierUrl,
       tableauTitre: s.tableauTitre,

@@ -109,6 +109,7 @@ export type ProgrammeStep = {
   desc: string
   table?: { headers: string[]; rows: string[][] }
   images?: string[]
+  pdfs?: { url: string; nom: string }[]
   videoUrl?: string | null
   videoFichierUrl?: string | null
 }

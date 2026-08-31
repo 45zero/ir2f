@@ -5,8 +5,9 @@ import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber, parseJsonArray } from "@/lib/actions/form-utils"
-import { resolveImageUrl } from "@/lib/storage"
+import { resolveImageUrl, resolvePdfUrl } from "@/lib/storage"
 import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
+import { Prisma } from "@/generated/prisma"
 import type {
   CategorieFormation,
   Filiere,
@@ -31,8 +32,15 @@ async function resolveProgrammeStepMedia(formData: FormData, step: ProgrammeStep
     const url = await resolveImageUrl(formData, `programmeImage_${i}_${j}`, `formations-programme/${i}-${j}`)
     if (url) images.push(url)
   }
+  const pdfCount = optionalNumber(formData, `programmePdfCount_${i}`) ?? 0
+  const pdfs: { url: string; nom: string }[] = []
+  for (let j = 0; j < pdfCount; j++) {
+    const url = await resolvePdfUrl(formData, `programmePdf_${i}_${j}`, `formations-programme/${i}-${j}`)
+    const nom = optionalStr(formData, `programmePdf_${i}_${j}Nom`)
+    if (url) pdfs.push({ url, nom: nom || "Document" })
+  }
   const videoFichierUrl = optionalStr(formData, `programmeVideo_${i}`)
-  return { ...step, images, videoUrl: step.videoUrl || null, videoFichierUrl }
+  return { ...step, images, pdfs, videoUrl: step.videoUrl || null, videoFichierUrl }
 }
 
 async function buildFormationData(formData: FormData) {
@@ -82,10 +90,10 @@ async function buildFormationData(formData: FormData) {
     varianteNode,
     badgeNode: optionalStr(formData, "badgeNode"),
     shortNode: optionalStr(formData, "shortNode"),
-    programme: programme.length > 0 ? programme : undefined,
+    programme: programme.length > 0 ? programme : Prisma.JsonNull,
     tauxReussite: optionalStr(formData, "tauxReussite"),
     tauxSatisfaction: optionalStr(formData, "tauxSatisfaction"),
-    resultats: resultats.length > 0 ? resultats : undefined,
+    resultats: resultats.length > 0 ? resultats : Prisma.JsonNull,
   }
 }
 

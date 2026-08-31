@@ -903,6 +903,7 @@ model FormationOngletSection {
   titre           String?
   contenu         String?
   images          Json // string[]
+  pdfs            Json // { url: string; nom: string }[]
   videoUrl        String?
   videoFichierUrl String?
   tableauTitre    String?

@@ -38853,6 +38853,7 @@ export namespace Prisma {
     titre: number
     contenu: number
     images: number
+    pdfs: number
     videoUrl: number
     videoFichierUrl: number
     tableauTitre: number
@@ -38911,6 +38912,7 @@ export namespace Prisma {
     titre?: true
     contenu?: true
     images?: true
+    pdfs?: true
     videoUrl?: true
     videoFichierUrl?: true
     tableauTitre?: true
@@ -39016,6 +39018,7 @@ export namespace Prisma {
     titre: string | null
     contenu: string | null
     images: JsonValue
+    pdfs: JsonValue
     videoUrl: string | null
     videoFichierUrl: string | null
     tableauTitre: string | null
@@ -39053,6 +39056,7 @@ export namespace Prisma {
     titre?: boolean
     contenu?: boolean
     images?: boolean
+    pdfs?: boolean
     videoUrl?: boolean
     videoFichierUrl?: boolean
     tableauTitre?: boolean
@@ -39071,6 +39075,7 @@ export namespace Prisma {
     titre?: boolean
     contenu?: boolean
     images?: boolean
+    pdfs?: boolean
     videoUrl?: boolean
     videoFichierUrl?: boolean
     tableauTitre?: boolean
@@ -39089,6 +39094,7 @@ export namespace Prisma {
     titre?: boolean
     contenu?: boolean
     images?: boolean
+    pdfs?: boolean
     videoUrl?: boolean
     videoFichierUrl?: boolean
     tableauTitre?: boolean
@@ -39107,6 +39113,7 @@ export namespace Prisma {
     titre?: boolean
     contenu?: boolean
     images?: boolean
+    pdfs?: boolean
     videoUrl?: boolean
     videoFichierUrl?: boolean
     tableauTitre?: boolean
@@ -39118,7 +39125,7 @@ export namespace Prisma {
     actif?: boolean
   }
 
-  export type FormationOngletSectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "onglet" | "titre" | "contenu" | "images" | "videoUrl" | "videoFichierUrl" | "tableauTitre" | "tableauEntetes" | "tableauLignes" | "lienLabel" | "lienUrl" | "ordre" | "actif", ExtArgs["result"]["formationOngletSection"]>
+  export type FormationOngletSectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categorie" | "onglet" | "titre" | "contenu" | "images" | "pdfs" | "videoUrl" | "videoFichierUrl" | "tableauTitre" | "tableauEntetes" | "tableauLignes" | "lienLabel" | "lienUrl" | "ordre" | "actif", ExtArgs["result"]["formationOngletSection"]>
 
   export type $FormationOngletSectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FormationOngletSection"
@@ -39130,6 +39137,7 @@ export namespace Prisma {
       titre: string | null
       contenu: string | null
       images: Prisma.JsonValue
+      pdfs: Prisma.JsonValue
       videoUrl: string | null
       videoFichierUrl: string | null
       tableauTitre: string | null
@@ -39568,6 +39576,7 @@ export namespace Prisma {
     readonly titre: FieldRef<"FormationOngletSection", 'String'>
     readonly contenu: FieldRef<"FormationOngletSection", 'String'>
     readonly images: FieldRef<"FormationOngletSection", 'Json'>
+    readonly pdfs: FieldRef<"FormationOngletSection", 'Json'>
     readonly videoUrl: FieldRef<"FormationOngletSection", 'String'>
     readonly videoFichierUrl: FieldRef<"FormationOngletSection", 'String'>
     readonly tableauTitre: FieldRef<"FormationOngletSection", 'String'>
@@ -58220,6 +58229,7 @@ export namespace Prisma {
     titre: 'titre',
     contenu: 'contenu',
     images: 'images',
+    pdfs: 'pdfs',
     videoUrl: 'videoUrl',
     videoFichierUrl: 'videoFichierUrl',
     tableauTitre: 'tableauTitre',
@@ -61553,6 +61563,7 @@ export namespace Prisma {
     titre?: StringNullableFilter<"FormationOngletSection"> | string | null
     contenu?: StringNullableFilter<"FormationOngletSection"> | string | null
     images?: JsonFilter<"FormationOngletSection">
+    pdfs?: JsonFilter<"FormationOngletSection">
     videoUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
     videoFichierUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
     tableauTitre?: StringNullableFilter<"FormationOngletSection"> | string | null
@@ -61571,6 +61582,7 @@ export namespace Prisma {
     titre?: SortOrderInput | SortOrder
     contenu?: SortOrderInput | SortOrder
     images?: SortOrder
+    pdfs?: SortOrder
     videoUrl?: SortOrderInput | SortOrder
     videoFichierUrl?: SortOrderInput | SortOrder
     tableauTitre?: SortOrderInput | SortOrder
@@ -61592,6 +61604,7 @@ export namespace Prisma {
     titre?: StringNullableFilter<"FormationOngletSection"> | string | null
     contenu?: StringNullableFilter<"FormationOngletSection"> | string | null
     images?: JsonFilter<"FormationOngletSection">
+    pdfs?: JsonFilter<"FormationOngletSection">
     videoUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
     videoFichierUrl?: StringNullableFilter<"FormationOngletSection"> | string | null
     tableauTitre?: StringNullableFilter<"FormationOngletSection"> | string | null
@@ -61610,6 +61623,7 @@ export namespace Prisma {
     titre?: SortOrderInput | SortOrder
     contenu?: SortOrderInput | SortOrder
     images?: SortOrder
+    pdfs?: SortOrder
     videoUrl?: SortOrderInput | SortOrder
     videoFichierUrl?: SortOrderInput | SortOrder
     tableauTitre?: SortOrderInput | SortOrder
@@ -61636,6 +61650,7 @@ export namespace Prisma {
     titre?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
     contenu?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
     images?: JsonWithAggregatesFilter<"FormationOngletSection">
+    pdfs?: JsonWithAggregatesFilter<"FormationOngletSection">
     videoUrl?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
     videoFichierUrl?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
     tableauTitre?: StringNullableWithAggregatesFilter<"FormationOngletSection"> | string | null
@@ -65762,6 +65777,7 @@ export namespace Prisma {
     titre?: string | null
     contenu?: string | null
     images: JsonNullValueInput | InputJsonValue
+    pdfs: JsonNullValueInput | InputJsonValue
     videoUrl?: string | null
     videoFichierUrl?: string | null
     tableauTitre?: string | null
@@ -65780,6 +65796,7 @@ export namespace Prisma {
     titre?: string | null
     contenu?: string | null
     images: JsonNullValueInput | InputJsonValue
+    pdfs: JsonNullValueInput | InputJsonValue
     videoUrl?: string | null
     videoFichierUrl?: string | null
     tableauTitre?: string | null
@@ -65798,6 +65815,7 @@ export namespace Prisma {
     titre?: NullableStringFieldUpdateOperationsInput | string | null
     contenu?: NullableStringFieldUpdateOperationsInput | string | null
     images?: JsonNullValueInput | InputJsonValue
+    pdfs?: JsonNullValueInput | InputJsonValue
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tableauTitre?: NullableStringFieldUpdateOperationsInput | string | null
@@ -65816,6 +65834,7 @@ export namespace Prisma {
     titre?: NullableStringFieldUpdateOperationsInput | string | null
     contenu?: NullableStringFieldUpdateOperationsInput | string | null
     images?: JsonNullValueInput | InputJsonValue
+    pdfs?: JsonNullValueInput | InputJsonValue
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tableauTitre?: NullableStringFieldUpdateOperationsInput | string | null
@@ -65834,6 +65853,7 @@ export namespace Prisma {
     titre?: string | null
     contenu?: string | null
     images: JsonNullValueInput | InputJsonValue
+    pdfs: JsonNullValueInput | InputJsonValue
     videoUrl?: string | null
     videoFichierUrl?: string | null
     tableauTitre?: string | null
@@ -65852,6 +65872,7 @@ export namespace Prisma {
     titre?: NullableStringFieldUpdateOperationsInput | string | null
     contenu?: NullableStringFieldUpdateOperationsInput | string | null
     images?: JsonNullValueInput | InputJsonValue
+    pdfs?: JsonNullValueInput | InputJsonValue
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tableauTitre?: NullableStringFieldUpdateOperationsInput | string | null
@@ -65870,6 +65891,7 @@ export namespace Prisma {
     titre?: NullableStringFieldUpdateOperationsInput | string | null
     contenu?: NullableStringFieldUpdateOperationsInput | string | null
     images?: JsonNullValueInput | InputJsonValue
+    pdfs?: JsonNullValueInput | InputJsonValue
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tableauTitre?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69497,6 +69519,7 @@ export namespace Prisma {
     titre?: SortOrder
     contenu?: SortOrder
     images?: SortOrder
+    pdfs?: SortOrder
     videoUrl?: SortOrder
     videoFichierUrl?: SortOrder
     tableauTitre?: SortOrder

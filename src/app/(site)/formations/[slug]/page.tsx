@@ -281,6 +281,33 @@ export default async function FormationDetailPage({ params }: { params: Promise<
                     ))}
                   </div>
                 )}
+                {p.pdfs && p.pdfs.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                    {p.pdfs.map((pdf, i) => (
+                      <a
+                        key={i}
+                        href={pdf.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 8,
+                          background: "#f5f7fb",
+                          border: "1px solid #eef0f3",
+                          borderRadius: 6,
+                          padding: "8px 14px",
+                          fontSize: 12.5,
+                          fontWeight: 700,
+                          color: colors.navy,
+                          textDecoration: "none",
+                        }}
+                      >
+                        📄 {pdf.nom}
+                      </a>
+                    ))}
+                  </div>
+                )}
                 {(p.videoFichierUrl || p.videoUrl) && (() => {
                   const embedUrl = p.videoUrl ? getYoutubeEmbedUrl(p.videoUrl) : null
                   return (

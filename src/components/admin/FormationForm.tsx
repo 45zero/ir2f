@@ -13,6 +13,7 @@ import {
 import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
 import { colors, fontHeading, fontBody } from "@/lib/theme"
 import { ImageField } from "@/components/admin/ImageField"
+import { PdfField } from "@/components/admin/PdfField"
 import { VideoField } from "@/components/admin/VideoField"
 import type {
   CategorieFormation,
@@ -636,6 +637,36 @@ function ProgrammeEditor({
                 style={{ ...addButtonStyle, alignSelf: "flex-start" }}
               >
                 + Image
+              </button>
+            </div>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+              {(step.pdfs ?? []).map((pdf, j) => (
+                <div key={j} style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 220 }}>
+                  <PdfField
+                    name={`programmePdf_${i}_${j}`}
+                    label={`PDF ${j + 1}`}
+                    defaultUrl={pdf.url}
+                    defaultNom={pdf.nom}
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      updateStep(i, { pdfs: (step.pdfs ?? []).filter((_, idx) => idx !== j) })
+                    }
+                    style={{ ...removeButtonStyle, alignSelf: "flex-start" }}
+                  >
+                    Retirer le PDF
+                  </button>
+                </div>
+              ))}
+              <input type="hidden" name={`programmePdfCount_${i}`} value={(step.pdfs ?? []).length} />
+              <button
+                type="button"
+                onClick={() => updateStep(i, { pdfs: [...(step.pdfs ?? []), { url: "", nom: "" }] })}
+                style={{ ...addButtonStyle, alignSelf: "flex-start" }}
+              >
+                + PDF
               </button>
             </div>
 

@@ -119,6 +119,45 @@ export async function resolveImageUrl(formData: FormData, fieldName: string, key
   return existing || null
 }
 
+const PDFS_BUCKET = "ir2f-public-pdfs"
+let pdfsBucketEnsured = false
+
+async function ensurePdfsBucket(client: SupabaseClient) {
+  if (pdfsBucketEnsured) return
+  const { data } = await client.storage.getBucket(PDFS_BUCKET)
+  if (!data) {
+    await client.storage.createBucket(PDFS_BUCKET, { public: true, fileSizeLimit: "20MB" })
+  }
+  pdfsBucketEnsured = true
+}
+
+export async function uploadPublicPdf(file: File, keyHint: string): Promise<string> {
+  const client = getStorageClient()
+  await ensurePdfsBucket(client)
+
+  const storagePath = `${keyHint}/${randomUUID()}.pdf`
+  const bytes = await file.arrayBuffer()
+
+  const { error } = await client.storage.from(PDFS_BUCKET).upload(storagePath, bytes, {
+    contentType: "application/pdf",
+    upsert: false,
+  })
+  if (error) throw new Error(`Échec de l'upload du PDF : ${error.message}`)
+
+  const { data } = client.storage.from(PDFS_BUCKET).getPublicUrl(storagePath)
+  return data.publicUrl
+}
+
+/** Récupère l'URL d'un PDF envoyé en fichier (champ `${fieldName}File`), ou reprend l'URL existante (champ `fieldName`). */
+export async function resolvePdfUrl(formData: FormData, fieldName: string, keyHint: string): Promise<string | null> {
+  const file = formData.get(`${fieldName}File`)
+  if (file instanceof File && file.size > 0) {
+    return uploadPublicPdf(file, keyHint)
+  }
+  const existing = (formData.get(fieldName) as string | null)?.trim()
+  return existing || null
+}
+
 let videosBucketEnsured = false
 
 async function ensureVideosBucket(client: SupabaseClient) {
