@@ -6,7 +6,11 @@ import { requireAdmin } from "@/lib/auth/guards"
 import { downloadStorageFile, uploadBytes } from "@/lib/storage"
 import { fillConventionTemplate, stampSignature } from "@/lib/conventions/pdf"
 import { buildConventionVariables, resolveSignataireContact, SIGNATAIRE_ORDER, SIGNATURE_FIELD_NAMES } from "@/lib/conventions/variables"
+import { buildSessionConventionsZip } from "@/lib/conventions/zip"
 import { notifySignataireASigner, ROLE_SIGNATAIRE_LABELS } from "@/lib/emails/convention-notifications"
+import { sendEmail } from "@/lib/emails/send"
+import { ConventionsZipEmail } from "@/lib/emails/ConventionsZipEmail"
+import { optionalStr } from "@/lib/actions/form-utils"
 import type { ConventionStagiaire, Session, Formation } from "@/generated/prisma"
 
 type SessionAvecResponsable = Session & {
@@ -275,6 +279,36 @@ export async function logRenvoiWhatsapp(signataireId: string): Promise<Conventio
   if (error) return { error }
   await marquerRenvoiEnvoye(signataireId, "WHATSAPP")
   return { error: null }
+}
+
+export type EnvoyerZipState = { error: string | null; success: boolean }
+
+/** Envoie par email les conventions déjà générées d'une session, zippées en pièce jointe. */
+export async function envoyerConventionsZipParEmail(
+  sessionId: string,
+  _prev: EnvoyerZipState | undefined,
+  formData: FormData
+): Promise<EnvoyerZipState> {
+  await requireAdmin()
+
+  const email = optionalStr(formData, "email")
+  if (!email) return { error: "Merci de renseigner une adresse email.", success: false }
+
+  const session = await prisma.session.findUnique({ where: { id: sessionId }, select: { formation: { select: { titre: true } } } })
+  if (!session) return { error: "Session introuvable.", success: false }
+
+  const zip = await buildSessionConventionsZip(sessionId)
+  if (!zip) return { error: "Aucune convention générée pour cette session.", success: false }
+
+  const { sent } = await sendEmail({
+    to: email,
+    subject: `Conventions de stage — ${session.formation.titre}`,
+    react: ConventionsZipEmail({ formationTitre: session.formation.titre, count: zip.count }),
+    attachments: [{ filename: zip.filename, content: zip.buffer }],
+  })
+  if (!sent) return { error: "Échec de l'envoi de l'email — réessayez dans quelques minutes.", success: false }
+
+  return { error: null, success: true }
 }
 
 export { avancerConvention }

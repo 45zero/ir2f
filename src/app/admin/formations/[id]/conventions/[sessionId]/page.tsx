@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { getSessionConventionSuivi } from "@/lib/admin/conventions"
+import { getSignedDocumentUrl, getSignedDocumentDownloadUrl } from "@/lib/storage"
 import { ImportStagiairesForm } from "@/components/admin/ImportStagiairesForm"
 import { EnvoyerConventionsButton } from "@/components/admin/EnvoyerConventionsButton"
 import { EnvoyerSignatureResponsablePedagogiqueButton } from "@/components/admin/EnvoyerSignatureResponsablePedagogiqueButton"
+import { ConventionsZipActions } from "@/components/admin/ConventionsZipActions"
 import { ConventionSuiviTable, type ConventionSuiviRow } from "@/components/admin/ConventionSuiviTable"
 import { colors, fontHeading } from "@/lib/theme"
 
@@ -14,26 +16,34 @@ export default async function SessionConventionsPage({ params }: { params: Promi
   const session = await getSessionConventionSuivi(sessionId)
   if (!session || session.formationId !== id) notFound()
 
-  const rows: ConventionSuiviRow[] = session.conventionStagiaires.map((s) => ({
-    id: s.id,
-    nom: s.nom,
-    prenom: s.prenom,
-    club: s.club,
-    signataires: s.signataires.map((sig) => ({
-      id: sig.id,
-      role: sig.role,
-      statut: sig.statut,
-      motifRefus: sig.motifRefus,
-      signedAt: sig.signedAt?.toISOString() ?? null,
-      ipAddress: sig.ipAddress,
-      token: sig.token,
-      nom: sig.nom,
-      dernierRenvoiPar: sig.dernierRenvoiPar,
-      dernierRenvoiCanal: sig.dernierRenvoiCanal,
-      dernierRenvoiAt: sig.dernierRenvoiAt?.toISOString() ?? null,
-    })),
-  }))
+  const rows: ConventionSuiviRow[] = await Promise.all(
+    session.conventionStagiaires.map(async (s) => ({
+      id: s.id,
+      nom: s.nom,
+      prenom: s.prenom,
+      club: s.club,
+      pdfViewUrl: s.pdfStoragePath ? await getSignedDocumentUrl(s.pdfStoragePath) : null,
+      pdfDownloadUrl: s.pdfStoragePath
+        ? await getSignedDocumentDownloadUrl(s.pdfStoragePath, `Convention - ${s.prenom} ${s.nom}.pdf`)
+        : null,
+      signataires: s.signataires.map((sig) => ({
+        id: sig.id,
+        role: sig.role,
+        statut: sig.statut,
+        motifRefus: sig.motifRefus,
+        signedAt: sig.signedAt?.toISOString() ?? null,
+        ipAddress: sig.ipAddress,
+        token: sig.token,
+        nom: sig.nom,
+        dernierRenvoiPar: sig.dernierRenvoiPar,
+        dernierRenvoiCanal: sig.dernierRenvoiCanal,
+        dernierRenvoiAt: sig.dernierRenvoiAt?.toISOString() ?? null,
+      })),
+    }))
+  )
 
+  const generatedCount = session.conventionStagiaires.filter((s) => s.pdfStoragePath).length
+  const unsignedCount = session.conventionStagiaires.filter((s) => s.pdfStoragePath && !s.completedAt).length
   const missingResponsablePedagogique = !session.responsablePedagogiqueUserId
 
   return (
@@ -93,6 +103,8 @@ export default async function SessionConventionsPage({ params }: { params: Promi
       <ImportStagiairesForm sessionId={sessionId} />
 
       <EnvoyerConventionsButton sessionId={sessionId} />
+
+      <ConventionsZipActions formationId={id} sessionId={sessionId} generatedCount={generatedCount} unsignedCount={unsignedCount} />
 
       <ConventionSuiviTable rows={rows} />
     </div>

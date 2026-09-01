@@ -206,7 +206,7 @@ export function ConventionSignForm({
   if (signState?.success) {
     return (
       <div style={{ background: "#e6f4ea", border: "1px solid #bfe3cb", borderRadius: 10, padding: 20, color: "#1a6b3a", fontSize: 14, fontWeight: 600 }}>
-        Merci, votre signature a bien été enregistrée. La convention poursuit son circuit de signature.
+        Vous avez signé cette convention. Merci.
       </div>
     )
   }

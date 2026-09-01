@@ -216,13 +216,6 @@ export async function signerConvention(
   })
 
   await avancerConvention(stagiaire.id, signataire.ordre)
-  await notifyAdminSignatureProgress({
-    formationTitre: stagiaire.formation.titre,
-    stagiairePrenom: stagiaire.prenom,
-    stagiaireNom: stagiaire.nom,
-    role: signataire.role,
-    refused: false,
-  })
 
   revalidatePath(`/admin/formations/${stagiaire.formation.id}/conventions`)
   return { error: null, success: true }

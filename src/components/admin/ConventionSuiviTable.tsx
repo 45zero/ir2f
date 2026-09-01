@@ -1,6 +1,7 @@
 "use client"
 
 import { CONVENTION_ROLE_ORDER, CONVENTION_ROLE_LABELS, ConventionStatutPill, type ConventionSignataireStatut } from "@/components/ui/ConventionStatutPills"
+import { ConventionShareActions } from "@/components/dashboard/ConventionShareActions"
 import { colors, fontBody } from "@/lib/theme"
 
 export type ConventionSuiviRow = {
@@ -9,6 +10,8 @@ export type ConventionSuiviRow = {
   prenom: string
   club: string | null
   signataires: ConventionSignataireStatut[]
+  pdfViewUrl: string | null
+  pdfDownloadUrl: string | null
 }
 
 export function ConventionSuiviTable({ rows }: { rows: ConventionSuiviRow[] }) {
@@ -33,6 +36,9 @@ export function ConventionSuiviTable({ rows }: { rows: ConventionSuiviRow[] }) {
                 {CONVENTION_ROLE_LABELS[role]}
               </th>
             ))}
+            <th style={{ textAlign: "center", padding: "12px 10px", fontSize: 11.5, fontWeight: 700, color: colors.navy, textTransform: "uppercase", letterSpacing: 0.4, whiteSpace: "nowrap" }}>
+              Documents
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +55,11 @@ export function ConventionSuiviTable({ rows }: { rows: ConventionSuiviRow[] }) {
                   </div>
                 </td>
               ))}
+              <td style={{ padding: "12px 10px", textAlign: "center" }}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <ConventionShareActions viewUrl={row.pdfViewUrl} downloadUrl={row.pdfDownloadUrl} nomPrenom={`${row.prenom} ${row.nom}`} />
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
