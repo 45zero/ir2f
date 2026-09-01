@@ -5,7 +5,7 @@ import { envoyerSignatureResponsablePedagogique } from "@/lib/actions/convention
 import { colors, fontBody } from "@/lib/theme"
 
 type Props = {
-  formationId: string
+  sessionId: string
   responsablePedagogiqueNom: string | null
   envoyeAt: string | null
   signedAt: string | null
@@ -13,8 +13,8 @@ type Props = {
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Paris" })
 
-export function EnvoyerSignatureResponsablePedagogiqueButton({ formationId, responsablePedagogiqueNom, envoyeAt, signedAt }: Props) {
-  const boundAction = envoyerSignatureResponsablePedagogique.bind(null, formationId)
+export function EnvoyerSignatureResponsablePedagogiqueButton({ sessionId, responsablePedagogiqueNom, envoyeAt, signedAt }: Props) {
+  const boundAction = envoyerSignatureResponsablePedagogique.bind(null, sessionId)
   const [state, formAction, isPending] = useActionState(
     async (_prev: Awaited<ReturnType<typeof envoyerSignatureResponsablePedagogique>> | undefined) => boundAction(),
     undefined
@@ -24,7 +24,7 @@ export function EnvoyerSignatureResponsablePedagogiqueButton({ formationId, resp
     return (
       <div style={{ background: "#e6f4ea", border: "1px solid #bfe3cb", borderRadius: 8, padding: "12px 16px", fontSize: 13, color: "#1a6b3a" }}>
         <strong>{responsablePedagogiqueNom}</strong> a signé le {dateFormatter.format(new Date(signedAt))}. Sa
-        signature est appliquée automatiquement à chaque convention générée pour cette formation.
+        signature est appliquée automatiquement à chaque convention générée pour cette session.
       </div>
     )
   }

@@ -11,10 +11,10 @@ export type ImportClubsState = { error: string | null; imported: number | null }
  * Gabarit de l'export LGEF « club adresse et référent » (une seule ligne d'en-tête) : Club,
  * Complément (club), Voie-rue (club), Lieu-dit (club), Code postal (club), Bureau distributeur
  * (club), Numéro, Gestionnaire, Centre de gestion, Nom, Prénom, Civilité, Mobile personnel
- * correspondant, Email principal correspondant, Email officiel club. Seules l'adresse, le numéro
- * d'affiliation et l'email officiel sont retenus (le nom/prénom/civilité du correspondant n'est
- * pas forcément le représentant habilité à signer une convention, voir clubRepresentant* sur
- * ConventionStagiaire, renseigné par le stagiaire à la signature).
+ * correspondant, Email principal correspondant, Email officiel club. Le nom/prénom du
+ * correspondant (colonnes Nom/Prénom) est retenu comme valeur par défaut du représentant club sur
+ * la convention (voir clubRepresentant* sur ConventionStagiaire) — pas forcément la personne
+ * habilitée à signer, donc modifiable par le club lui-même au moment de sa signature.
  */
 const COLUMN_INDEX = {
   nom: 0,
@@ -24,6 +24,8 @@ const COLUMN_INDEX = {
   codePostal: 4,
   bureauDistributeur: 5,
   numeroAffiliation: 6,
+  referentNom: 9,
+  referentPrenom: 10,
   emailOfficiel: 14,
 } as const
 
@@ -79,6 +81,8 @@ export async function importClubsExcel(_prev: ImportClubsState | undefined, form
       ville: cell(row, COLUMN_INDEX.bureauDistributeur) || null,
       numeroAffiliation: cell(row, COLUMN_INDEX.numeroAffiliation) || null,
       email: cell(row, COLUMN_INDEX.emailOfficiel) || null,
+      referentNom: cell(row, COLUMN_INDEX.referentNom) || null,
+      referentPrenom: cell(row, COLUMN_INDEX.referentPrenom) || null,
     }
 
     await prisma.club.upsert({

@@ -13,7 +13,10 @@ export async function getFormationForEdit(id: string) {
   return prisma.formation.findUnique({
     where: { id },
     include: {
-      sessions: { orderBy: { dateDebut: "asc" } },
+      sessions: {
+        orderBy: { dateDebut: "asc" },
+        include: { _count: { select: { conventionStagiaires: true } } },
+      },
       formateurs: { select: { userId: true } },
     },
   })

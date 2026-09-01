@@ -65,11 +65,15 @@ function isHeaderRow(row: unknown[]): boolean {
 }
 
 export async function importStagiairesExcel(
-  formationId: string,
+  sessionId: string,
   _prev: ImportStagiairesState | undefined,
   formData: FormData
 ): Promise<ImportStagiairesState> {
   await requireAdmin()
+
+  const session = await prisma.session.findUnique({ where: { id: sessionId }, select: { formationId: true } })
+  if (!session) return { error: "Session introuvable.", imported: null }
+  const formationId = session.formationId
 
   const file = formData.get("file")
   if (!(file instanceof File) || file.size === 0) return { error: "Sélectionnez un fichier Excel (.xlsx).", imported: null }
@@ -89,10 +93,12 @@ export async function importStagiairesExcel(
 
   if (rows.length === 0) return { error: "Le fichier ne contient aucune ligne de données.", imported: null }
 
-  // Annuaire des clubs (voir src/lib/actions/clubs.ts) — sert à pré-remplir l'adresse du club
-  // d'accueil (absente de ce gabarit stagiaires) par rapprochement sur le nom, normalisé pour
-  // tolérer les différences de casse/accents entre les deux fichiers.
-  const clubs = await prisma.club.findMany({ select: { nom: true, adresse: true, cp: true, ville: true } })
+  // Annuaire des clubs (voir src/lib/actions/clubs.ts) — sert à pré-remplir l'adresse et le
+  // représentant par défaut du club d'accueil (absents de ce gabarit stagiaires) par rapprochement
+  // sur le nom, normalisé pour tolérer les différences de casse/accents entre les deux fichiers.
+  const clubs = await prisma.club.findMany({
+    select: { nom: true, adresse: true, cp: true, ville: true, referentNom: true, referentPrenom: true },
+  })
   const clubsByNormalizedNom = new Map(clubs.map((c) => [normalize(c.nom), c]))
 
   let imported = 0
@@ -126,12 +132,15 @@ export async function importStagiairesExcel(
     if (manquants.length > 0) incomplets.push(`${prenom} ${nom} (${manquants.join(", ")})`)
 
     const data = {
+      formationId,
+      sessionId,
       club: clubNom || null,
       numeroAffiliationClub: cell(row, COLUMN_INDEX.clubNumeroAffiliation) || null,
       emailClub,
       clubAdresse: club?.adresse ?? null,
       clubCp: club?.cp ?? null,
       clubVille: club?.ville ?? null,
+      clubRepresentantNom: club ? [club.referentPrenom, club.referentNom].filter(Boolean).join(" ") || null : null,
       civilite: cell(row, COLUMN_INDEX.civilite) || null,
       nom,
       prenom,
@@ -153,7 +162,7 @@ export async function importStagiairesExcel(
     }
 
     const existing = await prisma.conventionStagiaire.findUnique({
-      where: { formationId_email: { formationId, email } },
+      where: { sessionId_email: { sessionId, email } },
       select: { id: true, pdfStoragePath: true },
     })
 
@@ -172,15 +181,15 @@ export async function importStagiairesExcel(
       reinitialises++
     } else {
       await prisma.conventionStagiaire.upsert({
-        where: { formationId_email: { formationId, email } },
+        where: { sessionId_email: { sessionId, email } },
         update: data,
-        create: { ...data, formationId, email },
+        create: { ...data, email },
       })
     }
     imported++
   }
 
-  revalidatePath(`/admin/formations/${formationId}/conventions`)
+  revalidatePath(`/admin/formations/${formationId}/conventions/${sessionId}`)
 
   const warningParts: string[] = []
   if (reinitialises > 0) {

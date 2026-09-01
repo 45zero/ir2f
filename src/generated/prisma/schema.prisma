@@ -187,18 +187,18 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  inscriptions                     Inscription[]
-  documentsUpload                  Document[]
-  documentsRecus                   DocumentDestinataire[]
-  signatures                       Signature[]
-  messagesEnvoyes                  Message[]              @relation("Expediteur")
-  messagesRecus                    MessageDestinataire[]
-  covoituragesConduit              Covoiturage[]          @relation("Conducteur")
-  covoituragesPassager             CovoituragePassager[]
-  articles                         Article[]
-  demandesInscription              DemandeInscription[]
-  formationsEnCharge               FormationFormateur[]
-  formationsResponsablePedagogique Formation[]            @relation("FormationResponsablePedagogique")
+  inscriptions                   Inscription[]
+  documentsUpload                Document[]
+  documentsRecus                 DocumentDestinataire[]
+  signatures                     Signature[]
+  messagesEnvoyes                Message[]              @relation("Expediteur")
+  messagesRecus                  MessageDestinataire[]
+  covoituragesConduit            Covoiturage[]          @relation("Conducteur")
+  covoituragesPassager           CovoituragePassager[]
+  articles                       Article[]
+  demandesInscription            DemandeInscription[]
+  formationsEnCharge             FormationFormateur[]
+  sessionsResponsablePedagogique Session[]              @relation("SessionResponsablePedagogique")
 
   @@schema("ir2f")
 }
@@ -247,35 +247,9 @@ model Formation {
   lienFffClub      String?
   fffCaptureActif  Boolean         @default(true)
 
-  // Convention de stage : modèle PDF associé + responsable pédagogique (fixe pour toute la
-  // formation — le tuteur et le maître de stage, eux, sont saisis par stagiaire, voir
-  // ConventionStagiaire, car ils varient selon le club d'accueil de chacun). Champs texte
-  // conservés en repli pour les formations créées avant le passage à un utilisateur IR2F lié
-  // (responsablePedagogiqueUser) — nouvelles formations : utiliser le lien.
-  conventionTemplateId            String?
-  responsablePedagogiqueNom       String?
-  responsablePedagogiquePrenom    String?
-  responsablePedagogiqueEmail     String?
-  responsablePedagogiqueTelephone String?
-
-  // Le responsable pédagogique est un membre de l'équipe IR2F (compte User) qui signe UNE SEULE
-  // FOIS pour toute la formation — pas par stagiaire comme les 4 autres rôles du circuit (voir
-  // RoleSignataire) — via un lien à token envoyé par email, exactement comme pour les autres
-  // signataires (voir ConventionSignataire). Sa signature (image + horodatage) est ensuite
-  // incrustée automatiquement dans le PDF de chaque stagiaire au moment de sa génération (voir
-  // genererEtActiverConvention) : plus aucun signataire RESPONSABLE_PEDAGOGIQUE n'est créé par
-  // stagiaire pour les formations utilisant ce circuit.
-  responsablePedagogiqueUserId               String?
-  responsablePedagogiqueUser                 User?     @relation("FormationResponsablePedagogique", fields: [responsablePedagogiqueUserId], references: [id])
-  responsablePedagogiqueSignatureToken       String?   @unique
-  responsablePedagogiqueSignatureEnvoyeAt    DateTime?
-  responsablePedagogiqueSignatureSignedAt    DateTime?
-  responsablePedagogiqueSignatureStoragePath String?
-  responsablePedagogiqueSignatureIpAddress   String?
-  responsablePedagogiqueSignatureUserAgent   String?
-
-  // Période globale de la formation (« du ... au ... »), affichée à côté de la durée et reportée
-  // dans la convention de stage — indépendante des sessions (qui peuvent être plus fines).
+  // Période globale de la formation (« du ... au ... »), affichée sur la fiche publique à côté de
+  // la durée — indépendante des sessions (qui peuvent être plus fines) et n'alimente plus la
+  // convention de stage (voir Session.dateDebut/dateFin/lieu, propres à chaque session).
   dateDebut DateTime?
   dateFin   DateTime?
 
@@ -303,7 +277,6 @@ model Formation {
   covoiturages   Covoiturage[]
   ongletsVedette FormationOnglet[]
 
-  conventionTemplate   ConventionTemplate?   @relation(fields: [conventionTemplateId], references: [id])
   conventionStagiaires ConventionStagiaire[]
 
   @@schema("ir2f")
@@ -333,6 +306,25 @@ model Session {
   createdAt   DateTime @default(now())
 
   formation Formation @relation(fields: [formationId], references: [id])
+
+  // Convention de stage : modèle PDF associé + responsable pédagogique, propres à CETTE session
+  // (une formation peut avoir plusieurs sessions avec des stagiaires, dates et responsables
+  // différents — voir ConventionStagiaire.sessionId). Même mécanique que l'ancien portage sur
+  // Formation : le responsable pédagogique signe UNE SEULE FOIS pour toute la session (pas par
+  // stagiaire), via un lien à token ; sa signature est ensuite incrustée automatiquement dans le
+  // PDF de chaque stagiaire de cette session au moment de sa génération.
+  conventionTemplateId                       String?
+  conventionTemplate                         ConventionTemplate? @relation(fields: [conventionTemplateId], references: [id])
+  responsablePedagogiqueUserId               String?
+  responsablePedagogiqueUser                 User?               @relation("SessionResponsablePedagogique", fields: [responsablePedagogiqueUserId], references: [id])
+  responsablePedagogiqueSignatureToken       String?             @unique
+  responsablePedagogiqueSignatureEnvoyeAt    DateTime?
+  responsablePedagogiqueSignatureSignedAt    DateTime?
+  responsablePedagogiqueSignatureStoragePath String?
+  responsablePedagogiqueSignatureIpAddress   String?
+  responsablePedagogiqueSignatureUserAgent   String?
+
+  conventionStagiaires ConventionStagiaire[]
 
   @@schema("ir2f")
 }
@@ -454,9 +446,9 @@ model Signature {
 
 // ─── CONVENTIONS DE STAGE ────────────────────────────
 
-// Bibliothèque de modèles PDF réutilisables entre formations. Chaque modèle
+// Bibliothèque de modèles PDF réutilisables entre sessions. Chaque modèle
 // est un PDF fillable (champs de formulaire nommés selon le contrat documenté
-// dans src/lib/conventions/variables.ts) que l'admin associe à une formation.
+// dans src/lib/conventions/variables.ts) que l'admin associe à une session.
 model ConventionTemplate {
   id          String   @id @default(uuid())
   nom         String
@@ -464,7 +456,7 @@ model ConventionTemplate {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  formations Formation[]
+  sessions Session[]
 
   @@schema("ir2f")
 }
@@ -481,9 +473,12 @@ model Organigramme {
 }
 
 // Annuaire des clubs FFF (import périodique depuis l'export LGEF, voir
-// src/lib/actions/clubs.ts) — sert uniquement à pré-remplir l'adresse du club d'accueil à
-// l'import des stagiaires (ConventionStagiaire.club* est une copie figée à l'import, pas une
-// référence : la convention déjà générée ne doit pas bouger si l'annuaire est réimporté plus tard).
+// src/lib/actions/clubs.ts) — sert à pré-remplir l'adresse et le représentant par défaut du club
+// d'accueil à l'import des stagiaires (ConventionStagiaire.club*/clubRepresentant* est une copie
+// figée à l'import, pas une référence : la convention déjà générée ne doit pas bouger si
+// l'annuaire est réimporté plus tard). referentNom/referentPrenom viennent de la colonne
+// "correspondant" de l'export LGEF — pas forcément la personne habilitée à signer une convention,
+// donc simple valeur par défaut modifiable par le club lui-même au moment de sa signature.
 model Club {
   id                String   @id @default(uuid())
   nom               String   @unique
@@ -492,6 +487,8 @@ model Club {
   cp                String?
   ville             String?
   email             String?
+  referentNom       String?
+  referentPrenom    String?
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
@@ -507,10 +504,15 @@ model Club {
 model ConventionStagiaire {
   id          String @id @default(uuid())
   formationId String
+  // Dénormalisé à partir de session.formationId (jamais accepté indépendamment en entrée) : sert
+  // au roster formateur/admin qui couvre toute la formation, toutes sessions confondues (voir
+  // getConventionStagiairesForRoster) sans avoir à joindre Session pour chaque lecture.
+  sessionId   String
 
   // Club d'accueil — nom/numéro/email saisis dans l'Excel stagiaires ; adresse déduite de
-  // l'annuaire Club au moment de l'import (voir Club ci-dessus) ; représentant renseigné par le
-  // stagiaire lui-même au moment de sa signature (article 1), pas connu à l'import.
+  // l'annuaire Club au moment de l'import (voir Club ci-dessus), puis confirmée/corrigée par le
+  // club lui-même au moment de sa signature ; représentant renseigné par le club à cette même
+  // étape (article 1), pas connu à l'import.
   club                    String?
   numeroAffiliationClub   String?
   emailClub               String?
@@ -531,23 +533,33 @@ model ConventionStagiaire {
   telephone     String?
   email         String
 
-  // Tuteur (propre à ce stagiaire)
-  tuteurNom    String?
-  tuteurPrenom String?
-  tuteurEmail  String?
+  // Tuteur — nom/prénom/email saisis dans l'Excel stagiaires ; le reste renseigné par le tuteur
+  // lui-même au moment de sa signature.
+  tuteurNom           String?
+  tuteurPrenom        String?
+  tuteurEmail         String?
+  tuteurQualite       String?
+  tuteurAdresse       String?
+  tuteurCp            String?
+  tuteurVille         String?
+  tuteurTelephone     String?
+  tuteurQualification String?
 
-  // Maître de stage (propre à ce stagiaire)
+  // Maître de stage (propre à ce stagiaire) — qualité renseignée par le maître de stage lui-même
+  // au moment de sa signature.
   maitreDeStageNom     String?
   maitreDeStagePrenom  String?
   maitreDeStageAdresse String?
   maitreDeStageCp      String?
   maitreDeStageVille   String?
   maitreDeStageEmail   String?
+  maitreDeStageQualite String?
 
   // Réponses saisies par le stagiaire au moment de sa signature (article 3 de la convention)
   natureIntervention           String[]
   natureInterventionAutre      String?
   publicVise                   String?
+  publicNiveauSportif          String?
   objectifEncadrementSeul      Boolean?
   objectifEncadrementAutonomie Boolean?
   objectifEncadrementPonctuel  Boolean?
@@ -559,9 +571,10 @@ model ConventionStagiaire {
   createdAt              DateTime  @default(now())
 
   formation   Formation              @relation(fields: [formationId], references: [id])
+  session     Session                @relation(fields: [sessionId], references: [id])
   signataires ConventionSignataire[]
 
-  @@unique([formationId, email])
+  @@unique([sessionId, email])
   @@schema("ir2f")
 }
 

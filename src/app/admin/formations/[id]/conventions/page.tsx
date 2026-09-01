@@ -1,38 +1,14 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { getFormationConventionSuivi } from "@/lib/admin/conventions"
-import { ImportStagiairesForm } from "@/components/admin/ImportStagiairesForm"
-import { EnvoyerConventionsButton } from "@/components/admin/EnvoyerConventionsButton"
-import { EnvoyerSignatureResponsablePedagogiqueButton } from "@/components/admin/EnvoyerSignatureResponsablePedagogiqueButton"
-import { ConventionSuiviTable, type ConventionSuiviRow } from "@/components/admin/ConventionSuiviTable"
-import { colors, fontHeading } from "@/lib/theme"
+import { getFormationSessionsConventionSuivi } from "@/lib/admin/conventions"
+import { colors, fontHeading, fontBody } from "@/lib/theme"
+
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "Europe/Paris" })
 
 export default async function FormationConventionsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const formation = await getFormationConventionSuivi(id)
+  const formation = await getFormationSessionsConventionSuivi(id)
   if (!formation) notFound()
-
-  const rows: ConventionSuiviRow[] = formation.conventionStagiaires.map((s) => ({
-    id: s.id,
-    nom: s.nom,
-    prenom: s.prenom,
-    club: s.club,
-    signataires: s.signataires.map((sig) => ({
-      id: sig.id,
-      role: sig.role,
-      statut: sig.statut,
-      motifRefus: sig.motifRefus,
-      signedAt: sig.signedAt?.toISOString() ?? null,
-      ipAddress: sig.ipAddress,
-      token: sig.token,
-      nom: sig.nom,
-      dernierRenvoiPar: sig.dernierRenvoiPar,
-      dernierRenvoiCanal: sig.dernierRenvoiCanal,
-      dernierRenvoiAt: sig.dernierRenvoiAt?.toISOString() ?? null,
-    })),
-  }))
-
-  const missingResponsablePedagogique = !formation.responsablePedagogiqueUserId
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -41,53 +17,78 @@ export default async function FormationConventionsPage({ params }: { params: Pro
           Conventions de stage — {formation.titre}
         </h1>
         <p style={{ color: colors.textMuted, fontSize: 13, margin: "4px 0 0" }}>
-          Importez les stagiaires, puis générez et envoyez leur convention de stage pour signature.
+          Chaque session a son propre modèle de convention, son responsable pédagogique et ses stagiaires. Gérez les
+          dates/lieu/modèle/responsable de chaque session depuis{" "}
+          <Link href={`/admin/formations/${id}`} style={{ color: colors.navy, fontWeight: 700 }}>
+            la fiche formation
+          </Link>
+          .
         </p>
       </div>
 
-      {!formation.conventionTemplateId && (
-        <div style={{ background: "#fdeceb", border: "1px solid #f3c6cb", borderRadius: 8, padding: "12px 16px", fontSize: 13, color: colors.red }}>
-          Aucun modèle de convention associé à cette formation.{" "}
-          <Link href={`/admin/formations/${id}`} style={{ color: colors.red, fontWeight: 700 }}>
-            Associer un modèle
-          </Link>
-          .
-        </div>
-      )}
-      {missingResponsablePedagogique ? (
-        <div style={{ background: "#faf4e6", border: "1px solid #e9d9a8", borderRadius: 8, padding: "12px 16px", fontSize: 13, color: "#7a6423" }}>
-          Responsable pédagogique non désigné pour cette formation.{" "}
-          <Link href={`/admin/formations/${id}`} style={{ color: "#7a6423", fontWeight: 700 }}>
-            Compléter
+      {formation.sessions.length === 0 ? (
+        <div style={{ background: "#f5f7fb", border: "1px solid #e4e9f2", borderRadius: 10, padding: 20, color: colors.textMuted, fontSize: 13 }}>
+          Aucune session pour cette formation.{" "}
+          <Link href={`/admin/formations/${id}`} style={{ color: colors.navy, fontWeight: 700 }}>
+            En ajouter une
           </Link>
           .
         </div>
       ) : (
-        <EnvoyerSignatureResponsablePedagogiqueButton
-          formationId={id}
-          responsablePedagogiqueNom={formation.responsablePedagogiqueUser ? `${formation.responsablePedagogiqueUser.prenom} ${formation.responsablePedagogiqueUser.nom}` : null}
-          envoyeAt={formation.responsablePedagogiqueSignatureEnvoyeAt?.toISOString() ?? null}
-          signedAt={formation.responsablePedagogiqueSignatureSignedAt?.toISOString() ?? null}
-        />
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {formation.sessions.map((session) => {
+            const signataireCount = session._count.conventionStagiaires
+            return (
+              <Link
+                key={session.id}
+                href={`/admin/formations/${id}/conventions/${session.id}`}
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 12,
+                  background: "#fff",
+                  border: "1px solid #eef0f3",
+                  borderRadius: 10,
+                  padding: "16px 18px",
+                  textDecoration: "none",
+                }}
+              >
+                <div>
+                  <span style={{ fontSize: 14, fontWeight: 700, color: colors.navy, fontFamily: fontBody }}>
+                    {dateFormatter.format(session.dateDebut)}
+                    {session.lieu ? ` — ${session.lieu}` : ""}
+                  </span>
+                  <div style={{ display: "flex", gap: 10, marginTop: 6, flexWrap: "wrap" }}>
+                    {!session.conventionTemplateId && (
+                      <span style={{ fontSize: 11.5, color: colors.red, background: "#fdeceb", padding: "3px 9px", borderRadius: 12, fontWeight: 700 }}>
+                        Modèle manquant
+                      </span>
+                    )}
+                    {!session.responsablePedagogiqueUserId ? (
+                      <span style={{ fontSize: 11.5, color: "#7a6423", background: "#faf4e6", padding: "3px 9px", borderRadius: 12, fontWeight: 700 }}>
+                        Responsable pédagogique manquant
+                      </span>
+                    ) : !session.responsablePedagogiqueSignatureSignedAt ? (
+                      <span style={{ fontSize: 11.5, color: "#7a6423", background: "#faf4e6", padding: "3px 9px", borderRadius: 12, fontWeight: 700 }}>
+                        {session.responsablePedagogiqueUser?.prenom} {session.responsablePedagogiqueUser?.nom} — signature en attente
+                      </span>
+                    ) : (
+                      <span style={{ fontSize: 11.5, color: "#1a6b3a", background: "#e6f4ea", padding: "3px 9px", borderRadius: 12, fontWeight: 700 }}>
+                        {session.responsablePedagogiqueUser?.prenom} {session.responsablePedagogiqueUser?.nom} — signé
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <span style={{ fontSize: 12.5, color: colors.textMuted, fontFamily: fontBody }}>
+                  {signataireCount} stagiaire{signataireCount > 1 ? "s" : ""}
+                </span>
+              </Link>
+            )
+          })}
+        </div>
       )}
-
-      <details style={{ background: "#f5f7fb", border: "1px solid #e4e9f2", borderRadius: 10, padding: "12px 18px" }}>
-        <summary style={{ fontSize: 12.5, fontWeight: 700, color: colors.navy, cursor: "pointer" }}>
-          Format attendu du fichier Excel
-        </summary>
-        <p style={{ fontSize: 12, color: colors.textMuted, margin: "8px 0 0", lineHeight: 1.6 }}>
-          Gabarit LGEF avec 2 lignes d&apos;en-tête puis les données à partir de la ligne 3, colonnes dans cet ordre :
-          Nom du Club, Numéro d&apos;affiliation, Mail club/employeur, Civilité, Nom, Prénom, Date de naissance,
-          Adresse, CP, Ville, Téléphone, Mail (stagiaire), Nom, Prénom, Mail (tuteur), Nom, Prénom, Adresse, CP,
-          Ville, Mail (maître de stage).
-        </p>
-      </details>
-
-      <ImportStagiairesForm formationId={id} />
-
-      <EnvoyerConventionsButton formationId={id} />
-
-      <ConventionSuiviTable rows={rows} />
     </div>
   )
 }

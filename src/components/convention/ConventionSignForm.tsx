@@ -4,7 +4,12 @@ import { useActionState, useState } from "react"
 import { signerConvention, refuserConvention } from "@/lib/actions/convention-signature"
 import { SIGNATURE_CONSENT_TEXT } from "@/lib/signature-consent"
 import { SignaturePad } from "@/components/convention/SignaturePad"
-import { NATURE_INTERVENTION_OPTIONS, PUBLIC_VISE_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS } from "@/lib/conventions/variables-shared"
+import {
+  NATURE_INTERVENTION_OPTIONS,
+  PUBLIC_VISE_OPTIONS,
+  PUBLIC_NIVEAU_SPORTIF_OPTIONS,
+  OBJECTIF_PEDAGOGIQUE_FIELDS,
+} from "@/lib/conventions/variables-shared"
 import { colors, fontBody } from "@/lib/theme"
 import type { RoleSignataire } from "@/generated/prisma"
 
@@ -17,23 +22,98 @@ const fieldStyle = {
   outline: "none",
 }
 
-function ClubRepresentantFields() {
+function ClubResponsableFields({
+  club,
+}: {
+  club: { representantNom: string | null; adresse: string | null; cp: string | null; ville: string | null }
+}) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 12, background: "#f5f7fb", borderRadius: 8, padding: 16 }}>
-      <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>Représentant du club d&apos;accueil</span>
+      <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>Responsable du club d&apos;accueil</span>
       <p style={{ fontSize: 12, color: colors.textMuted, margin: 0 }}>
         La convention (article 1) doit préciser qui représente le club et signera en son nom.
       </p>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 220px" }}>
-          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Nom et prénom</span>
-          <input name="clubRepresentantNom" required placeholder="Ex. Julien Chaussec" style={fieldStyle} />
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Nom et prénom du responsable</span>
+          <input
+            name="clubRepresentantNom"
+            required
+            defaultValue={club.representantNom ?? ""}
+            placeholder="Ex. Julien Chaussec"
+            style={fieldStyle}
+          />
         </label>
         <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 220px" }}>
-          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>En qualité de</span>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Qualité du responsable</span>
           <input name="clubRepresentantQualite" required placeholder="Ex. Président" style={fieldStyle} />
         </label>
       </div>
+      <p style={{ fontSize: 12, color: colors.textMuted, margin: 0 }}>
+        Merci de vérifier et, si besoin, corriger l&apos;adresse du club avant de signer.
+      </p>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "2 1 260px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Adresse</span>
+          <input name="clubAdresse" required defaultValue={club.adresse ?? ""} placeholder="Adresse du club" style={fieldStyle} />
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 100px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Code postal</span>
+          <input name="clubCp" required defaultValue={club.cp ?? ""} style={fieldStyle} />
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 180px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Ville</span>
+          <input name="clubVille" required defaultValue={club.ville ?? ""} style={fieldStyle} />
+        </label>
+      </div>
+    </div>
+  )
+}
+
+function TuteurFields() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, background: "#f5f7fb", borderRadius: 8, padding: 16 }}>
+      <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>Vos informations</span>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 220px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Qualité</span>
+          <input name="tuteurQualite" required placeholder="Ex. Éducateur diplômé" style={fieldStyle} />
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 220px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Fonction au sein du club</span>
+          <input name="tuteurQualification" required placeholder="Ex. Entraîneur" style={fieldStyle} />
+        </label>
+      </div>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "2 1 260px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Adresse</span>
+          <input name="tuteurAdresse" required placeholder="Adresse" style={fieldStyle} />
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 100px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Code postal</span>
+          <input name="tuteurCp" required style={fieldStyle} />
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 6, flex: "1 1 180px" }}>
+          <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Ville</span>
+          <input name="tuteurVille" required style={fieldStyle} />
+        </label>
+      </div>
+      <label style={{ display: "flex", flexDirection: "column", gap: 6, maxWidth: 240 }}>
+        <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Téléphone</span>
+        <input name="tuteurTelephone" type="tel" required placeholder="Ex. 06 12 34 56 78" style={fieldStyle} />
+      </label>
+    </div>
+  )
+}
+
+function MaitreDeStageFields() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, background: "#f5f7fb", borderRadius: 8, padding: 16 }}>
+      <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>Vos informations</span>
+      <label style={{ display: "flex", flexDirection: "column", gap: 6, maxWidth: 260 }}>
+        <span style={{ fontSize: 12.5, fontWeight: 700, color: colors.text }}>Qualité</span>
+        <input name="maitreDeStageQualite" required placeholder="Ex. Directeur technique" style={fieldStyle} />
+      </label>
     </div>
   )
 }
@@ -76,6 +156,18 @@ function ArticleTroisFields() {
         </select>
       </label>
 
+      <label style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>Niveau sportif du public</span>
+        <select name="publicNiveauSportif" required style={{ ...fieldStyle, maxWidth: 200 }}>
+          <option value="">— Choisir —</option>
+          {PUBLIC_NIVEAU_SPORTIF_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <span style={{ fontSize: 13, fontWeight: 700, color: colors.navy }}>Objectifs pédagogiques</span>
         {OBJECTIF_PEDAGOGIQUE_FIELDS.map((o) => (
@@ -98,7 +190,15 @@ function ArticleTroisFields() {
   )
 }
 
-export function ConventionSignForm({ token, role }: { token: string; role: RoleSignataire }) {
+export function ConventionSignForm({
+  token,
+  role,
+  club,
+}: {
+  token: string
+  role: RoleSignataire
+  club: { representantNom: string | null; adresse: string | null; cp: string | null; ville: string | null }
+}) {
   const [showRefus, setShowRefus] = useState(false)
   const [signState, signAction, signPending] = useActionState(signerConvention.bind(null, token), undefined)
   const [refusState, refusAction, refusPending] = useActionState(refuserConvention.bind(null, token), undefined)
@@ -150,12 +250,10 @@ export function ConventionSignForm({ token, role }: { token: string; role: RoleS
 
   return (
     <form action={signAction} style={{ display: "flex", flexDirection: "column", gap: 16, background: "#fff", border: "1px solid #eef0f3", borderRadius: 10, padding: 20 }}>
-      {role === "STAGIAIRE" && (
-        <>
-          <ClubRepresentantFields />
-          <ArticleTroisFields />
-        </>
-      )}
+      {role === "STAGIAIRE" && <ArticleTroisFields />}
+      {role === "CLUB" && <ClubResponsableFields club={club} />}
+      {role === "TUTEUR" && <TuteurFields />}
+      {role === "MAITRE_DE_STAGE" && <MaitreDeStageFields />}
 
       <SignaturePad name="signatureImage" />
 

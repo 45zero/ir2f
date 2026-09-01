@@ -24,8 +24,20 @@ export const NATURE_INTERVENTION_OPTIONS = [
 
 export type NatureIntervention = (typeof NATURE_INTERVENTION_OPTIONS)[number]["value"]
 
+/** "Rue, CP Ville" sur une seule ligne — utilisé pour l'article 1 (siège du club) dans le PDF. */
+export function formatAdresseLigne(adresse?: string | null, cp?: string | null, ville?: string | null): string {
+  return [adresse, [cp, ville].filter(Boolean).join(" ")].filter(Boolean).join(", ")
+}
+
 /** Catégories d'âge pour "Préciser le public" (article 3) — choix unique. */
 export const PUBLIC_VISE_OPTIONS = ["U7", "U8", "U9", "U10", "U11", "U12", "U13", "U14", "U15", "U16", "U17", "U18", "U19", "SENIORS"] as const
+
+/** Niveau sportif du public visé (article 3) — choix unique, distinct de la catégorie d'âge ci-dessus. */
+export const PUBLIC_NIVEAU_SPORTIF_OPTIONS = [
+  { value: "DISTRICT", label: "District" },
+  { value: "LIGUE", label: "Ligue" },
+  { value: "FEDERAL", label: "Fédéral" },
+] as const
 
 /** Les 3 paires Oui/Non "Objectifs pédagogiques" (article 3). */
 export const OBJECTIF_PEDAGOGIQUE_FIELDS = [
@@ -70,6 +82,7 @@ export const ASSIGNABLE_TEMPLATE_FIELD_NAMES: string[] = [
   "stagiaire_telephone",
   "stagiaire_email",
   "stagiaire_public_vise",
+  "public_niveau_sportif",
   "nature_intervention_autre_texte",
   "club_nom",
   "club_numero_affiliation",
@@ -83,6 +96,12 @@ export const ASSIGNABLE_TEMPLATE_FIELD_NAMES: string[] = [
   "tuteur_prenom",
   "tuteur_nom_prenom",
   "tuteur_email",
+  "tuteur_qualite",
+  "tuteur_adresse",
+  "tuteur_cp",
+  "tuteur_ville",
+  "tuteur_telephone",
+  "tuteur_qualification",
   "maitre_de_stage_nom",
   "maitre_de_stage_prenom",
   "maitre_de_stage_nom_prenom",
@@ -90,6 +109,7 @@ export const ASSIGNABLE_TEMPLATE_FIELD_NAMES: string[] = [
   "maitre_de_stage_cp",
   "maitre_de_stage_ville",
   "maitre_de_stage_email",
+  "maitre_de_stage_qualite",
   "responsable_pedagogique_nom",
   "responsable_pedagogique_prenom",
   "responsable_pedagogique_nom_prenom",

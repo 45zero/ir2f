@@ -4,8 +4,8 @@ import { useActionState } from "react"
 import { envoyerConventions } from "@/lib/actions/conventions"
 import { colors, fontBody } from "@/lib/theme"
 
-export function EnvoyerConventionsButton({ formationId }: { formationId: string }) {
-  const boundAction = envoyerConventions.bind(null, formationId)
+export function EnvoyerConventionsButton({ sessionId }: { sessionId: string }) {
+  const boundAction = envoyerConventions.bind(null, sessionId)
   const [state, formAction, isPending] = useActionState(
     async (_prev: Awaited<ReturnType<typeof envoyerConventions>> | undefined) => boundAction(),
     undefined

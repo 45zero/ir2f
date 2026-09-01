@@ -5,8 +5,6 @@ import { BroadcastComposerModal } from "@/components/dashboard/BroadcastComposer
 import { DocumentLinkActions } from "@/components/dashboard/DocumentLinkActions"
 import { ConventionShareActions } from "@/components/dashboard/ConventionShareActions"
 import { EnvoyerConventionStagiaireButton } from "@/components/dashboard/EnvoyerConventionStagiaireButton"
-import { ImportStagiairesForm } from "@/components/admin/ImportStagiairesForm"
-import { EnvoyerConventionsButton } from "@/components/admin/EnvoyerConventionsButton"
 import { ConventionStatutPills, type ConventionSignataireStatut } from "@/components/ui/ConventionStatutPills"
 import { colors, fontBody } from "@/lib/theme"
 import type { OrigineInscription } from "@/generated/prisma"
@@ -330,10 +328,12 @@ export function FormationRosterAndBroadcast({
                       Conventions de stage
                     </span>
                     {isAdmin && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                        <ImportStagiairesForm formationId={f.id} />
-                        <EnvoyerConventionsButton formationId={f.id} />
-                      </div>
+                      <a
+                        href={`/admin/formations/${f.id}/conventions`}
+                        style={{ color: colors.navy, fontSize: 12.5, fontWeight: 700, textDecoration: "underline" }}
+                      >
+                        Importer des stagiaires / envoyer les conventions par session →
+                      </a>
                     )}
                     {f.conventions.length === 0 && (
                       <span style={{ fontSize: 12.5, color: colors.textLight }}>Aucun stagiaire importé pour cette formation.</span>

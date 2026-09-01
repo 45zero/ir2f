@@ -4,7 +4,7 @@ import { useActionState } from "react"
 import { deleteConventionTemplate } from "@/lib/actions/convention-templates"
 import { colors, fontBody } from "@/lib/theme"
 
-export type ConventionTemplateRow = { id: string; nom: string; formationsCount: number; createdAt: string }
+export type ConventionTemplateRow = { id: string; nom: string; sessionsCount: number; createdAt: string }
 
 function DeleteButton({ template }: { template: ConventionTemplateRow }) {
   const [state, action, isPending] = useActionState(
@@ -66,7 +66,7 @@ export function ConventionTemplatesList({ templates }: { templates: ConventionTe
         >
           <span style={{ flex: 1, fontSize: 13.5, fontWeight: 700, color: colors.text }}>{t.nom}</span>
           <span style={{ fontSize: 12, color: colors.textLight }}>
-            {t.formationsCount > 0 ? `Utilisé par ${t.formationsCount} formation${t.formationsCount > 1 ? "s" : ""}` : "Non utilisé"}
+            {t.sessionsCount > 0 ? `Utilisé par ${t.sessionsCount} session${t.sessionsCount > 1 ? "s" : ""}` : "Non utilisé"}
           </span>
           <DeleteButton template={t} />
         </div>

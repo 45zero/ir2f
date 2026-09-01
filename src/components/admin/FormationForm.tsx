@@ -25,7 +25,15 @@ import type {
   ModeInscription,
 } from "@/generated/prisma"
 
-type SessionRow = { dateDebut: string; lieu: string; places: string }
+type SessionRow = {
+  id?: string
+  dateDebut: string
+  lieu: string
+  places: string
+  conventionTemplateId: string
+  responsablePedagogiqueUserId: string
+  hasStagiaires?: boolean
+}
 
 export type FormationFormInitial = {
   titre: string
@@ -62,8 +70,6 @@ export type FormationFormInitial = {
   programme: ProgrammeStep[]
   sessions: SessionRow[]
   formateurIds: string[]
-  conventionTemplateId: string
-  responsablePedagogiqueUserId: string
   tauxReussite: string
   tauxSatisfaction: string
   resultats: ResultatAnnee[]
@@ -104,8 +110,6 @@ const EMPTY: FormationFormInitial = {
   programme: [],
   sessions: [],
   formateurIds: [],
-  conventionTemplateId: "",
-  responsablePedagogiqueUserId: "",
   tauxReussite: "",
   tauxSatisfaction: "",
   resultats: [],
@@ -444,49 +448,27 @@ export function FormationForm({
         </Field>
       </SectionCard>
 
-      <SectionCard title="Convention de stage">
-        <Field label="Modèle PDF associé">
-          <select name="conventionTemplateId" defaultValue={data.conventionTemplateId} style={fieldStyle}>
-            <option value="">— Aucun —</option>
-            {conventionTemplates.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.nom}
-              </option>
-            ))}
-          </select>
-        </Field>
+      <SectionCard title="Programme détaillé">
+        <ProgrammeEditor programme={programme} setProgramme={setProgramme} />
+      </SectionCard>
+
+      <SectionCard title="Sessions & conventions de stage">
         <p style={{ color: colors.textLight, fontSize: 12, margin: 0 }}>
-          Gérer la bibliothèque de modèles depuis{" "}
+          Chaque session a son propre modèle de convention et son propre responsable pédagogique (un membre de
+          l&apos;équipe IR2F, qui signe une seule fois pour toute la session — bouton dans l&apos;onglet Conventions
+          de la session). Le tuteur et le maître de stage, eux, sont propres à chaque stagiaire et proviennent de
+          l&apos;import Excel. Gérer la bibliothèque de modèles depuis{" "}
           <a href="/admin/conventions/templates" style={{ color: colors.navy, fontWeight: 700 }}>
             Modèles de convention
           </a>
           .
         </p>
-        <p style={{ fontSize: 13, fontWeight: 700, color: colors.navy, margin: "6px 0 0" }}>Responsable pédagogique</p>
-        <p style={{ color: colors.textLight, fontSize: 12, margin: 0 }}>
-          Un membre de l&apos;équipe IR2F. Il signe une seule fois pour toute la formation (bouton dans l&apos;onglet
-          Conventions) — cette signature est ensuite appliquée automatiquement à la convention de chaque
-          stagiaire. Le tuteur et le maître de stage, eux, sont propres à chaque stagiaire et proviennent de
-          l&apos;import Excel.
-        </p>
-        <Field label="Responsable pédagogique">
-          <select name="responsablePedagogiqueUserId" defaultValue={data.responsablePedagogiqueUserId} style={fieldStyle}>
-            <option value="">— Aucun —</option>
-            {responsablePedagogiqueUsers.map((u) => (
-              <option key={u.id} value={u.id}>
-                {u.prenom} {u.nom}
-              </option>
-            ))}
-          </select>
-        </Field>
-      </SectionCard>
-
-      <SectionCard title="Programme détaillé">
-        <ProgrammeEditor programme={programme} setProgramme={setProgramme} />
-      </SectionCard>
-
-      <SectionCard title="Sessions">
-        <SessionsEditor sessions={sessions} setSessions={setSessions} />
+        <SessionsEditor
+          sessions={sessions}
+          setSessions={setSessions}
+          conventionTemplates={conventionTemplates}
+          responsablePedagogiqueUsers={responsablePedagogiqueUsers}
+        />
       </SectionCard>
 
       <SectionCard title="Indicateurs de résultats">
@@ -826,41 +808,84 @@ function StepTableEditor({
 function SessionsEditor({
   sessions,
   setSessions,
+  conventionTemplates,
+  responsablePedagogiqueUsers,
 }: {
   sessions: SessionRow[]
   setSessions: (fn: (s: SessionRow[]) => SessionRow[]) => void
+  conventionTemplates: { id: string; nom: string }[]
+  responsablePedagogiqueUsers: { id: string; nom: string; prenom: string }[]
 }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       {sessions.map((s, i) => (
-        <div key={i} style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-          <input
-            type="date"
-            value={s.dateDebut}
-            onChange={(e) => setSessions((prev) => prev.map((row, idx) => (idx === i ? { ...row, dateDebut: e.target.value } : row)))}
-            style={{ ...fieldStyle, flex: "1 1 160px" }}
-          />
-          <input
-            placeholder="Lieu"
-            value={s.lieu}
-            onChange={(e) => setSessions((prev) => prev.map((row, idx) => (idx === i ? { ...row, lieu: e.target.value } : row)))}
-            style={{ ...fieldStyle, flex: "1 1 160px" }}
-          />
-          <input
-            placeholder="Places"
-            type="number"
-            value={s.places}
-            onChange={(e) => setSessions((prev) => prev.map((row, idx) => (idx === i ? { ...row, places: e.target.value } : row)))}
-            style={{ ...fieldStyle, flex: "0 1 100px" }}
-          />
-          <button type="button" onClick={() => setSessions((prev) => prev.filter((_, idx) => idx !== i))} style={removeButtonStyle}>
-            Retirer
-          </button>
+        <div
+          key={s.id ?? i}
+          style={{ display: "flex", flexDirection: "column", gap: 10, background: "#f5f7fb", borderRadius: 8, padding: 14 }}
+        >
+          <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+            <input
+              type="date"
+              value={s.dateDebut}
+              onChange={(e) => setSessions((prev) => prev.map((row, idx) => (idx === i ? { ...row, dateDebut: e.target.value } : row)))}
+              style={{ ...fieldStyle, flex: "1 1 160px" }}
+            />
+            <input
+              placeholder="Lieu"
+              value={s.lieu}
+              onChange={(e) => setSessions((prev) => prev.map((row, idx) => (idx === i ? { ...row, lieu: e.target.value } : row)))}
+              style={{ ...fieldStyle, flex: "1 1 160px" }}
+            />
+            <input
+              placeholder="Places"
+              type="number"
+              value={s.places}
+              onChange={(e) => setSessions((prev) => prev.map((row, idx) => (idx === i ? { ...row, places: e.target.value } : row)))}
+              style={{ ...fieldStyle, flex: "0 1 100px" }}
+            />
+            <button
+              type="button"
+              disabled={s.hasStagiaires}
+              title={s.hasStagiaires ? "Des stagiaires sont déjà rattachés à cette session — impossible de la retirer." : undefined}
+              onClick={() => setSessions((prev) => prev.filter((_, idx) => idx !== i))}
+              style={{ ...removeButtonStyle, opacity: s.hasStagiaires ? 0.5 : 1, cursor: s.hasStagiaires ? "not-allowed" : "pointer" }}
+            >
+              Retirer
+            </button>
+          </div>
+          <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+            <select
+              value={s.conventionTemplateId}
+              onChange={(e) => setSessions((prev) => prev.map((row, idx) => (idx === i ? { ...row, conventionTemplateId: e.target.value } : row)))}
+              style={{ ...fieldStyle, flex: "1 1 220px" }}
+            >
+              <option value="">— Modèle de convention : aucun —</option>
+              {conventionTemplates.map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.nom}
+                </option>
+              ))}
+            </select>
+            <select
+              value={s.responsablePedagogiqueUserId}
+              onChange={(e) => setSessions((prev) => prev.map((row, idx) => (idx === i ? { ...row, responsablePedagogiqueUserId: e.target.value } : row)))}
+              style={{ ...fieldStyle, flex: "1 1 220px" }}
+            >
+              <option value="">— Responsable pédagogique : aucun —</option>
+              {responsablePedagogiqueUsers.map((u) => (
+                <option key={u.id} value={u.id}>
+                  {u.prenom} {u.nom}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       ))}
       <button
         type="button"
-        onClick={() => setSessions((prev) => [...prev, { dateDebut: "", lieu: "", places: "" }])}
+        onClick={() =>
+          setSessions((prev) => [...prev, { dateDebut: "", lieu: "", places: "", conventionTemplateId: "", responsablePedagogiqueUserId: "" }])
+        }
         style={addButtonStyle}
       >
         + Ajouter une session

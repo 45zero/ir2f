@@ -10,13 +10,13 @@ export default async function ConventionTemplatesPage() {
 
   const templates = await prisma.conventionTemplate.findMany({
     orderBy: { createdAt: "desc" },
-    include: { _count: { select: { formations: true } } },
+    include: { _count: { select: { sessions: true } } },
   })
 
   const rows: ConventionTemplateRow[] = templates.map((t) => ({
     id: t.id,
     nom: t.nom,
-    formationsCount: t._count.formations,
+    sessionsCount: t._count.sessions,
     createdAt: t.createdAt.toISOString(),
   }))
 
@@ -27,7 +27,7 @@ export default async function ConventionTemplatesPage() {
           Modèles de convention de stage
         </h1>
         <p style={{ color: colors.textMuted, fontSize: 13, margin: "4px 0 0" }}>
-          Bibliothèque de modèles PDF réutilisables, à associer à une ou plusieurs formations.
+          Bibliothèque de modèles PDF réutilisables, à associer à une ou plusieurs sessions.
         </p>
       </div>
 

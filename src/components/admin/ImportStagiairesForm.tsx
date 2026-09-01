@@ -4,8 +4,8 @@ import { useActionState } from "react"
 import { importStagiairesExcel } from "@/lib/actions/convention-stagiaires"
 import { colors, fontBody } from "@/lib/theme"
 
-export function ImportStagiairesForm({ formationId }: { formationId: string }) {
-  const boundAction = importStagiairesExcel.bind(null, formationId)
+export function ImportStagiairesForm({ sessionId }: { sessionId: string }) {
+  const boundAction = importStagiairesExcel.bind(null, sessionId)
   const [state, formAction, isPending] = useActionState(boundAction, undefined)
 
   return (

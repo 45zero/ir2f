@@ -7,27 +7,15 @@ import { downloadStorageFile, uploadBytes } from "@/lib/storage"
 import { fillConventionTemplate, stampSignature } from "@/lib/conventions/pdf"
 import { buildConventionVariables, resolveSignataireContact, SIGNATAIRE_ORDER, SIGNATURE_FIELD_NAMES } from "@/lib/conventions/variables"
 import { notifySignataireASigner, ROLE_SIGNATAIRE_LABELS } from "@/lib/emails/convention-notifications"
-import type { ConventionStagiaire, Formation } from "@/generated/prisma"
+import type { ConventionStagiaire, Session, Formation } from "@/generated/prisma"
 
-type FormationAvecResponsable = Formation & {
+type SessionAvecResponsable = Session & {
+  formation: Pick<Formation, "titre">
   responsablePedagogiqueUser: { nom: string; prenom: string; email: string; telephone: string | null } | null
 }
 
 export type EnvoyerConventionsState = { error: string | null; sent: number; skipped: string[] }
 export type ConventionActionState = { error: string | null }
-
-const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "Europe/Paris" })
-
-async function computeFormationDateLabel(formationId: string): Promise<string | null> {
-  const now = new Date()
-  const nextSession = await prisma.session.findFirst({
-    where: { formationId, dateDebut: { gte: now } },
-    orderBy: { dateDebut: "asc" },
-  })
-  const session = nextSession ?? (await prisma.session.findFirst({ where: { formationId }, orderBy: { dateDebut: "desc" } }))
-  if (!session) return null
-  return `${dateFormatter.format(session.dateDebut)}${session.lieu ? ` — ${session.lieu}` : ""}`
-}
 
 /**
  * Active l'étape suivant `apresOrdre` (ou la toute première si `apresOrdre` vaut -1) : envoie le
@@ -79,25 +67,24 @@ function missingContactsFor(stagiaire: ConventionStagiaire): string[] {
  * que le tuteur soit présent ou non.
  *
  * Le responsable pédagogique ne fait plus partie de ce circuit par-stagiaire (voir SIGNATAIRE_ORDER)
- * : sa signature, capturée une seule fois pour toute la formation (responsablePedagogiqueSignature*
+ * : sa signature, capturée une seule fois pour toute la session (responsablePedagogiqueSignature*
  * — voir enverSignatureResponsablePedagogique), est directement incrustée dans le PDF fraîchement
- * généré via `signatureFormationPngBytes`, fourni par l'appelant pour éviter de la retélécharger à
+ * généré via `signatureSessionPngBytes`, fourni par l'appelant pour éviter de la retélécharger à
  * chaque stagiaire d'un envoi groupé.
  */
 async function genererEtActiverConvention(
   stagiaire: ConventionStagiaire,
-  formation: FormationAvecResponsable,
+  session: SessionAvecResponsable,
   templateBytes: Uint8Array,
-  dateLabel: string | null,
-  signatureFormationPngBytes: Uint8Array
+  signatureSessionPngBytes: Uint8Array
 ): Promise<{ ok: boolean; error?: string }> {
-  const variables = buildConventionVariables({ formation, formationDateLabel: dateLabel, stagiaire })
+  const variables = buildConventionVariables({ session, stagiaire })
   let filled = await fillConventionTemplate(templateBytes, variables)
   filled = await stampSignature(
     filled,
     SIGNATURE_FIELD_NAMES.RESPONSABLE_PEDAGOGIQUE,
-    signatureFormationPngBytes,
-    formation.responsablePedagogiqueSignatureSignedAt!
+    signatureSessionPngBytes,
+    session.responsablePedagogiqueSignatureSignedAt!
   )
   const storagePath = `conventions/generated/${stagiaire.id}.pdf`
   await uploadBytes(filled, storagePath, "application/pdf")
@@ -124,46 +111,46 @@ async function genererEtActiverConvention(
   return avancerConvention(stagiaire.id, -1)
 }
 
-/** Vérifie que le responsable pédagogique a bien signé une première fois pour cette formation —
+/** Vérifie que le responsable pédagogique a bien signé une première fois pour cette session —
  * condition préalable à toute génération de convention, puisque sa signature est incrustée
  * directement dans chaque PDF (voir genererEtActiverConvention). */
-function requireResponsablePedagogiqueSignature(formation: Formation): string | null {
-  if (!formation.responsablePedagogiqueUserId) return "Aucun responsable pédagogique désigné pour cette formation."
-  if (!formation.responsablePedagogiqueSignatureSignedAt || !formation.responsablePedagogiqueSignatureStoragePath) {
+function requireResponsablePedagogiqueSignature(session: Session): string | null {
+  if (!session.responsablePedagogiqueUserId) return "Aucun responsable pédagogique désigné pour cette session."
+  if (!session.responsablePedagogiqueSignatureSignedAt || !session.responsablePedagogiqueSignatureStoragePath) {
     return "Le responsable pédagogique n'a pas encore signé — envoyez-lui d'abord la demande de signature ci-dessus."
   }
   return null
 }
 
-export async function envoyerConventions(formationId: string): Promise<EnvoyerConventionsState> {
+export async function envoyerConventions(sessionId: string): Promise<EnvoyerConventionsState> {
   await requireAdmin()
 
-  const formation = await prisma.formation.findUnique({
-    where: { id: formationId },
+  const session = await prisma.session.findUnique({
+    where: { id: sessionId },
     include: {
+      formation: { select: { id: true, titre: true } },
       conventionTemplate: true,
       conventionStagiaires: { where: { pdfStoragePath: null } },
       responsablePedagogiqueUser: { select: { nom: true, prenom: true, email: true, telephone: true } },
     },
   })
-  if (!formation) return { error: "Formation introuvable.", sent: 0, skipped: [] }
-  if (!formation.conventionTemplate) {
-    return { error: "Aucun modèle de convention associé à cette formation.", sent: 0, skipped: [] }
+  if (!session) return { error: "Session introuvable.", sent: 0, skipped: [] }
+  if (!session.conventionTemplate) {
+    return { error: "Aucun modèle de convention associé à cette session.", sent: 0, skipped: [] }
   }
-  const responsableError = requireResponsablePedagogiqueSignature(formation)
+  const responsableError = requireResponsablePedagogiqueSignature(session)
   if (responsableError) return { error: responsableError, sent: 0, skipped: [] }
-  if (formation.conventionStagiaires.length === 0) {
+  if (session.conventionStagiaires.length === 0) {
     return { error: "Aucun nouveau stagiaire à traiter.", sent: 0, skipped: [] }
   }
 
-  const templateBytes = await downloadStorageFile(formation.conventionTemplate.storagePath)
-  const signatureFormationPngBytes = await downloadStorageFile(formation.responsablePedagogiqueSignatureStoragePath!)
-  const dateLabel = await computeFormationDateLabel(formationId)
+  const templateBytes = await downloadStorageFile(session.conventionTemplate.storagePath)
+  const signatureSessionPngBytes = await downloadStorageFile(session.responsablePedagogiqueSignatureStoragePath!)
 
   let sent = 0
   const skipped: string[] = []
 
-  for (const stagiaire of formation.conventionStagiaires) {
+  for (const stagiaire of session.conventionStagiaires) {
     const missing = missingContactsFor(stagiaire)
     if (missing.length > 0) {
       skipped.push(`${stagiaire.prenom} ${stagiaire.nom} (${missing.join(", ")} manquant)`)
@@ -171,7 +158,7 @@ export async function envoyerConventions(formationId: string): Promise<EnvoyerCo
     }
 
     try {
-      const result = await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel, signatureFormationPngBytes)
+      const result = await genererEtActiverConvention(stagiaire, session, templateBytes, signatureSessionPngBytes)
       if (result.ok) sent++
       else skipped.push(`${stagiaire.prenom} ${stagiaire.nom} (${result.error})`)
     } catch (e) {
@@ -179,7 +166,7 @@ export async function envoyerConventions(formationId: string): Promise<EnvoyerCo
     }
   }
 
-  revalidatePath(`/admin/formations/${formationId}/conventions`)
+  revalidatePath(`/admin/formations/${session.formation.id}/conventions/${sessionId}`)
   return { error: null, sent, skipped }
 }
 
@@ -189,34 +176,38 @@ export async function envoyerConventionStagiaire(stagiaireId: string): Promise<C
   const stagiaire = await prisma.conventionStagiaire.findUnique({
     where: { id: stagiaireId },
     include: {
-      formation: {
-        include: { conventionTemplate: true, responsablePedagogiqueUser: { select: { nom: true, prenom: true, email: true, telephone: true } } },
+      session: {
+        include: {
+          formation: { select: { id: true, titre: true } },
+          conventionTemplate: true,
+          responsablePedagogiqueUser: { select: { nom: true, prenom: true, email: true, telephone: true } },
+        },
       },
     },
   })
   if (!stagiaire) return { error: "Stagiaire introuvable." }
   if (stagiaire.pdfStoragePath) return { error: "La convention a déjà été envoyée pour ce stagiaire." }
 
-  const { formation } = stagiaire
-  if (!formation.conventionTemplate) return { error: "Aucun modèle de convention associé à cette formation." }
-  const responsableError = requireResponsablePedagogiqueSignature(formation)
+  const { session } = stagiaire
+  if (!session) return { error: "Ce stagiaire n'est rattaché à aucune session." }
+  if (!session.conventionTemplate) return { error: "Aucun modèle de convention associé à cette session." }
+  const responsableError = requireResponsablePedagogiqueSignature(session)
   if (responsableError) return { error: responsableError }
 
   const missing = missingContactsFor(stagiaire)
   if (missing.length > 0) return { error: `Informations manquantes : ${missing.join(", ")}.` }
 
-  const templateBytes = await downloadStorageFile(formation.conventionTemplate.storagePath)
-  const signatureFormationPngBytes = await downloadStorageFile(formation.responsablePedagogiqueSignatureStoragePath!)
-  const dateLabel = await computeFormationDateLabel(formation.id)
+  const templateBytes = await downloadStorageFile(session.conventionTemplate.storagePath)
+  const signatureSessionPngBytes = await downloadStorageFile(session.responsablePedagogiqueSignatureStoragePath!)
 
   let result: { ok: boolean; error?: string }
   try {
-    result = await genererEtActiverConvention(stagiaire, formation, templateBytes, dateLabel, signatureFormationPngBytes)
+    result = await genererEtActiverConvention(stagiaire, session, templateBytes, signatureSessionPngBytes)
   } catch (e) {
     result = { ok: false, error: e instanceof Error ? e.message : "Erreur inattendue lors de la génération de la convention." }
   }
 
-  revalidatePath(`/admin/formations/${formation.id}/conventions`)
+  revalidatePath(`/admin/formations/${session.formation.id}/conventions/${session.id}`)
   revalidatePath("/dashboard/formations")
   return { error: result.ok ? null : (result.error ?? "Échec de l'envoi.") }
 }
@@ -249,10 +240,10 @@ async function marquerRenvoiEnvoye(signataireId: string, canal: "MAIL" | "WHATSA
 
   const stagiaire = await prisma.conventionStagiaire.findUnique({
     where: { id: target.conventionStagiaireId },
-    select: { formationId: true },
+    select: { formationId: true, sessionId: true },
   })
   if (stagiaire) {
-    revalidatePath(`/admin/formations/${stagiaire.formationId}/conventions`)
+    revalidatePath(`/admin/formations/${stagiaire.formationId}/conventions/${stagiaire.sessionId}`)
     revalidatePath("/dashboard/formations")
   }
 }

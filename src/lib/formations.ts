@@ -240,7 +240,10 @@ export async function getFormationBySlug(slug: string) {
   const formation = await prisma.formation.findUnique({
     where: { slug },
     include: {
-      sessions: { orderBy: { dateDebut: "asc" } },
+      // Une session déjà passée ne doit jamais s'afficher comme réservable (bouton "S'inscrire"
+      // sur une date révolue) — filtre aussi les sessions historiques créées pour rattacher
+      // d'anciennes conventions de stage (voir ConventionStagiaire.sessionId).
+      sessions: { where: { dateDebut: { gte: new Date() } }, orderBy: { dateDebut: "asc" } },
       documents: { where: { visiblePublic: true }, orderBy: [{ ordre: "asc" }, { createdAt: "desc" }] },
     },
   })

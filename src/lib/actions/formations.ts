@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber, parseJsonArray } from "@/lib/actions/form-utils"
+import { syncSessions, formationHasSessionWithConventions } from "@/lib/actions/sessions"
 import { resolveImageUrl, resolvePdfUrl } from "@/lib/storage"
 import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
 import { Prisma } from "@/generated/prisma"
@@ -17,8 +18,6 @@ import type {
   VarianteNode,
   ModeInscription,
 } from "@/generated/prisma"
-
-type SessionInput = { dateDebut: string; lieu: string; places: string }
 
 function optionalDate(formData: FormData, key: string): Date | null {
   const raw = optionalStr(formData, key)
@@ -81,8 +80,6 @@ async function buildFormationData(formData: FormData) {
     lienFffStagiaire: optionalStr(formData, "lienFffStagiaire"),
     lienFffClub: optionalStr(formData, "lienFffClub"),
     fffCaptureActif: formData.get("fffCaptureActif") === "on",
-    conventionTemplateId: optionalStr(formData, "conventionTemplateId"),
-    responsablePedagogiqueUserId: optionalStr(formData, "responsablePedagogiqueUserId"),
     formateurNom: optionalStr(formData, "formateurNom"),
     formateurRole: optionalStr(formData, "formateurRole"),
     ordre: optionalNumber(formData, "ordre") ?? 0,
@@ -95,23 +92,6 @@ async function buildFormationData(formData: FormData) {
     tauxSatisfaction: optionalStr(formData, "tauxSatisfaction"),
     resultats: resultats.length > 0 ? resultats : Prisma.JsonNull,
   }
-}
-
-async function replaceSessions(formationId: string, formData: FormData) {
-  const sessions = parseJsonArray<SessionInput>(formData, "sessions").filter((s) => s.dateDebut)
-
-  await prisma.session.deleteMany({ where: { formationId } })
-  if (sessions.length === 0) return
-
-  await prisma.session.createMany({
-    data: sessions.map((s) => ({
-      formationId,
-      dateDebut: new Date(s.dateDebut),
-      dateFin: new Date(s.dateDebut),
-      lieu: s.lieu || null,
-      places: s.places ? Number(s.places) : null,
-    })),
-  })
 }
 
 async function replaceFormateurs(formationId: string, formData: FormData) {
@@ -140,7 +120,7 @@ export async function createFormation(formData: FormData) {
 
   const data = await buildFormationData(formData)
   const formation = await prisma.formation.create({ data })
-  await replaceSessions(formation.id, formData)
+  await syncSessions(formation.id, formData)
   await replaceFormateurs(formation.id, formData)
 
   revalidateFormationPaths(formation.slug)
@@ -153,7 +133,7 @@ export async function updateFormation(id: string, formData: FormData) {
   const existing = await prisma.formation.findUnique({ where: { id }, select: { slug: true } })
   const data = await buildFormationData(formData)
   const formation = await prisma.formation.update({ where: { id }, data })
-  await replaceSessions(formation.id, formData)
+  await syncSessions(formation.id, formData)
   await replaceFormateurs(formation.id, formData)
 
   revalidateFormationPaths(formation.slug, existing?.slug)
@@ -171,6 +151,13 @@ export async function deleteFormation(id: string) {
 
   const formation = await prisma.formation.findUnique({ where: { id }, select: { slug: true } })
   if (!formation) return { error: "Formation introuvable." }
+
+  if (await formationHasSessionWithConventions(id)) {
+    return {
+      error:
+        "Impossible de supprimer : une ou plusieurs sessions de cette formation ont des conventions de stage en cours. Archivez-la à la place.",
+    }
+  }
 
   await prisma.session.deleteMany({ where: { formationId: id } })
 
