@@ -23,10 +23,14 @@ export function VideoField({
   const [blockedMessage, setBlockedMessage] = useState(false)
   const hiddenRef = useRef<HTMLInputElement>(null)
   const uploadingRef = useRef(false)
+  const blockedSubmitRef = useRef(false)
 
   // L'aperçu s'affiche dès le choix du fichier, mais l'envoi réel vers Supabase prend du temps
   // en tâche de fond : on bloque la soumission du formulaire tant qu'il n'est pas terminé, sinon
-  // le champ vidéo part vide et la vidéo « disparaît » après enregistrement.
+  // le champ vidéo part vide et la vidéo « disparaît » après enregistrement. On retente
+  // automatiquement l'enregistrement une fois l'envoi terminé (voir onChange) : sans ça, un
+  // admin qui ne reclique pas sur Enregistrer après le blocage perd sa vidéo silencieusement —
+  // ce qui explique des envois vus comme « réussis » côté stockage mais jamais enregistrés.
   useEffect(() => {
     const form = hiddenRef.current?.form
     if (!form) return
@@ -34,6 +38,7 @@ export function VideoField({
       if (uploadingRef.current) {
         e.preventDefault()
         setBlockedMessage(true)
+        blockedSubmitRef.current = true
       }
     }
     form.addEventListener("submit", onSubmit)
@@ -58,8 +63,18 @@ export function VideoField({
       if (hiddenRef.current) hiddenRef.current.value = publicUrl
       setStatus("idle")
       setBlockedMessage(false)
+      if (blockedSubmitRef.current) {
+        blockedSubmitRef.current = false
+        hiddenRef.current?.form?.requestSubmit()
+      }
     } catch {
+      // L'envoi a échoué : on restaure la vidéo précédente (aperçu + champ caché) pour qu'un
+      // enregistrement fait sans remarquer l'erreur n'efface pas la vidéo existante.
+      setPreview(defaultUrl ?? "")
+      setFileName(null)
+      if (hiddenRef.current) hiddenRef.current.value = defaultUrl ?? ""
       setStatus("error")
+      blockedSubmitRef.current = false
     } finally {
       uploadingRef.current = false
     }
@@ -116,7 +131,7 @@ export function VideoField({
       </div>
       {blockedMessage && (
         <span style={{ fontSize: 12, color: colors.red, fontWeight: 600 }}>
-          La vidéo est encore en cours d&apos;envoi — attends la fin puis clique à nouveau sur Enregistrer.
+          La vidéo est encore en cours d&apos;envoi — l&apos;enregistrement se fera automatiquement dès la fin de l&apos;envoi.
         </span>
       )}
       <input ref={hiddenRef} type="hidden" name={name} defaultValue={defaultUrl ?? ""} />
