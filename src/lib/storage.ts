@@ -158,6 +158,34 @@ export async function resolvePdfUrl(formData: FormData, fieldName: string, keyHi
   return existing || null
 }
 
+/** Comme uploadPublicPdf, mais conserve l'extension/le type MIME réels du fichier (PDF ou DOCX). */
+export async function uploadPublicDocument(file: File, keyHint: string): Promise<string> {
+  const client = getStorageClient()
+  await ensurePdfsBucket(client)
+
+  const ext = file.name.includes(".") ? file.name.split(".").pop() : "pdf"
+  const storagePath = `${keyHint}/${randomUUID()}.${ext}`
+  const bytes = await file.arrayBuffer()
+
+  const { error } = await client.storage.from(PDFS_BUCKET).upload(storagePath, bytes, {
+    contentType: file.type || "application/octet-stream",
+    upsert: false,
+  })
+  if (error) throw new Error(`Échec de l'upload du document : ${error.message}`)
+
+  const { data } = client.storage.from(PDFS_BUCKET).getPublicUrl(storagePath)
+  return data.publicUrl
+}
+
+export async function resolveDocumentUrl(formData: FormData, fieldName: string, keyHint: string): Promise<string | null> {
+  const file = formData.get(`${fieldName}File`)
+  if (file instanceof File && file.size > 0) {
+    return uploadPublicDocument(file, keyHint)
+  }
+  const existing = (formData.get(fieldName) as string | null)?.trim()
+  return existing || null
+}
+
 let videosBucketEnsured = false
 
 async function ensureVideosBucket(client: SupabaseClient) {

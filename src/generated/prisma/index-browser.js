@@ -737,6 +737,22 @@ exports.Prisma.DispositifFormationTableauScalarFieldEnum = {
   actif: 'actif'
 };
 
+exports.Prisma.DocumentationGroupeScalarFieldEnum = {
+  id: 'id',
+  titre: 'titre',
+  ordre: 'ordre'
+};
+
+exports.Prisma.DocumentationFichierScalarFieldEnum = {
+  id: 'id',
+  groupeId: 'groupeId',
+  titre: 'titre',
+  description: 'description',
+  url: 'url',
+  format: 'format',
+  ordre: 'ordre'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -954,6 +970,11 @@ exports.IconePratique = exports.$Enums.IconePratique = {
   AUTRE: 'AUTRE'
 };
 
+exports.DocumentationFormat = exports.$Enums.DocumentationFormat = {
+  PDF: 'PDF',
+  DOCX: 'DOCX'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Formation: 'Formation',
@@ -999,7 +1020,9 @@ exports.Prisma.ModelName = {
   DispositifFormation: 'DispositifFormation',
   LienFormation: 'LienFormation',
   ContactFormation: 'ContactFormation',
-  DispositifFormationTableau: 'DispositifFormationTableau'
+  DispositifFormationTableau: 'DispositifFormationTableau',
+  DocumentationGroupe: 'DocumentationGroupe',
+  DocumentationFichier: 'DocumentationFichier'
 };
 
 /**

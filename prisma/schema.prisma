@@ -1208,3 +1208,35 @@ model DispositifFormationTableau {
 
   @@schema("ir2f")
 }
+
+// ─── DOCUMENTATION (page publique /documentation) ─────
+
+enum DocumentationFormat {
+  PDF
+  DOCX
+
+  @@schema("ir2f")
+}
+
+model DocumentationGroupe {
+  id        String                 @id @default(uuid())
+  titre     String
+  ordre     Int                    @default(0)
+  documents DocumentationFichier[]
+
+  @@schema("ir2f")
+}
+
+model DocumentationFichier {
+  id          String              @id @default(uuid())
+  groupeId    String
+  titre       String
+  description String?
+  url         String
+  format      DocumentationFormat
+  ordre       Int                 @default(0)
+
+  groupe DocumentationGroupe @relation(fields: [groupeId], references: [id], onDelete: Cascade)
+
+  @@schema("ir2f")
+}

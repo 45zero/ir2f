@@ -1,88 +1,18 @@
 import { colors, fontHeading } from "@/lib/theme"
 
 type DocEntry = {
-  title: string
-  description: string
-  filename: string
+  id: string
+  titre: string
+  description: string | null
+  url: string
   format: "PDF" | "DOCX"
 }
 
 type DocGroup = {
-  title: string
+  id: string
+  titre: string
   documents: DocEntry[]
 }
-
-const GROUPS: DocGroup[] = [
-  {
-    title: "Tarifs & conditions",
-    documents: [
-      {
-        title: "Tarifs IR2F",
-        description: "Grille tarifaire des formations et des bons de formation en vigueur pour la saison 2026-2027.",
-        filename: "Tarifs et bons de formation 26-27.pdf",
-        format: "PDF",
-      },
-      {
-        title: "Conditions Générales de Vente",
-        description: "Les CGV applicables à toute inscription à une formation IR2F.",
-        filename: "CGV IR2F 26-27 (003).pdf",
-        format: "PDF",
-      },
-      {
-        title: "Règlement Intérieur",
-        description: "Le règlement intérieur applicable à l'ensemble des stagiaires et formateurs IR2F.",
-        filename: "REGLEMENT IR2F.pdf",
-        format: "PDF",
-      },
-      {
-        title: "Fiche réclamation",
-        description: "Formulaire à compléter pour toute réclamation relative à une formation ou à son organisation.",
-        filename: "Fiche-de-reclamation LGEF.docx",
-        format: "DOCX",
-      },
-    ],
-  },
-  {
-    title: "Accessibilité & santé",
-    documents: [
-      {
-        title: "Dispositions particulières — parcours éducateurs bénévoles",
-        description: "Modalités d'accueil et d'adaptation prévues pour les personnes en situation de handicap suivant le parcours éducateurs bénévoles.",
-        filename: "dossier-dispositions-particulieres-handicapes-benevoles.pdf",
-        format: "PDF",
-      },
-      {
-        title: "Dispositions particulières — parcours éducateurs professionnels",
-        description: "Modalités d'accueil et d'adaptation prévues pour les personnes en situation de handicap suivant le parcours éducateurs professionnels.",
-        filename: "Dossier-dispositions-particulières-handicap parcours professionnel.pdf",
-        format: "PDF",
-      },
-      {
-        title: "Protocole sanitaire",
-        description: "Protocole sanitaire applicable lors des sessions de formation IR2F.",
-        filename: "Protocole-sanitaire-formations-2020-2021-v16.pdf",
-        format: "PDF",
-      },
-    ],
-  },
-  {
-    title: "Jurys de certification — saison 26/27",
-    documents: [
-      {
-        title: "Composition du jury BEF",
-        description: "Arrêté fixant la composition du jury du Brevet d'Entraîneur de Football pour la saison 2026-2027.",
-        filename: "BEF Jury - Arrêté - 26-27 LGEF.pdf",
-        format: "PDF",
-      },
-      {
-        title: "Composition du jury BMF",
-        description: "Arrêté fixant la composition du jury du Brevet de Moniteur de Football pour la saison 2026-2027.",
-        filename: "BMF Jury - Arrêté - 26-27 LGEF.pdf",
-        format: "PDF",
-      },
-    ],
-  },
-]
 
 function docUrl(filename: string) {
   return `/documentation/${encodeURIComponent(filename)}`
@@ -112,11 +42,9 @@ function FileIcon({ format }: { format: "PDF" | "DOCX" }) {
 }
 
 function DocumentCard({ doc }: { doc: DocEntry }) {
-  const href = docUrl(doc.filename)
-
   return (
     <a
-      href={href}
+      href={doc.url}
       target="_blank"
       rel="noreferrer"
       style={{
@@ -135,7 +63,7 @@ function DocumentCard({ doc }: { doc: DocEntry }) {
       <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
         <FileIcon format={doc.format} />
         <div style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1 }}>
-          <span style={{ fontSize: 15, fontWeight: 700, color: colors.text, lineHeight: 1.3 }}>{doc.title}</span>
+          <span style={{ fontSize: 15, fontWeight: 700, color: colors.text, lineHeight: 1.3 }}>{doc.titre}</span>
           <span
             style={{
               alignSelf: "flex-start",
@@ -152,7 +80,9 @@ function DocumentCard({ doc }: { doc: DocEntry }) {
           </span>
         </div>
       </div>
-      <p style={{ fontSize: 13, lineHeight: 1.55, color: colors.textMuted, margin: 0, flex: 1 }}>{doc.description}</p>
+      {doc.description && (
+        <p style={{ fontSize: 13, lineHeight: 1.55, color: colors.textMuted, margin: 0, flex: 1 }}>{doc.description}</p>
+      )}
       <span
         style={{
           display: "flex",
@@ -174,7 +104,7 @@ function DocumentCard({ doc }: { doc: DocEntry }) {
   )
 }
 
-export function DocumentationSections() {
+export function DocumentationSections({ groupes }: { groupes: DocGroup[] }) {
   return (
     <section style={{ maxWidth: 1160, margin: "0 auto", padding: "48px 20px 80px", display: "flex", flexDirection: "column", gap: 56 }}>
       <style>{`
@@ -236,8 +166,8 @@ export function DocumentationSections() {
         </a>
       </div>
 
-      {GROUPS.map((group) => (
-        <div key={group.title} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+      {groupes.map((group) => (
+        <div key={group.id} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <h2
             style={{
               fontFamily: fontHeading,
@@ -249,11 +179,11 @@ export function DocumentationSections() {
               borderBottom: `2px solid ${colors.border}`,
             }}
           >
-            {group.title}
+            {group.titre}
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 18 }}>
             {group.documents.map((doc) => (
-              <DocumentCard key={doc.filename} doc={doc} />
+              <DocumentCard key={doc.id} doc={doc} />
             ))}
           </div>
         </div>

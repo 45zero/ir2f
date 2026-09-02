@@ -238,6 +238,16 @@ export type ContactFormation = $Result.DefaultSelection<Prisma.$ContactFormation
  * 
  */
 export type DispositifFormationTableau = $Result.DefaultSelection<Prisma.$DispositifFormationTableauPayload>
+/**
+ * Model DocumentationGroupe
+ * 
+ */
+export type DocumentationGroupe = $Result.DefaultSelection<Prisma.$DocumentationGroupePayload>
+/**
+ * Model DocumentationFichier
+ * 
+ */
+export type DocumentationFichier = $Result.DefaultSelection<Prisma.$DocumentationFichierPayload>
 
 /**
  * Enums
@@ -508,6 +518,14 @@ export const IconePratique: {
 
 export type IconePratique = (typeof IconePratique)[keyof typeof IconePratique]
 
+
+export const DocumentationFormat: {
+  PDF: 'PDF',
+  DOCX: 'DOCX'
+};
+
+export type DocumentationFormat = (typeof DocumentationFormat)[keyof typeof DocumentationFormat]
+
 }
 
 export type Role = $Enums.Role
@@ -613,6 +631,10 @@ export const TypeDocument: typeof $Enums.TypeDocument
 export type IconePratique = $Enums.IconePratique
 
 export const IconePratique: typeof $Enums.IconePratique
+
+export type DocumentationFormat = $Enums.DocumentationFormat
+
+export const DocumentationFormat: typeof $Enums.DocumentationFormat
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1184,6 +1206,26 @@ export class PrismaClient<
     * ```
     */
   get dispositifFormationTableau(): Prisma.DispositifFormationTableauDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.documentationGroupe`: Exposes CRUD operations for the **DocumentationGroupe** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DocumentationGroupes
+    * const documentationGroupes = await prisma.documentationGroupe.findMany()
+    * ```
+    */
+  get documentationGroupe(): Prisma.DocumentationGroupeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.documentationFichier`: Exposes CRUD operations for the **DocumentationFichier** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DocumentationFichiers
+    * const documentationFichiers = await prisma.documentationFichier.findMany()
+    * ```
+    */
+  get documentationFichier(): Prisma.DocumentationFichierDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1662,7 +1704,9 @@ export namespace Prisma {
     DispositifFormation: 'DispositifFormation',
     LienFormation: 'LienFormation',
     ContactFormation: 'ContactFormation',
-    DispositifFormationTableau: 'DispositifFormationTableau'
+    DispositifFormationTableau: 'DispositifFormationTableau',
+    DocumentationGroupe: 'DocumentationGroupe',
+    DocumentationFichier: 'DocumentationFichier'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1678,7 +1722,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "organigramme" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "footerContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "formationOngletTableau" | "formationOngletSection" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "organigramme" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "footerContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "formationOngletTableau" | "formationOngletSection" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau" | "documentationGroupe" | "documentationFichier"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -5012,6 +5056,154 @@ export namespace Prisma {
           }
         }
       }
+      DocumentationGroupe: {
+        payload: Prisma.$DocumentationGroupePayload<ExtArgs>
+        fields: Prisma.DocumentationGroupeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DocumentationGroupeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DocumentationGroupeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload>
+          }
+          findFirst: {
+            args: Prisma.DocumentationGroupeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DocumentationGroupeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload>
+          }
+          findMany: {
+            args: Prisma.DocumentationGroupeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload>[]
+          }
+          create: {
+            args: Prisma.DocumentationGroupeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload>
+          }
+          createMany: {
+            args: Prisma.DocumentationGroupeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DocumentationGroupeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload>[]
+          }
+          delete: {
+            args: Prisma.DocumentationGroupeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload>
+          }
+          update: {
+            args: Prisma.DocumentationGroupeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload>
+          }
+          deleteMany: {
+            args: Prisma.DocumentationGroupeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DocumentationGroupeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DocumentationGroupeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload>[]
+          }
+          upsert: {
+            args: Prisma.DocumentationGroupeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationGroupePayload>
+          }
+          aggregate: {
+            args: Prisma.DocumentationGroupeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDocumentationGroupe>
+          }
+          groupBy: {
+            args: Prisma.DocumentationGroupeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DocumentationGroupeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DocumentationGroupeCountArgs<ExtArgs>
+            result: $Utils.Optional<DocumentationGroupeCountAggregateOutputType> | number
+          }
+        }
+      }
+      DocumentationFichier: {
+        payload: Prisma.$DocumentationFichierPayload<ExtArgs>
+        fields: Prisma.DocumentationFichierFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DocumentationFichierFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DocumentationFichierFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload>
+          }
+          findFirst: {
+            args: Prisma.DocumentationFichierFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DocumentationFichierFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload>
+          }
+          findMany: {
+            args: Prisma.DocumentationFichierFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload>[]
+          }
+          create: {
+            args: Prisma.DocumentationFichierCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload>
+          }
+          createMany: {
+            args: Prisma.DocumentationFichierCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DocumentationFichierCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload>[]
+          }
+          delete: {
+            args: Prisma.DocumentationFichierDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload>
+          }
+          update: {
+            args: Prisma.DocumentationFichierUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload>
+          }
+          deleteMany: {
+            args: Prisma.DocumentationFichierDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DocumentationFichierUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DocumentationFichierUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload>[]
+          }
+          upsert: {
+            args: Prisma.DocumentationFichierUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentationFichierPayload>
+          }
+          aggregate: {
+            args: Prisma.DocumentationFichierAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDocumentationFichier>
+          }
+          groupBy: {
+            args: Prisma.DocumentationFichierGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DocumentationFichierGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DocumentationFichierCountArgs<ExtArgs>
+            result: $Utils.Optional<DocumentationFichierCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -5165,6 +5357,8 @@ export namespace Prisma {
     lienFormation?: LienFormationOmit
     contactFormation?: ContactFormationOmit
     dispositifFormationTableau?: DispositifFormationTableauOmit
+    documentationGroupe?: DocumentationGroupeOmit
+    documentationFichier?: DocumentationFichierOmit
   }
 
   /* Types for Logging */
@@ -5781,6 +5975,37 @@ export namespace Prisma {
    */
   export type DispositifFormationCountOutputTypeCountTableauxArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DispositifFormationTableauWhereInput
+  }
+
+
+  /**
+   * Count Type DocumentationGroupeCountOutputType
+   */
+
+  export type DocumentationGroupeCountOutputType = {
+    documents: number
+  }
+
+  export type DocumentationGroupeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documents?: boolean | DocumentationGroupeCountOutputTypeCountDocumentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DocumentationGroupeCountOutputType without action
+   */
+  export type DocumentationGroupeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupeCountOutputType
+     */
+    select?: DocumentationGroupeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DocumentationGroupeCountOutputType without action
+   */
+  export type DocumentationGroupeCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DocumentationFichierWhereInput
   }
 
 
@@ -57867,6 +58092,2212 @@ export namespace Prisma {
 
 
   /**
+   * Model DocumentationGroupe
+   */
+
+  export type AggregateDocumentationGroupe = {
+    _count: DocumentationGroupeCountAggregateOutputType | null
+    _avg: DocumentationGroupeAvgAggregateOutputType | null
+    _sum: DocumentationGroupeSumAggregateOutputType | null
+    _min: DocumentationGroupeMinAggregateOutputType | null
+    _max: DocumentationGroupeMaxAggregateOutputType | null
+  }
+
+  export type DocumentationGroupeAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DocumentationGroupeSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DocumentationGroupeMinAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    ordre: number | null
+  }
+
+  export type DocumentationGroupeMaxAggregateOutputType = {
+    id: string | null
+    titre: string | null
+    ordre: number | null
+  }
+
+  export type DocumentationGroupeCountAggregateOutputType = {
+    id: number
+    titre: number
+    ordre: number
+    _all: number
+  }
+
+
+  export type DocumentationGroupeAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DocumentationGroupeSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DocumentationGroupeMinAggregateInputType = {
+    id?: true
+    titre?: true
+    ordre?: true
+  }
+
+  export type DocumentationGroupeMaxAggregateInputType = {
+    id?: true
+    titre?: true
+    ordre?: true
+  }
+
+  export type DocumentationGroupeCountAggregateInputType = {
+    id?: true
+    titre?: true
+    ordre?: true
+    _all?: true
+  }
+
+  export type DocumentationGroupeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DocumentationGroupe to aggregate.
+     */
+    where?: DocumentationGroupeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentationGroupes to fetch.
+     */
+    orderBy?: DocumentationGroupeOrderByWithRelationInput | DocumentationGroupeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DocumentationGroupeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentationGroupes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentationGroupes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DocumentationGroupes
+    **/
+    _count?: true | DocumentationGroupeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DocumentationGroupeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DocumentationGroupeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DocumentationGroupeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DocumentationGroupeMaxAggregateInputType
+  }
+
+  export type GetDocumentationGroupeAggregateType<T extends DocumentationGroupeAggregateArgs> = {
+        [P in keyof T & keyof AggregateDocumentationGroupe]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDocumentationGroupe[P]>
+      : GetScalarType<T[P], AggregateDocumentationGroupe[P]>
+  }
+
+
+
+
+  export type DocumentationGroupeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DocumentationGroupeWhereInput
+    orderBy?: DocumentationGroupeOrderByWithAggregationInput | DocumentationGroupeOrderByWithAggregationInput[]
+    by: DocumentationGroupeScalarFieldEnum[] | DocumentationGroupeScalarFieldEnum
+    having?: DocumentationGroupeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DocumentationGroupeCountAggregateInputType | true
+    _avg?: DocumentationGroupeAvgAggregateInputType
+    _sum?: DocumentationGroupeSumAggregateInputType
+    _min?: DocumentationGroupeMinAggregateInputType
+    _max?: DocumentationGroupeMaxAggregateInputType
+  }
+
+  export type DocumentationGroupeGroupByOutputType = {
+    id: string
+    titre: string
+    ordre: number
+    _count: DocumentationGroupeCountAggregateOutputType | null
+    _avg: DocumentationGroupeAvgAggregateOutputType | null
+    _sum: DocumentationGroupeSumAggregateOutputType | null
+    _min: DocumentationGroupeMinAggregateOutputType | null
+    _max: DocumentationGroupeMaxAggregateOutputType | null
+  }
+
+  type GetDocumentationGroupeGroupByPayload<T extends DocumentationGroupeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DocumentationGroupeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DocumentationGroupeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DocumentationGroupeGroupByOutputType[P]>
+            : GetScalarType<T[P], DocumentationGroupeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DocumentationGroupeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    ordre?: boolean
+    documents?: boolean | DocumentationGroupe$documentsArgs<ExtArgs>
+    _count?: boolean | DocumentationGroupeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documentationGroupe"]>
+
+  export type DocumentationGroupeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    ordre?: boolean
+  }, ExtArgs["result"]["documentationGroupe"]>
+
+  export type DocumentationGroupeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    titre?: boolean
+    ordre?: boolean
+  }, ExtArgs["result"]["documentationGroupe"]>
+
+  export type DocumentationGroupeSelectScalar = {
+    id?: boolean
+    titre?: boolean
+    ordre?: boolean
+  }
+
+  export type DocumentationGroupeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "ordre", ExtArgs["result"]["documentationGroupe"]>
+  export type DocumentationGroupeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documents?: boolean | DocumentationGroupe$documentsArgs<ExtArgs>
+    _count?: boolean | DocumentationGroupeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DocumentationGroupeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type DocumentationGroupeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $DocumentationGroupePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DocumentationGroupe"
+    objects: {
+      documents: Prisma.$DocumentationFichierPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      titre: string
+      ordre: number
+    }, ExtArgs["result"]["documentationGroupe"]>
+    composites: {}
+  }
+
+  type DocumentationGroupeGetPayload<S extends boolean | null | undefined | DocumentationGroupeDefaultArgs> = $Result.GetResult<Prisma.$DocumentationGroupePayload, S>
+
+  type DocumentationGroupeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DocumentationGroupeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DocumentationGroupeCountAggregateInputType | true
+    }
+
+  export interface DocumentationGroupeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DocumentationGroupe'], meta: { name: 'DocumentationGroupe' } }
+    /**
+     * Find zero or one DocumentationGroupe that matches the filter.
+     * @param {DocumentationGroupeFindUniqueArgs} args - Arguments to find a DocumentationGroupe
+     * @example
+     * // Get one DocumentationGroupe
+     * const documentationGroupe = await prisma.documentationGroupe.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DocumentationGroupeFindUniqueArgs>(args: SelectSubset<T, DocumentationGroupeFindUniqueArgs<ExtArgs>>): Prisma__DocumentationGroupeClient<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DocumentationGroupe that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DocumentationGroupeFindUniqueOrThrowArgs} args - Arguments to find a DocumentationGroupe
+     * @example
+     * // Get one DocumentationGroupe
+     * const documentationGroupe = await prisma.documentationGroupe.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DocumentationGroupeFindUniqueOrThrowArgs>(args: SelectSubset<T, DocumentationGroupeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DocumentationGroupeClient<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DocumentationGroupe that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationGroupeFindFirstArgs} args - Arguments to find a DocumentationGroupe
+     * @example
+     * // Get one DocumentationGroupe
+     * const documentationGroupe = await prisma.documentationGroupe.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DocumentationGroupeFindFirstArgs>(args?: SelectSubset<T, DocumentationGroupeFindFirstArgs<ExtArgs>>): Prisma__DocumentationGroupeClient<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DocumentationGroupe that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationGroupeFindFirstOrThrowArgs} args - Arguments to find a DocumentationGroupe
+     * @example
+     * // Get one DocumentationGroupe
+     * const documentationGroupe = await prisma.documentationGroupe.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DocumentationGroupeFindFirstOrThrowArgs>(args?: SelectSubset<T, DocumentationGroupeFindFirstOrThrowArgs<ExtArgs>>): Prisma__DocumentationGroupeClient<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DocumentationGroupes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationGroupeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DocumentationGroupes
+     * const documentationGroupes = await prisma.documentationGroupe.findMany()
+     * 
+     * // Get first 10 DocumentationGroupes
+     * const documentationGroupes = await prisma.documentationGroupe.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const documentationGroupeWithIdOnly = await prisma.documentationGroupe.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DocumentationGroupeFindManyArgs>(args?: SelectSubset<T, DocumentationGroupeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DocumentationGroupe.
+     * @param {DocumentationGroupeCreateArgs} args - Arguments to create a DocumentationGroupe.
+     * @example
+     * // Create one DocumentationGroupe
+     * const DocumentationGroupe = await prisma.documentationGroupe.create({
+     *   data: {
+     *     // ... data to create a DocumentationGroupe
+     *   }
+     * })
+     * 
+     */
+    create<T extends DocumentationGroupeCreateArgs>(args: SelectSubset<T, DocumentationGroupeCreateArgs<ExtArgs>>): Prisma__DocumentationGroupeClient<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DocumentationGroupes.
+     * @param {DocumentationGroupeCreateManyArgs} args - Arguments to create many DocumentationGroupes.
+     * @example
+     * // Create many DocumentationGroupes
+     * const documentationGroupe = await prisma.documentationGroupe.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DocumentationGroupeCreateManyArgs>(args?: SelectSubset<T, DocumentationGroupeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DocumentationGroupes and returns the data saved in the database.
+     * @param {DocumentationGroupeCreateManyAndReturnArgs} args - Arguments to create many DocumentationGroupes.
+     * @example
+     * // Create many DocumentationGroupes
+     * const documentationGroupe = await prisma.documentationGroupe.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DocumentationGroupes and only return the `id`
+     * const documentationGroupeWithIdOnly = await prisma.documentationGroupe.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DocumentationGroupeCreateManyAndReturnArgs>(args?: SelectSubset<T, DocumentationGroupeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DocumentationGroupe.
+     * @param {DocumentationGroupeDeleteArgs} args - Arguments to delete one DocumentationGroupe.
+     * @example
+     * // Delete one DocumentationGroupe
+     * const DocumentationGroupe = await prisma.documentationGroupe.delete({
+     *   where: {
+     *     // ... filter to delete one DocumentationGroupe
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DocumentationGroupeDeleteArgs>(args: SelectSubset<T, DocumentationGroupeDeleteArgs<ExtArgs>>): Prisma__DocumentationGroupeClient<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DocumentationGroupe.
+     * @param {DocumentationGroupeUpdateArgs} args - Arguments to update one DocumentationGroupe.
+     * @example
+     * // Update one DocumentationGroupe
+     * const documentationGroupe = await prisma.documentationGroupe.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DocumentationGroupeUpdateArgs>(args: SelectSubset<T, DocumentationGroupeUpdateArgs<ExtArgs>>): Prisma__DocumentationGroupeClient<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DocumentationGroupes.
+     * @param {DocumentationGroupeDeleteManyArgs} args - Arguments to filter DocumentationGroupes to delete.
+     * @example
+     * // Delete a few DocumentationGroupes
+     * const { count } = await prisma.documentationGroupe.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DocumentationGroupeDeleteManyArgs>(args?: SelectSubset<T, DocumentationGroupeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DocumentationGroupes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationGroupeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DocumentationGroupes
+     * const documentationGroupe = await prisma.documentationGroupe.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DocumentationGroupeUpdateManyArgs>(args: SelectSubset<T, DocumentationGroupeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DocumentationGroupes and returns the data updated in the database.
+     * @param {DocumentationGroupeUpdateManyAndReturnArgs} args - Arguments to update many DocumentationGroupes.
+     * @example
+     * // Update many DocumentationGroupes
+     * const documentationGroupe = await prisma.documentationGroupe.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DocumentationGroupes and only return the `id`
+     * const documentationGroupeWithIdOnly = await prisma.documentationGroupe.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DocumentationGroupeUpdateManyAndReturnArgs>(args: SelectSubset<T, DocumentationGroupeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DocumentationGroupe.
+     * @param {DocumentationGroupeUpsertArgs} args - Arguments to update or create a DocumentationGroupe.
+     * @example
+     * // Update or create a DocumentationGroupe
+     * const documentationGroupe = await prisma.documentationGroupe.upsert({
+     *   create: {
+     *     // ... data to create a DocumentationGroupe
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DocumentationGroupe we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DocumentationGroupeUpsertArgs>(args: SelectSubset<T, DocumentationGroupeUpsertArgs<ExtArgs>>): Prisma__DocumentationGroupeClient<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DocumentationGroupes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationGroupeCountArgs} args - Arguments to filter DocumentationGroupes to count.
+     * @example
+     * // Count the number of DocumentationGroupes
+     * const count = await prisma.documentationGroupe.count({
+     *   where: {
+     *     // ... the filter for the DocumentationGroupes we want to count
+     *   }
+     * })
+    **/
+    count<T extends DocumentationGroupeCountArgs>(
+      args?: Subset<T, DocumentationGroupeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DocumentationGroupeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DocumentationGroupe.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationGroupeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DocumentationGroupeAggregateArgs>(args: Subset<T, DocumentationGroupeAggregateArgs>): Prisma.PrismaPromise<GetDocumentationGroupeAggregateType<T>>
+
+    /**
+     * Group by DocumentationGroupe.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationGroupeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DocumentationGroupeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DocumentationGroupeGroupByArgs['orderBy'] }
+        : { orderBy?: DocumentationGroupeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DocumentationGroupeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDocumentationGroupeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DocumentationGroupe model
+   */
+  readonly fields: DocumentationGroupeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DocumentationGroupe.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DocumentationGroupeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    documents<T extends DocumentationGroupe$documentsArgs<ExtArgs> = {}>(args?: Subset<T, DocumentationGroupe$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DocumentationGroupe model
+   */
+  interface DocumentationGroupeFieldRefs {
+    readonly id: FieldRef<"DocumentationGroupe", 'String'>
+    readonly titre: FieldRef<"DocumentationGroupe", 'String'>
+    readonly ordre: FieldRef<"DocumentationGroupe", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DocumentationGroupe findUnique
+   */
+  export type DocumentationGroupeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationGroupe to fetch.
+     */
+    where: DocumentationGroupeWhereUniqueInput
+  }
+
+  /**
+   * DocumentationGroupe findUniqueOrThrow
+   */
+  export type DocumentationGroupeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationGroupe to fetch.
+     */
+    where: DocumentationGroupeWhereUniqueInput
+  }
+
+  /**
+   * DocumentationGroupe findFirst
+   */
+  export type DocumentationGroupeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationGroupe to fetch.
+     */
+    where?: DocumentationGroupeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentationGroupes to fetch.
+     */
+    orderBy?: DocumentationGroupeOrderByWithRelationInput | DocumentationGroupeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DocumentationGroupes.
+     */
+    cursor?: DocumentationGroupeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentationGroupes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentationGroupes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DocumentationGroupes.
+     */
+    distinct?: DocumentationGroupeScalarFieldEnum | DocumentationGroupeScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentationGroupe findFirstOrThrow
+   */
+  export type DocumentationGroupeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationGroupe to fetch.
+     */
+    where?: DocumentationGroupeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentationGroupes to fetch.
+     */
+    orderBy?: DocumentationGroupeOrderByWithRelationInput | DocumentationGroupeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DocumentationGroupes.
+     */
+    cursor?: DocumentationGroupeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentationGroupes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentationGroupes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DocumentationGroupes.
+     */
+    distinct?: DocumentationGroupeScalarFieldEnum | DocumentationGroupeScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentationGroupe findMany
+   */
+  export type DocumentationGroupeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationGroupes to fetch.
+     */
+    where?: DocumentationGroupeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentationGroupes to fetch.
+     */
+    orderBy?: DocumentationGroupeOrderByWithRelationInput | DocumentationGroupeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DocumentationGroupes.
+     */
+    cursor?: DocumentationGroupeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentationGroupes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentationGroupes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DocumentationGroupes.
+     */
+    distinct?: DocumentationGroupeScalarFieldEnum | DocumentationGroupeScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentationGroupe create
+   */
+  export type DocumentationGroupeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DocumentationGroupe.
+     */
+    data: XOR<DocumentationGroupeCreateInput, DocumentationGroupeUncheckedCreateInput>
+  }
+
+  /**
+   * DocumentationGroupe createMany
+   */
+  export type DocumentationGroupeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DocumentationGroupes.
+     */
+    data: DocumentationGroupeCreateManyInput | DocumentationGroupeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DocumentationGroupe createManyAndReturn
+   */
+  export type DocumentationGroupeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * The data used to create many DocumentationGroupes.
+     */
+    data: DocumentationGroupeCreateManyInput | DocumentationGroupeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DocumentationGroupe update
+   */
+  export type DocumentationGroupeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DocumentationGroupe.
+     */
+    data: XOR<DocumentationGroupeUpdateInput, DocumentationGroupeUncheckedUpdateInput>
+    /**
+     * Choose, which DocumentationGroupe to update.
+     */
+    where: DocumentationGroupeWhereUniqueInput
+  }
+
+  /**
+   * DocumentationGroupe updateMany
+   */
+  export type DocumentationGroupeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DocumentationGroupes.
+     */
+    data: XOR<DocumentationGroupeUpdateManyMutationInput, DocumentationGroupeUncheckedUpdateManyInput>
+    /**
+     * Filter which DocumentationGroupes to update
+     */
+    where?: DocumentationGroupeWhereInput
+    /**
+     * Limit how many DocumentationGroupes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DocumentationGroupe updateManyAndReturn
+   */
+  export type DocumentationGroupeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * The data used to update DocumentationGroupes.
+     */
+    data: XOR<DocumentationGroupeUpdateManyMutationInput, DocumentationGroupeUncheckedUpdateManyInput>
+    /**
+     * Filter which DocumentationGroupes to update
+     */
+    where?: DocumentationGroupeWhereInput
+    /**
+     * Limit how many DocumentationGroupes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DocumentationGroupe upsert
+   */
+  export type DocumentationGroupeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DocumentationGroupe to update in case it exists.
+     */
+    where: DocumentationGroupeWhereUniqueInput
+    /**
+     * In case the DocumentationGroupe found by the `where` argument doesn't exist, create a new DocumentationGroupe with this data.
+     */
+    create: XOR<DocumentationGroupeCreateInput, DocumentationGroupeUncheckedCreateInput>
+    /**
+     * In case the DocumentationGroupe was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DocumentationGroupeUpdateInput, DocumentationGroupeUncheckedUpdateInput>
+  }
+
+  /**
+   * DocumentationGroupe delete
+   */
+  export type DocumentationGroupeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+    /**
+     * Filter which DocumentationGroupe to delete.
+     */
+    where: DocumentationGroupeWhereUniqueInput
+  }
+
+  /**
+   * DocumentationGroupe deleteMany
+   */
+  export type DocumentationGroupeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DocumentationGroupes to delete
+     */
+    where?: DocumentationGroupeWhereInput
+    /**
+     * Limit how many DocumentationGroupes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DocumentationGroupe.documents
+   */
+  export type DocumentationGroupe$documentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    where?: DocumentationFichierWhereInput
+    orderBy?: DocumentationFichierOrderByWithRelationInput | DocumentationFichierOrderByWithRelationInput[]
+    cursor?: DocumentationFichierWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DocumentationFichierScalarFieldEnum | DocumentationFichierScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentationGroupe without action
+   */
+  export type DocumentationGroupeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationGroupe
+     */
+    select?: DocumentationGroupeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationGroupe
+     */
+    omit?: DocumentationGroupeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationGroupeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DocumentationFichier
+   */
+
+  export type AggregateDocumentationFichier = {
+    _count: DocumentationFichierCountAggregateOutputType | null
+    _avg: DocumentationFichierAvgAggregateOutputType | null
+    _sum: DocumentationFichierSumAggregateOutputType | null
+    _min: DocumentationFichierMinAggregateOutputType | null
+    _max: DocumentationFichierMaxAggregateOutputType | null
+  }
+
+  export type DocumentationFichierAvgAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DocumentationFichierSumAggregateOutputType = {
+    ordre: number | null
+  }
+
+  export type DocumentationFichierMinAggregateOutputType = {
+    id: string | null
+    groupeId: string | null
+    titre: string | null
+    description: string | null
+    url: string | null
+    format: $Enums.DocumentationFormat | null
+    ordre: number | null
+  }
+
+  export type DocumentationFichierMaxAggregateOutputType = {
+    id: string | null
+    groupeId: string | null
+    titre: string | null
+    description: string | null
+    url: string | null
+    format: $Enums.DocumentationFormat | null
+    ordre: number | null
+  }
+
+  export type DocumentationFichierCountAggregateOutputType = {
+    id: number
+    groupeId: number
+    titre: number
+    description: number
+    url: number
+    format: number
+    ordre: number
+    _all: number
+  }
+
+
+  export type DocumentationFichierAvgAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DocumentationFichierSumAggregateInputType = {
+    ordre?: true
+  }
+
+  export type DocumentationFichierMinAggregateInputType = {
+    id?: true
+    groupeId?: true
+    titre?: true
+    description?: true
+    url?: true
+    format?: true
+    ordre?: true
+  }
+
+  export type DocumentationFichierMaxAggregateInputType = {
+    id?: true
+    groupeId?: true
+    titre?: true
+    description?: true
+    url?: true
+    format?: true
+    ordre?: true
+  }
+
+  export type DocumentationFichierCountAggregateInputType = {
+    id?: true
+    groupeId?: true
+    titre?: true
+    description?: true
+    url?: true
+    format?: true
+    ordre?: true
+    _all?: true
+  }
+
+  export type DocumentationFichierAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DocumentationFichier to aggregate.
+     */
+    where?: DocumentationFichierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentationFichiers to fetch.
+     */
+    orderBy?: DocumentationFichierOrderByWithRelationInput | DocumentationFichierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DocumentationFichierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentationFichiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentationFichiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DocumentationFichiers
+    **/
+    _count?: true | DocumentationFichierCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DocumentationFichierAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DocumentationFichierSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DocumentationFichierMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DocumentationFichierMaxAggregateInputType
+  }
+
+  export type GetDocumentationFichierAggregateType<T extends DocumentationFichierAggregateArgs> = {
+        [P in keyof T & keyof AggregateDocumentationFichier]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDocumentationFichier[P]>
+      : GetScalarType<T[P], AggregateDocumentationFichier[P]>
+  }
+
+
+
+
+  export type DocumentationFichierGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DocumentationFichierWhereInput
+    orderBy?: DocumentationFichierOrderByWithAggregationInput | DocumentationFichierOrderByWithAggregationInput[]
+    by: DocumentationFichierScalarFieldEnum[] | DocumentationFichierScalarFieldEnum
+    having?: DocumentationFichierScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DocumentationFichierCountAggregateInputType | true
+    _avg?: DocumentationFichierAvgAggregateInputType
+    _sum?: DocumentationFichierSumAggregateInputType
+    _min?: DocumentationFichierMinAggregateInputType
+    _max?: DocumentationFichierMaxAggregateInputType
+  }
+
+  export type DocumentationFichierGroupByOutputType = {
+    id: string
+    groupeId: string
+    titre: string
+    description: string | null
+    url: string
+    format: $Enums.DocumentationFormat
+    ordre: number
+    _count: DocumentationFichierCountAggregateOutputType | null
+    _avg: DocumentationFichierAvgAggregateOutputType | null
+    _sum: DocumentationFichierSumAggregateOutputType | null
+    _min: DocumentationFichierMinAggregateOutputType | null
+    _max: DocumentationFichierMaxAggregateOutputType | null
+  }
+
+  type GetDocumentationFichierGroupByPayload<T extends DocumentationFichierGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DocumentationFichierGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DocumentationFichierGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DocumentationFichierGroupByOutputType[P]>
+            : GetScalarType<T[P], DocumentationFichierGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DocumentationFichierSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    groupeId?: boolean
+    titre?: boolean
+    description?: boolean
+    url?: boolean
+    format?: boolean
+    ordre?: boolean
+    groupe?: boolean | DocumentationGroupeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documentationFichier"]>
+
+  export type DocumentationFichierSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    groupeId?: boolean
+    titre?: boolean
+    description?: boolean
+    url?: boolean
+    format?: boolean
+    ordre?: boolean
+    groupe?: boolean | DocumentationGroupeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documentationFichier"]>
+
+  export type DocumentationFichierSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    groupeId?: boolean
+    titre?: boolean
+    description?: boolean
+    url?: boolean
+    format?: boolean
+    ordre?: boolean
+    groupe?: boolean | DocumentationGroupeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documentationFichier"]>
+
+  export type DocumentationFichierSelectScalar = {
+    id?: boolean
+    groupeId?: boolean
+    titre?: boolean
+    description?: boolean
+    url?: boolean
+    format?: boolean
+    ordre?: boolean
+  }
+
+  export type DocumentationFichierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "groupeId" | "titre" | "description" | "url" | "format" | "ordre", ExtArgs["result"]["documentationFichier"]>
+  export type DocumentationFichierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groupe?: boolean | DocumentationGroupeDefaultArgs<ExtArgs>
+  }
+  export type DocumentationFichierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groupe?: boolean | DocumentationGroupeDefaultArgs<ExtArgs>
+  }
+  export type DocumentationFichierIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    groupe?: boolean | DocumentationGroupeDefaultArgs<ExtArgs>
+  }
+
+  export type $DocumentationFichierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DocumentationFichier"
+    objects: {
+      groupe: Prisma.$DocumentationGroupePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      groupeId: string
+      titre: string
+      description: string | null
+      url: string
+      format: $Enums.DocumentationFormat
+      ordre: number
+    }, ExtArgs["result"]["documentationFichier"]>
+    composites: {}
+  }
+
+  type DocumentationFichierGetPayload<S extends boolean | null | undefined | DocumentationFichierDefaultArgs> = $Result.GetResult<Prisma.$DocumentationFichierPayload, S>
+
+  type DocumentationFichierCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DocumentationFichierFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DocumentationFichierCountAggregateInputType | true
+    }
+
+  export interface DocumentationFichierDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DocumentationFichier'], meta: { name: 'DocumentationFichier' } }
+    /**
+     * Find zero or one DocumentationFichier that matches the filter.
+     * @param {DocumentationFichierFindUniqueArgs} args - Arguments to find a DocumentationFichier
+     * @example
+     * // Get one DocumentationFichier
+     * const documentationFichier = await prisma.documentationFichier.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DocumentationFichierFindUniqueArgs>(args: SelectSubset<T, DocumentationFichierFindUniqueArgs<ExtArgs>>): Prisma__DocumentationFichierClient<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DocumentationFichier that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DocumentationFichierFindUniqueOrThrowArgs} args - Arguments to find a DocumentationFichier
+     * @example
+     * // Get one DocumentationFichier
+     * const documentationFichier = await prisma.documentationFichier.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DocumentationFichierFindUniqueOrThrowArgs>(args: SelectSubset<T, DocumentationFichierFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DocumentationFichierClient<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DocumentationFichier that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationFichierFindFirstArgs} args - Arguments to find a DocumentationFichier
+     * @example
+     * // Get one DocumentationFichier
+     * const documentationFichier = await prisma.documentationFichier.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DocumentationFichierFindFirstArgs>(args?: SelectSubset<T, DocumentationFichierFindFirstArgs<ExtArgs>>): Prisma__DocumentationFichierClient<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DocumentationFichier that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationFichierFindFirstOrThrowArgs} args - Arguments to find a DocumentationFichier
+     * @example
+     * // Get one DocumentationFichier
+     * const documentationFichier = await prisma.documentationFichier.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DocumentationFichierFindFirstOrThrowArgs>(args?: SelectSubset<T, DocumentationFichierFindFirstOrThrowArgs<ExtArgs>>): Prisma__DocumentationFichierClient<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DocumentationFichiers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationFichierFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DocumentationFichiers
+     * const documentationFichiers = await prisma.documentationFichier.findMany()
+     * 
+     * // Get first 10 DocumentationFichiers
+     * const documentationFichiers = await prisma.documentationFichier.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const documentationFichierWithIdOnly = await prisma.documentationFichier.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DocumentationFichierFindManyArgs>(args?: SelectSubset<T, DocumentationFichierFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DocumentationFichier.
+     * @param {DocumentationFichierCreateArgs} args - Arguments to create a DocumentationFichier.
+     * @example
+     * // Create one DocumentationFichier
+     * const DocumentationFichier = await prisma.documentationFichier.create({
+     *   data: {
+     *     // ... data to create a DocumentationFichier
+     *   }
+     * })
+     * 
+     */
+    create<T extends DocumentationFichierCreateArgs>(args: SelectSubset<T, DocumentationFichierCreateArgs<ExtArgs>>): Prisma__DocumentationFichierClient<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DocumentationFichiers.
+     * @param {DocumentationFichierCreateManyArgs} args - Arguments to create many DocumentationFichiers.
+     * @example
+     * // Create many DocumentationFichiers
+     * const documentationFichier = await prisma.documentationFichier.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DocumentationFichierCreateManyArgs>(args?: SelectSubset<T, DocumentationFichierCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DocumentationFichiers and returns the data saved in the database.
+     * @param {DocumentationFichierCreateManyAndReturnArgs} args - Arguments to create many DocumentationFichiers.
+     * @example
+     * // Create many DocumentationFichiers
+     * const documentationFichier = await prisma.documentationFichier.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DocumentationFichiers and only return the `id`
+     * const documentationFichierWithIdOnly = await prisma.documentationFichier.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DocumentationFichierCreateManyAndReturnArgs>(args?: SelectSubset<T, DocumentationFichierCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DocumentationFichier.
+     * @param {DocumentationFichierDeleteArgs} args - Arguments to delete one DocumentationFichier.
+     * @example
+     * // Delete one DocumentationFichier
+     * const DocumentationFichier = await prisma.documentationFichier.delete({
+     *   where: {
+     *     // ... filter to delete one DocumentationFichier
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DocumentationFichierDeleteArgs>(args: SelectSubset<T, DocumentationFichierDeleteArgs<ExtArgs>>): Prisma__DocumentationFichierClient<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DocumentationFichier.
+     * @param {DocumentationFichierUpdateArgs} args - Arguments to update one DocumentationFichier.
+     * @example
+     * // Update one DocumentationFichier
+     * const documentationFichier = await prisma.documentationFichier.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DocumentationFichierUpdateArgs>(args: SelectSubset<T, DocumentationFichierUpdateArgs<ExtArgs>>): Prisma__DocumentationFichierClient<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DocumentationFichiers.
+     * @param {DocumentationFichierDeleteManyArgs} args - Arguments to filter DocumentationFichiers to delete.
+     * @example
+     * // Delete a few DocumentationFichiers
+     * const { count } = await prisma.documentationFichier.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DocumentationFichierDeleteManyArgs>(args?: SelectSubset<T, DocumentationFichierDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DocumentationFichiers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationFichierUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DocumentationFichiers
+     * const documentationFichier = await prisma.documentationFichier.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DocumentationFichierUpdateManyArgs>(args: SelectSubset<T, DocumentationFichierUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DocumentationFichiers and returns the data updated in the database.
+     * @param {DocumentationFichierUpdateManyAndReturnArgs} args - Arguments to update many DocumentationFichiers.
+     * @example
+     * // Update many DocumentationFichiers
+     * const documentationFichier = await prisma.documentationFichier.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DocumentationFichiers and only return the `id`
+     * const documentationFichierWithIdOnly = await prisma.documentationFichier.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DocumentationFichierUpdateManyAndReturnArgs>(args: SelectSubset<T, DocumentationFichierUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DocumentationFichier.
+     * @param {DocumentationFichierUpsertArgs} args - Arguments to update or create a DocumentationFichier.
+     * @example
+     * // Update or create a DocumentationFichier
+     * const documentationFichier = await prisma.documentationFichier.upsert({
+     *   create: {
+     *     // ... data to create a DocumentationFichier
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DocumentationFichier we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DocumentationFichierUpsertArgs>(args: SelectSubset<T, DocumentationFichierUpsertArgs<ExtArgs>>): Prisma__DocumentationFichierClient<$Result.GetResult<Prisma.$DocumentationFichierPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DocumentationFichiers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationFichierCountArgs} args - Arguments to filter DocumentationFichiers to count.
+     * @example
+     * // Count the number of DocumentationFichiers
+     * const count = await prisma.documentationFichier.count({
+     *   where: {
+     *     // ... the filter for the DocumentationFichiers we want to count
+     *   }
+     * })
+    **/
+    count<T extends DocumentationFichierCountArgs>(
+      args?: Subset<T, DocumentationFichierCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DocumentationFichierCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DocumentationFichier.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationFichierAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DocumentationFichierAggregateArgs>(args: Subset<T, DocumentationFichierAggregateArgs>): Prisma.PrismaPromise<GetDocumentationFichierAggregateType<T>>
+
+    /**
+     * Group by DocumentationFichier.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentationFichierGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DocumentationFichierGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DocumentationFichierGroupByArgs['orderBy'] }
+        : { orderBy?: DocumentationFichierGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DocumentationFichierGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDocumentationFichierGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DocumentationFichier model
+   */
+  readonly fields: DocumentationFichierFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DocumentationFichier.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DocumentationFichierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    groupe<T extends DocumentationGroupeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DocumentationGroupeDefaultArgs<ExtArgs>>): Prisma__DocumentationGroupeClient<$Result.GetResult<Prisma.$DocumentationGroupePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DocumentationFichier model
+   */
+  interface DocumentationFichierFieldRefs {
+    readonly id: FieldRef<"DocumentationFichier", 'String'>
+    readonly groupeId: FieldRef<"DocumentationFichier", 'String'>
+    readonly titre: FieldRef<"DocumentationFichier", 'String'>
+    readonly description: FieldRef<"DocumentationFichier", 'String'>
+    readonly url: FieldRef<"DocumentationFichier", 'String'>
+    readonly format: FieldRef<"DocumentationFichier", 'DocumentationFormat'>
+    readonly ordre: FieldRef<"DocumentationFichier", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DocumentationFichier findUnique
+   */
+  export type DocumentationFichierFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationFichier to fetch.
+     */
+    where: DocumentationFichierWhereUniqueInput
+  }
+
+  /**
+   * DocumentationFichier findUniqueOrThrow
+   */
+  export type DocumentationFichierFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationFichier to fetch.
+     */
+    where: DocumentationFichierWhereUniqueInput
+  }
+
+  /**
+   * DocumentationFichier findFirst
+   */
+  export type DocumentationFichierFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationFichier to fetch.
+     */
+    where?: DocumentationFichierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentationFichiers to fetch.
+     */
+    orderBy?: DocumentationFichierOrderByWithRelationInput | DocumentationFichierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DocumentationFichiers.
+     */
+    cursor?: DocumentationFichierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentationFichiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentationFichiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DocumentationFichiers.
+     */
+    distinct?: DocumentationFichierScalarFieldEnum | DocumentationFichierScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentationFichier findFirstOrThrow
+   */
+  export type DocumentationFichierFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationFichier to fetch.
+     */
+    where?: DocumentationFichierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentationFichiers to fetch.
+     */
+    orderBy?: DocumentationFichierOrderByWithRelationInput | DocumentationFichierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DocumentationFichiers.
+     */
+    cursor?: DocumentationFichierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentationFichiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentationFichiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DocumentationFichiers.
+     */
+    distinct?: DocumentationFichierScalarFieldEnum | DocumentationFichierScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentationFichier findMany
+   */
+  export type DocumentationFichierFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentationFichiers to fetch.
+     */
+    where?: DocumentationFichierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentationFichiers to fetch.
+     */
+    orderBy?: DocumentationFichierOrderByWithRelationInput | DocumentationFichierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DocumentationFichiers.
+     */
+    cursor?: DocumentationFichierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentationFichiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentationFichiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DocumentationFichiers.
+     */
+    distinct?: DocumentationFichierScalarFieldEnum | DocumentationFichierScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentationFichier create
+   */
+  export type DocumentationFichierCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DocumentationFichier.
+     */
+    data: XOR<DocumentationFichierCreateInput, DocumentationFichierUncheckedCreateInput>
+  }
+
+  /**
+   * DocumentationFichier createMany
+   */
+  export type DocumentationFichierCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DocumentationFichiers.
+     */
+    data: DocumentationFichierCreateManyInput | DocumentationFichierCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DocumentationFichier createManyAndReturn
+   */
+  export type DocumentationFichierCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * The data used to create many DocumentationFichiers.
+     */
+    data: DocumentationFichierCreateManyInput | DocumentationFichierCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DocumentationFichier update
+   */
+  export type DocumentationFichierUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DocumentationFichier.
+     */
+    data: XOR<DocumentationFichierUpdateInput, DocumentationFichierUncheckedUpdateInput>
+    /**
+     * Choose, which DocumentationFichier to update.
+     */
+    where: DocumentationFichierWhereUniqueInput
+  }
+
+  /**
+   * DocumentationFichier updateMany
+   */
+  export type DocumentationFichierUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DocumentationFichiers.
+     */
+    data: XOR<DocumentationFichierUpdateManyMutationInput, DocumentationFichierUncheckedUpdateManyInput>
+    /**
+     * Filter which DocumentationFichiers to update
+     */
+    where?: DocumentationFichierWhereInput
+    /**
+     * Limit how many DocumentationFichiers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DocumentationFichier updateManyAndReturn
+   */
+  export type DocumentationFichierUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * The data used to update DocumentationFichiers.
+     */
+    data: XOR<DocumentationFichierUpdateManyMutationInput, DocumentationFichierUncheckedUpdateManyInput>
+    /**
+     * Filter which DocumentationFichiers to update
+     */
+    where?: DocumentationFichierWhereInput
+    /**
+     * Limit how many DocumentationFichiers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DocumentationFichier upsert
+   */
+  export type DocumentationFichierUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DocumentationFichier to update in case it exists.
+     */
+    where: DocumentationFichierWhereUniqueInput
+    /**
+     * In case the DocumentationFichier found by the `where` argument doesn't exist, create a new DocumentationFichier with this data.
+     */
+    create: XOR<DocumentationFichierCreateInput, DocumentationFichierUncheckedCreateInput>
+    /**
+     * In case the DocumentationFichier was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DocumentationFichierUpdateInput, DocumentationFichierUncheckedUpdateInput>
+  }
+
+  /**
+   * DocumentationFichier delete
+   */
+  export type DocumentationFichierDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+    /**
+     * Filter which DocumentationFichier to delete.
+     */
+    where: DocumentationFichierWhereUniqueInput
+  }
+
+  /**
+   * DocumentationFichier deleteMany
+   */
+  export type DocumentationFichierDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DocumentationFichiers to delete
+     */
+    where?: DocumentationFichierWhereInput
+    /**
+     * Limit how many DocumentationFichiers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DocumentationFichier without action
+   */
+  export type DocumentationFichierDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentationFichier
+     */
+    select?: DocumentationFichierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentationFichier
+     */
+    omit?: DocumentationFichierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentationFichierInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -58632,6 +61063,28 @@ export namespace Prisma {
   export type DispositifFormationTableauScalarFieldEnum = (typeof DispositifFormationTableauScalarFieldEnum)[keyof typeof DispositifFormationTableauScalarFieldEnum]
 
 
+  export const DocumentationGroupeScalarFieldEnum: {
+    id: 'id',
+    titre: 'titre',
+    ordre: 'ordre'
+  };
+
+  export type DocumentationGroupeScalarFieldEnum = (typeof DocumentationGroupeScalarFieldEnum)[keyof typeof DocumentationGroupeScalarFieldEnum]
+
+
+  export const DocumentationFichierScalarFieldEnum: {
+    id: 'id',
+    groupeId: 'groupeId',
+    titre: 'titre',
+    description: 'description',
+    url: 'url',
+    format: 'format',
+    ordre: 'ordre'
+  };
+
+  export type DocumentationFichierScalarFieldEnum = (typeof DocumentationFichierScalarFieldEnum)[keyof typeof DocumentationFichierScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -59123,6 +61576,20 @@ export namespace Prisma {
    * Reference to a field of type 'IconePratique[]'
    */
   export type ListEnumIconePratiqueFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IconePratique[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DocumentationFormat'
+   */
+  export type EnumDocumentationFormatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentationFormat'>
+    
+
+
+  /**
+   * Reference to a field of type 'DocumentationFormat[]'
+   */
+  export type ListEnumDocumentationFormatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentationFormat[]'>
     
   /**
    * Deep Input Types
@@ -63023,6 +65490,120 @@ export namespace Prisma {
     lignes?: JsonWithAggregatesFilter<"DispositifFormationTableau">
     ordre?: IntWithAggregatesFilter<"DispositifFormationTableau"> | number
     actif?: BoolWithAggregatesFilter<"DispositifFormationTableau"> | boolean
+  }
+
+  export type DocumentationGroupeWhereInput = {
+    AND?: DocumentationGroupeWhereInput | DocumentationGroupeWhereInput[]
+    OR?: DocumentationGroupeWhereInput[]
+    NOT?: DocumentationGroupeWhereInput | DocumentationGroupeWhereInput[]
+    id?: StringFilter<"DocumentationGroupe"> | string
+    titre?: StringFilter<"DocumentationGroupe"> | string
+    ordre?: IntFilter<"DocumentationGroupe"> | number
+    documents?: DocumentationFichierListRelationFilter
+  }
+
+  export type DocumentationGroupeOrderByWithRelationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    ordre?: SortOrder
+    documents?: DocumentationFichierOrderByRelationAggregateInput
+  }
+
+  export type DocumentationGroupeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DocumentationGroupeWhereInput | DocumentationGroupeWhereInput[]
+    OR?: DocumentationGroupeWhereInput[]
+    NOT?: DocumentationGroupeWhereInput | DocumentationGroupeWhereInput[]
+    titre?: StringFilter<"DocumentationGroupe"> | string
+    ordre?: IntFilter<"DocumentationGroupe"> | number
+    documents?: DocumentationFichierListRelationFilter
+  }, "id">
+
+  export type DocumentationGroupeOrderByWithAggregationInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    ordre?: SortOrder
+    _count?: DocumentationGroupeCountOrderByAggregateInput
+    _avg?: DocumentationGroupeAvgOrderByAggregateInput
+    _max?: DocumentationGroupeMaxOrderByAggregateInput
+    _min?: DocumentationGroupeMinOrderByAggregateInput
+    _sum?: DocumentationGroupeSumOrderByAggregateInput
+  }
+
+  export type DocumentationGroupeScalarWhereWithAggregatesInput = {
+    AND?: DocumentationGroupeScalarWhereWithAggregatesInput | DocumentationGroupeScalarWhereWithAggregatesInput[]
+    OR?: DocumentationGroupeScalarWhereWithAggregatesInput[]
+    NOT?: DocumentationGroupeScalarWhereWithAggregatesInput | DocumentationGroupeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DocumentationGroupe"> | string
+    titre?: StringWithAggregatesFilter<"DocumentationGroupe"> | string
+    ordre?: IntWithAggregatesFilter<"DocumentationGroupe"> | number
+  }
+
+  export type DocumentationFichierWhereInput = {
+    AND?: DocumentationFichierWhereInput | DocumentationFichierWhereInput[]
+    OR?: DocumentationFichierWhereInput[]
+    NOT?: DocumentationFichierWhereInput | DocumentationFichierWhereInput[]
+    id?: StringFilter<"DocumentationFichier"> | string
+    groupeId?: StringFilter<"DocumentationFichier"> | string
+    titre?: StringFilter<"DocumentationFichier"> | string
+    description?: StringNullableFilter<"DocumentationFichier"> | string | null
+    url?: StringFilter<"DocumentationFichier"> | string
+    format?: EnumDocumentationFormatFilter<"DocumentationFichier"> | $Enums.DocumentationFormat
+    ordre?: IntFilter<"DocumentationFichier"> | number
+    groupe?: XOR<DocumentationGroupeScalarRelationFilter, DocumentationGroupeWhereInput>
+  }
+
+  export type DocumentationFichierOrderByWithRelationInput = {
+    id?: SortOrder
+    groupeId?: SortOrder
+    titre?: SortOrder
+    description?: SortOrderInput | SortOrder
+    url?: SortOrder
+    format?: SortOrder
+    ordre?: SortOrder
+    groupe?: DocumentationGroupeOrderByWithRelationInput
+  }
+
+  export type DocumentationFichierWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DocumentationFichierWhereInput | DocumentationFichierWhereInput[]
+    OR?: DocumentationFichierWhereInput[]
+    NOT?: DocumentationFichierWhereInput | DocumentationFichierWhereInput[]
+    groupeId?: StringFilter<"DocumentationFichier"> | string
+    titre?: StringFilter<"DocumentationFichier"> | string
+    description?: StringNullableFilter<"DocumentationFichier"> | string | null
+    url?: StringFilter<"DocumentationFichier"> | string
+    format?: EnumDocumentationFormatFilter<"DocumentationFichier"> | $Enums.DocumentationFormat
+    ordre?: IntFilter<"DocumentationFichier"> | number
+    groupe?: XOR<DocumentationGroupeScalarRelationFilter, DocumentationGroupeWhereInput>
+  }, "id">
+
+  export type DocumentationFichierOrderByWithAggregationInput = {
+    id?: SortOrder
+    groupeId?: SortOrder
+    titre?: SortOrder
+    description?: SortOrderInput | SortOrder
+    url?: SortOrder
+    format?: SortOrder
+    ordre?: SortOrder
+    _count?: DocumentationFichierCountOrderByAggregateInput
+    _avg?: DocumentationFichierAvgOrderByAggregateInput
+    _max?: DocumentationFichierMaxOrderByAggregateInput
+    _min?: DocumentationFichierMinOrderByAggregateInput
+    _sum?: DocumentationFichierSumOrderByAggregateInput
+  }
+
+  export type DocumentationFichierScalarWhereWithAggregatesInput = {
+    AND?: DocumentationFichierScalarWhereWithAggregatesInput | DocumentationFichierScalarWhereWithAggregatesInput[]
+    OR?: DocumentationFichierScalarWhereWithAggregatesInput[]
+    NOT?: DocumentationFichierScalarWhereWithAggregatesInput | DocumentationFichierScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DocumentationFichier"> | string
+    groupeId?: StringWithAggregatesFilter<"DocumentationFichier"> | string
+    titre?: StringWithAggregatesFilter<"DocumentationFichier"> | string
+    description?: StringNullableWithAggregatesFilter<"DocumentationFichier"> | string | null
+    url?: StringWithAggregatesFilter<"DocumentationFichier"> | string
+    format?: EnumDocumentationFormatWithAggregatesFilter<"DocumentationFichier"> | $Enums.DocumentationFormat
+    ordre?: IntWithAggregatesFilter<"DocumentationFichier"> | number
   }
 
   export type UserCreateInput = {
@@ -67452,6 +70033,121 @@ export namespace Prisma {
     actif?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type DocumentationGroupeCreateInput = {
+    id?: string
+    titre: string
+    ordre?: number
+    documents?: DocumentationFichierCreateNestedManyWithoutGroupeInput
+  }
+
+  export type DocumentationGroupeUncheckedCreateInput = {
+    id?: string
+    titre: string
+    ordre?: number
+    documents?: DocumentationFichierUncheckedCreateNestedManyWithoutGroupeInput
+  }
+
+  export type DocumentationGroupeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+    documents?: DocumentationFichierUpdateManyWithoutGroupeNestedInput
+  }
+
+  export type DocumentationGroupeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+    documents?: DocumentationFichierUncheckedUpdateManyWithoutGroupeNestedInput
+  }
+
+  export type DocumentationGroupeCreateManyInput = {
+    id?: string
+    titre: string
+    ordre?: number
+  }
+
+  export type DocumentationGroupeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DocumentationGroupeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DocumentationFichierCreateInput = {
+    id?: string
+    titre: string
+    description?: string | null
+    url: string
+    format: $Enums.DocumentationFormat
+    ordre?: number
+    groupe: DocumentationGroupeCreateNestedOneWithoutDocumentsInput
+  }
+
+  export type DocumentationFichierUncheckedCreateInput = {
+    id?: string
+    groupeId: string
+    titre: string
+    description?: string | null
+    url: string
+    format: $Enums.DocumentationFormat
+    ordre?: number
+  }
+
+  export type DocumentationFichierUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    format?: EnumDocumentationFormatFieldUpdateOperationsInput | $Enums.DocumentationFormat
+    ordre?: IntFieldUpdateOperationsInput | number
+    groupe?: DocumentationGroupeUpdateOneRequiredWithoutDocumentsNestedInput
+  }
+
+  export type DocumentationFichierUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    groupeId?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    format?: EnumDocumentationFormatFieldUpdateOperationsInput | $Enums.DocumentationFormat
+    ordre?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DocumentationFichierCreateManyInput = {
+    id?: string
+    groupeId: string
+    titre: string
+    description?: string | null
+    url: string
+    format: $Enums.DocumentationFormat
+    ordre?: number
+  }
+
+  export type DocumentationFichierUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    format?: EnumDocumentationFormatFieldUpdateOperationsInput | $Enums.DocumentationFormat
+    ordre?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DocumentationFichierUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    groupeId?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    format?: EnumDocumentationFormatFieldUpdateOperationsInput | $Enums.DocumentationFormat
+    ordre?: IntFieldUpdateOperationsInput | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -70628,6 +73324,102 @@ export namespace Prisma {
     ordre?: SortOrder
   }
 
+  export type DocumentationFichierListRelationFilter = {
+    every?: DocumentationFichierWhereInput
+    some?: DocumentationFichierWhereInput
+    none?: DocumentationFichierWhereInput
+  }
+
+  export type DocumentationFichierOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DocumentationGroupeCountOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    ordre?: SortOrder
+  }
+
+  export type DocumentationGroupeAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type DocumentationGroupeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    ordre?: SortOrder
+  }
+
+  export type DocumentationGroupeMinOrderByAggregateInput = {
+    id?: SortOrder
+    titre?: SortOrder
+    ordre?: SortOrder
+  }
+
+  export type DocumentationGroupeSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type EnumDocumentationFormatFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentationFormat | EnumDocumentationFormatFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentationFormat[] | ListEnumDocumentationFormatFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentationFormat[] | ListEnumDocumentationFormatFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentationFormatFilter<$PrismaModel> | $Enums.DocumentationFormat
+  }
+
+  export type DocumentationGroupeScalarRelationFilter = {
+    is?: DocumentationGroupeWhereInput
+    isNot?: DocumentationGroupeWhereInput
+  }
+
+  export type DocumentationFichierCountOrderByAggregateInput = {
+    id?: SortOrder
+    groupeId?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    format?: SortOrder
+    ordre?: SortOrder
+  }
+
+  export type DocumentationFichierAvgOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type DocumentationFichierMaxOrderByAggregateInput = {
+    id?: SortOrder
+    groupeId?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    format?: SortOrder
+    ordre?: SortOrder
+  }
+
+  export type DocumentationFichierMinOrderByAggregateInput = {
+    id?: SortOrder
+    groupeId?: SortOrder
+    titre?: SortOrder
+    description?: SortOrder
+    url?: SortOrder
+    format?: SortOrder
+    ordre?: SortOrder
+  }
+
+  export type DocumentationFichierSumOrderByAggregateInput = {
+    ordre?: SortOrder
+  }
+
+  export type EnumDocumentationFormatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentationFormat | EnumDocumentationFormatFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentationFormat[] | ListEnumDocumentationFormatFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentationFormat[] | ListEnumDocumentationFormatFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentationFormatWithAggregatesFilter<$PrismaModel> | $Enums.DocumentationFormat
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDocumentationFormatFilter<$PrismaModel>
+    _max?: NestedEnumDocumentationFormatFilter<$PrismaModel>
+  }
+
   export type InscriptionCreateNestedManyWithoutUserInput = {
     create?: XOR<InscriptionCreateWithoutUserInput, InscriptionUncheckedCreateWithoutUserInput> | InscriptionCreateWithoutUserInput[] | InscriptionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: InscriptionCreateOrConnectWithoutUserInput | InscriptionCreateOrConnectWithoutUserInput[]
@@ -72846,6 +75638,66 @@ export namespace Prisma {
     update?: XOR<XOR<DispositifFormationUpdateToOneWithWhereWithoutTableauxInput, DispositifFormationUpdateWithoutTableauxInput>, DispositifFormationUncheckedUpdateWithoutTableauxInput>
   }
 
+  export type DocumentationFichierCreateNestedManyWithoutGroupeInput = {
+    create?: XOR<DocumentationFichierCreateWithoutGroupeInput, DocumentationFichierUncheckedCreateWithoutGroupeInput> | DocumentationFichierCreateWithoutGroupeInput[] | DocumentationFichierUncheckedCreateWithoutGroupeInput[]
+    connectOrCreate?: DocumentationFichierCreateOrConnectWithoutGroupeInput | DocumentationFichierCreateOrConnectWithoutGroupeInput[]
+    createMany?: DocumentationFichierCreateManyGroupeInputEnvelope
+    connect?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+  }
+
+  export type DocumentationFichierUncheckedCreateNestedManyWithoutGroupeInput = {
+    create?: XOR<DocumentationFichierCreateWithoutGroupeInput, DocumentationFichierUncheckedCreateWithoutGroupeInput> | DocumentationFichierCreateWithoutGroupeInput[] | DocumentationFichierUncheckedCreateWithoutGroupeInput[]
+    connectOrCreate?: DocumentationFichierCreateOrConnectWithoutGroupeInput | DocumentationFichierCreateOrConnectWithoutGroupeInput[]
+    createMany?: DocumentationFichierCreateManyGroupeInputEnvelope
+    connect?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+  }
+
+  export type DocumentationFichierUpdateManyWithoutGroupeNestedInput = {
+    create?: XOR<DocumentationFichierCreateWithoutGroupeInput, DocumentationFichierUncheckedCreateWithoutGroupeInput> | DocumentationFichierCreateWithoutGroupeInput[] | DocumentationFichierUncheckedCreateWithoutGroupeInput[]
+    connectOrCreate?: DocumentationFichierCreateOrConnectWithoutGroupeInput | DocumentationFichierCreateOrConnectWithoutGroupeInput[]
+    upsert?: DocumentationFichierUpsertWithWhereUniqueWithoutGroupeInput | DocumentationFichierUpsertWithWhereUniqueWithoutGroupeInput[]
+    createMany?: DocumentationFichierCreateManyGroupeInputEnvelope
+    set?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+    disconnect?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+    delete?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+    connect?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+    update?: DocumentationFichierUpdateWithWhereUniqueWithoutGroupeInput | DocumentationFichierUpdateWithWhereUniqueWithoutGroupeInput[]
+    updateMany?: DocumentationFichierUpdateManyWithWhereWithoutGroupeInput | DocumentationFichierUpdateManyWithWhereWithoutGroupeInput[]
+    deleteMany?: DocumentationFichierScalarWhereInput | DocumentationFichierScalarWhereInput[]
+  }
+
+  export type DocumentationFichierUncheckedUpdateManyWithoutGroupeNestedInput = {
+    create?: XOR<DocumentationFichierCreateWithoutGroupeInput, DocumentationFichierUncheckedCreateWithoutGroupeInput> | DocumentationFichierCreateWithoutGroupeInput[] | DocumentationFichierUncheckedCreateWithoutGroupeInput[]
+    connectOrCreate?: DocumentationFichierCreateOrConnectWithoutGroupeInput | DocumentationFichierCreateOrConnectWithoutGroupeInput[]
+    upsert?: DocumentationFichierUpsertWithWhereUniqueWithoutGroupeInput | DocumentationFichierUpsertWithWhereUniqueWithoutGroupeInput[]
+    createMany?: DocumentationFichierCreateManyGroupeInputEnvelope
+    set?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+    disconnect?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+    delete?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+    connect?: DocumentationFichierWhereUniqueInput | DocumentationFichierWhereUniqueInput[]
+    update?: DocumentationFichierUpdateWithWhereUniqueWithoutGroupeInput | DocumentationFichierUpdateWithWhereUniqueWithoutGroupeInput[]
+    updateMany?: DocumentationFichierUpdateManyWithWhereWithoutGroupeInput | DocumentationFichierUpdateManyWithWhereWithoutGroupeInput[]
+    deleteMany?: DocumentationFichierScalarWhereInput | DocumentationFichierScalarWhereInput[]
+  }
+
+  export type DocumentationGroupeCreateNestedOneWithoutDocumentsInput = {
+    create?: XOR<DocumentationGroupeCreateWithoutDocumentsInput, DocumentationGroupeUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: DocumentationGroupeCreateOrConnectWithoutDocumentsInput
+    connect?: DocumentationGroupeWhereUniqueInput
+  }
+
+  export type EnumDocumentationFormatFieldUpdateOperationsInput = {
+    set?: $Enums.DocumentationFormat
+  }
+
+  export type DocumentationGroupeUpdateOneRequiredWithoutDocumentsNestedInput = {
+    create?: XOR<DocumentationGroupeCreateWithoutDocumentsInput, DocumentationGroupeUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: DocumentationGroupeCreateOrConnectWithoutDocumentsInput
+    upsert?: DocumentationGroupeUpsertWithoutDocumentsInput
+    connect?: DocumentationGroupeWhereUniqueInput
+    update?: XOR<XOR<DocumentationGroupeUpdateToOneWithWhereWithoutDocumentsInput, DocumentationGroupeUpdateWithoutDocumentsInput>, DocumentationGroupeUncheckedUpdateWithoutDocumentsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -73596,6 +76448,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumIconePratiqueFilter<$PrismaModel>
     _max?: NestedEnumIconePratiqueFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDocumentationFormatFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentationFormat | EnumDocumentationFormatFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentationFormat[] | ListEnumDocumentationFormatFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentationFormat[] | ListEnumDocumentationFormatFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentationFormatFilter<$PrismaModel> | $Enums.DocumentationFormat
+  }
+
+  export type NestedEnumDocumentationFormatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentationFormat | EnumDocumentationFormatFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentationFormat[] | ListEnumDocumentationFormatFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentationFormat[] | ListEnumDocumentationFormatFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentationFormatWithAggregatesFilter<$PrismaModel> | $Enums.DocumentationFormat
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDocumentationFormatFilter<$PrismaModel>
+    _max?: NestedEnumDocumentationFormatFilter<$PrismaModel>
   }
 
   export type InscriptionCreateWithoutUserInput = {
@@ -80736,6 +83605,103 @@ export namespace Prisma {
     contacts?: ContactFormationUncheckedUpdateManyWithoutDispositifNestedInput
   }
 
+  export type DocumentationFichierCreateWithoutGroupeInput = {
+    id?: string
+    titre: string
+    description?: string | null
+    url: string
+    format: $Enums.DocumentationFormat
+    ordre?: number
+  }
+
+  export type DocumentationFichierUncheckedCreateWithoutGroupeInput = {
+    id?: string
+    titre: string
+    description?: string | null
+    url: string
+    format: $Enums.DocumentationFormat
+    ordre?: number
+  }
+
+  export type DocumentationFichierCreateOrConnectWithoutGroupeInput = {
+    where: DocumentationFichierWhereUniqueInput
+    create: XOR<DocumentationFichierCreateWithoutGroupeInput, DocumentationFichierUncheckedCreateWithoutGroupeInput>
+  }
+
+  export type DocumentationFichierCreateManyGroupeInputEnvelope = {
+    data: DocumentationFichierCreateManyGroupeInput | DocumentationFichierCreateManyGroupeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DocumentationFichierUpsertWithWhereUniqueWithoutGroupeInput = {
+    where: DocumentationFichierWhereUniqueInput
+    update: XOR<DocumentationFichierUpdateWithoutGroupeInput, DocumentationFichierUncheckedUpdateWithoutGroupeInput>
+    create: XOR<DocumentationFichierCreateWithoutGroupeInput, DocumentationFichierUncheckedCreateWithoutGroupeInput>
+  }
+
+  export type DocumentationFichierUpdateWithWhereUniqueWithoutGroupeInput = {
+    where: DocumentationFichierWhereUniqueInput
+    data: XOR<DocumentationFichierUpdateWithoutGroupeInput, DocumentationFichierUncheckedUpdateWithoutGroupeInput>
+  }
+
+  export type DocumentationFichierUpdateManyWithWhereWithoutGroupeInput = {
+    where: DocumentationFichierScalarWhereInput
+    data: XOR<DocumentationFichierUpdateManyMutationInput, DocumentationFichierUncheckedUpdateManyWithoutGroupeInput>
+  }
+
+  export type DocumentationFichierScalarWhereInput = {
+    AND?: DocumentationFichierScalarWhereInput | DocumentationFichierScalarWhereInput[]
+    OR?: DocumentationFichierScalarWhereInput[]
+    NOT?: DocumentationFichierScalarWhereInput | DocumentationFichierScalarWhereInput[]
+    id?: StringFilter<"DocumentationFichier"> | string
+    groupeId?: StringFilter<"DocumentationFichier"> | string
+    titre?: StringFilter<"DocumentationFichier"> | string
+    description?: StringNullableFilter<"DocumentationFichier"> | string | null
+    url?: StringFilter<"DocumentationFichier"> | string
+    format?: EnumDocumentationFormatFilter<"DocumentationFichier"> | $Enums.DocumentationFormat
+    ordre?: IntFilter<"DocumentationFichier"> | number
+  }
+
+  export type DocumentationGroupeCreateWithoutDocumentsInput = {
+    id?: string
+    titre: string
+    ordre?: number
+  }
+
+  export type DocumentationGroupeUncheckedCreateWithoutDocumentsInput = {
+    id?: string
+    titre: string
+    ordre?: number
+  }
+
+  export type DocumentationGroupeCreateOrConnectWithoutDocumentsInput = {
+    where: DocumentationGroupeWhereUniqueInput
+    create: XOR<DocumentationGroupeCreateWithoutDocumentsInput, DocumentationGroupeUncheckedCreateWithoutDocumentsInput>
+  }
+
+  export type DocumentationGroupeUpsertWithoutDocumentsInput = {
+    update: XOR<DocumentationGroupeUpdateWithoutDocumentsInput, DocumentationGroupeUncheckedUpdateWithoutDocumentsInput>
+    create: XOR<DocumentationGroupeCreateWithoutDocumentsInput, DocumentationGroupeUncheckedCreateWithoutDocumentsInput>
+    where?: DocumentationGroupeWhereInput
+  }
+
+  export type DocumentationGroupeUpdateToOneWithWhereWithoutDocumentsInput = {
+    where?: DocumentationGroupeWhereInput
+    data: XOR<DocumentationGroupeUpdateWithoutDocumentsInput, DocumentationGroupeUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type DocumentationGroupeUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DocumentationGroupeUncheckedUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    ordre?: IntFieldUpdateOperationsInput | number
+  }
+
   export type InscriptionCreateManyUserInput = {
     id?: string
     formationId: string
@@ -82702,6 +85668,42 @@ export namespace Prisma {
     lignes?: JsonNullValueInput | InputJsonValue
     ordre?: IntFieldUpdateOperationsInput | number
     actif?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type DocumentationFichierCreateManyGroupeInput = {
+    id?: string
+    titre: string
+    description?: string | null
+    url: string
+    format: $Enums.DocumentationFormat
+    ordre?: number
+  }
+
+  export type DocumentationFichierUpdateWithoutGroupeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    format?: EnumDocumentationFormatFieldUpdateOperationsInput | $Enums.DocumentationFormat
+    ordre?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DocumentationFichierUncheckedUpdateWithoutGroupeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    format?: EnumDocumentationFormatFieldUpdateOperationsInput | $Enums.DocumentationFormat
+    ordre?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DocumentationFichierUncheckedUpdateManyWithoutGroupeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    format?: EnumDocumentationFormatFieldUpdateOperationsInput | $Enums.DocumentationFormat
+    ordre?: IntFieldUpdateOperationsInput | number
   }
 
 

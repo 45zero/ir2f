@@ -17,6 +17,7 @@ const ITEMS = [
   { href: "/admin/users", label: "Utilisateurs", enabled: true },
   { href: "/admin/emploi", label: "Emploi", enabled: true },
   { href: "/admin/financement", label: "Financement", enabled: true },
+  { href: "/admin/documentation", label: "Documentation", enabled: true },
   { href: "/admin/articles", label: "Actualités", enabled: true },
 ]
 
