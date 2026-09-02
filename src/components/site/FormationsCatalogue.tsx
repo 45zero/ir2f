@@ -651,11 +651,13 @@ function OngletSections({ sections }: { sections: FormationOngletData["sections"
 
 export function FormationsCatalogue({
   formations,
+  equivalenceFormations,
   tuiles,
   onglets,
   initialCategory,
 }: {
   formations: CatalogueFormation[]
+  equivalenceFormations: CatalogueFormation[]
   tuiles: FormationTuileData[]
   onglets: Record<string, FormationOngletData>
   initialCategory: CategorieFormation
@@ -695,14 +697,14 @@ export function FormationsCatalogue({
 
   const equivalenceByGroup = useMemo(() => {
     const map = new Map<GroupeEquivalence, CatalogueFormation[]>()
-    for (const f of formations) {
+    for (const f of equivalenceFormations) {
       if (!f.groupeEquivalence) continue
       const list = map.get(f.groupeEquivalence) ?? []
       list.push(f)
       map.set(f.groupeEquivalence, list)
     }
     return map
-  }, [formations])
+  }, [equivalenceFormations])
 
   function selectCategory(cat: CategorieFormation) {
     setSidebarCategory(cat)

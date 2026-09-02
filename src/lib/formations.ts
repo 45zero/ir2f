@@ -74,6 +74,29 @@ export async function getCatalogueFormations(): Promise<CatalogueFormation[]> {
   }))
 }
 
+// Nœuds du diagramme "équivalences et passerelles" (onglet Éducateur > Équivalences) : à la
+// différence de getCatalogueFormations, on ne filtre pas par statut. Ce diagramme est une
+// représentation structurelle et stable des parcours de qualification, indépendante du fait
+// qu'une formation soit actuellement publiée — passer une formation en brouillon/archivée pour
+// la retirer de la liste "Formations professionnelles" (doublon, image de remplacement...) ne
+// doit pas faire disparaître son nœud du diagramme.
+export async function getEquivalenceFormations(): Promise<CatalogueFormation[]> {
+  const formations = await prisma.formation.findMany({
+    where: { groupeEquivalence: { not: null } },
+    orderBy: [{ categorie: "asc" }, { ordre: "asc" }],
+    select: CATALOGUE_SELECT,
+  })
+  return formations.map((f) => ({
+    ...toCard(f),
+    description: f.description,
+    filiere: f.filiere,
+    groupeEquivalence: f.groupeEquivalence,
+    varianteNode: f.varianteNode,
+    badgeNode: f.badgeNode,
+    shortNode: f.shortNode,
+  }))
+}
+
 export type FormationTuileData = {
   categorie: CategorieFormation
   label: string
