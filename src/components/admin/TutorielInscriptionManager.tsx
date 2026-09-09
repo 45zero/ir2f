@@ -98,6 +98,7 @@ export function TutorielInscriptionManager({
 
 function TutorielForm({ cible, item }: { cible: TutorielInscriptionCible; item?: AdminTutorielInscription }) {
   const [mode, setMode] = useState<TutorielInscriptionMode>(item?.mode ?? "LIEN")
+  const [videoUploading, setVideoUploading] = useState(false)
   const [state, formAction, pending] = useActionState(
     (prev: TutorielInscriptionActionState | undefined, formData: FormData) =>
       saveTutorielInscription(cible, prev, formData),
@@ -134,13 +135,22 @@ function TutorielForm({ cible, item }: { cible: TutorielInscriptionCible; item?:
             <span style={labelText}>Vidéo — lien YouTube (optionnel si fichier vidéo fourni)</span>
             <input name="youtubeUrl" placeholder="Lien YouTube" defaultValue={item?.youtubeUrl ?? ""} style={fieldStyle} />
           </label>
-          <VideoField name="videoFichier" label="Vidéo — ou fichier vidéo direct (optionnel)" defaultUrl={item?.videoFichierUrl} keyHint="tutoriels-inscription-videos" />
+          <VideoField
+            name="videoFichier"
+            label="Vidéo — ou fichier vidéo direct (optionnel)"
+            defaultUrl={item?.videoFichierUrl}
+            keyHint="tutoriels-inscription-videos"
+            onUploadingChange={setVideoUploading}
+          />
         </>
       )}
 
+      {mode === "VIDEO" && videoUploading && (
+        <span style={{ color: colors.textLight, fontSize: 12 }}>Envoi de la vidéo en cours, merci de patienter…</span>
+      )}
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
-      <button type="submit" disabled={pending} style={submitButtonStyle}>
-        {pending ? "Enregistrement..." : "Enregistrer"}
+      <button type="submit" disabled={pending || (mode === "VIDEO" && videoUploading)} style={submitButtonStyle}>
+        {mode === "VIDEO" && videoUploading ? "Envoi de la vidéo..." : pending ? "Enregistrement..." : "Enregistrer"}
       </button>
     </form>
   )

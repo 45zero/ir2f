@@ -11,11 +11,13 @@ export function VideoField({
   label,
   defaultUrl,
   keyHint,
+  onUploadingChange,
 }: {
   name: string
   label: string
   defaultUrl?: string | null
   keyHint: string
+  onUploadingChange?: (uploading: boolean) => void
 }) {
   const [preview, setPreview] = useState(defaultUrl ?? "")
   const [fileName, setFileName] = useState<string | null>(null)
@@ -54,6 +56,7 @@ export function VideoField({
     setStatus("uploading")
     setBlockedMessage(false)
     uploadingRef.current = true
+    onUploadingChange?.(true)
     if (hiddenRef.current) hiddenRef.current.value = ""
 
     try {
@@ -77,6 +80,7 @@ export function VideoField({
       blockedSubmitRef.current = false
     } finally {
       uploadingRef.current = false
+      onUploadingChange?.(false)
     }
   }
 
