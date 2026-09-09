@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, type ChangeEvent } from "react"
+import { flushSync } from "react-dom"
 import { colors, fontBody } from "@/lib/theme"
 import { getVideoUploadTarget } from "@/lib/actions/video-upload"
 import { getBrowserSupabase } from "@/lib/supabase-browser"
@@ -22,6 +23,11 @@ export function VideoField({
   // plus fiable que de compter uniquement sur le blocage de la soumission ci-dessous.
   onUploadStateChange?: (uploading: boolean, pending: Promise<void> | null) => void
 }) {
+  // Champ piloté par du state React (pas defaultValue/ref) : React réinitialise automatiquement
+  // tout champ non contrôlé d'un <form action={...}> à chaque tentative de soumission (succès ou
+  // échec), ce qui effaçait silencieusement l'URL de la vidéo tout juste envoyée. Un champ
+  // contrôlé (value + onChange, ici via setUrl) échappe à cette réinitialisation.
+  const [url, setUrl] = useState(defaultUrl ?? "")
   const [preview, setPreview] = useState(defaultUrl ?? "")
   const [fileName, setFileName] = useState<string | null>(null)
   const [status, setStatus] = useState<"idle" | "uploading" | "error">("idle")
@@ -59,16 +65,20 @@ export function VideoField({
     setErrorDetail(null)
     setBlockedMessage(false)
     uploadingRef.current = true
-    if (hiddenRef.current) hiddenRef.current.value = ""
+    setUrl("")
 
     const uploadPromise = (async () => {
       try {
         const { storagePath, token, publicUrl } = await getVideoUploadTarget(keyHint, file.name)
         const { error } = await getBrowserSupabase().storage.from(VIDEOS_BUCKET).uploadToSignedUrl(storagePath, token, file)
         if (error) throw error
-        if (hiddenRef.current) hiddenRef.current.value = publicUrl
-        setStatus("idle")
-        setBlockedMessage(false)
+        // flushSync : le champ étant maintenant contrôlé (value=url), la resoumission juste après
+        // doit voir l'URL déjà commitée dans le DOM, pas une mise à jour encore en attente.
+        flushSync(() => {
+          setUrl(publicUrl)
+          setStatus("idle")
+          setBlockedMessage(false)
+        })
         if (blockedSubmitRef.current) {
           blockedSubmitRef.current = false
           hiddenRef.current?.form?.requestSubmit()
@@ -78,7 +88,7 @@ export function VideoField({
         // enregistrement fait sans remarquer l'erreur n'efface pas la vidéo existante.
         setPreview(defaultUrl ?? "")
         setFileName(null)
-        if (hiddenRef.current) hiddenRef.current.value = defaultUrl ?? ""
+        setUrl(defaultUrl ?? "")
         setStatus("error")
         setErrorDetail(err instanceof Error ? err.message : String(err))
         blockedSubmitRef.current = false
@@ -149,7 +159,7 @@ export function VideoField({
           La vidéo est encore en cours d&apos;envoi — l&apos;enregistrement se fera automatiquement dès la fin de l&apos;envoi.
         </span>
       )}
-      <input ref={hiddenRef} type="hidden" name={name} defaultValue={defaultUrl ?? ""} />
+      <input ref={hiddenRef} type="hidden" name={name} value={url} readOnly />
     </div>
   )
 }

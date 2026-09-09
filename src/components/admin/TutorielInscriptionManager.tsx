@@ -1,6 +1,6 @@
 "use client"
 
-import { useActionState, useRef, useState } from "react"
+import { useActionState, useEffect, useRef, useState } from "react"
 import { saveTutorielInscription, type TutorielInscriptionActionState } from "@/lib/actions/tutoriel-inscription"
 import { VideoField } from "@/components/admin/VideoField"
 import { DocFileField } from "@/components/admin/DocFileField"
@@ -108,9 +108,15 @@ function TutorielForm({
   cible: TutorielInscriptionCible
   item?: AdminTutorielInscription
 }) {
+  // Tous ces champs sont pilotés par du state React (value + onChange), pas par defaultValue :
+  // React réinitialise automatiquement les champs non contrôlés d'un <form action={...}> à chaque
+  // tentative de soumission, y compris en cas d'échec — un champ contrôlé y échappe.
   const [mode, setMode] = useState<TutorielInscriptionMode>(item?.mode ?? "LIEN")
+  const [lienUrl, setLienUrl] = useState(item?.lienUrl ?? "")
+  const [youtubeUrl, setYoutubeUrl] = useState(item?.youtubeUrl ?? "")
   const [videoUploading, setVideoUploading] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
+  const modeSelectRef = useRef<HTMLSelectElement>(null)
   const videoUploadPromiseRef = useRef<Promise<void> | null>(null)
   const [state, formAction, pending] = useActionState(
     (prev: TutorielInscriptionActionState | undefined, formData: FormData) =>
@@ -118,13 +124,27 @@ function TutorielForm({
     undefined
   )
 
+  // React réinitialise le <form> au niveau du DOM natif à chaque tentative de soumission (succès
+  // ou échec) — pour un <select> contrôlé, ça peut désynchroniser l'option affichée de l'état React
+  // si React ne rejoue pas l'écriture (il pense que rien n'a changé). On force la resynchronisation
+  // à chaque rendu pour que le menu affiché corresponde toujours à `mode`.
+  useEffect(() => {
+    if (modeSelectRef.current) modeSelectRef.current.value = mode
+  })
+
   return (
     <form ref={formRef} action={formAction} style={cardStyle}>
       <span style={{ fontWeight: 700, fontSize: 14, color: colors.navy }}>{CIBLE_LABEL[cible]}</span>
 
       <label style={labelStyle}>
         <span style={labelText}>Mode</span>
-        <select name="mode" value={mode} onChange={(e) => setMode(e.target.value as TutorielInscriptionMode)} style={fieldStyle}>
+        <select
+          ref={modeSelectRef}
+          name="mode"
+          value={mode}
+          onChange={(e) => setMode(e.target.value as TutorielInscriptionMode)}
+          style={fieldStyle}
+        >
           {Object.entries(MODE_LABELS).map(([v, l]) => (
             <option key={v} value={v}>
               {l}
@@ -136,7 +156,13 @@ function TutorielForm({
       {mode === "LIEN" && (
         <label style={labelStyle}>
           <span style={labelText}>Lien (ouvert dans un nouvel onglet)</span>
-          <input name="lienUrl" placeholder="https://..." defaultValue={item?.lienUrl ?? ""} style={fieldStyle} />
+          <input
+            name="lienUrl"
+            placeholder="https://..."
+            value={lienUrl}
+            onChange={(e) => setLienUrl(e.target.value)}
+            style={fieldStyle}
+          />
         </label>
       )}
 
@@ -146,7 +172,13 @@ function TutorielForm({
         <>
           <label style={labelStyle}>
             <span style={labelText}>Vidéo — lien YouTube (optionnel si fichier vidéo fourni)</span>
-            <input name="youtubeUrl" placeholder="Lien YouTube" defaultValue={item?.youtubeUrl ?? ""} style={fieldStyle} />
+            <input
+              name="youtubeUrl"
+              placeholder="Lien YouTube"
+              value={youtubeUrl}
+              onChange={(e) => setYoutubeUrl(e.target.value)}
+              style={fieldStyle}
+            />
           </label>
           <VideoField
             name="videoFichier"
