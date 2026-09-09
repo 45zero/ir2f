@@ -5,14 +5,14 @@ import Link from "next/link"
 import { publishArticleToSocial } from "@/lib/actions/social-publish"
 import { FacebookIcon, InstagramIcon, TikTokIcon, LinkedInIcon } from "@/components/admin/SocialPlatformIcons"
 import { colors, fontBody } from "@/lib/theme"
-import type { ReseauSocialPlateforme } from "@/generated/prisma"
+import type { SocialPlateforme } from "@/lib/social/accounts"
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Paris" })
 
-export type PublierReseauxCompte = { id: string; label: string; plateforme: ReseauSocialPlateforme }
+export type PublierReseauxCompte = { id: string; label: string; plateforme: SocialPlateforme }
 export type ReseauxPublies = Record<string, { publishedAt: string; postId?: string; error?: string }>
 
-const PLATEFORME_ICONS: Record<ReseauSocialPlateforme, (props: { size?: number }) => React.JSX.Element> = {
+const PLATEFORME_ICONS: Record<SocialPlateforme, (props: { size?: number }) => React.JSX.Element> = {
   FACEBOOK: FacebookIcon,
   INSTAGRAM: InstagramIcon,
 }

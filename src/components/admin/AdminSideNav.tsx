@@ -20,7 +20,6 @@ const ITEMS = [
   { href: "/admin/financement", label: "Financement", enabled: true },
   { href: "/admin/documentation", label: "Documentation", enabled: true },
   { href: "/admin/articles", label: "Actualités", enabled: true },
-  { href: "/admin/reseaux-sociaux", label: "Réseaux sociaux", enabled: true },
 ]
 
 export function AdminSideNav() {

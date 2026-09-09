@@ -699,37 +699,14 @@ model Article {
   // src/lib/articles-shared.ts, même principe que Formation.programme.
   sections Json?
 
-  // Suivi des publications officielles sur les réseaux (voir ReseauSocialCompte) —
-  // { [compteId]: { publishedAt, postId?, error? } }. Distinct du bouton "partager" côté
-  // visiteur (qui ne touche pas ce champ) : ici c'est la Ligue qui publie en son nom.
+  // Suivi des publications officielles sur les réseaux (comptes configurés en variable
+  // d'environnement, voir src/lib/social/accounts.ts — volontairement pas en base pour que ces
+  // identifiants ne soient visibles/modifiables par aucun compte ADMIN, seulement par qui a accès
+  // au déploiement) — { [compteId]: { publishedAt, postId?, error? } }. Distinct du bouton
+  // "partager" côté visiteur (qui ne touche pas ce champ) : ici c'est la Ligue qui publie en son nom.
   reseauxPublies Json?
 
   auteur User @relation(fields: [auteurId], references: [id])
-
-  @@schema("ir2f")
-}
-
-enum ReseauSocialPlateforme {
-  FACEBOOK
-  INSTAGRAM
-
-  @@schema("ir2f")
-}
-
-// Comptes réseaux sociaux officiels de la Ligue (3 pages Facebook + comptes Instagram liés)
-// connectés pour la publication officielle des actualités — voir src/lib/social/graph.ts et
-// src/lib/actions/social-publish.ts. accessToken est un token longue durée généré manuellement
-// par l'admin (Graph API Explorer / Meta Business Suite) — jamais renvoyé en clair au formulaire
-// d'édition, lu uniquement côté serveur au moment de publier.
-model ReseauSocialCompte {
-  id          String                 @id @default(uuid())
-  plateforme  ReseauSocialPlateforme
-  label       String
-  externalId  String
-  accessToken String
-  actif       Boolean                @default(true)
-  createdAt   DateTime               @default(now())
-  updatedAt   DateTime               @updatedAt
 
   @@schema("ir2f")
 }

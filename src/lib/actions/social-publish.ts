@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { publishToFacebookPage, publishToInstagram } from "@/lib/social/graph"
+import { getSocialAccountById } from "@/lib/social/accounts"
 import { articleShareExcerpt } from "@/lib/articles-shared"
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ir2f.lgef.fr"
@@ -15,7 +16,7 @@ export type PublishSocialState = {
 
 type ReseauxPublies = Record<string, { publishedAt: string; postId?: string; error?: string }>
 
-/** Publie une actualité sur les comptes réseaux sociaux sélectionnés (voir ReseauSocialCompte). Un échec sur un compte n'empêche pas les autres — chaque résultat est reporté séparément. */
+/** Publie une actualité sur les comptes réseaux sociaux sélectionnés (voir src/lib/social/accounts.ts — comptes configurés en variable d'environnement, pas en base). Un échec sur un compte n'empêche pas les autres — chaque résultat est reporté séparément. */
 export async function publishArticleToSocial(articleId: string, compteIds: string[]): Promise<PublishSocialState> {
   await requireAdmin()
 
@@ -27,8 +28,8 @@ export async function publishArticleToSocial(articleId: string, compteIds: strin
   })
   if (!article) return { error: "Actualité introuvable.", results: [] }
 
-  const comptes = await prisma.reseauSocialCompte.findMany({ where: { id: { in: compteIds }, actif: true } })
-  if (comptes.length === 0) return { error: "Aucun compte actif sélectionné.", results: [] }
+  const comptes = compteIds.map(getSocialAccountById).filter((c): c is NonNullable<typeof c> => c !== null)
+  if (comptes.length === 0) return { error: "Aucun compte configuré trouvé pour cette sélection.", results: [] }
 
   const articleUrl = `${SITE_URL}/actualites/${article.slug}`
   const caption = articleShareExcerpt(article)

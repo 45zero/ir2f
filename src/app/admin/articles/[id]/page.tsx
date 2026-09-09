@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { getArticleForEdit } from "@/lib/admin/articles"
-import { getAllSocialComptes } from "@/lib/admin/social-comptes"
+import { getConfiguredSocialAccounts } from "@/lib/social/accounts"
 import { ArticleForm, type ArticleFormInitial } from "@/components/admin/ArticleForm"
 import { PublierReseauxPanel, type ReseauxPublies } from "@/components/admin/PublierReseauxPanel"
 import { colors, fontHeading } from "@/lib/theme"
@@ -8,10 +8,10 @@ import type { ArticleSection } from "@/lib/articles-shared"
 
 export default async function EditArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const [article, comptes] = await Promise.all([getArticleForEdit(id), getAllSocialComptes()])
+  const article = await getArticleForEdit(id)
   if (!article) notFound()
 
-  const comptesActifs = comptes.filter((c) => c.actif)
+  const comptesActifs = getConfiguredSocialAccounts()
 
   const initial: ArticleFormInitial = {
     titre: article.titre,
