@@ -123,7 +123,7 @@ export type FooterLogosData = {
 const FOOTER_LOGOS_DEFAUT: FooterLogosData = {
   logoFffUrl: "/images/logofff.png",
   logoLgefUrl: "/images/logo-lgef.png",
-  logoQualiopiUrl: "/images/qualiopi.png",
+  logoQualiopiUrl: "/images/qualiopi.jpg",
 }
 
 export async function getFooterLogos(): Promise<FooterLogosData> {

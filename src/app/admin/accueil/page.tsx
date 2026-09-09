@@ -76,7 +76,7 @@ export default async function AdminAccueilPage() {
         footerContenu={{
           logoFffUrl: footerContenu?.logoFffUrl || "/images/logofff.png",
           logoLgefUrl: footerContenu?.logoLgefUrl || "/images/logo-lgef.png",
-          logoQualiopiUrl: footerContenu?.logoQualiopiUrl || "/images/qualiopi.png",
+          logoQualiopiUrl: footerContenu?.logoQualiopiUrl || "/images/qualiopi.jpg",
         }}
       />
     </div>

@@ -132,7 +132,7 @@ export function DocumentationSections({ groupes }: { groupes: DocGroup[] }) {
             flexShrink: 0,
           }}
         >
-          <img src="/images/qualiopi.png" alt="Certification Qualiopi" style={{ height: 56, width: "auto" }} />
+          <img src="/images/qualiopi.jpg" alt="Certification Qualiopi" style={{ height: 56, width: "auto" }} />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 6, flex: 1, minWidth: 240 }}>
           <span style={{ color: colors.gold, fontSize: 12, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase" }}>
