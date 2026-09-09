@@ -1,0 +1,147 @@
+"use client"
+
+import { useActionState, useState } from "react"
+import { saveTutorielInscription, type TutorielInscriptionActionState } from "@/lib/actions/tutoriel-inscription"
+import { VideoField } from "@/components/admin/VideoField"
+import { DocFileField } from "@/components/admin/DocFileField"
+import { colors, fontHeading, fontBody } from "@/lib/theme"
+import type { TutorielInscriptionCible, TutorielInscriptionMode } from "@/generated/prisma"
+
+const fieldStyle = {
+  border: "1px solid #e2e5ea",
+  borderRadius: 5,
+  padding: "9px 12px",
+  fontSize: 13,
+  fontFamily: fontBody,
+  outline: "none",
+  width: "100%",
+}
+
+const labelStyle = { display: "flex", flexDirection: "column" as const, gap: 5 }
+const labelText = { fontSize: 12, fontWeight: 700, color: colors.navy }
+
+const submitButtonStyle = {
+  alignSelf: "flex-start" as const,
+  background: colors.red,
+  color: "#fff",
+  border: "none",
+  padding: "9px 18px",
+  borderRadius: 4,
+  fontSize: 13,
+  fontWeight: 700,
+  fontFamily: fontBody,
+  cursor: "pointer",
+}
+
+const cardStyle = {
+  background: "#fff",
+  border: "1px solid #eef0f3",
+  borderRadius: 8,
+  padding: 16,
+  display: "flex",
+  flexDirection: "column" as const,
+  gap: 10,
+}
+
+const sectionCardStyle = {
+  background: "#fff",
+  border: "1px solid #eef0f3",
+  borderRadius: 10,
+  padding: "clamp(16px,3vw,24px)",
+  display: "flex",
+  flexDirection: "column" as const,
+  gap: 16,
+}
+
+const MODE_LABELS: Record<TutorielInscriptionMode, string> = {
+  LIEN: "Redirection vers un lien",
+  PDF: "Fichier PDF",
+  VIDEO: "Vidéo",
+}
+
+export type AdminTutorielInscription = {
+  cible: TutorielInscriptionCible
+  mode: TutorielInscriptionMode
+  lienUrl: string | null
+  pdfUrl: string | null
+  youtubeUrl: string | null
+  videoFichierUrl: string | null
+}
+
+const CIBLE_LABEL: Record<TutorielInscriptionCible, string> = {
+  STAGIAIRE: "Tutoriel inscription stagiaire",
+  CLUB: "Tutoriel inscription club",
+}
+
+export function TutorielInscriptionManager({
+  items,
+}: {
+  items: Partial<Record<TutorielInscriptionCible, AdminTutorielInscription>>
+}) {
+  return (
+    <div style={sectionCardStyle}>
+      <div>
+        <h2 style={{ fontFamily: fontHeading, color: colors.navy, fontSize: 19, fontWeight: 800, margin: 0 }}>
+          Tutoriels d&apos;inscription
+        </h2>
+        <p style={{ color: colors.textLight, fontSize: 12.5, margin: "4px 0 0" }}>
+          Un petit lien discret apparaît sous « Je m&apos;inscris » et « Le club m&apos;inscrit ! » sur toutes les
+          formations concernées. Laissez un tutoriel non configuré pour que son lien n&apos;apparaisse pas.
+        </p>
+      </div>
+
+      <TutorielForm cible="STAGIAIRE" item={items.STAGIAIRE} />
+      <TutorielForm cible="CLUB" item={items.CLUB} />
+    </div>
+  )
+}
+
+function TutorielForm({ cible, item }: { cible: TutorielInscriptionCible; item?: AdminTutorielInscription }) {
+  const [mode, setMode] = useState<TutorielInscriptionMode>(item?.mode ?? "LIEN")
+  const [state, formAction, pending] = useActionState(
+    (prev: TutorielInscriptionActionState | undefined, formData: FormData) =>
+      saveTutorielInscription(cible, prev, formData),
+    undefined
+  )
+
+  return (
+    <form action={formAction} style={cardStyle}>
+      <span style={{ fontWeight: 700, fontSize: 14, color: colors.navy }}>{CIBLE_LABEL[cible]}</span>
+
+      <label style={labelStyle}>
+        <span style={labelText}>Mode</span>
+        <select name="mode" value={mode} onChange={(e) => setMode(e.target.value as TutorielInscriptionMode)} style={fieldStyle}>
+          {Object.entries(MODE_LABELS).map(([v, l]) => (
+            <option key={v} value={v}>
+              {l}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {mode === "LIEN" && (
+        <label style={labelStyle}>
+          <span style={labelText}>Lien (ouvert dans un nouvel onglet)</span>
+          <input name="lienUrl" placeholder="https://..." defaultValue={item?.lienUrl ?? ""} style={fieldStyle} />
+        </label>
+      )}
+
+      {mode === "PDF" && <DocFileField name="pdf" label="Fichier PDF" defaultUrl={item?.pdfUrl} />}
+
+      {mode === "VIDEO" && (
+        <>
+          <label style={labelStyle}>
+            <span style={labelText}>Vidéo — lien YouTube (optionnel si fichier vidéo fourni)</span>
+            <input name="youtubeUrl" placeholder="Lien YouTube" defaultValue={item?.youtubeUrl ?? ""} style={fieldStyle} />
+          </label>
+          <VideoField name="videoFichier" label="Vidéo — ou fichier vidéo direct (optionnel)" defaultUrl={item?.videoFichierUrl} keyHint="tutoriels-inscription-videos" />
+        </>
+      )}
+
+      {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
+      <button type="submit" disabled={pending} style={submitButtonStyle}>
+        {pending ? "Enregistrement..." : "Enregistrer"}
+      </button>
+    </form>
+  )
+}

@@ -5,6 +5,7 @@ import { getFormationBySlug, getInscriptionStatusMessage, CATEGORIE_LABELS, TYPE
 import { HoverLink } from "@/components/ui/HoverLink"
 import { InscribeButton } from "@/components/site/InscribeButton"
 import { FffInscriptionPanel } from "@/components/site/FffInscriptionPanel"
+import { getTutorielsInscription } from "@/lib/tutoriel-inscription"
 import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
 import { colors, fontHeading } from "@/lib/theme"
 import { getYoutubeEmbedUrl } from "@/lib/youtube"
@@ -29,6 +30,7 @@ export default async function FormationDetailPage({ params }: { params: Promise<
           select: { nom: true, prenom: true, email: true, telephone: true },
         })
       : null
+  const tutoriels = isFff ? await getTutorielsInscription() : undefined
 
   const categorieLabel = CATEGORIE_LABELS[formation.categorie]
   const modeLabel = formation.modeLabel ?? TYPE_LABELS[formation.type]
@@ -180,6 +182,7 @@ export default async function FormationDetailPage({ params }: { params: Promise<
                   lienFffClub={formation.lienFffClub}
                   captureActif={formation.fffCaptureActif}
                   prefill={currentUser ?? undefined}
+                  tutoriels={tutoriels}
                 />
               ) : (
                 <InscribeButton

@@ -1288,3 +1288,44 @@ model Popup {
 
   @@schema("ir2f")
 }
+
+// ─── TUTORIELS D'INSCRIPTION ─────────────────────────
+
+enum TutorielInscriptionCible {
+  STAGIAIRE
+  CLUB
+
+  @@schema("ir2f")
+}
+
+enum TutorielInscriptionMode {
+  LIEN
+  PDF
+  VIDEO
+
+  @@schema("ir2f")
+}
+
+// Petit lien discret affiché sous les boutons d'inscription FFF ("Je m'inscris" / "Le club
+// m'inscrit !") sur toutes les fiches formation concernées. Un seul enregistrement par cible
+// (STAGIAIRE/CLUB) ; le lien ne s'affiche que si un tutoriel est configuré pour cette cible.
+model TutorielInscription {
+  id    String                   @id @default(uuid())
+  cible TutorielInscriptionCible @unique
+  mode  TutorielInscriptionMode  @default(LIEN)
+
+  // Mode LIEN : ouvre directement cette URL dans un nouvel onglet.
+  lienUrl String?
+
+  // Mode PDF : fichier affiché et téléchargeable dans une pop-up.
+  pdfUrl String?
+
+  // Mode VIDEO : lien YouTube et/ou fichier vidéo uploadé, affiché dans une pop-up (fichier
+  // prioritaire sur YouTube si les deux sont renseignés). Téléchargeable seulement si fichier.
+  youtubeUrl      String?
+  videoFichierUrl String?
+
+  updatedAt DateTime @updatedAt
+
+  @@schema("ir2f")
+}

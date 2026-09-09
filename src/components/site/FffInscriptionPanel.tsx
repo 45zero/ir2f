@@ -3,6 +3,7 @@
 import { useActionState, useState } from "react"
 import { Hoverable } from "@/components/ui/Hoverable"
 import { enrolerViaFff, type FffInscriptionCible } from "@/lib/actions/fff-inscription"
+import { TutorielInscriptionLink, type SiteTutorielInscription } from "@/components/site/TutorielInscriptionLink"
 import { colors, fontBody } from "@/lib/theme"
 
 const inputStyle = {
@@ -49,12 +50,14 @@ export function FffInscriptionPanel({
   lienFffClub,
   captureActif,
   prefill,
+  tutoriels,
 }: {
   formationId: string
   lienFffStagiaire: string | null
   lienFffClub: string | null
   captureActif: boolean
   prefill?: { nom: string; prenom: string; email: string; telephone: string | null }
+  tutoriels?: Partial<Record<FffInscriptionCible, SiteTutorielInscription>>
 }) {
   const [cible, setCible] = useState<FffInscriptionCible | null>(null)
 
@@ -64,19 +67,25 @@ export function FffInscriptionPanel({
     return (
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
         {lienFffStagiaire && (
-          <Hoverable as="a" href={lienFffStagiaire} style={{ ...buttonStyle, textDecoration: "none", display: "inline-block" }} hoverStyle={{ background: colors.redDark }}>
-            {CIBLE_LABEL.STAGIAIRE}
-          </Hoverable>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-start" }}>
+            <Hoverable as="a" href={lienFffStagiaire} style={{ ...buttonStyle, textDecoration: "none", display: "inline-block" }} hoverStyle={{ background: colors.redDark }}>
+              {CIBLE_LABEL.STAGIAIRE}
+            </Hoverable>
+            <TutorielInscriptionLink label="Tutoriel inscription stagiaire" tutoriel={tutoriels?.STAGIAIRE} />
+          </div>
         )}
         {lienFffClub && (
-          <Hoverable
-            as="a"
-            href={lienFffClub}
-            style={{ ...secondaryButtonStyle, textDecoration: "none", display: "inline-block" }}
-            hoverStyle={{ background: colors.navy, color: "#fff" }}
-          >
-            {CIBLE_LABEL.CLUB}
-          </Hoverable>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-start" }}>
+            <Hoverable
+              as="a"
+              href={lienFffClub}
+              style={{ ...secondaryButtonStyle, textDecoration: "none", display: "inline-block" }}
+              hoverStyle={{ background: colors.navy, color: "#fff" }}
+            >
+              {CIBLE_LABEL.CLUB}
+            </Hoverable>
+            <TutorielInscriptionLink label="Tutoriel inscription club" tutoriel={tutoriels?.CLUB} />
+          </div>
         )}
       </div>
     )
@@ -86,20 +95,26 @@ export function FffInscriptionPanel({
     return (
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
         {lienFffStagiaire && (
-          <Hoverable as="button" type="button" onClick={() => setCible("STAGIAIRE")} style={buttonStyle} hoverStyle={{ background: colors.redDark }}>
-            {CIBLE_LABEL.STAGIAIRE}
-          </Hoverable>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-start" }}>
+            <Hoverable as="button" type="button" onClick={() => setCible("STAGIAIRE")} style={buttonStyle} hoverStyle={{ background: colors.redDark }}>
+              {CIBLE_LABEL.STAGIAIRE}
+            </Hoverable>
+            <TutorielInscriptionLink label="Tutoriel inscription stagiaire" tutoriel={tutoriels?.STAGIAIRE} />
+          </div>
         )}
         {lienFffClub && (
-          <Hoverable
-            as="button"
-            type="button"
-            onClick={() => setCible("CLUB")}
-            style={secondaryButtonStyle}
-            hoverStyle={{ background: colors.navy, color: "#fff" }}
-          >
-            {CIBLE_LABEL.CLUB}
-          </Hoverable>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-start" }}>
+            <Hoverable
+              as="button"
+              type="button"
+              onClick={() => setCible("CLUB")}
+              style={secondaryButtonStyle}
+              hoverStyle={{ background: colors.navy, color: "#fff" }}
+            >
+              {CIBLE_LABEL.CLUB}
+            </Hoverable>
+            <TutorielInscriptionLink label="Tutoriel inscription club" tutoriel={tutoriels?.CLUB} />
+          </div>
         )}
       </div>
     )

@@ -776,6 +776,17 @@ exports.Prisma.PopupScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TutorielInscriptionScalarFieldEnum = {
+  id: 'id',
+  cible: 'cible',
+  mode: 'mode',
+  lienUrl: 'lienUrl',
+  pdfUrl: 'pdfUrl',
+  youtubeUrl: 'youtubeUrl',
+  videoFichierUrl: 'videoFichierUrl',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1003,6 +1014,17 @@ exports.TypePopup = exports.$Enums.TypePopup = {
   ANNONCE: 'ANNONCE'
 };
 
+exports.TutorielInscriptionCible = exports.$Enums.TutorielInscriptionCible = {
+  STAGIAIRE: 'STAGIAIRE',
+  CLUB: 'CLUB'
+};
+
+exports.TutorielInscriptionMode = exports.$Enums.TutorielInscriptionMode = {
+  LIEN: 'LIEN',
+  PDF: 'PDF',
+  VIDEO: 'VIDEO'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Formation: 'Formation',
@@ -1051,7 +1073,8 @@ exports.Prisma.ModelName = {
   DispositifFormationTableau: 'DispositifFormationTableau',
   DocumentationGroupe: 'DocumentationGroupe',
   DocumentationFichier: 'DocumentationFichier',
-  Popup: 'Popup'
+  Popup: 'Popup',
+  TutorielInscription: 'TutorielInscription'
 };
 
 /**

@@ -13,6 +13,7 @@ const ITEMS = [
   { href: "/admin/clubs", label: "Annuaire clubs", enabled: true },
   { href: "/admin/formations-page", label: "Page « Nos Formations »", enabled: true },
   { href: "/admin/inscriptions", label: "Inscriptions", enabled: true },
+  { href: "/admin/tutoriels-inscription", label: "Tutoriels d'inscription", enabled: true },
   { href: "/admin/demandes-contact", label: "Demandes de contact", enabled: true },
   { href: "/admin/organigramme", label: "Organigramme", enabled: true },
   { href: "/admin/users", label: "Utilisateurs", enabled: true },
