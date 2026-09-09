@@ -1,6 +1,6 @@
 "use client"
 
-import { useActionState, useState } from "react"
+import { useActionState, useRef, useState } from "react"
 import { saveTutorielInscription, type TutorielInscriptionActionState } from "@/lib/actions/tutoriel-inscription"
 import { VideoField } from "@/components/admin/VideoField"
 import { DocFileField } from "@/components/admin/DocFileField"
@@ -99,6 +99,8 @@ export function TutorielInscriptionManager({
 function TutorielForm({ cible, item }: { cible: TutorielInscriptionCible; item?: AdminTutorielInscription }) {
   const [mode, setMode] = useState<TutorielInscriptionMode>(item?.mode ?? "LIEN")
   const [videoUploading, setVideoUploading] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+  const videoUploadPromiseRef = useRef<Promise<void> | null>(null)
   const [state, formAction, pending] = useActionState(
     (prev: TutorielInscriptionActionState | undefined, formData: FormData) =>
       saveTutorielInscription(cible, prev, formData),
@@ -106,7 +108,7 @@ function TutorielForm({ cible, item }: { cible: TutorielInscriptionCible; item?:
   )
 
   return (
-    <form action={formAction} style={cardStyle}>
+    <form ref={formRef} action={formAction} style={cardStyle}>
       <span style={{ fontWeight: 700, fontSize: 14, color: colors.navy }}>{CIBLE_LABEL[cible]}</span>
 
       <label style={labelStyle}>
@@ -140,7 +142,10 @@ function TutorielForm({ cible, item }: { cible: TutorielInscriptionCible; item?:
             label="Vidéo — ou fichier vidéo direct (optionnel)"
             defaultUrl={item?.videoFichierUrl}
             keyHint="tutoriels-inscription-videos"
-            onUploadingChange={setVideoUploading}
+            onUploadStateChange={(uploading, promise) => {
+              setVideoUploading(uploading)
+              videoUploadPromiseRef.current = promise
+            }}
           />
         </>
       )}
@@ -149,7 +154,21 @@ function TutorielForm({ cible, item }: { cible: TutorielInscriptionCible; item?:
         <span style={{ color: colors.textLight, fontSize: 12 }}>Envoi de la vidéo en cours, merci de patienter…</span>
       )}
       {state?.error && <span style={{ color: colors.red, fontSize: 12 }}>{state.error}</span>}
-      <button type="submit" disabled={pending || (mode === "VIDEO" && videoUploading)} style={submitButtonStyle}>
+      <button
+        type="button"
+        disabled={pending || (mode === "VIDEO" && videoUploading)}
+        style={submitButtonStyle}
+        onClick={async () => {
+          // On attend explicitement la fin de l'envoi vidéo en cours avant de soumettre, plutôt que
+          // de compter uniquement sur l'attribut disabled (qui n'empêche pas une soumission par
+          // touche Entrée) : sans ça, un clic pile pendant l'upload pouvait partir avec un champ
+          // vidéo encore vide.
+          if (mode === "VIDEO" && videoUploadPromiseRef.current) {
+            await videoUploadPromiseRef.current
+          }
+          formRef.current?.requestSubmit()
+        }}
+      >
         {mode === "VIDEO" && videoUploading ? "Envoi de la vidéo..." : pending ? "Enregistrement..." : "Enregistrer"}
       </button>
     </form>

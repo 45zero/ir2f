@@ -11,13 +11,16 @@ export function VideoField({
   label,
   defaultUrl,
   keyHint,
-  onUploadingChange,
+  onUploadStateChange,
 }: {
   name: string
   label: string
   defaultUrl?: string | null
   keyHint: string
-  onUploadingChange?: (uploading: boolean) => void
+  // Prévient le formulaire parent qu'un envoi est en cours et lui fournit la promesse
+  // correspondante, pour qu'il puisse l'attendre avant de soumettre (voir TutorielInscriptionManager.tsx) —
+  // plus fiable que de compter uniquement sur le blocage de la soumission ci-dessous.
+  onUploadStateChange?: (uploading: boolean, pending: Promise<void> | null) => void
 }) {
   const [preview, setPreview] = useState(defaultUrl ?? "")
   const [fileName, setFileName] = useState<string | null>(null)
@@ -27,12 +30,10 @@ export function VideoField({
   const uploadingRef = useRef(false)
   const blockedSubmitRef = useRef(false)
 
-  // L'aperçu s'affiche dès le choix du fichier, mais l'envoi réel vers Supabase prend du temps
-  // en tâche de fond : on bloque la soumission du formulaire tant qu'il n'est pas terminé, sinon
-  // le champ vidéo part vide et la vidéo « disparaît » après enregistrement. On retente
-  // automatiquement l'enregistrement une fois l'envoi terminé (voir onChange) : sans ça, un
-  // admin qui ne reclique pas sur Enregistrer après le blocage perd sa vidéo silencieusement —
-  // ce qui explique des envois vus comme « réussis » côté stockage mais jamais enregistrés.
+  // Filet de sécurité pour une soumission déclenchée autrement qu'en cliquant sur le bouton
+  // « Enregistrer » (ex. touche Entrée dans un champ texte) : le formulaire parent attend
+  // normalement la promesse d'envoi (onUploadStateChange) avant de soumettre, mais ce blocage
+  // couvre les cas où ce n'est pas possible.
   useEffect(() => {
     const form = hiddenRef.current?.form
     if (!form) return
@@ -47,7 +48,7 @@ export function VideoField({
     return () => form.removeEventListener("submit", onSubmit)
   }, [])
 
-  async function onChange(e: ChangeEvent<HTMLInputElement>) {
+  function onChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
 
@@ -56,32 +57,35 @@ export function VideoField({
     setStatus("uploading")
     setBlockedMessage(false)
     uploadingRef.current = true
-    onUploadingChange?.(true)
     if (hiddenRef.current) hiddenRef.current.value = ""
 
-    try {
-      const { storagePath, token, publicUrl } = await getVideoUploadTarget(keyHint, file.name)
-      const { error } = await getBrowserSupabase().storage.from(VIDEOS_BUCKET).uploadToSignedUrl(storagePath, token, file)
-      if (error) throw error
-      if (hiddenRef.current) hiddenRef.current.value = publicUrl
-      setStatus("idle")
-      setBlockedMessage(false)
-      if (blockedSubmitRef.current) {
+    const uploadPromise = (async () => {
+      try {
+        const { storagePath, token, publicUrl } = await getVideoUploadTarget(keyHint, file.name)
+        const { error } = await getBrowserSupabase().storage.from(VIDEOS_BUCKET).uploadToSignedUrl(storagePath, token, file)
+        if (error) throw error
+        if (hiddenRef.current) hiddenRef.current.value = publicUrl
+        setStatus("idle")
+        setBlockedMessage(false)
+        if (blockedSubmitRef.current) {
+          blockedSubmitRef.current = false
+          hiddenRef.current?.form?.requestSubmit()
+        }
+      } catch {
+        // L'envoi a échoué : on restaure la vidéo précédente (aperçu + champ caché) pour qu'un
+        // enregistrement fait sans remarquer l'erreur n'efface pas la vidéo existante.
+        setPreview(defaultUrl ?? "")
+        setFileName(null)
+        if (hiddenRef.current) hiddenRef.current.value = defaultUrl ?? ""
+        setStatus("error")
         blockedSubmitRef.current = false
-        hiddenRef.current?.form?.requestSubmit()
+      } finally {
+        uploadingRef.current = false
+        onUploadStateChange?.(false, null)
       }
-    } catch {
-      // L'envoi a échoué : on restaure la vidéo précédente (aperçu + champ caché) pour qu'un
-      // enregistrement fait sans remarquer l'erreur n'efface pas la vidéo existante.
-      setPreview(defaultUrl ?? "")
-      setFileName(null)
-      if (hiddenRef.current) hiddenRef.current.value = defaultUrl ?? ""
-      setStatus("error")
-      blockedSubmitRef.current = false
-    } finally {
-      uploadingRef.current = false
-      onUploadingChange?.(false)
-    }
+    })()
+
+    onUploadStateChange?.(true, uploadPromise)
   }
 
   return (
