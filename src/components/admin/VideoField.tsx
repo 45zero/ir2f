@@ -25,6 +25,7 @@ export function VideoField({
   const [preview, setPreview] = useState(defaultUrl ?? "")
   const [fileName, setFileName] = useState<string | null>(null)
   const [status, setStatus] = useState<"idle" | "uploading" | "error">("idle")
+  const [errorDetail, setErrorDetail] = useState<string | null>(null)
   const [blockedMessage, setBlockedMessage] = useState(false)
   const hiddenRef = useRef<HTMLInputElement>(null)
   const uploadingRef = useRef(false)
@@ -55,6 +56,7 @@ export function VideoField({
     setPreview(URL.createObjectURL(file))
     setFileName(file.name)
     setStatus("uploading")
+    setErrorDetail(null)
     setBlockedMessage(false)
     uploadingRef.current = true
     if (hiddenRef.current) hiddenRef.current.value = ""
@@ -71,13 +73,14 @@ export function VideoField({
           blockedSubmitRef.current = false
           hiddenRef.current?.form?.requestSubmit()
         }
-      } catch {
+      } catch (err) {
         // L'envoi a échoué : on restaure la vidéo précédente (aperçu + champ caché) pour qu'un
         // enregistrement fait sans remarquer l'erreur n'efface pas la vidéo existante.
         setPreview(defaultUrl ?? "")
         setFileName(null)
         if (hiddenRef.current) hiddenRef.current.value = defaultUrl ?? ""
         setStatus("error")
+        setErrorDetail(err instanceof Error ? err.message : String(err))
         blockedSubmitRef.current = false
       } finally {
         uploadingRef.current = false
@@ -134,7 +137,11 @@ export function VideoField({
           <input type="file" accept="video/*" onChange={onChange} style={{ display: "none" }} />
         </label>
         {status === "uploading" && <span style={{ fontSize: 12, color: colors.textLight }}>Envoi en cours…</span>}
-        {status === "error" && <span style={{ fontSize: 12, color: colors.red }}>Échec de l&apos;envoi, réessayez.</span>}
+        {status === "error" && (
+          <span style={{ fontSize: 12, color: colors.red }}>
+            Échec de l&apos;envoi{errorDetail ? ` : ${errorDetail}` : ""}. Réessayez.
+          </span>
+        )}
         {status === "idle" && fileName && <span style={{ fontSize: 12, color: colors.textLight }}>{fileName}</span>}
       </div>
       {blockedMessage && (

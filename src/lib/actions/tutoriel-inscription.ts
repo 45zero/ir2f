@@ -31,13 +31,7 @@ export async function saveTutorielInscription(
   if (mode === "LIEN" && !lienUrl) return { error: "Un lien est obligatoire pour le mode redirection." }
   if (mode === "PDF" && !pdfUrl) return { error: "Un fichier PDF est obligatoire pour le mode PDF." }
   if (mode === "VIDEO" && !youtubeUrl && !videoFichierUrl) {
-    // Diagnostic temporaire (à retirer) : précise ce que le serveur a reçu, pour comprendre
-    // pourquoi le champ vidéo arrive vide malgré un envoi apparemment terminé côté client.
-    const debugKeys = Array.from(formData.keys())
-    const debugVideoRaw = formData.get("videoFichier")
-    return {
-      error: `Une vidéo (lien YouTube ou fichier) est obligatoire pour le mode vidéo. [debug: clés=${JSON.stringify(debugKeys)} videoFichier=${JSON.stringify(debugVideoRaw)} type=${typeof debugVideoRaw}]`,
-    }
+    return { error: "Une vidéo (lien YouTube ou fichier) est obligatoire pour le mode vidéo." }
   }
 
   await prisma.tutorielInscription.upsert({

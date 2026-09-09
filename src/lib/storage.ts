@@ -186,13 +186,20 @@ export async function resolveDocumentUrl(formData: FormData, fieldName: string, 
   return existing || null
 }
 
+// Des vidéos "brutes" (export caméra, écran...) dépassent facilement 200 Mo : 1 Go laisse de la
+// marge. Une limite de bucket créée avant ce changement ne se relève pas toute seule (elle n'est
+// appliquée qu'à la création) — updateBucket la corrige aussi pour un bucket déjà existant.
+const VIDEOS_MAX_SIZE = "1GB"
+
 let videosBucketEnsured = false
 
 async function ensureVideosBucket(client: SupabaseClient) {
   if (videosBucketEnsured) return
   const { data } = await client.storage.getBucket(VIDEOS_BUCKET)
   if (!data) {
-    await client.storage.createBucket(VIDEOS_BUCKET, { public: true, fileSizeLimit: "200MB" })
+    await client.storage.createBucket(VIDEOS_BUCKET, { public: true, fileSizeLimit: VIDEOS_MAX_SIZE })
+  } else {
+    await client.storage.updateBucket(VIDEOS_BUCKET, { public: true, fileSizeLimit: VIDEOS_MAX_SIZE })
   }
   videosBucketEnsured = true
 }
