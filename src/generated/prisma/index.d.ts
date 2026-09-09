@@ -29376,6 +29376,7 @@ export namespace Prisma {
     auteurId: number
     createdAt: number
     updatedAt: number
+    sections: number
     _all: number
   }
 
@@ -29417,6 +29418,7 @@ export namespace Prisma {
     auteurId?: true
     createdAt?: true
     updatedAt?: true
+    sections?: true
     _all?: true
   }
 
@@ -29503,6 +29505,7 @@ export namespace Prisma {
     auteurId: string
     createdAt: Date
     updatedAt: Date
+    sections: JsonValue | null
     _count: ArticleCountAggregateOutputType | null
     _min: ArticleMinAggregateOutputType | null
     _max: ArticleMaxAggregateOutputType | null
@@ -29533,6 +29536,7 @@ export namespace Prisma {
     auteurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    sections?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
@@ -29547,6 +29551,7 @@ export namespace Prisma {
     auteurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    sections?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
@@ -29561,6 +29566,7 @@ export namespace Prisma {
     auteurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    sections?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
@@ -29575,9 +29581,10 @@ export namespace Prisma {
     auteurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    sections?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "slug" | "contenu" | "image" | "categorie" | "publie" | "auteurId" | "createdAt" | "updatedAt", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "slug" | "contenu" | "image" | "categorie" | "publie" | "auteurId" | "createdAt" | "updatedAt" | "sections", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -29604,6 +29611,7 @@ export namespace Prisma {
       auteurId: string
       createdAt: Date
       updatedAt: Date
+      sections: Prisma.JsonValue | null
     }, ExtArgs["result"]["article"]>
     composites: {}
   }
@@ -30038,6 +30046,7 @@ export namespace Prisma {
     readonly auteurId: FieldRef<"Article", 'String'>
     readonly createdAt: FieldRef<"Article", 'DateTime'>
     readonly updatedAt: FieldRef<"Article", 'DateTime'>
+    readonly sections: FieldRef<"Article", 'Json'>
   }
     
 
@@ -63274,7 +63283,8 @@ export namespace Prisma {
     publie: 'publie',
     auteurId: 'auteurId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    sections: 'sections'
   };
 
   export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
@@ -66177,6 +66187,7 @@ export namespace Prisma {
     auteurId?: StringFilter<"Article"> | string
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
+    sections?: JsonNullableFilter<"Article">
     auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -66191,6 +66202,7 @@ export namespace Prisma {
     auteurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    sections?: SortOrderInput | SortOrder
     auteur?: UserOrderByWithRelationInput
   }
 
@@ -66208,6 +66220,7 @@ export namespace Prisma {
     auteurId?: StringFilter<"Article"> | string
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
+    sections?: JsonNullableFilter<"Article">
     auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "slug">
 
@@ -66222,6 +66235,7 @@ export namespace Prisma {
     auteurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    sections?: SortOrderInput | SortOrder
     _count?: ArticleCountOrderByAggregateInput
     _max?: ArticleMaxOrderByAggregateInput
     _min?: ArticleMinOrderByAggregateInput
@@ -66241,6 +66255,7 @@ export namespace Prisma {
     auteurId?: StringWithAggregatesFilter<"Article"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
+    sections?: JsonNullableWithAggregatesFilter<"Article">
   }
 
   export type AccompagnementCardWhereInput = {
@@ -70652,6 +70667,7 @@ export namespace Prisma {
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
     auteur: UserCreateNestedOneWithoutArticlesInput
   }
 
@@ -70666,6 +70682,7 @@ export namespace Prisma {
     auteurId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUpdateInput = {
@@ -70678,6 +70695,7 @@ export namespace Prisma {
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
     auteur?: UserUpdateOneRequiredWithoutArticlesNestedInput
   }
 
@@ -70692,6 +70710,7 @@ export namespace Prisma {
     auteurId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleCreateManyInput = {
@@ -70705,6 +70724,7 @@ export namespace Prisma {
     auteurId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUpdateManyMutationInput = {
@@ -70717,6 +70737,7 @@ export namespace Prisma {
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUncheckedUpdateManyInput = {
@@ -70730,6 +70751,7 @@ export namespace Prisma {
     auteurId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type AccompagnementCardCreateInput = {
@@ -75036,6 +75058,7 @@ export namespace Prisma {
     auteurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    sections?: SortOrder
   }
 
   export type ArticleMaxOrderByAggregateInput = {
@@ -80200,6 +80223,7 @@ export namespace Prisma {
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUncheckedCreateWithoutAuteurInput = {
@@ -80212,6 +80236,7 @@ export namespace Prisma {
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleCreateOrConnectWithoutAuteurInput = {
@@ -80596,6 +80621,7 @@ export namespace Prisma {
     auteurId?: StringFilter<"Article"> | string
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
+    sections?: JsonNullableFilter<"Article">
   }
 
   export type DemandeInscriptionUpsertWithWhereUniqueWithoutUserInput = {
@@ -87596,6 +87622,7 @@ export namespace Prisma {
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type DemandeInscriptionCreateManyUserInput = {
@@ -87883,6 +87910,7 @@ export namespace Prisma {
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUncheckedUpdateWithoutAuteurInput = {
@@ -87895,6 +87923,7 @@ export namespace Prisma {
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUncheckedUpdateManyWithoutAuteurInput = {
@@ -87907,6 +87936,7 @@ export namespace Prisma {
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sections?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type DemandeInscriptionUpdateWithoutUserInput = {

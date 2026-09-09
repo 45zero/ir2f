@@ -1,6 +1,7 @@
 import "server-only"
 import { prisma } from "@/lib/prisma"
 import { CATEGORIE_LABELS } from "@/lib/formations-shared"
+import type { ArticleSection } from "@/lib/articles-shared"
 
 export type ArticleListItem = {
   id: string
@@ -53,13 +54,13 @@ export async function getPublishedArticles(): Promise<ArticleListItem[]> {
   return articles.map(toListItem)
 }
 
-export type ArticleDetail = ArticleListItem & { contenu: string }
+export type ArticleDetail = ArticleListItem & { contenu: string; sections: ArticleSection[] | null }
 
 export async function getArticleBySlug(slug: string): Promise<ArticleDetail | null> {
   const article = await prisma.article.findFirst({
     where: { slug, publie: true },
-    select: { id: true, slug: true, titre: true, image: true, categorie: true, createdAt: true, contenu: true },
+    select: { id: true, slug: true, titre: true, image: true, categorie: true, createdAt: true, contenu: true, sections: true },
   })
   if (!article) return null
-  return { ...toListItem(article), contenu: article.contenu }
+  return { ...toListItem(article), contenu: article.contenu, sections: (article.sections as ArticleSection[] | null) ?? null }
 }

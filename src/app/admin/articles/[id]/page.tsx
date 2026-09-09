@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { getArticleForEdit } from "@/lib/admin/articles"
 import { ArticleForm, type ArticleFormInitial } from "@/components/admin/ArticleForm"
 import { colors, fontHeading } from "@/lib/theme"
+import type { ArticleSection } from "@/lib/articles-shared"
 
 export default async function EditArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -15,6 +16,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
     image: article.image ?? "",
     categorie: article.categorie ?? "",
     publie: article.publie,
+    sections: (article.sections as ArticleSection[] | null) ?? [],
   }
 
   return (

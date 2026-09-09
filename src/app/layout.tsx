@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://ir2f.lgef.fr"),
   title: "IR2F — Institut Régional de Formation Football",
   description:
     "Les formations IR2F pour éducateurs, arbitres, clubs et dirigeants de la Ligue Grand Est.",

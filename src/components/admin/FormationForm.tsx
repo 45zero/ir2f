@@ -687,9 +687,9 @@ function ProgrammeEditor({
   )
 }
 
-type StepTable = NonNullable<ProgrammeStep["table"]>
+export type StepTable = NonNullable<ProgrammeStep["table"]>
 
-function StepTableEditor({
+export function StepTableEditor({
   table,
   setTable,
   onRemove,

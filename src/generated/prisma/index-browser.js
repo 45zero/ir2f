@@ -422,7 +422,8 @@ exports.Prisma.ArticleScalarFieldEnum = {
   publie: 'publie',
   auteurId: 'auteurId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  sections: 'sections'
 };
 
 exports.Prisma.AccompagnementCardScalarFieldEnum = {

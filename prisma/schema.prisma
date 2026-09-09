@@ -692,6 +692,10 @@ model Article {
   createdAt DateTime            @default(now())
   updatedAt DateTime            @updatedAt
 
+  // Sections répétables (photos/vidéos/tableaux/lien de redirection) — voir ArticleSection dans
+  // src/lib/articles-shared.ts, même principe que Formation.programme.
+  sections Json?
+
   auteur User @relation(fields: [auteurId], references: [id])
 
   @@schema("ir2f")
