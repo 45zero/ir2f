@@ -1,6 +1,7 @@
 import "server-only"
 import { prisma } from "@/lib/prisma"
 import { getSignedDocumentUrl, getSignedDocumentDownloadUrl } from "@/lib/storage"
+import { getTutorielsInscription } from "@/lib/tutoriel-inscription"
 
 export async function getAllFormationsAdmin() {
   return prisma.formation.findMany({
@@ -46,4 +47,14 @@ export async function getFormationDocuments(formationId: string) {
       }))
     ),
   }
+}
+
+export async function getFormationTutorielsInscription(formationId: string) {
+  const [formation, tutoriels] = await Promise.all([
+    prisma.formation.findUnique({ where: { id: formationId }, select: { titre: true } }),
+    getTutorielsInscription(formationId),
+  ])
+  if (!formation) return null
+
+  return { titre: formation.titre, tutoriels }
 }

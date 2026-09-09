@@ -9,12 +9,13 @@ import type { TutorielInscriptionCible, TutorielInscriptionMode } from "@/genera
 
 export type TutorielInscriptionActionState = { error: string | null }
 
-function revalidateTutoriels() {
-  revalidatePath("/admin/tutoriels-inscription")
+function revalidateTutoriels(formationId: string) {
+  revalidatePath(`/admin/formations/${formationId}/tutoriels-inscription`)
   revalidatePath("/formations", "layout")
 }
 
 export async function saveTutorielInscription(
+  formationId: string,
   cible: TutorielInscriptionCible,
   _prev: TutorielInscriptionActionState | undefined,
   formData: FormData
@@ -23,7 +24,7 @@ export async function saveTutorielInscription(
 
   const mode = (optionalStr(formData, "mode") ?? "LIEN") as TutorielInscriptionMode
   const lienUrl = optionalStr(formData, "lienUrl")
-  const pdfUrl = await resolveDocumentUrl(formData, "pdf", `tutoriels-inscription/${cible.toLowerCase()}`)
+  const pdfUrl = await resolveDocumentUrl(formData, "pdf", `tutoriels-inscription/${formationId}/${cible.toLowerCase()}`)
   const youtubeUrl = optionalStr(formData, "youtubeUrl")
   const videoFichierUrl = optionalStr(formData, "videoFichier")
 
@@ -34,17 +35,17 @@ export async function saveTutorielInscription(
   }
 
   await prisma.tutorielInscription.upsert({
-    where: { cible },
-    create: { cible, mode, lienUrl, pdfUrl, youtubeUrl, videoFichierUrl },
+    where: { formationId_cible: { formationId, cible } },
+    create: { formationId, cible, mode, lienUrl, pdfUrl, youtubeUrl, videoFichierUrl },
     update: { mode, lienUrl, pdfUrl, youtubeUrl, videoFichierUrl },
   })
 
-  revalidateTutoriels()
+  revalidateTutoriels(formationId)
   return { error: null }
 }
 
-export async function deleteTutorielInscription(cible: TutorielInscriptionCible) {
+export async function deleteTutorielInscription(formationId: string, cible: TutorielInscriptionCible) {
   await requireAdmin()
-  await prisma.tutorielInscription.deleteMany({ where: { cible } })
-  revalidateTutoriels()
+  await prisma.tutorielInscription.deleteMany({ where: { formationId, cible } })
+  revalidateTutoriels(formationId)
 }

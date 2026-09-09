@@ -778,6 +778,7 @@ exports.Prisma.PopupScalarFieldEnum = {
 
 exports.Prisma.TutorielInscriptionScalarFieldEnum = {
   id: 'id',
+  formationId: 'formationId',
   cible: 'cible',
   mode: 'mode',
   lienUrl: 'lienUrl',

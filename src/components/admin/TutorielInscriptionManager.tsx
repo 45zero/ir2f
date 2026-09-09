@@ -74,8 +74,10 @@ const CIBLE_LABEL: Record<TutorielInscriptionCible, string> = {
 }
 
 export function TutorielInscriptionManager({
+  formationId,
   items,
 }: {
+  formationId: string
   items: Partial<Record<TutorielInscriptionCible, AdminTutorielInscription>>
 }) {
   return (
@@ -85,25 +87,34 @@ export function TutorielInscriptionManager({
           Tutoriels d&apos;inscription
         </h2>
         <p style={{ color: colors.textLight, fontSize: 12.5, margin: "4px 0 0" }}>
-          Un petit lien discret apparaît sous « Je m&apos;inscris » et « Le club m&apos;inscrit ! » sur toutes les
-          formations concernées. Laissez un tutoriel non configuré pour que son lien n&apos;apparaisse pas.
+          Un petit lien discret apparaît sous « Je m&apos;inscris » et « Le club m&apos;inscrit ! » sur la fiche
+          publique de cette formation (mode d&apos;inscription « Portail FFF » uniquement). Laissez un tutoriel
+          non configuré pour que son lien n&apos;apparaisse pas.
         </p>
       </div>
 
-      <TutorielForm cible="STAGIAIRE" item={items.STAGIAIRE} />
-      <TutorielForm cible="CLUB" item={items.CLUB} />
+      <TutorielForm formationId={formationId} cible="STAGIAIRE" item={items.STAGIAIRE} />
+      <TutorielForm formationId={formationId} cible="CLUB" item={items.CLUB} />
     </div>
   )
 }
 
-function TutorielForm({ cible, item }: { cible: TutorielInscriptionCible; item?: AdminTutorielInscription }) {
+function TutorielForm({
+  formationId,
+  cible,
+  item,
+}: {
+  formationId: string
+  cible: TutorielInscriptionCible
+  item?: AdminTutorielInscription
+}) {
   const [mode, setMode] = useState<TutorielInscriptionMode>(item?.mode ?? "LIEN")
   const [videoUploading, setVideoUploading] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
   const videoUploadPromiseRef = useRef<Promise<void> | null>(null)
   const [state, formAction, pending] = useActionState(
     (prev: TutorielInscriptionActionState | undefined, formData: FormData) =>
-      saveTutorielInscription(cible, prev, formData),
+      saveTutorielInscription(formationId, cible, prev, formData),
     undefined
   )
 
@@ -141,7 +152,7 @@ function TutorielForm({ cible, item }: { cible: TutorielInscriptionCible; item?:
             name="videoFichier"
             label="Vidéo — ou fichier vidéo direct (optionnel)"
             defaultUrl={item?.videoFichierUrl}
-            keyHint="tutoriels-inscription-videos"
+            keyHint={`tutoriels-inscription-videos/${formationId}`}
             onUploadStateChange={(uploading, promise) => {
               setVideoUploading(uploading)
               videoUploadPromiseRef.current = promise

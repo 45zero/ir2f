@@ -30,7 +30,7 @@ export default async function FormationDetailPage({ params }: { params: Promise<
           select: { nom: true, prenom: true, email: true, telephone: true },
         })
       : null
-  const tutoriels = isFff ? await getTutorielsInscription() : undefined
+  const tutoriels = isFff ? await getTutorielsInscription(formation.id) : undefined
 
   const categorieLabel = CATEGORIE_LABELS[formation.categorie]
   const modeLabel = formation.modeLabel ?? TYPE_LABELS[formation.type]

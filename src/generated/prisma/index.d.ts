@@ -5797,6 +5797,7 @@ export namespace Prisma {
     messages: number
     covoiturages: number
     ongletsVedette: number
+    tutorielsInscription: number
     conventionStagiaires: number
   }
 
@@ -5810,6 +5811,7 @@ export namespace Prisma {
     messages?: boolean | FormationCountOutputTypeCountMessagesArgs
     covoiturages?: boolean | FormationCountOutputTypeCountCovoituragesArgs
     ongletsVedette?: boolean | FormationCountOutputTypeCountOngletsVedetteArgs
+    tutorielsInscription?: boolean | FormationCountOutputTypeCountTutorielsInscriptionArgs
     conventionStagiaires?: boolean | FormationCountOutputTypeCountConventionStagiairesArgs
   }
 
@@ -5885,6 +5887,13 @@ export namespace Prisma {
    */
   export type FormationCountOutputTypeCountOngletsVedetteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FormationOngletWhereInput
+  }
+
+  /**
+   * FormationCountOutputType without action
+   */
+  export type FormationCountOutputTypeCountTutorielsInscriptionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TutorielInscriptionWhereInput
   }
 
   /**
@@ -8163,6 +8172,7 @@ export namespace Prisma {
     messages?: boolean | Formation$messagesArgs<ExtArgs>
     covoiturages?: boolean | Formation$covoituragesArgs<ExtArgs>
     ongletsVedette?: boolean | Formation$ongletsVedetteArgs<ExtArgs>
+    tutorielsInscription?: boolean | Formation$tutorielsInscriptionArgs<ExtArgs>
     conventionStagiaires?: boolean | Formation$conventionStagiairesArgs<ExtArgs>
     _count?: boolean | FormationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["formation"]>
@@ -8304,6 +8314,7 @@ export namespace Prisma {
     messages?: boolean | Formation$messagesArgs<ExtArgs>
     covoiturages?: boolean | Formation$covoituragesArgs<ExtArgs>
     ongletsVedette?: boolean | Formation$ongletsVedetteArgs<ExtArgs>
+    tutorielsInscription?: boolean | Formation$tutorielsInscriptionArgs<ExtArgs>
     conventionStagiaires?: boolean | Formation$conventionStagiairesArgs<ExtArgs>
     _count?: boolean | FormationCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -8322,6 +8333,7 @@ export namespace Prisma {
       messages: Prisma.$MessagePayload<ExtArgs>[]
       covoiturages: Prisma.$CovoituragePayload<ExtArgs>[]
       ongletsVedette: Prisma.$FormationOngletPayload<ExtArgs>[]
+      tutorielsInscription: Prisma.$TutorielInscriptionPayload<ExtArgs>[]
       conventionStagiaires: Prisma.$ConventionStagiairePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -8767,6 +8779,7 @@ export namespace Prisma {
     messages<T extends Formation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     covoiturages<T extends Formation$covoituragesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$covoituragesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CovoituragePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ongletsVedette<T extends Formation$ongletsVedetteArgs<ExtArgs> = {}>(args?: Subset<T, Formation$ongletsVedetteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FormationOngletPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tutorielsInscription<T extends Formation$tutorielsInscriptionArgs<ExtArgs> = {}>(args?: Subset<T, Formation$tutorielsInscriptionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TutorielInscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     conventionStagiaires<T extends Formation$conventionStagiairesArgs<ExtArgs> = {}>(args?: Subset<T, Formation$conventionStagiairesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConventionStagiairePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9442,6 +9455,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FormationOngletScalarFieldEnum | FormationOngletScalarFieldEnum[]
+  }
+
+  /**
+   * Formation.tutorielsInscription
+   */
+  export type Formation$tutorielsInscriptionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TutorielInscription
+     */
+    select?: TutorielInscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TutorielInscription
+     */
+    omit?: TutorielInscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
+    where?: TutorielInscriptionWhereInput
+    orderBy?: TutorielInscriptionOrderByWithRelationInput | TutorielInscriptionOrderByWithRelationInput[]
+    cursor?: TutorielInscriptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TutorielInscriptionScalarFieldEnum | TutorielInscriptionScalarFieldEnum[]
   }
 
   /**
@@ -61761,6 +61798,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionMinAggregateOutputType = {
     id: string | null
+    formationId: string | null
     cible: $Enums.TutorielInscriptionCible | null
     mode: $Enums.TutorielInscriptionMode | null
     lienUrl: string | null
@@ -61772,6 +61810,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionMaxAggregateOutputType = {
     id: string | null
+    formationId: string | null
     cible: $Enums.TutorielInscriptionCible | null
     mode: $Enums.TutorielInscriptionMode | null
     lienUrl: string | null
@@ -61783,6 +61822,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionCountAggregateOutputType = {
     id: number
+    formationId: number
     cible: number
     mode: number
     lienUrl: number
@@ -61796,6 +61836,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionMinAggregateInputType = {
     id?: true
+    formationId?: true
     cible?: true
     mode?: true
     lienUrl?: true
@@ -61807,6 +61848,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionMaxAggregateInputType = {
     id?: true
+    formationId?: true
     cible?: true
     mode?: true
     lienUrl?: true
@@ -61818,6 +61860,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionCountAggregateInputType = {
     id?: true
+    formationId?: true
     cible?: true
     mode?: true
     lienUrl?: true
@@ -61902,6 +61945,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionGroupByOutputType = {
     id: string
+    formationId: string
     cible: $Enums.TutorielInscriptionCible
     mode: $Enums.TutorielInscriptionMode
     lienUrl: string | null
@@ -61930,6 +61974,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    formationId?: boolean
     cible?: boolean
     mode?: boolean
     lienUrl?: boolean
@@ -61937,10 +61982,12 @@ export namespace Prisma {
     youtubeUrl?: boolean
     videoFichierUrl?: boolean
     updatedAt?: boolean
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tutorielInscription"]>
 
   export type TutorielInscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    formationId?: boolean
     cible?: boolean
     mode?: boolean
     lienUrl?: boolean
@@ -61948,10 +61995,12 @@ export namespace Prisma {
     youtubeUrl?: boolean
     videoFichierUrl?: boolean
     updatedAt?: boolean
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tutorielInscription"]>
 
   export type TutorielInscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    formationId?: boolean
     cible?: boolean
     mode?: boolean
     lienUrl?: boolean
@@ -61959,10 +62008,12 @@ export namespace Prisma {
     youtubeUrl?: boolean
     videoFichierUrl?: boolean
     updatedAt?: boolean
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tutorielInscription"]>
 
   export type TutorielInscriptionSelectScalar = {
     id?: boolean
+    formationId?: boolean
     cible?: boolean
     mode?: boolean
     lienUrl?: boolean
@@ -61972,13 +62023,25 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TutorielInscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cible" | "mode" | "lienUrl" | "pdfUrl" | "youtubeUrl" | "videoFichierUrl" | "updatedAt", ExtArgs["result"]["tutorielInscription"]>
+  export type TutorielInscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formationId" | "cible" | "mode" | "lienUrl" | "pdfUrl" | "youtubeUrl" | "videoFichierUrl" | "updatedAt", ExtArgs["result"]["tutorielInscription"]>
+  export type TutorielInscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
+  }
+  export type TutorielInscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
+  }
+  export type TutorielInscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    formation?: boolean | FormationDefaultArgs<ExtArgs>
+  }
 
   export type $TutorielInscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "TutorielInscription"
-    objects: {}
+    objects: {
+      formation: Prisma.$FormationPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      formationId: string
       cible: $Enums.TutorielInscriptionCible
       mode: $Enums.TutorielInscriptionMode
       lienUrl: string | null
@@ -62380,6 +62443,7 @@ export namespace Prisma {
    */
   export interface Prisma__TutorielInscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    formation<T extends FormationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FormationDefaultArgs<ExtArgs>>): Prisma__FormationClient<$Result.GetResult<Prisma.$FormationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -62410,6 +62474,7 @@ export namespace Prisma {
    */
   interface TutorielInscriptionFieldRefs {
     readonly id: FieldRef<"TutorielInscription", 'String'>
+    readonly formationId: FieldRef<"TutorielInscription", 'String'>
     readonly cible: FieldRef<"TutorielInscription", 'TutorielInscriptionCible'>
     readonly mode: FieldRef<"TutorielInscription", 'TutorielInscriptionMode'>
     readonly lienUrl: FieldRef<"TutorielInscription", 'String'>
@@ -62434,6 +62499,10 @@ export namespace Prisma {
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
+    /**
      * Filter, which TutorielInscription to fetch.
      */
     where: TutorielInscriptionWhereUniqueInput
@@ -62452,6 +62521,10 @@ export namespace Prisma {
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
+    /**
      * Filter, which TutorielInscription to fetch.
      */
     where: TutorielInscriptionWhereUniqueInput
@@ -62469,6 +62542,10 @@ export namespace Prisma {
      * Omit specific fields from the TutorielInscription
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
     /**
      * Filter, which TutorielInscription to fetch.
      */
@@ -62518,6 +62595,10 @@ export namespace Prisma {
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
+    /**
      * Filter, which TutorielInscription to fetch.
      */
     where?: TutorielInscriptionWhereInput
@@ -62565,6 +62646,10 @@ export namespace Prisma {
      * Omit specific fields from the TutorielInscription
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
     /**
      * Filter, which TutorielInscriptions to fetch.
      */
@@ -62614,6 +62699,10 @@ export namespace Prisma {
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
+    /**
      * The data needed to create a TutorielInscription.
      */
     data: XOR<TutorielInscriptionCreateInput, TutorielInscriptionUncheckedCreateInput>
@@ -62647,6 +62736,10 @@ export namespace Prisma {
      */
     data: TutorielInscriptionCreateManyInput | TutorielInscriptionCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -62661,6 +62754,10 @@ export namespace Prisma {
      * Omit specific fields from the TutorielInscription
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
     /**
      * The data needed to update a TutorielInscription.
      */
@@ -62713,6 +62810,10 @@ export namespace Prisma {
      * Limit how many TutorielInscriptions to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -62727,6 +62828,10 @@ export namespace Prisma {
      * Omit specific fields from the TutorielInscription
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
     /**
      * The filter to search for the TutorielInscription to update in case it exists.
      */
@@ -62753,6 +62858,10 @@ export namespace Prisma {
      * Omit specific fields from the TutorielInscription
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
     /**
      * Filter which TutorielInscription to delete.
      */
@@ -62785,6 +62894,10 @@ export namespace Prisma {
      * Omit specific fields from the TutorielInscription
      */
     omit?: TutorielInscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorielInscriptionInclude<ExtArgs> | null
   }
 
 
@@ -63604,6 +63717,7 @@ export namespace Prisma {
 
   export const TutorielInscriptionScalarFieldEnum: {
     id: 'id',
+    formationId: 'formationId',
     cible: 'cible',
     mode: 'mode',
     lienUrl: 'lienUrl',
@@ -64334,6 +64448,7 @@ export namespace Prisma {
     messages?: MessageListRelationFilter
     covoiturages?: CovoiturageListRelationFilter
     ongletsVedette?: FormationOngletListRelationFilter
+    tutorielsInscription?: TutorielInscriptionListRelationFilter
     conventionStagiaires?: ConventionStagiaireListRelationFilter
   }
 
@@ -64386,6 +64501,7 @@ export namespace Prisma {
     messages?: MessageOrderByRelationAggregateInput
     covoiturages?: CovoiturageOrderByRelationAggregateInput
     ongletsVedette?: FormationOngletOrderByRelationAggregateInput
+    tutorielsInscription?: TutorielInscriptionOrderByRelationAggregateInput
     conventionStagiaires?: ConventionStagiaireOrderByRelationAggregateInput
   }
 
@@ -64441,6 +64557,7 @@ export namespace Prisma {
     messages?: MessageListRelationFilter
     covoiturages?: CovoiturageListRelationFilter
     ongletsVedette?: FormationOngletListRelationFilter
+    tutorielsInscription?: TutorielInscriptionListRelationFilter
     conventionStagiaires?: ConventionStagiaireListRelationFilter
   }, "id" | "slug">
 
@@ -68313,6 +68430,7 @@ export namespace Prisma {
     OR?: TutorielInscriptionWhereInput[]
     NOT?: TutorielInscriptionWhereInput | TutorielInscriptionWhereInput[]
     id?: StringFilter<"TutorielInscription"> | string
+    formationId?: StringFilter<"TutorielInscription"> | string
     cible?: EnumTutorielInscriptionCibleFilter<"TutorielInscription"> | $Enums.TutorielInscriptionCible
     mode?: EnumTutorielInscriptionModeFilter<"TutorielInscription"> | $Enums.TutorielInscriptionMode
     lienUrl?: StringNullableFilter<"TutorielInscription"> | string | null
@@ -68320,10 +68438,12 @@ export namespace Prisma {
     youtubeUrl?: StringNullableFilter<"TutorielInscription"> | string | null
     videoFichierUrl?: StringNullableFilter<"TutorielInscription"> | string | null
     updatedAt?: DateTimeFilter<"TutorielInscription"> | Date | string
+    formation?: XOR<FormationScalarRelationFilter, FormationWhereInput>
   }
 
   export type TutorielInscriptionOrderByWithRelationInput = {
     id?: SortOrder
+    formationId?: SortOrder
     cible?: SortOrder
     mode?: SortOrder
     lienUrl?: SortOrderInput | SortOrder
@@ -68331,24 +68451,29 @@ export namespace Prisma {
     youtubeUrl?: SortOrderInput | SortOrder
     videoFichierUrl?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
+    formation?: FormationOrderByWithRelationInput
   }
 
   export type TutorielInscriptionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    cible?: $Enums.TutorielInscriptionCible
+    formationId_cible?: TutorielInscriptionFormationIdCibleCompoundUniqueInput
     AND?: TutorielInscriptionWhereInput | TutorielInscriptionWhereInput[]
     OR?: TutorielInscriptionWhereInput[]
     NOT?: TutorielInscriptionWhereInput | TutorielInscriptionWhereInput[]
+    formationId?: StringFilter<"TutorielInscription"> | string
+    cible?: EnumTutorielInscriptionCibleFilter<"TutorielInscription"> | $Enums.TutorielInscriptionCible
     mode?: EnumTutorielInscriptionModeFilter<"TutorielInscription"> | $Enums.TutorielInscriptionMode
     lienUrl?: StringNullableFilter<"TutorielInscription"> | string | null
     pdfUrl?: StringNullableFilter<"TutorielInscription"> | string | null
     youtubeUrl?: StringNullableFilter<"TutorielInscription"> | string | null
     videoFichierUrl?: StringNullableFilter<"TutorielInscription"> | string | null
     updatedAt?: DateTimeFilter<"TutorielInscription"> | Date | string
-  }, "id" | "cible">
+    formation?: XOR<FormationScalarRelationFilter, FormationWhereInput>
+  }, "id" | "formationId_cible">
 
   export type TutorielInscriptionOrderByWithAggregationInput = {
     id?: SortOrder
+    formationId?: SortOrder
     cible?: SortOrder
     mode?: SortOrder
     lienUrl?: SortOrderInput | SortOrder
@@ -68366,6 +68491,7 @@ export namespace Prisma {
     OR?: TutorielInscriptionScalarWhereWithAggregatesInput[]
     NOT?: TutorielInscriptionScalarWhereWithAggregatesInput | TutorielInscriptionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"TutorielInscription"> | string
+    formationId?: StringWithAggregatesFilter<"TutorielInscription"> | string
     cible?: EnumTutorielInscriptionCibleWithAggregatesFilter<"TutorielInscription"> | $Enums.TutorielInscriptionCible
     mode?: EnumTutorielInscriptionModeWithAggregatesFilter<"TutorielInscription"> | $Enums.TutorielInscriptionMode
     lienUrl?: StringNullableWithAggregatesFilter<"TutorielInscription"> | string | null
@@ -68563,6 +68689,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -68615,6 +68742,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -68667,6 +68795,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -68719,6 +68848,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -73087,10 +73217,12 @@ export namespace Prisma {
     youtubeUrl?: string | null
     videoFichierUrl?: string | null
     updatedAt?: Date | string
+    formation: FormationCreateNestedOneWithoutTutorielsInscriptionInput
   }
 
   export type TutorielInscriptionUncheckedCreateInput = {
     id?: string
+    formationId: string
     cible: $Enums.TutorielInscriptionCible
     mode?: $Enums.TutorielInscriptionMode
     lienUrl?: string | null
@@ -73109,10 +73241,12 @@ export namespace Prisma {
     youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    formation?: FormationUpdateOneRequiredWithoutTutorielsInscriptionNestedInput
   }
 
   export type TutorielInscriptionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    formationId?: StringFieldUpdateOperationsInput | string
     cible?: EnumTutorielInscriptionCibleFieldUpdateOperationsInput | $Enums.TutorielInscriptionCible
     mode?: EnumTutorielInscriptionModeFieldUpdateOperationsInput | $Enums.TutorielInscriptionMode
     lienUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73124,6 +73258,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionCreateManyInput = {
     id?: string
+    formationId: string
     cible: $Enums.TutorielInscriptionCible
     mode?: $Enums.TutorielInscriptionMode
     lienUrl?: string | null
@@ -73146,6 +73281,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    formationId?: StringFieldUpdateOperationsInput | string
     cible?: EnumTutorielInscriptionCibleFieldUpdateOperationsInput | $Enums.TutorielInscriptionCible
     mode?: EnumTutorielInscriptionModeFieldUpdateOperationsInput | $Enums.TutorielInscriptionMode
     lienUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73568,6 +73704,12 @@ export namespace Prisma {
     none?: FormationOngletWhereInput
   }
 
+  export type TutorielInscriptionListRelationFilter = {
+    every?: TutorielInscriptionWhereInput
+    some?: TutorielInscriptionWhereInput
+    none?: TutorielInscriptionWhereInput
+  }
+
   export type ConventionStagiaireListRelationFilter = {
     every?: ConventionStagiaireWhereInput
     some?: ConventionStagiaireWhereInput
@@ -73579,6 +73721,10 @@ export namespace Prisma {
   }
 
   export type FormationOngletOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TutorielInscriptionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -76554,8 +76700,14 @@ export namespace Prisma {
     not?: NestedEnumTutorielInscriptionModeFilter<$PrismaModel> | $Enums.TutorielInscriptionMode
   }
 
+  export type TutorielInscriptionFormationIdCibleCompoundUniqueInput = {
+    formationId: string
+    cible: $Enums.TutorielInscriptionCible
+  }
+
   export type TutorielInscriptionCountOrderByAggregateInput = {
     id?: SortOrder
+    formationId?: SortOrder
     cible?: SortOrder
     mode?: SortOrder
     lienUrl?: SortOrder
@@ -76567,6 +76719,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionMaxOrderByAggregateInput = {
     id?: SortOrder
+    formationId?: SortOrder
     cible?: SortOrder
     mode?: SortOrder
     lienUrl?: SortOrder
@@ -76578,6 +76731,7 @@ export namespace Prisma {
 
   export type TutorielInscriptionMinOrderByAggregateInput = {
     id?: SortOrder
+    formationId?: SortOrder
     cible?: SortOrder
     mode?: SortOrder
     lienUrl?: SortOrder
@@ -77194,6 +77348,13 @@ export namespace Prisma {
     connect?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
   }
 
+  export type TutorielInscriptionCreateNestedManyWithoutFormationInput = {
+    create?: XOR<TutorielInscriptionCreateWithoutFormationInput, TutorielInscriptionUncheckedCreateWithoutFormationInput> | TutorielInscriptionCreateWithoutFormationInput[] | TutorielInscriptionUncheckedCreateWithoutFormationInput[]
+    connectOrCreate?: TutorielInscriptionCreateOrConnectWithoutFormationInput | TutorielInscriptionCreateOrConnectWithoutFormationInput[]
+    createMany?: TutorielInscriptionCreateManyFormationInputEnvelope
+    connect?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
+  }
+
   export type ConventionStagiaireCreateNestedManyWithoutFormationInput = {
     create?: XOR<ConventionStagiaireCreateWithoutFormationInput, ConventionStagiaireUncheckedCreateWithoutFormationInput> | ConventionStagiaireCreateWithoutFormationInput[] | ConventionStagiaireUncheckedCreateWithoutFormationInput[]
     connectOrCreate?: ConventionStagiaireCreateOrConnectWithoutFormationInput | ConventionStagiaireCreateOrConnectWithoutFormationInput[]
@@ -77262,6 +77423,13 @@ export namespace Prisma {
     connectOrCreate?: FormationOngletCreateOrConnectWithoutFormationVedetteInput | FormationOngletCreateOrConnectWithoutFormationVedetteInput[]
     createMany?: FormationOngletCreateManyFormationVedetteInputEnvelope
     connect?: FormationOngletWhereUniqueInput | FormationOngletWhereUniqueInput[]
+  }
+
+  export type TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput = {
+    create?: XOR<TutorielInscriptionCreateWithoutFormationInput, TutorielInscriptionUncheckedCreateWithoutFormationInput> | TutorielInscriptionCreateWithoutFormationInput[] | TutorielInscriptionUncheckedCreateWithoutFormationInput[]
+    connectOrCreate?: TutorielInscriptionCreateOrConnectWithoutFormationInput | TutorielInscriptionCreateOrConnectWithoutFormationInput[]
+    createMany?: TutorielInscriptionCreateManyFormationInputEnvelope
+    connect?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
   }
 
   export type ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput = {
@@ -77453,6 +77621,20 @@ export namespace Prisma {
     deleteMany?: FormationOngletScalarWhereInput | FormationOngletScalarWhereInput[]
   }
 
+  export type TutorielInscriptionUpdateManyWithoutFormationNestedInput = {
+    create?: XOR<TutorielInscriptionCreateWithoutFormationInput, TutorielInscriptionUncheckedCreateWithoutFormationInput> | TutorielInscriptionCreateWithoutFormationInput[] | TutorielInscriptionUncheckedCreateWithoutFormationInput[]
+    connectOrCreate?: TutorielInscriptionCreateOrConnectWithoutFormationInput | TutorielInscriptionCreateOrConnectWithoutFormationInput[]
+    upsert?: TutorielInscriptionUpsertWithWhereUniqueWithoutFormationInput | TutorielInscriptionUpsertWithWhereUniqueWithoutFormationInput[]
+    createMany?: TutorielInscriptionCreateManyFormationInputEnvelope
+    set?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
+    disconnect?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
+    delete?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
+    connect?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
+    update?: TutorielInscriptionUpdateWithWhereUniqueWithoutFormationInput | TutorielInscriptionUpdateWithWhereUniqueWithoutFormationInput[]
+    updateMany?: TutorielInscriptionUpdateManyWithWhereWithoutFormationInput | TutorielInscriptionUpdateManyWithWhereWithoutFormationInput[]
+    deleteMany?: TutorielInscriptionScalarWhereInput | TutorielInscriptionScalarWhereInput[]
+  }
+
   export type ConventionStagiaireUpdateManyWithoutFormationNestedInput = {
     create?: XOR<ConventionStagiaireCreateWithoutFormationInput, ConventionStagiaireUncheckedCreateWithoutFormationInput> | ConventionStagiaireCreateWithoutFormationInput[] | ConventionStagiaireUncheckedCreateWithoutFormationInput[]
     connectOrCreate?: ConventionStagiaireCreateOrConnectWithoutFormationInput | ConventionStagiaireCreateOrConnectWithoutFormationInput[]
@@ -77591,6 +77773,20 @@ export namespace Prisma {
     update?: FormationOngletUpdateWithWhereUniqueWithoutFormationVedetteInput | FormationOngletUpdateWithWhereUniqueWithoutFormationVedetteInput[]
     updateMany?: FormationOngletUpdateManyWithWhereWithoutFormationVedetteInput | FormationOngletUpdateManyWithWhereWithoutFormationVedetteInput[]
     deleteMany?: FormationOngletScalarWhereInput | FormationOngletScalarWhereInput[]
+  }
+
+  export type TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput = {
+    create?: XOR<TutorielInscriptionCreateWithoutFormationInput, TutorielInscriptionUncheckedCreateWithoutFormationInput> | TutorielInscriptionCreateWithoutFormationInput[] | TutorielInscriptionUncheckedCreateWithoutFormationInput[]
+    connectOrCreate?: TutorielInscriptionCreateOrConnectWithoutFormationInput | TutorielInscriptionCreateOrConnectWithoutFormationInput[]
+    upsert?: TutorielInscriptionUpsertWithWhereUniqueWithoutFormationInput | TutorielInscriptionUpsertWithWhereUniqueWithoutFormationInput[]
+    createMany?: TutorielInscriptionCreateManyFormationInputEnvelope
+    set?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
+    disconnect?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
+    delete?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
+    connect?: TutorielInscriptionWhereUniqueInput | TutorielInscriptionWhereUniqueInput[]
+    update?: TutorielInscriptionUpdateWithWhereUniqueWithoutFormationInput | TutorielInscriptionUpdateWithWhereUniqueWithoutFormationInput[]
+    updateMany?: TutorielInscriptionUpdateManyWithWhereWithoutFormationInput | TutorielInscriptionUpdateManyWithWhereWithoutFormationInput[]
+    deleteMany?: TutorielInscriptionScalarWhereInput | TutorielInscriptionScalarWhereInput[]
   }
 
   export type ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput = {
@@ -78893,12 +79089,26 @@ export namespace Prisma {
     set?: $Enums.TypeLien | null
   }
 
+  export type FormationCreateNestedOneWithoutTutorielsInscriptionInput = {
+    create?: XOR<FormationCreateWithoutTutorielsInscriptionInput, FormationUncheckedCreateWithoutTutorielsInscriptionInput>
+    connectOrCreate?: FormationCreateOrConnectWithoutTutorielsInscriptionInput
+    connect?: FormationWhereUniqueInput
+  }
+
   export type EnumTutorielInscriptionCibleFieldUpdateOperationsInput = {
     set?: $Enums.TutorielInscriptionCible
   }
 
   export type EnumTutorielInscriptionModeFieldUpdateOperationsInput = {
     set?: $Enums.TutorielInscriptionMode
+  }
+
+  export type FormationUpdateOneRequiredWithoutTutorielsInscriptionNestedInput = {
+    create?: XOR<FormationCreateWithoutTutorielsInscriptionInput, FormationUncheckedCreateWithoutTutorielsInscriptionInput>
+    connectOrCreate?: FormationCreateOrConnectWithoutTutorielsInscriptionInput
+    upsert?: FormationUpsertWithoutTutorielsInscriptionInput
+    connect?: FormationWhereUniqueInput
+    update?: XOR<XOR<FormationUpdateToOneWithWhereWithoutTutorielsInscriptionInput, FormationUpdateWithoutTutorielsInscriptionInput>, FormationUncheckedUpdateWithoutTutorielsInscriptionInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -80829,6 +81039,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TutorielInscriptionCreateWithoutFormationInput = {
+    id?: string
+    cible: $Enums.TutorielInscriptionCible
+    mode?: $Enums.TutorielInscriptionMode
+    lienUrl?: string | null
+    pdfUrl?: string | null
+    youtubeUrl?: string | null
+    videoFichierUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type TutorielInscriptionUncheckedCreateWithoutFormationInput = {
+    id?: string
+    cible: $Enums.TutorielInscriptionCible
+    mode?: $Enums.TutorielInscriptionMode
+    lienUrl?: string | null
+    pdfUrl?: string | null
+    youtubeUrl?: string | null
+    videoFichierUrl?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type TutorielInscriptionCreateOrConnectWithoutFormationInput = {
+    where: TutorielInscriptionWhereUniqueInput
+    create: XOR<TutorielInscriptionCreateWithoutFormationInput, TutorielInscriptionUncheckedCreateWithoutFormationInput>
+  }
+
+  export type TutorielInscriptionCreateManyFormationInputEnvelope = {
+    data: TutorielInscriptionCreateManyFormationInput | TutorielInscriptionCreateManyFormationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ConventionStagiaireCreateWithoutFormationInput = {
     id?: string
     club?: string | null
@@ -81130,6 +81372,37 @@ export namespace Prisma {
     formationVedetteId?: StringNullableFilter<"FormationOnglet"> | string | null
   }
 
+  export type TutorielInscriptionUpsertWithWhereUniqueWithoutFormationInput = {
+    where: TutorielInscriptionWhereUniqueInput
+    update: XOR<TutorielInscriptionUpdateWithoutFormationInput, TutorielInscriptionUncheckedUpdateWithoutFormationInput>
+    create: XOR<TutorielInscriptionCreateWithoutFormationInput, TutorielInscriptionUncheckedCreateWithoutFormationInput>
+  }
+
+  export type TutorielInscriptionUpdateWithWhereUniqueWithoutFormationInput = {
+    where: TutorielInscriptionWhereUniqueInput
+    data: XOR<TutorielInscriptionUpdateWithoutFormationInput, TutorielInscriptionUncheckedUpdateWithoutFormationInput>
+  }
+
+  export type TutorielInscriptionUpdateManyWithWhereWithoutFormationInput = {
+    where: TutorielInscriptionScalarWhereInput
+    data: XOR<TutorielInscriptionUpdateManyMutationInput, TutorielInscriptionUncheckedUpdateManyWithoutFormationInput>
+  }
+
+  export type TutorielInscriptionScalarWhereInput = {
+    AND?: TutorielInscriptionScalarWhereInput | TutorielInscriptionScalarWhereInput[]
+    OR?: TutorielInscriptionScalarWhereInput[]
+    NOT?: TutorielInscriptionScalarWhereInput | TutorielInscriptionScalarWhereInput[]
+    id?: StringFilter<"TutorielInscription"> | string
+    formationId?: StringFilter<"TutorielInscription"> | string
+    cible?: EnumTutorielInscriptionCibleFilter<"TutorielInscription"> | $Enums.TutorielInscriptionCible
+    mode?: EnumTutorielInscriptionModeFilter<"TutorielInscription"> | $Enums.TutorielInscriptionMode
+    lienUrl?: StringNullableFilter<"TutorielInscription"> | string | null
+    pdfUrl?: StringNullableFilter<"TutorielInscription"> | string | null
+    youtubeUrl?: StringNullableFilter<"TutorielInscription"> | string | null
+    videoFichierUrl?: StringNullableFilter<"TutorielInscription"> | string | null
+    updatedAt?: DateTimeFilter<"TutorielInscription"> | Date | string
+  }
+
   export type ConventionStagiaireUpsertWithWhereUniqueWithoutFormationInput = {
     where: ConventionStagiaireWhereUniqueInput
     update: XOR<ConventionStagiaireUpdateWithoutFormationInput, ConventionStagiaireUncheckedUpdateWithoutFormationInput>
@@ -81301,6 +81574,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -81352,6 +81626,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -81478,6 +81753,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -81529,6 +81805,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -81580,6 +81857,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -81631,6 +81909,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -81884,6 +82163,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -81935,6 +82215,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -82141,6 +82422,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -82192,6 +82474,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -82318,6 +82601,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -82369,6 +82653,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -82420,6 +82705,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -82471,6 +82757,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -82591,6 +82878,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -82642,6 +82930,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -82805,6 +83094,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -82856,6 +83146,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -83064,6 +83355,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -83115,6 +83407,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -83695,6 +83988,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
   }
 
   export type FormationUncheckedCreateWithoutConventionStagiairesInput = {
@@ -83746,6 +84040,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
   }
 
   export type FormationCreateOrConnectWithoutConventionStagiairesInput = {
@@ -83908,6 +84203,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
   }
 
   export type FormationUncheckedUpdateWithoutConventionStagiairesInput = {
@@ -83959,6 +84255,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
   }
 
   export type SessionUpsertWithoutConventionStagiairesInput = {
@@ -84396,6 +84693,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -84447,6 +84745,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -84634,6 +84933,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -84685,6 +84985,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -85030,6 +85331,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -85081,6 +85383,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -85223,6 +85526,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -85274,6 +85578,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -85617,6 +85922,7 @@ export namespace Prisma {
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -85668,6 +85974,7 @@ export namespace Prisma {
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
     ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -85735,6 +86042,7 @@ export namespace Prisma {
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -85786,6 +86094,7 @@ export namespace Prisma {
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
     ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -85837,6 +86146,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
     messages?: MessageCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    tutorielsInscription?: TutorielInscriptionCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
   }
 
@@ -85888,6 +86198,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
     messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
     covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    tutorielsInscription?: TutorielInscriptionUncheckedCreateNestedManyWithoutFormationInput
     conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
   }
 
@@ -85955,6 +86266,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
     messages?: MessageUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    tutorielsInscription?: TutorielInscriptionUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
   }
 
@@ -86006,6 +86318,7 @@ export namespace Prisma {
     formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
     messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
     covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    tutorielsInscription?: TutorielInscriptionUncheckedUpdateManyWithoutFormationNestedInput
     conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
   }
 
@@ -86973,6 +87286,230 @@ export namespace Prisma {
     ordre?: IntFieldUpdateOperationsInput | number
   }
 
+  export type FormationCreateWithoutTutorielsInscriptionInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    lienExterne?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    fafaEligible?: boolean
+    bonFormationEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    fffCaptureActif?: boolean
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionCreateNestedManyWithoutFormationInput
+    documents?: DocumentCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurCreateNestedManyWithoutFormationInput
+    messages?: MessageCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletCreateNestedManyWithoutFormationVedetteInput
+    conventionStagiaires?: ConventionStagiaireCreateNestedManyWithoutFormationInput
+  }
+
+  export type FormationUncheckedCreateWithoutTutorielsInscriptionInput = {
+    id?: string
+    slug: string
+    titre: string
+    description?: string | null
+    lienExterne?: string | null
+    type: $Enums.TypeFormation
+    statut?: $Enums.StatutFormation
+    dureeHeures?: number | null
+    dureeLabel?: string | null
+    modeLabel?: string | null
+    lieu?: string | null
+    prix?: number | null
+    places?: number | null
+    lienVisio?: string | null
+    image?: string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: string | null
+    formateurRole?: string | null
+    ordre?: number
+    categorie?: $Enums.CategorieFormation
+    filiere?: $Enums.Filiere | null
+    cpfEligible?: boolean
+    fafaEligible?: boolean
+    bonFormationEligible?: boolean
+    modeInscription?: $Enums.ModeInscription
+    lienFffStagiaire?: string | null
+    lienFffClub?: string | null
+    fffCaptureActif?: boolean
+    dateDebut?: Date | string | null
+    dateFin?: Date | string | null
+    groupeEquivalence?: $Enums.GroupeEquivalence | null
+    varianteNode?: $Enums.VarianteNode | null
+    badgeNode?: string | null
+    shortNode?: string | null
+    tauxReussite?: string | null
+    tauxSatisfaction?: string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
+    inscriptions?: InscriptionUncheckedCreateNestedManyWithoutFormationInput
+    demandes?: DemandeInscriptionUncheckedCreateNestedManyWithoutFormationInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutFormationInput
+    heroSlides?: HeroSlideUncheckedCreateNestedManyWithoutFormationInput
+    formateurs?: FormationFormateurUncheckedCreateNestedManyWithoutFormationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutFormationInput
+    covoiturages?: CovoiturageUncheckedCreateNestedManyWithoutFormationInput
+    ongletsVedette?: FormationOngletUncheckedCreateNestedManyWithoutFormationVedetteInput
+    conventionStagiaires?: ConventionStagiaireUncheckedCreateNestedManyWithoutFormationInput
+  }
+
+  export type FormationCreateOrConnectWithoutTutorielsInscriptionInput = {
+    where: FormationWhereUniqueInput
+    create: XOR<FormationCreateWithoutTutorielsInscriptionInput, FormationUncheckedCreateWithoutTutorielsInscriptionInput>
+  }
+
+  export type FormationUpsertWithoutTutorielsInscriptionInput = {
+    update: XOR<FormationUpdateWithoutTutorielsInscriptionInput, FormationUncheckedUpdateWithoutTutorielsInscriptionInput>
+    create: XOR<FormationCreateWithoutTutorielsInscriptionInput, FormationUncheckedCreateWithoutTutorielsInscriptionInput>
+    where?: FormationWhereInput
+  }
+
+  export type FormationUpdateToOneWithWhereWithoutTutorielsInscriptionInput = {
+    where?: FormationWhereInput
+    data: XOR<FormationUpdateWithoutTutorielsInscriptionInput, FormationUncheckedUpdateWithoutTutorielsInscriptionInput>
+  }
+
+  export type FormationUpdateWithoutTutorielsInscriptionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUpdateManyWithoutFormationNestedInput
+    messages?: MessageUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUpdateManyWithoutFormationVedetteNestedInput
+    conventionStagiaires?: ConventionStagiaireUpdateManyWithoutFormationNestedInput
+  }
+
+  export type FormationUncheckedUpdateWithoutTutorielsInscriptionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    lienExterne?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumTypeFormationFieldUpdateOperationsInput | $Enums.TypeFormation
+    statut?: EnumStatutFormationFieldUpdateOperationsInput | $Enums.StatutFormation
+    dureeHeures?: NullableIntFieldUpdateOperationsInput | number | null
+    dureeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    modeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    lieu?: NullableStringFieldUpdateOperationsInput | string | null
+    prix?: NullableFloatFieldUpdateOperationsInput | number | null
+    places?: NullableIntFieldUpdateOperationsInput | number | null
+    lienVisio?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    programme?: NullableJsonNullValueInput | InputJsonValue
+    formateurNom?: NullableStringFieldUpdateOperationsInput | string | null
+    formateurRole?: NullableStringFieldUpdateOperationsInput | string | null
+    ordre?: IntFieldUpdateOperationsInput | number
+    categorie?: EnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation
+    filiere?: NullableEnumFiliereFieldUpdateOperationsInput | $Enums.Filiere | null
+    cpfEligible?: BoolFieldUpdateOperationsInput | boolean
+    fafaEligible?: BoolFieldUpdateOperationsInput | boolean
+    bonFormationEligible?: BoolFieldUpdateOperationsInput | boolean
+    modeInscription?: EnumModeInscriptionFieldUpdateOperationsInput | $Enums.ModeInscription
+    lienFffStagiaire?: NullableStringFieldUpdateOperationsInput | string | null
+    lienFffClub?: NullableStringFieldUpdateOperationsInput | string | null
+    fffCaptureActif?: BoolFieldUpdateOperationsInput | boolean
+    dateDebut?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    groupeEquivalence?: NullableEnumGroupeEquivalenceFieldUpdateOperationsInput | $Enums.GroupeEquivalence | null
+    varianteNode?: NullableEnumVarianteNodeFieldUpdateOperationsInput | $Enums.VarianteNode | null
+    badgeNode?: NullableStringFieldUpdateOperationsInput | string | null
+    shortNode?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
+    tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
+    resultats?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
+    inscriptions?: InscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    demandes?: DemandeInscriptionUncheckedUpdateManyWithoutFormationNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutFormationNestedInput
+    heroSlides?: HeroSlideUncheckedUpdateManyWithoutFormationNestedInput
+    formateurs?: FormationFormateurUncheckedUpdateManyWithoutFormationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutFormationNestedInput
+    covoiturages?: CovoiturageUncheckedUpdateManyWithoutFormationNestedInput
+    ongletsVedette?: FormationOngletUncheckedUpdateManyWithoutFormationVedetteNestedInput
+    conventionStagiaires?: ConventionStagiaireUncheckedUpdateManyWithoutFormationNestedInput
+  }
+
   export type InscriptionCreateManyUserInput = {
     id?: string
     formationId: string
@@ -87606,6 +88143,17 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type TutorielInscriptionCreateManyFormationInput = {
+    id?: string
+    cible: $Enums.TutorielInscriptionCible
+    mode?: $Enums.TutorielInscriptionMode
+    lienUrl?: string | null
+    pdfUrl?: string | null
+    youtubeUrl?: string | null
+    videoFichierUrl?: string | null
+    updatedAt?: Date | string
+  }
+
   export type ConventionStagiaireCreateManyFormationInput = {
     id?: string
     sessionId: string
@@ -88028,6 +88576,39 @@ export namespace Prisma {
     backgroundColor?: StringFieldUpdateOperationsInput | string
     opacity?: IntFieldUpdateOperationsInput | number
     effetVisuel?: EnumEffetVisuelFieldUpdateOperationsInput | $Enums.EffetVisuel
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TutorielInscriptionUpdateWithoutFormationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cible?: EnumTutorielInscriptionCibleFieldUpdateOperationsInput | $Enums.TutorielInscriptionCible
+    mode?: EnumTutorielInscriptionModeFieldUpdateOperationsInput | $Enums.TutorielInscriptionMode
+    lienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TutorielInscriptionUncheckedUpdateWithoutFormationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cible?: EnumTutorielInscriptionCibleFieldUpdateOperationsInput | $Enums.TutorielInscriptionCible
+    mode?: EnumTutorielInscriptionModeFieldUpdateOperationsInput | $Enums.TutorielInscriptionMode
+    lienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TutorielInscriptionUncheckedUpdateManyWithoutFormationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cible?: EnumTutorielInscriptionCibleFieldUpdateOperationsInput | $Enums.TutorielInscriptionCible
+    mode?: EnumTutorielInscriptionModeFieldUpdateOperationsInput | $Enums.TutorielInscriptionMode
+    lienUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    youtubeUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    videoFichierUrl?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

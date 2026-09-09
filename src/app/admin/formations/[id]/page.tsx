@@ -87,6 +87,12 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
           >
             Conventions de stage →
           </Link>
+          <Link
+            href={`/admin/formations/${id}/tutoriels-inscription`}
+            style={{ color: colors.navy, fontSize: 13, fontWeight: 700, textDecoration: "underline" }}
+          >
+            Tutoriels d&apos;inscription →
+          </Link>
         </div>
       </div>
       <FormationForm

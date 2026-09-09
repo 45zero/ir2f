@@ -267,15 +267,16 @@ model Formation {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  sessions       Session[]
-  inscriptions   Inscription[]
-  demandes       DemandeInscription[]
-  documents      Document[]
-  heroSlides     HeroSlide[]
-  formateurs     FormationFormateur[]
-  messages       Message[]
-  covoiturages   Covoiturage[]
-  ongletsVedette FormationOnglet[]
+  sessions             Session[]
+  inscriptions         Inscription[]
+  demandes             DemandeInscription[]
+  documents            Document[]
+  heroSlides           HeroSlide[]
+  formateurs           FormationFormateur[]
+  messages             Message[]
+  covoiturages         Covoiturage[]
+  ongletsVedette       FormationOnglet[]
+  tutorielsInscription TutorielInscription[]
 
   conventionStagiaires ConventionStagiaire[]
 
@@ -1307,12 +1308,14 @@ enum TutorielInscriptionMode {
 }
 
 // Petit lien discret affiché sous les boutons d'inscription FFF ("Je m'inscris" / "Le club
-// m'inscrit !") sur toutes les fiches formation concernées. Un seul enregistrement par cible
-// (STAGIAIRE/CLUB) ; le lien ne s'affiche que si un tutoriel est configuré pour cette cible.
+// m'inscrit !") sur la fiche publique d'une formation. Propre à chaque formation (au plus un
+// enregistrement par formation et par cible STAGIAIRE/CLUB) ; le lien ne s'affiche que si un
+// tutoriel est configuré pour cette cible sur cette formation.
 model TutorielInscription {
-  id    String                   @id @default(uuid())
-  cible TutorielInscriptionCible @unique
-  mode  TutorielInscriptionMode  @default(LIEN)
+  id          String                   @id @default(uuid())
+  formationId String
+  cible       TutorielInscriptionCible
+  mode        TutorielInscriptionMode  @default(LIEN)
 
   // Mode LIEN : ouvre directement cette URL dans un nouvel onglet.
   lienUrl String?
@@ -1327,5 +1330,8 @@ model TutorielInscription {
 
   updatedAt DateTime @updatedAt
 
+  formation Formation @relation(fields: [formationId], references: [id], onDelete: Cascade)
+
+  @@unique([formationId, cible])
   @@schema("ir2f")
 }
