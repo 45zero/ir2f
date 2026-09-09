@@ -1240,3 +1240,51 @@ model DocumentationFichier {
 
   @@schema("ir2f")
 }
+
+// ─── POP-UP D'ACCUEIL ────────────────────────────────
+
+// EDITO : le mot du président, affiché avec sa photo et sa signature. ANNONCE : campagne ponctuelle
+// (actualité, événement...) affichée pendant une période donnée, avec image/vidéo et lien au choix.
+enum TypePopup {
+  EDITO
+  ANNONCE
+
+  @@schema("ir2f")
+}
+
+// Un visiteur qui a fermé un pop-up ne le revoit plus (mémorisé par id côté navigateur, voir
+// popup-shared.ts) — publier un nouveau pop-up (nouvel id) le fait donc réapparaître pour tout le
+// monde, ce qui permet d'enchaîner les annonces au cours de l'année sans rouvrir l'édito à chaque fois.
+model Popup {
+  id    String    @id @default(uuid())
+  type  TypePopup @default(ANNONCE)
+  actif Boolean   @default(false)
+
+  // Photo en haut à gauche du pop-up (le président pour un édito, un visuel pour une annonce).
+  image String?
+  titre String
+  texte String
+
+  // Édito uniquement : identité + signature du président sous le mot.
+  auteurNom      String?
+  auteurFonction String?
+  signatureUrl   String?
+
+  // Annonce uniquement : vidéo et/ou lien (vers une page interne — tableau, formation... — ou externe).
+  youtubeUrl      String?
+  videoFichierUrl String?
+  lienLabel       String?
+  lienUrl         String?
+  lienType        TypeLien? @default(INTERNE)
+
+  // Délai avant ouverture automatique à l'arrivée sur le site, et fenêtre de diffusion (annonces).
+  delaiAffichage Int       @default(4)
+  dateDebut      DateTime?
+  dateFin        DateTime?
+  ordre          Int       @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@schema("ir2f")
+}

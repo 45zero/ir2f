@@ -753,6 +753,29 @@ exports.Prisma.DocumentationFichierScalarFieldEnum = {
   ordre: 'ordre'
 };
 
+exports.Prisma.PopupScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  actif: 'actif',
+  image: 'image',
+  titre: 'titre',
+  texte: 'texte',
+  auteurNom: 'auteurNom',
+  auteurFonction: 'auteurFonction',
+  signatureUrl: 'signatureUrl',
+  youtubeUrl: 'youtubeUrl',
+  videoFichierUrl: 'videoFichierUrl',
+  lienLabel: 'lienLabel',
+  lienUrl: 'lienUrl',
+  lienType: 'lienType',
+  delaiAffichage: 'delaiAffichage',
+  dateDebut: 'dateDebut',
+  dateFin: 'dateFin',
+  ordre: 'ordre',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -975,6 +998,11 @@ exports.DocumentationFormat = exports.$Enums.DocumentationFormat = {
   DOCX: 'DOCX'
 };
 
+exports.TypePopup = exports.$Enums.TypePopup = {
+  EDITO: 'EDITO',
+  ANNONCE: 'ANNONCE'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Formation: 'Formation',
@@ -1022,7 +1050,8 @@ exports.Prisma.ModelName = {
   ContactFormation: 'ContactFormation',
   DispositifFormationTableau: 'DispositifFormationTableau',
   DocumentationGroupe: 'DocumentationGroupe',
-  DocumentationFichier: 'DocumentationFichier'
+  DocumentationFichier: 'DocumentationFichier',
+  Popup: 'Popup'
 };
 
 /**

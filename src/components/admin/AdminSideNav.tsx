@@ -7,6 +7,7 @@ import { colors } from "@/lib/theme"
 const ITEMS = [
   { href: "/admin/accueil", label: "Page d'accueil", enabled: true },
   { href: "/admin/pages-hero", label: "Bandeaux (Hero)", enabled: true },
+  { href: "/admin/popup", label: "Pop-up d'accueil", enabled: true },
   { href: "/admin/formations", label: "Formations", enabled: true },
   { href: "/admin/conventions/templates", label: "Modèles de convention", enabled: true },
   { href: "/admin/clubs", label: "Annuaire clubs", enabled: true },
