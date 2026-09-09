@@ -1,18 +1,23 @@
 import { notFound } from "next/navigation"
 import { getArticleForEdit } from "@/lib/admin/articles"
+import { getAllSocialComptes } from "@/lib/admin/social-comptes"
 import { ArticleForm, type ArticleFormInitial } from "@/components/admin/ArticleForm"
+import { PublierReseauxPanel, type ReseauxPublies } from "@/components/admin/PublierReseauxPanel"
 import { colors, fontHeading } from "@/lib/theme"
 import type { ArticleSection } from "@/lib/articles-shared"
 
 export default async function EditArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const article = await getArticleForEdit(id)
+  const [article, comptes] = await Promise.all([getArticleForEdit(id), getAllSocialComptes()])
   if (!article) notFound()
+
+  const comptesActifs = comptes.filter((c) => c.actif)
 
   const initial: ArticleFormInitial = {
     titre: article.titre,
     slug: article.slug,
     contenu: article.contenu,
+    textePartage: article.textePartage ?? "",
     image: article.image ?? "",
     categorie: article.categorie ?? "",
     publie: article.publie,
@@ -25,6 +30,11 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
         Modifier l&apos;actualité
       </h1>
       <ArticleForm id={id} initial={initial} submitLabel="Enregistrer les modifications" />
+      <PublierReseauxPanel
+        articleId={id}
+        comptes={comptesActifs}
+        reseauxPublies={article.reseauxPublies as ReseauxPublies | null}
+      />
     </div>
   )
 }

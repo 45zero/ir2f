@@ -114,6 +114,11 @@ export type CovoituragePassager = $Result.DefaultSelection<Prisma.$CovoituragePa
  */
 export type Article = $Result.DefaultSelection<Prisma.$ArticlePayload>
 /**
+ * Model ReseauSocialCompte
+ * 
+ */
+export type ReseauSocialCompte = $Result.DefaultSelection<Prisma.$ReseauSocialComptePayload>
+/**
  * Model AccompagnementCard
  * 
  */
@@ -428,6 +433,14 @@ export const RenvoiCanal: {
 export type RenvoiCanal = (typeof RenvoiCanal)[keyof typeof RenvoiCanal]
 
 
+export const ReseauSocialPlateforme: {
+  FACEBOOK: 'FACEBOOK',
+  INSTAGRAM: 'INSTAGRAM'
+};
+
+export type ReseauSocialPlateforme = (typeof ReseauSocialPlateforme)[keyof typeof ReseauSocialPlateforme]
+
+
 export const IconeAccompagnement: {
   FINANCEMENT: 'FINANCEMENT',
   GESTION: 'GESTION',
@@ -626,6 +639,10 @@ export const StatutSignature: typeof $Enums.StatutSignature
 export type RenvoiCanal = $Enums.RenvoiCanal
 
 export const RenvoiCanal: typeof $Enums.RenvoiCanal
+
+export type ReseauSocialPlateforme = $Enums.ReseauSocialPlateforme
+
+export const ReseauSocialPlateforme: typeof $Enums.ReseauSocialPlateforme
 
 export type IconeAccompagnement = $Enums.IconeAccompagnement
 
@@ -1003,6 +1020,16 @@ export class PrismaClient<
     * ```
     */
   get article(): Prisma.ArticleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reseauSocialCompte`: Exposes CRUD operations for the **ReseauSocialCompte** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReseauSocialComptes
+    * const reseauSocialComptes = await prisma.reseauSocialCompte.findMany()
+    * ```
+    */
+  get reseauSocialCompte(): Prisma.ReseauSocialCompteDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.accompagnementCard`: Exposes CRUD operations for the **AccompagnementCard** model.
@@ -1747,6 +1774,7 @@ export namespace Prisma {
     Covoiturage: 'Covoiturage',
     CovoituragePassager: 'CovoituragePassager',
     Article: 'Article',
+    ReseauSocialCompte: 'ReseauSocialCompte',
     AccompagnementCard: 'AccompagnementCard',
     AccueilContenu: 'AccueilContenu',
     FooterContenu: 'FooterContenu',
@@ -1791,7 +1819,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "organigramme" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "accompagnementCard" | "accueilContenu" | "footerContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "formationOngletTableau" | "formationOngletSection" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau" | "documentationGroupe" | "documentationFichier" | "popup" | "tutorielInscription"
+      modelProps: "user" | "formation" | "formationFormateur" | "session" | "inscription" | "demandeInscription" | "demandeContact" | "document" | "documentDestinataire" | "signature" | "conventionTemplate" | "organigramme" | "club" | "conventionStagiaire" | "conventionSignataire" | "message" | "messageDestinataire" | "covoiturage" | "covoituragePassager" | "article" | "reseauSocialCompte" | "accompagnementCard" | "accueilContenu" | "footerContenu" | "statCle" | "heroSlide" | "formationTuile" | "formationOnglet" | "formationOngletTableau" | "formationOngletSection" | "pageHero" | "documentPasserelle" | "partenaire" | "contact" | "video" | "webinaire" | "dispositifFinancement" | "referentEmploi" | "pratiqueEmploiCard" | "emploiPageContenu" | "gestionEmploiContenu" | "formationEmployabiliteContenu" | "dispositifFormation" | "lienFormation" | "contactFormation" | "dispositifFormationTableau" | "documentationGroupe" | "documentationFichier" | "popup" | "tutorielInscription"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3272,6 +3300,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ArticleCountArgs<ExtArgs>
             result: $Utils.Optional<ArticleCountAggregateOutputType> | number
+          }
+        }
+      }
+      ReseauSocialCompte: {
+        payload: Prisma.$ReseauSocialComptePayload<ExtArgs>
+        fields: Prisma.ReseauSocialCompteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReseauSocialCompteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReseauSocialCompteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload>
+          }
+          findFirst: {
+            args: Prisma.ReseauSocialCompteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReseauSocialCompteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload>
+          }
+          findMany: {
+            args: Prisma.ReseauSocialCompteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload>[]
+          }
+          create: {
+            args: Prisma.ReseauSocialCompteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload>
+          }
+          createMany: {
+            args: Prisma.ReseauSocialCompteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReseauSocialCompteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload>[]
+          }
+          delete: {
+            args: Prisma.ReseauSocialCompteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload>
+          }
+          update: {
+            args: Prisma.ReseauSocialCompteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload>
+          }
+          deleteMany: {
+            args: Prisma.ReseauSocialCompteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReseauSocialCompteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReseauSocialCompteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload>[]
+          }
+          upsert: {
+            args: Prisma.ReseauSocialCompteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReseauSocialComptePayload>
+          }
+          aggregate: {
+            args: Prisma.ReseauSocialCompteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReseauSocialCompte>
+          }
+          groupBy: {
+            args: Prisma.ReseauSocialCompteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReseauSocialCompteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReseauSocialCompteCountArgs<ExtArgs>
+            result: $Utils.Optional<ReseauSocialCompteCountAggregateOutputType> | number
           }
         }
       }
@@ -5549,6 +5651,7 @@ export namespace Prisma {
     covoiturage?: CovoiturageOmit
     covoituragePassager?: CovoituragePassagerOmit
     article?: ArticleOmit
+    reseauSocialCompte?: ReseauSocialCompteOmit
     accompagnementCard?: AccompagnementCardOmit
     accueilContenu?: AccueilContenuOmit
     footerContenu?: FooterContenuOmit
@@ -29345,6 +29448,7 @@ export namespace Prisma {
     slug: string | null
     contenu: string | null
     image: string | null
+    textePartage: string | null
     categorie: $Enums.CategorieFormation | null
     publie: boolean | null
     auteurId: string | null
@@ -29358,6 +29462,7 @@ export namespace Prisma {
     slug: string | null
     contenu: string | null
     image: string | null
+    textePartage: string | null
     categorie: $Enums.CategorieFormation | null
     publie: boolean | null
     auteurId: string | null
@@ -29371,12 +29476,14 @@ export namespace Prisma {
     slug: number
     contenu: number
     image: number
+    textePartage: number
     categorie: number
     publie: number
     auteurId: number
     createdAt: number
     updatedAt: number
     sections: number
+    reseauxPublies: number
     _all: number
   }
 
@@ -29387,6 +29494,7 @@ export namespace Prisma {
     slug?: true
     contenu?: true
     image?: true
+    textePartage?: true
     categorie?: true
     publie?: true
     auteurId?: true
@@ -29400,6 +29508,7 @@ export namespace Prisma {
     slug?: true
     contenu?: true
     image?: true
+    textePartage?: true
     categorie?: true
     publie?: true
     auteurId?: true
@@ -29413,12 +29522,14 @@ export namespace Prisma {
     slug?: true
     contenu?: true
     image?: true
+    textePartage?: true
     categorie?: true
     publie?: true
     auteurId?: true
     createdAt?: true
     updatedAt?: true
     sections?: true
+    reseauxPublies?: true
     _all?: true
   }
 
@@ -29500,12 +29611,14 @@ export namespace Prisma {
     slug: string
     contenu: string
     image: string | null
+    textePartage: string | null
     categorie: $Enums.CategorieFormation | null
     publie: boolean
     auteurId: string
     createdAt: Date
     updatedAt: Date
     sections: JsonValue | null
+    reseauxPublies: JsonValue | null
     _count: ArticleCountAggregateOutputType | null
     _min: ArticleMinAggregateOutputType | null
     _max: ArticleMaxAggregateOutputType | null
@@ -29531,12 +29644,14 @@ export namespace Prisma {
     slug?: boolean
     contenu?: boolean
     image?: boolean
+    textePartage?: boolean
     categorie?: boolean
     publie?: boolean
     auteurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sections?: boolean
+    reseauxPublies?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
@@ -29546,12 +29661,14 @@ export namespace Prisma {
     slug?: boolean
     contenu?: boolean
     image?: boolean
+    textePartage?: boolean
     categorie?: boolean
     publie?: boolean
     auteurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sections?: boolean
+    reseauxPublies?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
@@ -29561,12 +29678,14 @@ export namespace Prisma {
     slug?: boolean
     contenu?: boolean
     image?: boolean
+    textePartage?: boolean
     categorie?: boolean
     publie?: boolean
     auteurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sections?: boolean
+    reseauxPublies?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
@@ -29576,15 +29695,17 @@ export namespace Prisma {
     slug?: boolean
     contenu?: boolean
     image?: boolean
+    textePartage?: boolean
     categorie?: boolean
     publie?: boolean
     auteurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sections?: boolean
+    reseauxPublies?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "slug" | "contenu" | "image" | "categorie" | "publie" | "auteurId" | "createdAt" | "updatedAt" | "sections", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "slug" | "contenu" | "image" | "textePartage" | "categorie" | "publie" | "auteurId" | "createdAt" | "updatedAt" | "sections" | "reseauxPublies", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -29606,12 +29727,14 @@ export namespace Prisma {
       slug: string
       contenu: string
       image: string | null
+      textePartage: string | null
       categorie: $Enums.CategorieFormation | null
       publie: boolean
       auteurId: string
       createdAt: Date
       updatedAt: Date
       sections: Prisma.JsonValue | null
+      reseauxPublies: Prisma.JsonValue | null
     }, ExtArgs["result"]["article"]>
     composites: {}
   }
@@ -30041,12 +30164,14 @@ export namespace Prisma {
     readonly slug: FieldRef<"Article", 'String'>
     readonly contenu: FieldRef<"Article", 'String'>
     readonly image: FieldRef<"Article", 'String'>
+    readonly textePartage: FieldRef<"Article", 'String'>
     readonly categorie: FieldRef<"Article", 'CategorieFormation'>
     readonly publie: FieldRef<"Article", 'Boolean'>
     readonly auteurId: FieldRef<"Article", 'String'>
     readonly createdAt: FieldRef<"Article", 'DateTime'>
     readonly updatedAt: FieldRef<"Article", 'DateTime'>
     readonly sections: FieldRef<"Article", 'Json'>
+    readonly reseauxPublies: FieldRef<"Article", 'Json'>
   }
     
 
@@ -30463,6 +30588,1045 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ArticleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ReseauSocialCompte
+   */
+
+  export type AggregateReseauSocialCompte = {
+    _count: ReseauSocialCompteCountAggregateOutputType | null
+    _min: ReseauSocialCompteMinAggregateOutputType | null
+    _max: ReseauSocialCompteMaxAggregateOutputType | null
+  }
+
+  export type ReseauSocialCompteMinAggregateOutputType = {
+    id: string | null
+    plateforme: $Enums.ReseauSocialPlateforme | null
+    label: string | null
+    externalId: string | null
+    accessToken: string | null
+    actif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReseauSocialCompteMaxAggregateOutputType = {
+    id: string | null
+    plateforme: $Enums.ReseauSocialPlateforme | null
+    label: string | null
+    externalId: string | null
+    accessToken: string | null
+    actif: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReseauSocialCompteCountAggregateOutputType = {
+    id: number
+    plateforme: number
+    label: number
+    externalId: number
+    accessToken: number
+    actif: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ReseauSocialCompteMinAggregateInputType = {
+    id?: true
+    plateforme?: true
+    label?: true
+    externalId?: true
+    accessToken?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReseauSocialCompteMaxAggregateInputType = {
+    id?: true
+    plateforme?: true
+    label?: true
+    externalId?: true
+    accessToken?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReseauSocialCompteCountAggregateInputType = {
+    id?: true
+    plateforme?: true
+    label?: true
+    externalId?: true
+    accessToken?: true
+    actif?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ReseauSocialCompteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReseauSocialCompte to aggregate.
+     */
+    where?: ReseauSocialCompteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReseauSocialComptes to fetch.
+     */
+    orderBy?: ReseauSocialCompteOrderByWithRelationInput | ReseauSocialCompteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReseauSocialCompteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReseauSocialComptes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReseauSocialComptes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ReseauSocialComptes
+    **/
+    _count?: true | ReseauSocialCompteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReseauSocialCompteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReseauSocialCompteMaxAggregateInputType
+  }
+
+  export type GetReseauSocialCompteAggregateType<T extends ReseauSocialCompteAggregateArgs> = {
+        [P in keyof T & keyof AggregateReseauSocialCompte]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReseauSocialCompte[P]>
+      : GetScalarType<T[P], AggregateReseauSocialCompte[P]>
+  }
+
+
+
+
+  export type ReseauSocialCompteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReseauSocialCompteWhereInput
+    orderBy?: ReseauSocialCompteOrderByWithAggregationInput | ReseauSocialCompteOrderByWithAggregationInput[]
+    by: ReseauSocialCompteScalarFieldEnum[] | ReseauSocialCompteScalarFieldEnum
+    having?: ReseauSocialCompteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReseauSocialCompteCountAggregateInputType | true
+    _min?: ReseauSocialCompteMinAggregateInputType
+    _max?: ReseauSocialCompteMaxAggregateInputType
+  }
+
+  export type ReseauSocialCompteGroupByOutputType = {
+    id: string
+    plateforme: $Enums.ReseauSocialPlateforme
+    label: string
+    externalId: string
+    accessToken: string
+    actif: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ReseauSocialCompteCountAggregateOutputType | null
+    _min: ReseauSocialCompteMinAggregateOutputType | null
+    _max: ReseauSocialCompteMaxAggregateOutputType | null
+  }
+
+  type GetReseauSocialCompteGroupByPayload<T extends ReseauSocialCompteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReseauSocialCompteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReseauSocialCompteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReseauSocialCompteGroupByOutputType[P]>
+            : GetScalarType<T[P], ReseauSocialCompteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReseauSocialCompteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    plateforme?: boolean
+    label?: boolean
+    externalId?: boolean
+    accessToken?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["reseauSocialCompte"]>
+
+  export type ReseauSocialCompteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    plateforme?: boolean
+    label?: boolean
+    externalId?: boolean
+    accessToken?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["reseauSocialCompte"]>
+
+  export type ReseauSocialCompteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    plateforme?: boolean
+    label?: boolean
+    externalId?: boolean
+    accessToken?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["reseauSocialCompte"]>
+
+  export type ReseauSocialCompteSelectScalar = {
+    id?: boolean
+    plateforme?: boolean
+    label?: boolean
+    externalId?: boolean
+    accessToken?: boolean
+    actif?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ReseauSocialCompteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "plateforme" | "label" | "externalId" | "accessToken" | "actif" | "createdAt" | "updatedAt", ExtArgs["result"]["reseauSocialCompte"]>
+
+  export type $ReseauSocialComptePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ReseauSocialCompte"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      plateforme: $Enums.ReseauSocialPlateforme
+      label: string
+      externalId: string
+      accessToken: string
+      actif: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["reseauSocialCompte"]>
+    composites: {}
+  }
+
+  type ReseauSocialCompteGetPayload<S extends boolean | null | undefined | ReseauSocialCompteDefaultArgs> = $Result.GetResult<Prisma.$ReseauSocialComptePayload, S>
+
+  type ReseauSocialCompteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReseauSocialCompteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReseauSocialCompteCountAggregateInputType | true
+    }
+
+  export interface ReseauSocialCompteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReseauSocialCompte'], meta: { name: 'ReseauSocialCompte' } }
+    /**
+     * Find zero or one ReseauSocialCompte that matches the filter.
+     * @param {ReseauSocialCompteFindUniqueArgs} args - Arguments to find a ReseauSocialCompte
+     * @example
+     * // Get one ReseauSocialCompte
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReseauSocialCompteFindUniqueArgs>(args: SelectSubset<T, ReseauSocialCompteFindUniqueArgs<ExtArgs>>): Prisma__ReseauSocialCompteClient<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ReseauSocialCompte that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReseauSocialCompteFindUniqueOrThrowArgs} args - Arguments to find a ReseauSocialCompte
+     * @example
+     * // Get one ReseauSocialCompte
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReseauSocialCompteFindUniqueOrThrowArgs>(args: SelectSubset<T, ReseauSocialCompteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReseauSocialCompteClient<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReseauSocialCompte that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReseauSocialCompteFindFirstArgs} args - Arguments to find a ReseauSocialCompte
+     * @example
+     * // Get one ReseauSocialCompte
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReseauSocialCompteFindFirstArgs>(args?: SelectSubset<T, ReseauSocialCompteFindFirstArgs<ExtArgs>>): Prisma__ReseauSocialCompteClient<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReseauSocialCompte that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReseauSocialCompteFindFirstOrThrowArgs} args - Arguments to find a ReseauSocialCompte
+     * @example
+     * // Get one ReseauSocialCompte
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReseauSocialCompteFindFirstOrThrowArgs>(args?: SelectSubset<T, ReseauSocialCompteFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReseauSocialCompteClient<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ReseauSocialComptes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReseauSocialCompteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ReseauSocialComptes
+     * const reseauSocialComptes = await prisma.reseauSocialCompte.findMany()
+     * 
+     * // Get first 10 ReseauSocialComptes
+     * const reseauSocialComptes = await prisma.reseauSocialCompte.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const reseauSocialCompteWithIdOnly = await prisma.reseauSocialCompte.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReseauSocialCompteFindManyArgs>(args?: SelectSubset<T, ReseauSocialCompteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ReseauSocialCompte.
+     * @param {ReseauSocialCompteCreateArgs} args - Arguments to create a ReseauSocialCompte.
+     * @example
+     * // Create one ReseauSocialCompte
+     * const ReseauSocialCompte = await prisma.reseauSocialCompte.create({
+     *   data: {
+     *     // ... data to create a ReseauSocialCompte
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReseauSocialCompteCreateArgs>(args: SelectSubset<T, ReseauSocialCompteCreateArgs<ExtArgs>>): Prisma__ReseauSocialCompteClient<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ReseauSocialComptes.
+     * @param {ReseauSocialCompteCreateManyArgs} args - Arguments to create many ReseauSocialComptes.
+     * @example
+     * // Create many ReseauSocialComptes
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReseauSocialCompteCreateManyArgs>(args?: SelectSubset<T, ReseauSocialCompteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ReseauSocialComptes and returns the data saved in the database.
+     * @param {ReseauSocialCompteCreateManyAndReturnArgs} args - Arguments to create many ReseauSocialComptes.
+     * @example
+     * // Create many ReseauSocialComptes
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ReseauSocialComptes and only return the `id`
+     * const reseauSocialCompteWithIdOnly = await prisma.reseauSocialCompte.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReseauSocialCompteCreateManyAndReturnArgs>(args?: SelectSubset<T, ReseauSocialCompteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ReseauSocialCompte.
+     * @param {ReseauSocialCompteDeleteArgs} args - Arguments to delete one ReseauSocialCompte.
+     * @example
+     * // Delete one ReseauSocialCompte
+     * const ReseauSocialCompte = await prisma.reseauSocialCompte.delete({
+     *   where: {
+     *     // ... filter to delete one ReseauSocialCompte
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReseauSocialCompteDeleteArgs>(args: SelectSubset<T, ReseauSocialCompteDeleteArgs<ExtArgs>>): Prisma__ReseauSocialCompteClient<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ReseauSocialCompte.
+     * @param {ReseauSocialCompteUpdateArgs} args - Arguments to update one ReseauSocialCompte.
+     * @example
+     * // Update one ReseauSocialCompte
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReseauSocialCompteUpdateArgs>(args: SelectSubset<T, ReseauSocialCompteUpdateArgs<ExtArgs>>): Prisma__ReseauSocialCompteClient<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ReseauSocialComptes.
+     * @param {ReseauSocialCompteDeleteManyArgs} args - Arguments to filter ReseauSocialComptes to delete.
+     * @example
+     * // Delete a few ReseauSocialComptes
+     * const { count } = await prisma.reseauSocialCompte.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReseauSocialCompteDeleteManyArgs>(args?: SelectSubset<T, ReseauSocialCompteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReseauSocialComptes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReseauSocialCompteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ReseauSocialComptes
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReseauSocialCompteUpdateManyArgs>(args: SelectSubset<T, ReseauSocialCompteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReseauSocialComptes and returns the data updated in the database.
+     * @param {ReseauSocialCompteUpdateManyAndReturnArgs} args - Arguments to update many ReseauSocialComptes.
+     * @example
+     * // Update many ReseauSocialComptes
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ReseauSocialComptes and only return the `id`
+     * const reseauSocialCompteWithIdOnly = await prisma.reseauSocialCompte.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReseauSocialCompteUpdateManyAndReturnArgs>(args: SelectSubset<T, ReseauSocialCompteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ReseauSocialCompte.
+     * @param {ReseauSocialCompteUpsertArgs} args - Arguments to update or create a ReseauSocialCompte.
+     * @example
+     * // Update or create a ReseauSocialCompte
+     * const reseauSocialCompte = await prisma.reseauSocialCompte.upsert({
+     *   create: {
+     *     // ... data to create a ReseauSocialCompte
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ReseauSocialCompte we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReseauSocialCompteUpsertArgs>(args: SelectSubset<T, ReseauSocialCompteUpsertArgs<ExtArgs>>): Prisma__ReseauSocialCompteClient<$Result.GetResult<Prisma.$ReseauSocialComptePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ReseauSocialComptes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReseauSocialCompteCountArgs} args - Arguments to filter ReseauSocialComptes to count.
+     * @example
+     * // Count the number of ReseauSocialComptes
+     * const count = await prisma.reseauSocialCompte.count({
+     *   where: {
+     *     // ... the filter for the ReseauSocialComptes we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReseauSocialCompteCountArgs>(
+      args?: Subset<T, ReseauSocialCompteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReseauSocialCompteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ReseauSocialCompte.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReseauSocialCompteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReseauSocialCompteAggregateArgs>(args: Subset<T, ReseauSocialCompteAggregateArgs>): Prisma.PrismaPromise<GetReseauSocialCompteAggregateType<T>>
+
+    /**
+     * Group by ReseauSocialCompte.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReseauSocialCompteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReseauSocialCompteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReseauSocialCompteGroupByArgs['orderBy'] }
+        : { orderBy?: ReseauSocialCompteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReseauSocialCompteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReseauSocialCompteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ReseauSocialCompte model
+   */
+  readonly fields: ReseauSocialCompteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ReseauSocialCompte.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReseauSocialCompteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ReseauSocialCompte model
+   */
+  interface ReseauSocialCompteFieldRefs {
+    readonly id: FieldRef<"ReseauSocialCompte", 'String'>
+    readonly plateforme: FieldRef<"ReseauSocialCompte", 'ReseauSocialPlateforme'>
+    readonly label: FieldRef<"ReseauSocialCompte", 'String'>
+    readonly externalId: FieldRef<"ReseauSocialCompte", 'String'>
+    readonly accessToken: FieldRef<"ReseauSocialCompte", 'String'>
+    readonly actif: FieldRef<"ReseauSocialCompte", 'Boolean'>
+    readonly createdAt: FieldRef<"ReseauSocialCompte", 'DateTime'>
+    readonly updatedAt: FieldRef<"ReseauSocialCompte", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ReseauSocialCompte findUnique
+   */
+  export type ReseauSocialCompteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * Filter, which ReseauSocialCompte to fetch.
+     */
+    where: ReseauSocialCompteWhereUniqueInput
+  }
+
+  /**
+   * ReseauSocialCompte findUniqueOrThrow
+   */
+  export type ReseauSocialCompteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * Filter, which ReseauSocialCompte to fetch.
+     */
+    where: ReseauSocialCompteWhereUniqueInput
+  }
+
+  /**
+   * ReseauSocialCompte findFirst
+   */
+  export type ReseauSocialCompteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * Filter, which ReseauSocialCompte to fetch.
+     */
+    where?: ReseauSocialCompteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReseauSocialComptes to fetch.
+     */
+    orderBy?: ReseauSocialCompteOrderByWithRelationInput | ReseauSocialCompteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReseauSocialComptes.
+     */
+    cursor?: ReseauSocialCompteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReseauSocialComptes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReseauSocialComptes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReseauSocialComptes.
+     */
+    distinct?: ReseauSocialCompteScalarFieldEnum | ReseauSocialCompteScalarFieldEnum[]
+  }
+
+  /**
+   * ReseauSocialCompte findFirstOrThrow
+   */
+  export type ReseauSocialCompteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * Filter, which ReseauSocialCompte to fetch.
+     */
+    where?: ReseauSocialCompteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReseauSocialComptes to fetch.
+     */
+    orderBy?: ReseauSocialCompteOrderByWithRelationInput | ReseauSocialCompteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReseauSocialComptes.
+     */
+    cursor?: ReseauSocialCompteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReseauSocialComptes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReseauSocialComptes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReseauSocialComptes.
+     */
+    distinct?: ReseauSocialCompteScalarFieldEnum | ReseauSocialCompteScalarFieldEnum[]
+  }
+
+  /**
+   * ReseauSocialCompte findMany
+   */
+  export type ReseauSocialCompteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * Filter, which ReseauSocialComptes to fetch.
+     */
+    where?: ReseauSocialCompteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReseauSocialComptes to fetch.
+     */
+    orderBy?: ReseauSocialCompteOrderByWithRelationInput | ReseauSocialCompteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ReseauSocialComptes.
+     */
+    cursor?: ReseauSocialCompteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReseauSocialComptes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReseauSocialComptes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReseauSocialComptes.
+     */
+    distinct?: ReseauSocialCompteScalarFieldEnum | ReseauSocialCompteScalarFieldEnum[]
+  }
+
+  /**
+   * ReseauSocialCompte create
+   */
+  export type ReseauSocialCompteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * The data needed to create a ReseauSocialCompte.
+     */
+    data: XOR<ReseauSocialCompteCreateInput, ReseauSocialCompteUncheckedCreateInput>
+  }
+
+  /**
+   * ReseauSocialCompte createMany
+   */
+  export type ReseauSocialCompteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ReseauSocialComptes.
+     */
+    data: ReseauSocialCompteCreateManyInput | ReseauSocialCompteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReseauSocialCompte createManyAndReturn
+   */
+  export type ReseauSocialCompteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * The data used to create many ReseauSocialComptes.
+     */
+    data: ReseauSocialCompteCreateManyInput | ReseauSocialCompteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReseauSocialCompte update
+   */
+  export type ReseauSocialCompteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * The data needed to update a ReseauSocialCompte.
+     */
+    data: XOR<ReseauSocialCompteUpdateInput, ReseauSocialCompteUncheckedUpdateInput>
+    /**
+     * Choose, which ReseauSocialCompte to update.
+     */
+    where: ReseauSocialCompteWhereUniqueInput
+  }
+
+  /**
+   * ReseauSocialCompte updateMany
+   */
+  export type ReseauSocialCompteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ReseauSocialComptes.
+     */
+    data: XOR<ReseauSocialCompteUpdateManyMutationInput, ReseauSocialCompteUncheckedUpdateManyInput>
+    /**
+     * Filter which ReseauSocialComptes to update
+     */
+    where?: ReseauSocialCompteWhereInput
+    /**
+     * Limit how many ReseauSocialComptes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReseauSocialCompte updateManyAndReturn
+   */
+  export type ReseauSocialCompteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * The data used to update ReseauSocialComptes.
+     */
+    data: XOR<ReseauSocialCompteUpdateManyMutationInput, ReseauSocialCompteUncheckedUpdateManyInput>
+    /**
+     * Filter which ReseauSocialComptes to update
+     */
+    where?: ReseauSocialCompteWhereInput
+    /**
+     * Limit how many ReseauSocialComptes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReseauSocialCompte upsert
+   */
+  export type ReseauSocialCompteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * The filter to search for the ReseauSocialCompte to update in case it exists.
+     */
+    where: ReseauSocialCompteWhereUniqueInput
+    /**
+     * In case the ReseauSocialCompte found by the `where` argument doesn't exist, create a new ReseauSocialCompte with this data.
+     */
+    create: XOR<ReseauSocialCompteCreateInput, ReseauSocialCompteUncheckedCreateInput>
+    /**
+     * In case the ReseauSocialCompte was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReseauSocialCompteUpdateInput, ReseauSocialCompteUncheckedUpdateInput>
+  }
+
+  /**
+   * ReseauSocialCompte delete
+   */
+  export type ReseauSocialCompteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
+    /**
+     * Filter which ReseauSocialCompte to delete.
+     */
+    where: ReseauSocialCompteWhereUniqueInput
+  }
+
+  /**
+   * ReseauSocialCompte deleteMany
+   */
+  export type ReseauSocialCompteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReseauSocialComptes to delete
+     */
+    where?: ReseauSocialCompteWhereInput
+    /**
+     * Limit how many ReseauSocialComptes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReseauSocialCompte without action
+   */
+  export type ReseauSocialCompteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReseauSocialCompte
+     */
+    select?: ReseauSocialCompteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReseauSocialCompte
+     */
+    omit?: ReseauSocialCompteOmit<ExtArgs> | null
   }
 
 
@@ -63279,15 +64443,31 @@ export namespace Prisma {
     slug: 'slug',
     contenu: 'contenu',
     image: 'image',
+    textePartage: 'textePartage',
     categorie: 'categorie',
     publie: 'publie',
     auteurId: 'auteurId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    sections: 'sections'
+    sections: 'sections',
+    reseauxPublies: 'reseauxPublies'
   };
 
   export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
+
+
+  export const ReseauSocialCompteScalarFieldEnum: {
+    id: 'id',
+    plateforme: 'plateforme',
+    label: 'label',
+    externalId: 'externalId',
+    accessToken: 'accessToken',
+    actif: 'actif',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ReseauSocialCompteScalarFieldEnum = (typeof ReseauSocialCompteScalarFieldEnum)[keyof typeof ReseauSocialCompteScalarFieldEnum]
 
 
   export const AccompagnementCardScalarFieldEnum: {
@@ -64077,6 +65257,20 @@ export namespace Prisma {
    * Reference to a field of type 'StatutCovoiturage[]'
    */
   export type ListEnumStatutCovoiturageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutCovoiturage[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReseauSocialPlateforme'
+   */
+  export type EnumReseauSocialPlateformeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReseauSocialPlateforme'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReseauSocialPlateforme[]'
+   */
+  export type ListEnumReseauSocialPlateformeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReseauSocialPlateforme[]'>
     
 
 
@@ -66182,12 +67376,14 @@ export namespace Prisma {
     slug?: StringFilter<"Article"> | string
     contenu?: StringFilter<"Article"> | string
     image?: StringNullableFilter<"Article"> | string | null
+    textePartage?: StringNullableFilter<"Article"> | string | null
     categorie?: EnumCategorieFormationNullableFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolFilter<"Article"> | boolean
     auteurId?: StringFilter<"Article"> | string
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     sections?: JsonNullableFilter<"Article">
+    reseauxPublies?: JsonNullableFilter<"Article">
     auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -66197,12 +67393,14 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrderInput | SortOrder
+    textePartage?: SortOrderInput | SortOrder
     categorie?: SortOrderInput | SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     sections?: SortOrderInput | SortOrder
+    reseauxPublies?: SortOrderInput | SortOrder
     auteur?: UserOrderByWithRelationInput
   }
 
@@ -66215,12 +67413,14 @@ export namespace Prisma {
     titre?: StringFilter<"Article"> | string
     contenu?: StringFilter<"Article"> | string
     image?: StringNullableFilter<"Article"> | string | null
+    textePartage?: StringNullableFilter<"Article"> | string | null
     categorie?: EnumCategorieFormationNullableFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolFilter<"Article"> | boolean
     auteurId?: StringFilter<"Article"> | string
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     sections?: JsonNullableFilter<"Article">
+    reseauxPublies?: JsonNullableFilter<"Article">
     auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "slug">
 
@@ -66230,12 +67430,14 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrderInput | SortOrder
+    textePartage?: SortOrderInput | SortOrder
     categorie?: SortOrderInput | SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     sections?: SortOrderInput | SortOrder
+    reseauxPublies?: SortOrderInput | SortOrder
     _count?: ArticleCountOrderByAggregateInput
     _max?: ArticleMaxOrderByAggregateInput
     _min?: ArticleMinOrderByAggregateInput
@@ -66250,12 +67452,81 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Article"> | string
     contenu?: StringWithAggregatesFilter<"Article"> | string
     image?: StringNullableWithAggregatesFilter<"Article"> | string | null
+    textePartage?: StringNullableWithAggregatesFilter<"Article"> | string | null
     categorie?: EnumCategorieFormationNullableWithAggregatesFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolWithAggregatesFilter<"Article"> | boolean
     auteurId?: StringWithAggregatesFilter<"Article"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     sections?: JsonNullableWithAggregatesFilter<"Article">
+    reseauxPublies?: JsonNullableWithAggregatesFilter<"Article">
+  }
+
+  export type ReseauSocialCompteWhereInput = {
+    AND?: ReseauSocialCompteWhereInput | ReseauSocialCompteWhereInput[]
+    OR?: ReseauSocialCompteWhereInput[]
+    NOT?: ReseauSocialCompteWhereInput | ReseauSocialCompteWhereInput[]
+    id?: StringFilter<"ReseauSocialCompte"> | string
+    plateforme?: EnumReseauSocialPlateformeFilter<"ReseauSocialCompte"> | $Enums.ReseauSocialPlateforme
+    label?: StringFilter<"ReseauSocialCompte"> | string
+    externalId?: StringFilter<"ReseauSocialCompte"> | string
+    accessToken?: StringFilter<"ReseauSocialCompte"> | string
+    actif?: BoolFilter<"ReseauSocialCompte"> | boolean
+    createdAt?: DateTimeFilter<"ReseauSocialCompte"> | Date | string
+    updatedAt?: DateTimeFilter<"ReseauSocialCompte"> | Date | string
+  }
+
+  export type ReseauSocialCompteOrderByWithRelationInput = {
+    id?: SortOrder
+    plateforme?: SortOrder
+    label?: SortOrder
+    externalId?: SortOrder
+    accessToken?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReseauSocialCompteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ReseauSocialCompteWhereInput | ReseauSocialCompteWhereInput[]
+    OR?: ReseauSocialCompteWhereInput[]
+    NOT?: ReseauSocialCompteWhereInput | ReseauSocialCompteWhereInput[]
+    plateforme?: EnumReseauSocialPlateformeFilter<"ReseauSocialCompte"> | $Enums.ReseauSocialPlateforme
+    label?: StringFilter<"ReseauSocialCompte"> | string
+    externalId?: StringFilter<"ReseauSocialCompte"> | string
+    accessToken?: StringFilter<"ReseauSocialCompte"> | string
+    actif?: BoolFilter<"ReseauSocialCompte"> | boolean
+    createdAt?: DateTimeFilter<"ReseauSocialCompte"> | Date | string
+    updatedAt?: DateTimeFilter<"ReseauSocialCompte"> | Date | string
+  }, "id">
+
+  export type ReseauSocialCompteOrderByWithAggregationInput = {
+    id?: SortOrder
+    plateforme?: SortOrder
+    label?: SortOrder
+    externalId?: SortOrder
+    accessToken?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ReseauSocialCompteCountOrderByAggregateInput
+    _max?: ReseauSocialCompteMaxOrderByAggregateInput
+    _min?: ReseauSocialCompteMinOrderByAggregateInput
+  }
+
+  export type ReseauSocialCompteScalarWhereWithAggregatesInput = {
+    AND?: ReseauSocialCompteScalarWhereWithAggregatesInput | ReseauSocialCompteScalarWhereWithAggregatesInput[]
+    OR?: ReseauSocialCompteScalarWhereWithAggregatesInput[]
+    NOT?: ReseauSocialCompteScalarWhereWithAggregatesInput | ReseauSocialCompteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ReseauSocialCompte"> | string
+    plateforme?: EnumReseauSocialPlateformeWithAggregatesFilter<"ReseauSocialCompte"> | $Enums.ReseauSocialPlateforme
+    label?: StringWithAggregatesFilter<"ReseauSocialCompte"> | string
+    externalId?: StringWithAggregatesFilter<"ReseauSocialCompte"> | string
+    accessToken?: StringWithAggregatesFilter<"ReseauSocialCompte"> | string
+    actif?: BoolWithAggregatesFilter<"ReseauSocialCompte"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ReseauSocialCompte"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ReseauSocialCompte"> | Date | string
   }
 
   export type AccompagnementCardWhereInput = {
@@ -70663,11 +71934,13 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
     auteur: UserCreateNestedOneWithoutArticlesInput
   }
 
@@ -70677,12 +71950,14 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     auteurId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUpdateInput = {
@@ -70691,11 +71966,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
     auteur?: UserUpdateOneRequiredWithoutArticlesNestedInput
   }
 
@@ -70705,12 +71982,14 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     auteurId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleCreateManyInput = {
@@ -70719,12 +71998,14 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     auteurId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUpdateManyMutationInput = {
@@ -70733,11 +72014,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUncheckedUpdateManyInput = {
@@ -70746,12 +72029,91 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     auteurId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ReseauSocialCompteCreateInput = {
+    id?: string
+    plateforme: $Enums.ReseauSocialPlateforme
+    label: string
+    externalId: string
+    accessToken: string
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReseauSocialCompteUncheckedCreateInput = {
+    id?: string
+    plateforme: $Enums.ReseauSocialPlateforme
+    label: string
+    externalId: string
+    accessToken: string
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReseauSocialCompteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    plateforme?: EnumReseauSocialPlateformeFieldUpdateOperationsInput | $Enums.ReseauSocialPlateforme
+    label?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
+    accessToken?: StringFieldUpdateOperationsInput | string
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReseauSocialCompteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    plateforme?: EnumReseauSocialPlateformeFieldUpdateOperationsInput | $Enums.ReseauSocialPlateforme
+    label?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
+    accessToken?: StringFieldUpdateOperationsInput | string
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReseauSocialCompteCreateManyInput = {
+    id?: string
+    plateforme: $Enums.ReseauSocialPlateforme
+    label: string
+    externalId: string
+    accessToken: string
+    actif?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReseauSocialCompteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    plateforme?: EnumReseauSocialPlateformeFieldUpdateOperationsInput | $Enums.ReseauSocialPlateforme
+    label?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
+    accessToken?: StringFieldUpdateOperationsInput | string
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReseauSocialCompteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    plateforme?: EnumReseauSocialPlateformeFieldUpdateOperationsInput | $Enums.ReseauSocialPlateforme
+    label?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
+    accessToken?: StringFieldUpdateOperationsInput | string
+    actif?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccompagnementCardCreateInput = {
@@ -75053,12 +76415,14 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrder
+    textePartage?: SortOrder
     categorie?: SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     sections?: SortOrder
+    reseauxPublies?: SortOrder
   }
 
   export type ArticleMaxOrderByAggregateInput = {
@@ -75067,6 +76431,7 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrder
+    textePartage?: SortOrder
     categorie?: SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
@@ -75080,6 +76445,7 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrder
+    textePartage?: SortOrder
     categorie?: SortOrder
     publie?: SortOrder
     auteurId?: SortOrder
@@ -75095,6 +76461,56 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
     _max?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
+  }
+
+  export type EnumReseauSocialPlateformeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReseauSocialPlateforme | EnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReseauSocialPlateforme[] | ListEnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReseauSocialPlateforme[] | ListEnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReseauSocialPlateformeFilter<$PrismaModel> | $Enums.ReseauSocialPlateforme
+  }
+
+  export type ReseauSocialCompteCountOrderByAggregateInput = {
+    id?: SortOrder
+    plateforme?: SortOrder
+    label?: SortOrder
+    externalId?: SortOrder
+    accessToken?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReseauSocialCompteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    plateforme?: SortOrder
+    label?: SortOrder
+    externalId?: SortOrder
+    accessToken?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReseauSocialCompteMinOrderByAggregateInput = {
+    id?: SortOrder
+    plateforme?: SortOrder
+    label?: SortOrder
+    externalId?: SortOrder
+    accessToken?: SortOrder
+    actif?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumReseauSocialPlateformeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReseauSocialPlateforme | EnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReseauSocialPlateforme[] | ListEnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReseauSocialPlateforme[] | ListEnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReseauSocialPlateformeWithAggregatesFilter<$PrismaModel> | $Enums.ReseauSocialPlateforme
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumReseauSocialPlateformeFilter<$PrismaModel>
+    _max?: NestedEnumReseauSocialPlateformeFilter<$PrismaModel>
   }
 
   export type EnumIconeAccompagnementFilter<$PrismaModel = never> = {
@@ -78624,6 +80040,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutArticlesInput, UserUpdateWithoutArticlesInput>, UserUncheckedUpdateWithoutArticlesInput>
   }
 
+  export type EnumReseauSocialPlateformeFieldUpdateOperationsInput = {
+    set?: $Enums.ReseauSocialPlateforme
+  }
+
   export type EnumIconeAccompagnementFieldUpdateOperationsInput = {
     set?: $Enums.IconeAccompagnement
   }
@@ -79659,6 +81079,23 @@ export namespace Prisma {
     _max?: NestedEnumCategorieFormationNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumReseauSocialPlateformeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReseauSocialPlateforme | EnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReseauSocialPlateforme[] | ListEnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReseauSocialPlateforme[] | ListEnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReseauSocialPlateformeFilter<$PrismaModel> | $Enums.ReseauSocialPlateforme
+  }
+
+  export type NestedEnumReseauSocialPlateformeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReseauSocialPlateforme | EnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReseauSocialPlateforme[] | ListEnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReseauSocialPlateforme[] | ListEnumReseauSocialPlateformeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReseauSocialPlateformeWithAggregatesFilter<$PrismaModel> | $Enums.ReseauSocialPlateforme
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumReseauSocialPlateformeFilter<$PrismaModel>
+    _max?: NestedEnumReseauSocialPlateformeFilter<$PrismaModel>
+  }
+
   export type NestedEnumIconeAccompagnementFilter<$PrismaModel = never> = {
     equals?: $Enums.IconeAccompagnement | EnumIconeAccompagnementFieldRefInput<$PrismaModel>
     in?: $Enums.IconeAccompagnement[] | ListEnumIconeAccompagnementFieldRefInput<$PrismaModel>
@@ -80219,11 +81656,13 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUncheckedCreateWithoutAuteurInput = {
@@ -80232,11 +81671,13 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleCreateOrConnectWithoutAuteurInput = {
@@ -80616,12 +82057,14 @@ export namespace Prisma {
     slug?: StringFilter<"Article"> | string
     contenu?: StringFilter<"Article"> | string
     image?: StringNullableFilter<"Article"> | string | null
+    textePartage?: StringNullableFilter<"Article"> | string | null
     categorie?: EnumCategorieFormationNullableFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolFilter<"Article"> | boolean
     auteurId?: StringFilter<"Article"> | string
     createdAt?: DateTimeFilter<"Article"> | Date | string
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     sections?: JsonNullableFilter<"Article">
+    reseauxPublies?: JsonNullableFilter<"Article">
   }
 
   export type DemandeInscriptionUpsertWithWhereUniqueWithoutUserInput = {
@@ -87618,11 +89061,13 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type DemandeInscriptionCreateManyUserInput = {
@@ -87906,11 +89351,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUncheckedUpdateWithoutAuteurInput = {
@@ -87919,11 +89366,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ArticleUncheckedUpdateManyWithoutAuteurInput = {
@@ -87932,11 +89381,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type DemandeInscriptionUpdateWithoutUserInput = {

@@ -14,3 +14,9 @@ export type ArticleSection = {
   videoFichierUrl?: string | null
   lien?: { type: "INTERNE" | "EXTERNE"; url: string; label: string } | null
 }
+
+/** Légende courte utilisée partout où un extrait de l'article est nécessaire (balises Open Graph, bouton "partager" visiteur, légende de publication officielle réseaux sociaux) — priorité au texte de partage dédié, repli sur le début du contenu. */
+export function articleShareExcerpt(article: { contenu: string; textePartage: string | null }): string {
+  const source = article.textePartage?.trim() || article.contenu
+  return source.slice(0, 160).trim() + (source.length > 160 ? "…" : "")
+}

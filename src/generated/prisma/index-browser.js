@@ -418,12 +418,25 @@ exports.Prisma.ArticleScalarFieldEnum = {
   slug: 'slug',
   contenu: 'contenu',
   image: 'image',
+  textePartage: 'textePartage',
   categorie: 'categorie',
   publie: 'publie',
   auteurId: 'auteurId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  sections: 'sections'
+  sections: 'sections',
+  reseauxPublies: 'reseauxPublies'
+};
+
+exports.Prisma.ReseauSocialCompteScalarFieldEnum = {
+  id: 'id',
+  plateforme: 'plateforme',
+  label: 'label',
+  externalId: 'externalId',
+  accessToken: 'accessToken',
+  actif: 'actif',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.AccompagnementCardScalarFieldEnum = {
@@ -930,6 +943,11 @@ exports.StatutCovoiturage = exports.$Enums.StatutCovoiturage = {
   ANNULE: 'ANNULE'
 };
 
+exports.ReseauSocialPlateforme = exports.$Enums.ReseauSocialPlateforme = {
+  FACEBOOK: 'FACEBOOK',
+  INSTAGRAM: 'INSTAGRAM'
+};
+
 exports.IconeAccompagnement = exports.$Enums.IconeAccompagnement = {
   FINANCEMENT: 'FINANCEMENT',
   GESTION: 'GESTION',
@@ -1048,6 +1066,7 @@ exports.Prisma.ModelName = {
   Covoiturage: 'Covoiturage',
   CovoituragePassager: 'CovoituragePassager',
   Article: 'Article',
+  ReseauSocialCompte: 'ReseauSocialCompte',
   AccompagnementCard: 'AccompagnementCard',
   AccueilContenu: 'AccueilContenu',
   FooterContenu: 'FooterContenu',

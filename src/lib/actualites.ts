@@ -54,13 +54,28 @@ export async function getPublishedArticles(): Promise<ArticleListItem[]> {
   return articles.map(toListItem)
 }
 
-export type ArticleDetail = ArticleListItem & { contenu: string; sections: ArticleSection[] | null }
+export type ArticleDetail = ArticleListItem & { contenu: string; textePartage: string | null; sections: ArticleSection[] | null }
 
 export async function getArticleBySlug(slug: string): Promise<ArticleDetail | null> {
   const article = await prisma.article.findFirst({
     where: { slug, publie: true },
-    select: { id: true, slug: true, titre: true, image: true, categorie: true, createdAt: true, contenu: true, sections: true },
+    select: {
+      id: true,
+      slug: true,
+      titre: true,
+      image: true,
+      categorie: true,
+      createdAt: true,
+      contenu: true,
+      textePartage: true,
+      sections: true,
+    },
   })
   if (!article) return null
-  return { ...toListItem(article), contenu: article.contenu, sections: (article.sections as ArticleSection[] | null) ?? null }
+  return {
+    ...toListItem(article),
+    contenu: article.contenu,
+    textePartage: article.textePartage,
+    sections: (article.sections as ArticleSection[] | null) ?? null,
+  }
 }

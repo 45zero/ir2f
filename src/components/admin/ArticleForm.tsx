@@ -49,6 +49,7 @@ export type ArticleFormInitial = {
   titre: string
   slug: string
   contenu: string
+  textePartage: string
   image: string
   categorie: CategorieFormation | ""
   publie: boolean
@@ -269,6 +270,19 @@ export function ArticleForm({
           rows={12}
           defaultValue={initial?.contenu}
           style={{ ...fieldStyle, resize: "vertical", fontFamily: "monospace" }}
+        />
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Texte de partage (optionnel)</span>
+        <span style={{ fontSize: 11.5, color: colors.textLight }}>
+          Texte court utilisé comme légende quand l&apos;article est partagé sur les réseaux sociaux (bouton
+          Partager, aperçu Facebook). Laissez vide pour utiliser le début du contenu.
+        </span>
+        <textarea
+          name="textePartage"
+          rows={3}
+          defaultValue={initial?.textePartage}
+          style={{ ...fieldStyle, resize: "vertical" }}
         />
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>

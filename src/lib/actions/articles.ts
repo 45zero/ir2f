@@ -45,6 +45,7 @@ async function buildArticleData(formData: FormData) {
     titre: str(formData, "titre"),
     slug: str(formData, "slug"),
     contenu: str(formData, "contenu"),
+    textePartage: optionalStr(formData, "textePartage"),
     image: await resolveImageUrl(formData, "image", "articles"),
     categorie: optionalStr(formData, "categorie") as CategorieFormation | null,
     publie: formData.get("publie") === "on",

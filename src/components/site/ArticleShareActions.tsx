@@ -31,13 +31,13 @@ const buttonStyle = {
   textDecoration: "none",
 }
 
-export function ArticleShareActions({ url, title }: { url: string; title: string }) {
+export function ArticleShareActions({ url, title, text }: { url: string; title: string; text?: string }) {
   const canNativeShare = useSyncExternalStore(subscribeNoop, getCanNativeShare, getCanNativeShareServer)
   const [copied, setCopied] = useState(false)
 
   async function handleNativeShare() {
     try {
-      await navigator.share({ title, url })
+      await navigator.share({ title, text, url })
     } catch {
       // L'utilisateur a annulé le partage — rien à faire.
     }

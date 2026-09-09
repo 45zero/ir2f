@@ -5,6 +5,7 @@ import { getArticleBySlug } from "@/lib/actualites"
 import { HoverLink } from "@/components/ui/HoverLink"
 import { ArticleShareActions } from "@/components/site/ArticleShareActions"
 import { getYoutubeEmbedUrl } from "@/lib/youtube"
+import { articleShareExcerpt } from "@/lib/articles-shared"
 import { colors, fontHeading } from "@/lib/theme"
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ir2f.lgef.fr"
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const article = await loadArticle(slug)
   if (!article) return {}
 
-  const description = article.contenu.slice(0, 160).trim() + (article.contenu.length > 160 ? "…" : "")
+  const description = articleShareExcerpt(article)
   const url = `${SITE_URL}/actualites/${article.slug}`
 
   return {
@@ -96,7 +97,7 @@ export default async function ActualiteDetailPage({ params }: { params: Promise<
           {article.titre}
         </h1>
         <span style={{ color: colors.textLight, fontSize: 13, fontWeight: 600 }}>{article.date}</span>
-        <ArticleShareActions url={articleUrl} title={article.titre} />
+        <ArticleShareActions url={articleUrl} title={article.titre} text={articleShareExcerpt(article)} />
       </section>
 
       <section style={{ maxWidth: 1160, margin: "0 auto", padding: "24px 20px 0" }}>
