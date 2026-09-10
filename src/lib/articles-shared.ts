@@ -21,26 +21,5 @@ export function articleShareExcerpt(article: { contenu: string; textePartage: st
   return source.slice(0, 160).trim() + (source.length > 160 ? "…" : "")
 }
 
-/**
- * État de publication officielle d'un article sur UN compte réseau social (voir
- * src/lib/social/accounts.ts) — stocké dans Article.reseauxPublies, une entrée par compte, clé =
- * id du compte. Volontairement un JSON étendu plutôt qu'une table dédiée : proportionné au volume
- * de publications d'une ligue régionale, pas besoin d'un vrai outil de social media management.
- */
-export type PublicationEtat = {
-  statut: "PROGRAMME" | "PUBLIE" | "ECHEC" | "SUPPRIME"
-  message: string
-  imageUrl?: string
-  scheduledFor?: string
-  publishedAt?: string
-  postId?: string
-  error?: string
-  likes?: number
-  comments?: number
-  views?: number
-  reach?: number
-  statsFetchedAt?: string
-  deletedAt?: string
-}
-
-export type ReseauxPublies = Record<string, PublicationEtat>
+// PublicationEtat/ReseauxPublies (publication réseaux sociaux) ont déménagé dans
+// src/lib/social/publication.ts — désormais partagés avec Formation, pas seulement Article.

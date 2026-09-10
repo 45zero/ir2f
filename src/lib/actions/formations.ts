@@ -91,6 +91,7 @@ async function buildFormationData(formData: FormData) {
     tauxReussite: optionalStr(formData, "tauxReussite"),
     tauxSatisfaction: optionalStr(formData, "tauxSatisfaction"),
     resultats: resultats.length > 0 ? resultats : Prisma.JsonNull,
+    diffuserReseaux: formData.get("diffuserReseaux") === "on",
   }
 }
 

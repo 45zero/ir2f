@@ -40,11 +40,17 @@ export async function publishToFacebookPage(
   return { postId: String(body.id) }
 }
 
-const INSTAGRAM_CONTAINER_POLL_ATTEMPTS = 5
-const INSTAGRAM_CONTAINER_POLL_DELAY_MS = 1500
+// Une image traite en général en quelques secondes ; une vidéo/Reel peut prendre 30s à 2min côté
+// Meta. Le compte Vercel est en plan Hobby (voir la note dans social-publish.ts sur maxDuration) —
+// le budget vidéo (6 × 8s = 48s) reste sous la limite de 60s, mais une vidéo longue/lourde peut
+// tout de même dépasser ce budget : à tester avec de vrais fichiers courts avant de compter dessus.
+const INSTAGRAM_IMAGE_POLL_ATTEMPTS = 5
+const INSTAGRAM_IMAGE_POLL_DELAY_MS = 1500
+const INSTAGRAM_VIDEO_POLL_ATTEMPTS = 6
+const INSTAGRAM_VIDEO_POLL_DELAY_MS = 8000
 
-async function waitForInstagramContainer(containerId: string, accessToken: string): Promise<void> {
-  for (let attempt = 0; attempt < INSTAGRAM_CONTAINER_POLL_ATTEMPTS; attempt++) {
+async function waitForInstagramContainer(containerId: string, accessToken: string, attempts: number, delayMs: number): Promise<void> {
+  for (let attempt = 0; attempt < attempts; attempt++) {
     const url = new URL(`${GRAPH_API_BASE}/${containerId}`)
     url.searchParams.set("fields", "status_code")
     url.searchParams.set("access_token", accessToken)
@@ -53,9 +59,9 @@ async function waitForInstagramContainer(containerId: string, accessToken: strin
     if (!res.ok || body.error) throw new Error(body.error?.message ?? "Échec de la vérification du média Instagram.")
     if (body.status_code === "FINISHED") return
     if (body.status_code === "ERROR") throw new Error("Le traitement du média Instagram a échoué.")
-    await new Promise((resolve) => setTimeout(resolve, INSTAGRAM_CONTAINER_POLL_DELAY_MS))
+    await new Promise((resolve) => setTimeout(resolve, delayMs))
   }
-  throw new Error("Le média Instagram n'a pas terminé son traitement à temps — réessayez.")
+  throw new Error("Le média Instagram n'a pas terminé son traitement à temps — réessayez, ou utilisez un fichier plus court.")
 }
 
 /** Publie une image + légende sur un compte Instagram professionnel (obligatoirement lié à une page Facebook). Instagram n'accepte pas de post texte seul. */
@@ -67,10 +73,52 @@ export async function publishToInstagram(
   const container = await graphFetch(`/${externalId}/media`, { image_url: imageUrl, caption, access_token: accessToken })
   const containerId = String(container.id)
 
-  await waitForInstagramContainer(containerId, accessToken)
+  await waitForInstagramContainer(containerId, accessToken, INSTAGRAM_IMAGE_POLL_ATTEMPTS, INSTAGRAM_IMAGE_POLL_DELAY_MS)
 
   const published = await graphFetch(`/${externalId}/media_publish`, { creation_id: containerId, access_token: accessToken })
   return { postId: String(published.id) }
+}
+
+/** Publie une vidéo (Reel) + légende sur un compte Instagram professionnel — `video_url` doit être un fichier hébergé accessible publiquement (pas un lien YouTube). Même mécanique de conteneur que l'image, délai de traitement plus long. */
+export async function publishInstagramVideo(
+  externalId: string,
+  accessToken: string,
+  { videoUrl, caption }: { videoUrl: string; caption: string }
+): Promise<{ postId: string }> {
+  const container = await graphFetch(`/${externalId}/media`, {
+    media_type: "REELS",
+    video_url: videoUrl,
+    caption,
+    access_token: accessToken,
+  })
+  const containerId = String(container.id)
+
+  await waitForInstagramContainer(containerId, accessToken, INSTAGRAM_VIDEO_POLL_ATTEMPTS, INSTAGRAM_VIDEO_POLL_DELAY_MS)
+
+  const published = await graphFetch(`/${externalId}/media_publish`, { creation_id: containerId, access_token: accessToken })
+  return { postId: String(published.id) }
+}
+
+/** Publie une photo native sur une page Facebook (le clic lit/agrandit la photo directement) — alternative à publishToFacebookPage quand on préfère un vrai média à la carte de lien cliquable. `url` doit être une image hébergée accessible publiquement. */
+export async function publishFacebookNativePhoto(
+  externalId: string,
+  accessToken: string,
+  { url, caption }: { url: string; caption: string }
+): Promise<{ postId: string }> {
+  const body = await graphFetch(`/${externalId}/photos`, { url, caption, access_token: accessToken })
+  // /photos renvoie post_id (le post du fil, ce qu'on veut pour les stats/édition/suppression) en
+  // plus de id (l'id de la photo elle-même) — on préfère post_id quand il est présent.
+  return { postId: String(body.post_id ?? body.id) }
+}
+
+/** Publie une vidéo native sur une page Facebook (le clic lit la vidéo directement) — `file_url` doit être un fichier hébergé accessible publiquement. */
+export async function publishFacebookNativeVideo(
+  externalId: string,
+  accessToken: string,
+  { fileUrl, description }: { fileUrl: string; description: string }
+): Promise<{ postId: string }> {
+  const body = await graphFetch(`/${externalId}/videos`, { file_url: fileUrl, description, access_token: accessToken })
+  return { postId: String(body.id) }
 }
 
 /** Stats d'un post de page Facebook — `reactions` est l'équivalent actuel de "likes" dans l'API (qui gère plusieurs types de réactions). Permissions déjà accordées au token (pages_read_engagement) suffisent, rien de plus à redemander. */

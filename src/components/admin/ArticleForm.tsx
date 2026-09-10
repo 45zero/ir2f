@@ -53,6 +53,7 @@ export type ArticleFormInitial = {
   image: string
   categorie: CategorieFormation | ""
   publie: boolean
+  diffuserReseaux: boolean
   sections: ArticleSection[]
 }
 
@@ -293,6 +294,16 @@ export function ArticleForm({
       <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text }}>
         <input type="checkbox" name="publie" defaultChecked={initial?.publie} style={{ width: 15, height: 15 }} />
         Publié (visible sur le site public)
+      </label>
+
+      <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text }}>
+        <input
+          type="checkbox"
+          name="diffuserReseaux"
+          defaultChecked={initial?.diffuserReseaux ?? true}
+          style={{ width: 15, height: 15 }}
+        />
+        Diffuser sur les réseaux (apparaît dans «&nbsp;À publier&nbsp;» une fois publié)
       </label>
 
       {state?.error && <p style={{ color: colors.red, fontSize: 13, margin: 0 }}>{state.error}</p>}

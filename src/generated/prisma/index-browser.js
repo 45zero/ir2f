@@ -171,6 +171,8 @@ exports.Prisma.FormationScalarFieldEnum = {
   tauxReussite: 'tauxReussite',
   tauxSatisfaction: 'tauxSatisfaction',
   resultats: 'resultats',
+  reseauxPublies: 'reseauxPublies',
+  diffuserReseaux: 'diffuserReseaux',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -425,7 +427,8 @@ exports.Prisma.ArticleScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   sections: 'sections',
-  reseauxPublies: 'reseauxPublies'
+  reseauxPublies: 'reseauxPublies',
+  diffuserReseaux: 'diffuserReseaux'
 };
 
 exports.Prisma.AccompagnementCardScalarFieldEnum = {

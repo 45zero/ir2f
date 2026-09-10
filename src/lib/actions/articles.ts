@@ -49,6 +49,7 @@ async function buildArticleData(formData: FormData) {
     image: await resolveImageUrl(formData, "image", "articles"),
     categorie: optionalStr(formData, "categorie") as CategorieFormation | null,
     publie: formData.get("publie") === "on",
+    diffuserReseaux: formData.get("diffuserReseaux") === "on",
     sections: sections.length > 0 ? sections : Prisma.JsonNull,
   }
 }

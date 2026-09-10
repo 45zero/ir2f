@@ -3,10 +3,17 @@ import Link from "next/link"
 import { getFormationForEdit } from "@/lib/admin/formations"
 import { getFormateurUsers, getResponsablePedagogiqueUsers } from "@/lib/admin/users"
 import { getConventionTemplatesForSelect } from "@/lib/admin/conventions"
+import { getConfiguredSocialAccounts } from "@/lib/social/accounts"
 import { updateFormation } from "@/lib/actions/formations"
 import { FormationForm, type FormationFormInitial } from "@/components/admin/FormationForm"
-import type { ProgrammeStep, ResultatAnnee } from "@/lib/formations-shared"
+import { PublierReseauxPanel } from "@/components/admin/PublierReseauxPanel"
+import { formationShareExcerpt, type ProgrammeStep, type ResultatAnnee } from "@/lib/formations-shared"
+import type { ReseauxPublies } from "@/lib/social/publication"
 import { colors, fontHeading } from "@/lib/theme"
+
+// Publier une vidéo native peut prendre jusqu'à ~50s côté Meta (voir social/graph.ts) — 60s est le
+// maximum autorisé sur le plan Vercel Hobby.
+export const maxDuration = 60
 
 export default async function EditFormationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -64,7 +71,13 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
     tauxReussite: formation.tauxReussite ?? "",
     tauxSatisfaction: formation.tauxSatisfaction ?? "",
     resultats: (formation.resultats as ResultatAnnee[] | null) ?? [],
+    diffuserReseaux: formation.diffuserReseaux,
   }
+
+  const comptesActifs = getConfiguredSocialAccounts()
+  const programme = (formation.programme as ProgrammeStep[] | null) ?? []
+  const images = [...(formation.image ? [formation.image] : []), ...programme.flatMap((p) => p.images ?? [])]
+  const videos = programme.flatMap((p) => (p.videoFichierUrl ? [p.videoFichierUrl] : []))
 
   const boundUpdate = updateFormation.bind(null, id)
 
@@ -103,6 +116,24 @@ export default async function EditFormationPage({ params }: { params: Promise<{ 
         conventionTemplates={conventionTemplates}
         responsablePedagogiqueUsers={responsablePedagogiqueUsers}
       />
+      {formation.diffuserReseaux ? (
+        <PublierReseauxPanel
+          entityType="FORMATION"
+          entityId={id}
+          comptes={comptesActifs}
+          reseauxPublies={formation.reseauxPublies as ReseauxPublies | null}
+          defaultMessage={formationShareExcerpt(formation)}
+          images={images}
+          videos={videos}
+        />
+      ) : (
+        <div style={{ background: "#f9fafb", border: "1px dashed #d8dde5", borderRadius: 10, padding: "clamp(18px,3vw,28px)", maxWidth: 620 }}>
+          <p style={{ fontSize: 13, color: colors.textMuted, margin: 0 }}>
+            Diffusion sur les réseaux désactivée pour cette formation — recochez «&nbsp;Diffuser sur les réseaux&nbsp;»
+            ci-dessus et enregistrez pour la réactiver.
+          </p>
+        </div>
+      )}
     </div>
   )
 }

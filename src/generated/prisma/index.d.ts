@@ -7751,6 +7751,7 @@ export namespace Prisma {
     shortNode: string | null
     tauxReussite: string | null
     tauxSatisfaction: string | null
+    diffuserReseaux: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7791,6 +7792,7 @@ export namespace Prisma {
     shortNode: string | null
     tauxReussite: string | null
     tauxSatisfaction: string | null
+    diffuserReseaux: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7833,6 +7835,8 @@ export namespace Prisma {
     tauxReussite: number
     tauxSatisfaction: number
     resultats: number
+    reseauxPublies: number
+    diffuserReseaux: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7889,6 +7893,7 @@ export namespace Prisma {
     shortNode?: true
     tauxReussite?: true
     tauxSatisfaction?: true
+    diffuserReseaux?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7929,6 +7934,7 @@ export namespace Prisma {
     shortNode?: true
     tauxReussite?: true
     tauxSatisfaction?: true
+    diffuserReseaux?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7971,6 +7977,8 @@ export namespace Prisma {
     tauxReussite?: true
     tauxSatisfaction?: true
     resultats?: true
+    reseauxPublies?: true
+    diffuserReseaux?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -8100,6 +8108,8 @@ export namespace Prisma {
     tauxReussite: string | null
     tauxSatisfaction: string | null
     resultats: JsonValue | null
+    reseauxPublies: JsonValue | null
+    diffuserReseaux: boolean
     createdAt: Date
     updatedAt: Date
     _count: FormationCountAggregateOutputType | null
@@ -8161,6 +8171,8 @@ export namespace Prisma {
     tauxReussite?: boolean
     tauxSatisfaction?: boolean
     resultats?: boolean
+    reseauxPublies?: boolean
+    diffuserReseaux?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
@@ -8215,6 +8227,8 @@ export namespace Prisma {
     tauxReussite?: boolean
     tauxSatisfaction?: boolean
     resultats?: boolean
+    reseauxPublies?: boolean
+    diffuserReseaux?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["formation"]>
@@ -8257,6 +8271,8 @@ export namespace Prisma {
     tauxReussite?: boolean
     tauxSatisfaction?: boolean
     resultats?: boolean
+    reseauxPublies?: boolean
+    diffuserReseaux?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["formation"]>
@@ -8299,11 +8315,13 @@ export namespace Prisma {
     tauxReussite?: boolean
     tauxSatisfaction?: boolean
     resultats?: boolean
+    reseauxPublies?: boolean
+    diffuserReseaux?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "lienExterne" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "fafaEligible" | "bonFormationEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
+  export type FormationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "titre" | "description" | "lienExterne" | "type" | "statut" | "dureeHeures" | "dureeLabel" | "modeLabel" | "lieu" | "prix" | "places" | "lienVisio" | "image" | "programme" | "formateurNom" | "formateurRole" | "ordre" | "categorie" | "filiere" | "cpfEligible" | "fafaEligible" | "bonFormationEligible" | "modeInscription" | "lienFffStagiaire" | "lienFffClub" | "fffCaptureActif" | "dateDebut" | "dateFin" | "groupeEquivalence" | "varianteNode" | "badgeNode" | "shortNode" | "tauxReussite" | "tauxSatisfaction" | "resultats" | "reseauxPublies" | "diffuserReseaux" | "createdAt" | "updatedAt", ExtArgs["result"]["formation"]>
   export type FormationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Formation$sessionsArgs<ExtArgs>
     inscriptions?: boolean | Formation$inscriptionsArgs<ExtArgs>
@@ -8374,6 +8392,8 @@ export namespace Prisma {
       tauxReussite: string | null
       tauxSatisfaction: string | null
       resultats: Prisma.JsonValue | null
+      reseauxPublies: Prisma.JsonValue | null
+      diffuserReseaux: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["formation"]>
@@ -8847,6 +8867,8 @@ export namespace Prisma {
     readonly tauxReussite: FieldRef<"Formation", 'String'>
     readonly tauxSatisfaction: FieldRef<"Formation", 'String'>
     readonly resultats: FieldRef<"Formation", 'Json'>
+    readonly reseauxPublies: FieldRef<"Formation", 'Json'>
+    readonly diffuserReseaux: FieldRef<"Formation", 'Boolean'>
     readonly createdAt: FieldRef<"Formation", 'DateTime'>
     readonly updatedAt: FieldRef<"Formation", 'DateTime'>
   }
@@ -29351,6 +29373,7 @@ export namespace Prisma {
     auteurId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    diffuserReseaux: boolean | null
   }
 
   export type ArticleMaxAggregateOutputType = {
@@ -29365,6 +29388,7 @@ export namespace Prisma {
     auteurId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    diffuserReseaux: boolean | null
   }
 
   export type ArticleCountAggregateOutputType = {
@@ -29381,6 +29405,7 @@ export namespace Prisma {
     updatedAt: number
     sections: number
     reseauxPublies: number
+    diffuserReseaux: number
     _all: number
   }
 
@@ -29397,6 +29422,7 @@ export namespace Prisma {
     auteurId?: true
     createdAt?: true
     updatedAt?: true
+    diffuserReseaux?: true
   }
 
   export type ArticleMaxAggregateInputType = {
@@ -29411,6 +29437,7 @@ export namespace Prisma {
     auteurId?: true
     createdAt?: true
     updatedAt?: true
+    diffuserReseaux?: true
   }
 
   export type ArticleCountAggregateInputType = {
@@ -29427,6 +29454,7 @@ export namespace Prisma {
     updatedAt?: true
     sections?: true
     reseauxPublies?: true
+    diffuserReseaux?: true
     _all?: true
   }
 
@@ -29516,6 +29544,7 @@ export namespace Prisma {
     updatedAt: Date
     sections: JsonValue | null
     reseauxPublies: JsonValue | null
+    diffuserReseaux: boolean
     _count: ArticleCountAggregateOutputType | null
     _min: ArticleMinAggregateOutputType | null
     _max: ArticleMaxAggregateOutputType | null
@@ -29549,6 +29578,7 @@ export namespace Prisma {
     updatedAt?: boolean
     sections?: boolean
     reseauxPublies?: boolean
+    diffuserReseaux?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
@@ -29566,6 +29596,7 @@ export namespace Prisma {
     updatedAt?: boolean
     sections?: boolean
     reseauxPublies?: boolean
+    diffuserReseaux?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
@@ -29583,6 +29614,7 @@ export namespace Prisma {
     updatedAt?: boolean
     sections?: boolean
     reseauxPublies?: boolean
+    diffuserReseaux?: boolean
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["article"]>
 
@@ -29600,9 +29632,10 @@ export namespace Prisma {
     updatedAt?: boolean
     sections?: boolean
     reseauxPublies?: boolean
+    diffuserReseaux?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "slug" | "contenu" | "image" | "textePartage" | "categorie" | "publie" | "auteurId" | "createdAt" | "updatedAt" | "sections" | "reseauxPublies", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "slug" | "contenu" | "image" | "textePartage" | "categorie" | "publie" | "auteurId" | "createdAt" | "updatedAt" | "sections" | "reseauxPublies" | "diffuserReseaux", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -29632,6 +29665,7 @@ export namespace Prisma {
       updatedAt: Date
       sections: Prisma.JsonValue | null
       reseauxPublies: Prisma.JsonValue | null
+      diffuserReseaux: boolean
     }, ExtArgs["result"]["article"]>
     composites: {}
   }
@@ -30069,6 +30103,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Article", 'DateTime'>
     readonly sections: FieldRef<"Article", 'Json'>
     readonly reseauxPublies: FieldRef<"Article", 'Json'>
+    readonly diffuserReseaux: FieldRef<"Article", 'Boolean'>
   }
     
 
@@ -63000,6 +63035,8 @@ export namespace Prisma {
     tauxReussite: 'tauxReussite',
     tauxSatisfaction: 'tauxSatisfaction',
     resultats: 'resultats',
+    reseauxPublies: 'reseauxPublies',
+    diffuserReseaux: 'diffuserReseaux',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -63308,7 +63345,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     sections: 'sections',
-    reseauxPublies: 'reseauxPublies'
+    reseauxPublies: 'reseauxPublies',
+    diffuserReseaux: 'diffuserReseaux'
   };
 
   export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
@@ -64471,6 +64509,8 @@ export namespace Prisma {
     tauxReussite?: StringNullableFilter<"Formation"> | string | null
     tauxSatisfaction?: StringNullableFilter<"Formation"> | string | null
     resultats?: JsonNullableFilter<"Formation">
+    reseauxPublies?: JsonNullableFilter<"Formation">
+    diffuserReseaux?: BoolFilter<"Formation"> | boolean
     createdAt?: DateTimeFilter<"Formation"> | Date | string
     updatedAt?: DateTimeFilter<"Formation"> | Date | string
     sessions?: SessionListRelationFilter
@@ -64524,6 +64564,8 @@ export namespace Prisma {
     tauxReussite?: SortOrderInput | SortOrder
     tauxSatisfaction?: SortOrderInput | SortOrder
     resultats?: SortOrderInput | SortOrder
+    reseauxPublies?: SortOrderInput | SortOrder
+    diffuserReseaux?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
@@ -64580,6 +64622,8 @@ export namespace Prisma {
     tauxReussite?: StringNullableFilter<"Formation"> | string | null
     tauxSatisfaction?: StringNullableFilter<"Formation"> | string | null
     resultats?: JsonNullableFilter<"Formation">
+    reseauxPublies?: JsonNullableFilter<"Formation">
+    diffuserReseaux?: BoolFilter<"Formation"> | boolean
     createdAt?: DateTimeFilter<"Formation"> | Date | string
     updatedAt?: DateTimeFilter<"Formation"> | Date | string
     sessions?: SessionListRelationFilter
@@ -64633,6 +64677,8 @@ export namespace Prisma {
     tauxReussite?: SortOrderInput | SortOrder
     tauxSatisfaction?: SortOrderInput | SortOrder
     resultats?: SortOrderInput | SortOrder
+    reseauxPublies?: SortOrderInput | SortOrder
+    diffuserReseaux?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: FormationCountOrderByAggregateInput
@@ -64683,6 +64729,8 @@ export namespace Prisma {
     tauxReussite?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     tauxSatisfaction?: StringNullableWithAggregatesFilter<"Formation"> | string | null
     resultats?: JsonNullableWithAggregatesFilter<"Formation">
+    reseauxPublies?: JsonNullableWithAggregatesFilter<"Formation">
+    diffuserReseaux?: BoolWithAggregatesFilter<"Formation"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Formation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Formation"> | Date | string
   }
@@ -66214,6 +66262,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     sections?: JsonNullableFilter<"Article">
     reseauxPublies?: JsonNullableFilter<"Article">
+    diffuserReseaux?: BoolFilter<"Article"> | boolean
     auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -66231,6 +66280,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     sections?: SortOrderInput | SortOrder
     reseauxPublies?: SortOrderInput | SortOrder
+    diffuserReseaux?: SortOrder
     auteur?: UserOrderByWithRelationInput
   }
 
@@ -66251,6 +66301,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     sections?: JsonNullableFilter<"Article">
     reseauxPublies?: JsonNullableFilter<"Article">
+    diffuserReseaux?: BoolFilter<"Article"> | boolean
     auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "slug">
 
@@ -66268,6 +66319,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     sections?: SortOrderInput | SortOrder
     reseauxPublies?: SortOrderInput | SortOrder
+    diffuserReseaux?: SortOrder
     _count?: ArticleCountOrderByAggregateInput
     _max?: ArticleMaxOrderByAggregateInput
     _min?: ArticleMinOrderByAggregateInput
@@ -66290,6 +66342,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Article"> | Date | string
     sections?: JsonNullableWithAggregatesFilter<"Article">
     reseauxPublies?: JsonNullableWithAggregatesFilter<"Article">
+    diffuserReseaux?: BoolWithAggregatesFilter<"Article"> | boolean
   }
 
   export type AccompagnementCardWhereInput = {
@@ -68727,6 +68780,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -68780,6 +68835,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -68833,6 +68890,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -68886,6 +68945,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -68939,6 +69000,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -68981,6 +69044,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -69023,6 +69088,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -70704,6 +70771,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     auteur: UserCreateNestedOneWithoutArticlesInput
   }
 
@@ -70721,6 +70789,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
   }
 
   export type ArticleUpdateInput = {
@@ -70736,6 +70805,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     auteur?: UserUpdateOneRequiredWithoutArticlesNestedInput
   }
 
@@ -70753,6 +70823,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ArticleCreateManyInput = {
@@ -70769,6 +70840,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
   }
 
   export type ArticleUpdateManyMutationInput = {
@@ -70784,6 +70856,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ArticleUncheckedUpdateManyInput = {
@@ -70800,6 +70873,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type AccompagnementCardCreateInput = {
@@ -73840,6 +73914,8 @@ export namespace Prisma {
     tauxReussite?: SortOrder
     tauxSatisfaction?: SortOrder
     resultats?: SortOrder
+    reseauxPublies?: SortOrder
+    diffuserReseaux?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -73887,6 +73963,7 @@ export namespace Prisma {
     shortNode?: SortOrder
     tauxReussite?: SortOrder
     tauxSatisfaction?: SortOrder
+    diffuserReseaux?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -73927,6 +74004,7 @@ export namespace Prisma {
     shortNode?: SortOrder
     tauxReussite?: SortOrder
     tauxSatisfaction?: SortOrder
+    diffuserReseaux?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -75109,6 +75187,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     sections?: SortOrder
     reseauxPublies?: SortOrder
+    diffuserReseaux?: SortOrder
   }
 
   export type ArticleMaxOrderByAggregateInput = {
@@ -75123,6 +75202,7 @@ export namespace Prisma {
     auteurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    diffuserReseaux?: SortOrder
   }
 
   export type ArticleMinOrderByAggregateInput = {
@@ -75137,6 +75217,7 @@ export namespace Prisma {
     auteurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    diffuserReseaux?: SortOrder
   }
 
   export type EnumCategorieFormationNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -80278,6 +80359,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
   }
 
   export type ArticleUncheckedCreateWithoutAuteurInput = {
@@ -80293,6 +80375,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
   }
 
   export type ArticleCreateOrConnectWithoutAuteurInput = {
@@ -80680,6 +80763,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Article"> | Date | string
     sections?: JsonNullableFilter<"Article">
     reseauxPublies?: JsonNullableFilter<"Article">
+    diffuserReseaux?: BoolFilter<"Article"> | boolean
   }
 
   export type DemandeInscriptionUpsertWithWhereUniqueWithoutUserInput = {
@@ -81648,6 +81732,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -81700,6 +81786,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -81827,6 +81915,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -81879,6 +81969,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -81931,6 +82023,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     inscriptions?: InscriptionCreateNestedManyWithoutFormationInput
@@ -81983,6 +82077,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     inscriptions?: InscriptionUncheckedCreateNestedManyWithoutFormationInput
@@ -82237,6 +82333,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inscriptions?: InscriptionUpdateManyWithoutFormationNestedInput
@@ -82289,6 +82387,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inscriptions?: InscriptionUncheckedUpdateManyWithoutFormationNestedInput
@@ -82496,6 +82596,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -82548,6 +82650,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -82675,6 +82779,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -82727,6 +82833,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -82779,6 +82887,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -82831,6 +82941,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -82952,6 +83064,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -83004,6 +83118,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -83168,6 +83284,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -83220,6 +83338,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -83429,6 +83549,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -83481,6 +83603,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -84061,6 +84185,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -84113,6 +84239,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -84276,6 +84404,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -84328,6 +84458,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -84767,6 +84899,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -84819,6 +84953,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -85007,6 +85143,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -85059,6 +85197,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -85405,6 +85545,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -85457,6 +85599,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -85600,6 +85744,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -85652,6 +85798,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -85996,6 +86144,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -86048,6 +86198,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -86116,6 +86268,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -86168,6 +86322,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -86220,6 +86376,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -86272,6 +86430,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -86340,6 +86500,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -86392,6 +86554,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -87408,6 +87572,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutFormationInput
@@ -87460,6 +87626,8 @@ export namespace Prisma {
     tauxReussite?: string | null
     tauxSatisfaction?: string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutFormationInput
@@ -87528,6 +87696,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutFormationNestedInput
@@ -87580,6 +87750,8 @@ export namespace Prisma {
     tauxReussite?: NullableStringFieldUpdateOperationsInput | string | null
     tauxSatisfaction?: NullableStringFieldUpdateOperationsInput | string | null
     resultats?: NullableJsonNullValueInput | InputJsonValue
+    reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutFormationNestedInput
@@ -87683,6 +87855,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: boolean
   }
 
   export type DemandeInscriptionCreateManyUserInput = {
@@ -87973,6 +88146,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ArticleUncheckedUpdateWithoutAuteurInput = {
@@ -87988,6 +88162,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ArticleUncheckedUpdateManyWithoutAuteurInput = {
@@ -88003,6 +88178,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sections?: NullableJsonNullValueInput | InputJsonValue
     reseauxPublies?: NullableJsonNullValueInput | InputJsonValue
+    diffuserReseaux?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type DemandeInscriptionUpdateWithoutUserInput = {

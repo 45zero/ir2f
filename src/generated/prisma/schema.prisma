@@ -264,6 +264,11 @@ model Formation {
   tauxSatisfaction String?
   resultats        Json? // [{ annee, tauxSelection, tauxJuryFinal }]
 
+  // Même principe que Article.reseauxPublies/diffuserReseaux (voir ce modèle pour le détail) —
+  // publication officielle réseaux sociaux généralisée aux formations.
+  reseauxPublies  Json?
+  diffuserReseaux Boolean @default(true)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -705,6 +710,11 @@ model Article {
   // au déploiement) — { [compteId]: { publishedAt, postId?, error? } }. Distinct du bouton
   // "partager" côté visiteur (qui ne touche pas ce champ) : ici c'est la Ligue qui publie en son nom.
   reseauxPublies Json?
+
+  // Coché par défaut à la création — piloté par la case "Diffuser sur les réseaux" du formulaire.
+  // Passe à false quand l'admin retire l'actualité de la liste "À publier" (/admin/publications)
+  // sans avoir publié ; se réactive en recochant la case dans le formulaire.
+  diffuserReseaux Boolean @default(true)
 
   auteur User @relation(fields: [auteurId], references: [id])
 

@@ -2,16 +2,19 @@
 
 import { useActionState, useMemo, useState } from "react"
 import Link from "next/link"
-import { publishArticleToSocial, refreshSocialStats, editArticleSocialPost, deleteArticleSocialPost } from "@/lib/actions/social-publish"
+import { publishContentToSocial, refreshContentSocialStats, editContentSocialPost, deleteContentSocialPost } from "@/lib/actions/social-publish"
 import { FacebookIcon, InstagramIcon, TikTokIcon, LinkedInIcon } from "@/components/admin/SocialPlatformIcons"
 import { colors, fontBody } from "@/lib/theme"
 import type { SocialPlateforme } from "@/lib/social/accounts"
-import type { ReseauxPublies } from "@/lib/articles-shared"
+import type { ReseauxPublies, PublishableType } from "@/lib/social/publication"
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Paris" })
 const numberFormatter = new Intl.NumberFormat("fr-FR")
 
 export type PublierReseauxCompte = { id: string; label: string; plateforme: SocialPlateforme }
+
+// Libellé naturel du contenu dans les phrases de l'interface ("publie X au nom de la Ligue").
+const ENTITY_LABELS: Record<PublishableType, string> = { ARTICLE: "l'actualité", FORMATION: "la formation" }
 
 const fieldStyle = {
   border: "1px solid #e2e5ea",
@@ -58,12 +61,14 @@ function smallButtonStyle(background: string, filled: boolean): React.CSSPropert
 
 /** Actions sur une publication déjà PUBLIE : modifier (Facebook uniquement — Instagram ne permet pas de modifier une légende publiée) et supprimer (les deux plateformes, avec confirmation car irréversible côté réseau social). */
 function PublishedPostActions({
-  articleId,
+  entityType,
+  entityId,
   compteId,
   plateforme,
   currentMessage,
 }: {
-  articleId: string
+  entityType: PublishableType
+  entityId: string
   compteId: string
   plateforme: SocialPlateforme
   currentMessage: string
@@ -72,15 +77,15 @@ function PublishedPostActions({
   const [draft, setDraft] = useState(currentMessage)
 
   const [editState, editAction, editPending] = useActionState(
-    async (_prev: Awaited<ReturnType<typeof editArticleSocialPost>> | undefined) => {
-      const result = await editArticleSocialPost(articleId, compteId, draft)
+    async (_prev: Awaited<ReturnType<typeof editContentSocialPost>> | undefined) => {
+      const result = await editContentSocialPost(entityType, entityId, compteId, draft)
       if (result.ok) setMode("idle")
       return result
     },
     undefined
   )
   const [deleteState, deleteAction, deletePending] = useActionState(
-    async (_prev: Awaited<ReturnType<typeof deleteArticleSocialPost>> | undefined) => deleteArticleSocialPost(articleId, compteId),
+    async (_prev: Awaited<ReturnType<typeof deleteContentSocialPost>> | undefined) => deleteContentSocialPost(entityType, entityId, compteId),
     undefined
   )
 
@@ -137,6 +142,54 @@ function PublishedPostActions({
   )
 }
 
+/** Sélecteur photo/vidéo réutilisé pour le média natif Facebook et pour Instagram (toujours natif) — bascule le type seulement si les deux sont disponibles. */
+function MediaPicker({
+  images,
+  videos,
+  type,
+  onTypeChange,
+  url,
+  onUrlChange,
+}: {
+  images: string[]
+  videos: string[]
+  type: "IMAGE" | "VIDEO"
+  onTypeChange: (type: "IMAGE" | "VIDEO") => void
+  url: string
+  onUrlChange: (url: string) => void
+}) {
+  const options = type === "VIDEO" ? videos : images
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      {images.length > 0 && videos.length > 0 && (
+        <div style={{ display: "flex", gap: 14 }}>
+          <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
+            <input type="radio" checked={type === "IMAGE"} onChange={() => onTypeChange("IMAGE")} />
+            Photo
+          </label>
+          <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
+            <input type="radio" checked={type === "VIDEO"} onChange={() => onTypeChange("VIDEO")} />
+            Vidéo
+          </label>
+        </div>
+      )}
+      {options.length > 0 ? (
+        <select value={url} onChange={(e) => onUrlChange(e.target.value)} style={fieldStyle}>
+          {options.map((o, i) => (
+            <option key={o} value={o}>
+              {type === "VIDEO" ? `Vidéo ${i + 1}` : i === 0 ? "Image principale" : `Image ${i + 1}`}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <p style={{ fontSize: 11.5, color: colors.red, margin: 0 }}>
+          Aucune {type === "VIDEO" ? "vidéo" : "image"} disponible.
+        </p>
+      )}
+    </div>
+  )
+}
+
 function PlatformSection({
   icon,
   title,
@@ -144,7 +197,8 @@ function PlatformSection({
   selected,
   onToggle,
   statuses,
-  articleId,
+  entityType,
+  entityId,
   children,
 }: {
   icon: React.ReactNode
@@ -153,7 +207,8 @@ function PlatformSection({
   selected: string[]
   onToggle: (id: string, checked: boolean) => void
   statuses: ReseauxPublies
-  articleId: string
+  entityType: PublishableType
+  entityId: string
   children: React.ReactNode
 }) {
   return (
@@ -197,7 +252,7 @@ function PlatformSection({
                 </span>
               )}
               {etat && etat.statut === "PUBLIE" && (
-                <PublishedPostActions articleId={articleId} compteId={c.id} plateforme={c.plateforme} currentMessage={etat.message} />
+                <PublishedPostActions entityType={entityType} entityId={entityId} compteId={c.id} plateforme={c.plateforme} currentMessage={etat.message} />
               )}
             </div>
           )
@@ -209,49 +264,80 @@ function PlatformSection({
 }
 
 export function PublierReseauxPanel({
-  articleId,
+  entityType,
+  entityId,
   comptes,
   reseauxPublies,
   defaultMessage,
-  articleImage,
-  sectionImages,
+  images,
+  videos,
+  hideFooterLink,
 }: {
-  articleId: string
+  entityType: PublishableType
+  entityId: string
   comptes: PublierReseauxCompte[]
   reseauxPublies: ReseauxPublies | null
   defaultMessage: string
-  articleImage: string | null
-  sectionImages: string[]
+  images: string[]
+  videos: string[]
+  hideFooterLink?: boolean
 }) {
   const facebookComptes = useMemo(() => comptes.filter((c) => c.plateforme === "FACEBOOK"), [comptes])
   const instagramComptes = useMemo(() => comptes.filter((c) => c.plateforme === "INSTAGRAM"), [comptes])
-  const availableImages = useMemo(() => [...(articleImage ? [articleImage] : []), ...sectionImages], [articleImage, sectionImages])
 
   const [selectedFacebook, setSelectedFacebook] = useState<string[]>([])
   const [selectedInstagram, setSelectedInstagram] = useState<string[]>([])
   const [facebookMessage, setFacebookMessage] = useState(defaultMessage)
   const [instagramCaption, setInstagramCaption] = useState(defaultMessage)
-  const [instagramImage, setInstagramImage] = useState(availableImages[0] ?? "")
   const [when, setWhen] = useState<"now" | "schedule">("now")
   const [scheduledFor, setScheduledFor] = useState("")
 
+  // Facebook : "LIEN" (comportement historique, carte cliquable) par défaut, ou média natif
+  // (photo/vidéo jouable directement) si l'admin le choisit. Instagram : toujours natif, un média
+  // est obligatoire — c'est une limitation de la plateforme, pas de notre code.
+  const [facebookMediaMode, setFacebookMediaMode] = useState<"LIEN" | "IMAGE" | "VIDEO">("LIEN")
+  const [facebookMediaUrl, setFacebookMediaUrl] = useState(images[0] ?? videos[0] ?? "")
+  const [instagramMediaType, setInstagramMediaType] = useState<"IMAGE" | "VIDEO">(images.length > 0 ? "IMAGE" : "VIDEO")
+  const [instagramMediaUrl, setInstagramMediaUrl] = useState(images[0] ?? videos[0] ?? "")
+
+  function handleFacebookMediaModeChange(mode: "LIEN" | "IMAGE" | "VIDEO") {
+    setFacebookMediaMode(mode)
+    if (mode !== "LIEN") setFacebookMediaUrl((mode === "VIDEO" ? videos : images)[0] ?? "")
+  }
+
+  function handleInstagramTypeChange(type: "IMAGE" | "VIDEO") {
+    setInstagramMediaType(type)
+    setInstagramMediaUrl((type === "VIDEO" ? videos : images)[0] ?? "")
+  }
+
   const [state, formAction, isPending] = useActionState(
-    async (_prev: Awaited<ReturnType<typeof publishArticleToSocial>> | undefined) =>
-      publishArticleToSocial(articleId, {
-        facebook: { compteIds: selectedFacebook, message: facebookMessage },
-        instagram: { compteIds: selectedInstagram, caption: instagramCaption, imageUrl: instagramImage || null },
+    async (_prev: Awaited<ReturnType<typeof publishContentToSocial>> | undefined) =>
+      publishContentToSocial(entityType, entityId, {
+        facebook: {
+          compteIds: selectedFacebook,
+          message: facebookMessage,
+          mediaMode: facebookMediaMode,
+          mediaUrl: facebookMediaMode !== "LIEN" ? facebookMediaUrl : undefined,
+        },
+        instagram: {
+          compteIds: selectedInstagram,
+          caption: instagramCaption,
+          mediaMode: instagramMediaType,
+          mediaUrl: instagramMediaUrl || null,
+        },
         scheduledFor: when === "schedule" && scheduledFor ? new Date(scheduledFor).toISOString() : undefined,
       }),
     undefined
   )
   const [refreshState, refreshAction, refreshPending] = useActionState(
-    async (_prev: Awaited<ReturnType<typeof refreshSocialStats>> | undefined) => refreshSocialStats(articleId),
+    async (_prev: Awaited<ReturnType<typeof refreshContentSocialStats>> | undefined) => refreshContentSocialStats(entityType, entityId),
     undefined
   )
 
   const statuses: ReseauxPublies = reseauxPublies ?? {}
   const hasAnyPublished = Object.values(statuses).some((s) => s.statut === "PUBLIE")
   const totalSelected = selectedFacebook.length + selectedInstagram.length
+  const entityLabel = ENTITY_LABELS[entityType]
 
   return (
     <div style={{ background: "#fff", border: "1px solid #eef0f3", borderRadius: 10, padding: "clamp(18px,3vw,28px)", display: "flex", flexDirection: "column", gap: 16, maxWidth: 620 }}>
@@ -270,7 +356,7 @@ export function PublierReseauxPanel({
         )}
       </div>
       <p style={{ fontSize: 12, color: colors.textLight, margin: 0 }}>
-        Publie officiellement l&apos;actualité au nom de la Ligue, avec un texte propre à chaque plateforme.
+        Publie officiellement {entityLabel} au nom de la Ligue, avec un texte propre à chaque plateforme.
       </p>
 
       {comptes.length === 0 ? (
@@ -287,7 +373,8 @@ export function PublierReseauxPanel({
               selected={selectedFacebook}
               onToggle={(id, checked) => setSelectedFacebook((prev) => (checked ? [...prev, id] : prev.filter((x) => x !== id)))}
               statuses={statuses}
-              articleId={articleId}
+              entityType={entityType}
+              entityId={entityId}
             >
               <textarea
                 value={facebookMessage}
@@ -296,6 +383,34 @@ export function PublierReseauxPanel({
                 placeholder="Texte du post Facebook"
                 style={{ ...fieldStyle, resize: "vertical" }}
               />
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <span style={{ fontSize: 11.5, fontWeight: 700, color: colors.textMuted }}>Format du post</span>
+                <div style={{ display: "flex", gap: 14 }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
+                    <input type="radio" checked={facebookMediaMode === "LIEN"} onChange={() => handleFacebookMediaModeChange("LIEN")} />
+                    Lien vers le site
+                  </label>
+                  <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: colors.text }}>
+                    <input
+                      type="radio"
+                      checked={facebookMediaMode !== "LIEN"}
+                      disabled={images.length === 0 && videos.length === 0}
+                      onChange={() => handleFacebookMediaModeChange(images.length > 0 ? "IMAGE" : "VIDEO")}
+                    />
+                    Média natif (photo/vidéo jouable directement)
+                  </label>
+                </div>
+                {facebookMediaMode !== "LIEN" && (
+                  <MediaPicker
+                    images={images}
+                    videos={videos}
+                    type={facebookMediaMode}
+                    onTypeChange={handleFacebookMediaModeChange}
+                    url={facebookMediaUrl}
+                    onUrlChange={setFacebookMediaUrl}
+                  />
+                )}
+              </div>
             </PlatformSection>
           )}
 
@@ -307,7 +422,8 @@ export function PublierReseauxPanel({
               selected={selectedInstagram}
               onToggle={(id, checked) => setSelectedInstagram((prev) => (checked ? [...prev, id] : prev.filter((x) => x !== id)))}
               statuses={statuses}
-              articleId={articleId}
+              entityType={entityType}
+              entityId={entityId}
             >
               <textarea
                 value={instagramCaption}
@@ -316,21 +432,19 @@ export function PublierReseauxPanel({
                 placeholder="Légende du post Instagram"
                 style={{ ...fieldStyle, resize: "vertical" }}
               />
-              {availableImages.length > 0 ? (
-                <label style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                  <span style={{ fontSize: 11.5, fontWeight: 700, color: colors.textMuted }}>Image à publier</span>
-                  <select value={instagramImage} onChange={(e) => setInstagramImage(e.target.value)} style={fieldStyle}>
-                    {availableImages.map((img, i) => (
-                      <option key={img} value={img}>
-                        {i === 0 ? "Image principale de l'actualité" : `Image de section ${i}`}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              ) : (
+              {images.length === 0 && videos.length === 0 ? (
                 <p style={{ fontSize: 11.5, color: colors.red, margin: 0 }}>
-                  Cette actualité n&apos;a aucune image — Instagram ne pourra pas être publié.
+                  Aucune image ni vidéo disponible — Instagram ne pourra pas être publié.
                 </p>
+              ) : (
+                <MediaPicker
+                  images={images}
+                  videos={videos}
+                  type={instagramMediaType}
+                  onTypeChange={handleInstagramTypeChange}
+                  url={instagramMediaUrl}
+                  onUrlChange={setInstagramMediaUrl}
+                />
               )}
             </PlatformSection>
           )}
@@ -397,9 +511,11 @@ export function PublierReseauxPanel({
         ))}
       </div>
 
-      <Link href="/admin/publications" style={{ fontSize: 11.5, color: colors.textLight, textDecoration: "underline" }}>
-        Voir toutes les publications
-      </Link>
+      {!hideFooterLink && (
+        <Link href="/admin/publications" style={{ fontSize: 11.5, color: colors.textLight, textDecoration: "underline" }}>
+          Voir toutes les publications
+        </Link>
+      )}
     </div>
   )
 }

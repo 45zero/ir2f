@@ -4,8 +4,6 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import {
-  publishToFacebookPage,
-  publishToInstagram,
   getFacebookPostStats,
   getInstagramMediaStats,
   getFacebookPostInsights,
@@ -14,10 +12,56 @@ import {
   deleteFacebookPost,
   deleteInstagramMedia,
 } from "@/lib/social/graph"
+import { publishToSocialAccount } from "@/lib/social/publish-router"
 import { getSocialAccountById } from "@/lib/social/accounts"
-import type { ReseauxPublies } from "@/lib/articles-shared"
+import type { ReseauxPublies, PublishableType, MediaMode } from "@/lib/social/publication"
+import { articleShareExcerpt, type ArticleSection } from "@/lib/articles-shared"
+import { formationShareExcerpt, type ProgrammeStep } from "@/lib/formations-shared"
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ir2f.lgef.fr"
+
+// Compte Vercel en plan Hobby (voir le commit "Corrige le cron... pour le plan Hobby") — le budget
+// par défaut serait de 10s, trop court pour une vidéo Instagram/Facebook dont le traitement côté
+// Meta peut prendre jusqu'à ~50s (voir le polling dans social/graph.ts). Un fichier "use server" ne
+// peut exporter que des fonctions async, donc `maxDuration` est déclaré sur les pages qui appellent
+// publishContentToSocial (articles/[id], formations/[id], publications) plutôt qu'ici.
+
+/**
+ * Publier sur les réseaux fonctionne à l'identique pour une actualité ou une formation — seule
+ * l'origine des données change (slug/URL publique, où est stocké reseauxPublies). Cette petite
+ * couche évite de dupliquer toute la logique de publication/édition/suppression/stats entre
+ * social-publish (Article) et un futur équivalent Formation.
+ */
+async function loadEntity(entityType: PublishableType, id: string): Promise<{ url: string; reseauxPublies: ReseauxPublies } | null> {
+  if (entityType === "ARTICLE") {
+    const article = await prisma.article.findUnique({ where: { id }, select: { slug: true, reseauxPublies: true } })
+    if (!article) return null
+    return { url: `${SITE_URL}/actualites/${article.slug}`, reseauxPublies: (article.reseauxPublies as ReseauxPublies | null) ?? {} }
+  }
+
+  const formation = await prisma.formation.findUnique({ where: { id }, select: { slug: true, lienExterne: true, reseauxPublies: true } })
+  if (!formation) return null
+  return {
+    url: formation.lienExterne || `${SITE_URL}/formations/${formation.slug}`,
+    reseauxPublies: (formation.reseauxPublies as ReseauxPublies | null) ?? {},
+  }
+}
+
+async function saveReseauxPublies(entityType: PublishableType, id: string, reseauxPublies: ReseauxPublies): Promise<void> {
+  if (entityType === "ARTICLE") await prisma.article.update({ where: { id }, data: { reseauxPublies } })
+  else await prisma.formation.update({ where: { id }, data: { reseauxPublies } })
+}
+
+function entityNotFoundError(entityType: PublishableType): string {
+  return entityType === "ARTICLE" ? "Actualité introuvable." : "Formation introuvable."
+}
+
+function revalidateEntity(entityType: PublishableType, id: string): void {
+  const base = entityType === "ARTICLE" ? "/admin/articles" : "/admin/formations"
+  revalidatePath(base)
+  revalidatePath(`${base}/${id}`)
+  revalidatePath("/admin/publications")
+}
 
 export type PublishSocialState = {
   error: string | null
@@ -25,35 +69,44 @@ export type PublishSocialState = {
 }
 
 export type PublishSocialGroups = {
-  facebook: { compteIds: string[]; message: string }
-  instagram: { compteIds: string[]; caption: string; imageUrl: string | null }
+  facebook: { compteIds: string[]; message: string; mediaMode: MediaMode; mediaUrl?: string }
+  instagram: { compteIds: string[]; caption: string; mediaMode: Exclude<MediaMode, "LIEN">; mediaUrl: string | null }
   scheduledFor?: string
 }
 
 /**
- * Publie (ou programme) une actualité sur les comptes réseaux sociaux sélectionnés, avec un texte
- * propre à chaque plateforme (voir src/lib/social/accounts.ts — comptes configurés en variable
- * d'environnement, pas en base). Un échec sur un compte n'empêche pas les autres — chaque résultat
- * est reporté séparément dans Article.reseauxPublies.
+ * Publie (ou programme) une actualité/formation sur les comptes réseaux sociaux sélectionnés, avec
+ * un texte propre à chaque plateforme (voir src/lib/social/accounts.ts — comptes configurés en
+ * variable d'environnement, pas en base). Un échec sur un compte n'empêche pas les autres — chaque
+ * résultat est reporté séparément dans reseauxPublies.
  */
-export async function publishArticleToSocial(articleId: string, groups: PublishSocialGroups): Promise<PublishSocialState> {
+export async function publishContentToSocial(
+  entityType: PublishableType,
+  entityId: string,
+  groups: PublishSocialGroups
+): Promise<PublishSocialState> {
   await requireAdmin()
 
-  const targets: { compteId: string; message: string; imageUrl?: string }[] = [
-    ...groups.facebook.compteIds.map((compteId) => ({ compteId, message: groups.facebook.message })),
+  const targets: { compteId: string; message: string; mediaMode: MediaMode; mediaUrl?: string }[] = [
+    ...groups.facebook.compteIds.map((compteId) => ({
+      compteId,
+      message: groups.facebook.message,
+      mediaMode: groups.facebook.mediaMode,
+      mediaUrl: groups.facebook.mediaUrl,
+    })),
     ...groups.instagram.compteIds.map((compteId) => ({
       compteId,
       message: groups.instagram.caption,
-      imageUrl: groups.instagram.imageUrl ?? undefined,
+      mediaMode: groups.instagram.mediaMode as MediaMode,
+      mediaUrl: groups.instagram.mediaUrl ?? undefined,
     })),
   ]
   if (targets.length === 0) return { error: "Sélectionnez au moins un compte.", results: [] }
 
-  const article = await prisma.article.findUnique({ where: { id: articleId }, select: { slug: true, reseauxPublies: true } })
-  if (!article) return { error: "Actualité introuvable.", results: [] }
+  const entity = await loadEntity(entityType, entityId)
+  if (!entity) return { error: entityNotFoundError(entityType), results: [] }
 
-  const articleUrl = `${SITE_URL}/actualites/${article.slug}`
-  const reseauxPublies = { ...((article.reseauxPublies as ReseauxPublies | null) ?? {}) }
+  const reseauxPublies = { ...entity.reseauxPublies }
   const results: PublishSocialState["results"] = []
 
   const scheduledFor = groups.scheduledFor && new Date(groups.scheduledFor) > new Date() ? groups.scheduledFor : null
@@ -66,56 +119,49 @@ export async function publishArticleToSocial(articleId: string, groups: PublishS
     }
 
     if (scheduledFor) {
-      reseauxPublies[compte.id] = { statut: "PROGRAMME", message: target.message, imageUrl: target.imageUrl, scheduledFor }
+      reseauxPublies[compte.id] = { statut: "PROGRAMME", message: target.message, mediaMode: target.mediaMode, mediaUrl: target.mediaUrl, scheduledFor }
       results.push({ compteId: compte.id, label: compte.label, ok: true })
       continue
     }
 
     try {
-      const { postId } =
-        compte.plateforme === "FACEBOOK"
-          ? await publishToFacebookPage(compte.externalId, compte.accessToken, { message: target.message, link: articleUrl })
-          : await publishToInstagram(compte.externalId, compte.accessToken, {
-              imageUrl: requireImage(target.imageUrl),
-              caption: `${target.message}\n\n${articleUrl}`,
-            })
-      reseauxPublies[compte.id] = { statut: "PUBLIE", message: target.message, imageUrl: target.imageUrl, publishedAt: new Date().toISOString(), postId }
+      const { postId } = await publishToSocialAccount(compte, target.message, entity.url, target.mediaMode, target.mediaUrl)
+      reseauxPublies[compte.id] = {
+        statut: "PUBLIE",
+        message: target.message,
+        mediaMode: target.mediaMode,
+        mediaUrl: target.mediaUrl,
+        publishedAt: new Date().toISOString(),
+        postId,
+      }
       results.push({ compteId: compte.id, label: compte.label, ok: true })
     } catch (e) {
       const message = e instanceof Error ? e.message : "Erreur inattendue."
-      reseauxPublies[compte.id] = { statut: "ECHEC", message: target.message, imageUrl: target.imageUrl, error: message }
+      reseauxPublies[compte.id] = { statut: "ECHEC", message: target.message, mediaMode: target.mediaMode, mediaUrl: target.mediaUrl, error: message }
       results.push({ compteId: compte.id, label: compte.label, ok: false, error: message })
     }
   }
 
-  await prisma.article.update({ where: { id: articleId }, data: { reseauxPublies } })
-
-  revalidatePath("/admin/articles")
-  revalidatePath(`/admin/articles/${articleId}`)
-  revalidatePath("/admin/publications")
+  await saveReseauxPublies(entityType, entityId, reseauxPublies)
+  revalidateEntity(entityType, entityId)
   return { error: null, results }
-}
-
-function requireImage(imageUrl: string | undefined): string {
-  if (!imageUrl) throw new Error("Aucune image sélectionnée — Instagram en nécessite une.")
-  return imageUrl
 }
 
 export type RefreshStatsState = { error: string | null }
 
 /**
- * Rafraîchit les likes/commentaires et vues/portée des publications déjà PUBLIE d'un article. Les
+ * Rafraîchit les likes/commentaires et vues/portée des publications déjà PUBLIE d'un contenu. Les
  * vues/portée sont récupérées séparément (édge /insights, pas les mêmes permissions ni le même
  * risque d'erreur que like_count/comments_count) — un échec dessus ne doit pas empêcher de garder
  * au moins les likes/commentaires à jour.
  */
-export async function refreshSocialStats(articleId: string): Promise<RefreshStatsState> {
+export async function refreshContentSocialStats(entityType: PublishableType, entityId: string): Promise<RefreshStatsState> {
   await requireAdmin()
 
-  const article = await prisma.article.findUnique({ where: { id: articleId }, select: { reseauxPublies: true } })
-  if (!article) return { error: "Actualité introuvable." }
+  const entity = await loadEntity(entityType, entityId)
+  if (!entity) return { error: entityNotFoundError(entityType) }
 
-  const reseauxPublies = { ...((article.reseauxPublies as ReseauxPublies | null) ?? {}) }
+  const reseauxPublies = { ...entity.reseauxPublies }
   let changed = false
 
   for (const [compteId, etat] of Object.entries(reseauxPublies)) {
@@ -147,9 +193,8 @@ export async function refreshSocialStats(articleId: string): Promise<RefreshStat
   }
 
   if (changed) {
-    await prisma.article.update({ where: { id: articleId }, data: { reseauxPublies } })
-    revalidatePath("/admin/articles")
-    revalidatePath("/admin/publications")
+    await saveReseauxPublies(entityType, entityId, reseauxPublies)
+    revalidateEntity(entityType, entityId)
   }
 
   return { error: null }
@@ -158,17 +203,22 @@ export async function refreshSocialStats(articleId: string): Promise<RefreshStat
 export type EditSocialPostState = { error: string | null; ok: boolean }
 
 /** Modifie le texte d'une publication Facebook déjà publiée. Instagram ne permet pas de modifier une légende publiée (limitation de l'API, pas de notre code) — l'appelant ne doit pas proposer cette action pour Instagram. */
-export async function editArticleSocialPost(articleId: string, compteId: string, newMessage: string): Promise<EditSocialPostState> {
+export async function editContentSocialPost(
+  entityType: PublishableType,
+  entityId: string,
+  compteId: string,
+  newMessage: string
+): Promise<EditSocialPostState> {
   await requireAdmin()
 
   const compte = getSocialAccountById(compteId)
   if (!compte) return { error: "Compte introuvable.", ok: false }
   if (compte.plateforme !== "FACEBOOK") return { error: "La modification n'est pas possible sur Instagram.", ok: false }
 
-  const article = await prisma.article.findUnique({ where: { id: articleId }, select: { reseauxPublies: true } })
-  if (!article) return { error: "Actualité introuvable.", ok: false }
+  const entity = await loadEntity(entityType, entityId)
+  if (!entity) return { error: entityNotFoundError(entityType), ok: false }
 
-  const reseauxPublies = { ...((article.reseauxPublies as ReseauxPublies | null) ?? {}) }
+  const reseauxPublies = { ...entity.reseauxPublies }
   const etat = reseauxPublies[compteId]
   if (!etat || etat.statut !== "PUBLIE" || !etat.postId) return { error: "Cette publication n'est pas publiée.", ok: false }
 
@@ -179,27 +229,24 @@ export async function editArticleSocialPost(articleId: string, compteId: string,
   }
 
   reseauxPublies[compteId] = { ...etat, message: newMessage }
-  await prisma.article.update({ where: { id: articleId }, data: { reseauxPublies } })
-
-  revalidatePath("/admin/articles")
-  revalidatePath(`/admin/articles/${articleId}`)
-  revalidatePath("/admin/publications")
+  await saveReseauxPublies(entityType, entityId, reseauxPublies)
+  revalidateEntity(entityType, entityId)
   return { error: null, ok: true }
 }
 
 export type DeleteSocialPostState = { error: string | null; ok: boolean }
 
 /** Supprime une publication déjà publiée sur la plateforme d'origine, puis marque l'état SUPPRIME côté IR2F (on garde la trace plutôt que de retirer l'entrée). */
-export async function deleteArticleSocialPost(articleId: string, compteId: string): Promise<DeleteSocialPostState> {
+export async function deleteContentSocialPost(entityType: PublishableType, entityId: string, compteId: string): Promise<DeleteSocialPostState> {
   await requireAdmin()
 
   const compte = getSocialAccountById(compteId)
   if (!compte) return { error: "Compte introuvable.", ok: false }
 
-  const article = await prisma.article.findUnique({ where: { id: articleId }, select: { reseauxPublies: true } })
-  if (!article) return { error: "Actualité introuvable.", ok: false }
+  const entity = await loadEntity(entityType, entityId)
+  if (!entity) return { error: entityNotFoundError(entityType), ok: false }
 
-  const reseauxPublies = { ...((article.reseauxPublies as ReseauxPublies | null) ?? {}) }
+  const reseauxPublies = { ...entity.reseauxPublies }
   const etat = reseauxPublies[compteId]
   if (!etat || etat.statut !== "PUBLIE" || !etat.postId) return { error: "Cette publication n'est pas publiée.", ok: false }
 
@@ -211,10 +258,74 @@ export async function deleteArticleSocialPost(articleId: string, compteId: strin
   }
 
   reseauxPublies[compteId] = { ...etat, statut: "SUPPRIME", deletedAt: new Date().toISOString() }
-  await prisma.article.update({ where: { id: articleId }, data: { reseauxPublies } })
-
-  revalidatePath("/admin/articles")
-  revalidatePath(`/admin/articles/${articleId}`)
-  revalidatePath("/admin/publications")
+  await saveReseauxPublies(entityType, entityId, reseauxPublies)
+  revalidateEntity(entityType, entityId)
   return { error: null, ok: true }
+}
+
+export type ContentPublishContext = {
+  titre: string
+  reseauxPublies: ReseauxPublies | null
+  defaultMessage: string
+  images: string[]
+  videos: string[]
+}
+
+/**
+ * Contexte nécessaire pour ouvrir le panneau de publication (message par défaut, images
+ * disponibles, état actuel) à la demande — utilisé par la boîte de dialogue "Publier" depuis
+ * /admin/publications, pour éviter de précharger tout ce contexte pour chaque ligne de la liste.
+ */
+export async function getContentPublishContext(entityType: PublishableType, entityId: string): Promise<ContentPublishContext | null> {
+  await requireAdmin()
+
+  if (entityType === "ARTICLE") {
+    const article = await prisma.article.findUnique({
+      where: { id: entityId },
+      select: { titre: true, contenu: true, textePartage: true, image: true, sections: true, reseauxPublies: true },
+    })
+    if (!article) return null
+    const sections = (article.sections as ArticleSection[] | null) ?? []
+    return {
+      titre: article.titre,
+      reseauxPublies: article.reseauxPublies as ReseauxPublies | null,
+      defaultMessage: articleShareExcerpt(article),
+      images: [...(article.image ? [article.image] : []), ...sections.flatMap((s) => s.images ?? [])],
+      videos: sections.flatMap((s) => (s.videoFichierUrl ? [s.videoFichierUrl] : [])),
+    }
+  }
+
+  const formation = await prisma.formation.findUnique({
+    where: { id: entityId },
+    select: { titre: true, description: true, image: true, programme: true, reseauxPublies: true },
+  })
+  if (!formation) return null
+  const programme = (formation.programme as ProgrammeStep[] | null) ?? []
+  return {
+    titre: formation.titre,
+    reseauxPublies: formation.reseauxPublies as ReseauxPublies | null,
+    defaultMessage: formationShareExcerpt(formation),
+    images: [...(formation.image ? [formation.image] : []), ...programme.flatMap((p) => p.images ?? [])],
+    videos: programme.flatMap((p) => (p.videoFichierUrl ? [p.videoFichierUrl] : [])),
+  }
+}
+
+export type SetDiffuserReseauxState = { error: string | null }
+
+/** Retire (ou remet) un contenu de la liste "À publier" — piloté par la case "Diffuser sur les réseaux" du formulaire, ou par l'action "Retirer" sur /admin/publications. */
+export async function setDiffuserReseaux(entityType: PublishableType, entityId: string, diffuserReseaux: boolean): Promise<SetDiffuserReseauxState> {
+  await requireAdmin()
+
+  if (entityType === "ARTICLE") {
+    const article = await prisma.article.findUnique({ where: { id: entityId }, select: { id: true } })
+    if (!article) return { error: entityNotFoundError(entityType) }
+    await prisma.article.update({ where: { id: entityId }, data: { diffuserReseaux } })
+  } else {
+    const formation = await prisma.formation.findUnique({ where: { id: entityId }, select: { id: true } })
+    if (!formation) return { error: entityNotFoundError(entityType) }
+    await prisma.formation.update({ where: { id: entityId }, data: { diffuserReseaux } })
+  }
+
+  revalidateEntity(entityType, entityId)
+  return { error: null }
 }

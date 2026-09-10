@@ -73,6 +73,7 @@ export type FormationFormInitial = {
   tauxReussite: string
   tauxSatisfaction: string
   resultats: ResultatAnnee[]
+  diffuserReseaux: boolean
 }
 
 const EMPTY: FormationFormInitial = {
@@ -113,6 +114,7 @@ const EMPTY: FormationFormInitial = {
   tauxReussite: "",
   tauxSatisfaction: "",
   resultats: [],
+  diffuserReseaux: true,
 }
 
 const fieldStyle = {
@@ -345,6 +347,10 @@ export function FormationForm({
               style={{ width: 15, height: 15 }}
             />
             Éligible Bon de Formation
+          </label>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: colors.text, marginTop: 20 }}>
+            <input type="checkbox" name="diffuserReseaux" defaultChecked={data.diffuserReseaux} style={{ width: 15, height: 15 }} />
+            Diffuser sur les réseaux (apparaît dans «&nbsp;À publier&nbsp;» une fois publiée)
           </label>
         </div>
       </SectionCard>

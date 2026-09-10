@@ -103,6 +103,12 @@ export type CatalogueFormation = FormationCard & {
 
 export type FormationOption = { id: string; titre: string }
 
+/** Légende courte utilisée pour pré-remplir le texte de publication officielle réseaux sociaux d'une formation — même principe que articleShareExcerpt (articles-shared.ts). */
+export function formationShareExcerpt(formation: { description: string | null }): string {
+  const source = formation.description?.trim() ?? ""
+  return source.slice(0, 160).trim() + (source.length > 160 ? "…" : "")
+}
+
 export type ProgrammeStep = {
   n: string
   title: string
