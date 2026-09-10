@@ -24,16 +24,6 @@ const PLATEFORME_ICONS: Record<SocialPlateforme, (props: { size?: number }) => R
 const ENTITY_ADMIN_PATH: Record<PublishableType, string> = { ARTICLE: "/admin/articles", FORMATION: "/admin/formations" }
 const ENTITY_TYPE_LABEL: Record<PublishableType, string> = { ARTICLE: "Actualité", FORMATION: "Formation" }
 
-function PlatformBadge({ plateforme }: { plateforme: SocialPlateforme | null }) {
-  if (!plateforme) return null
-  const Icon = PLATEFORME_ICONS[plateforme]
-  return (
-    <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 22, height: 22, borderRadius: 6, background: "#f5f7fb", flexShrink: 0 }}>
-      <Icon size={13} />
-    </span>
-  )
-}
-
 function TypeBadge({ entityType }: { entityType: PublishableType }) {
   return (
     <span style={{ fontSize: 10.5, fontWeight: 700, color: colors.textLight, border: "1px solid #e2e5ea", borderRadius: 4, padding: "2px 6px", whiteSpace: "nowrap" }}>
@@ -60,8 +50,6 @@ const rowStyle = {
   fontSize: 13,
 }
 
-// Variante utilisée quand la ligne porte des actions (Modifier/Supprimer) en dessous — la bordure
-// et le padding passent sur le conteneur externe, la ligne de contenu proprement dite n'en a plus.
 const rowWrapStyle = { borderTop: "1px solid #eef0f3", padding: "10px 0" }
 const rowContentStyle = { display: "flex", alignItems: "center", gap: 10, fontSize: 13 }
 
@@ -96,6 +84,107 @@ function APublierRow({ item, comptes }: { item: APublierItem; comptes: PublierRe
   )
 }
 
+type EntityGroup = { entityType: PublishableType; entityId: string; titre: string; rows: PublicationRow[] }
+
+/** Regroupe des lignes plateforme-par-plateforme (une par compte) en une ligne par contenu — l'ordre des groupes suit la première apparition, les listes d'entrée étant déjà triées (voir getPublicationsOverview). */
+function groupByEntity(rows: PublicationRow[]): EntityGroup[] {
+  const groups = new Map<string, EntityGroup>()
+  for (const r of rows) {
+    const key = `${r.entityType}:${r.entityId}`
+    const group = groups.get(key)
+    if (group) group.rows.push(r)
+    else groups.set(key, { entityType: r.entityType, entityId: r.entityId, titre: r.titre, rows: [r] })
+  }
+  return [...groups.values()]
+}
+
+const logoButtonSize = 28
+
+function PlatformLogoButton({ row, active, onClick }: { row: PublicationRow; active: boolean; onClick: () => void }) {
+  const Icon = row.plateforme ? PLATEFORME_ICONS[row.plateforme] : null
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      title={row.compteLabel}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: logoButtonSize,
+        height: logoButtonSize,
+        borderRadius: 7,
+        background: active ? "#eef1f8" : "#f5f7fb",
+        border: active ? `1.5px solid ${colors.navy}` : "1.5px solid transparent",
+        cursor: "pointer",
+        flexShrink: 0,
+      }}
+    >
+      {Icon ? <Icon size={14} /> : <span style={{ fontSize: 10, fontWeight: 700, color: colors.textMuted }}>?</span>}
+    </button>
+  )
+}
+
+/**
+ * Une ligne par contenu (actualité/formation), avec un logo cliquable par compte réseau en
+ * dessous — cliquer un logo ouvre/ferme le détail (statut, stats) et les actions Modifier/Supprimer
+ * pour ce compte précis, sans encombrer la liste d'une ligne par réseau comme avant.
+ */
+function PublicationGroupRow({ group, kind }: { group: EntityGroup; kind: "programme" | "publie" | "echec" }) {
+  const [openCompteId, setOpenCompteId] = useState<string | null>(null)
+  const openRow = group.rows.find((r) => r.compteId === openCompteId) ?? null
+
+  return (
+    <div style={rowWrapStyle}>
+      <div style={rowContentStyle}>
+        <TypeBadge entityType={group.entityType} />
+        <Link href={`${ENTITY_ADMIN_PATH[group.entityType]}/${group.entityId}`} style={{ flex: 1, color: colors.text, textDecoration: "none" }}>
+          <strong>{group.titre}</strong>
+        </Link>
+      </div>
+      <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
+        {group.rows.map((r) => (
+          <PlatformLogoButton
+            key={r.compteId}
+            row={r}
+            active={openCompteId === r.compteId}
+            onClick={() => setOpenCompteId((prev) => (prev === r.compteId ? null : r.compteId))}
+          />
+        ))}
+      </div>
+      {openRow && (
+        <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px dashed #eef0f3", display: "flex", flexDirection: "column", gap: 4 }}>
+          <span style={{ fontSize: 12, color: colors.textMuted }}>
+            {openRow.compteLabel}
+            {kind === "programme" && openRow.etat.scheduledFor && ` — programmé pour le ${dateFormatter.format(new Date(openRow.etat.scheduledFor))}`}
+            {kind === "publie" && openRow.etat.publishedAt && ` — publié le ${dateFormatter.format(new Date(openRow.etat.publishedAt))}`}
+            {kind === "publie" && (openRow.etat.views !== undefined || openRow.etat.likes !== undefined) && (
+              <>
+                {" "}
+                —{openRow.etat.views !== undefined && ` ${numberFormatter.format(openRow.etat.views)} vue${openRow.etat.views > 1 ? "s" : ""} ·`}{" "}
+                {openRow.etat.likes ?? 0} j&apos;aime, {openRow.etat.comments ?? 0} commentaire{(openRow.etat.comments ?? 0) > 1 ? "s" : ""}
+              </>
+            )}
+            {kind === "echec" && openRow.etat.error && ` — ${openRow.etat.error}`}
+          </span>
+          {kind === "programme" && (
+            <ScheduledPostActions entityType={group.entityType} entityId={group.entityId} compteId={openRow.compteId} currentMessage={openRow.etat.message} />
+          )}
+          {kind === "publie" && (
+            <PublishedPostActions
+              entityType={group.entityType}
+              entityId={group.entityId}
+              compteId={openRow.compteId}
+              plateforme={openRow.plateforme}
+              currentMessage={openRow.etat.message}
+            />
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function PublicationsOverview({
   aPublier,
   programme,
@@ -112,10 +201,13 @@ export function PublicationsOverview({
   const router = useRouter()
   const [refreshing, setRefreshing] = useState(false)
 
+  const programmeGroups = groupByEntity(programme)
+  const publieGroups = groupByEntity(publie)
+  const echecGroups = groupByEntity(echec)
+
   async function refreshAll() {
     setRefreshing(true)
-    const targets = [...new Map(publie.map((r) => [`${r.entityType}:${r.entityId}`, r])).values()]
-    await Promise.all(targets.map((r) => refreshContentSocialStats(r.entityType, r.entityId)))
+    await Promise.all(publieGroups.map((g) => refreshContentSocialStats(g.entityType, g.entityId)))
     setRefreshing(false)
     router.refresh()
   }
@@ -130,45 +222,24 @@ export function PublicationsOverview({
         )}
       </SectionCard>
 
-      <SectionCard title={`Programmé (${programme.length})`}>
-        {programme.length === 0 ? (
+      <SectionCard title={`Programmé (${programmeGroups.length})`}>
+        {programmeGroups.length === 0 ? (
           <p style={{ fontSize: 12.5, color: colors.textLight, margin: 0 }}>Aucune publication programmée.</p>
         ) : (
-          programme.map((r) => (
-            <div key={`${r.entityType}-${r.entityId}-${r.compteId}`} style={rowWrapStyle}>
-              <div style={rowContentStyle}>
-                <PlatformBadge plateforme={r.plateforme} />
-                <TypeBadge entityType={r.entityType} />
-                <Link href={`${ENTITY_ADMIN_PATH[r.entityType]}/${r.entityId}`} style={{ flex: 1, color: colors.text, textDecoration: "none" }}>
-                  <strong>{r.titre}</strong> — {r.compteLabel}
-                </Link>
-                <span style={{ color: "#7a6423", fontSize: 12 }}>
-                  {r.etat.scheduledFor ? dateFormatter.format(new Date(r.etat.scheduledFor)) : ""}
-                </span>
-              </div>
-              <ScheduledPostActions entityType={r.entityType} entityId={r.entityId} compteId={r.compteId} currentMessage={r.etat.message} />
-            </div>
-          ))
+          programmeGroups.map((g) => <PublicationGroupRow key={`${g.entityType}-${g.entityId}`} group={g} kind="programme" />)
         )}
       </SectionCard>
 
-      {echec.length > 0 && (
-        <SectionCard title={`Échecs (${echec.length})`}>
-          {echec.map((r) => (
-            <Link key={`${r.entityType}-${r.entityId}-${r.compteId}`} href={`${ENTITY_ADMIN_PATH[r.entityType]}/${r.entityId}`} style={{ ...rowStyle, color: colors.text, textDecoration: "none" }}>
-              <PlatformBadge plateforme={r.plateforme} />
-              <TypeBadge entityType={r.entityType} />
-              <span style={{ flex: 1 }}>
-                <strong>{r.titre}</strong> — {r.compteLabel}
-              </span>
-              <span style={{ color: colors.red, fontSize: 12 }}>{r.etat.error}</span>
-            </Link>
+      {echecGroups.length > 0 && (
+        <SectionCard title={`Échecs (${echecGroups.length})`}>
+          {echecGroups.map((g) => (
+            <PublicationGroupRow key={`${g.entityType}-${g.entityId}`} group={g} kind="echec" />
           ))}
         </SectionCard>
       )}
 
-      <SectionCard title={`Publié (${publie.length})`}>
-        {publie.length > 0 && (
+      <SectionCard title={`Publié (${publieGroups.length})`}>
+        {publieGroups.length > 0 && (
           <button
             type="button"
             onClick={refreshAll}
@@ -189,28 +260,10 @@ export function PublicationsOverview({
             {refreshing ? "Actualisation..." : "Rafraîchir toutes les stats"}
           </button>
         )}
-        {publie.length === 0 ? (
+        {publieGroups.length === 0 ? (
           <p style={{ fontSize: 12.5, color: colors.textLight, margin: 0 }}>Aucune publication pour le moment.</p>
         ) : (
-          publie.map((r) => (
-            <div key={`${r.entityType}-${r.entityId}-${r.compteId}`} style={rowWrapStyle}>
-              <div style={rowContentStyle}>
-                <PlatformBadge plateforme={r.plateforme} />
-                <TypeBadge entityType={r.entityType} />
-                <Link href={`${ENTITY_ADMIN_PATH[r.entityType]}/${r.entityId}`} style={{ flex: 1, color: colors.text, textDecoration: "none" }}>
-                  <strong>{r.titre}</strong> — {r.compteLabel}
-                </Link>
-                <span style={{ color: colors.textLight, fontSize: 11.5 }}>
-                  {r.etat.publishedAt && dateFormatter.format(new Date(r.etat.publishedAt))}
-                </span>
-                <span style={{ color: colors.textMuted, fontSize: 12, whiteSpace: "nowrap" }}>
-                  {r.etat.views !== undefined && `${numberFormatter.format(r.etat.views)} vue${r.etat.views > 1 ? "s" : ""} · `}
-                  {r.etat.likes ?? 0} j&apos;aime · {r.etat.comments ?? 0} commentaire{(r.etat.comments ?? 0) > 1 ? "s" : ""}
-                </span>
-              </div>
-              <PublishedPostActions entityType={r.entityType} entityId={r.entityId} compteId={r.compteId} plateforme={r.plateforme} currentMessage={r.etat.message} />
-            </div>
-          ))
+          publieGroups.map((g) => <PublicationGroupRow key={`${g.entityType}-${g.entityId}`} group={g} kind="publie" />)
         )}
       </SectionCard>
     </div>
