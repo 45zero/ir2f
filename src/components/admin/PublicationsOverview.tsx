@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { refreshContentSocialStats, setDiffuserReseaux } from "@/lib/actions/social-publish"
 import { PublierReseauxDialogTrigger } from "@/components/admin/PublierReseauxDialog"
+import { PublishedPostActions, ScheduledPostActions } from "@/components/admin/PublierReseauxPanel"
 import { FacebookIcon, InstagramIcon } from "@/components/admin/SocialPlatformIcons"
 import { colors, fontBody, fontHeading } from "@/lib/theme"
 import type { PublicationRow, APublierItem } from "@/lib/admin/publications"
@@ -58,6 +59,11 @@ const rowStyle = {
   borderTop: "1px solid #eef0f3",
   fontSize: 13,
 }
+
+// Variante utilisée quand la ligne porte des actions (Modifier/Supprimer) en dessous — la bordure
+// et le padding passent sur le conteneur externe, la ligne de contenu proprement dite n'en a plus.
+const rowWrapStyle = { borderTop: "1px solid #eef0f3", padding: "10px 0" }
+const rowContentStyle = { display: "flex", alignItems: "center", gap: 10, fontSize: 13 }
 
 /** Ligne "À publier" : ouvre la publication en popup (voir PublierReseauxDialog) sans quitter cette page, ou permet de retirer le contenu de la liste (passe Article/Formation.diffuserReseaux à false — réactivable depuis le formulaire d'édition). */
 function APublierRow({ item, comptes }: { item: APublierItem; comptes: PublierReseauxCompte[] }) {
@@ -129,16 +135,19 @@ export function PublicationsOverview({
           <p style={{ fontSize: 12.5, color: colors.textLight, margin: 0 }}>Aucune publication programmée.</p>
         ) : (
           programme.map((r) => (
-            <Link key={`${r.entityType}-${r.entityId}-${r.compteId}`} href={`${ENTITY_ADMIN_PATH[r.entityType]}/${r.entityId}`} style={{ ...rowStyle, color: colors.text, textDecoration: "none" }}>
-              <PlatformBadge plateforme={r.plateforme} />
-              <TypeBadge entityType={r.entityType} />
-              <span style={{ flex: 1 }}>
-                <strong>{r.titre}</strong> — {r.compteLabel}
-              </span>
-              <span style={{ color: "#7a6423", fontSize: 12 }}>
-                {r.etat.scheduledFor ? dateFormatter.format(new Date(r.etat.scheduledFor)) : ""}
-              </span>
-            </Link>
+            <div key={`${r.entityType}-${r.entityId}-${r.compteId}`} style={rowWrapStyle}>
+              <div style={rowContentStyle}>
+                <PlatformBadge plateforme={r.plateforme} />
+                <TypeBadge entityType={r.entityType} />
+                <Link href={`${ENTITY_ADMIN_PATH[r.entityType]}/${r.entityId}`} style={{ flex: 1, color: colors.text, textDecoration: "none" }}>
+                  <strong>{r.titre}</strong> — {r.compteLabel}
+                </Link>
+                <span style={{ color: "#7a6423", fontSize: 12 }}>
+                  {r.etat.scheduledFor ? dateFormatter.format(new Date(r.etat.scheduledFor)) : ""}
+                </span>
+              </div>
+              <ScheduledPostActions entityType={r.entityType} entityId={r.entityId} compteId={r.compteId} currentMessage={r.etat.message} />
+            </div>
           ))
         )}
       </SectionCard>
@@ -184,19 +193,22 @@ export function PublicationsOverview({
           <p style={{ fontSize: 12.5, color: colors.textLight, margin: 0 }}>Aucune publication pour le moment.</p>
         ) : (
           publie.map((r) => (
-            <div key={`${r.entityType}-${r.entityId}-${r.compteId}`} style={rowStyle}>
-              <PlatformBadge plateforme={r.plateforme} />
-              <TypeBadge entityType={r.entityType} />
-              <Link href={`${ENTITY_ADMIN_PATH[r.entityType]}/${r.entityId}`} style={{ flex: 1, color: colors.text, textDecoration: "none" }}>
-                <strong>{r.titre}</strong> — {r.compteLabel}
-              </Link>
-              <span style={{ color: colors.textLight, fontSize: 11.5 }}>
-                {r.etat.publishedAt && dateFormatter.format(new Date(r.etat.publishedAt))}
-              </span>
-              <span style={{ color: colors.textMuted, fontSize: 12, whiteSpace: "nowrap" }}>
-                {r.etat.views !== undefined && `${numberFormatter.format(r.etat.views)} vue${r.etat.views > 1 ? "s" : ""} · `}
-                {r.etat.likes ?? 0} j&apos;aime · {r.etat.comments ?? 0} commentaire{(r.etat.comments ?? 0) > 1 ? "s" : ""}
-              </span>
+            <div key={`${r.entityType}-${r.entityId}-${r.compteId}`} style={rowWrapStyle}>
+              <div style={rowContentStyle}>
+                <PlatformBadge plateforme={r.plateforme} />
+                <TypeBadge entityType={r.entityType} />
+                <Link href={`${ENTITY_ADMIN_PATH[r.entityType]}/${r.entityId}`} style={{ flex: 1, color: colors.text, textDecoration: "none" }}>
+                  <strong>{r.titre}</strong> — {r.compteLabel}
+                </Link>
+                <span style={{ color: colors.textLight, fontSize: 11.5 }}>
+                  {r.etat.publishedAt && dateFormatter.format(new Date(r.etat.publishedAt))}
+                </span>
+                <span style={{ color: colors.textMuted, fontSize: 12, whiteSpace: "nowrap" }}>
+                  {r.etat.views !== undefined && `${numberFormatter.format(r.etat.views)} vue${r.etat.views > 1 ? "s" : ""} · `}
+                  {r.etat.likes ?? 0} j&apos;aime · {r.etat.comments ?? 0} commentaire{(r.etat.comments ?? 0) > 1 ? "s" : ""}
+                </span>
+              </div>
+              <PublishedPostActions entityType={r.entityType} entityId={r.entityId} compteId={r.compteId} plateforme={r.plateforme} currentMessage={r.etat.message} />
             </div>
           ))
         )}

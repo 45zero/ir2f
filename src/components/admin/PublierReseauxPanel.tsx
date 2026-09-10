@@ -2,7 +2,14 @@
 
 import { useActionState, useMemo, useState } from "react"
 import Link from "next/link"
-import { publishContentToSocial, refreshContentSocialStats, editContentSocialPost, deleteContentSocialPost } from "@/lib/actions/social-publish"
+import {
+  publishContentToSocial,
+  refreshContentSocialStats,
+  editContentSocialPost,
+  deleteContentSocialPost,
+  editScheduledSocialPost,
+  cancelScheduledSocialPost,
+} from "@/lib/actions/social-publish"
 import { FacebookIcon, InstagramIcon, TikTokIcon, LinkedInIcon } from "@/components/admin/SocialPlatformIcons"
 import { colors, fontBody } from "@/lib/theme"
 import type { SocialPlateforme } from "@/lib/social/accounts"
@@ -60,7 +67,7 @@ function smallButtonStyle(background: string, filled: boolean): React.CSSPropert
 }
 
 /** Actions sur une publication déjà PUBLIE : modifier (Facebook uniquement — Instagram ne permet pas de modifier une légende publiée) et supprimer (les deux plateformes, avec confirmation car irréversible côté réseau social). */
-function PublishedPostActions({
+export function PublishedPostActions({
   entityType,
   entityId,
   compteId,
@@ -70,7 +77,7 @@ function PublishedPostActions({
   entityType: PublishableType
   entityId: string
   compteId: string
-  plateforme: SocialPlateforme
+  plateforme: SocialPlateforme | null
   currentMessage: string
 }) {
   const [mode, setMode] = useState<"idle" | "edit" | "confirmDelete">("idle")
@@ -138,6 +145,85 @@ function PublishedPostActions({
         </button>
       )}
       {deleteState?.error && <span style={{ fontSize: 11.5, color: colors.red }}>{deleteState.error}</span>}
+    </div>
+  )
+}
+
+/** Actions sur une publication PROGRAMME (pas encore envoyée) : modifier le message (les deux plateformes, aucun appel réseau) et annuler (retire l'entrée — rien à supprimer sur le réseau puisque rien n'a été publié). */
+export function ScheduledPostActions({
+  entityType,
+  entityId,
+  compteId,
+  currentMessage,
+}: {
+  entityType: PublishableType
+  entityId: string
+  compteId: string
+  currentMessage: string
+}) {
+  const [mode, setMode] = useState<"idle" | "edit" | "confirmCancel">("idle")
+  const [draft, setDraft] = useState(currentMessage)
+
+  const [editState, editAction, editPending] = useActionState(
+    async (_prev: Awaited<ReturnType<typeof editScheduledSocialPost>> | undefined) => {
+      const result = await editScheduledSocialPost(entityType, entityId, compteId, draft)
+      if (result.ok) setMode("idle")
+      return result
+    },
+    undefined
+  )
+  const [cancelState, cancelAction, cancelPending] = useActionState(
+    async (_prev: Awaited<ReturnType<typeof cancelScheduledSocialPost>> | undefined) => cancelScheduledSocialPost(entityType, entityId, compteId),
+    undefined
+  )
+
+  if (mode === "edit") {
+    return (
+      <form action={editAction} style={{ display: "flex", flexDirection: "column", gap: 6, marginLeft: 23, marginTop: 4 }}>
+        <textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={3} style={{ ...fieldStyle, resize: "vertical" }} />
+        {editState?.error && <p style={{ color: colors.red, fontSize: 11.5, margin: 0 }}>{editState.error}</p>}
+        <div style={{ display: "flex", gap: 8 }}>
+          <button type="submit" disabled={editPending} style={smallButtonStyle(colors.red, true)}>
+            {editPending ? "Enregistrement..." : "Enregistrer"}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setMode("idle")
+              setDraft(currentMessage)
+            }}
+            style={smallButtonStyle("transparent", false)}
+          >
+            Annuler
+          </button>
+        </div>
+      </form>
+    )
+  }
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 12, marginLeft: 23, marginTop: 2 }}>
+      <button type="button" onClick={() => setMode("edit")} style={linkButtonStyle}>
+        Modifier
+      </button>
+      {mode === "confirmCancel" ? (
+        <>
+          <span style={{ fontSize: 11.5, color: colors.red }}>Annuler cette programmation ?</span>
+          <form action={cancelAction}>
+            <button type="submit" disabled={cancelPending} style={{ ...linkButtonStyle, color: colors.red }}>
+              {cancelPending ? "Suppression..." : "Confirmer"}
+            </button>
+          </form>
+          <button type="button" onClick={() => setMode("idle")} style={linkButtonStyle}>
+            Annuler
+          </button>
+        </>
+      ) : (
+        <button type="button" onClick={() => setMode("confirmCancel")} style={{ ...linkButtonStyle, color: colors.red }}>
+          Supprimer
+        </button>
+      )}
+      {cancelState?.error && <span style={{ fontSize: 11.5, color: colors.red }}>{cancelState.error}</span>}
     </div>
   )
 }
@@ -253,6 +339,9 @@ function PlatformSection({
               )}
               {etat && etat.statut === "PUBLIE" && (
                 <PublishedPostActions entityType={entityType} entityId={entityId} compteId={c.id} plateforme={c.plateforme} currentMessage={etat.message} />
+              )}
+              {etat && etat.statut === "PROGRAMME" && (
+                <ScheduledPostActions entityType={entityType} entityId={entityId} compteId={c.id} currentMessage={etat.message} />
               )}
             </div>
           )

@@ -263,6 +263,49 @@ export async function deleteContentSocialPost(entityType: PublishableType, entit
   return { error: null, ok: true }
 }
 
+export type EditScheduledPostState = { error: string | null; ok: boolean }
+
+/** Modifie le message d'une publication PROGRAMME (pas encore envoyée) — aucun appel réseau, le cron enverra ce nouveau texte à l'échéance. Contrairement à editContentSocialPost, disponible sur Facebook comme Instagram puisque rien n'est encore publié. */
+export async function editScheduledSocialPost(
+  entityType: PublishableType,
+  entityId: string,
+  compteId: string,
+  newMessage: string
+): Promise<EditScheduledPostState> {
+  await requireAdmin()
+
+  const entity = await loadEntity(entityType, entityId)
+  if (!entity) return { error: entityNotFoundError(entityType), ok: false }
+
+  const reseauxPublies = { ...entity.reseauxPublies }
+  const etat = reseauxPublies[compteId]
+  if (!etat || etat.statut !== "PROGRAMME") return { error: "Cette publication n'est plus programmée.", ok: false }
+
+  reseauxPublies[compteId] = { ...etat, message: newMessage }
+  await saveReseauxPublies(entityType, entityId, reseauxPublies)
+  revalidateEntity(entityType, entityId)
+  return { error: null, ok: true }
+}
+
+export type CancelScheduledPostState = { error: string | null; ok: boolean }
+
+/** Annule une publication PROGRAMME avant son envoi. Rien n'a encore été publié sur le réseau, donc rien à y supprimer — on retire simplement l'entrée, ce qui fait réapparaître le contenu dans "À publier" pour ce compte. */
+export async function cancelScheduledSocialPost(entityType: PublishableType, entityId: string, compteId: string): Promise<CancelScheduledPostState> {
+  await requireAdmin()
+
+  const entity = await loadEntity(entityType, entityId)
+  if (!entity) return { error: entityNotFoundError(entityType), ok: false }
+
+  const reseauxPublies = { ...entity.reseauxPublies }
+  const etat = reseauxPublies[compteId]
+  if (!etat || etat.statut !== "PROGRAMME") return { error: "Cette publication n'est plus programmée.", ok: false }
+
+  delete reseauxPublies[compteId]
+  await saveReseauxPublies(entityType, entityId, reseauxPublies)
+  revalidateEntity(entityType, entityId)
+  return { error: null, ok: true }
+}
+
 export type ContentPublishContext = {
   titre: string
   reseauxPublies: ReseauxPublies | null
