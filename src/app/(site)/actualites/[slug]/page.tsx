@@ -100,18 +100,19 @@ export default async function ActualiteDetailPage({ params }: { params: Promise<
         <ArticleShareActions url={articleUrl} title={article.titre} text={articleShareExcerpt(article)} />
       </section>
 
-      <section style={{ maxWidth: 1160, margin: "0 auto", padding: "24px 20px 0" }}>
-        <div
-          style={{
-            minHeight: 320,
-            borderRadius: 10,
-            backgroundImage: article.image ? `url('${article.image}')` : undefined,
-            backgroundColor: article.image ? undefined : colors.navy,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-      </section>
+      {article.image && article.imageCouvertureVisible && (
+        <section style={{ maxWidth: 820, margin: "0 auto", padding: "24px 20px 0" }}>
+          <div
+            style={{
+              aspectRatio: "16/7",
+              borderRadius: 10,
+              backgroundImage: `url('${article.image}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </section>
+      )}
 
       <section style={{ maxWidth: 820, margin: "0 auto", padding: "32px 20px 72px", display: "flex", flexDirection: "column", gap: 18 }}>
         {paragraphes.map((p, i) => (

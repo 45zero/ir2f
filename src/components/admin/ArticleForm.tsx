@@ -51,6 +51,7 @@ export type ArticleFormInitial = {
   contenu: string
   textePartage: string
   image: string
+  imageCouvertureVisible: boolean
   categorie: CategorieFormation | ""
   publie: boolean
   diffuserReseaux: boolean
@@ -248,8 +249,17 @@ export function ArticleForm({
         <input name="slug" required defaultValue={initial?.slug} style={fieldStyle} />
       </div>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-        <div style={{ flex: "1 1 260px" }}>
+        <div style={{ flex: "1 1 260px", display: "flex", flexDirection: "column", gap: 8 }}>
           <ImageField name="image" label="Image" defaultUrl={initial?.image} />
+          <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: colors.text }}>
+            <input
+              type="checkbox"
+              name="imageCouvertureVisible"
+              defaultChecked={initial?.imageCouvertureVisible ?? true}
+              style={{ width: 15, height: 15 }}
+            />
+            Afficher cette image en haut de l&apos;actualité (reste toujours visible dans la liste)
+          </label>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 5, flex: "1 1 200px" }}>
           <span style={{ fontSize: 12, fontWeight: 700, color: colors.navy }}>Catégorie</span>

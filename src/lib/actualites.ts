@@ -54,7 +54,12 @@ export async function getPublishedArticles(): Promise<ArticleListItem[]> {
   return articles.map(toListItem)
 }
 
-export type ArticleDetail = ArticleListItem & { contenu: string; textePartage: string | null; sections: ArticleSection[] | null }
+export type ArticleDetail = ArticleListItem & {
+  contenu: string
+  textePartage: string | null
+  sections: ArticleSection[] | null
+  imageCouvertureVisible: boolean
+}
 
 export async function getArticleBySlug(slug: string): Promise<ArticleDetail | null> {
   const article = await prisma.article.findFirst({
@@ -64,6 +69,7 @@ export async function getArticleBySlug(slug: string): Promise<ArticleDetail | nu
       slug: true,
       titre: true,
       image: true,
+      imageCouvertureVisible: true,
       categorie: true,
       createdAt: true,
       contenu: true,
@@ -77,5 +83,6 @@ export async function getArticleBySlug(slug: string): Promise<ArticleDetail | nu
     contenu: article.contenu,
     textePartage: article.textePartage,
     sections: (article.sections as ArticleSection[] | null) ?? null,
+    imageCouvertureVisible: article.imageCouvertureVisible,
   }
 }

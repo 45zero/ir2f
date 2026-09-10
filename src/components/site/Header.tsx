@@ -43,8 +43,19 @@ export function Header({ user }: { user: HeaderUser }) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [lastPathname, setLastPathname] = useState(pathname)
 
   const hasHero = HERO_PATHS.has(pathname)
+
+  // Ferme le panneau mobile automatiquement à chaque changement de page (clic sur un lien, retour
+  // navigateur...) plutôt que de compter sur chaque lien pour le faire individuellement. Ajustée
+  // pendant le rendu (pattern recommandé par React pour réagir à un changement de prop) plutôt que
+  // dans un effet, pour éviter un rendu en cascade évitable.
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname)
+    setMobileOpen(false)
+  }
 
   useEffect(() => {
     if (!hasHero) return
@@ -54,9 +65,23 @@ export function Header({ user }: { user: HeaderUser }) {
     return () => window.removeEventListener("scroll", onScroll)
   }, [hasHero])
 
-  const overlay = hasHero && !scrolled
+  useEffect(() => {
+    if (!mobileOpen) return
+    document.body.style.overflow = "hidden"
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setMobileOpen(false)
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => {
+      document.body.style.overflow = ""
+      window.removeEventListener("keydown", onKeyDown)
+    }
+  }, [mobileOpen])
+
+  const overlay = hasHero && !scrolled && !mobileOpen
 
   return (
+    <>
     <header
       style={{
         position: "fixed",
@@ -85,7 +110,7 @@ export function Header({ user }: { user: HeaderUser }) {
         />
       </Link>
 
-      <nav style={{ display: "flex", alignItems: "center", gap: "clamp(14px,2vw,32px)" }}>
+      <nav className="ir2f-header-nav-desktop" style={{ alignItems: "center", gap: "clamp(14px,2vw,32px)" }}>
         {NAV_LINKS.map((link, i) => (
           <Hoverable
             as={Link}
@@ -317,6 +342,139 @@ export function Header({ user }: { user: HeaderUser }) {
           ActuFormation
         </Hoverable>
       </nav>
+
+      <button
+        type="button"
+        className="ir2f-header-nav-mobile-toggle"
+        onClick={() => setMobileOpen((o) => !o)}
+        aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+        aria-expanded={mobileOpen}
+        style={{
+          background: "transparent",
+          border: "none",
+          color: "#ffffff",
+          width: 40,
+          height: 40,
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          flexShrink: 0,
+        }}
+      >
+        {mobileOpen ? (
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        ) : (
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        )}
+      </button>
     </header>
+
+    {mobileOpen && <MobileNavPanel user={user} pathname={pathname} onClose={() => setMobileOpen(false)} />}
+    </>
+  )
+}
+
+function MobileNavPanel({ user, pathname, onClose }: { user: HeaderUser; pathname: string; onClose: () => void }) {
+  const rowStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    padding: "14px 4px",
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: 700,
+    fontFamily: fontBody,
+    textDecoration: "none",
+    cursor: "pointer",
+    width: "100%",
+    textAlign: "left" as const,
+    background: "transparent",
+    border: "none",
+    borderBottom: "1px solid rgba(255,255,255,0.12)",
+  }
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      style={{
+        position: "fixed",
+        top: 68,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: colors.navy,
+        zIndex: 950,
+        display: "flex",
+        flexDirection: "column",
+        padding: "8px 24px 24px",
+        overflowY: "auto",
+        animation: "ir2fFadeIn 0.2s ease",
+      }}
+    >
+      {NAV_LINKS.map((link, i) => (
+        <Link
+          key={`${link.href}-${i}`}
+          href={link.href}
+          onClick={onClose}
+          style={{ ...rowStyle, color: pathname.startsWith(link.href) ? colors.red : "#ffffff" }}
+        >
+          {link.label}
+        </Link>
+      ))}
+
+      {user ? (
+        <>
+          <span style={{ fontSize: 11, fontWeight: 700, color: colors.gold, letterSpacing: 0.6, textTransform: "uppercase", padding: "14px 4px 4px" }}>
+            {ROLE_LABELS[user.role] ?? user.role} — {user.name}
+          </span>
+          <Link href="/dashboard" onClick={onClose} style={rowStyle}>
+            Mon espace
+          </Link>
+          {user.role === "ADMIN" && (
+            <Link href="/admin" onClick={onClose} style={rowStyle}>
+              Interface admin
+            </Link>
+          )}
+          <form action={logout}>
+            <button type="submit" style={rowStyle}>
+              Déconnexion
+            </button>
+          </form>
+        </>
+      ) : (
+        <Link href="/login" onClick={onClose} style={rowStyle}>
+          Connexion
+        </Link>
+      )}
+
+      <Link
+        href="/actualites"
+        onClick={onClose}
+        style={{
+          marginTop: 20,
+          background: colors.red,
+          color: "#ffffff",
+          border: "none",
+          padding: "14px 22px",
+          borderRadius: 4,
+          fontSize: 15,
+          fontWeight: 700,
+          fontFamily: fontBody,
+          textAlign: "center",
+          letterSpacing: 0.2,
+          textDecoration: "none",
+        }}
+      >
+        ActuFormation
+      </Link>
+    </div>
   )
 }

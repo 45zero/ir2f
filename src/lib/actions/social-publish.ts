@@ -11,10 +11,14 @@ import {
   editFacebookPost,
   deleteFacebookPost,
   deleteInstagramMedia,
+  getFacebookPostComments,
+  deleteFacebookComment,
+  getInstagramMediaComments,
+  deleteInstagramComment,
 } from "@/lib/social/graph"
 import { publishToSocialAccount } from "@/lib/social/publish-router"
 import { getSocialAccountById } from "@/lib/social/accounts"
-import type { ReseauxPublies, PublishableType, MediaMode } from "@/lib/social/publication"
+import type { ReseauxPublies, PublishableType, MediaMode, SocialComment } from "@/lib/social/publication"
 import { articleShareExcerpt, type ArticleSection } from "@/lib/articles-shared"
 import { formationShareExcerpt, type ProgrammeStep } from "@/lib/formations-shared"
 
@@ -371,4 +375,84 @@ export async function setDiffuserReseaux(entityType: PublishableType, entityId: 
 
   revalidateEntity(entityType, entityId)
   return { error: null }
+}
+
+export type SetArchiveState = { error: string | null }
+
+/** Masque/affiche une publication PUBLIE dans la liste "Publié" de /admin/publications — ne touche à rien côté réseau, juste une préférence d'affichage pour désencombrer la liste une fois qu'une publication est ancienne. */
+export async function setPublicationArchive(
+  entityType: PublishableType,
+  entityId: string,
+  compteId: string,
+  archive: boolean
+): Promise<SetArchiveState> {
+  await requireAdmin()
+
+  const entity = await loadEntity(entityType, entityId)
+  if (!entity) return { error: entityNotFoundError(entityType) }
+
+  const reseauxPublies = { ...entity.reseauxPublies }
+  const etat = reseauxPublies[compteId]
+  if (!etat) return { error: "Publication introuvable." }
+
+  reseauxPublies[compteId] = { ...etat, archive }
+  await saveReseauxPublies(entityType, entityId, reseauxPublies)
+  revalidateEntity(entityType, entityId)
+  return { error: null }
+}
+
+export type GetCommentsState = { error: string | null; comments: SocialComment[] }
+
+/** Commentaires d'une publication déjà publiée, lus en direct depuis la plateforme (jamais stockés côté IR2F) — chargés à la demande depuis /admin/publications plutôt que préchargés pour chaque ligne. */
+export async function getPostComments(entityType: PublishableType, entityId: string, compteId: string): Promise<GetCommentsState> {
+  await requireAdmin()
+
+  const compte = getSocialAccountById(compteId)
+  if (!compte) return { error: "Compte introuvable.", comments: [] }
+
+  const entity = await loadEntity(entityType, entityId)
+  if (!entity) return { error: entityNotFoundError(entityType), comments: [] }
+
+  const etat = entity.reseauxPublies[compteId]
+  if (!etat || etat.statut !== "PUBLIE" || !etat.postId) return { error: "Cette publication n'est pas publiée.", comments: [] }
+
+  try {
+    const comments =
+      compte.plateforme === "FACEBOOK"
+        ? await getFacebookPostComments(etat.postId, compte.accessToken)
+        : await getInstagramMediaComments(etat.postId, compte.accessToken)
+    return { error: null, comments }
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Erreur inattendue.", comments: [] }
+  }
+}
+
+export type DeleteCommentState = { error: string | null; ok: boolean }
+
+/** Supprime un commentaire directement sur la plateforme — irréversible, pas de trace gardée côté IR2F puisque les commentaires n'y sont jamais stockés. */
+export async function deleteSocialComment(
+  entityType: PublishableType,
+  entityId: string,
+  compteId: string,
+  commentId: string
+): Promise<DeleteCommentState> {
+  await requireAdmin()
+
+  const compte = getSocialAccountById(compteId)
+  if (!compte) return { error: "Compte introuvable.", ok: false }
+
+  const entity = await loadEntity(entityType, entityId)
+  if (!entity) return { error: entityNotFoundError(entityType), ok: false }
+
+  const etat = entity.reseauxPublies[compteId]
+  if (!etat || etat.statut !== "PUBLIE") return { error: "Cette publication n'est pas publiée.", ok: false }
+
+  try {
+    if (compte.plateforme === "FACEBOOK") await deleteFacebookComment(commentId, compte.accessToken)
+    else await deleteInstagramComment(commentId, compte.accessToken)
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Erreur inattendue.", ok: false }
+  }
+
+  return { error: null, ok: true }
 }

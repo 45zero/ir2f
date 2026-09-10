@@ -1,11 +1,14 @@
 import "server-only"
+import type { SocialComment } from "@/lib/social/publication"
 
 // Graph API v25.0 (vérifié contre developers.facebook.com en septembre 2026). Permissions
 // nécessaires sur le token généré manuellement par l'admin : pages_manage_posts,
-// pages_manage_metadata, pages_manage_read_engagement, pages_show_list (Facebook) et
-// instagram_basic, instagram_content_publish (Instagram — nécessite un compte pro lié à une page).
-// Suppression Instagram (deleteInstagramMedia) nécessite EN PLUS instagram_manage_contents — pas
-// encore accordé à nos tokens actuels, voir la démarche dans la mémoire du projet.
+// pages_manage_metadata, pages_manage_read_engagement, pages_manage_engagement, pages_show_list
+// (Facebook) et instagram_basic, instagram_content_publish (Instagram — nécessite un compte pro
+// lié à une page). Suppression Instagram (deleteInstagramMedia) et modération des commentaires
+// Instagram (getInstagramMediaComments/deleteInstagramComment) nécessitent EN PLUS,
+// respectivement, instagram_manage_contents et instagram_manage_comments — pas encore accordés à
+// nos tokens actuels, voir la démarche dans la mémoire du projet.
 const GRAPH_API_BASE = "https://graph.facebook.com/v25.0"
 
 type GraphErrorBody = { error?: { message?: string; code?: number } }
@@ -198,4 +201,36 @@ export async function deleteFacebookPost(postId: string, accessToken: string): P
 /** Supprime un média Instagram déjà publié. Nécessite le scope instagram_manage_contents en plus de instagram_basic (voir note en tête de fichier) — sans lui, Meta renvoie une erreur de permission. */
 export async function deleteInstagramMedia(mediaId: string, accessToken: string): Promise<void> {
   await graphFetch(`/${mediaId}`, { access_token: accessToken }, "DELETE")
+}
+
+/** Commentaires d'un post de page Facebook — pages_manage_engagement (déjà accordée) suffit pour lire ET modérer, pas besoin d'un scope supplémentaire. */
+export async function getFacebookPostComments(postId: string, accessToken: string): Promise<SocialComment[]> {
+  const body = await graphFetch(
+    `/${postId}/comments`,
+    { fields: "id,message,from{name},created_time", limit: "50", access_token: accessToken },
+    "GET"
+  )
+  const data = (body.data as { id: string; message?: string; from?: { name?: string }; created_time?: string }[] | undefined) ?? []
+  return data.map((c) => ({ id: c.id, author: c.from?.name ?? "Anonyme", text: c.message ?? "", createdAt: c.created_time ?? "" }))
+}
+
+/** Supprime un commentaire sur un post Facebook. */
+export async function deleteFacebookComment(commentId: string, accessToken: string): Promise<void> {
+  await graphFetch(`/${commentId}`, { access_token: accessToken }, "DELETE")
+}
+
+/** Commentaires d'un média Instagram. Nécessite le scope instagram_manage_comments en plus de instagram_basic (voir note en tête de fichier) — pas encore accordé à nos tokens actuels. */
+export async function getInstagramMediaComments(mediaId: string, accessToken: string): Promise<SocialComment[]> {
+  const body = await graphFetch(
+    `/${mediaId}/comments`,
+    { fields: "id,text,username,timestamp", limit: "50", access_token: accessToken },
+    "GET"
+  )
+  const data = (body.data as { id: string; text?: string; username?: string; timestamp?: string }[] | undefined) ?? []
+  return data.map((c) => ({ id: c.id, author: c.username ?? "Anonyme", text: c.text ?? "", createdAt: c.timestamp ?? "" }))
+}
+
+/** Supprime un commentaire sur un média Instagram — même scope instagram_manage_comments requis. */
+export async function deleteInstagramComment(commentId: string, accessToken: string): Promise<void> {
+  await graphFetch(`/${commentId}`, { access_token: accessToken }, "DELETE")
 }

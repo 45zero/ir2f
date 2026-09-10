@@ -1,11 +1,19 @@
 "use server"
 
+import crypto from "crypto"
 import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { downloadStorageFile, uploadBytes } from "@/lib/storage"
-import { fillConventionTemplate, stampSignature } from "@/lib/conventions/pdf"
-import { buildConventionVariables, resolveSignataireContact, SIGNATAIRE_ORDER, SIGNATURE_FIELD_NAMES } from "@/lib/conventions/variables"
+import { fillConventionTemplate, stampSignature, stampCheckmark } from "@/lib/conventions/pdf"
+import {
+  buildConventionVariables,
+  resolveSignataireContact,
+  SIGNATAIRE_ORDER,
+  SIGNATURE_FIELD_NAMES,
+  NATURE_INTERVENTION_OPTIONS,
+  OBJECTIF_PEDAGOGIQUE_FIELDS,
+} from "@/lib/conventions/variables"
 import { buildSessionConventionsZip } from "@/lib/conventions/zip"
 import { notifySignataireASigner, ROLE_SIGNATAIRE_LABELS } from "@/lib/emails/convention-notifications"
 import { sendEmail } from "@/lib/emails/send"
@@ -37,6 +45,10 @@ async function avancerConvention(conventionStagiaireId: string, apresOrdre: numb
     await prisma.conventionStagiaire.update({ where: { id: conventionStagiaireId }, data: { completedAt: new Date() } })
     return { ok: true }
   }
+  // L'étape suivante est déjà en attente ou signée : la réinitialisation d'un signataire
+  // intermédiaire (reinitialiserSignatureEtape) peut faire resigner quelqu'un dont l'étape
+  // suivante avait déjà progressé — ne jamais l'écraser ni la re-notifier dans ce cas.
+  if (next.statut !== "NON_ENVOYE") return { ok: true }
 
   const { sent } = await notifySignataireASigner(next.id)
   if (!sent) {
@@ -281,6 +293,119 @@ export async function logRenvoiWhatsapp(signataireId: string): Promise<Conventio
   const { error } = await findRenvoiTarget(signataireId)
   if (error) return { error }
   await marquerRenvoiEnvoye(signataireId, "WHATSAPP")
+  return { error: null }
+}
+
+/**
+ * Réinitialise la signature d'UN signataire déjà signé, pour lui permettre de resigner, sans
+ * toucher aux autres étapes du même stagiaire — y compris celles déjà signées APRÈS lui dans
+ * l'ordre du circuit. Possible car chaque signature (image PNG) et chaque donnée saisie à la
+ * signature (ex. qualité du tuteur, adresse du club) sont conservées indépendamment du PDF
+ * généré (voir ConventionSignataire.signatureStoragePath et les colonnes dédiées de
+ * ConventionStagiaire) : le PDF stocké n'est qu'une projection reconstructible de cet état. On
+ * régénère donc le document depuis le modèle vierge en ré-appliquant les données/signatures de
+ * TOUS les autres signataires déjà signés, quelle que soit leur position, et on laisse
+ * uniquement l'emplacement du signataire ciblé vide pour sa prochaine signature.
+ */
+export async function reinitialiserSignatureEtape(signataireId: string): Promise<ConventionActionState> {
+  await requireAdmin()
+
+  const cible = await prisma.conventionSignataire.findUnique({
+    where: { id: signataireId },
+    include: {
+      conventionStagiaire: {
+        include: {
+          session: {
+            include: {
+              formation: { select: { titre: true } },
+              conventionTemplate: true,
+              responsablePedagogiqueUser: { select: { nom: true, prenom: true, email: true, telephone: true } },
+            },
+          },
+          signataires: true,
+        },
+      },
+    },
+  })
+  if (!cible) return { error: "Signataire introuvable." }
+  if (cible.statut !== "SIGNE") return { error: "Cette étape n'a pas encore été signée — rien à réinitialiser." }
+
+  const stagiaire = cible.conventionStagiaire
+  const { session } = stagiaire
+  if (!stagiaire.pdfStoragePath) return { error: "Document introuvable pour ce stagiaire." }
+  if (!session.conventionTemplate) return { error: "Aucun modèle de convention associé à cette session." }
+  if (!session.responsablePedagogiqueSignatureStoragePath || !session.responsablePedagogiqueSignatureSignedAt) {
+    return { error: "Le responsable pédagogique n'a plus de signature valide pour cette session — impossible de régénérer le document." }
+  }
+
+  const templateBytes = await downloadStorageFile(session.conventionTemplate.storagePath)
+  const rpSignatureBytes = await downloadStorageFile(session.responsablePedagogiqueSignatureStoragePath)
+
+  const variables = buildConventionVariables({ session, stagiaire })
+  let rebuilt = await fillConventionTemplate(templateBytes, variables)
+  rebuilt = await stampSignature(
+    rebuilt,
+    SIGNATURE_FIELD_NAMES.RESPONSABLE_PEDAGOGIQUE,
+    rpSignatureBytes,
+    session.responsablePedagogiqueSignatureSignedAt,
+    session.responsablePedagogiqueUser
+      ? `${session.responsablePedagogiqueUser.prenom} ${session.responsablePedagogiqueUser.nom}`
+      : undefined
+  )
+
+  for (const role of SIGNATAIRE_ORDER) {
+    if (role === cible.role) continue
+    const autre = stagiaire.signataires.find((s) => s.role === role)
+    if (!autre || autre.statut !== "SIGNE" || !autre.signatureStoragePath || !autre.signedAt) continue
+
+    if (role === "STAGIAIRE") {
+      for (const option of NATURE_INTERVENTION_OPTIONS) {
+        if (stagiaire.natureIntervention.includes(option.value)) rebuilt = await stampCheckmark(rebuilt, option.champ)
+      }
+      const objectifReponses = {
+        objectifEncadrementSeul: stagiaire.objectifEncadrementSeul,
+        objectifEncadrementAutonomie: stagiaire.objectifEncadrementAutonomie,
+        objectifEncadrementPonctuel: stagiaire.objectifEncadrementPonctuel,
+      }
+      for (const o of OBJECTIF_PEDAGOGIQUE_FIELDS) {
+        const reponse = objectifReponses[o.key as keyof typeof objectifReponses]
+        rebuilt = await stampCheckmark(rebuilt, reponse ? o.champOui : o.champNon)
+      }
+    }
+
+    const signatureBytes = await downloadStorageFile(autre.signatureStoragePath)
+    rebuilt = await stampSignature(rebuilt, SIGNATURE_FIELD_NAMES[role], signatureBytes, autre.signedAt, autre.nom)
+  }
+
+  await uploadBytes(rebuilt, stagiaire.pdfStoragePath, "application/pdf")
+
+  await prisma.$transaction([
+    prisma.conventionSignataire.update({
+      where: { id: cible.id },
+      data: {
+        statut: "EN_ATTENTE",
+        token: crypto.randomUUID(),
+        signedAt: null,
+        refusedAt: null,
+        motifRefus: null,
+        signatureStoragePath: null,
+        ipAddress: null,
+        userAgent: null,
+        documentHash: null,
+        envoyeAt: new Date(),
+      },
+    }),
+    prisma.conventionStagiaire.update({ where: { id: stagiaire.id }, data: { completedAt: null } }),
+  ])
+
+  const { sent } = await notifySignataireASigner(cible.id)
+
+  revalidatePath(`/admin/formations/${stagiaire.formationId}/conventions/${stagiaire.sessionId}`)
+  revalidatePath("/dashboard/formations")
+
+  if (!sent) {
+    return { error: "Le document a été régénéré mais l'email n'a pas pu être envoyé — utilisez le renvoi manuel (mail ou WhatsApp) ci-dessous." }
+  }
   return { error: null }
 }
 

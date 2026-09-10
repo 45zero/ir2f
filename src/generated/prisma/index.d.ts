@@ -29367,6 +29367,7 @@ export namespace Prisma {
     slug: string | null
     contenu: string | null
     image: string | null
+    imageCouvertureVisible: boolean | null
     textePartage: string | null
     categorie: $Enums.CategorieFormation | null
     publie: boolean | null
@@ -29382,6 +29383,7 @@ export namespace Prisma {
     slug: string | null
     contenu: string | null
     image: string | null
+    imageCouvertureVisible: boolean | null
     textePartage: string | null
     categorie: $Enums.CategorieFormation | null
     publie: boolean | null
@@ -29397,6 +29399,7 @@ export namespace Prisma {
     slug: number
     contenu: number
     image: number
+    imageCouvertureVisible: number
     textePartage: number
     categorie: number
     publie: number
@@ -29416,6 +29419,7 @@ export namespace Prisma {
     slug?: true
     contenu?: true
     image?: true
+    imageCouvertureVisible?: true
     textePartage?: true
     categorie?: true
     publie?: true
@@ -29431,6 +29435,7 @@ export namespace Prisma {
     slug?: true
     contenu?: true
     image?: true
+    imageCouvertureVisible?: true
     textePartage?: true
     categorie?: true
     publie?: true
@@ -29446,6 +29451,7 @@ export namespace Prisma {
     slug?: true
     contenu?: true
     image?: true
+    imageCouvertureVisible?: true
     textePartage?: true
     categorie?: true
     publie?: true
@@ -29536,6 +29542,7 @@ export namespace Prisma {
     slug: string
     contenu: string
     image: string | null
+    imageCouvertureVisible: boolean
     textePartage: string | null
     categorie: $Enums.CategorieFormation | null
     publie: boolean
@@ -29570,6 +29577,7 @@ export namespace Prisma {
     slug?: boolean
     contenu?: boolean
     image?: boolean
+    imageCouvertureVisible?: boolean
     textePartage?: boolean
     categorie?: boolean
     publie?: boolean
@@ -29588,6 +29596,7 @@ export namespace Prisma {
     slug?: boolean
     contenu?: boolean
     image?: boolean
+    imageCouvertureVisible?: boolean
     textePartage?: boolean
     categorie?: boolean
     publie?: boolean
@@ -29606,6 +29615,7 @@ export namespace Prisma {
     slug?: boolean
     contenu?: boolean
     image?: boolean
+    imageCouvertureVisible?: boolean
     textePartage?: boolean
     categorie?: boolean
     publie?: boolean
@@ -29624,6 +29634,7 @@ export namespace Prisma {
     slug?: boolean
     contenu?: boolean
     image?: boolean
+    imageCouvertureVisible?: boolean
     textePartage?: boolean
     categorie?: boolean
     publie?: boolean
@@ -29635,7 +29646,7 @@ export namespace Prisma {
     diffuserReseaux?: boolean
   }
 
-  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "slug" | "contenu" | "image" | "textePartage" | "categorie" | "publie" | "auteurId" | "createdAt" | "updatedAt" | "sections" | "reseauxPublies" | "diffuserReseaux", ExtArgs["result"]["article"]>
+  export type ArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titre" | "slug" | "contenu" | "image" | "imageCouvertureVisible" | "textePartage" | "categorie" | "publie" | "auteurId" | "createdAt" | "updatedAt" | "sections" | "reseauxPublies" | "diffuserReseaux", ExtArgs["result"]["article"]>
   export type ArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auteur?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -29657,6 +29668,7 @@ export namespace Prisma {
       slug: string
       contenu: string
       image: string | null
+      imageCouvertureVisible: boolean
       textePartage: string | null
       categorie: $Enums.CategorieFormation | null
       publie: boolean
@@ -30095,6 +30107,7 @@ export namespace Prisma {
     readonly slug: FieldRef<"Article", 'String'>
     readonly contenu: FieldRef<"Article", 'String'>
     readonly image: FieldRef<"Article", 'String'>
+    readonly imageCouvertureVisible: FieldRef<"Article", 'Boolean'>
     readonly textePartage: FieldRef<"Article", 'String'>
     readonly categorie: FieldRef<"Article", 'CategorieFormation'>
     readonly publie: FieldRef<"Article", 'Boolean'>
@@ -63338,6 +63351,7 @@ export namespace Prisma {
     slug: 'slug',
     contenu: 'contenu',
     image: 'image',
+    imageCouvertureVisible: 'imageCouvertureVisible',
     textePartage: 'textePartage',
     categorie: 'categorie',
     publie: 'publie',
@@ -66254,6 +66268,7 @@ export namespace Prisma {
     slug?: StringFilter<"Article"> | string
     contenu?: StringFilter<"Article"> | string
     image?: StringNullableFilter<"Article"> | string | null
+    imageCouvertureVisible?: BoolFilter<"Article"> | boolean
     textePartage?: StringNullableFilter<"Article"> | string | null
     categorie?: EnumCategorieFormationNullableFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolFilter<"Article"> | boolean
@@ -66272,6 +66287,7 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrderInput | SortOrder
+    imageCouvertureVisible?: SortOrder
     textePartage?: SortOrderInput | SortOrder
     categorie?: SortOrderInput | SortOrder
     publie?: SortOrder
@@ -66293,6 +66309,7 @@ export namespace Prisma {
     titre?: StringFilter<"Article"> | string
     contenu?: StringFilter<"Article"> | string
     image?: StringNullableFilter<"Article"> | string | null
+    imageCouvertureVisible?: BoolFilter<"Article"> | boolean
     textePartage?: StringNullableFilter<"Article"> | string | null
     categorie?: EnumCategorieFormationNullableFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolFilter<"Article"> | boolean
@@ -66311,6 +66328,7 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrderInput | SortOrder
+    imageCouvertureVisible?: SortOrder
     textePartage?: SortOrderInput | SortOrder
     categorie?: SortOrderInput | SortOrder
     publie?: SortOrder
@@ -66334,6 +66352,7 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Article"> | string
     contenu?: StringWithAggregatesFilter<"Article"> | string
     image?: StringNullableWithAggregatesFilter<"Article"> | string | null
+    imageCouvertureVisible?: BoolWithAggregatesFilter<"Article"> | boolean
     textePartage?: StringNullableWithAggregatesFilter<"Article"> | string | null
     categorie?: EnumCategorieFormationNullableWithAggregatesFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolWithAggregatesFilter<"Article"> | boolean
@@ -70764,6 +70783,7 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    imageCouvertureVisible?: boolean
     textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
@@ -70781,6 +70801,7 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    imageCouvertureVisible?: boolean
     textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
@@ -70798,6 +70819,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageCouvertureVisible?: BoolFieldUpdateOperationsInput | boolean
     textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
@@ -70815,6 +70837,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageCouvertureVisible?: BoolFieldUpdateOperationsInput | boolean
     textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
@@ -70832,6 +70855,7 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    imageCouvertureVisible?: boolean
     textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
@@ -70849,6 +70873,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageCouvertureVisible?: BoolFieldUpdateOperationsInput | boolean
     textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
@@ -70865,6 +70890,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageCouvertureVisible?: BoolFieldUpdateOperationsInput | boolean
     textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
@@ -75179,6 +75205,7 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrder
+    imageCouvertureVisible?: SortOrder
     textePartage?: SortOrder
     categorie?: SortOrder
     publie?: SortOrder
@@ -75196,6 +75223,7 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrder
+    imageCouvertureVisible?: SortOrder
     textePartage?: SortOrder
     categorie?: SortOrder
     publie?: SortOrder
@@ -75211,6 +75239,7 @@ export namespace Prisma {
     slug?: SortOrder
     contenu?: SortOrder
     image?: SortOrder
+    imageCouvertureVisible?: SortOrder
     textePartage?: SortOrder
     categorie?: SortOrder
     publie?: SortOrder
@@ -80352,6 +80381,7 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    imageCouvertureVisible?: boolean
     textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
@@ -80368,6 +80398,7 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    imageCouvertureVisible?: boolean
     textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
@@ -80755,6 +80786,7 @@ export namespace Prisma {
     slug?: StringFilter<"Article"> | string
     contenu?: StringFilter<"Article"> | string
     image?: StringNullableFilter<"Article"> | string | null
+    imageCouvertureVisible?: BoolFilter<"Article"> | boolean
     textePartage?: StringNullableFilter<"Article"> | string | null
     categorie?: EnumCategorieFormationNullableFilter<"Article"> | $Enums.CategorieFormation | null
     publie?: BoolFilter<"Article"> | boolean
@@ -87848,6 +87880,7 @@ export namespace Prisma {
     slug: string
     contenu: string
     image?: string | null
+    imageCouvertureVisible?: boolean
     textePartage?: string | null
     categorie?: $Enums.CategorieFormation | null
     publie?: boolean
@@ -88139,6 +88172,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageCouvertureVisible?: BoolFieldUpdateOperationsInput | boolean
     textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
@@ -88155,6 +88189,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageCouvertureVisible?: BoolFieldUpdateOperationsInput | boolean
     textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean
@@ -88171,6 +88206,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     contenu?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    imageCouvertureVisible?: BoolFieldUpdateOperationsInput | boolean
     textePartage?: NullableStringFieldUpdateOperationsInput | string | null
     categorie?: NullableEnumCategorieFormationFieldUpdateOperationsInput | $Enums.CategorieFormation | null
     publie?: BoolFieldUpdateOperationsInput | boolean

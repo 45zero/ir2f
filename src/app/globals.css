@@ -47,3 +47,22 @@ textarea::placeholder {
     transform: translateX(0);
   }
 }
+
+/* Bascule desktop/mobile du header : les styles inline ne supportent pas les media queries (voir
+   AGENTS.md — "inline style uniquement en JSX"), donc ce sont les deux seules règles du projet à
+   vivre ici plutôt qu'en JSX. Le !important est nécessaire pour l'emporter sur le `display` inline
+   posé côté composant. */
+.ir2f-header-nav-desktop {
+  display: flex;
+}
+.ir2f-header-nav-mobile-toggle {
+  display: none;
+}
+@media (max-width: 880px) {
+  .ir2f-header-nav-desktop {
+    display: none !important;
+  }
+  .ir2f-header-nav-mobile-toggle {
+    display: flex !important;
+  }
+}

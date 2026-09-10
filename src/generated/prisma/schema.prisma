@@ -686,19 +686,22 @@ model CovoituragePassager {
 // ─── ARTICLES / SITE PUBLIC ──────────────────────────
 
 model Article {
-  id           String              @id @default(uuid())
-  titre        String
-  slug         String              @unique
-  contenu      String
-  image        String?
+  id                     String              @id @default(uuid())
+  titre                  String
+  slug                   String              @unique
+  contenu                String
+  image                  String?
+  // L'image de couverture reste toujours affichée dans la mosaïque /actualites — ce champ ne
+  // contrôle que sa présence en haut de la page /actualites/[slug], au choix du rédacteur.
+  imageCouvertureVisible Boolean             @default(true)
   // Texte court utilisé comme légende quand l'article est partagé sur les réseaux sociaux
   // (aperçu Facebook, texte pré-rempli du partage natif) — distinct du contenu complet.
-  textePartage String?
-  categorie    CategorieFormation?
-  publie       Boolean             @default(false)
-  auteurId     String
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
+  textePartage           String?
+  categorie              CategorieFormation?
+  publie                 Boolean             @default(false)
+  auteurId               String
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
 
   // Sections répétables (photos/vidéos/tableaux/lien de redirection) — voir ArticleSection dans
   // src/lib/articles-shared.ts, même principe que Formation.programme.

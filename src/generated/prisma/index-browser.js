@@ -420,6 +420,7 @@ exports.Prisma.ArticleScalarFieldEnum = {
   slug: 'slug',
   contenu: 'contenu',
   image: 'image',
+  imageCouvertureVisible: 'imageCouvertureVisible',
   textePartage: 'textePartage',
   categorie: 'categorie',
   publie: 'publie',

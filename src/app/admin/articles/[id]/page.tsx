@@ -27,6 +27,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
     contenu: article.contenu,
     textePartage: article.textePartage ?? "",
     image: article.image ?? "",
+    imageCouvertureVisible: article.imageCouvertureVisible,
     categorie: article.categorie ?? "",
     publie: article.publie,
     diffuserReseaux: article.diffuserReseaux,

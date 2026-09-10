@@ -195,14 +195,16 @@ export async function signerConvention(
   }
 
   updatedPdf = await stampSignature(updatedPdf, SIGNATURE_FIELD_NAMES[signataire.role], pngBytes, signedAt, signataire.nom)
-  // Le tuteur peut être absent du circuit (email non renseigné, voir conventions.ts) : le nombre
-  // réel de signataires varie donc d'un stagiaire à l'autre, pas de longueur fixe à 5. On compare
-  // à la dernière étape effectivement créée pour CE stagiaire plutôt qu'à SIGNATAIRE_ORDER.length.
-  const derniereEtape = await prisma.conventionSignataire.aggregate({
-    where: { conventionStagiaireId: stagiaire.id },
-    _max: { ordre: true },
+  // On finalise dès que TOUS les signataires de ce stagiaire sont signés, plutôt que de se fier à
+  // l'ordre (comparer à l'étape de plus haut `ordre`) : une réinitialisation d'étape intermédiaire
+  // (reinitialiserSignatureEtape) peut faire resigner quelqu'un alors que des étapes suivantes
+  // sont déjà signées depuis longtemps, auquel cas ce n'est pas la personne de plus haut `ordre`
+  // qui termine réellement le circuit.
+  const autresNonSignes = await prisma.conventionSignataire.count({
+    where: { conventionStagiaireId: stagiaire.id, id: { not: signataire.id }, statut: { not: "SIGNE" } },
   })
-  if (signataire.ordre === derniereEtape._max.ordre) updatedPdf = await finalizeConvention(updatedPdf)
+  const circuitComplet = autresNonSignes === 0
+  if (circuitComplet) updatedPdf = await finalizeConvention(updatedPdf)
   await uploadBytes(updatedPdf, stagiaire.pdfStoragePath, "application/pdf")
 
   const hdrs = await headers()
@@ -215,7 +217,15 @@ export async function signerConvention(
     data: { statut: "SIGNE", signedAt, ipAddress, userAgent, documentHash, signatureStoragePath },
   })
 
-  await avancerConvention(stagiaire.id, signataire.ordre)
+  // Circuit déjà complet (dernière étape signée dans l'ordre, ou resignature d'une étape
+  // intermédiaire réinitialisée alors que les suivantes étaient déjà signées) : on marque
+  // directement la convention comme terminée plutôt que de tenter d'avancer vers une étape
+  // suivante qui n'existe pas ou est déjà signée.
+  if (circuitComplet) {
+    await prisma.conventionStagiaire.update({ where: { id: stagiaire.id }, data: { completedAt: new Date() } })
+  } else {
+    await avancerConvention(stagiaire.id, signataire.ordre)
+  }
 
   revalidatePath(`/admin/formations/${stagiaire.formation.id}/conventions`)
   return { error: null, success: true }

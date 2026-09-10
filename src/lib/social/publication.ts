@@ -29,6 +29,11 @@ export type PublicationEtat = {
   reach?: number
   statsFetchedAt?: string
   deletedAt?: string
+  /** Masque cette publication de la liste "Publié" par défaut (voir /admin/publications) sans rien toucher côté réseau — juste pour désencombrer la vue une fois qu'une publication est ancienne. */
+  archive?: boolean
 }
 
 export type ReseauxPublies = Record<string, PublicationEtat>
+
+/** Commentaire lu en direct depuis la plateforme (jamais stocké côté IR2F) — voir getPostComments dans social-publish.ts. */
+export type SocialComment = { id: string; author: string; text: string; createdAt: string }

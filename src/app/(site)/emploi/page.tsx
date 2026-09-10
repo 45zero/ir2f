@@ -575,7 +575,7 @@ export default async function EmploiPage() {
       </section>
 
       <div style={{ marginTop: 40 }}>
-        <BandeauEmploiCta contenu={accueilContenu} />
+        <BandeauEmploiCta contenu={accueilContenu} showButton2={false} button1AsPopup />
       </div>
 
       <section style={{ maxWidth: 1160, margin: "0 auto", padding: "48px 20px 0" }}>

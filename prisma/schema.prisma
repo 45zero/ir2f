@@ -691,6 +691,9 @@ model Article {
   slug         String              @unique
   contenu      String
   image        String?
+  // L'image de couverture reste toujours affichée dans la mosaïque /actualites — ce champ ne
+  // contrôle que sa présence en haut de la page /actualites/[slug], au choix du rédacteur.
+  imageCouvertureVisible Boolean @default(true)
   // Texte court utilisé comme légende quand l'article est partagé sur les réseaux sociaux
   // (aperçu Facebook, texte pré-rempli du partage natif) — distinct du contenu complet.
   textePartage String?

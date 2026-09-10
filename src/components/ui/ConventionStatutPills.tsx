@@ -1,7 +1,7 @@
 "use client"
 
 import { useActionState, useTransition } from "react"
-import { renvoyerEtape, logRenvoiWhatsapp } from "@/lib/actions/conventions"
+import { renvoyerEtape, logRenvoiWhatsapp, reinitialiserSignatureEtape } from "@/lib/actions/conventions"
 import { colors } from "@/lib/theme"
 import type { RoleSignataire, StatutSignature, RenvoiCanal } from "@/generated/prisma"
 
@@ -72,6 +72,61 @@ function WhatsappIcon() {
       <path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 20l1-5.5A8.5 8.5 0 1 1 21 11.5z" />
       <path d="M8.5 10.5c0 3 2.5 5.5 5.5 5.5" strokeLinecap="round" />
     </svg>
+  )
+}
+
+function RefreshIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3">
+      <path d="M21 12a9 9 0 1 1-3-6.7" strokeLinecap="round" />
+      <path d="M21 3v6h-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+/** Réinitialise la signature déjà apposée d'un signataire pour lui permettre de resigner, sans
+ * toucher aux autres étapes (voir reinitialiserSignatureEtape). Régénère le document et invalide
+ * l'ancien lien de signature — action confirmée avant envoi vu son impact. */
+function ReinitialiserSignatureButton({ signataire }: { signataire: ConventionSignataireStatut }) {
+  const [state, formAction, isPending] = useActionState(
+    async (_prev: { error: string | null } | undefined) => reinitialiserSignatureEtape(signataire.id),
+    undefined
+  )
+
+  return (
+    <form action={formAction}>
+      <button
+        type="submit"
+        disabled={isPending}
+        onClick={(e) => {
+          if (
+            !confirm(
+              `Réinitialiser la signature de ${signataire.nom} ? Le document sera régénéré et un nouveau lien de signature lui sera envoyé — les autres signatures déjà apposées ne seront pas modifiées.`
+            )
+          ) {
+            e.preventDefault()
+          }
+        }}
+        title="Réinitialiser cette signature"
+        aria-label="Réinitialiser cette signature"
+        style={{
+          background: "transparent",
+          border: "1px solid #d8dde5",
+          color: colors.navy,
+          borderRadius: 4,
+          width: 22,
+          height: 22,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: isPending ? "default" : "pointer",
+          padding: 0,
+        }}
+      >
+        <RefreshIcon />
+      </button>
+      {state?.error && <span style={{ color: colors.red, fontSize: 9.5, textAlign: "center", display: "block", maxWidth: 90 }}>{state.error}</span>}
+    </form>
   )
 }
 
@@ -154,12 +209,18 @@ export function ConventionStatutPill({
   }
 
   const canResend = canManage && (signataire.statut === "EN_ATTENTE" || signataire.statut === "REFUSE")
+  // Le responsable pédagogique a sa propre réinitialisation au niveau de la session (voir
+  // EnvoyerSignatureResponsablePedagogiqueButton) — cette ligne-ci n'est qu'une pastille de suivi
+  // synthétique pour lui (buildResponsablePedagogiqueSignatairePseudoRow), pas un vrai
+  // ConventionSignataire que reinitialiserSignatureEtape pourrait cibler.
+  const canReset = canManage && role !== "RESPONSABLE_PEDAGOGIQUE" && signataire.statut === "SIGNE"
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }} title={tooltipFor(signataire)}>
       {label}
       <span style={{ width: 12, height: 12, borderRadius: "50%", background: STATUT_COLOR[signataire.statut], display: "inline-block" }} />
       {canResend && <RenvoiButtons signataire={signataire} />}
+      {canReset && <ReinitialiserSignatureButton signataire={signataire} />}
       {signataire.dernierRenvoiPar && signataire.dernierRenvoiAt && (
         <span style={{ fontSize: 9, color: colors.textLight, textAlign: "center", whiteSpace: "nowrap" }}>
           Renvoi {signataire.dernierRenvoiCanal === "WHATSAPP" ? "WhatsApp" : "mail"} par {signataire.dernierRenvoiPar}
