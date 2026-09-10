@@ -8,11 +8,15 @@ const GRAPH_API_BASE = "https://graph.facebook.com/v25.0"
 
 type GraphErrorBody = { error?: { message?: string; code?: number } }
 
-async function graphFetch(path: string, params: Record<string, string>): Promise<Record<string, unknown>> {
+async function graphFetch(
+  path: string,
+  params: Record<string, string>,
+  method: "GET" | "POST" = "POST"
+): Promise<Record<string, unknown>> {
   const url = new URL(`${GRAPH_API_BASE}${path}`)
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value)
 
-  const res = await fetch(url.toString(), { method: "POST" })
+  const res = await fetch(url.toString(), { method })
   const body = (await res.json()) as GraphErrorBody & Record<string, unknown>
   if (!res.ok || body.error) {
     throw new Error(body.error?.message ?? `Échec de la requête Graph API (${res.status}).`)
@@ -65,4 +69,30 @@ export async function publishToInstagram(
 
   const published = await graphFetch(`/${externalId}/media_publish`, { creation_id: containerId, access_token: accessToken })
   return { postId: String(published.id) }
+}
+
+/** Stats d'un post de page Facebook — `reactions` est l'équivalent actuel de "likes" dans l'API (qui gère plusieurs types de réactions). Permissions déjà accordées au token (pages_read_engagement) suffisent, rien de plus à redemander. */
+export async function getFacebookPostStats(
+  postId: string,
+  accessToken: string
+): Promise<{ likes: number; comments: number; shares: number }> {
+  const body = await graphFetch(
+    `/${postId}`,
+    { fields: "reactions.summary(true).limit(0),comments.summary(true).limit(0),shares", access_token: accessToken },
+    "GET"
+  )
+  const reactions = body.reactions as { summary?: { total_count?: number } } | undefined
+  const comments = body.comments as { summary?: { total_count?: number } } | undefined
+  const shares = body.shares as { count?: number } | undefined
+  return {
+    likes: reactions?.summary?.total_count ?? 0,
+    comments: comments?.summary?.total_count ?? 0,
+    shares: shares?.count ?? 0,
+  }
+}
+
+/** Stats d'un média Instagram — lisibles avec instagram_basic seul (déjà accordé), pas besoin de instagram_manage_comments (qui ne sert qu'à modérer/répondre). */
+export async function getInstagramMediaStats(mediaId: string, accessToken: string): Promise<{ likes: number; comments: number }> {
+  const body = await graphFetch(`/${mediaId}`, { fields: "like_count,comments_count", access_token: accessToken }, "GET")
+  return { likes: Number(body.like_count ?? 0), comments: Number(body.comments_count ?? 0) }
 }

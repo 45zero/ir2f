@@ -2,9 +2,9 @@ import { notFound } from "next/navigation"
 import { getArticleForEdit } from "@/lib/admin/articles"
 import { getConfiguredSocialAccounts } from "@/lib/social/accounts"
 import { ArticleForm, type ArticleFormInitial } from "@/components/admin/ArticleForm"
-import { PublierReseauxPanel, type ReseauxPublies } from "@/components/admin/PublierReseauxPanel"
+import { PublierReseauxPanel } from "@/components/admin/PublierReseauxPanel"
 import { colors, fontHeading } from "@/lib/theme"
-import type { ArticleSection } from "@/lib/articles-shared"
+import { articleShareExcerpt, type ArticleSection, type ReseauxPublies } from "@/lib/articles-shared"
 
 export default async function EditArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -12,6 +12,8 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
   if (!article) notFound()
 
   const comptesActifs = getConfiguredSocialAccounts()
+  const sections = (article.sections as ArticleSection[] | null) ?? []
+  const sectionImages = sections.flatMap((s) => s.images ?? [])
 
   const initial: ArticleFormInitial = {
     titre: article.titre,
@@ -21,7 +23,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
     image: article.image ?? "",
     categorie: article.categorie ?? "",
     publie: article.publie,
-    sections: (article.sections as ArticleSection[] | null) ?? [],
+    sections,
   }
 
   return (
@@ -34,6 +36,9 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
         articleId={id}
         comptes={comptesActifs}
         reseauxPublies={article.reseauxPublies as ReseauxPublies | null}
+        defaultMessage={articleShareExcerpt(article)}
+        articleImage={article.image}
+        sectionImages={sectionImages}
       />
     </div>
   )
