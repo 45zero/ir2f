@@ -28,7 +28,7 @@ export function articleShareExcerpt(article: { contenu: string; textePartage: st
  * de publications d'une ligue régionale, pas besoin d'un vrai outil de social media management.
  */
 export type PublicationEtat = {
-  statut: "PROGRAMME" | "PUBLIE" | "ECHEC"
+  statut: "PROGRAMME" | "PUBLIE" | "ECHEC" | "SUPPRIME"
   message: string
   imageUrl?: string
   scheduledFor?: string
@@ -37,7 +37,10 @@ export type PublicationEtat = {
   error?: string
   likes?: number
   comments?: number
+  views?: number
+  reach?: number
   statsFetchedAt?: string
+  deletedAt?: string
 }
 
 export type ReseauxPublies = Record<string, PublicationEtat>

@@ -10,6 +10,7 @@ import type { PublicationRow, ArticleAPublier } from "@/lib/admin/publications"
 import type { SocialPlateforme } from "@/lib/social/accounts"
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Paris" })
+const numberFormatter = new Intl.NumberFormat("fr-FR")
 
 const PLATEFORME_ICONS: Record<SocialPlateforme, (props: { size?: number }) => React.JSX.Element> = {
   FACEBOOK: FacebookIcon,
@@ -147,6 +148,7 @@ export function PublicationsOverview({
                 {r.etat.publishedAt && dateFormatter.format(new Date(r.etat.publishedAt))}
               </span>
               <span style={{ color: colors.textMuted, fontSize: 12, whiteSpace: "nowrap" }}>
+                {r.etat.views !== undefined && `${numberFormatter.format(r.etat.views)} vue${r.etat.views > 1 ? "s" : ""} · `}
                 {r.etat.likes ?? 0} j&apos;aime · {r.etat.comments ?? 0} commentaire{(r.etat.comments ?? 0) > 1 ? "s" : ""}
               </span>
             </div>

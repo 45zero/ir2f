@@ -2,13 +2,14 @@
 
 import { useActionState, useMemo, useState } from "react"
 import Link from "next/link"
-import { publishArticleToSocial, refreshSocialStats } from "@/lib/actions/social-publish"
+import { publishArticleToSocial, refreshSocialStats, editArticleSocialPost, deleteArticleSocialPost } from "@/lib/actions/social-publish"
 import { FacebookIcon, InstagramIcon, TikTokIcon, LinkedInIcon } from "@/components/admin/SocialPlatformIcons"
 import { colors, fontBody } from "@/lib/theme"
 import type { SocialPlateforme } from "@/lib/social/accounts"
 import type { ReseauxPublies } from "@/lib/articles-shared"
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Paris" })
+const numberFormatter = new Intl.NumberFormat("fr-FR")
 
 export type PublierReseauxCompte = { id: string; label: string; plateforme: SocialPlateforme }
 
@@ -26,6 +27,114 @@ const STATUT_LABELS: Record<string, { label: string; color: string }> = {
   PROGRAMME: { label: "Programmé", color: "#7a6423" },
   PUBLIE: { label: "Publié", color: "#1a6b3a" },
   ECHEC: { label: "Échec", color: colors.red },
+  SUPPRIME: { label: "Supprimé", color: colors.textMuted },
+}
+
+const linkButtonStyle: React.CSSProperties = {
+  background: "none",
+  border: "none",
+  padding: 0,
+  fontSize: 11.5,
+  fontWeight: 700,
+  fontFamily: fontBody,
+  color: colors.navy,
+  textDecoration: "underline",
+  cursor: "pointer",
+}
+
+function smallButtonStyle(background: string, filled: boolean): React.CSSProperties {
+  return {
+    background,
+    color: filled ? "#fff" : colors.navy,
+    border: filled ? "none" : "1px solid #d8dde5",
+    padding: "5px 10px",
+    borderRadius: 4,
+    fontSize: 11.5,
+    fontWeight: 700,
+    fontFamily: fontBody,
+    cursor: "pointer",
+  }
+}
+
+/** Actions sur une publication déjà PUBLIE : modifier (Facebook uniquement — Instagram ne permet pas de modifier une légende publiée) et supprimer (les deux plateformes, avec confirmation car irréversible côté réseau social). */
+function PublishedPostActions({
+  articleId,
+  compteId,
+  plateforme,
+  currentMessage,
+}: {
+  articleId: string
+  compteId: string
+  plateforme: SocialPlateforme
+  currentMessage: string
+}) {
+  const [mode, setMode] = useState<"idle" | "edit" | "confirmDelete">("idle")
+  const [draft, setDraft] = useState(currentMessage)
+
+  const [editState, editAction, editPending] = useActionState(
+    async (_prev: Awaited<ReturnType<typeof editArticleSocialPost>> | undefined) => {
+      const result = await editArticleSocialPost(articleId, compteId, draft)
+      if (result.ok) setMode("idle")
+      return result
+    },
+    undefined
+  )
+  const [deleteState, deleteAction, deletePending] = useActionState(
+    async (_prev: Awaited<ReturnType<typeof deleteArticleSocialPost>> | undefined) => deleteArticleSocialPost(articleId, compteId),
+    undefined
+  )
+
+  if (mode === "edit") {
+    return (
+      <form action={editAction} style={{ display: "flex", flexDirection: "column", gap: 6, marginLeft: 23, marginTop: 4 }}>
+        <textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={3} style={{ ...fieldStyle, resize: "vertical" }} />
+        {editState?.error && <p style={{ color: colors.red, fontSize: 11.5, margin: 0 }}>{editState.error}</p>}
+        <div style={{ display: "flex", gap: 8 }}>
+          <button type="submit" disabled={editPending} style={smallButtonStyle(colors.red, true)}>
+            {editPending ? "Enregistrement..." : "Enregistrer"}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setMode("idle")
+              setDraft(currentMessage)
+            }}
+            style={smallButtonStyle("transparent", false)}
+          >
+            Annuler
+          </button>
+        </div>
+      </form>
+    )
+  }
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 12, marginLeft: 23, marginTop: 2 }}>
+      {plateforme === "FACEBOOK" && (
+        <button type="button" onClick={() => setMode("edit")} style={linkButtonStyle}>
+          Modifier
+        </button>
+      )}
+      {mode === "confirmDelete" ? (
+        <>
+          <span style={{ fontSize: 11.5, color: colors.red }}>Supprimer définitivement ?</span>
+          <form action={deleteAction}>
+            <button type="submit" disabled={deletePending} style={{ ...linkButtonStyle, color: colors.red }}>
+              {deletePending ? "Suppression..." : "Confirmer"}
+            </button>
+          </form>
+          <button type="button" onClick={() => setMode("idle")} style={linkButtonStyle}>
+            Annuler
+          </button>
+        </>
+      ) : (
+        <button type="button" onClick={() => setMode("confirmDelete")} style={linkButtonStyle}>
+          Supprimer
+        </button>
+      )}
+      {deleteState?.error && <span style={{ fontSize: 11.5, color: colors.red }}>{deleteState.error}</span>}
+    </div>
+  )
 }
 
 function PlatformSection({
@@ -35,6 +144,7 @@ function PlatformSection({
   selected,
   onToggle,
   statuses,
+  articleId,
   children,
 }: {
   icon: React.ReactNode
@@ -43,6 +153,7 @@ function PlatformSection({
   selected: string[]
   onToggle: (id: string, checked: boolean) => void
   statuses: ReseauxPublies
+  articleId: string
   children: React.ReactNode
 }) {
   return (
@@ -72,10 +183,21 @@ function PlatformSection({
                   {etat.statut === "PROGRAMME" && etat.scheduledFor && ` pour le ${dateFormatter.format(new Date(etat.scheduledFor))}`}
                   {etat.statut === "PUBLIE" && etat.publishedAt && ` le ${dateFormatter.format(new Date(etat.publishedAt))}`}
                   {etat.statut === "ECHEC" && etat.error && ` : ${etat.error}`}
+                  {etat.statut === "SUPPRIME" && etat.deletedAt && ` le ${dateFormatter.format(new Date(etat.deletedAt))}`}
+                  {etat.statut === "PUBLIE" && (etat.views !== undefined || etat.reach !== undefined) && (
+                    <>
+                      {" "}
+                      — {numberFormatter.format(etat.views ?? 0)} vue{(etat.views ?? 0) > 1 ? "s" : ""}
+                      {etat.reach !== undefined && ` (${numberFormatter.format(etat.reach)} en portée)`}
+                    </>
+                  )}
                   {etat.statut === "PUBLIE" && (etat.likes !== undefined || etat.comments !== undefined) && (
                     <> — {etat.likes ?? 0} j&apos;aime, {etat.comments ?? 0} commentaire{(etat.comments ?? 0) > 1 ? "s" : ""}</>
                   )}
                 </span>
+              )}
+              {etat && etat.statut === "PUBLIE" && (
+                <PublishedPostActions articleId={articleId} compteId={c.id} plateforme={c.plateforme} currentMessage={etat.message} />
               )}
             </div>
           )
@@ -165,6 +287,7 @@ export function PublierReseauxPanel({
               selected={selectedFacebook}
               onToggle={(id, checked) => setSelectedFacebook((prev) => (checked ? [...prev, id] : prev.filter((x) => x !== id)))}
               statuses={statuses}
+              articleId={articleId}
             >
               <textarea
                 value={facebookMessage}
@@ -184,6 +307,7 @@ export function PublierReseauxPanel({
               selected={selectedInstagram}
               onToggle={(id, checked) => setSelectedInstagram((prev) => (checked ? [...prev, id] : prev.filter((x) => x !== id)))}
               statuses={statuses}
+              articleId={articleId}
             >
               <textarea
                 value={instagramCaption}

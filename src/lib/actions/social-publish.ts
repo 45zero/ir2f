@@ -3,7 +3,17 @@
 import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
-import { publishToFacebookPage, publishToInstagram, getFacebookPostStats, getInstagramMediaStats } from "@/lib/social/graph"
+import {
+  publishToFacebookPage,
+  publishToInstagram,
+  getFacebookPostStats,
+  getInstagramMediaStats,
+  getFacebookPostInsights,
+  getInstagramMediaInsights,
+  editFacebookPost,
+  deleteFacebookPost,
+  deleteInstagramMedia,
+} from "@/lib/social/graph"
 import { getSocialAccountById } from "@/lib/social/accounts"
 import type { ReseauxPublies } from "@/lib/articles-shared"
 
@@ -93,7 +103,12 @@ function requireImage(imageUrl: string | undefined): string {
 
 export type RefreshStatsState = { error: string | null }
 
-/** Rafraîchit les likes/commentaires des publications déjà PUBLIE d'un article. */
+/**
+ * Rafraîchit les likes/commentaires et vues/portée des publications déjà PUBLIE d'un article. Les
+ * vues/portée sont récupérées séparément (édge /insights, pas les mêmes permissions ni le même
+ * risque d'erreur que like_count/comments_count) — un échec dessus ne doit pas empêcher de garder
+ * au moins les likes/commentaires à jour.
+ */
 export async function refreshSocialStats(articleId: string): Promise<RefreshStatsState> {
   await requireAdmin()
 
@@ -113,10 +128,21 @@ export async function refreshSocialStats(articleId: string): Promise<RefreshStat
         compte.plateforme === "FACEBOOK"
           ? await getFacebookPostStats(etat.postId, compte.accessToken)
           : await getInstagramMediaStats(etat.postId, compte.accessToken)
-      reseauxPublies[compteId] = { ...etat, likes: stats.likes, comments: stats.comments, statsFetchedAt: new Date().toISOString() }
+      reseauxPublies[compteId] = { ...reseauxPublies[compteId], likes: stats.likes, comments: stats.comments, statsFetchedAt: new Date().toISOString() }
       changed = true
     } catch {
       // Une stat qu'on n'arrive pas à rafraîchir ne doit pas bloquer les autres — on garde l'ancienne valeur.
+    }
+
+    try {
+      const insights =
+        compte.plateforme === "FACEBOOK"
+          ? await getFacebookPostInsights(etat.postId, compte.accessToken)
+          : await getInstagramMediaInsights(etat.postId, compte.accessToken)
+      reseauxPublies[compteId] = { ...reseauxPublies[compteId], views: insights.views, reach: insights.reach }
+      changed = true
+    } catch {
+      // Idem : les vues sont un bonus, pas de quoi bloquer le reste si Meta les refuse.
     }
   }
 
@@ -127,4 +153,68 @@ export async function refreshSocialStats(articleId: string): Promise<RefreshStat
   }
 
   return { error: null }
+}
+
+export type EditSocialPostState = { error: string | null; ok: boolean }
+
+/** Modifie le texte d'une publication Facebook déjà publiée. Instagram ne permet pas de modifier une légende publiée (limitation de l'API, pas de notre code) — l'appelant ne doit pas proposer cette action pour Instagram. */
+export async function editArticleSocialPost(articleId: string, compteId: string, newMessage: string): Promise<EditSocialPostState> {
+  await requireAdmin()
+
+  const compte = getSocialAccountById(compteId)
+  if (!compte) return { error: "Compte introuvable.", ok: false }
+  if (compte.plateforme !== "FACEBOOK") return { error: "La modification n'est pas possible sur Instagram.", ok: false }
+
+  const article = await prisma.article.findUnique({ where: { id: articleId }, select: { reseauxPublies: true } })
+  if (!article) return { error: "Actualité introuvable.", ok: false }
+
+  const reseauxPublies = { ...((article.reseauxPublies as ReseauxPublies | null) ?? {}) }
+  const etat = reseauxPublies[compteId]
+  if (!etat || etat.statut !== "PUBLIE" || !etat.postId) return { error: "Cette publication n'est pas publiée.", ok: false }
+
+  try {
+    await editFacebookPost(etat.postId, compte.accessToken, newMessage)
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Erreur inattendue.", ok: false }
+  }
+
+  reseauxPublies[compteId] = { ...etat, message: newMessage }
+  await prisma.article.update({ where: { id: articleId }, data: { reseauxPublies } })
+
+  revalidatePath("/admin/articles")
+  revalidatePath(`/admin/articles/${articleId}`)
+  revalidatePath("/admin/publications")
+  return { error: null, ok: true }
+}
+
+export type DeleteSocialPostState = { error: string | null; ok: boolean }
+
+/** Supprime une publication déjà publiée sur la plateforme d'origine, puis marque l'état SUPPRIME côté IR2F (on garde la trace plutôt que de retirer l'entrée). */
+export async function deleteArticleSocialPost(articleId: string, compteId: string): Promise<DeleteSocialPostState> {
+  await requireAdmin()
+
+  const compte = getSocialAccountById(compteId)
+  if (!compte) return { error: "Compte introuvable.", ok: false }
+
+  const article = await prisma.article.findUnique({ where: { id: articleId }, select: { reseauxPublies: true } })
+  if (!article) return { error: "Actualité introuvable.", ok: false }
+
+  const reseauxPublies = { ...((article.reseauxPublies as ReseauxPublies | null) ?? {}) }
+  const etat = reseauxPublies[compteId]
+  if (!etat || etat.statut !== "PUBLIE" || !etat.postId) return { error: "Cette publication n'est pas publiée.", ok: false }
+
+  try {
+    if (compte.plateforme === "FACEBOOK") await deleteFacebookPost(etat.postId, compte.accessToken)
+    else await deleteInstagramMedia(etat.postId, compte.accessToken)
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Erreur inattendue.", ok: false }
+  }
+
+  reseauxPublies[compteId] = { ...etat, statut: "SUPPRIME", deletedAt: new Date().toISOString() }
+  await prisma.article.update({ where: { id: articleId }, data: { reseauxPublies } })
+
+  revalidatePath("/admin/articles")
+  revalidatePath(`/admin/articles/${articleId}`)
+  revalidatePath("/admin/publications")
+  return { error: null, ok: true }
 }

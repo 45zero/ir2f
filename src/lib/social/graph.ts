@@ -4,6 +4,8 @@ import "server-only"
 // nécessaires sur le token généré manuellement par l'admin : pages_manage_posts,
 // pages_manage_metadata, pages_manage_read_engagement, pages_show_list (Facebook) et
 // instagram_basic, instagram_content_publish (Instagram — nécessite un compte pro lié à une page).
+// Suppression Instagram (deleteInstagramMedia) nécessite EN PLUS instagram_manage_contents — pas
+// encore accordé à nos tokens actuels, voir la démarche dans la mémoire du projet.
 const GRAPH_API_BASE = "https://graph.facebook.com/v25.0"
 
 type GraphErrorBody = { error?: { message?: string; code?: number } }
@@ -11,7 +13,7 @@ type GraphErrorBody = { error?: { message?: string; code?: number } }
 async function graphFetch(
   path: string,
   params: Record<string, string>,
-  method: "GET" | "POST" = "POST"
+  method: "GET" | "POST" | "DELETE" = "POST"
 ): Promise<Record<string, unknown>> {
   const url = new URL(`${GRAPH_API_BASE}${path}`)
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value)
@@ -95,4 +97,57 @@ export async function getFacebookPostStats(
 export async function getInstagramMediaStats(mediaId: string, accessToken: string): Promise<{ likes: number; comments: number }> {
   const body = await graphFetch(`/${mediaId}`, { fields: "like_count,comments_count", access_token: accessToken }, "GET")
   return { likes: Number(body.like_count ?? 0), comments: Number(body.comments_count ?? 0) }
+}
+
+type InsightMetric = { name?: string; values?: { value?: number }[]; total_value?: { value?: number } }
+
+function extractInsightMetric(data: unknown, name: string): number {
+  const metric = (data as InsightMetric[] | undefined)?.find((m) => m.name === name)
+  if (!metric) return 0
+  if (metric.total_value?.value !== undefined) return Number(metric.total_value.value)
+  return Number(metric.values?.[0]?.value ?? 0)
+}
+
+/**
+ * Vues/portée d'un post de page Facebook — `post_impressions`/`post_impressions_unique` ont été
+ * dépréciées par Meta le 15/06/2026 (erreur "invalid metric" désormais), remplacées par
+ * `post_media_view` (vues) et `post_total_media_view_unique` (portée). Édge `/insights` séparé de
+ * `/{post-id}` (pas un simple `fields`). Migration très récente côté Meta — à reconfirmer sur un
+ * vrai post si jamais ces noms bougent encore.
+ */
+export async function getFacebookPostInsights(postId: string, accessToken: string): Promise<{ views: number; reach: number }> {
+  const body = await graphFetch(
+    `/${postId}/insights`,
+    { metric: "post_media_view,post_total_media_view_unique", access_token: accessToken },
+    "GET"
+  )
+  return {
+    views: extractInsightMetric(body.data, "post_media_view"),
+    reach: extractInsightMetric(body.data, "post_total_media_view_unique"),
+  }
+}
+
+/**
+ * Vues/portée d'un média Instagram — `impressions` et `plays` ont été dépréciées par Meta (avril
+ * 2025), remplacées uniformément par `views` (feed, carrousel, reels, stories confondus) ; `reach`
+ * reste valide tel quel. Lisibles avec instagram_basic seul.
+ */
+export async function getInstagramMediaInsights(mediaId: string, accessToken: string): Promise<{ views: number; reach: number }> {
+  const body = await graphFetch(`/${mediaId}/insights`, { metric: "views,reach", access_token: accessToken }, "GET")
+  return { views: extractInsightMetric(body.data, "views"), reach: extractInsightMetric(body.data, "reach") }
+}
+
+/** Modifie le texte d'un post Facebook déjà publié. Contrairement à Instagram (qui n'autorise pas de modifier une légende publiée — limitation de plateforme, pas de notre code), l'API Graph l'accepte via un simple POST avec un nouveau `message`. */
+export async function editFacebookPost(postId: string, accessToken: string, message: string): Promise<void> {
+  await graphFetch(`/${postId}`, { message, access_token: accessToken })
+}
+
+/** Supprime un post Facebook déjà publié. */
+export async function deleteFacebookPost(postId: string, accessToken: string): Promise<void> {
+  await graphFetch(`/${postId}`, { access_token: accessToken }, "DELETE")
+}
+
+/** Supprime un média Instagram déjà publié. Nécessite le scope instagram_manage_contents en plus de instagram_basic (voir note en tête de fichier) — sans lui, Meta renvoie une erreur de permission. */
+export async function deleteInstagramMedia(mediaId: string, accessToken: string): Promise<void> {
+  await graphFetch(`/${mediaId}`, { access_token: accessToken }, "DELETE")
 }
