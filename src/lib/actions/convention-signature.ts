@@ -194,7 +194,7 @@ export async function signerConvention(
     })
   }
 
-  updatedPdf = await stampSignature(updatedPdf, SIGNATURE_FIELD_NAMES[signataire.role], pngBytes, signedAt)
+  updatedPdf = await stampSignature(updatedPdf, SIGNATURE_FIELD_NAMES[signataire.role], pngBytes, signedAt, signataire.nom)
   // Le tuteur peut être absent du circuit (email non renseigné, voir conventions.ts) : le nombre
   // réel de signataires varie donc d'un stagiaire à l'autre, pas de longueur fixe à 5. On compare
   // à la dernière étape effectivement créée pour CE stagiaire plutôt qu'à SIGNATAIRE_ORDER.length.

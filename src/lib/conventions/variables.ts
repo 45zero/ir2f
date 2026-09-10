@@ -69,6 +69,7 @@ type StagiaireVars = Pick<
 >
 
 const formationDatesLongFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "Europe/Paris" })
+const signatureDateFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short", timeZone: "Europe/Paris" })
 const formationDateDebutFormatter = new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "2-digit", year: "2-digit", timeZone: "Europe/Paris" })
 const formationDateFinFormatter = new Intl.DateTimeFormat("fr-FR", { dateStyle: "short", timeZone: "Europe/Paris" })
 
@@ -144,6 +145,12 @@ export function buildConventionVariables(params: { session: SessionVars; stagiai
       : "",
     responsable_pedagogique_email: session.responsablePedagogiqueUser?.email ?? "",
     responsable_pedagogique_telephone: session.responsablePedagogiqueUser?.telephone ?? "",
+
+    // Article 7 ("Fait à ___, le ___") : jamais rattaché à un signataire précis puisque la
+    // signature se fait à distance par chacun — on prend le lieu de la session et la date de
+    // génération du document comme repère, plutôt que de laisser ces champs vides indéfiniment.
+    lieu_signature: session.lieu ?? "",
+    date_signature: signatureDateFormatter.format(new Date()),
   }
 }
 

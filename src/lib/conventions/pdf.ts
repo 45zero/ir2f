@@ -56,15 +56,34 @@ function consolidateAllPages(pdfDoc: PDFDocument): void {
 
 export type ConventionVariables = Record<string, string>
 
-/** Remplit les champs de formulaire du modèle dont le nom correspond à une variable connue. Les champs absents du modèle (ou les champs-emplacements de signature, laissés vides) sont ignorés. */
+/**
+ * Remplit les champs de formulaire du modèle dont le nom correspond à une variable connue. Les
+ * champs absents du modèle (ou les champs-emplacements de signature, laissés vides) sont ignorés.
+ *
+ * Certains modèles (générés via PyMuPDF, voir mémo pipeline PDF) contiennent par erreur plusieurs
+ * objets-champ distincts portant le même nom (ex. `stagiaire_nom_prenom` répété en page 1 et en
+ * page 4 de "Le stagiaire M ___") au lieu d'un seul champ avec plusieurs widgets (`Kids`) — un
+ * défaut d'AcroForm invalide que `form.getFieldMaybe` ne voit pas : il ne résout qu'UN seul des
+ * objets-champ portant ce nom, laissant les autres occurrences vides. On regroupe donc les champs
+ * par nom et on remplit toutes les occurrences plutôt que de se fier à la résolution par nom.
+ */
 export async function fillConventionTemplate(templateBytes: Uint8Array, variables: ConventionVariables): Promise<Uint8Array> {
   const pdfDoc = await PDFDocument.load(templateBytes)
   consolidateAllPages(pdfDoc)
   const form = pdfDoc.getForm()
 
+  const fieldsByName = new Map<string, PDFField[]>()
+  for (const field of form.getFields()) {
+    const name = field.getName()
+    const existing = fieldsByName.get(name)
+    if (existing) existing.push(field)
+    else fieldsByName.set(name, [field])
+  }
+
   for (const [key, value] of Object.entries(variables)) {
-    const field = form.getFieldMaybe(key)
-    if (field instanceof PDFTextField) field.setText(value)
+    for (const field of fieldsByName.get(key) ?? []) {
+      if (field instanceof PDFTextField) field.setText(value)
+    }
   }
 
   return pdfDoc.save()
@@ -86,19 +105,26 @@ function findWidgetPageAndRect(pdfDoc: PDFDocument, field: PDFField): { page: PD
   throw new Error(`Impossible de localiser la page du champ "${field.getName()}" dans le PDF.`)
 }
 
-const DATE_BAND_HEIGHT = 12
-
 /**
- * Incruste une image de signature (PNG) sur l'emplacement du champ-signature donné, avec la date
- * et l'heure de signature imprimées juste en dessous (visible même à l'impression du PDF), puis
- * retire ce seul champ du formulaire — l'image et le texte font désormais partie du contenu de la
- * page, et les champs-signature des étapes suivantes restent intacts pour être localisés à leur tour.
+ * Incruste une image de signature (PNG) sur l'emplacement du champ-signature donné, avec le nom
+ * du signataire et la date/heure de signature imprimés à côté (visibles même à l'impression du
+ * PDF), puis retire ce seul champ du formulaire — l'image et le texte font désormais partie du
+ * contenu de la page, et les champs-signature des étapes suivantes restent intacts pour être
+ * localisés à leur tour.
+ *
+ * Layout horizontal (image à gauche, nom + date empilés à droite) plutôt qu'un bandeau de date en
+ * dessous de l'image : les emplacements de signature de ce modèle sont des lignes larges et basses
+ * (~14pt de haut sur ~225pt de large, voir mémo pipeline PDF), donc réserver une hauteur fixe pour
+ * la date au-dessus/en-dessous de l'image ne laissait quasiment plus de hauteur pour l'image
+ * elle-même (tampon invisible en pratique). Le layout horizontal s'adapte à la forme réelle du
+ * champ au lieu de supposer un champ haut et étroit.
  */
 export async function stampSignature(
   pdfBytes: Uint8Array,
   fieldName: string,
   signaturePngBytes: Uint8Array,
-  signedAt: Date
+  signedAt: Date,
+  signerName?: string
 ): Promise<Uint8Array> {
   const pdfDoc = await PDFDocument.load(pdfBytes)
   consolidateAllPages(pdfDoc)
@@ -106,31 +132,43 @@ export async function stampSignature(
   const field = form.getField(fieldName)
   const { page, rect } = findWidgetPageAndRect(pdfDoc, field)
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
+  const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold)
+
+  const padding = 2
+  const labelLines = [signerName?.trim(), `Signé le ${signedAtFormatter.format(signedAt)}`].filter(
+    (l): l is string => Boolean(l)
+  )
+  const labelFontSize = 7
+  const labelLineHeight = labelFontSize + 1.5
+  const labelWidth = labelLines.length > 0 ? Math.max(...labelLines.map((l) => font.widthOfTextAtSize(l, labelFontSize))) : 0
+  const labelGap = labelLines.length > 0 ? 6 : 0
 
   const image = await pdfDoc.embedPng(signaturePngBytes)
-  const padding = 2
-  const imageAreaHeight = rect.height - DATE_BAND_HEIGHT - padding
-  const scale = Math.min((rect.width - padding * 2) / image.width, imageAreaHeight / image.height, 1)
+  const availableHeight = rect.height - padding * 2
+  const availableImageWidth = Math.max(rect.width - padding * 2 - labelGap - labelWidth, rect.width * 0.35)
+  const scale = Math.min(availableImageWidth / image.width, availableHeight / image.height, 1)
   const drawWidth = image.width * scale
   const drawHeight = image.height * scale
 
   page.drawImage(image, {
-    x: rect.x + (rect.width - drawWidth) / 2,
-    y: rect.y + DATE_BAND_HEIGHT + (imageAreaHeight - drawHeight) / 2,
+    x: rect.x + padding,
+    y: rect.y + (rect.height - drawHeight) / 2,
     width: drawWidth,
     height: drawHeight,
   })
 
-  const dateLabel = `Signé le ${signedAtFormatter.format(signedAt)}`
-  const dateFontSize = 7
-  const dateWidth = font.widthOfTextAtSize(dateLabel, dateFontSize)
-  page.drawText(dateLabel, {
-    x: rect.x + (rect.width - dateWidth) / 2,
-    y: rect.y + 2,
-    size: dateFontSize,
-    font,
-    color: rgb(0.35, 0.38, 0.45),
-  })
+  const labelsBlockHeight = labelLines.length * labelLineHeight
+  let labelY = rect.y + (rect.height + labelsBlockHeight) / 2 - labelFontSize
+  for (const [i, line] of labelLines.entries()) {
+    page.drawText(line, {
+      x: rect.x + padding + drawWidth + labelGap,
+      y: labelY,
+      size: labelFontSize,
+      font: i === 0 && signerName ? boldFont : font,
+      color: rgb(0.2, 0.23, 0.3),
+    })
+    labelY -= labelLineHeight
+  }
 
   form.removeField(field)
 

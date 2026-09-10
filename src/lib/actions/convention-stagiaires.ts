@@ -64,6 +64,48 @@ function isHeaderRow(row: unknown[]): boolean {
   return normalize(cell(row, COLUMN_INDEX.nom)) === "nom"
 }
 
+/** Champs du tableau de suivi comparés pour décider si une ligne a réellement changé (voir plus
+ * bas) — n'inclut ni `formationId`/`sessionId` (jamais réimportés) ni les champs que seuls les
+ * signataires eux-mêmes renseignent (clubRepresentantQualite, tuteurQualite/adresse/etc.,
+ * maitreDeStageQualite) : ceux-là ne viennent jamais de l'Excel donc ne peuvent jamais "changer"
+ * à l'import. */
+const IMPORTED_FIELDS = [
+  "club",
+  "numeroAffiliationClub",
+  "emailClub",
+  "clubAdresse",
+  "clubCp",
+  "clubVille",
+  "clubRepresentantNom",
+  "civilite",
+  "nom",
+  "prenom",
+  "dateNaissance",
+  "adresse",
+  "cp",
+  "ville",
+  "telephone",
+  "tuteurNom",
+  "tuteurPrenom",
+  "tuteurEmail",
+  "maitreDeStageNom",
+  "maitreDeStagePrenom",
+  "maitreDeStageAdresse",
+  "maitreDeStageCp",
+  "maitreDeStageVille",
+  "maitreDeStageEmail",
+  "donneesSupplementaires",
+] as const
+
+function importedDataChanged(existing: Record<string, unknown>, incoming: Record<string, unknown>): boolean {
+  return IMPORTED_FIELDS.some((field) => {
+    const a = incoming[field] ?? null
+    const b = existing[field] ?? null
+    if (field === "donneesSupplementaires") return JSON.stringify(a) !== JSON.stringify(b)
+    return a !== b
+  })
+}
+
 export async function importStagiairesExcel(
   sessionId: string,
   _prev: ImportStagiairesState | undefined,
@@ -163,14 +205,17 @@ export async function importStagiairesExcel(
 
     const existing = await prisma.conventionStagiaire.findUnique({
       where: { sessionId_email: { sessionId, email } },
-      select: { id: true, pdfStoragePath: true },
+      select: { id: true, pdfStoragePath: true, ...Object.fromEntries(IMPORTED_FIELDS.map((f) => [f, true])) },
     })
 
-    if (existing?.pdfStoragePath) {
-      // Une convention avait déjà été générée (et éventuellement signée) pour cet email — les
-      // informations changent, donc l'ancien PDF/signatures ne sont plus valables : on les efface
-      // pour repartir d'un statut vierge plutôt que d'afficher un statut "signé" qui ne correspond
-      // plus aux données affichées.
+    if (existing?.pdfStoragePath && importedDataChanged(existing, data)) {
+      // Une convention avait déjà été générée (et éventuellement signée) pour cet email, et ses
+      // informations viennent réellement de changer (ex. changement de tuteur) — l'ancien
+      // PDF/signatures ne sont donc plus valables : on les efface pour repartir d'un statut vierge
+      // plutôt que d'afficher un statut "signé" qui ne correspond plus aux données affichées.
+      // Si rien n'a changé pour ce stagiaire (réimport du même tableau, ou modification concernant
+      // d'autres lignes seulement), on laisse sa convention/ses signatures déjà en cours intactes —
+      // réimporter le tableau ne doit pas repartir à zéro tout le monde à chaque fois.
       await prisma.$transaction([
         prisma.conventionSignataire.deleteMany({ where: { conventionStagiaireId: existing.id } }),
         prisma.conventionStagiaire.update({

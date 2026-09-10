@@ -115,6 +115,8 @@ export const ASSIGNABLE_TEMPLATE_FIELD_NAMES: string[] = [
   "responsable_pedagogique_nom_prenom",
   "responsable_pedagogique_email",
   "responsable_pedagogique_telephone",
+  "lieu_signature",
+  "date_signature",
   ...NATURE_INTERVENTION_OPTIONS.map((o) => o.champ),
   ...OBJECTIF_PEDAGOGIQUE_FIELDS.flatMap((o) => [o.champOui, o.champNon]),
 ]

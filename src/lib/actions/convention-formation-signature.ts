@@ -49,6 +49,35 @@ export async function envoyerSignatureResponsablePedagogique(sessionId: string):
   return { error: null }
 }
 
+/**
+ * Invalide la signature du responsable pédagogique déjà enregistrée pour cette session, pour
+ * permettre d'en redemander une nouvelle (ex. signature de test conservée par erreur, changement
+ * de responsable pédagogique). Sans reset, `envoyerSignatureResponsablePedagogique` refuse tout
+ * renvoi une fois signé — la même image/date reste alors incrustée indéfiniment dans chaque
+ * nouvelle convention générée pour cette session, quelle que soit son ancienneté.
+ */
+export async function reinitialiserSignatureResponsablePedagogique(sessionId: string): Promise<EnvoyerSignatureFormationState> {
+  await requireAdmin()
+
+  const session = await prisma.session.findUnique({ where: { id: sessionId }, select: { formationId: true } })
+  if (!session) return { error: "Session introuvable." }
+
+  await prisma.session.update({
+    where: { id: sessionId },
+    data: {
+      responsablePedagogiqueSignatureToken: null,
+      responsablePedagogiqueSignatureEnvoyeAt: null,
+      responsablePedagogiqueSignatureSignedAt: null,
+      responsablePedagogiqueSignatureStoragePath: null,
+      responsablePedagogiqueSignatureIpAddress: null,
+      responsablePedagogiqueSignatureUserAgent: null,
+    },
+  })
+
+  revalidatePath(`/admin/formations/${session.formationId}/conventions/${sessionId}`)
+  return { error: null }
+}
+
 export type SignatureFormationActionState = { error: string | null; success: boolean }
 
 /** Enregistre la signature unique du responsable pédagogique pour une session. */

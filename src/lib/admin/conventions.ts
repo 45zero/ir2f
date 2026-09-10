@@ -44,6 +44,7 @@ export async function getSessionConventionSuivi(sessionId: string) {
       responsablePedagogiqueUser: { select: { nom: true, prenom: true, email: true } },
       responsablePedagogiqueSignatureEnvoyeAt: true,
       responsablePedagogiqueSignatureSignedAt: true,
+      responsablePedagogiqueSignatureIpAddress: true,
       conventionStagiaires: {
         orderBy: { createdAt: "asc" },
         include: { signataires: { orderBy: { ordre: "asc" } } },

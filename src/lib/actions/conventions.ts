@@ -88,7 +88,10 @@ async function genererEtActiverConvention(
     filled,
     SIGNATURE_FIELD_NAMES.RESPONSABLE_PEDAGOGIQUE,
     signatureSessionPngBytes,
-    session.responsablePedagogiqueSignatureSignedAt!
+    session.responsablePedagogiqueSignatureSignedAt!,
+    session.responsablePedagogiqueUser
+      ? `${session.responsablePedagogiqueUser.prenom} ${session.responsablePedagogiqueUser.nom}`
+      : undefined
   )
   const storagePath = `conventions/generated/${stagiaire.id}.pdf`
   await uploadBytes(filled, storagePath, "application/pdf")

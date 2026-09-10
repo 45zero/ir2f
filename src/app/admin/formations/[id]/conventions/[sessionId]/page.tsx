@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { getSessionConventionSuivi } from "@/lib/admin/conventions"
+import { buildResponsablePedagogiqueSignatairePseudoRow } from "@/lib/conventions/roster"
 import { getSignedDocumentUrl, getSignedDocumentDownloadUrl } from "@/lib/storage"
 import { ImportStagiairesForm } from "@/components/admin/ImportStagiairesForm"
 import { EnvoyerConventionsButton } from "@/components/admin/EnvoyerConventionsButton"
@@ -26,19 +27,22 @@ export default async function SessionConventionsPage({ params }: { params: Promi
       pdfDownloadUrl: s.pdfStoragePath
         ? await getSignedDocumentDownloadUrl(s.pdfStoragePath, `Convention - ${s.prenom} ${s.nom}.pdf`)
         : null,
-      signataires: s.signataires.map((sig) => ({
-        id: sig.id,
-        role: sig.role,
-        statut: sig.statut,
-        motifRefus: sig.motifRefus,
-        signedAt: sig.signedAt?.toISOString() ?? null,
-        ipAddress: sig.ipAddress,
-        token: sig.token,
-        nom: sig.nom,
-        dernierRenvoiPar: sig.dernierRenvoiPar,
-        dernierRenvoiCanal: sig.dernierRenvoiCanal,
-        dernierRenvoiAt: sig.dernierRenvoiAt?.toISOString() ?? null,
-      })),
+      signataires: [
+        ...s.signataires.map((sig) => ({
+          id: sig.id,
+          role: sig.role,
+          statut: sig.statut,
+          motifRefus: sig.motifRefus,
+          signedAt: sig.signedAt?.toISOString() ?? null,
+          ipAddress: sig.ipAddress,
+          token: sig.token,
+          nom: sig.nom,
+          dernierRenvoiPar: sig.dernierRenvoiPar,
+          dernierRenvoiCanal: sig.dernierRenvoiCanal,
+          dernierRenvoiAt: sig.dernierRenvoiAt?.toISOString() ?? null,
+        })),
+        buildResponsablePedagogiqueSignatairePseudoRow(session),
+      ],
     }))
   )
 
