@@ -467,6 +467,29 @@ model ConventionTemplate {
   @@schema("ir2f")
 }
 
+enum CategorieNotificationConvention {
+  ADMIN
+  COMPTABILITE
+
+  @@schema("ir2f")
+}
+
+// Destinataires (emails libres, pas forcément des comptes User — la comptabilité n'a pas de
+// compte IR2F) notifiés automatiquement quand la convention d'un stagiaire est intégralement
+// signée (voir notifyConventionComplete dans convention-notifications.ts). Gérés depuis
+// /admin/conventions/notifications, indépendamment des comptes ADMIN existants : ne remplace pas
+// getAdminNotificationEmails (toujours utilisée pour les alertes de circuit bloqué/refus).
+model ConventionNotificationDestinataire {
+  id        String                           @id @default(uuid())
+  categorie CategorieNotificationConvention
+  email     String
+  nom       String?
+  createdAt DateTime                         @default(now())
+
+  @@unique([categorie, email])
+  @@schema("ir2f")
+}
+
 // Organigramme IR2F affiché en pièce jointe sur la page /contact — une seule ligne
 // (id fixe "singleton"), remplacée à chaque nouvel upload depuis l'admin.
 model Organigramme {

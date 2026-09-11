@@ -282,6 +282,14 @@ exports.Prisma.ConventionTemplateScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ConventionNotificationDestinataireScalarFieldEnum = {
+  id: 'id',
+  categorie: 'categorie',
+  email: 'email',
+  nom: 'nom',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.OrganigrammeScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
@@ -910,6 +918,11 @@ exports.DocumentCategorie = exports.$Enums.DocumentCategorie = {
   PEDAGOGIQUE: 'PEDAGOGIQUE'
 };
 
+exports.CategorieNotificationConvention = exports.$Enums.CategorieNotificationConvention = {
+  ADMIN: 'ADMIN',
+  COMPTABILITE: 'COMPTABILITE'
+};
+
 exports.RoleSignataire = exports.$Enums.RoleSignataire = {
   STAGIAIRE: 'STAGIAIRE',
   CLUB: 'CLUB',
@@ -1045,6 +1058,7 @@ exports.Prisma.ModelName = {
   DocumentDestinataire: 'DocumentDestinataire',
   Signature: 'Signature',
   ConventionTemplate: 'ConventionTemplate',
+  ConventionNotificationDestinataire: 'ConventionNotificationDestinataire',
   Organigramme: 'Organigramme',
   Club: 'Club',
   ConventionStagiaire: 'ConventionStagiaire',

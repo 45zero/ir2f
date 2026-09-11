@@ -10,6 +10,7 @@ const ITEMS = [
   { href: "/admin/popup", label: "Pop-up d'accueil", enabled: true },
   { href: "/admin/formations", label: "Formations", enabled: true },
   { href: "/admin/conventions/templates", label: "Modèles de convention", enabled: true },
+  { href: "/admin/conventions/notifications", label: "Notifications conventions", enabled: true },
   { href: "/admin/clubs", label: "Annuaire clubs", enabled: true },
   { href: "/admin/formations-page", label: "Page « Nos Formations »", enabled: true },
   { href: "/admin/inscriptions", label: "Inscriptions", enabled: true },

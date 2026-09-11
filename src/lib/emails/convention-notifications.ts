@@ -5,7 +5,8 @@ import { ConventionSignatureRequestEmail } from "@/lib/emails/ConventionSignatur
 import { ConventionSignatureAdminEmail } from "@/lib/emails/ConventionSignatureAdminEmail"
 import { ConventionSignatureBlockedAdminEmail } from "@/lib/emails/ConventionSignatureBlockedAdminEmail"
 import { ConventionFormationSignatureRequestEmail } from "@/lib/emails/ConventionFormationSignatureRequestEmail"
-import { getAdminNotificationEmails } from "@/lib/emails/admin-recipients"
+import { ConventionCompleteEmail } from "@/lib/emails/ConventionCompleteEmail"
+import { getAdminNotificationEmails, getConventionNotificationEmails } from "@/lib/emails/admin-recipients"
 import type { RoleSignataire } from "@/generated/prisma"
 
 export const ROLE_SIGNATAIRE_LABELS: Record<RoleSignataire, string> = {
@@ -126,7 +127,10 @@ export async function notifyResponsablePedagogiqueASigner(params: {
   return { sent }
 }
 
-/** Notifie les admins de l'avancement (signature ou refus) d'une étape. */
+/** Notifie les admins de l'avancement (signature ou refus) d'une étape. Réservée au refus depuis
+ * que les signatures individuelles ne notifient plus personne (voir notifyConventionComplete,
+ * déclenchée uniquement une fois TOUTES les signatures recueillies pour un stagiaire) — un refus
+ * reste rare et bloquant, donc toujours notifié immédiatement à l'étape où il survient. */
 export async function notifyAdminSignatureProgress(params: {
   formationTitre: string
   stagiairePrenom: string
@@ -156,4 +160,53 @@ export async function notifyAdminSignatureProgress(params: {
       })
     )
   )
+}
+
+/**
+ * Notifie ADMIN + COMPTABILITE (listes configurées sur /admin/conventions/notifications, voir
+ * getConventionNotificationEmails) qu'une convention de stage est intégralement signée. Seule la
+ * comptabilité reçoit le PDF final en pièce jointe — l'admin reçoit une notification simple (déjà
+ * consultable depuis l'espace admin). Best-effort : un échec d'envoi ici ne doit jamais faire
+ * échouer la signature elle-même (voir l'appelant dans convention-signature.ts).
+ */
+export async function notifyConventionComplete(params: {
+  formationTitre: string
+  stagiairePrenom: string
+  stagiaireNom: string
+  pdfBytes: Uint8Array
+  pdfFileName: string
+}) {
+  const [adminEmails, comptaEmails] = await Promise.all([
+    getConventionNotificationEmails("ADMIN"),
+    getConventionNotificationEmails("COMPTABILITE"),
+  ])
+  const subject = `Convention signée — ${params.stagiairePrenom} ${params.stagiaireNom}`
+
+  await Promise.all([
+    ...adminEmails.map((email) =>
+      sendEmail({
+        to: email,
+        subject,
+        react: ConventionCompleteEmail({
+          formationTitre: params.formationTitre,
+          stagiairePrenom: params.stagiairePrenom,
+          stagiaireNom: params.stagiaireNom,
+          attached: false,
+        }),
+      })
+    ),
+    ...comptaEmails.map((email) =>
+      sendEmail({
+        to: email,
+        subject,
+        react: ConventionCompleteEmail({
+          formationTitre: params.formationTitre,
+          stagiairePrenom: params.stagiairePrenom,
+          stagiaireNom: params.stagiaireNom,
+          attached: true,
+        }),
+        attachments: [{ filename: params.pdfFileName, content: Buffer.from(params.pdfBytes) }],
+      })
+    ),
+  ])
 }

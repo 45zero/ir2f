@@ -7,7 +7,7 @@ import { prisma } from "@/lib/prisma"
 import { downloadStorageFile, uploadBytes } from "@/lib/storage"
 import { fillConventionTemplate, stampSignature, stampCheckmark, finalizeConvention } from "@/lib/conventions/pdf"
 import { SIGNATURE_FIELD_NAMES, NATURE_INTERVENTION_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS, formatAdresseLigne } from "@/lib/conventions/variables"
-import { notifyAdminSignatureProgress } from "@/lib/emails/convention-notifications"
+import { notifyAdminSignatureProgress, notifyConventionComplete } from "@/lib/emails/convention-notifications"
 import { avancerConvention } from "@/lib/actions/conventions"
 import { str, optionalStr } from "@/lib/actions/form-utils"
 
@@ -216,6 +216,20 @@ export async function signerConvention(
     where: { id: signataire.id },
     data: { statut: "SIGNE", signedAt, ipAddress, userAgent, documentHash, signatureStoragePath },
   })
+
+  // Pas de notification à chaque étape (trop de mails) — seulement une fois que TOUTES les
+  // signatures de ce stagiaire sont recueillies, voir notifyConventionComplete (ADMIN + la liste
+  // COMPTABILITE configurée sur /admin/conventions/notifications, avec le PDF final en pièce
+  // jointe). Best-effort : ne bloque jamais la signature elle-même si l'envoi échoue.
+  if (circuitComplet) {
+    await notifyConventionComplete({
+      formationTitre: stagiaire.formation.titre,
+      stagiairePrenom: stagiaire.prenom,
+      stagiaireNom: stagiaire.nom,
+      pdfBytes: updatedPdf,
+      pdfFileName: `Convention - ${stagiaire.prenom} ${stagiaire.nom}.pdf`,
+    })
+  }
 
   // Circuit déjà complet (dernière étape signée dans l'ordre, ou resignature d'une étape
   // intermédiaire réinitialisée alors que les suivantes étaient déjà signées) : on marque
