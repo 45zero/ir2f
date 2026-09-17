@@ -53,6 +53,7 @@ enum CategorieFormation {
   TERRAIN
   CLUB
   DEV
+  COMPLEMENTAIRE
 
   @@schema("ir2f")
 }

@@ -14,7 +14,7 @@ export const EFFET_VISUEL_LABELS: Record<EffetVisuel, string> = {
 
 // ─── Tuiles (les 4 cartes catégories cliquables) ───────
 
-export const TUILE_CATEGORIES = ["EDUCATEUR", "ARBITRAGE", "TERRAIN", "DEV"] as const satisfies readonly CategorieFormation[]
+export const TUILE_CATEGORIES = ["EDUCATEUR", "ARBITRAGE", "TERRAIN", "DEV", "COMPLEMENTAIRE"] as const satisfies readonly CategorieFormation[]
 
 export const TUILE_DEFAULTS: Record<
   (typeof TUILE_CATEGORIES)[number],
@@ -24,12 +24,13 @@ export const TUILE_DEFAULTS: Record<
   ARBITRAGE: { label: "Arbitres", backgroundColor: "#c9a84c" },
   TERRAIN: { label: "Tout Terrain", backgroundColor: "#c9a84c" },
   DEV: { label: "Chargé de Développement de Structures Sportives et Associatives (CDSSA)", backgroundColor: "#c9a84c" },
+  COMPLEMENTAIRE: { label: "Parcours de formations complémentaires", backgroundColor: "#c9a84c" },
 }
 
 // ─── Onglets (contenu des panneaux déroulés) ───────────
 
 export const ONGLET_CATEGORIES: Record<FormationOngletCle, CategorieFormation[]> = {
-  INFO: ["ARBITRAGE", "TERRAIN", "DEV"],
+  INFO: ["ARBITRAGE", "TERRAIN", "DEV", "COMPLEMENTAIRE"],
   PARCOURS: ["ARBITRAGE", "TERRAIN", "DEV"],
   CLUB: ["TERRAIN"],
   EDU_PRESENTATION: ["EDUCATEUR"],
@@ -91,6 +92,10 @@ const ONGLET_DEFAULT_CONTENU: Partial<Record<string, { titre: string | null; con
     titre: "CHARGÉ DE DÉVELOPPEMENT : PILOTER LES PROJETS DU FOOTBALL RÉGIONAL",
     contenu:
       "Ce catalogue s'adresse aux futurs chargés de développement et responsables emploi-formation. Diagnostic territorial, conduite de projet, financements : des parcours longs, en présentiel et à distance, pour structurer et développer le football sur son territoire.",
+  },
+  [ongletKeyId("COMPLEMENTAIRE", "INFO")]: {
+    titre: "PARCOURS DE FORMATIONS COMPLÉMENTAIRES",
+    contenu: "Découvrez les formations complémentaires proposées par l'IR2F pour enrichir votre parcours.",
   },
   [ongletKeyId("TERRAIN", "CLUB")]: {
     titre: "ACCUEILLIR UNE FORMATION AU SEIN DE MON CLUB",

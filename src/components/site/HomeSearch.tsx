@@ -12,6 +12,7 @@ const FILTERS = [
   { value: "ARBITRAGE", label: "Arbitrage" },
   { value: "TERRAIN", label: "Tout Terrain" },
   { value: "DEV", label: "Chargé de développement" },
+  { value: "COMPLEMENTAIRE", label: "Parcours de formations complémentaires" },
 ]
 
 export function HomeSearch({ formations }: { formations: FormationCard[] }) {

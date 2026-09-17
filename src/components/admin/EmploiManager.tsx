@@ -337,6 +337,7 @@ function DocumentForm({
   onDone: () => void
 }) {
   const [section, setSection] = useState<SectionEmploi | "">(item?.section ?? "")
+  const [type, setType] = useState<TypeDocument>(item?.type ?? "LIEN_EXTERNE")
   const [state, formAction, pending] = useActionState(
     async (prev: EmploiActionState | undefined, formData: FormData) => {
       const result = await saveDocumentPasserelle(prev, formData)
@@ -351,14 +352,22 @@ function DocumentForm({
       {item && <input type="hidden" name="id" value={item.id} />}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 10 }}>
         <input name="titre" placeholder="Titre" required defaultValue={item?.titre} style={fieldStyle} />
-        <input name="url" placeholder="URL" required defaultValue={item?.url} style={fieldStyle} />
-        <select name="type" defaultValue={item?.type ?? "LIEN_EXTERNE"} style={fieldStyle}>
+        <select name="type" value={type} onChange={(e) => setType(e.target.value as TypeDocument)} style={fieldStyle}>
           {Object.entries(TYPE_DOCUMENT_LABELS).map(([v, l]) => (
             <option key={v} value={v}>
               {l}
             </option>
           ))}
         </select>
+        {type === "FICHIER" ? (
+          <div style={{ display: "flex", flexDirection: "column", gap: 4, gridColumn: "span 1" }}>
+            <input name="urlFile" type="file" accept="application/pdf" style={fieldStyle} />
+            <input type="hidden" name="url" defaultValue={item?.url ?? ""} />
+            {item?.url && <span style={{ fontSize: 11, color: colors.textLight }}>Laisser vide pour conserver le PDF actuel.</span>}
+          </div>
+        ) : (
+          <input name="url" placeholder="URL" required defaultValue={item?.url} style={fieldStyle} />
+        )}
         <select
           name="section"
           required

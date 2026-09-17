@@ -33,6 +33,7 @@ const FILTERS: { value: "all" | CategorieFormation; label: string }[] = [
   { value: "TERRAIN", label: "Tout Terrain" },
   { value: "CLUB", label: "Club" },
   { value: "DEV", label: "Chargé de développement" },
+  { value: "COMPLEMENTAIRE", label: "Parcours de formations complémentaires" },
 ]
 
 const selectStyle = {

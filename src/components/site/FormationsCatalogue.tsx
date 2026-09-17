@@ -835,9 +835,11 @@ export function FormationsCatalogue({
                     ? "Présentation et parcours"
                     : sidebarCategory === "DEV"
                       ? "Présentation et parcours"
-                      : ONGLET_LABEL.INFO}
+                      : sidebarCategory === "COMPLEMENTAIRE"
+                        ? "Formations complémentaires"
+                        : ONGLET_LABEL.INFO}
                 </button>
-                {sidebarCategory !== "ARBITRAGE" && sidebarCategory !== "DEV" && (
+                {sidebarCategory !== "ARBITRAGE" && sidebarCategory !== "DEV" && sidebarCategory !== "COMPLEMENTAIRE" && (
                   <button style={expandedTab === "parcours" ? tabActive : tabBase} onClick={() => setExpandedTab("parcours")}>
                     {ONGLET_LABEL.PARCOURS}
                   </button>
@@ -929,7 +931,28 @@ export function FormationsCatalogue({
               )
             })()}
 
-            {expandedTab === "info" && sidebarCategory !== "EDUCATEUR" && sidebarCategory !== "ARBITRAGE" && sidebarCategory !== "DEV" && (() => {
+            {expandedTab === "info" && sidebarCategory === "COMPLEMENTAIRE" && (() => {
+              const data = getOnglet("COMPLEMENTAIRE", "INFO")
+              const list = byCategory.get("COMPLEMENTAIRE") ?? []
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {data.titre && <h3 style={tabTitleStyle}>{data.titre}</h3>}
+                  {data.contenu && <p style={tabTextStyle}>{data.contenu}</p>}
+                  {(data.videoFichierUrl || data.videoUrl || data.image) && <OngletMedia data={data} />}
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 20 }}>
+                    {list.map((f) => (
+                      <FormationGridCard key={f.id} f={f} />
+                    ))}
+                  </div>
+                  {list.length === 0 && (
+                    <p style={{ ...tabTextStyle, color: colors.textLight }}>Aucune formation dans cette catégorie pour le moment.</p>
+                  )}
+                  <OngletSections sections={data.sections} />
+                </div>
+              )
+            })()}
+
+            {expandedTab === "info" && sidebarCategory !== "EDUCATEUR" && sidebarCategory !== "ARBITRAGE" && sidebarCategory !== "DEV" && sidebarCategory !== "COMPLEMENTAIRE" && (() => {
               const data = getOnglet(sidebarCategory, "INFO")
               return (
                 <>

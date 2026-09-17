@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { requireAdmin } from "@/lib/auth/guards"
 import { str, optionalStr, optionalNumber } from "@/lib/actions/form-utils"
-import { resolveImageUrl } from "@/lib/storage"
+import { resolveImageUrl, resolvePdfUrl } from "@/lib/storage"
 import type { SectionEmploi, TypeDocument, IconePratique } from "@/generated/prisma"
 
 export type EmploiActionState = { error: string | null }
@@ -23,14 +23,14 @@ export async function saveDocumentPasserelle(
   await requireAdmin()
   const id = optionalStr(formData, "id")
   const titre = str(formData, "titre")
-  const url = str(formData, "url")
   const type = str(formData, "type") as TypeDocument
   const section = str(formData, "section") as SectionEmploi
   const dispositifId = optionalStr(formData, "dispositifId")
   const ordre = optionalNumber(formData, "ordre") ?? 0
+  const url = await resolvePdfUrl(formData, "url", "emploi/documents-passerelles")
 
   if (!titre || !url || !section) {
-    return { error: "Titre, URL et section sont obligatoires." }
+    return { error: "Titre, section et fichier ou lien sont obligatoires." }
   }
 
   const data = { titre, url, type, section, dispositifId, ordre }

@@ -311,7 +311,8 @@ export const CategorieFormation: {
   ARBITRAGE: 'ARBITRAGE',
   TERRAIN: 'TERRAIN',
   CLUB: 'CLUB',
-  DEV: 'DEV'
+  DEV: 'DEV',
+  COMPLEMENTAIRE: 'COMPLEMENTAIRE'
 };
 
 export type CategorieFormation = (typeof CategorieFormation)[keyof typeof CategorieFormation]

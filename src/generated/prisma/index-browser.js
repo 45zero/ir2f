@@ -857,7 +857,8 @@ exports.CategorieFormation = exports.$Enums.CategorieFormation = {
   ARBITRAGE: 'ARBITRAGE',
   TERRAIN: 'TERRAIN',
   CLUB: 'CLUB',
-  DEV: 'DEV'
+  DEV: 'DEV',
+  COMPLEMENTAIRE: 'COMPLEMENTAIRE'
 };
 
 exports.Filiere = exports.$Enums.Filiere = {

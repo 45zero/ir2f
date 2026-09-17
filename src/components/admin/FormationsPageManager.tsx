@@ -252,7 +252,7 @@ function TuilesSection({ tuiles }: { tuiles: AdminFormationTuile[] }) {
           Tuiles catégories
         </h2>
         <p style={{ color: colors.textLight, fontSize: 12.5, margin: "4px 0 0" }}>
-          Les 4 cartes cliquables en haut de la page « Nos Formations ».
+          Les cartes cliquables en haut de la page « Nos Formations ».
         </p>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 16 }}>

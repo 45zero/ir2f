@@ -15,6 +15,7 @@ export const CATEGORIE_LABELS: Record<CategorieFormation, string> = {
   TERRAIN: "Tout Terrain",
   CLUB: "Club",
   DEV: "Chargé de développement",
+  COMPLEMENTAIRE: "Parcours de formations complémentaires",
 }
 
 export const TYPE_LABELS: Record<TypeFormation, string> = {
