@@ -187,11 +187,16 @@ function RenvoiButtons({ signataire }: { signataire: ConventionSignataireStatut 
 export function ConventionStatutPill({
   role,
   signataire,
+  allSignataires,
   canManage,
   showLabel,
 }: {
   role: RoleSignataire
   signataire: ConventionSignataireStatut | undefined
+  /** Les autres étapes du même stagiaire, pour détecter un circuit bloqué (voir `estBloque`
+   * ci-dessous) — optionnel : sans elle, une étape NON_ENVOYE bloquée reste indiscernable d'une
+   * étape pas encore atteinte, mais rien ne casse (juste pas de bouton de renvoi proposé). */
+  allSignataires?: ConventionSignataireStatut[]
   canManage: boolean
   showLabel?: boolean
 }) {
@@ -208,7 +213,17 @@ export function ConventionStatutPill({
     )
   }
 
-  const canResend = canManage && (signataire.statut === "EN_ATTENTE" || signataire.statut === "REFUSE")
+  // Une étape NON_ENVOYE est normale tant qu'elle attend son tour. Mais si une autre étape du
+  // même stagiaire est déjà signée, le circuit aurait dû l'activer via avancerConvention — si ce
+  // n'est pas le cas, c'est que l'envoi de l'email a échoué silencieusement (service de
+  // messagerie indisponible) et que l'étape est restée bloquée sans qu'on puisse la relancer
+  // depuis cette page (RenvoiButtons n'apparaissait auparavant que pour EN_ATTENTE/REFUSE). On
+  // considère alors l'étape "bloquée" pour proposer un renvoi.
+  const estBloque =
+    signataire.statut === "NON_ENVOYE" &&
+    (allSignataires?.some((s) => s.id !== signataire.id && s.role !== "RESPONSABLE_PEDAGOGIQUE" && s.statut === "SIGNE") ?? false)
+
+  const canResend = canManage && (signataire.statut === "EN_ATTENTE" || signataire.statut === "REFUSE" || estBloque)
   // Le responsable pédagogique a sa propre réinitialisation au niveau de la session (voir
   // EnvoyerSignatureResponsablePedagogiqueButton) — cette ligne-ci n'est qu'une pastille de suivi
   // synthétique pour lui (buildResponsablePedagogiqueSignatairePseudoRow), pas un vrai
@@ -243,7 +258,14 @@ export function ConventionStatutPills({
   return (
     <div style={{ display: "flex", gap: 14 }}>
       {CONVENTION_ROLE_ORDER.map((role) => (
-        <ConventionStatutPill key={role} role={role} signataire={signataires.find((s) => s.role === role)} canManage={canManage} showLabel />
+        <ConventionStatutPill
+          key={role}
+          role={role}
+          signataire={signataires.find((s) => s.role === role)}
+          allSignataires={signataires}
+          canManage={canManage}
+          showLabel
+        />
       ))}
     </div>
   )
