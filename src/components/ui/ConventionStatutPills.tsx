@@ -213,15 +213,26 @@ export function ConventionStatutPill({
     )
   }
 
-  // Une étape NON_ENVOYE est normale tant qu'elle attend son tour. Mais si une autre étape du
-  // même stagiaire est déjà signée, le circuit aurait dû l'activer via avancerConvention — si ce
-  // n'est pas le cas, c'est que l'envoi de l'email a échoué silencieusement (service de
-  // messagerie indisponible) et que l'étape est restée bloquée sans qu'on puisse la relancer
-  // depuis cette page (RenvoiButtons n'apparaissait auparavant que pour EN_ATTENTE/REFUSE). On
-  // considère alors l'étape "bloquée" pour proposer un renvoi.
+  // Une étape NON_ENVOYE est normale tant qu'elle attend son tour : il faut donc comparer
+  // uniquement à l'étape précédente dans l'ordre du circuit (CONVENTION_ROLE_ORDER), pas à
+  // n'importe quelle étape déjà signée — sinon un Maître de stage qui attend simplement que le
+  // Tuteur signe se retrouverait marqué "bloqué" à tort. On remonte jusqu'à la première étape
+  // précédente qui existe réellement (le Tuteur est parfois absent du circuit, voir
+  // missingContactsFor) : si elle est signée, l'étape courante aurait dû être activée par
+  // avancerConvention — si elle ne l'a pas été, c'est que l'envoi a échoué silencieusement
+  // (service de messagerie indisponible) et qu'elle est restée bloquée sans qu'on puisse la
+  // relancer depuis cette page (RenvoiButtons n'apparaissait auparavant que pour EN_ATTENTE/REFUSE).
+  const roleIndex = CONVENTION_ROLE_ORDER.indexOf(role)
+  const precedente = allSignataires && roleIndex > 0
+    ? CONVENTION_ROLE_ORDER.slice(0, roleIndex)
+        .reverse()
+        .map((r) => allSignataires.find((s) => s.role === r))
+        .find((s) => s !== undefined)
+    : undefined
   const estBloque =
+    role !== "RESPONSABLE_PEDAGOGIQUE" &&
     signataire.statut === "NON_ENVOYE" &&
-    (allSignataires?.some((s) => s.id !== signataire.id && s.role !== "RESPONSABLE_PEDAGOGIQUE" && s.statut === "SIGNE") ?? false)
+    (roleIndex === 0 || precedente?.statut === "SIGNE")
 
   const canResend = canManage && (signataire.statut === "EN_ATTENTE" || signataire.statut === "REFUSE" || estBloque)
   // Le responsable pédagogique a sa propre réinitialisation au niveau de la session (voir
