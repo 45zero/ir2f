@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { getSessionConventionSuivi } from "@/lib/admin/conventions"
 import { buildResponsablePedagogiqueSignatairePseudoRow } from "@/lib/conventions/roster"
+import { missingContactsFor } from "@/lib/conventions/variables"
 import { getSignedDocumentUrl, getSignedDocumentDownloadUrl } from "@/lib/storage"
 import { ImportStagiairesForm } from "@/components/admin/ImportStagiairesForm"
 import { EnvoyerConventionsButton } from "@/components/admin/EnvoyerConventionsButton"
@@ -23,6 +24,10 @@ export default async function SessionConventionsPage({ params }: { params: Promi
       nom: s.nom,
       prenom: s.prenom,
       club: s.club,
+      conventionGeneree: Boolean(s.pdfStoragePath),
+      contactsManquants: missingContactsFor(s),
+      dejaSignee: s.signataires.some((sig) => sig.statut === "SIGNE"),
+      contacts: { email: s.email, emailClub: s.emailClub, tuteurEmail: s.tuteurEmail, maitreDeStageEmail: s.maitreDeStageEmail },
       pdfViewUrl: s.pdfStoragePath ? await getSignedDocumentUrl(s.pdfStoragePath) : null,
       pdfDownloadUrl: s.pdfStoragePath
         ? await getSignedDocumentDownloadUrl(s.pdfStoragePath, `Convention - ${s.prenom} ${s.nom}.pdf`)

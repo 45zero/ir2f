@@ -23,6 +23,18 @@ import { formatAdresseLigne } from "./variables-shared"
  */
 export const SIGNATAIRE_ORDER: Exclude<RoleSignataire, "RESPONSABLE_PEDAGOGIQUE">[] = ["STAGIAIRE", "CLUB", "TUTEUR", "MAITRE_DE_STAGE"]
 
+/** Le tuteur n'est pas toujours connu (souvent absent du fichier stagiaires) — son étape de
+ * signature est simplement omise du circuit quand son email manque, plutôt que de tout bloquer.
+ * Club et maître de stage restent obligatoires : ce sont des parties prenantes de la convention
+ * elle-même (article 1), pas un simple contact informatif. Exposé ici (et pas dans l'action) pour
+ * que la page de suivi puisse afficher pourquoi une convention n'a pas pu être générée. */
+export function missingContactsFor(stagiaire: Pick<ConventionStagiaire, "emailClub" | "maitreDeStageEmail">): string[] {
+  return [
+    !stagiaire.emailClub && "email du club",
+    !stagiaire.maitreDeStageEmail && "email du maître de stage",
+  ].filter((v): v is string => Boolean(v))
+}
+
 type SessionVars = Pick<Session, "dateDebut" | "dateFin" | "lieu"> & {
   formation: Pick<Formation, "titre">
   responsablePedagogiqueUser: { nom: string; prenom: string; email: string; telephone: string | null } | null

@@ -9,6 +9,7 @@ import { fillConventionTemplate, stampSignature, stampCheckmark } from "@/lib/co
 import {
   buildConventionVariables,
   resolveSignataireContact,
+  missingContactsFor,
   SIGNATAIRE_ORDER,
   SIGNATURE_FIELD_NAMES,
   NATURE_INTERVENTION_OPTIONS,
@@ -57,17 +58,6 @@ async function avancerConvention(conventionStagiaireId: string, apresOrdre: numb
 
   await prisma.conventionSignataire.update({ where: { id: next.id }, data: { statut: "EN_ATTENTE", envoyeAt: new Date() } })
   return { ok: true }
-}
-
-/** Le tuteur n'est pas toujours connu (souvent absent du fichier stagiaires) — son étape de
- * signature est simplement omise du circuit quand son email manque, plutôt que de tout bloquer.
- * Club et maître de stage restent obligatoires : ce sont des parties prenantes de la convention
- * elle-même (article 1), pas un simple contact informatif. */
-function missingContactsFor(stagiaire: ConventionStagiaire): string[] {
-  return [
-    !stagiaire.emailClub && "email du club",
-    !stagiaire.maitreDeStageEmail && "email du maître de stage",
-  ].filter((v): v is string => Boolean(v))
 }
 
 /**
@@ -229,6 +219,57 @@ export async function envoyerConventionStagiaire(stagiaireId: string): Promise<C
   revalidatePath(`/admin/formations/${session.formation.id}/conventions/${session.id}`)
   revalidatePath("/dashboard/formations")
   return { error: result.ok ? null : (result.error ?? "Échec de l'envoi.") }
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+/**
+ * Corrige les emails d'un stagiaire depuis la page de suivi (ex. club manquant après un réimport,
+ * adresse refusée par la messagerie du destinataire), puis génère et envoie sa convention. Ces
+ * emails sont imprimés dans le PDF et copiés sur chaque signataire à la génération : une convention
+ * déjà générée est donc effacée et régénérée — uniquement tant que personne n'a signé, pour ne
+ * jamais perdre une signature (au-delà, le réimport du fichier Excel reste la voie prévue).
+ */
+export async function corrigerContactsStagiaire(stagiaireId: string, formData: FormData): Promise<ConventionActionState> {
+  await requireAdmin()
+
+  const stagiaire = await prisma.conventionStagiaire.findUnique({
+    where: { id: stagiaireId },
+    select: { id: true, formationId: true, sessionId: true, email: true, signataires: { select: { statut: true } } },
+  })
+  if (!stagiaire) return { error: "Stagiaire introuvable." }
+  if (stagiaire.signataires.some((s) => s.statut === "SIGNE")) {
+    return { error: "Une signature a déjà été faite : corrigez l'adresse dans le fichier Excel puis réimportez-le." }
+  }
+
+  const email = optionalStr(formData, "email")?.toLowerCase() ?? null
+  const emailClub = optionalStr(formData, "emailClub")
+  const tuteurEmail = optionalStr(formData, "tuteurEmail")
+  const maitreDeStageEmail = optionalStr(formData, "maitreDeStageEmail")
+  if (!email) return { error: "L'email du stagiaire est obligatoire." }
+  const invalide = [email, emailClub, tuteurEmail, maitreDeStageEmail].find((e) => e && !EMAIL_RE.test(e))
+  if (invalide) return { error: `Adresse invalide : ${invalide}` }
+
+  if (email !== stagiaire.email && stagiaire.sessionId) {
+    const doublon = await prisma.conventionStagiaire.findUnique({
+      where: { sessionId_email: { sessionId: stagiaire.sessionId, email } },
+      select: { id: true },
+    })
+    if (doublon) return { error: "Un autre stagiaire de cette session utilise déjà cet email." }
+  }
+
+  await prisma.$transaction([
+    prisma.conventionSignataire.deleteMany({ where: { conventionStagiaireId: stagiaire.id } }),
+    prisma.conventionStagiaire.update({
+      where: { id: stagiaire.id },
+      data: { email, emailClub, tuteurEmail, maitreDeStageEmail, pdfStoragePath: null, envoyeAt: null, completedAt: null },
+    }),
+  ])
+  // envoyerConventionStagiaire ne revalide pas sur ses retours anticipés (ex. email encore manquant) —
+  // la correction, elle, est déjà enregistrée et doit apparaître.
+  revalidatePath(`/admin/formations/${stagiaire.formationId}/conventions/${stagiaire.sessionId}`)
+
+  return envoyerConventionStagiaire(stagiaire.id)
 }
 
 async function findRenvoiTarget(signataireId: string) {
