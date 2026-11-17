@@ -4,6 +4,7 @@ import { Footer } from "@/components/site/Footer"
 import { getFooterLogos } from "@/lib/home"
 import { getActivePopups } from "@/lib/popup"
 import { PopupGate } from "@/components/site/PopupGate"
+import { AnalyticsTracker } from "@/components/site/AnalyticsTracker"
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const [session, footerLogos, popups] = await Promise.all([auth(), getFooterLogos(), getActivePopups()])
@@ -22,6 +23,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         overflowX: "hidden",
       }}
     >
+      <AnalyticsTracker />
       <Header user={user} />
       <div style={{ height: 68 }} />
       {children}

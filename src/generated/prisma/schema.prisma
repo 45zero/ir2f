@@ -1386,3 +1386,32 @@ model TutorielInscription {
   @@unique([formationId, cible])
   @@schema("ir2f")
 }
+
+enum AnalyticsEventType {
+  VIEW
+  CLICK
+
+  @@schema("ir2f")
+}
+
+// Statistiques de fréquentation du site public (onglet admin « Statistiques »). Suivi maison,
+// sans cookie : `visiteurId` est un hash (IP + navigateur + sel du jour) qui change chaque jour,
+// donc aucune donnée personnelle n'est stockée et un même visiteur n'est pas suivi d'un jour à
+// l'autre. Les événements de plus de 13 mois sont purgés par le cron quotidien.
+model AnalyticsEvent {
+  id         String             @id @default(uuid())
+  type       AnalyticsEventType
+  path       String
+  // Clic : libellé visible du lien/bouton (tronqué) et destination éventuelle.
+  label      String?
+  href       String?
+  referrer   String?
+  device     String? // "mobile" | "tablette" | "ordinateur"
+  visiteurId String
+  createdAt  DateTime           @default(now())
+
+  @@index([createdAt])
+  @@index([path, createdAt])
+  @@index([type, createdAt])
+  @@schema("ir2f")
+}

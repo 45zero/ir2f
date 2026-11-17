@@ -803,6 +803,18 @@ exports.Prisma.TutorielInscriptionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AnalyticsEventScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  path: 'path',
+  label: 'label',
+  href: 'href',
+  referrer: 'referrer',
+  device: 'device',
+  visiteurId: 'visiteurId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1047,6 +1059,11 @@ exports.TutorielInscriptionMode = exports.$Enums.TutorielInscriptionMode = {
   VIDEO: 'VIDEO'
 };
 
+exports.AnalyticsEventType = exports.$Enums.AnalyticsEventType = {
+  VIEW: 'VIEW',
+  CLICK: 'CLICK'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Formation: 'Formation',
@@ -1097,7 +1114,8 @@ exports.Prisma.ModelName = {
   DocumentationGroupe: 'DocumentationGroupe',
   DocumentationFichier: 'DocumentationFichier',
   Popup: 'Popup',
-  TutorielInscription: 'TutorielInscription'
+  TutorielInscription: 'TutorielInscription',
+  AnalyticsEvent: 'AnalyticsEvent'
 };
 
 /**

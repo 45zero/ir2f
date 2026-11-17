@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { sendRappelsFormation } from "@/lib/emails/rappels"
+import { purgeOldAnalytics } from "@/lib/admin/statistiques"
 
 export const runtime = "nodejs"
 
@@ -9,7 +10,11 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const [semaine, veille] = await Promise.all([sendRappelsFormation(7), sendRappelsFormation(1)])
+  const [semaine, veille, purge] = await Promise.all([
+    sendRappelsFormation(7),
+    sendRappelsFormation(1),
+    purgeOldAnalytics().catch(() => 0),
+  ])
 
-  return NextResponse.json({ rappelsSemaine: semaine.sent, rappelsVeille: veille.sent })
+  return NextResponse.json({ rappelsSemaine: semaine.sent, rappelsVeille: veille.sent, statsPurgees: purge })
 }
