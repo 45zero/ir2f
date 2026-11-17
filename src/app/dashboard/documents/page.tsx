@@ -15,10 +15,13 @@ export default async function DashboardDocumentsPage() {
   if (session.user.role === "FORMATEUR") redirect("/dashboard")
 
   const role = session.user.role as Role
+  // Un stagiaire ne voit que ses propres formations et leurs inscrits (pas la liste nominative
+  // de tous les stagiaires de toutes les formations).
+  const restrictTo = role === "ADMIN" || role === "DIRECTION" ? undefined : session.user.id
   const [documents, formations, rosters] = await Promise.all([
     getMesDocuments(session.user.id, role),
-    getFormationOptions(),
-    getFormationRosters(),
+    getFormationOptions(restrictTo),
+    getFormationRosters(restrictTo),
   ])
 
   const rows: DashboardDocument[] = documents

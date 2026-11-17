@@ -58,7 +58,8 @@ async function publishDueEntries(
 
 export async function GET(request: Request) {
   const authHeader = request.headers.get("authorization")
-  if (process.env.CRON_SECRET && authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  // Fermé par défaut : sans CRON_SECRET configuré, la route refuse tout le monde.
+  if (!process.env.CRON_SECRET || authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 

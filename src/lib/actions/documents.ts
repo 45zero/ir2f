@@ -35,6 +35,33 @@ function parsePartage(formData: FormData, formationId: string | null): { partage
   return { partageIndividuel: true, destinataireIds: formData.getAll("destinataires").map(String).filter(Boolean) }
 }
 
+const isStaff = (role: string | undefined) => role === "ADMIN" || role === "DIRECTION"
+
+/**
+ * Le navigateur n'est pas fiable : on revérifie côté serveur qu'un non-admin ne rattache un
+ * document qu'à une formation où il est inscrit (ou qu'il encadre), et qu'il ne le partage
+ * individuellement qu'avec des inscrits de cette formation.
+ */
+async function checkFormationScope(
+  user: { id: string; role: string },
+  formationId: string | null,
+  destinataireIds: string[]
+): Promise<string | null> {
+  if (!formationId || isStaff(user.role)) return null
+  const [inscription, encadre] = await Promise.all([
+    prisma.inscription.findFirst({ where: { userId: user.id, formationId, statut: "VALIDEE" }, select: { id: true } }),
+    prisma.formationFormateur.findFirst({ where: { userId: user.id, formationId }, select: { userId: true } }),
+  ])
+  if (!inscription && !encadre) return "Vous ne pouvez partager un document qu'avec vos propres formations."
+  if (destinataireIds.length > 0) {
+    const valides = await prisma.inscription.count({
+      where: { formationId, statut: "VALIDEE", userId: { in: destinataireIds } },
+    })
+    if (valides !== new Set(destinataireIds).size) return "Destinataire invalide pour cette formation."
+  }
+  return null
+}
+
 async function resolveUploadedFile(
   formData: FormData,
   keyHint: string,
@@ -67,7 +94,8 @@ export async function uploadDocument(
   const nom = str(formData, "nom")
   const formationId = optionalStr(formData, "formationId")
   const isPublic = formData.get("public") === "on"
-  const visiblePublic = formData.get("visiblePublic") === "on"
+  // Affichage sur la fiche publique du site : réservé à l'administration.
+  const visiblePublic = isStaff(session.user.role) && formData.get("visiblePublic") === "on"
   const categorie = parseCategorie(formData)
   const { partageIndividuel, destinataireIds } = parsePartage(formData, formationId)
 
@@ -75,6 +103,8 @@ export async function uploadDocument(
   if (partageIndividuel && destinataireIds.length === 0) {
     return { error: "Sélectionnez au moins un destinataire pour un partage individuel." }
   }
+  const scopeError = await checkFormationScope(session.user, formationId, destinataireIds)
+  if (scopeError) return { error: scopeError }
 
   const source = await resolveUploadedFile(formData, `uploads/${session.user.id}`, categorie)
   if ("error" in source) return { error: source.error }
@@ -125,6 +155,8 @@ export async function updateDocument(
   if (partageIndividuel && destinataireIds.length === 0) {
     return { error: "Sélectionnez au moins un destinataire pour un partage individuel." }
   }
+  const scopeError = await checkFormationScope(session.user, formationId, destinataireIds)
+  if (scopeError) return { error: scopeError }
 
   const file = formData.get("file")
   const hasNewFile = file instanceof File && file.size > 0

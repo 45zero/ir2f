@@ -30,6 +30,12 @@ export async function enrolerViaFff(
   if (!nom || !prenom || !email) {
     return { status: "error", message: "Merci de renseigner le nom, le prénom et l'email." }
   }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200 || nom.length > 100 || prenom.length > 100) {
+    return { status: "error", message: "Merci de vérifier les informations saisies." }
+  }
+  if (cible !== "STAGIAIRE" && cible !== "CLUB") {
+    return { status: "error", message: "Type d'inscription invalide." }
+  }
 
   const formation = await prisma.formation.findUnique({ where: { id: formationId } })
   if (!formation || formation.modeInscription !== "PORTAIL_FFF") {
@@ -56,7 +62,9 @@ export async function enrolerViaFff(
 
   await prisma.inscription.upsert({
     where: { userId_formationId: { userId: user.id, formationId } },
-    update: { statut: "VALIDEE", origine },
+    // Formulaire public : on ne modifie jamais une inscription existante (sinon n'importe qui
+    // pourrait repasser en VALIDEE une inscription refusée, en connaissant juste l'email).
+    update: {},
     create: { userId: user.id, formationId, statut: "VALIDEE", origine },
   })
 

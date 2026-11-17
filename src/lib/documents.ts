@@ -62,9 +62,16 @@ export async function getMesDocuments(userId: string, role: Role) {
   return rows
 }
 
-export async function getFormationRosters(): Promise<Record<string, { id: string; nom: string; prenom: string }[]>> {
+export async function getFormationRosters(
+  onlyForUserId?: string
+): Promise<Record<string, { id: string; nom: string; prenom: string }[]>> {
   const inscriptions = await prisma.inscription.findMany({
-    where: { statut: "VALIDEE" },
+    where: {
+      statut: "VALIDEE",
+      ...(onlyForUserId
+        ? { formation: { inscriptions: { some: { userId: onlyForUserId, statut: "VALIDEE" } } } }
+        : {}),
+    },
     select: { formationId: true, user: { select: { id: true, nom: true, prenom: true } } },
   })
 

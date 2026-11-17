@@ -1,5 +1,7 @@
-"use server"
-
+// Module interne (sans directive server action) : ces fonctions ne doivent être appelées que depuis
+// formations.ts, après requireAdmin(). Déclarées en server actions, elles devenaient des points d'entrée
+// publics sans aucun contrôle de droits.
+import "server-only"
 import { prisma } from "@/lib/prisma"
 import { parseJsonArray } from "@/lib/actions/form-utils"
 
@@ -45,7 +47,7 @@ export async function syncSessions(formationId: string, formData: FormData) {
       responsablePedagogiqueUserId: s.responsablePedagogiqueUserId || null,
     }
     if (s.id) {
-      await prisma.session.update({ where: { id: s.id }, data })
+      await prisma.session.updateMany({ where: { id: s.id, formationId }, data })
     } else {
       await prisma.session.create({ data })
     }

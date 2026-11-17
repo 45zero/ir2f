@@ -8,7 +8,7 @@ import { downloadStorageFile, uploadBytes } from "@/lib/storage"
 import { fillConventionTemplate, stampSignature, stampCheckmark, finalizeConvention } from "@/lib/conventions/pdf"
 import { SIGNATURE_FIELD_NAMES, NATURE_INTERVENTION_OPTIONS, OBJECTIF_PEDAGOGIQUE_FIELDS, formatAdresseLigne } from "@/lib/conventions/variables"
 import { notifyAdminSignatureProgress, notifyConventionComplete } from "@/lib/emails/convention-notifications"
-import { avancerConvention } from "@/lib/actions/conventions"
+import { avancerConvention } from "@/lib/conventions/circuit"
 import { str, optionalStr } from "@/lib/actions/form-utils"
 
 export type SignatureActionState = { error: string | null; success: boolean }

@@ -250,9 +250,12 @@ export async function getFormationOnglets(): Promise<Record<string, FormationOng
   return result
 }
 
-export async function getFormationOptions(): Promise<FormationOption[]> {
+export async function getFormationOptions(onlyForUserId?: string): Promise<FormationOption[]> {
   const formations = await prisma.formation.findMany({
-    where: { statut: "PUBLIEE" },
+    where: {
+      statut: "PUBLIEE",
+      ...(onlyForUserId ? { inscriptions: { some: { userId: onlyForUserId, statut: "VALIDEE" } } } : {}),
+    },
     orderBy: [{ categorie: "asc" }, { ordre: "asc" }],
     select: { id: true, titre: true },
   })

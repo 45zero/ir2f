@@ -32,6 +32,13 @@ export async function submitContactRequest(
   if (!nom || !prenom || !email) {
     return { status: "error", message: "Merci de renseigner votre nom, prénom et email." }
   }
+  if (
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+    email.length > 200 || nom.length > 100 || prenom.length > 100 ||
+    (messageRaw?.length ?? 0) > 5000 || (clubNom?.length ?? 0) > 200
+  ) {
+    return { status: "error", message: "Merci de vérifier les informations saisies." }
+  }
 
   const parts: string[] = []
   if (type === "club" && clubNom) parts.push(`Club : ${clubNom}`)

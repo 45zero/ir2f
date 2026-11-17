@@ -53,6 +53,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user) {
         token.id = user.id
         token.role = (user as any).role
+        token.checkedAt = Date.now()
+        return token
+      }
+      // Le rôle est mis en cache dans le jeton (valable 30 jours) : on le revalide en base toutes
+      // les 5 minutes pour qu'un compte désactivé, supprimé ou rétrogradé perde ses droits
+      // rapidement. Retourner null déconnecte l'utilisateur.
+      if (token.id && Date.now() - Number(token.checkedAt ?? 0) > 5 * 60 * 1000) {
+        const fresh = await prisma.user.findUnique({
+          where: { id: token.id as string },
+          select: { role: true, actif: true },
+        })
+        if (!fresh || !fresh.actif) return null
+        token.role = fresh.role
+        token.checkedAt = Date.now()
       }
       return token
     },
